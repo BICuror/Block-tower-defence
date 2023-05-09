@@ -4,44 +4,48 @@ using UnityEngine;
 
 public class MortireTower : MonoBehaviour
 {
-    [SerializeField] private GameObject core;
+    [SerializeField] private GameObject _core;
     
-    [SerializeField] private float angle;
+    [SerializeField] private float _angle;
 
-    [SerializeField] private int damage;
+    [SerializeField] private int _damage;
     
     [SerializeField] private EnemyAreaScaner _enemyAreaScaner;
 
     private void Start()
     {   
-        GetComponent<TaskCycle>().ShouldWorkDelegate = LOL;
+        TaskCycle buildingTaskCycle = GetComponent<TaskCycle>();
+
+        buildingTaskCycle.ShouldWorkDelegate = ShouldWorkDelegate;
+
+        buildingTaskCycle.TaskPerformed.AddListener(Shoot);
     }
 
-    public bool LOL() => _enemyAreaScaner.Empty() == false;
+    private bool ShouldWorkDelegate() => _enemyAreaScaner.Empty() == false;
 
-    public void Shoot()
+    private void Shoot()
     {
-        core.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _core.GetComponent<Rigidbody>().velocity = Vector3.zero;
         
-        core.SetActive(true);
+        _core.SetActive(true);
 
-        core.transform.position = transform.position;
+        _core.transform.position = transform.position;
 
-        core.transform.rotation = Quaternion.identity;
+        _core.transform.rotation = Quaternion.identity;
 
-        core.GetComponent<Rigidbody>().velocity = BallisticVelocity(_enemyAreaScaner.GetFirstEnemy().transform.position, angle);
+        _core.GetComponent<Rigidbody>().velocity = BallisticVelocity(_enemyAreaScaner.GetFirstEnemy().transform.position, _angle);
 
-        core.GetComponent<Weapon>().SetDamage(damage);
+        _core.GetComponent<Weapon>().SetDamage(_damage);
     }
 
-    private Vector3 BallisticVelocity(Vector3 destination, float angle)
+    private Vector3 BallisticVelocity(Vector3 destination, float _angle)
     {
         Vector3 dir = destination - transform.position; // get Target Direction
         float height = dir.y; // get height difference
         dir.y = 0; // retain only the horizontal difference
         float dist = dir.magnitude; // get horizontal direction
-        float a = angle * Mathf.Deg2Rad; // Convert angle to radians
-        dir.y = dist * Mathf.Tan(a); // set dir to the elevation angle.
+        float a = _angle * Mathf.Deg2Rad; // Convert _angle to radians
+        dir.y = dist * Mathf.Tan(a); // set dir to the elevation _angle.
         dist += height / Mathf.Tan(a); // Correction for small height differences
 
         // Calculate the velocity magnitude

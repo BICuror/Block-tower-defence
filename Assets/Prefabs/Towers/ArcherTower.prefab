@@ -587,9 +587,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff5c021aa5e09e45b88135378965ab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arrow: {fileID: 3226556112063563293}
-  arrowSpeed: 12
-  damage: 6
+  _arrow: {fileID: 8199430091194888889}
+  _arrowSpeed: 12
+  _damage: 3
   _applyEffectContainer: {fileID: 8562473689253911524}
   _enemyAreaScaner: {fileID: 4206930205166591802}
 --- !u!114 &5831701976978186503
@@ -681,19 +681,7 @@ MonoBehaviour:
   _rechargeTime: 1
   TaskPerformed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5055056520785728960}
-        m_TargetAssemblyTypeName: ArcherTower, Assembly-CSharp
-        m_MethodName: Shoot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &6594646396356217692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,13 +875,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c68c16af92ce0c94aadf43f1a0bba243, type: 3}
---- !u!1 &3226556112063563293 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1306646994892462151, guid: c68c16af92ce0c94aadf43f1a0bba243, type: 3}
-  m_PrefabInstance: {fileID: 4532067308445605466}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6669700587078290855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7091667944770081789, guid: c68c16af92ce0c94aadf43f1a0bba243, type: 3}
+  m_PrefabInstance: {fileID: 4532067308445605466}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &8199430091194888889 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 5705806797472689379, guid: c68c16af92ce0c94aadf43f1a0bba243, type: 3}
   m_PrefabInstance: {fileID: 4532067308445605466}
   m_PrefabAsset: {fileID: 0}

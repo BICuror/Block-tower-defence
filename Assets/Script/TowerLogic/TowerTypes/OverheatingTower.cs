@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class OverheatingTower : MonoBehaviour
+public sealed class OverheatingTower : MonoBehaviour
 {
-    [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject _arrow;
     
-    [SerializeField] private float arrowSpeed;
+    [SerializeField] private float _arrowSpeed;
 
-    [SerializeField] private int damage;
+    [SerializeField] private int _damage;
 
     [SerializeField] private ApplyEffectContainer _applyEffectContainer;
     
@@ -18,32 +16,38 @@ public class OverheatingTower : MonoBehaviour
 
     private void Start()
     {   
-        GetComponent<TaskCycle>().ShouldWorkDelegate = LOL;
+        TaskCycle buildingTaskCycle = GetComponent<TaskCycle>();
+
+        buildingTaskCycle.ShouldWorkDelegate = ShouldWorkDelegate;
+
+        buildingTaskCycle.TaskPerformed.AddListener(Shoot);
 
         _applyEffectContainer.ApplyEffectUpdated.AddListener(ModifyArrow);
+
+        ModifyArrow();
     }
 
     private void ModifyArrow()
     {
-        arrow.GetComponent<Weapon>()._effect = _applyEffectContainer.GetApplyEffects();
+        _arrow.GetComponent<Weapon>()._effect = _applyEffectContainer.GetApplyEffects();
+
+        _arrow.GetComponent<Weapon>().SetDamage(_damage);
     }
 
-    public bool LOL() => _enemyAreaScaner.Empty() == false &&  _overheatingManager.IsOverheated() == false;
+    public bool ShouldWorkDelegate() => _enemyAreaScaner.Empty() == false &&  _overheatingManager.IsOverheated() == false;
 
     public void Shoot()
     {
         _overheatingManager.AddOverheat(20f);
 
-        arrow.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        _arrow.GetComponent<Rigidbody>().velocity = Vector3.zero;
         
-        arrow.SetActive(true);
+        _arrow.SetActive(true);
 
-        arrow.transform.position = transform.position;
+        _arrow.transform.position = transform.position;
 
-        arrow.transform.LookAt(_enemyAreaScaner.GetFirstEnemy().transform.position);
+        _arrow.transform.LookAt(_enemyAreaScaner.GetFirstEnemy().transform.position);
 
-        arrow.GetComponent<Rigidbody>().AddForce(arrow.transform.forward * arrowSpeed, ForceMode.Impulse);
-
-        arrow.GetComponent<Weapon>().SetDamage(damage);
+        _arrow.GetComponent<Rigidbody>().AddForce(_arrow.transform.forward * _arrowSpeed, ForceMode.Impulse);
     }
 }

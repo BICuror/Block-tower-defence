@@ -45,7 +45,7 @@ public sealed class HealingTower : MonoBehaviour
     {
         building.gameObject.GetComponent<EntityHealth>().HealthChanged.RemoveListener(TryToFindBuildingToHeal);
 
-        if (_buildingToHeal == null || building.gameObject == _buildingToHeal.gameObject)
+        if (building.gameObject == _buildingToHeal.gameObject)
         {
             TryToFindBuildingToHeal();
         }

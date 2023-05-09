@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.28995317, g: 0.63435996, b: 0.9999686, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1574,7 +1574,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 12.9
+  m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: -8.796361e+12, y: 1048576.4, z: -1.7014118e+38, w: 2.5243547e-29}
@@ -7986,17 +7986,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.23944397
       value: 0.12698878
-      inSlope: -2.7205806
-      outSlope: -2.7205806
+      inSlope: -2.5138416
+      outSlope: -2.5138416
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.5
-      value: 0.011387706
-      inSlope: 0.7667769
-      outSlope: 0.7667769
+      time: 0.51135254
+      value: 0.11877906
+      inSlope: 0.88659745
+      outSlope: 0.88659745
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -8004,8 +8004,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1.9772246
-      outSlope: 1.9772246
+      inSlope: 1.8033879
+      outSlope: 1.8033879
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

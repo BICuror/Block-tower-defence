@@ -65,7 +65,6 @@ public class EntityEffectManager : MonoBehaviour
     #endregion
 
     #region ApplyAndRemoveOverTime
-
     public void ApplyEffectAndRemoveAfterTime(RemoveOverTimeEffect effect)
     {
         effect.ApplyToEntity(_entityComponentsContainer);

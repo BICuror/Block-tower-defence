@@ -457,13 +457,13 @@ MonoBehaviour:
   BuildCompleted:
     m_PersistentCalls:
       m_Calls: []
-  PlacedReturned:
+  BuildingPlaced:
     m_PersistentCalls:
       m_Calls: []
-  BuildReturned:
+  BuildingBuilt:
     m_PersistentCalls:
       m_Calls: []
-  PickupReturned:
+  BuildingPickedUp:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &2807140037423955712
@@ -498,19 +498,7 @@ MonoBehaviour:
   _rechargeTime: 3.5
   TaskPerformed:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8721894607636130599}
-        m_TargetAssemblyTypeName: MortireTower, Assembly-CSharp
-        m_MethodName: Shoot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1493084277413840007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,9 +531,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c51036bc90a3418ca2d85f1fad551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  core: {fileID: 6563347417802502617}
-  angle: 60
-  damage: 1000
+  _core: {fileID: 6563347417802502617}
+  _angle: 65
+  _damage: 50
   _enemyAreaScaner: {fileID: 8457310894088949985}
 --- !u!114 &6477888456084869543
 MonoBehaviour:
@@ -647,24 +635,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d02b85437885af24abd5d5cb55cc94d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyListUpdated:
-    m_PersistentCalls:
-      m_Calls: []
-  EnteredArea:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4552322317668586728}
-        m_TargetAssemblyTypeName: TaskCycle, Assembly-CSharp
-        m_MethodName: StartSycle
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
   EnemyEnteredArea:
     m_PersistentCalls:
       m_Calls: []

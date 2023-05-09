@@ -63,7 +63,6 @@ GameObject:
   - component: {fileID: 1344744023374680030}
   - component: {fileID: 1344744023374680031}
   - component: {fileID: 1344744023374680028}
-  - component: {fileID: 6485638581364086132}
   - component: {fileID: 7878440266434386855}
   - component: {fileID: 1363518843604500999}
   m_Layer: 12
@@ -235,13 +234,13 @@ MonoBehaviour:
   BuildCompleted:
     m_PersistentCalls:
       m_Calls: []
-  PlacedReturned:
+  BuildingPlaced:
     m_PersistentCalls:
       m_Calls: []
-  BuildReturned:
+  BuildingBuilt:
     m_PersistentCalls:
       m_Calls: []
-  PickupReturned:
+  BuildingPickedUp:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &1344744023374680028
@@ -264,48 +263,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _healthBar: {fileID: 1344744024267951456}
---- !u!114 &6485638581364086132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1344744023374680026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78980f7ab429c864b82b2b729aa524b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EffectApplied:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 907612875775773733}
-        m_TargetAssemblyTypeName: EffectUIManager, Assembly-CSharp
-        m_MethodName: AddEffectUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  EffectRemoved:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 907612875775773733}
-        m_TargetAssemblyTypeName: EffectUIManager, Assembly-CSharp
-        m_MethodName: RemoveEffectUI
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &7878440266434386855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,9 +732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b57bf423fce30146aabdbebb45f4c6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuildingListUpdated:
-    m_PersistentCalls:
-      m_Calls: []
   ErectedBuildingAdded:
     m_PersistentCalls:
       m_Calls: []

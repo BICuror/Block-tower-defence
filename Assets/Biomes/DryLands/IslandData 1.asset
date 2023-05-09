@@ -1,0 +1,445 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c4d0bc7911dc214990190dc81c473c7, type: 3}
+  m_Name: IslandData 1
+  m_EditorClassIdentifier: 
+  _townHallPrefab: {fileID: 2559395845429993347, guid: c5326e01f98af254e96e8c09c4752f86, type: 3}
+  _roadBlock: {fileID: 11400000, guid: 93a6e26a402a677448cb2473aa9dabc7, type: 2}
+  _amountOfRoadNodesBetweenCenterAndEdge: 2
+  _amountOfSpawners: 2
+  _islandSize: 25
+  _islandMaxHeight: 40
+  _islandHeightOffset: 5
+  _biomes:
+  - AppearRate: 0.416
+    BiomeName: StoneBiome
+    SurfaceBiomBlock: {fileID: 11400000, guid: 8d316d8399860e349b8687507e2915f8, type: 2}
+    RockBiomeBlock: {fileID: 11400000, guid: 8d316d8399860e349b8687507e2915f8, type: 2}
+    BedrockBiomBlock: {fileID: 11400000, guid: 8d316d8399860e349b8687507e2915f8, type: 2}
+    HeightMultiplier: 7
+    Noises:
+    - NoiseCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      NoiseScale: {x: 1, y: 1}
+    - NoiseCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.6928016
+          value: 0.16621783
+          inSlope: -Infinity
+          outSlope: -Infinity
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1.0125122
+          value: 0.57351685
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      NoiseScale: {x: 3, y: 3}
+    DecorationsModule:
+      DecorationAppearRate: 0
+      Decorations:
+      - Prefabs:
+        - {fileID: 1609028456964177722, guid: e61358fd91d630b4986fc88b64ef74eb, type: 3}
+        Amount: 5
+        AppearRate: 1
+        MinScale: 0
+        MaxScale: 0
+        PlacmentOffset: 0
+        MaxXRotation: 0
+        MaxYRotation: 0
+        MaxZRotation: 0
+  - AppearRate: 0.198
+    BiomeName: Rivers
+    SurfaceBiomBlock: {fileID: 11400000, guid: ef016be0e98fd1c4baf7c8d06783b137, type: 2}
+    RockBiomeBlock: {fileID: 11400000, guid: 93a6e26a402a677448cb2473aa9dabc7, type: 2}
+    BedrockBiomBlock: {fileID: 11400000, guid: 8d316d8399860e349b8687507e2915f8, type: 2}
+    HeightMultiplier: 0
+    Noises:
+    - NoiseCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      NoiseScale: {x: 3, y: 3}
+    - NoiseCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0.0041656494
+          value: 0.3204651
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      NoiseScale: {x: 1, y: 1}
+    DecorationsModule:
+      DecorationAppearRate: 0.398
+      Decorations:
+      - Prefabs:
+        - {fileID: 1609028456964177722, guid: e61358fd91d630b4986fc88b64ef74eb, type: 3}
+        Amount: 4
+        AppearRate: 1
+        MinScale: 0.1
+        MaxScale: 0.3
+        PlacmentOffset: 0.262
+        MaxXRotation: 0
+        MaxYRotation: 180
+        MaxZRotation: 0
+  - AppearRate: 1
+    BiomeName: MainBiome
+    SurfaceBiomBlock: {fileID: 11400000, guid: ef016be0e98fd1c4baf7c8d06783b137, type: 2}
+    RockBiomeBlock: {fileID: 11400000, guid: 93a6e26a402a677448cb2473aa9dabc7, type: 2}
+    BedrockBiomBlock: {fileID: 11400000, guid: 8d316d8399860e349b8687507e2915f8, type: 2}
+    HeightMultiplier: 7
+    Noises:
+    - NoiseCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      NoiseScale: {x: 3, y: 3}
+    - NoiseCurve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: -0.01243159
+          value: 0.3764916
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 2
+          outSlope: 2
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      NoiseScale: {x: 1, y: 1}
+    DecorationsModule:
+      DecorationAppearRate: 0.653
+      Decorations:
+      - Prefabs:
+        - {fileID: 1609028456964177722, guid: e61358fd91d630b4986fc88b64ef74eb, type: 3}
+        Amount: 4
+        AppearRate: 1
+        MinScale: 0.1
+        MaxScale: 0.3
+        PlacmentOffset: 0.177
+        MaxXRotation: 0
+        MaxYRotation: 180
+        MaxZRotation: 0
+  BiomeGenerationNoises:
+  - NoiseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0.08316085
+        outSlope: 0.08316085
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.4065621
+        value: 0.03381005
+        inSlope: -Infinity
+        outSlope: -Infinity
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 1.6281232
+        outSlope: 1.6281232
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    NoiseScale: {x: 1, y: 1}
+  - NoiseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    NoiseScale: {x: 1, y: 4}
+  - NoiseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    NoiseScale: {x: 4, y: 1}
+  _enemyBiomeStages:
+  - _lessZeroHeight: 0
+    DecorationsModule:
+      DecorationAppearRate: 0
+      Decorations: []
+    _enemyBiomeRadius: 2
+    EnemyBiomeEdgeReductionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.0041664112
+        value: 0.3063226
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - _lessZeroHeight: 0
+    DecorationsModule:
+      DecorationAppearRate: 0
+      Decorations: []
+    _enemyBiomeRadius: 4
+    EnemyBiomeEdgeReductionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: -0.008333333
+        value: 0.21206406
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  - _lessZeroHeight: 0
+    DecorationsModule:
+      DecorationAppearRate: 0
+      Decorations: []
+    _enemyBiomeRadius: 1
+    EnemyBiomeEdgeReductionCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.21675913
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0.9976387
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CorruptionBlock: {fileID: 11400000, guid: a7adfe78410be854aa9f8a8ebe7ac10d, type: 2}
+  _smoothingType: 1
+  _smoothingStrength: 0.951
+  _clearSingleEmptyBlocks: 1
+  _clearSingleSolidBlocks: 1
+  _borderCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _edgePrecantageCutout: 0.889
+  _edgeRandomAdditionalHeight: 0.051

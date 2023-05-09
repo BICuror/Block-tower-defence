@@ -1,0 +1,123 @@
+{
+    "name": "Controls",
+    "maps": [
+        {
+            "name": "TouchInput",
+            "id": "83b0a702-3d20-4c1d-85da-e2b1105b3f92",
+            "actions": [
+                {
+                    "name": "FirstTouch",
+                    "type": "Value",
+                    "id": "b95f2d87-3d44-4d42-b41e-19498768dfef",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SecondTouch",
+                    "type": "Value",
+                    "id": "238876c8-2d75-4b31-a1d7-53592f9490b2",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "FirstTouchEvent",
+                    "type": "Button",
+                    "id": "f9e6ee71-80fb-438c-82c2-59953b554c6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "SecondTouchEvent",
+                    "type": "Button",
+                    "id": "5690afad-3876-4da2-ac1c-620ed0b9bd97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "faddaf1e-b112-4ead-b854-33207c43099b",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fc86d719-af7a-4feb-a011-f6585e66b045",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f94a0289-7dc1-46e2-902c-13609b7395c4",
+                    "path": "<Touchscreen>/touch1/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2fc06d78-4ee7-478a-a232-271ca1e9ad56",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondTouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37a31609-f2e0-4531-b531-2b79bc820eb1",
+                    "path": "<Touchscreen>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstTouchEvent",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be2bb755-fa13-429f-be41-2a7028d557b4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstTouchEvent",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8da603ba-c7b0-40d4-a7f2-e6049b71b104",
+                    "path": "<Touchscreen>/touch1/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SecondTouchEvent",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

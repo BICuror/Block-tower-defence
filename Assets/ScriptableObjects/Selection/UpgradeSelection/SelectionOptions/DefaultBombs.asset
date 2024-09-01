@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ef4d3d8a0828ec4191f63bf520f95a9, type: 3}
+  m_Name: DefaultBombs
+  m_EditorClassIdentifier: 
+  _name: Wait, they explode now?
+  _description: Upon death enemies have a chanse to explode, dealing damage to nearby
+    enemies
+  _shouldBeRemovedAfterTaking: 0
+  _uprgade: {fileID: 11400000, guid: e4571f2711fdf1344a876a24c3f4e548, type: 2}
+  _inspectableObject: {fileID: 1937837831002010405, guid: cb8d2206f5f4dca42abd58c2f051bea2, type: 3}

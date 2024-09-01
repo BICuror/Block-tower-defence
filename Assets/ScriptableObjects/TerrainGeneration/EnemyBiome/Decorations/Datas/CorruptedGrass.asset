@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba29af3eeb05284da765e3449ef1165, type: 3}
+  m_Name: CorruptedGrass
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 3078312725957408352, guid: 0d35daaa97665af499b4980f128adaa1, type: 3}
+  - {fileID: 4012497875285439993, guid: 608861cfab8625c448ffe854a76c75db, type: 3}
+  - {fileID: 584758241323455064, guid: 9f8949bae1727a44c8f429adcdd502a4, type: 3}
+  _amount: 2
+  _minScale: 1
+  _maxScale: 1.6
+  _placementOffset: 0.331
+  _maxRotation: {x: 0, y: 180, z: 0}

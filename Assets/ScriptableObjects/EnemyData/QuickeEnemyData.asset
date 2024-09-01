@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
+  m_Name: QuickeEnemyData
+  m_EditorClassIdentifier: 
+  _enemyMovmentData: {fileID: 11400000, guid: 1eff336b37f641b4297143e197f3a91b, type: 2}
+  _enemyHealthData: {fileID: 11400000, guid: 0b0280b06bb994a4396aa2f543f66957, type: 2}
+  _mesh: {fileID: 4300000, guid: b795d1f342e4beb4c96c843702fbfb70, type: 3}
+  _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}
+  _specialObject: {fileID: 0}

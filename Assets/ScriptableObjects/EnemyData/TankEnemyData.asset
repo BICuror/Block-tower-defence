@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
+  m_Name: TankEnemyData
+  m_EditorClassIdentifier: 
+  _enemyMovmentData: {fileID: 11400000, guid: ac1606666086b8049b63fe0d431e857b, type: 2}
+  _enemyHealthData: {fileID: 11400000, guid: c5ed90621ebb27e4ea3a44e682bbcde8, type: 2}
+  _mesh: {fileID: 2534964839176971238, guid: db8802b864268d348a1601dbf333690f, type: 3}
+  _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}
+  _specialObject: {fileID: 0}

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f52fff00ca8e41741b00dd2b0df3fb5d, type: 3}
+  m_Name: PoisonBombsUpgrade
+  m_EditorClassIdentifier: 
+  _chanseToSpawn: 12
+  _dropStrength: 0.2
+  _bloodExplotion: {fileID: 6677902375762488144, guid: 9ab226401e8841c45965f539e9f8dd0e, type: 3}
+  _explotionDamage: 0
+  _explotionRadius: 2
+  _effectsToApply:
+  - {fileID: 11400000, guid: f69971336ba94f640830d06ab1a84087, type: 2}

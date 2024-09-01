@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba29af3eeb05284da765e3449ef1165, type: 3}
+  m_Name: Stone
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 1796059414702426893, guid: 3de200cab304edc4e9bb22efab02d849, type: 3}
+  - {fileID: 2075412019116159185, guid: fdb3f2e7410831a4eafbda74e4fcf55e, type: 3}
+  - {fileID: 9073940858209490478, guid: 335d7b83b9740ce48b54ffd7a541143a, type: 3}
+  - {fileID: 1326105028468485470, guid: d88be587b1801d545be13adbcb96b72c, type: 3}
+  - {fileID: 1882843143293734746, guid: 4c2ea6be44c51df42abae65ed9f76572, type: 3}
+  - {fileID: 271236150456536182, guid: abb649821cd0d4e40a864b8fc5c97632, type: 3}
+  - {fileID: 1114298619676382774, guid: d5bf44a43881f564a9110ba8429968db, type: 3}
+  - {fileID: 4718509804703522342, guid: 93934d8d55cabb54bb98a1cb035e4a87, type: 3}
+  _amount: 4
+  _minScale: 0.1
+  _maxScale: 0.3
+  _placementOffset: 0.207
+  _maxRotation: {x: 10, y: 180, z: 10}

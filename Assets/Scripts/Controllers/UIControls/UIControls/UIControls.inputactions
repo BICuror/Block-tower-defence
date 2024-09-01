@@ -1,0 +1,34 @@
+{
+    "name": "UIControls",
+    "maps": [
+        {
+            "name": "TouchInput",
+            "id": "83b0a702-3d20-4c1d-85da-e2b1105b3f92",
+            "actions": [
+                {
+                    "name": "EscapeToggle",
+                    "type": "Button",
+                    "id": "58b2953e-c9f0-452e-bf99-88e6a1af4f83",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "8a202cfb-5ac1-479f-bb77-5f50c0c18e6a",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EscapeToggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

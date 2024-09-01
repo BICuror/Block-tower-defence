@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce3b1cdfede87a4badc298ec1154c9a, type: 3}
+  m_Name: LateTanksWithInvinsibler
+  m_EditorClassIdentifier: 
+  _groupParts:
+  - _enemyData: {fileID: 11400000, guid: d083d5000a95b9343b087e9fa8a37138, type: 2}
+    _minAmount: 4
+    _maxAmount: 4
+  - _enemyData: {fileID: 11400000, guid: e89a52b678e6a9d478996fc966397aad, type: 2}
+    _minAmount: 1
+    _maxAmount: 1
+  - _enemyData: {fileID: 11400000, guid: d083d5000a95b9343b087e9fa8a37138, type: 2}
+    _minAmount: 1
+    _maxAmount: 1
+  _firstPossibleWaveEncounter: 6
+  _lastPossibleWaveEncounter: 1000

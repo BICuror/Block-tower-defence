@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 8867280263951497180}
   - component: {fileID: 891611346077369501}
   - component: {fileID: 4145828844707971013}
+  - component: {fileID: 8385729584426442078}
   m_Layer: 14
   m_Name: EnemyBiome
   m_TagString: Untagged
@@ -349,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _meshFilter: {fileID: 706525302667871673}
-  _meshCollider: {fileID: 0}
+  _meshCollider: {fileID: 8385729584426442078}
   _meshRenderer: {fileID: 8175578880814386127}
 --- !u!114 &5615790595464292867
 MonoBehaviour:
@@ -473,3 +474,25 @@ MonoBehaviour:
   _decorationContainer: {fileID: 2923925836184401968}
   _terrainAnimator: {fileID: 8867280263951497180}
   _spawnerMesh: {fileID: 2720465651251010393}
+--- !u!64 &8385729584426442078
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177820772775545984}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}

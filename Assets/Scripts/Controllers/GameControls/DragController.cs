@@ -15,6 +15,8 @@ public sealed class DragController : MonoBehaviour
     [SerializeField] private LayerSetting _terrainAndRoadLayerSettings;
     [SerializeField] private LayerSetting _waterAndTerrainLayerSettings; 
 
+    [SerializeField] private PlacementCondition _defaultPlacementCondition;
+
     [Header("DragSettings")]
     [SerializeField] private float _placingHeight;
     [SerializeField] private float _dragSpeed;
@@ -30,7 +32,6 @@ public sealed class DragController : MonoBehaviour
     private GameObject _currentDraggableGameObject;
     private IDraggable _currentIDraggable;
     private Vector3 _lastValuablePosition;
-
 
     private void OnEnable() => _camera = GetComponent<Camera>();
 
@@ -57,9 +58,14 @@ public sealed class DragController : MonoBehaviour
 
         Ray heightRay = new Ray(new Vector3(placePosition.x, 100000f, placePosition.z), Vector3.down);
 
+        float height = _placingHeight;
+
         if (Physics.Raycast(heightRay, out RaycastHit heightRayInfo, Mathf.Infinity, currentTerrainLayerSetting.GetLayerMask()))
         {
-            return new Vector3(placePosition.x, heightRayInfo.point.y + _placingHeight, placePosition.z);
+            if (heightRayInfo.point.y < 1) height += 1;
+            else height += heightRayInfo.point.y;
+
+            return new Vector3(placePosition.x, height, placePosition.z);
         }
 
         return Vector3.zero;
@@ -86,12 +92,7 @@ public sealed class DragController : MonoBehaviour
 
     public LayerSetting GetCurrentDraggableLayerSetting() 
     {
-        switch (_currentIDraggable.GetPlacementRequirements())
-        {
-            case PlacementRequirements.SolidSurface: return _terrainLayerSettings;
-            case PlacementRequirements.TransitionSurface: return _terrainAndRoadLayerSettings;
-            default: return _waterAndTerrainLayerSettings;
-        }
+        return _waterAndTerrainLayerSettings;
     }
 
     public void TryDragTo(Vector2 mousePosition)
@@ -106,11 +107,16 @@ public sealed class DragController : MonoBehaviour
 
             Ray heightRay = new Ray(new Vector3(roundedRayPosition.x, 100000f, roundedRayPosition.z), Vector3.down);
 
+            float height = _placingHeight;
+
             if (Physics.Raycast(heightRay, out RaycastHit heightRayInfo, Mathf.Infinity, currentTerrainLayerSetting.GetLayerMask()))
             {
                 if (CanBePlacedAt(roundedRayPosition.x, roundedRayPosition.z))
-                {
-                    _lastValuablePosition = new Vector3(roundedRayPosition.x, heightRayInfo.point.y + _placingHeight, roundedRayPosition.z);
+                {   
+                    if (heightRayInfo.point.y < 1) height += 1;
+                    else height += heightRayInfo.point.y;
+                    
+                    _lastValuablePosition = new Vector3(roundedRayPosition.x, height, roundedRayPosition.z);
                 }
             }
         }
@@ -127,7 +133,14 @@ public sealed class DragController : MonoBehaviour
 
     public bool CanBePlacedAt(float x, float z)
     {
-        return _currentIDraggable.CanBePlacedAt(x, z, _solidObjectsLayerSettings);
+        if (_currentIDraggable.GetPlacementCondition() != null)
+        {
+            return _currentIDraggable.GetPlacementCondition().IsSatisfied(_currentDraggableGameObject, Mathf.RoundToInt(x), Mathf.RoundToInt(z));
+        }
+        else 
+        {
+            return _defaultPlacementCondition.IsSatisfied(_currentDraggableGameObject, Mathf.RoundToInt(x), Mathf.RoundToInt(z));
+        }
     }
 
     public bool PickedUpDraggable(Vector2 mousePosition)

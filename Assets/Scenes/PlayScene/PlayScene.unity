@@ -2640,8 +2640,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.33, y: 0.44580978, z: 0.33}
-  m_Center: {x: 0, y: 0.05790484, z: 0}
+  m_Size: {x: 0.33, y: 0.17790715, z: 0.33}
+  m_Center: {x: 0, y: -0.07604655, z: 0}
 --- !u!1 &552864730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4899,9 +4899,10 @@ MonoBehaviour:
   _draggableObjectLayerSettings: {fileID: 11400000, guid: 7dbd76bdf00311747bd5e8886724202d, type: 2}
   _activatableObjectLayerSettings: {fileID: 11400000, guid: 37156529190d46c429409a37255818d8, type: 2}
   _solidObjectsLayerSettings: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
-  _terrainLayerSettings: {fileID: 11400000, guid: c7068e07d1cf01548b43795dc6f938f4, type: 2}
-  _terrainAndRoadLayerSettings: {fileID: 11400000, guid: a2db540a0a12bba4dade7344a24b3b6b, type: 2}
+  _terrainLayerSettings: {fileID: 11400000, guid: b0e551c17e93f544199c093e61184ced, type: 2}
+  _terrainAndRoadLayerSettings: {fileID: 0}
   _waterAndTerrainLayerSettings: {fileID: 11400000, guid: b0e551c17e93f544199c093e61184ced, type: 2}
+  _defaultPlacementCondition: {fileID: 11400000, guid: 33296f7510ce96c49917af81ff0e4063, type: 2}
   _placingHeight: 0.5
   _dragSpeed: 0.15
   _draggableConnector: {fileID: 1056926169}
@@ -9727,7 +9728,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 0.33, y: 0.41221255, z: 0.33}
   m_Center: {x: 0, y: 0.041106224, z: 0}
@@ -16772,7 +16773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6603117a8dcd245a2ba165dc4ee5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _placementRequirements: 0
+  _placementRequirements: {fileID: 0}
   _isDraggable: 0
   PickedUp:
     m_PersistentCalls:

@@ -18,7 +18,7 @@ public abstract class Crystal : DraggableObject
 
     public Launcher GetLauncher() => _crystalLauncher;
 
-    public override bool CanBePlacedAt(float x, float z, LayerSetting layerSetting)
+    /*public override bool CanBePlacedAt(float x, float z, LayerSetting layerSetting)
     {
         RaycastHit[] hits = Physics.RaycastAll(new Vector3(x, 10000f, z), Vector3.down, Mathf.Infinity, layerSetting.GetLayerMask());
 
@@ -29,7 +29,7 @@ public abstract class Crystal : DraggableObject
             return Physics.Raycast(new Vector3(x, 10000f, z), Vector3.down, Mathf.Infinity, _townhallLayer.GetLayerMask());
         } 
         else return false;
-    }
+    }*/
 
     public void DisableDraggableComponent() => SetDraggableState(false);
     protected void StopFromDestroying() => _crystalManager.CrystalSet.RemoveListener(Destroy);

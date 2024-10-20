@@ -8,7 +8,9 @@ public sealed class ParametersDisplayer : MonoBehaviour
     {
         Parameter[] parameters = buildingInpectable.GetAllParameters();
 
-        for (int i = 0; i < _panels.Length; i++)
+    
+
+    /*    for (int i = 0; i < _panels.Length; i++)
         {
             if (parameters.Length > i)
             {
@@ -19,6 +21,6 @@ public sealed class ParametersDisplayer : MonoBehaviour
             {
                 _panels[i].gameObject.SetActive(false);
             }
-        }
+        }*/
     }
 }

@@ -3,6 +3,7 @@ using DG.Tweening;
 
 public sealed class SelectionAnimator : MonoBehaviour
 {
+    /*
     [SerializeField] private SeclectionLinesCreator _selectionLineCreator;
 
     private SelectionOptionObject[] _selectionOptions;
@@ -46,5 +47,5 @@ public sealed class SelectionAnimator : MonoBehaviour
         }
 
         _selectionOptions = new SelectionOptionObject[0];
-    }
+    }*/
 }

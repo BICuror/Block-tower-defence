@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -8,14 +7,12 @@ using System.Linq;
 public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
 {
     [Inject] private RoadMapHolder _roadMapHolder;
-
+    [SerializeField] private LayerSetting _solidObjectsLayer;
     [SerializeField] private int _initialRaduis;
-    [SerializeField] private float _maxAllowedDistanceToSpawner;
 
     private bool[,] _roadMap => _roadMapHolder.Map;
     private int _currentMapCenter;
     private int _currentMapSize;
-    private bool[,] _additionalRoadMap;
     private Vector2Int[] _checkDirections = new Vector2Int[4]
     {
         Vector2Int.up,
@@ -43,7 +40,7 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
 
     private Vector2Int FindRandomPosition(Vector2Int centerPosition, int startingRadius)
     {
-        for (int radius = startingRadius; radius > 1; radius++)
+        for (int radius = startingRadius; radius > 1; radius--)
         {
             List<Vector2Int> possiblePositions = FindAllSutablePositions(centerPosition, radius);
 
@@ -60,20 +57,23 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
 
                 if (HasRoadToPosition(roadTile, centerPosition) && distance > 2 && distance <= 5)
                 {   
-                    Debug.Log($"{roadTile.x}, {roadTile.y}");
                     ConnectPositionsOnRoadMap(position, roadTile);
 
                     return position;
                 }
-            }
-                
-            radius--;            
+            }         
         }
     
-        Debug.LogError("Whatthefuck");            
+        Debug.LogError("Couldn't find suitable random position");            
         return new Vector2Int(0, 0);
     }
 
+    private bool HasSolidObjects(int x, int y)
+    {
+        Ray heightRay = new Ray(new Vector3(x, 100000f, y), Vector3.down);
+
+        return Physics.Raycast(heightRay, Mathf.Infinity, _solidObjectsLayer.GetLayerMask());
+    }
     
     private Vector2Int FindClosestRoadTile(List<Vector2Int> initialPositions)
     {
@@ -154,6 +154,8 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
                         
                     if (IsValidPosition(checkX, checkY) == false || _roadMap[checkX, checkY]) continue;
                      
+                    if (HasSolidObjects(checkX, checkY)) continue;
+
                     bool hasRoadAround = false;
 
                     foreach (Vector2Int checkDirection in _checkDirections)
@@ -166,10 +168,7 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
 
                     if (hasRoadAround == false)
                     {
-                        //if (Vector2Int.Distance(new Vector2Int(checkX, checkY), spawnerPosition) <= _maxAllowedDistanceToSpawner)
-                        
-                        possiblePositions.Add(new Vector2Int(checkX, checkY));
-                        
+                        possiblePositions.Add(new Vector2Int(checkX, checkY));   
                     }
                 }
             }

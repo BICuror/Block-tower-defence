@@ -1,11 +1,12 @@
 using UnityEngine;
+using Navigation;
 
 [CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyDatas/EnemyData")]
 
 public sealed class EnemyData : ScriptableObject 
 {
-    [SerializeField] private EnemyMovmentData _enemyMovmentData;
-    public EnemyMovmentData MovmentData => _enemyMovmentData;
+    [SerializeField] private NavigationAgentData _navigationData;
+    public NavigationAgentData NavigationData => _navigationData;
 
     [SerializeField] private EnemyHealthData _enemyHealthData;
     public EnemyHealthData HealthData => _enemyHealthData;

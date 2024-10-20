@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public sealed class CrystalCreator : MonoBehaviour
 {
+    /*
     [Inject] private DraggableCreator _draggableCreator;
     [Inject] private EnemySpawnerSystem _enemySpawnerSystem;
     [Inject] private IslandDataContainer _islandDataContainer;
@@ -92,5 +93,5 @@ public sealed class CrystalCreator : MonoBehaviour
 
             leftIndexes.RemoveAt(randomIndex);
         }
-    }
+    }*/
 }

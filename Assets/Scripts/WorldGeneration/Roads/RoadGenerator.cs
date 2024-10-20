@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 using Zenject;
 using Navigation;
 
@@ -14,10 +11,7 @@ namespace WorldGeneration
         
         [Inject] private TextureManager _textureManager;
         [Inject] private HeightMapGenerator _heightMapGenerator;
-        [Inject] private RoadMapGenerator _roadMapGenerator;
         [Inject] private IslandDecorationContainer _islandDecorationContainer;
-        [SerializeField] private AdditionalNavigationPointsPositionGenerator _additionalNavigationPointsPositionGenerator;
-        [SerializeField] private AdditionalNavigationPointsSpawner _additionalNavigationPointsSpawner;
         [Inject] private IslandGridHolder _islandGridHolder;
  
         private BlockGrid _roadGrid;
@@ -25,18 +19,12 @@ namespace WorldGeneration
 
         [SerializeField] private TerrainSetter _roadTerrainSetter;
         [Inject] private RoadMapHolder _roadMapHolder;
-        [SerializeField] private EnemyNavigator _enemyNavigator;
 
         public void GenerateRoads()
         {
             int[,] heightMap = _heightMapGenerator.HeightMap;
-
-            _roadMapGenerator.GenerateRoads();
-            List<Vector2Int> chestPositions = _additionalNavigationPointsPositionGenerator.GeneratePositions(_roadMapGenerator.GetEnemyPositions());
-            _additionalNavigationPointsSpawner.GeneratePointsPositions(chestPositions, _roadMapGenerator.GetEnemyPositions());
-            //_enemyNavigator.GenerateNodeMap();
-
             bool[,] roadMap = _roadMapHolder.Map;
+
             _roadGrid = ConvertRoadBlockGrid(roadMap, heightMap);
 
             GenerateRoadMesh(_roadGrid);

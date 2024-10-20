@@ -6,37 +6,17 @@ namespace WorldGeneration
 
     public sealed class IslandData : ScriptableObject
     {
-        #region Saving
-
-        public void ReachedWave(int wave)
-        {
-            if (PlayerPrefs.GetInt(IslandName) < wave)
-            {
-                PlayerPrefs.SetInt(IslandName, wave); 
-            }
-        }
-
-        public bool HasReachedWave(int wave) => wave <= PlayerPrefs.GetInt(IslandName);
-
-        #endregion
-
-
-        [SerializeField] private string _islandName;
-        public string IslandName => _islandName;
-
-        [SerializeField] private int _maxWave;
-        public int MaxWave => _maxWave;
-
-        [Header("EniviromentSettings")][Space]
+        [Header("EniviromentSettings")]
         [SerializeField] private GameObject _eniviromentObject;
         public GameObject EniviromentObject => _eniviromentObject; 
 
-        [Header("CrystalSpawnSettings")][Space]
-        [SerializeField] private CrystalSpawnSettings _crystalSpawnSettings;
-        public CrystalSpawnSettings CrystalSettings => _crystalSpawnSettings;
+        [Header("SelectionSettings")][Space]
+        [SerializeField] private SelectionContainer _selectionContainer;
+        public SelectionContainer SelectionContainer => _selectionContainer;
 
-        [SerializeField] private SelectionOptionContainer _buildingsSelectionOptionContainer;
-        public SelectionOptionContainer BuildingsSelectionOptionContainer => _buildingsSelectionOptionContainer;
+        [Header("ItemSpawnSettings")][Space]
+        [SerializeField] private ItemModifiersSelectionContainer _itemModifiersSelectionContainer;
+        public ItemModifiersSelectionContainer ItemModifiersSelectionContainer => _itemModifiersSelectionContainer;
 
         [Header("EnemySpawnSettings")][Space]
         [SerializeField] private EnemyWavesData _enemyWavesData;

@@ -6,17 +6,12 @@ using UnityEngine.Events;
 public sealed class DraggableConnector : MonoBehaviour
 {
     [Header("JointSettings")]
-
     [SerializeField] private Joint _joint;
-
     [SerializeField] private Vector3 _distance;
 
     [Header("PlacementSettings")]
-
     public UnityEvent<GameObject> PlacedDraggable;
-
     [SerializeField] private int _placementFramesDuration;
-
     private Coroutine _transformCoroutine;
 
     private Vector3 rotStep;

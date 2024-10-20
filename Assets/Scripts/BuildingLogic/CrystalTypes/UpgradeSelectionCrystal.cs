@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public class UpgradeSelectionCrystal : SelectionCrystal
-{
+public class UpgradeSelectionCrystal// : SelectionCrystal
+{/*
     [SerializeField] private SelectionOptionContainer _selectionOptionContainer;
     public override SelectionOptionContainer GetOptionContainer() => _selectionOptionContainer;
 
@@ -10,5 +10,5 @@ public class UpgradeSelectionCrystal : SelectionCrystal
         UpgradeSelectionOption option = selectionOption as UpgradeSelectionOption;   
 
         option.UpgradeInSelectionOption.Apply();
-    }
+    }*/
 }

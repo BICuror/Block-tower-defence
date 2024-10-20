@@ -4,5 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/PlayScene/PlayScene.unity
+    guid: 4416bfbec22cec044a7ec627b01c4743
+  m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 45704661fdd86c745ada74cba59c183e, type: 2}
+    com.unity.localization.settings: {fileID: 11400000, guid: 00f1bbc6d133f814c8cbff618a6702f6, type: 2}

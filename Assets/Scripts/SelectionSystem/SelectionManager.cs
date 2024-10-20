@@ -1,39 +1,25 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public sealed class SelectionManager : MonoBehaviour
 {
-    [SerializeField] private OptionsCreator _optionsCreator;
+    private int _selectionSize = 3;
+    private Queue<SelectionType> _enqeuedSelections = new();
 
-    [SerializeField] private SelectionOptionsObjectsPositionCalculator _selectionOptionsObjectsPositionCalculator;
+    [SerializeField] private BuildingSelector _buildingSelector;
 
-    [SerializeField] private SelectionAnimator _selectionAnimator;
+    public void EnqeueSelection(SelectionType type) => _enqeuedSelections.Enqueue(type); 
 
-    private SelectionOptionObject[] _selectionOptionObjects;
-    public UnityEvent<SelectionOption> OptionChoosen;
-    private SelectionOptionContainer _selectionOptionsContainer;
-    [SerializeField] private int _selectionOptionsAmount = 3;
-    public void SetSelectionOptionAmount(int value) => _selectionOptionsAmount += value;
-    public int GetSelectionOptionAmount() => _selectionOptionsAmount;
-
-    public void StartSelection(SelectionCrystal crystal)
+    private void StartSelection()
     {
-        SelectionOption[] selectionOptions = crystal.GetOptionContainer().GetSelectionOptions(GetSelectionOptionAmount());
+        SelectionType type = _enqeuedSelections.Dequeue();
 
-        _selectionOptionObjects = _optionsCreator.CreateOptionObjects(selectionOptions, crystal is BuildingsSelectionCrystal);
-    
-        for (int i = 0; i < _selectionOptionObjects.Length; i++)
+        switch (type)
         {
-            _selectionOptionObjects[i].Choosen.AddListener(StopSelection);
+            case SelectionType.Building: _buildingSelector.StartBuildingsSelection(); break;
+            default: break;
         }
-
-        _selectionAnimator.StartSelectionAnimation(_selectionOptionsObjectsPositionCalculator.GetPanelsPosition(_selectionOptionObjects.Length), _selectionOptionObjects, crystal);
-    }
-
-    private void StopSelection(SelectionOption selectionOption)
-    {   
-        _selectionAnimator.StopSelectionAnimation(_selectionOptionObjects);
-
-        OptionChoosen.Invoke(selectionOption);
     }
 }

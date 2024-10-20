@@ -1,7 +1,7 @@
 using UnityEngine;
 
-public abstract class SelectionCrystal : Crystal
-{
+public abstract class SelectionCrystal// : Crystal
+{/*
     private SelectionManager _selectionManager;
     [SerializeField] private Transform _floatingPart;
 
@@ -31,5 +31,5 @@ public abstract class SelectionCrystal : Crystal
         _selectionManager.OptionChoosen.RemoveListener(UseCrystal);
 
         CrystalUsed.Invoke();
-    }
+    }*/
 }

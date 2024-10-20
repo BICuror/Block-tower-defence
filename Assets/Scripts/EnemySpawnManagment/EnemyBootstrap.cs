@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+using Navigation;
 
 [RequireComponent(typeof(EnemyHealth))]
 
@@ -11,25 +11,28 @@ public sealed class EnemyBootstrap : MonoBehaviour
     [SerializeField] private MeshFilter _meshFilter;
     [SerializeField] private MeshRenderer _meshRenderer;   
 
-    [SerializeField] private NewEnemyNavAgent _navMeshAgent;
-    public NavMeshAgent Agent;
+    [SerializeField] private NavigationAgent _navMeshAgent;
+    public NavigationAgent Agent;
 
     [SerializeField] private EnemyHealth _enemyHealth; 
     public EnemyHealth Health => _enemyHealth;
 
     [SerializeField] private Animator _animator;
 
+    private EnemyData _enemyData;
+
     public void SetEnemyData(EnemyData enemyDataToSet)
     {
+        _enemyData = enemyDataToSet;
+
         SetEnemyHealthData(enemyDataToSet.HealthData);
-        SetEnemyMovmentData(enemyDataToSet.MovmentData);
         SetVisualData(enemyDataToSet);
         CreateSpecialObject(enemyDataToSet);
     }
 
-    private void SetEnemyMovmentData(EnemyMovmentData enemyData)
+    private void SetEnemyMovmentData(NavigationAgentData enemyData)
     {
-        //_navMeshAgent.speed = enemyData.MovmentSpeed;
+        _navMeshAgent.Init(enemyData);
     }    
 
     private void SetEnemyHealthData(EnemyHealthData enemyData)
@@ -57,8 +60,7 @@ public sealed class EnemyBootstrap : MonoBehaviour
     public void EnableNavmeshAgent()
     {
         _navMeshAgent.enabled = true;
-        
-        //_navMeshAgent.SetDestination(EnemyDestanationSetter.Instance.GetFinalEnemyDestanation());
+        SetEnemyMovmentData(_enemyData.NavigationData);
     }
 
     private void OnEnable() 

@@ -25,7 +25,7 @@ public sealed class OptionsCreator : MonoBehaviour
             selectionOptionsObjects[i].transform.localPosition = Vector3.zero;
             selectionOptionsObjects[i].transform.localScale = Vector3.zero;
 
-            selectionOptionsObjects[i].SetSelectionOption(selectionOptions[i]);
+        //selectionOptionsObjects[i].SetSelectionOption(selectionOptions[i]);
         }
 
         return selectionOptionsObjects;

@@ -6,8 +6,7 @@ public sealed class Building : DraggableObject
 {
     [Header("BuildingProcessSettings")]
 
-    [SerializeField] private float _buildTime;
-    public float BuildTime => _buildTime;
+    [SerializeField] private BuildTime _buildTime;
     [SerializeField] private BuildingProgressBar _buildBar;
 
     private bool _isBuilt = true;
@@ -22,6 +21,8 @@ public sealed class Building : DraggableObject
 
     private void Start()  
     {
+        _buildTime = this.GetStat<BuildTime>();
+
         Placed.AddListener(StartBuilding);
 
         PickedUp.AddListener(DisableBuilding);
@@ -42,12 +43,12 @@ public sealed class Building : DraggableObject
 
         StartCoroutine(StartBuildingProcess());
         
-        _buildBar?.StartFillingBar(_buildTime);
+        _buildBar?.StartFillingBar(_buildTime.Value);
     }
 
     private IEnumerator StartBuildingProcess()
     {
-        yield return new WaitForSeconds(_buildTime);
+        yield return new WaitForSeconds(_buildTime.Value);
 
         CompleteBuild();
     }

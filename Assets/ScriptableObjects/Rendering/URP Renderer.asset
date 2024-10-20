@@ -94,7 +94,7 @@ MonoBehaviour:
     zFailOperation: 0
   m_ShadowTransparentReceive: 0
   m_RenderingMode: 0
-  m_DepthPrimingMode: 2
+  m_DepthPrimingMode: 0
   m_CopyDepthMode: 0
   m_AccurateGbufferNormals: 0
   m_IntermediateTextureMode: 1
@@ -116,10 +116,10 @@ MonoBehaviour:
     Downsample: 0
     AfterOpaque: 1
     Source: 1
-    NormalSamples: 0
-    Intensity: 2.5
+    NormalSamples: 2
+    Intensity: 3
     DirectLightingStrength: 0
-    Radius: 0.8
+    Radius: 0.89
     Samples: 0
     BlurQuality: 0
     Falloff: 1000

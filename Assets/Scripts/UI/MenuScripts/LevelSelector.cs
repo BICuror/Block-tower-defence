@@ -6,14 +6,12 @@ public sealed class LevelSelector : MonoBehaviour
 {
     [Header("IslandDataSettings")]
     [SerializeField] private IslandDataContainer _islandDataContainer;
-    [SerializeField] private IslandData[] _islandDatas;    
-    [SerializeField] private Unlock[] _unlocks;
+    [SerializeField] private IslandData[] _islandDatas;
 
     [Header("InfoDisplayers")]
     [SerializeField] private TextMeshProUGUI _locationNameText;
 
     [Header("UnlockDisplay")]
-    [SerializeField] private GameObject _lockedDisplay;
     [SerializeField] private TextMeshProUGUI _requirementText;
 
     [Header("Generation")]
@@ -32,20 +30,7 @@ public sealed class LevelSelector : MonoBehaviour
 
         _islandGeneration.GenerateIsland();
         _materialSetter.UpdateMaterialsTextures();
-
-        _locationNameText.text = _islandDatas[index].IslandName;
-
-        if (_unlocks[index].IsUnlocked())
-        {
-            _lockedDisplay.SetActive(false);
-        }
-        else 
-        {
-            _lockedDisplay.SetActive(true);
-            _requirementText.text = _unlocks[index].GetRequirement();
-        }
     }
-
 
     public void NextIslandData() 
     {

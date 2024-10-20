@@ -823,7 +823,7 @@ MonoBehaviour:
   _meshFilter: {fileID: 5618922150075673844}
   _meshRenderer: {fileID: 5307450753371701605}
   _navMeshAgent: {fileID: 7679030763716337191}
-  Agent: {fileID: 0}
+  Agent: {fileID: 7679030763716337191}
   _enemyHealth: {fileID: 2821463210539011180}
   _animator: {fileID: 5861284781355044582}
 --- !u!114 &3706642640325084935
@@ -931,88 +931,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31304d7c17afc9f4db30316e4e7d5644, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sameHeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _jumpHeight: 2
-  _differentHeightCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1.9971786
-      outSlope: 1.9971786
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.49952653
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -1.9933864
-      outSlope: -1.9933864
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.5028409
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _rotationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2.0161679
-      outSlope: 2.0161679
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.9943182
-    - serializedVersion: 3
-      time: 0.5
-      value: 1
-      inSlope: -0.00000048604255
-      outSlope: -0.00000048604255
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.24526513
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -2.0028157
-      outSlope: -2.0028157
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  _placementRequirements: {fileID: 11400000, guid: 33296f7510ce96c49917af81ff0e4063, type: 2}
+  _isDraggable: 1
+  PickedUp:
+    m_PersistentCalls:
+      m_Calls: []
+  Placed:
+    m_PersistentCalls:
+      m_Calls: []
+  DraggablePickedUp:
+    m_PersistentCalls:
+      m_Calls: []
+  DraggablePlaced:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &9064062526424563897
 GameObject:
   m_ObjectHideFlags: 0

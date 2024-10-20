@@ -47,7 +47,7 @@ public abstract class AreaDetectorWithDraggableSubscription<T> : AreaDetector<T>
         }
         else 
         {
-            draggableObject.DraggablePlaced.AddListener(AddPlacedDraggable);
+            draggableObject.DraggablePlaced += AddPlacedDraggable;
         }       
     }
 
@@ -55,8 +55,8 @@ public abstract class AreaDetectorWithDraggableSubscription<T> : AreaDetector<T>
     {
         DraggableObject draggableObject = other.GetComponent<DraggableObject>();
         
-        draggableObject.DraggablePlaced.RemoveListener(AddPlacedDraggable);
-        draggableObject.DraggablePickedUp.RemoveListener(RemovePlacedDraggable);
+        draggableObject.DraggablePlaced -= AddPlacedDraggable;
+        draggableObject.DraggablePickedUp -= RemovePlacedDraggable;
 
         if (_TComponentHasHealth)
         {
@@ -78,14 +78,14 @@ public abstract class AreaDetectorWithDraggableSubscription<T> : AreaDetector<T>
 
     private void AddPlacedDraggable(DraggableObject draggable)
     {
-        draggable.DraggablePlaced.RemoveListener(AddPlacedDraggable);
+        draggable.DraggablePlaced -= AddPlacedDraggable;
         
         _placedDraggables.Add(draggable);
         T component = draggable.GetComponent<T>();
         _placedComponents.Add(component);
         PlacedComponentAdded.Invoke(component);
 
-        draggable.DraggablePickedUp.AddListener(RemovePlacedDraggable);
+        draggable.DraggablePickedUp += RemovePlacedDraggable;
 
         if (_TComponentHasHealth)
         {
@@ -99,9 +99,9 @@ public abstract class AreaDetectorWithDraggableSubscription<T> : AreaDetector<T>
 
     private void RemovePlacedDraggable(DraggableObject draggable)
     {
-        draggable.DraggablePickedUp.RemoveListener(RemovePlacedDraggable);
+        draggable.DraggablePickedUp -= RemovePlacedDraggable;
 
-        draggable.DraggablePlaced.AddListener(AddPlacedDraggable);
+        draggable.DraggablePlaced += AddPlacedDraggable;
 
         _placedDraggables.Remove(draggable);
 

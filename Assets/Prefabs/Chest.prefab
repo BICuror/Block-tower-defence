@@ -270,8 +270,8 @@ GameObject:
   - component: {fileID: 3032709507445009490}
   - component: {fileID: 6782032023307961533}
   - component: {fileID: 6692096836456901224}
-  - component: {fileID: 8737697132866799366}
   - component: {fileID: 6581572728798217390}
+  - component: {fileID: 2314991022373557598}
   m_Layer: 7
   m_Name: Chest
   m_TagString: Untagged
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6603117a8dcd245a2ba165dc4ee5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _placementRequirements: 0
+  _placementRequirements: {fileID: 0}
   _isDraggable: 0
   PickedUp:
     m_PersistentCalls:
@@ -442,21 +442,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fa893e5725ca0d40a398ca6086d27a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8737697132866799366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6442317979181897654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57ab05c8a60fd2449be5ed0f91abdb06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shakeDuration: 0.5
-  _shakeStrength: 0.4
-  _mesh: {fileID: 381842271666186358}
 --- !u!114 &6581572728798217390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,11 +454,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec54c5efe2ca23a4cbc8689d7a98171c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _name: Townhall
+  _name: Chest
   _description: Defend at all costs
   _height: 3
-  _parametrs:
-  - {fileID: 11400000, guid: d84137419f01aa442a77f3cb6bcbdf66, type: 2}
+  _parametrs: []
+--- !u!114 &2314991022373557598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442317979181897654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc21b5c84dbd70c48be280b79a8cc69a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possibleToCreateCrystals:
+  - {fileID: 5525435963237314612, guid: 8bfdc7f8215825b4c94c34294d34804d, type: 3}
+  - {fileID: 831196094606668926, guid: bd5ef9bc5516fd74794200825c4cb0e9, type: 3}
+  _maxAmountOfCrystalsCreated: 2
 --- !u!1 &6813076032577213933
 GameObject:
   m_ObjectHideFlags: 0

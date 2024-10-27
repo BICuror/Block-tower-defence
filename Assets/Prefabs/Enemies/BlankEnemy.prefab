@@ -568,8 +568,6 @@ GameObject:
   - component: {fileID: 8399028000082788085}
   - component: {fileID: 7057627010155670114}
   - component: {fileID: 6155376202890342081}
-  - component: {fileID: 3423739780722169328}
-  - component: {fileID: 7539283187517295852}
   - component: {fileID: 3470423544607155355}
   - component: {fileID: 5470116573557611511}
   - component: {fileID: 4996617739708713314}
@@ -655,93 +653,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!195 &3423739780722169328
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946998955840327174}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.1
-  m_Speed: 0.75
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 0
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 1
-  m_BaseOffset: 0.5
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 1
---- !u!114 &7539283187517295852
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4946998955840327174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36f9318ebb0bf26438bb9151ba66b5b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _jumpHeightInBlocks: 2
-  _animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 7.5230675
-      outSlope: 7.5230675
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.03602706
-      value: 0.271034
-      inSlope: 4.5481744
-      outSlope: 4.5481744
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.50064296
-      value: 1.0020056
-      inSlope: -0.071237266
-      outSlope: -0.071237266
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.9769793
-      value: 0.18472856
-      inSlope: -4.870108
-      outSlope: -4.870108
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -8.02446
-      outSlope: -8.02446
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _linkTravelDuration: 0.75
 --- !u!114 &3470423544607155355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -815,7 +726,8 @@ MonoBehaviour:
   _GPUInstancerEnabler: {fileID: 9018162654390213284}
   _meshFilter: {fileID: 6815170168767357717}
   _meshRenderer: {fileID: 6135330917030590304}
-  _navMeshAgent: {fileID: 3423739780722169328}
+  _navMeshAgent: {fileID: 0}
+  Agent: {fileID: 0}
   _enemyHealth: {fileID: 3470423544607155355}
   _animator: {fileID: 4790466594771268099}
 --- !u!114 &675977964231776498

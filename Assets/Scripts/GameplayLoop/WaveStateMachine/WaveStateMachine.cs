@@ -1,0 +1,50 @@
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+
+public sealed class WaveStateMachine : MonoBehaviour
+{
+    private const WaveState INITIAL_STATE = WaveState.None;
+
+    [SerializeField] private List<WaveStateController> _stateControllersList;
+    private Dictionary<WaveState, WaveStateController> _stateControllers = new();
+    private WaveState _currentState;
+
+    private void Awake() => Initialize();
+    private void Initialize()
+    {
+        _currentState = INITIAL_STATE;
+
+        _stateControllersList.ForEach(controller => 
+        {
+            _stateControllers.Add(controller.GetControlledState(), controller);
+        });
+    }
+
+    public void TransitionIntoIdle() => TransitionOutToState(WaveState.Idle); 
+    public void TransitionIntoAttack() => TransitionOutToState(WaveState.Attack); 
+
+    public void TransitionToState(WaveState waveState)
+    {
+        TransitionOutToState(waveState);
+    }
+    
+    public async void TransitionOutToState(WaveState stateToTransitionTo)
+    {
+        if (_currentState != WaveState.None) await TransitionOutOfCurrentState();
+
+        _currentState = stateToTransitionTo;
+
+        await TransitionIntoNewState();
+    }
+
+    private async UniTask TransitionOutOfCurrentState()
+    {
+        await _stateControllers[_currentState].TransitionOutOfState();
+    }
+
+    private async UniTask TransitionIntoNewState()
+    {
+        await _stateControllers[_currentState].TransitionIntoState();
+    } 
+}

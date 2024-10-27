@@ -5,12 +5,9 @@ using UnityEngine;
 public sealed class ObjectPool<T>: MonoBehaviour where T: Component
 {   
     private List<T> _pool;
-
     private int _pointer;
-
-    private Transform _container;
-
     private T _prefab;
+    private Transform _container;
 
     public ObjectPool(T prefab, int poolSize)
     {

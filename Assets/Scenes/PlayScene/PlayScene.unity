@@ -1377,6 +1377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64a930f8220a9a64ab20ade3e01866be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemContainerManager: {fileID: 1923945690}
 --- !u!4 &249324046
 Transform:
   m_ObjectHideFlags: 0
@@ -4779,9 +4780,9 @@ MonoBehaviour:
   AllEnemiesDied:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125240000}
-        m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
-        m_MethodName: EndWave
+      - m_Target: {fileID: 1125240004}
+        m_TargetAssemblyTypeName: WaveStateMachine.WaveStateMachine, Assembly-CSharp
+        m_MethodName: TransitionIntoIdle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6208,6 +6209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3cf4d7cc216cc4e8be7f6a2f55e6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingSelector: {fileID: 0}
 --- !u!114 &1034691482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6873,6 +6875,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1125240001}
   - component: {fileID: 1125240000}
+  - component: {fileID: 1125240004}
+  - component: {fileID: 1125240003}
+  - component: {fileID: 1125240002}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -6892,65 +6897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c41ab9fdb9b8c5a478c0a4c73843c7bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waveEndingDuration: 2
-  _wavePreparationDuration: 2
-  WaveStopped:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1982758052}
-        m_TargetAssemblyTypeName: TerrainAnimator, Assembly-CSharp
-        m_MethodName: StartDisappearing
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1034691477}
-        m_TargetAssemblyTypeName: CrystalManager, Assembly-CSharp
-        m_MethodName: DestroyCrystal
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1705139745}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  WavePreparationBegun:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1982758052}
-        m_TargetAssemblyTypeName: TerrainAnimator, Assembly-CSharp
-        m_MethodName: StartAppearing
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  WaveStarted:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!4 &1125240001
 Transform:
   m_ObjectHideFlags: 0
@@ -6966,6 +6912,51 @@ Transform:
   m_Children: []
   m_Father: {fileID: 32533206}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1125240002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125239999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c02ae5aee4eb29347b8a3ac05dea2f15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionOutDuration: 0.5
+  TransitionInDuration: 2
+  _roadAnimator: {fileID: 1982758052}
+--- !u!114 &1125240003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125239999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb8ee3d9100687645bf257b26e2909df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TransitionOutDuration: 2
+  TransitionInDuration: 0.5
+  _roadAnimator: {fileID: 1982758052}
+--- !u!114 &1125240004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125239999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf69b1612d622645a248db8155f178f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateControllersList:
+  - {fileID: 1125240003}
+  - {fileID: 1125240002}
 --- !u!1 &1136076230
 GameObject:
   m_ObjectHideFlags: 0
@@ -10153,9 +10144,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1125240000}
-        m_TargetAssemblyTypeName: WaveManager, Assembly-CSharp
-        m_MethodName: TryToStartWave
+      - m_Target: {fileID: 1125240004}
+        m_TargetAssemblyTypeName: WaveStateMachine.WaveStateMachine, Assembly-CSharp
+        m_MethodName: TransitionIntoAttack
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10440,6 +10431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _islandGenerator: {fileID: 32533205}
+  _waveManager: {fileID: 1125240004}
 --- !u!4 &1778413792
 Transform:
   m_ObjectHideFlags: 0

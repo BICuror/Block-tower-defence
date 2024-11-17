@@ -10,10 +10,12 @@ public sealed class BuildingTaskCycle : TaskCycle
         
         _building.PickedUp.AddListener(StopCycle);
 
-        _building.BuildCompleted.AddListener(StartCycle);
+        _building.BuildCompleted += StartCycle;
 
         base.Awake();
     }
 
     public override bool CanWork() => _building.IsBuilt(); 
+    
+    private void OnDestroy() => _building.BuildCompleted -= StartCycle;
 }

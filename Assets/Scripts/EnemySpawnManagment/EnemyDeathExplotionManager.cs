@@ -1,3 +1,4 @@
+using Combat;
 using UnityEngine;
 
 public sealed class EnemyDeathExplotionManager : MonoBehaviour
@@ -6,10 +7,10 @@ public sealed class EnemyDeathExplotionManager : MonoBehaviour
 
     private void Awake()
     {
-        GetComponent<EnemyHealth>().DeathEvent.AddListener(PlayExplotionVFX);
+        GetComponent<EntityHealth>().EntityDied += PlayExplotionVFX;
     }
 
-    public void PlayExplotionVFX(GameObject enemyObject)
+    public void PlayExplotionVFX(CombatEntity enemyObject)
     {
         _visualEffectHandler.transform.SetParent(null);
 

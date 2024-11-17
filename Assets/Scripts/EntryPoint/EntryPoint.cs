@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using WorldGeneration;
+using Combat;
 
 public sealed class EntryPoint : MonoBehaviour
 {

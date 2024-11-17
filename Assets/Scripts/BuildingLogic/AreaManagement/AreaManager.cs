@@ -9,7 +9,7 @@ public class AreaManager : MonoBehaviour
 
     private void Start() 
     {   
-        _reachAreaScale = this.GetStat<ReachAreaScale>();
+        //_reachAreaScale = this.GetStat<ReachAreaScale>();
         UpdateScale();
     }
 

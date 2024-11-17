@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+using Combat;
 
 public sealed class EnemySpawnManagmentInstaller : MonoInstaller
 {

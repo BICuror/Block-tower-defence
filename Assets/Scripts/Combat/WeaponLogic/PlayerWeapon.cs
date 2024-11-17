@@ -1,1 +1,4 @@
-public class PlayerWeapon : Weapon<EnemyHealth> {}
+namespace Combat
+{
+    public class PlayerWeapon : Weapon<EnemyEntity> {}
+}

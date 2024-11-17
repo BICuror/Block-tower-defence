@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class MortarTower : CombatBuilding
 {
-    [Header("StatSettings")]
+    /*[Header("StatSettings")]
     [Range(0f, 1f)] [SerializeField] private float _explotionDamageMultiplyer;
     [SerializeField] private float _explotionRadius;
     public float ExplotionDamage => Damage * _explotionDamageMultiplyer;
@@ -42,5 +42,5 @@ public sealed class MortarTower : CombatBuilding
         currentGrenade.Launch(_enemyAreaScaner.GetRandomEnemy().transform.position);
     }
 
-    private void OnDestroy() => _grenadeObjectPool.DestroyPool();
+    private void OnDestroy() => _grenadeObjectPool.DestroyPool();*/
 }

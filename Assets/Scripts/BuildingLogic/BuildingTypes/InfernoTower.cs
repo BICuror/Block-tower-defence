@@ -4,7 +4,7 @@ using UnityEngine;
 
 public sealed class InfernoTower : CombatBuilding
 {
-    [Header("Stats")]
+    /*[Header("Stats")]
     [SerializeField] private AnimationCurve _damageCurve;
     [SerializeField] private float _damageAccselerationTime;
     private int _fullAccerationTicks;
@@ -120,5 +120,5 @@ public sealed class InfernoTower : CombatBuilding
                 if (_currentEnemy.IsAlive()) enemyEffectManager.ApplyEffect(effectsToApply[i]);
             }
         }
-    }
+    }*/
 }

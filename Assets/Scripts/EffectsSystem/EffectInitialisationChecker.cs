@@ -1,36 +1,39 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public sealed class EffectInitialisationChecker : MonoBehaviour
+namespace Combat
 {
-    private static EffectInitialisationChecker _instance;
-    public static EffectInitialisationChecker Instance => _instance;
-
-    private List<Effect> _initializedEffects = new List<Effect>();
-
-    public bool EffectIsInitialized(Effect effect)
+    public sealed class EffectInitialisationChecker : MonoBehaviour
     {
-        if (_initializedEffects.Contains(effect))
+        private static EffectInitialisationChecker _instance;
+        public static EffectInitialisationChecker Instance => _instance;
+    
+        private List<Effect> _initializedEffects = new List<Effect>();
+    
+        public bool EffectIsInitialized(Effect effect)
         {
-            return true;
+            if (_initializedEffects.Contains(effect))
+            {
+                return true;
+            }
+            else
+            {
+                _initializedEffects.Add(effect);
+    
+                return false;
+            }
         }
-        else
+    
+        private void Awake()
         {
-            _initializedEffects.Add(effect);
-
-            return false;
-        }
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+            else
+            {
+                Debug.LogError("Multiple instances of effectInitialisationChecker");
+            }
+        }    
     }
-
-    private void Awake()
-    {
-        if (_instance == null)
-        {
-            _instance = this;
-        }
-        else
-        {
-            Debug.LogError("Multiple instances of effectInitialisationChecker");
-        }
-    }    
 }

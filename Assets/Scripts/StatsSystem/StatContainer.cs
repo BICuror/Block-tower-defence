@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Data;
 
 public sealed class StatContainer : MonoBehaviour
 {
     [SerializeField] private StatInitializer[] _statInitializers;
-    private Dictionary<Type, Stat> _stats = new();
+    private readonly Dictionary<Type, Stat> _stats = new();
 
-    private void Awake()
+    public void Initialize()
     {
         foreach (StatInitializer statInitializer in _statInitializers)
         {
@@ -20,47 +21,64 @@ public sealed class StatContainer : MonoBehaviour
         }
     }
 
-    public T GetStat<T>() where T : Stat
+    #region Generic
+    public T Get<T>() where T : Stat
     {
-        Type type = typeof(T);
-
-        T result = _stats[type] as T;
-
-        if (result != null) Debug.Log($"{gameObject.name} doesn't have stat with type {type.ToString()}");
-
-        return result;
+        return (T)Get(typeof(T));
     }
-
-    public bool HasStat(Type type) => _stats.ContainsKey(type);
-
+    public bool Has<T>() where T : Stat
+    {
+        return Has(typeof(T));
+    }
+    public void Remove<T>() where T : Stat
+    {
+        Remove(typeof(T));
+    }
+    #endregion
+    
+    #region Typed
+    public Stat Get(Type type)
+    {
+        if (_stats[type] != null) return _stats[type];
+        
+        throw new KeyNotFoundException($"Stat with type {type.ToString()} was found.");
+    }
+    public bool Has(Type type) => _stats.ContainsKey(type);
+    public void Remove(Type type)
+    {
+        if (Has(type)) _stats.Remove(type);
+        else throw new KeyNotFoundException($"Stat with type {type.ToString()} was not found.");
+    }
+    #endregion
+    
     public void AddStat(Stat stat)
     {
         Type statType = stat.GetType();
 
-        if (HasStat(statType) == false)
+        if (Has(statType) == false)
         {
             _stats.Add(stat.GetType(), stat);
-            Debug.Log($"Added {stat.GetType().ToString()} stat to {gameObject.name}");
         }
-        else Debug.LogError($"Tried adding additional instance of {statType.ToString()} to {gameObject.name}");
+        else throw new DuplicateNameException($"Stat with type {statType.ToString()} already exists.");
     }
-
-    public void RemoveStat(Type type)
-    {
-        if (HasStat(type)) _stats.Remove(type);
-        else Debug.LogError($"Tried removing to {type.ToString()} to {gameObject.name} while not having it in the first place");
-    }
-
+    
     private void OnValidate()
     {
         try
         {
             for (int i = 0; i < _statInitializers.Length; i++)
-            {    
+            {
                 _statInitializers[i].StructName = _statInitializers[i].StatData.GetStatType().ToString();
+
+                Type statType = _statInitializers[i].StatData.GetStatType();
+                
+                if (Has(statType))
+                {
+                    Get(statType).SetDefault(_statInitializers[i].DefaultValue);
+                }
             }
         }
-        catch (Exception ex) {}
+        catch (Exception ex) { Debug.LogWarning(ex.Message); }
     }
 
     [Serializable] private struct StatInitializer

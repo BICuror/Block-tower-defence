@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Combat;
 using UnityEngine;
 
 public sealed class HealingTower : MonoBehaviour
 {
-    [Header("Stats")]
+    /*[Header("Stats")]
     [SerializeField] private float _healAmount;
     public float HealAmount => _healAmount;
 
@@ -13,7 +14,7 @@ public sealed class HealingTower : MonoBehaviour
 
     [SerializeField] private BeamSystem _beamSystem;
 
-    private EntityHealth _currentBuilding;
+    private CombatEntity _currentBuilding;
 
     private BuildingTaskCycle _buildingTaskCycle;
 
@@ -134,5 +135,5 @@ public sealed class HealingTower : MonoBehaviour
         {
             TryRemoveBuilding(_currentBuilding);
         }
-    }
+    }*/
 }

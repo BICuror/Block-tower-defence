@@ -1,15 +1,18 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "OnFireEffect", menuName = "Effect/OnFireEffect")]
-
-public sealed class OnFireEffect : RemoveOverTicksEffect
+namespace Combat
 {
-    [SerializeField] private float _damage;
-
-    public override bool CanBeApplied(EntityComponentsContainer componentsContainer) => componentsContainer.HasHealth();
-
-    public override void ApplyTickEffectToEntity(EntityComponentsContainer componentsContainer)
+    [CreateAssetMenu(fileName = "OnFireEffect", menuName = "Effect/OnFireEffect")]
+    
+    public sealed class OnFireEffect : RemoveOverTicksEffect
     {
-        componentsContainer.Health.GetHurt(_damage);
+        [SerializeField] private float _damage;
+    
+        public override bool CanBeApplied(EntityComponentsContainer componentsContainer) => componentsContainer.HasHealth();
+    
+        public override void ApplyTickEffectToEntity(EntityComponentsContainer componentsContainer)
+        {
+            componentsContainer.Health.ReceiveDamage(_damage);
+        }
     }
 }

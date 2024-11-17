@@ -4,6 +4,7 @@ using UnityEngine;
 
 public sealed class EnemyRanger : MonoBehaviour
 {
+    /*
     [Header("Stats")]
     [SerializeField] private float _projectileSpeed;
     [SerializeField] private float _projectileDamage;
@@ -50,5 +51,5 @@ public sealed class EnemyRanger : MonoBehaviour
     {
         Destroy(_enemyTaskCycle);
         Destroy(this);
-    }
+    }*/
 }

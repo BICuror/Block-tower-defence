@@ -1,15 +1,18 @@
-public sealed class BuildingEffectManager : EntityEffectManager 
+namespace Combat
 {
-    private void Awake()
+    public sealed class BuildingEffectManager : EntityEffectManager 
     {
-        Building building = GetComponent<Building>();
+        private void Awake()
+        {
+            Building building = GetComponent<Building>();
+            
+            building.PickedUp.AddListener(RemoveAllEffects);
         
-        building.PickedUp.AddListener(RemoveAllEffects);
+            building.PickedUp.AddListener(SetEffectsCanBeSetFalse);
+            building.Placed.AddListener(SetEffectsCanBeSetTrue);
+        }
     
-        building.PickedUp.AddListener(SetEffectsCanBeSetFalse);
-        building.Placed.AddListener(SetEffectsCanBeSetTrue);
+        private void SetEffectsCanBeSetTrue() => _effectsCanBeSet = true;
+        private void SetEffectsCanBeSetFalse() => _effectsCanBeSet = false;
     }
-
-    private void SetEffectsCanBeSetTrue() => _effectsCanBeSet = true;
-    private void SetEffectsCanBeSetFalse() => _effectsCanBeSet = false;
 }

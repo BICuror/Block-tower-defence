@@ -1,13 +1,16 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RechargeIncreaseParameter", menuName = "Parameter/EffectParameters/RechargeIncreaseParameter")]
-
-public sealed class RechargeIncreaseParameter : Parameter
+namespace Combat
 {
-    [SerializeField] private WorkFasterEffect _workFasterEffect;
-
-    public override string GetValue(GameObject inspectable)
+    [CreateAssetMenu(fileName = "RechargeIncreaseParameter", menuName = "Parameter/EffectParameters/RechargeIncreaseParameter")]
+    
+    public sealed class RechargeIncreaseParameter : Parameter
     {
-        return _workFasterEffect.EffectStrength.ToString();
+        [SerializeField] private WorkFasterEffect _workFasterEffect;
+    
+        public override string GetValue(GameObject inspectable)
+        {
+            return _workFasterEffect.EffectStrength.ToString();
+        }
     }
 }

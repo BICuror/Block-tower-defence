@@ -1,6 +1,7 @@
 using UnityEngine.Events;
 using UnityEngine;
 using Zenject;
+using Combat;
 
 namespace WorldGeneration
 {

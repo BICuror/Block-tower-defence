@@ -1,13 +1,17 @@
 using UnityEngine;
 
-[RequireComponent(typeof(EntityHealth))]
-
-public sealed class HitShaker : Shaker
+namespace Combat.Animation
 {
-    private void Awake()
+    [RequireComponent(typeof(EntityHealth))]
+    
+    public sealed class HitShaker : Shaker
     {
-        CaptureDefaultScale();
-
-        GetComponent<EntityHealth>().Damaged.AddListener(Shake);
+        private void Awake()
+        {
+            CaptureDefaultScale();
+    
+            GetComponent<EntityHealth>().Damaged += Shake;
+        }
     }
 }
+

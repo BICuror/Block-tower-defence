@@ -1,1 +1,4 @@
-public sealed class ApplyEffectContainerAreaScaner : AreaDetectorWithDraggableSubscription<ApplyEffectContainer> {}
+namespace Combat
+{
+    public sealed class ApplyEffectContainerAreaScaner : AreaDetectorWithDraggableSubscription<ApplyEffectContainer> {}
+}

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public sealed class SpecialEnemyObject : MonoBehaviour
 {
+    /*
     [SerializeField] private float _areaScale;
     [SerializeField] private float _animationDuration;
 
@@ -67,5 +68,5 @@ public sealed class SpecialEnemyObject : MonoBehaviour
         }
 
         Destroy(gameObject);
-    }
+    }*/
 }

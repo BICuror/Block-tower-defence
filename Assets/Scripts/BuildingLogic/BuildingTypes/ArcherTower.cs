@@ -2,7 +2,7 @@ using UnityEngine;
 
 public sealed class ArcherTower : CombatBuilding
 {
-    [Header("Stats")]
+    /*[Header("Stats")]
     [SerializeField] private float _arrowSpeed;
 
     [Header("Links")]
@@ -11,10 +11,10 @@ public sealed class ArcherTower : CombatBuilding
     [SerializeField] private EnemyAreaScaner _enemyAreaScaner;
     [SerializeField] private Transform _shootingPoint;
 
-    private ObjectPool<Arrow> _arrowObjectPool; 
+    private ObjectPool<Arrow> _arrowObjectPool;
 
     private void Start()
-    {   
+    {
         _arrowObjectPool = new ObjectPool<Arrow>(_arrowPrefab, 3);
 
         TaskCycle buildingTaskCycle = GetComponent<TaskCycle>();
@@ -27,14 +27,14 @@ public sealed class ArcherTower : CombatBuilding
     private bool ShouldWorkDelegate() => _enemyAreaScaner.Empty() == false;
 
     private void Shoot()
-    {   
+    {
         Arrow currentArrow = _arrowObjectPool.GetNextPooledObject();
-        
+
         currentArrow.GetRigidbody().velocity = Vector3.zero;
         currentArrow.transform.position = _shootingPoint.position;
-        
+
         currentArrow.transform.LookAt(_enemyAreaScaner.GetFirstEnemy().transform.position);
-        
+
         currentArrow.gameObject.SetActive(true);
 
         currentArrow.SetEffects(_applyEffectContainer.GetApplyEffects());
@@ -43,5 +43,5 @@ public sealed class ArcherTower : CombatBuilding
         currentArrow.GetRigidbody().AddForce(currentArrow.transform.forward * _arrowSpeed, ForceMode.Impulse);
     }
 
-    private void OnDestroy() => _arrowObjectPool.DestroyPool();
+    private void OnDestroy() => _arrowObjectPool.DestroyPool();*/
 }

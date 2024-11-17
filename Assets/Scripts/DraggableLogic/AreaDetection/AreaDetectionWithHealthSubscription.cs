@@ -1,39 +1,37 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public abstract class AreaDetectorWithHealthSubscription<T> : AreaDetector<T> where T: MonoBehaviour
+namespace Combat
 {
-    private List<EntityHealth> _healthComponentsArea = new List<EntityHealth>();
-
-    private UnityEvent<T> RemovedComponentDueToItsDeath;
-
-    public EntityHealth GetFirstEntityHealth() => _healthComponentsArea[0];
-
-    private void Awake()
-    {   
-        AddedComponent.AddListener(OnComponentAdded);
-        RemovedComponent.AddListener(OnComponentRemoved);
-    }
-
-    public void OnComponentAdded(T other)
+    public abstract class AreaDetectorWithHealthSubscription<T> : AreaDetector<T> where T: MonoBehaviour
     {
-        EntityHealth entityHealth = other.gameObject.GetComponent<EntityHealth>();
+        private List<EntityHealth> _itemsHealth = new List<EntityHealth>();
+    
+        private void Awake()
+        {   
+            AddedItem += OnItemAdded;
+            RemovedItem += OnItemRemoved;
+        }
+    
+        private void OnItemAdded(T other)
+        {
+            EntityHealth entityHealth = other.gameObject.GetComponent<EntityHealth>();
+    
+            _itemsHealth.Add(entityHealth);
+    
+            entityHealth.EntityDied += RemoveDestroyedComponent;
+        }
 
-        _healthComponentsArea.Add(entityHealth);
+        private void OnItemRemoved(T other)
+        {
+            EntityHealth entityHealth = other.gameObject.GetComponent<EntityHealth>();
 
-        entityHealth.DeathEvent.AddListener(RemoveDestroyedComponent);
+            _itemsHealth.Remove(entityHealth);
+
+            entityHealth.EntityDied -= RemoveDestroyedComponent;
+        }
+
+        private void RemoveDestroyedComponent(CombatEntity entity) => RemoveComponent(entity.GetComponent<T>());
     }
-
-    public void OnComponentRemoved(T other)
-    {
-        EntityHealth entityHealth = other.gameObject.GetComponent<EntityHealth>();
-
-        _healthComponentsArea.Remove(entityHealth);
-
-        entityHealth.DeathEvent.RemoveListener(RemoveDestroyedComponent);
-    }
-
-    private void RemoveDestroyedComponent(GameObject other) => RemoveComponent(other.GetComponent<T>());
 }
+

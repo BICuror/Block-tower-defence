@@ -1,66 +1,63 @@
+using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
-public abstract class AreaDetector <T> : AreaDetectorBase where T: MonoBehaviour 
+namespace Combat
 {
-    protected List<T> _list = new List<T>();
-
-    public UnityEvent<T> AddedComponent;
-    public UnityEvent<T> RemovedComponent;
+    public abstract class AreaDetector <T> : AreaDetectorBase where T: MonoBehaviour 
+    {
+        protected List<T> List = new List<T>();
     
-    public bool IsEmpty() => _list.Count == 0;
-    public T GetRandomEntity() => _list[Random.Range(0, _list.Count)];
-    public T GetFirstEntity() => _list[0];
-    public IReadOnlyList<T> GetList() => _list;
-
-    public void ClearList() => _list = new List<T>();
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out T component))
+        public Action<T> AddedItem;
+        public Action<T> RemovedItem;
+        
+        public bool IsEmpty() => List.Count == 0;
+        public T GetRandomItem() => List[Random.Range(0, List.Count)];
+        public T GetFirstItem() => List[0];
+        public IReadOnlyList<T> GetList() => List;
+    
+        public void ClearList() => List = new List<T>();
+    
+        private void OnTriggerEnter(Collider other)
         {
-            AddComponent(component);
-        }
-    }
-
-    protected void AddComponent(T component)
-    {
-        _list.Add(component);
-
-        AddedComponent.Invoke(component);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.TryGetComponent(out T component))
-        {
-            RemoveComponent(component);
-        }
-    }
-
-    protected void RemoveComponent(T component)
-    {
-        _list.Remove(component);
-
-        RemovedComponent.Invoke(component);
-    }
-
-    private void OnDisable() => RemoveAll();
-    private void OnDestroy() => RemoveAll();
-
-    private void RemoveAll()
-    {
-        while(_list.Count > 0)
-        {
-            if (_list[_list.Count - 1] != null)
+            if (other.gameObject.TryGetComponent(out T component))
             {
-                RemoveComponent(_list[_list.Count - 1]);
-            }
-            else 
-            {
-                _list.RemoveAt(_list.Count - 1);
+                AddComponent(component);
             }
         }
+        protected void AddComponent(T component)
+        {
+            List.Add(component);
+    
+            AddedItem?.Invoke(component);
+        }
+    
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out T component))
+            {
+                RemoveComponent(component);
+            }
+        }
+        protected void RemoveComponent(T component)
+        {
+            List.Remove(component);
+    
+            RemovedItem?.Invoke(component);
+        }
+    
+        private void RemoveAll()
+        {
+            List.ForEach(item =>
+            {
+                if (item != null) RemoveComponent(item);
+            });
+            
+            List.Clear();
+        }
+        
+        private void OnDisable() => RemoveAll();
+        private void OnDestroy() => RemoveAll();
     }
 }

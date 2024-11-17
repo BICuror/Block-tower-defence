@@ -1,3 +1,4 @@
+using Combat;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -29,7 +30,7 @@ public sealed class Bomb : DraggableObject
 
         for (int i = 0; i < hitEntities.Length; i++)
         {
-            hitEntities[i].transform.gameObject.GetComponent<EntityHealth>().GetHurt(_explotionDamage);
+            hitEntities[i].transform.gameObject.GetComponent<CombatEntity>().Health.ReceiveDamage(_explotionDamage);
         }
 
         _visualEffectHandler.Play();

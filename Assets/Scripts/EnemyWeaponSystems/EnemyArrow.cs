@@ -1,17 +1,20 @@
 using UnityEngine;
 
-public sealed class EnemyArrow : EnemyWeapon
+namespace Combat
 {
-    [SerializeField] private VisualEffectHandler _visualEffectHandler;
-
-    private void Awake() => HitSomething.AddListener(OnHitSomehing);
-
-    private void OnHitSomehing()
+    public sealed class EnemyArrow : EnemyWeapon
     {
-        _visualEffectHandler.Play();
-
-        Rigidbody.velocity = Vector3.zero;
+        [SerializeField] private VisualEffectHandler _visualEffectHandler;
+    
+        private void Awake() => HitSomething.AddListener(OnHitSomehing);
+    
+        private void OnHitSomehing()
+        {
+            _visualEffectHandler.Play();
+    
+            Rigidbody.velocity = Vector3.zero;
+        }
+    
+        private void OnBecameInvisible() => gameObject.SetActive(false);
     }
-
-    private void OnBecameInvisible() => gameObject.SetActive(false);
 }

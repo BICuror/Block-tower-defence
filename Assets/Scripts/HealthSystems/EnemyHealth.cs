@@ -1,48 +1,42 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class EnemyHealth : EntityHealth
+namespace Combat
 {
-    [SerializeField] private float _attackDamage = 10f;
-
-    public UnityEvent<EnemyHealth> EnemyDeathEvent; 
-
-    private float _attackMultipluer;
-
-    public void SetEnemyData(EnemyHealthData enemyData)
+    public class EnemyHealth : EntityHealth
     {
-        _maxHealth = enemyData.MaxHealth;
-
-        _incomingDamageMultipluer = enemyData.IncomingDamageMultipluer;
-
-        EnableHealthBar();
-
-        HealFully();
-    }
-
-    public void MultiplyMaxHealth(float value) 
-    {
-        _maxHealth *= value;
-        
-        HealFully();
-    }
-
-    private void OnCollisionEnter(Collision other) 
-    {
-        if (other.gameObject.TryGetComponent(out BuildingHealth buildingHealth))
+        [SerializeField] private float _attackDamage = 10f;
+    
+        public UnityEvent<EnemyHealth> EnemyDeathEvent; 
+    
+        private float _attackMultipluer;
+    
+        public void SetEnemyData(EnemyHealthData enemyData)
         {
-            buildingHealth.GetHurt(_attackDamage);
-
-            Die();
-        }    
-    }
-
-    public override void Die()
-    {
-        DeathEvent.Invoke(gameObject);
-
-        EnemyDeathEvent.Invoke(this);
-
-        gameObject.SetActive(false);
+            ReceivePercentHeal(1f);
+        }
+    
+        public void MultiplyMaxHealth(float value) 
+        {
+            ReceivePercentHeal(1f);
+        }
+    
+        private void OnCollisionEnter(Collision other) 
+        {
+            if (other.gameObject.TryGetComponent(out BuildingHealth buildingHealth))
+            {
+                buildingHealth.ReceiveDamage(_attackDamage);
+    
+                Die();
+            }    
+        }
+    
+        public override void Die()
+        {
+            base.Die();
+            EnemyDeathEvent.Invoke(this);
+    
+            gameObject.SetActive(false);
+        }
     }
 }

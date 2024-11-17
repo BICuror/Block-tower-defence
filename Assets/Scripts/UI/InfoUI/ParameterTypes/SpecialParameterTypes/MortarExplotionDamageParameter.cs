@@ -6,6 +6,6 @@ public sealed class MortarExplotionDamageParameter : Parameter
 {
     public override string GetValue(GameObject inspectable)
     {
-        return inspectable.GetComponent<MortarTower>().ExplotionDamage.ToString();
+        return "1";
     }
 }

@@ -1198,6 +1198,106 @@ FixedJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!1 &182228405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 182228408}
+  - component: {fileID: 182228407}
+  - component: {fileID: 182228409}
+  - component: {fileID: 182228410}
+  - component: {fileID: 182228411}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &182228407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182228405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61a7e3cfd9fd824088e64d82332d009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boxCollider: {fileID: 0}
+--- !u!4 &182228408
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182228405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &182228409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182228405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6c93608b9a959c4c9e620e79e2021db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &182228410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182228405}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &182228411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182228405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c46f64bdb308df4b89db761591db20e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _statInitializers:
+  - StructName: BuildTime
+    _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
+    _defaultValue: 0
+  - StructName: MaxHealth
+    _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
+    _defaultValue: 0
 --- !u!224 &182438218 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5898645503864052357, guid: 10e6ff70318cc19468b942d8aa575dca, type: 3}
@@ -2982,25 +3082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba411af8f61b094cbd054709a0146ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AddedComponent:
-    m_PersistentCalls:
-      m_Calls: []
-  RemovedComponent:
-    m_PersistentCalls:
-      m_Calls: []
-  PlacedComponentAdded:
-    m_PersistentCalls:
-      m_Calls: []
-  PlacedComponentRemoved:
-    m_PersistentCalls:
-      m_Calls: []
-  _TComponentHasHealth: 0
-  HealthComponentAdded:
-    m_PersistentCalls:
-      m_Calls: []
-  HealthComponentRemoved:
-    m_PersistentCalls:
-      m_Calls: []
+  _componentHasHealth: 0
 --- !u!65 &551356292
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5177,7 +5259,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1cd2f79c6f03a4f965c42bab9c95ac, type: 3}
   m_Name: 
@@ -6208,6 +6290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf3cf4d7cc216cc4e8be7f6a2f55e6b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buildingSelector: {fileID: 0}
 --- !u!114 &1034691482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17498,106 +17581,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e82f5ec9f4413449503eb6059356f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 50
-  Damaged:
-    m_PersistentCalls:
-      m_Calls: []
-  Healed:
-    m_PersistentCalls:
-      m_Calls: []
-  DeathEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _healthBar: {fileID: 6706312524419070204}
-  BuildingDeathEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 963194232}
-        m_TargetAssemblyTypeName: CameraZoomController, Assembly-CSharp
-        m_MethodName: ZoomOutOnDefeat
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 963194229}
-        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Disable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4232094176376533613}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 2053057275}
-        m_TargetAssemblyTypeName: PauseController, Assembly-CSharp
-        m_MethodName: Disable
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 910443199}
-        m_TargetAssemblyTypeName: EnemySpawnerSystem, Assembly-CSharp
-        m_MethodName: KillAllEnemies
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1087343606}
-        m_TargetAssemblyTypeName: LosePanel, Assembly-CSharp
-        m_MethodName: DisplayLosePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1087343600}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-  _draggablesToCreateOnStart:
-  - {fileID: 1305424881754724633, guid: bd5ef9bc5516fd74794200825c4cb0e9, type: 3}
 --- !u!4 &5834142661143563088
 Transform:
   m_ObjectHideFlags: 0
@@ -17896,3 +17879,4 @@ SceneRoots:
   - {fileID: 29118316}
   - {fileID: 950391930}
   - {fileID: 357389936}
+  - {fileID: 182228408}

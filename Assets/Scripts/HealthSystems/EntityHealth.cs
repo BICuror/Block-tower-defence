@@ -1,95 +1,64 @@
+using System;
+using Cashing;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class EntityHealth : MonoBehaviour
+namespace Combat
 {
-    [SerializeField] protected float _maxHealth;
-    private float _currentHealth;
-
-    protected float _incomingDamageMultipluer = 1f;
-
-    private bool _isInvinsible;
-
-    public UnityEvent Damaged;
-
-    public UnityEvent Healed;
-    
-    public UnityEvent<GameObject> DeathEvent; 
-
-    [SerializeField] protected HealthBar _healthBar;
-
-    protected void Awake() => _currentHealth = _maxHealth;
-
-    public float GetCurrentHealth() => _currentHealth;
-    public float GetHealthPrcentage() => _currentHealth / _maxHealth;
-    public bool IsAlive() => _currentHealth > 0;
-    public float GetMaxHealth() => _maxHealth;
-
-    public void ChangeIncomingDamageMultipluer(float value) => _incomingDamageMultipluer += value;
-    public void SetInvincibleState(bool state) => _isInvinsible = state;
-
-    #region HealthBar
-    public void DisableHealthBar() => _healthBar.gameObject.SetActive(false);
-    public void EnableHealthBar()
+    public abstract class EntityHealth : MonoBehaviour, IHealth
     {
-        _healthBar.gameObject.SetActive(true);
-
-        float currentHealth = GetHealthPrcentage();
-
-        _healthBar.SetValue(currentHealth);
-    }
-    #endregion
-
-    public void GetHurtPrecent(float precent)
-    {
-        GetHurt(precent * GetMaxHealth());
-    }
-
-    public virtual void GetHurt(float damage)
-    {
-        if (_isInvinsible) return;
-
-        float healthDifference = GetHealthPrcentage();
-
-        damage *= _incomingDamageMultipluer;
-
-        _currentHealth -= damage;
-
-        if (_currentHealth <= 0) 
-        {
-            Die();
-        }
-        else
-        {
-            Damaged.Invoke();
-            
-            _healthBar.DecreaseValue(GetHealthPrcentage(), healthDifference);
-        }
-    }
-    #region Heal
-    public void HealFully() => Heal(_maxHealth - _currentHealth);
-    public void HealByPercent(float value) => Heal(_maxHealth * value);
-    public void Heal(float healAmount)
-    {
-        if (_currentHealth + healAmount <= _maxHealth)
-        {
-            _currentHealth += healAmount;
-        }
-        else
-        { 
-            _currentHealth = _maxHealth;
-        }
-
-        Healed?.Invoke();
-
-        _healthBar.IncreaseValue(GetHealthPrcentage());
-    }
-    #endregion
-
-    public virtual void Die()
-    {
-        DeathEvent.Invoke(gameObject);
+        [Cached] private CombatEntity _entity;
+        private float _maxHp;
+        private float _currentHp;
         
-        Destroy(gameObject);
-    }
-}   
+        public Action Damaged;
+        public Action Healed;
+        public Action<CombatEntity> EntityDied; 
+        
+        public float GetMaxHp() => _maxHp;
+        public float GetHp() => _currentHp;
+        public float GetHpPercent() => _currentHp / _maxHp;
+        public bool IsAlive() => _currentHp > 0;
+        public bool IsFullHp() => _currentHp == _maxHp;
+
+        #region DamageRecivement 
+        public void ReceivePercentDamage(float percent) => ReceiveDamage(percent * _maxHp);
+        public void ReceiveDamage(float damage)
+        {
+            _currentHp -= damage;
+    
+            if (_currentHp <= 0) Die();
+            else Damaged?.Invoke();
+        }
+        #endregion
+        
+        #region HealRecivement
+        public void ReceivePercentHeal(float percent) => ReceiveHeal(_maxHp * percent);
+        public void ReceiveHeal(float heal)
+        {
+            if (_currentHp + heal <= _maxHp) _currentHp += heal;
+            else _currentHp = _maxHp;
+            
+            Healed?.Invoke();
+        }
+        #endregion
+
+        /*#region HealthBar
+        public void DisableHealthBar() => _healthBar.gameObject.SetActive(false);
+        public void EnableHealthBar()
+        {
+            _healthBar.gameObject.SetActive(true);
+    
+            float currentHealth = GetHealthPrcentage();
+    
+            _healthBar.SetValue(currentHealth);
+        }
+        #endregion*/
+        
+        
+        public virtual void Die()
+        {
+            EntityDied?.Invoke(_entity);
+        }
+    }   
+}
+

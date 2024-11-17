@@ -1,17 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using Cashing;
 
 public sealed class Building : DraggableObject
 {
     [Header("BuildingProcessSettings")]
 
-    [SerializeField] private BuildTime _buildTime;
-    [SerializeField] private BuildingProgressBar _buildBar;
+    [Cached] private BuildTime _buildTime;
 
     private bool _isBuilt = true;
     
-    public UnityEvent BuildCompleted;
+    public Action BuildCompleted;
 
     [HideInInspector] public UnityEvent<Building> BuildingPlaced;
     [HideInInspector] public UnityEvent<Building> BuildingBuilt;
@@ -21,13 +22,12 @@ public sealed class Building : DraggableObject
 
     private void Start()  
     {
-        _buildTime = this.GetStat<BuildTime>();
+        //_buildTime = this.GetStat<BuildTime>();
 
         Placed.AddListener(StartBuilding);
 
         PickedUp.AddListener(DisableBuilding);
         PickedUp.AddListener(StopBuildingProcess);
-        if (_buildBar != null) PickedUp.AddListener(_buildBar.StopFillingBar);
     }
 
     private void DisableBuilding() 
@@ -42,8 +42,6 @@ public sealed class Building : DraggableObject
         BuildingPlaced?.Invoke(this);
 
         StartCoroutine(StartBuildingProcess());
-        
-        _buildBar?.StartFillingBar(_buildTime.Value);
     }
 
     private IEnumerator StartBuildingProcess()

@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
+using Cashing;
 
-public abstract class CombatEntity : MonoBehaviour
+namespace Combat
 {
-    private Dictionary<Type, MonoBehaviour> _conmponentDictionary;
-
-    public void AddComponent<T>(T component) where T : MonoBehaviour
+    [RequireComponent(typeof(StatContainer))]
+    
+    public abstract class CombatEntity : EntityComponentCacher
     {
-        _conmponentDictionary.Add(T, component);
-    }
-
-    public void RemoveComponent<T>(T component) where T: MonoBehaviour
-    {
-        _conmponentDictionary.Remove(T);
+        [Cached] public BoxCollider boxCollider;
+        
+        [Cached] private EntityHealth _entityHealth;
+        private EntityEffectManager _entityEffectManager;
+    
+        public IHealth Health => CachedComponentsContainer.Get<EntityHealth>();
+        public EntityEffectManager EntityEffectManager => CachedComponentsContainer.Get<EntityEffectManager>();
     }
 }

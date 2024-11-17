@@ -1,1 +1,4 @@
-public sealed class DraggableEffectManagerAreaDetector : AreaDetectorWithDraggableSubscription<BuildingEffectManager> {}
+namespace Combat
+{
+    public sealed class DraggableEffectManagerAreaDetector : AreaDetectorWithDraggableSubscription<BuildingEffectManager> {}
+}

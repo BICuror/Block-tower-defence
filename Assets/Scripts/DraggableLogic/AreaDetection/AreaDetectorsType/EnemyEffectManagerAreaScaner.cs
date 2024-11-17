@@ -1,1 +1,4 @@
-public sealed class EnemyEffectManagerAreaScaner : AreaDetectorWithHealthSubscription<EnemyEffectManager> {}
+namespace Combat
+{
+    public sealed class EnemyEffectManagerAreaScaner : AreaDetectorWithHealthSubscription<EnemyEffectManager> {}
+}

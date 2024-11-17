@@ -14,8 +14,7 @@ public class Item : DraggableObject
 
     private void Awake()
     {
-        base.Awake();
-        PickedUp.AddListener(OnPickedUp);
+        PickedUp += OnPickedUp;
     }
 
     public void AddPropertyDatas(List<ItemPropertyData> propertyDatas) => _propertyDatas.AddRange(propertyDatas);

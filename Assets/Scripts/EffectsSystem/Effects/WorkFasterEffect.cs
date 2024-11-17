@@ -13,12 +13,12 @@ namespace Combat
     
         public override void ApplyToEntity(EntityComponentsContainer componentsContainer)
         {
-            componentsContainer.Task.RechargeTime -= componentsContainer.Task.RechargeTime * _rechargeCutdownStrength;
+            //componentsContainer.Task.RechargeTime -= componentsContainer.Task.RechargeTime * _rechargeCutdownStrength;
         }
     
         public override void RemoveFromEntity(EntityComponentsContainer componentsContainer)
         {
-            componentsContainer.Task.RechargeTime += componentsContainer.Task.RechargeTime / (1f - _rechargeCutdownStrength) * _rechargeCutdownStrength;
+            //componentsContainer.Task.RechargeTime += componentsContainer.Task.RechargeTime / (1f - _rechargeCutdownStrength) * _rechargeCutdownStrength;
         }
     }
 }

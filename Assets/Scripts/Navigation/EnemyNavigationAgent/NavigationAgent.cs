@@ -15,8 +15,8 @@ namespace Navigation
 
         private void Start()
         {
-            PickedUp.AddListener(StopAllCoroutines);
-            Placed.AddListener(IterateToNextNode);
+            PickedUp += StopAllCoroutines;
+            Placed += IterateToNextNode;
         }
 
         public void Init(NavigationAgentData agentData)

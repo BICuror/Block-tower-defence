@@ -1,34 +1,27 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.Events;
+using Cashing;
+using System;
 
-public class TaskCycle : MonoBehaviour
+public class TaskCycle
 {
-    [Header("Settings")]
-    [SerializeField] private float _rechargeTime;
-    public float RechargeTime 
-    {
-        get => _rechargeTime;  
-        
-        set 
-        {
-            _rechargeTime = value;
-
-            _rechargeInstruction = new WaitForSeconds(value);
-        } 
-    }
-
-    private bool _taskCycleIsActive;
-    
-    public UnityEvent TaskPerformed;
-
-    public delegate bool ShouldWork();
+    [Cached] private TaskRecharge _taskRecharge;
+    public delegate bool ShouldWork(); 
     public ShouldWork ShouldWorkDelegate;
-
-    private YieldInstruction _rechargeInstruction;
-
-    protected void Awake() => _rechargeInstruction = new WaitForSeconds(_rechargeTime);
-
+    private bool _taskCycleIsActive;
+    private CancellationTokenSource _cancellationTokenSource;
+    
+    public Action TaskPerformed;
+    
+    public void StopRechargeProcess()
+    {
+        _taskCycleIsActive = false;
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new();
+    }
+    
     public void StartCycle() => Recharge();
     
     private void Recharge()
@@ -36,33 +29,23 @@ public class TaskCycle : MonoBehaviour
         if (CanWork() && ShouldWorkDelegate() && _taskCycleIsActive == false)
         {
             _taskCycleIsActive = true;
-
-            StartCoroutine(StartRechargeProcess());
+            StartRechargeProcess();
         }
     }
     
-    public virtual bool CanWork() => true;
-
-    private IEnumerator StartRechargeProcess()
+    protected virtual bool CanWork() => true;
+    
+    private async void StartRechargeProcess()
     {
-        yield return _rechargeInstruction;
-        
+        await UniTask.WaitForSeconds(_taskRecharge.Value, cancellationToken: _cancellationTokenSource.Token);
         _taskCycleIsActive = false;
 
         if (ShouldWorkDelegate())
         {
             Recharge();
-            
             PerformTask();
         }
     }
     
     private void PerformTask() => TaskPerformed?.Invoke();
-    
-    public void StopCycle()  
-    {
-        _taskCycleIsActive = false;
-
-        StopAllCoroutines();
-    }
 }

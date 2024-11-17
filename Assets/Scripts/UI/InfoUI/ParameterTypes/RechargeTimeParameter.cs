@@ -6,6 +6,6 @@ public sealed class RechargeTimeParameter : Parameter
 {
     public override string GetValue(GameObject inspectable)
     {
-        return inspectable.GetComponent<TaskCycle>().RechargeTime.ToString();
+        return "9"; //inspectable.GetComponent<TaskCycle>().RechargeTime.ToString();
     }
 }

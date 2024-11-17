@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Collections;
+using ModestTree.Util;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
@@ -9,17 +11,15 @@ namespace Combat
     public class EntityEffectManager : MonoBehaviour
     {
         [SerializeField] private List<Effect> _effectsImmunities;
-        protected bool _effectsCanBeSet = true;
         private EntityComponentsContainer _entityComponentsContainer;
-    
         private List<Effect> _appliedEffects = new List<Effect>();
-    
-        public UnityEvent<Effect> EffectApplied;
-    
-        public UnityEvent<Effect> EffectRemoved;
-        
         private Dictionary<Effect, Coroutine> _coroutines = new Dictionary<Effect, Coroutine>();
-    
+        
+        protected bool _effectsCanBeSet = true;
+        
+        public Action<Effect> EffectApplied; 
+        public Action<Effect> EffectRemoved;
+            
         public List<Effect> GetAllEffecs() => _appliedEffects;
     
         public bool HasEffect(Effect effect) => _appliedEffects.Contains(effect);

@@ -5,7 +5,7 @@ namespace Combat
 {
     public sealed class BuildingApplyEffectContainerStand : MonoBehaviour
     {
-        [SerializeField] private ApplyEffectContainerAreaScaner _applyEffectContainerAreaScaner;
+        /*[SerializeField] private ApplyEffectContainerAreaScaner _applyEffectContainerAreaScaner;
     
         [SerializeField] private Effect[] _applyEffects;
     
@@ -29,6 +29,6 @@ namespace Combat
             {
                 container.RemoveEffect(_applyEffects[i]);
             }
-        }
+        }*/
     }
 }

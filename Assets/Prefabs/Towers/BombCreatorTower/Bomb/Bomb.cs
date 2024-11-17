@@ -15,7 +15,7 @@ public sealed class Bomb : DraggableObject
 
     public UnityEvent Exploded;
 
-    private void Start() => Placed.AddListener(PrepeareToExplode);
+    private void Start() => Placed += PrepeareToExplode;
 
     private void PrepeareToExplode()
     {

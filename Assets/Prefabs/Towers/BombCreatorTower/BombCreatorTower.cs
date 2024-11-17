@@ -15,7 +15,7 @@ public sealed class BombCreatorTower : CombatBuilding
     {
         _buildingTaskCycle = GetComponent<BuildingTaskCycle>();
         _buildingTaskCycle.ShouldWorkDelegate = DoesNotHasBomb;
-        _buildingTaskCycle.TaskPerformed.AddListener(CreateBomb);
+        _buildingTaskCycle.TaskPerformed += CreateBomb;
     
         _buildingTaskCycle.StartCycle();
     }
@@ -24,7 +24,7 @@ public sealed class BombCreatorTower : CombatBuilding
 
     private void CreateBomb()
     {
-        _buildingTaskCycle.StopCycle();
+        _buildingTaskCycle.StopRechargeProcess();
 
         Launcher launcher = _draggableCreator.CreateDraggableOnRandomPosition(_bombPrefab, transform.position);
     

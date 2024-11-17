@@ -18,7 +18,7 @@ public sealed class Launcher : MonoBehaviour
     {
         DraggableObject draggable = _diContainer.InstantiatePrefab(_draggablePrefab.gameObject, landPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
 
-        draggable.Place();
+        draggable.GetComponent<IDraggable>().Place();
 
         Landed.Invoke(draggable);
     }

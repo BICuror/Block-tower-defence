@@ -1,21 +1,16 @@
-using UnityEngine;
+using Cashing;
 
 public sealed class BuildingTaskCycle : TaskCycle
 {
-    private Building _building;
+    [Cached] private BuildingDraggable _buildingDraggable;
 
-    private void Awake()
+    public BuildingTaskCycle()
     {
-        _building = GetComponent<Building>();
-        
-        _building.PickedUp.AddListener(StopCycle);
-
-        _building.BuildCompleted += StartCycle;
-
-        base.Awake();
+        _buildingDraggable.PickedUp += StopRechargeProcess;
+        _buildingDraggable.BuildCompleted += StartCycle;
     }
 
-    public override bool CanWork() => _building.IsBuilt(); 
+    protected override bool CanWork() => _buildingDraggable.IsBuilt; 
     
-    private void OnDestroy() => _building.BuildCompleted -= StartCycle;
+    private void OnDestroy() => _buildingDraggable.BuildCompleted -= StartCycle;
 }

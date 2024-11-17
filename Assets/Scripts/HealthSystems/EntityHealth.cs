@@ -41,19 +41,6 @@ namespace Combat
             Healed?.Invoke();
         }
         #endregion
-
-        /*#region HealthBar
-        public void DisableHealthBar() => _healthBar.gameObject.SetActive(false);
-        public void EnableHealthBar()
-        {
-            _healthBar.gameObject.SetActive(true);
-    
-            float currentHealth = GetHealthPrcentage();
-    
-            _healthBar.SetValue(currentHealth);
-        }
-        #endregion*/
-        
         
         public virtual void Die()
         {

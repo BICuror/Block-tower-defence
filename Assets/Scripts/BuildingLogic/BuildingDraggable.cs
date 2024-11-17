@@ -1,0 +1,55 @@
+using Cysharp.Threading.Tasks;
+using System.Threading;
+using Cashing;
+using System;
+
+public sealed class BuildingDraggable : DraggableObject
+{
+    [Cached] private BuildTime _buildTime;
+    private CancellationTokenSource _cancellationTokenSource;
+    private bool _isBuilt = true;
+    
+    public Action BuildCompleted;
+    public Action<BuildingDraggable> BuildingPickedUp;
+    public Action<BuildingDraggable> BuildingPlaced;
+    public Action<BuildingDraggable> BuildingBuilt;
+    
+    public bool IsBuilt => _isBuilt;
+
+    private void Awake()  
+    {
+        Placed += StartBuildingProcess;
+        PickedUp += PickUpBuilding;
+        PickedUp += StopBuildingProcess;
+    }
+    
+    private void PickUpBuilding() 
+    {
+        _isBuilt = false;
+        BuildingPickedUp?.Invoke(this);
+    }
+    
+    private async void StartBuildingProcess()
+    {
+        BuildingPlaced?.Invoke(this);
+        await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: _cancellationTokenSource.Token);
+        
+        CompleteBuild();
+    }
+
+    private void CompleteBuild()
+    {
+        _isBuilt = true;
+        BuildCompleted?.Invoke();
+        BuildingBuilt?.Invoke(this);
+    }
+
+    private void StopBuildingProcess()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new();
+    }
+    
+    private void OnDestroy() => StopBuildingProcess();
+}

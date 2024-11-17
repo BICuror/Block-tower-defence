@@ -15,8 +15,8 @@ namespace Combat
         {
             _entityEffectManager = GetComponent<EntityEffectManager>();
         
-            _entityEffectManager.EffectApplied.AddListener(ApplyEffect);
-            _entityEffectManager.EffectRemoved.AddListener(RemoveEffect);
+            _entityEffectManager.EffectApplied += ApplyEffect;
+            _entityEffectManager.EffectRemoved += RemoveEffect;
         }
     
         private void ApplyEffect(Effect effect)

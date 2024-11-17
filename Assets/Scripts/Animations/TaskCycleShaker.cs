@@ -8,6 +8,6 @@ public sealed class TaskCycleShaker : Shaker
     {
         CaptureDefaultScale();
 
-        GetComponent<TaskCycle>().TaskPerformed.AddListener(Shake);
+        GetComponent<TaskCycle>().TaskPerformed += Shake;
     }
 }

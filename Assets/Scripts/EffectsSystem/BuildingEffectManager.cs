@@ -4,12 +4,12 @@ namespace Combat
     {
         private void Awake()
         {
-            Building building = GetComponent<Building>();
+            BuildingDraggable buildingDraggable = GetComponent<BuildingDraggable>();
             
-            building.PickedUp.AddListener(RemoveAllEffects);
+            buildingDraggable.PickedUp += RemoveAllEffects;
         
-            building.PickedUp.AddListener(SetEffectsCanBeSetFalse);
-            building.Placed.AddListener(SetEffectsCanBeSetTrue);
+            buildingDraggable.PickedUp += SetEffectsCanBeSetFalse;
+            buildingDraggable.Placed += SetEffectsCanBeSetTrue;
         }
     
         private void SetEffectsCanBeSetTrue() => _effectsCanBeSet = true;

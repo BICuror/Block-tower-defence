@@ -5,53 +5,36 @@ using System;
 
 namespace Combat
 {
-    public abstract class AreaDetector <T> : AreaDetectorBase where T: MonoBehaviour 
+    public abstract class AreaDetector <T> : MonoBehaviour where T: Component 
     {
-        protected List<T> List = new List<T>();
+        protected List<T> List = new();
     
         public Action<T> AddedItem;
         public Action<T> RemovedItem;
         
-        public bool IsEmpty() => List.Count == 0;
-        public T GetRandomItem() => List[Random.Range(0, List.Count)];
-        public T GetFirstItem() => List[0];
+        public bool IsEmpty => List.Count == 0;
+        public T RandomItem => List[Random.Range(0, List.Count)];
+        public T FirstItem => List[0];
+        
         public IReadOnlyList<T> GetList() => List;
-    
-        public void ClearList() => List = new List<T>();
-    
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out T component))
-            {
-                AddComponent(component);
-            }
-        }
-        protected void AddComponent(T component)
+        
+        protected void AddItem(T component)
         {
             List.Add(component);
-    
             AddedItem?.Invoke(component);
         }
-    
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out T component))
-            {
-                RemoveComponent(component);
-            }
-        }
-        protected void RemoveComponent(T component)
-        {
+        
+        protected void RemoveItem(T component)
+        { 
             List.Remove(component);
-    
             RemovedItem?.Invoke(component);
         }
-    
+        
         private void RemoveAll()
         {
             List.ForEach(item =>
             {
-                if (item != null) RemoveComponent(item);
+                if (item != null) RemoveItem(item);
             });
             
             List.Clear();

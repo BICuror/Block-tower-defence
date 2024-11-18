@@ -1,4 +1,4 @@
 namespace Combat
 {
-    public sealed class EnemyAreaScaner : AreaDetectorWithHealthSubscription<EnemyEntity> {}
+    public sealed class EnemyAreaScaner : AreaEntityDetector<EnemyEntity> {}
 }

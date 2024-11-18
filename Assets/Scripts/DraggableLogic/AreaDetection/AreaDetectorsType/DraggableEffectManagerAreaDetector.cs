@@ -1,4 +1,4 @@
 namespace Combat
 {
-    public sealed class DraggableEffectManagerAreaDetector : AreaDetectorWithDraggableSubscription<BuildingEffectManager> {}
+    public sealed class DraggableEffectManagerAreaDetector : AreaEntityDetector<BuildingEffectManager> {}
 }

@@ -45,6 +45,11 @@ namespace Cashing
         #endregion
         
         #region Generic
+
+        public bool Has<T>() where T : Component
+        {
+            return _cachedComponents.ContainsKey(typeof(T));
+        }
         public T Get<T>() where T : Component 
         {
             Component component;

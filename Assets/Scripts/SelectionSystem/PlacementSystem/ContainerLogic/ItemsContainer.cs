@@ -17,7 +17,7 @@ public sealed class ItemsContainer : MonoBehaviour
 
     private void Start()
     {
-        _itemDetector.PlacedComponentAdded += AddItem;
+        _itemDetector.AddedItem += AddItem;
     }
 
     private void AddItem(Item item)

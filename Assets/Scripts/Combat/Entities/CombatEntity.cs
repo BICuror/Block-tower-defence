@@ -11,7 +11,8 @@ namespace Combat
         
         [Cached] private EntityHealth _entityHealth;
         private EntityEffectManager _entityEffectManager;
-    
+
+        public CachedComponentsContainer ComponentsContainer => CachedComponentsContainer;
         public IHealth Health => CachedComponentsContainer.Get<EntityHealth>();
         public EntityEffectManager EntityEffectManager => CachedComponentsContainer.Get<EntityEffectManager>();
     }

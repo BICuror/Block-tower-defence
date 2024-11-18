@@ -2,11 +2,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 using Cashing;
+using Combat;
 
 [RequireComponent(typeof(Collider))]
 
 public class DraggableObject : MonoBehaviour, IDraggable
 {  
+    [Cached] private CombatEntity _ownerEntity;
     [Cached] private Collider _collider;
     
     [SerializeField] private PlacementCondition _placementRequirements;
@@ -15,8 +17,8 @@ public class DraggableObject : MonoBehaviour, IDraggable
 
     public Action PickedUp;
     public Action Placed;
-    public Action<DraggableObject> DraggablePickedUp;
-    public Action<DraggableObject> DraggablePlaced;
+    public Action<CombatEntity> DraggablePickedUp;
+    public Action<CombatEntity> DraggablePlaced;
     
     void IDraggable.PickUp()
     {
@@ -24,7 +26,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
         _collider.isTrigger = true;
 
         PickedUp?.Invoke();
-        DraggablePickedUp?.Invoke(this);
+        DraggablePickedUp?.Invoke(_ownerEntity);
     }
     void IDraggable.Place() 
     { 
@@ -32,7 +34,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
         _collider.isTrigger = false;
 
         Placed?.Invoke();
-        DraggablePlaced?.Invoke(this);
+        DraggablePlaced?.Invoke(_ownerEntity);
     }
     bool IDraggable.IsDraggable() => _isDraggable && _draggableState == DraggableState.Placed;
     PlacementCondition IDraggable.GetPlacementCondition() => _placementRequirements;

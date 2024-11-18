@@ -1,4 +1,4 @@
 namespace Combat
 {
-    public sealed class BuildingHealthAreaScaner : AreaDetectorWithDraggableSubscription<BuildingDraggable> {}
+    public sealed class BuildingHealthAreaScaner : AreaEntityDetector<BuildingDraggable> {}
 }

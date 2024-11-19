@@ -21,12 +21,12 @@ namespace Combat
                 entity.ComponentsContainer.Get<EntityHealth>().EntityDied -= RemoveEntity;
             }
             
-            if (entity.ComponentsContainer.Has<DraggableObject>()) 
+            if (entity.ComponentsContainer.Has<DraggableEntity>()) 
             { 
-                DraggableObject draggableObject = entity.ComponentsContainer.Get<DraggableObject>();
+                DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
                 
-                draggableObject.DraggablePlaced -= AddPlacedEntity; 
-                draggableObject.DraggablePickedUp -= RemovePickedUpEntity;
+                draggable.EntityPlaced -= AddPlacedEntity; 
+                draggable.EntityPickedUp -= RemovePickedUpEntity;
             }
             
             RemoveItem(entity.ComponentsContainer.Get<T>());
@@ -49,13 +49,13 @@ namespace Combat
                 entity.ComponentsContainer.Get<EntityHealth>().EntityDied += RemoveEntity;
             }
             
-            if (entity.ComponentsContainer.Has<DraggableObject>())
+            if (entity.ComponentsContainer.Has<DraggableEntity>())
             {
-                DraggableObject draggableObject = entity.ComponentsContainer.Get<DraggableObject>();
+                DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
 
-                if (draggableObject.IsPlaced() == false)
+                if (draggable.IsPlaced() == false)
                 {
-                    draggableObject.DraggablePlaced += AddPlacedEntity;
+                    draggable.EntityPlaced += AddPlacedEntity;
                 }
             }
             
@@ -64,20 +64,20 @@ namespace Combat
         
         private void AddPlacedEntity(CombatEntity entity)
         {
-            DraggableObject draggableObject = entity.ComponentsContainer.Get<DraggableObject>();
+            DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
             
-            draggableObject.DraggablePlaced -= AddPlacedEntity;
-            draggableObject.DraggablePickedUp += RemovePickedUpEntity;
+            draggable.EntityPlaced -= AddPlacedEntity;
+            draggable.EntityPickedUp += RemovePickedUpEntity;
 
             AddItem(entity.ComponentsContainer.Get<T>());
         }
     
         private void RemovePickedUpEntity(CombatEntity entity)
         {
-            DraggableObject draggableObject = entity.ComponentsContainer.Get<DraggableObject>();
+            DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
             
-            draggableObject.DraggablePickedUp -= RemovePickedUpEntity;
-            draggableObject.DraggablePlaced += AddPlacedEntity;
+            draggable.EntityPickedUp -= RemovePickedUpEntity;
+            draggable.EntityPlaced += AddPlacedEntity;
             
             RemoveItem(entity.ComponentsContainer.Get<T>());
         }

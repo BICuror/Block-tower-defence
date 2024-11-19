@@ -8,33 +8,27 @@ using Combat;
 
 public class DraggableObject : MonoBehaviour, IDraggable
 {  
-    [Cached] private CombatEntity _ownerEntity;
-    [Cached] private Collider _collider;
-    
+    [SerializeField] private Collider _collider;
     [SerializeField] private PlacementCondition _placementRequirements;
     [SerializeField] private bool _isDraggable = true;
     private DraggableState _draggableState;
 
     public Action PickedUp;
     public Action Placed;
-    public Action<CombatEntity> DraggablePickedUp;
-    public Action<CombatEntity> DraggablePlaced;
     
     void IDraggable.PickUp()
     {
-        _draggableState = DraggableState.Placed;
+        _draggableState = DraggableState.Dragged;
         _collider.isTrigger = true;
 
         PickedUp?.Invoke();
-        DraggablePickedUp?.Invoke(_ownerEntity);
     }
     void IDraggable.Place() 
     { 
-        _draggableState = DraggableState.Dragged;
+        _draggableState = DraggableState.Placed;
         _collider.isTrigger = false;
 
         Placed?.Invoke();
-        DraggablePlaced?.Invoke(_ownerEntity);
     }
     bool IDraggable.IsDraggable() => _isDraggable && _draggableState == DraggableState.Placed;
     PlacementCondition IDraggable.GetPlacementCondition() => _placementRequirements;

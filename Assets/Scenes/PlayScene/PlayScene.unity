@@ -1230,7 +1230,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61a7e3cfd9fd824088e64d82332d009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxCollider: {fileID: 0}
 --- !u!4 &182228408
 Transform:
   m_ObjectHideFlags: 0
@@ -2985,7 +2984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ba411af8f61b094cbd054709a0146ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _componentHasHealth: 0
 --- !u!65 &551356292
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5162,7 +5160,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5d1cd2f79c6f03a4f965c42bab9c95ac, type: 3}
   m_Name: 
@@ -19374,6 +19372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6603117a8dcd245a2ba165dc4ee5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 0}
   _placementRequirements: {fileID: 0}
   _isDraggable: 0
 --- !u!23 &4889281572624174274
@@ -19527,6 +19526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e82f5ec9f4413449503eb6059356f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _draggablesToCreateOnStart: []
 --- !u!114 &5831701977166722935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19539,6 +19539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6603117a8dcd245a2ba165dc4ee5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 3906317590894539405}
   _placementRequirements: {fileID: 11400000, guid: 33296f7510ce96c49917af81ff0e4063, type: 2}
   _isDraggable: 1
 --- !u!4 &5834142661143563088
@@ -19951,22 +19952,6 @@ MonoBehaviour:
   _height: 3
   _parametrs:
   - {fileID: 11400000, guid: d84137419f01aa442a77f3cb6bcbdf66, type: 2}
---- !u!114 &8562473688939023764
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8725522730865917137}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 083b374e14a777a48834958a42c20306, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _applyEffects: []
-  ApplyEffectUpdated:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &8675003753868112788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20022,11 +20007,11 @@ GameObject:
   - component: {fileID: 5055056520597324720}
   - component: {fileID: 5831701977166722935}
   - component: {fileID: 6594646396711869740}
-  - component: {fileID: 8562473688939023764}
   - component: {fileID: 5913469404243012163}
   - component: {fileID: 3470710824070034105}
   - component: {fileID: 861512872782666269}
   - component: {fileID: 8675003753868112788}
+  - component: {fileID: 8725522730865917138}
   m_Layer: 7
   m_Name: ArcherTower
   m_TagString: Draggable
@@ -20034,6 +20019,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8725522730865917138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8725522730865917137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b61a7e3cfd9fd824088e64d82332d009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8780399789328027087
 Transform:
   m_ObjectHideFlags: 0

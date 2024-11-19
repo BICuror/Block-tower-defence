@@ -1,12 +1,13 @@
+using Cashing;
 using UnityEngine;
 
 public class AreaManager : MonoBehaviour
 {
     [Header("AreaSettings")]
     protected float _height = 100f;
-    [SerializeField] protected ReachAreaScale _reachAreaScale;
     [SerializeField] private GameObject _reachAreaCollider;
 
+    [Cached] protected ReachAreaScale _reachAreaScale;
     private void Start() 
     {   
         //_reachAreaScale = this.GetStat<ReachAreaScale>();

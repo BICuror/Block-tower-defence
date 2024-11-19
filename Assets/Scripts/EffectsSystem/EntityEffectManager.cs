@@ -30,9 +30,9 @@ namespace Combat
     
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
             EntityHealth health = GetComponent<EntityHealth>();
-            TaskCycle taskCycle = GetComponent<TaskCycle>();
+            //TaskCycle taskCycle = GetComponent<TaskCycle>();
     
-            _entityComponentsContainer = new EntityComponentsContainer(health, taskCycle, agent);
+            //_entityComponentsContainer = new EntityComponentsContainer(health, taskCycle, agent);
         }
     
         private bool EffectCanBeApplied(Effect effect) => (_effectsCanBeSet && _effectsImmunities.Contains(effect) == false);

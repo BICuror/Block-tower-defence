@@ -8,8 +8,6 @@ namespace Combat.Animation
     {
         private void Awake()
         {
-            CaptureDefaultScale();
-    
             GetComponent<EntityHealth>().Damaged += Shake;
         }
     }

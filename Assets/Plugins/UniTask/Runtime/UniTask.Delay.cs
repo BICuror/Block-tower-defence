@@ -760,6 +760,13 @@ namespace Cysharp.Threading.Tasks
                 {
                     core.GetResult(token);
                 }
+                catch (Exception ex)
+                {
+                    if (ex is not OperationCanceledException)
+                    {
+                        throw ex;
+                    }
+                }
                 finally
                 {
                     if (!(cancelImmediately && cancellationToken.IsCancellationRequested))

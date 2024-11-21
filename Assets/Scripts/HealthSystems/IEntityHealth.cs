@@ -1,3 +1,5 @@
+using System;
+
 namespace Combat
 {
     public interface IHealth

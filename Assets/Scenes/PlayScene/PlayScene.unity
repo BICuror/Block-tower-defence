@@ -18846,8 +18846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06120566091737b4a98be175c719a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shakeDuration: 0.5
-  _shakeStrength: 0.04
+  _shakeDatas: []
   _mesh: {fileID: 8126423961579232069}
   _progressBarMaterial: {fileID: 2100000, guid: e4d5124eb24758641bf202cf5c10c0b6, type: 2}
 --- !u!114 &1119945085396933672
@@ -18932,6 +18931,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2400e3686f6f459438667a55c4608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 0
+    Duration: 0.3
+    Strength: 0.04
+  - ShakeType: 1
+    Duration: 0.3
+    Strength: 45
+  _mesh: {fileID: 8780399789328027087}
 --- !u!82 &2031930140222117796
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19464,7 +19471,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &5378333317375675258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19477,8 +19484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06120566091737b4a98be175c719a6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shakeDuration: 0.5
-  _shakeStrength: 0.04
+  _shakeDatas: []
   _mesh: {fileID: 0}
   _progressBarMaterial: {fileID: 2100000, guid: e4d5124eb24758641bf202cf5c10c0b6, type: 2}
 --- !u!65 &5454375565258529433
@@ -19639,6 +19645,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc2400e3686f6f459438667a55c4608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _shakeDatas: []
+  _mesh: {fileID: 0}
 --- !u!33 &6839579580702332845
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -19932,8 +19940,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57ab05c8a60fd2449be5ed0f91abdb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shakeDuration: 0.5
-  _shakeStrength: 0.4
+  _shakeDatas: []
   _mesh: {fileID: 7639062467750908543}
 --- !u!114 &8464262724155894547
 MonoBehaviour:

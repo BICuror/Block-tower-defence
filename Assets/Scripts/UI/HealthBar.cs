@@ -1,144 +1,98 @@
-using System.Collections;
+using System.Threading;
+using Cashing;
+using Combat;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 
-public class HealthBar : MonoBehaviour
+public sealed class HealthBar : Shaker
 {
-    #region ShakeSettings
-    private float _shakeDuration = 0.3f;
-    private float _shakeRotationStrength = 45f;
-    private float _shakeScaleStrength = 0.04f;
-    private Tween _shakeRotationTween;
-    private Tween _shakeScaleTween;
-    private Vector3 _defaultScale;
-    #endregion
+    private const float HealthTweenDuration = 0.2f;
+    private const float IdleTweenDuration = 0.3f;
 
-    #region CurrentHealthTweeningSettings
-    private float _currentHealthChangeDuration = 0.1f;
-    private Tween _currentHealthTween;
-    #endregion
+    [Cached] private EntityHealth _entityHealth;
 
-    #region HealthDifferenceTweeningSettings
-    private float _healthDifferenceDecreaseTime = 0.2f;
-    private float _timeBeforeDecreasingHealthDifference = 0.3f;
-    private YieldInstruction _healthDifferenceChangeWait;
-    private Tween _currentHealthDifferenceTween;
-    #endregion
-
+    private CancellationTokenSource _cancellationTokenSource = new();
+    private MaterialPropertyBlock _materialPropertyBlock;
     private MeshRenderer _meshRenderer;
 
-    private float _lastSetHealthDifferecne;
-    private float _lastSetHealth;
-    private float _currentDisplayedHealth;
+    private float _healthDifference = 1f;
+    private float _displayedHealth = 1f;
 
-    private MaterialPropertyBlock _materialPropertyBlock;
-
-    private void Awake()
+    private void Start()
     {
-        _defaultScale = transform.localScale;
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _materialPropertyBlock = new MaterialPropertyBlock();
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
 
-        _healthDifferenceChangeWait = new WaitForSeconds(_timeBeforeDecreasingHealthDifference);
+        _entityHealth.Damaged += UpdateBar;
+        _entityHealth.Healed += UpdateBar;
+        UpdateBar();
     }
 
-    public void SetValue(float health) 
+    private void UpdateBar()
     {
-        _lastSetHealth = health;
-        _currentDisplayedHealth = health;
-        _lastSetHealthDifferecne = health;
-        SetPropertyBlock(health, health);
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource = new();
+
+        if (_entityHealth.GetHp() < _displayedHealth)
+        {
+            Shake();
+            DecreaseValue();
+        }
+        else if (_entityHealth.GetHp() > _displayedHealth)
+        {
+            IncreaseValue();
+        }
     }
 
-    private void SetPropertyBlock(float currentHealth, float healthDifference)
+    private async void DecreaseValue()
     {
-        _materialPropertyBlock.SetFloat("Health", currentHealth);
-        _materialPropertyBlock.SetFloat("HealthDifference", healthDifference);
+        _displayedHealth = _entityHealth.GetHp();
+
+        await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
+
+        DOTween.Kill(this);
+        DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference);
+    }
+
+    private void UpdateHealthDifference(float value)
+    {
+        _healthDifference = value;
+        UpdatePropertyBlock();
+    }
+
+    private async void IncreaseValue()
+    {
+        _healthDifference = _entityHealth.GetHp();
+
+        await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
+
+        DOTween.Kill(this);
+        DOVirtual.Float(_displayedHealth, _healthDifference, HealthTweenDuration, UpdateDisplayedHealth);
+    }
+
+    private void UpdateDisplayedHealth(float value)
+    {
+        _healthDifference = value;
+        UpdatePropertyBlock();
+    }
+
+    private void UpdatePropertyBlock()
+    {
+        _materialPropertyBlock.SetFloat("Health", _healthDifference);
+        _materialPropertyBlock.SetFloat("HealthDifference", _healthDifference);
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
     }
-    
-    #region Decrease
-    public void DecreaseValue(float currentHealth, float healthDifference)
+
+    private void OnDisable() => _cancellationTokenSource.Cancel();
+
+    private void OnDestroy()
     {
-        if (_lastSetHealthDifferecne < healthDifference) _lastSetHealthDifferecne = healthDifference;
-        else _lastSetHealthDifferecne *= 0.95f;
-
-        _lastSetHealth = currentHealth;
-
-        ShakeSlider();
-
-        DecreaseCurrentHealth();
+        _entityHealth.Damaged -= UpdateBar;
+        _entityHealth.Healed -= UpdateBar;
         
-        StopAllCoroutines();
-        
-        StartCoroutine(DecreaseHealthDifference());
+        _cancellationTokenSource.Cancel();
     }
-
-    private void DecreaseCurrentHealth()
-    {
-        if (_currentHealthTween != null && _currentHealthTween.IsPlaying()) _currentHealthTween.Kill();
-
-        _currentHealthTween = DOVirtual.Float(_currentDisplayedHealth, _lastSetHealth, _currentHealthChangeDuration, SetCurrentHealth);
-
-        void SetCurrentHealth(float currentHealth)
-        {
-            _currentDisplayedHealth = currentHealth;
-            SetPropertyBlock(_currentDisplayedHealth, _lastSetHealthDifferecne);
-        }
-    }
-
-    private IEnumerator DecreaseHealthDifference()
-    {
-        if (_currentHealthDifferenceTween != null && _currentHealthDifferenceTween.IsPlaying()) _currentHealthDifferenceTween.Kill();
-
-        yield return _healthDifferenceChangeWait;
-
-        _currentHealthDifferenceTween = DOVirtual.Float(_lastSetHealthDifferecne, _lastSetHealth, _healthDifferenceDecreaseTime, SetCurrentHealthDifference);
-    }
-    private void SetCurrentHealthDifference(float currentHealth)
-    { 
-        _lastSetHealthDifferecne = currentHealth;
-        SetPropertyBlock(_currentDisplayedHealth, _lastSetHealthDifferecne);
-    }
-    
-    #endregion
-
-    public void IncreaseValue(float currentHealth)
-    {
-        if (_currentHealthTween != null && _currentHealthTween.IsPlaying()) _currentHealthTween.Kill();
-        if (_currentHealthDifferenceTween != null && _currentHealthDifferenceTween.IsPlaying()) _currentHealthDifferenceTween.Kill();
-        StopAllCoroutines();
-
-        float healthDifference = currentHealth;
-        if (currentHealth < _lastSetHealthDifferecne) healthDifference = _lastSetHealthDifferecne;
-            
-        SetPropertyBlock(currentHealth, currentHealth);
-    }
-
-    private void ShakeSlider()
-    {
-        CompleteAllTweens();
-
-        _shakeRotationTween = transform.DOShakeRotation(_shakeDuration, _shakeRotationStrength);
-        _shakeScaleTween = transform.DOShakeScale(_shakeDuration, _shakeScaleStrength);
-    }
-
-    private void CompleteAllTweens()
-    {
-        if (_shakeRotationTween != null && _shakeRotationTween.IsPlaying() == true)
-        {
-            _shakeRotationTween.Complete();
-            _shakeScaleTween.Complete();
-        }
-    }
-
-    private void OnDisable() 
-    {
-        CompleteAllTweens();
-        StopAllCoroutines();
-    }    
-
-    private void OnDestroy() => transform.DOKill();
 }

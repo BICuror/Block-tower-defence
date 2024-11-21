@@ -1,37 +1,65 @@
+using System;
+using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
 public abstract class Shaker : MonoBehaviour
 {
-    [Header("ShakeSettings")]
-    [SerializeField] private float _shakeDuration = 0.5f;
-    protected float ShakeDuration {get => _shakeDuration; set => _shakeDuration = value;}
-    [SerializeField] private float _shakeStrength = 0.3f;
+    [Header("ShakeSettings")] 
+    [SerializeField] private List<ShakeData> _shakeDatas;
 
     [Header("Links")]
     [SerializeField] protected Transform _mesh;
     private Vector3 _defaultScale;
-    private Tween _currentTween;
-
-    protected void Shake()
+    
+    [Serializable] private struct ShakeData
     {
-        SetDefaultScale();
-
-        if (_currentTween != null && _currentTween.IsPlaying())
-        {
-            _currentTween.Complete();
-        }
-        
-        _currentTween = _mesh.DOShakeScale(_shakeDuration, _shakeStrength);
+        public ShakeType ShakeType;
+        public float Duration;
+        public float Strength;
     }
 
-    protected void CaptureDefaultScale() => _defaultScale = _mesh.localScale;
-
-    private void SetDefaultScale()
+    private void Awake()
     {
+        if (_mesh == null) _mesh = transform;
+        GetDefaultValues();
+    }
+    private void GetDefaultValues()
+    {
+        _defaultScale = _mesh.localScale; 
+    }
+    private void SetDefaultValues()
+    { 
         _mesh.localScale = _defaultScale;
     }
+    
+    protected void Shake()
+    {
+        SetDefaultValues();
 
-    private void OnDisable() => _currentTween.Complete();
-    private void OnDestroy() => _currentTween.Kill();
+        DOTween.Kill(this);
+        
+        _shakeDatas.ForEach(shakeData =>
+        {
+            Shake(shakeData);    
+        });
+    }
+
+    private void Shake(ShakeData shakeData)
+    {
+        switch (shakeData.ShakeType)
+        {
+            case ShakeType.Scale: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength); break;
+            case ShakeType.Rotation: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength); break;
+        }
+    }
+    
+    private void OnDisable() => DOTween.Kill(this);
+    private void OnDestroy() => DOTween.Kill(this);
+
+    private enum ShakeType
+    {
+        Scale,
+        Rotation,
+    }
 }

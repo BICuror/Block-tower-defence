@@ -8,9 +8,7 @@ public sealed class ItemFactory : MonoBehaviour
     [SerializeField] private Item _itemPrefab;
     [SerializeField] private ItemModifierSelector _modifierSelector;
     [SerializeField] private ItemModifierFactory _itemModifierFactory;
-
-    private void Awake() => CreateItem(0, 1);
-
+    
     public void CreateItem(int quality, int strength)
     {
         Item item = Instantiate(_itemPrefab, new Vector3(12f, 7f, 12f), Quaternion.identity);

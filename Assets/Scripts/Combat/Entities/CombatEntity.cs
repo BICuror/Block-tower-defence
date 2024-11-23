@@ -7,7 +7,6 @@ namespace Combat
     
     public abstract class CombatEntity : EntityComponentCacher
     {
-        [Cached] private BoxCollider boxCollider;
         [Cached] private EntityHealth _entityHealth;
         private EntityEffectManager _entityEffectManager;
 

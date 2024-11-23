@@ -13,7 +13,7 @@ namespace Combat
         public override void Die()
         {
             base.Die();
-            BuildingDestroyed.Invoke(_ownerEntity);
+            BuildingDestroyed?.Invoke(_ownerEntity);
             Destroy(gameObject);
         }
     }

@@ -3,14 +3,14 @@ using System;
 
 namespace Combat
 {
-    public abstract class DraggableEntity : DraggableObject
+    public class DraggableEntity : DraggableObject
     {
         [Cached] private CombatEntity _ownerEntity;
         
         public Action<CombatEntity> EntityPickedUp;
         public Action<CombatEntity> EntityPlaced;
 
-        private void Awake()
+        private void Start()
         {
             PickedUp += OnEntityPickedUp;
             Placed += OnEntityPlaced;

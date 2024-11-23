@@ -7,24 +7,24 @@ namespace Combat
         private static EnemyFactory _instance;
         public static EnemyFactory Instance => _instance;
         
-        [SerializeField] private EnemyBootstrap _blankEnemy; 
+        [SerializeField] private EnemyEntity _blankEnemy; 
     
-        private ObjectPool<EnemyBootstrap> _enemyPool;
+        private ObjectPool<EnemyEntity> _enemyPool;
     
         private void Start()
         {
             _instance = this;
     
-            _enemyPool = new ObjectPool<EnemyBootstrap>(_blankEnemy, 10);
+            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10);
         }
     
-        public EnemyHealth CreateEnemy(EnemyData _enemyDataToCreate)
+        public EnemyEntity CreateEnemy(EnemyData _enemyDataToCreate)
         {
-            EnemyBootstrap newEnemy = _enemyPool.GetNextPooledObject();
+            EnemyEntity newEnemy = _enemyPool.GetNextPooledObject();
     
-            newEnemy.SetEnemyData(_enemyDataToCreate);
+            newEnemy.ComponentsContainer.Get<EnemyBootstrap>().SetEnemyData(_enemyDataToCreate);
     
-            return newEnemy.Health;
+            return newEnemy;
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +11,12 @@ namespace Combat
         [SerializeField] private float _timeBetweenSpawns;
         [SerializeField] private EnemySpawnerInfoDisplayer _enemySpawnerInfoDisplayer;
     
-        public UnityEvent<EnemyHealth> EnemySpawned;
-        public UnityEvent<EnemyHealth> EnemyDied;
-        public UnityEvent LastEnemyKilled;
+        public Action<EnemyEntity> EnemySpawned;
+        public Action<EnemyEntity> EnemyDied;
+        public Action LastEnemyKilled;
     
     
-        private List<EnemyHealth> _spawnedEnemies;
+        private List<EnemyEntity> _spawnedEnemies;
     
         private List<EnemyData> _enemiesToSpawn;
     
@@ -23,11 +24,11 @@ namespace Combat
     
         private void Awake()
         {
-            _spawnedEnemies = new List<EnemyHealth>();
+            _spawnedEnemies = new();
     
             _yieldInstruction = new WaitForSeconds(_timeBetweenSpawns);
     
-            LastEnemyKilled.AddListener(TryToSpawnEnemy);
+            LastEnemyKilled += TryToSpawnEnemy;
         }
     
         public void SetEnemiesToSpawn(List<EnemyData> enemiesToSpawn)
@@ -71,7 +72,7 @@ namespace Combat
     
         private void SpawnEnemy()
         {
-            EnemyHealth spawnedEnemy = EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0]);
+            EnemyEntity spawnedEnemy = EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0]);
     
             _enemiesToSpawn.RemoveAt(0);
     
@@ -79,18 +80,18 @@ namespace Combat
     
             spawnedEnemy.transform.position = transform.position;
     
-            spawnedEnemy.EnemyDeathEvent.AddListener(RemoveEnemy);
+            spawnedEnemy.Health.EnemyDied += RemoveEnemy;
     
             EnemySpawned.Invoke(spawnedEnemy);
         }
     
-        private void RemoveEnemy(EnemyHealth enemyHealth)
+        private void RemoveEnemy(EnemyEntity enemyEntity)
         {
-            _spawnedEnemies.Remove(enemyHealth);
+            _spawnedEnemies.Remove(enemyEntity);
     
-            enemyHealth.EnemyDeathEvent.RemoveListener(RemoveEnemy);
+            enemyEntity.Health.EnemyDied += RemoveEnemy;
     
-            EnemyDied.Invoke(enemyHealth);
+            EnemyDied.Invoke(enemyEntity);
     
             if (_spawnedEnemies.Count == 0) LastEnemyKilled?.Invoke();
         }
@@ -101,9 +102,8 @@ namespace Combat
         {
             for (int i = 0; i < _spawnedEnemies.Count; i++)
             {
-                _spawnedEnemies[i].EnemyDeathEvent.RemoveListener(RemoveEnemy);
-    
-                _spawnedEnemies[i].Die();
+                _spawnedEnemies[i].Health.EnemyDied += RemoveEnemy;
+                _spawnedEnemies[i].Health.Die();
     
                 yield return new WaitForSeconds(0.25f);
             }        

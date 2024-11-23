@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 2750250454631569984}
   - component: {fileID: 7688208347547464120}
   - component: {fileID: 7658911807093949798}
-  - component: {fileID: 365400857842701661}
   m_Layer: 10
   m_Name: StrongRangerArea
   m_TagString: Untagged
@@ -121,12 +120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10f5cb795d6dc2458a4a2c6f7fe4406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _projectileSpeed: 8
-  _projectileDamage: 1.5
-  _effectsToApply: []
-  _buildingHealthScaner: {fileID: 7658911807093949798}
-  _projectilePrefab: {fileID: 748332779686630820, guid: ae23f8801fdfb7240b285315d717b832, type: 3}
-  _shootingPoint: {fileID: 8608035959342228994}
 --- !u!114 &7688208347547464120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,32 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee88e71521aa5bf42a47e67f214f95c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _areaScale: 6
-  _animationDuration: 1
-  _appearCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &7658911807093949798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,38 +144,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9141d5181a24fb54280f59f3af4ee703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AddedComponent:
-    m_PersistentCalls:
-      m_Calls: []
-  RemovedComponent:
-    m_PersistentCalls:
-      m_Calls: []
-  PlacedComponentAdded:
-    m_PersistentCalls:
-      m_Calls: []
-  PlacedComponentRemoved:
-    m_PersistentCalls:
-      m_Calls: []
-  _TComponentHasHealth: 1
-  HealthComponentAdded:
-    m_PersistentCalls:
-      m_Calls: []
-  HealthComponentRemoved:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &365400857842701661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741189611747840163}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 277b3cbc04ac69e42b02a93c5e2ba1a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _rechargeTime: 1
-  TaskPerformed:
-    m_PersistentCalls:
-      m_Calls: []

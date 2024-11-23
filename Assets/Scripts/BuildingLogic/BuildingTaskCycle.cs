@@ -4,7 +4,7 @@ public sealed class BuildingTaskCycle : TaskCycle
 {
     [Cached] private BuildingDraggable _buildingDraggable;
 
-    public BuildingTaskCycle()
+    private void Start()
     {
         _buildingDraggable.PickedUp += StopRechargeProcess;
         _buildingDraggable.BuildCompleted += StartCycle;

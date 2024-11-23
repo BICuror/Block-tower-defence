@@ -4,13 +4,13 @@ using UnityEngine;
 using Cashing;
 using System;
 
-public class TaskCycle
+public class TaskCycle : MonoBehaviour
 {
     [Cached] private TaskRecharge _taskRecharge;
     public delegate bool ShouldWork(); 
     public ShouldWork ShouldWorkDelegate;
     private bool _taskCycleIsActive;
-    private CancellationTokenSource _cancellationTokenSource;
+    private CancellationTokenSource _cancellationTokenSource = new();
     
     public Action TaskPerformed;
     
@@ -26,7 +26,7 @@ public class TaskCycle
     
     private void Recharge()
     {
-        if (CanWork() && ShouldWorkDelegate() && _taskCycleIsActive == false)
+        if (CanWork() && _taskCycleIsActive == false)
         {
             _taskCycleIsActive = true;
             StartRechargeProcess();

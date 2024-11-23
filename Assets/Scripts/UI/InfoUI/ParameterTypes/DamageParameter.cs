@@ -6,6 +6,6 @@ public sealed class DamageParameter : Parameter
 {
     public override string GetValue(GameObject inspectable)
     {
-        return inspectable.GetComponent<CombatBuilding>().GetDamageValue();
+        return "0";
     }
 }

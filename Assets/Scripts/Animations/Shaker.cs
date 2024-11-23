@@ -19,7 +19,7 @@ public abstract class Shaker : MonoBehaviour
         public float Strength;
     }
 
-    private void Awake()
+    protected void Awake()
     {
         if (_mesh == null) _mesh = transform;
         GetDefaultValues();
@@ -50,7 +50,7 @@ public abstract class Shaker : MonoBehaviour
         switch (shakeData.ShakeType)
         {
             case ShakeType.Scale: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength); break;
-            case ShakeType.Rotation: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength); break;
+            case ShakeType.Rotation: _mesh.DOShakeRotation(shakeData.Duration, shakeData.Strength); break;
         }
     }
     

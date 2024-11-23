@@ -1,14 +1,17 @@
+using Cashing;
+using Combat;
 using UnityEngine;
 
-public sealed class ArcherTower : CombatBuilding
+public sealed class ArcherTower : MonoBehaviour
 {
-    /*[Header("Stats")]
+    [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    [Cached] private Damage _damage;
+    
+    [Header("Stats")]
     [SerializeField] private float _arrowSpeed;
 
     [Header("Links")]
     [SerializeField] private Arrow _arrowPrefab;
-    [SerializeField] private ApplyEffectContainer _applyEffectContainer;
-    [SerializeField] private EnemyAreaScaner _enemyAreaScaner;
     [SerializeField] private Transform _shootingPoint;
 
     private ObjectPool<Arrow> _arrowObjectPool;
@@ -21,10 +24,10 @@ public sealed class ArcherTower : CombatBuilding
 
         buildingTaskCycle.ShouldWorkDelegate = ShouldWorkDelegate;
 
-        buildingTaskCycle.TaskPerformed.AddListener(Shoot);
+        buildingTaskCycle.TaskPerformed += Shoot;
     }
 
-    private bool ShouldWorkDelegate() => _enemyAreaScaner.Empty() == false;
+    private bool ShouldWorkDelegate() => _enemyAreaScaner.IsEmpty == false;
 
     private void Shoot()
     {
@@ -33,15 +36,13 @@ public sealed class ArcherTower : CombatBuilding
         currentArrow.GetRigidbody().velocity = Vector3.zero;
         currentArrow.transform.position = _shootingPoint.position;
 
-        currentArrow.transform.LookAt(_enemyAreaScaner.GetFirstEnemy().transform.position);
+        currentArrow.transform.LookAt(_enemyAreaScaner.FirstItem.transform.position);
 
         currentArrow.gameObject.SetActive(true);
-
-        currentArrow.SetEffects(_applyEffectContainer.GetApplyEffects());
-        currentArrow.SetContactDamage(Damage);
+        currentArrow.SetContactDamage(_damage.Value);
 
         currentArrow.GetRigidbody().AddForce(currentArrow.transform.forward * _arrowSpeed, ForceMode.Impulse);
     }
 
-    private void OnDestroy() => _arrowObjectPool.DestroyPool();*/
+    private void OnDestroy() => _arrowObjectPool.DestroyPool();
 }

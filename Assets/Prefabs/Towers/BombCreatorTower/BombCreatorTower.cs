@@ -36,7 +36,7 @@ public sealed class BombCreatorTower : CombatBuilding
         _draggableObject = draggableObject;
 
         Bomb bomb = (draggableObject as Bomb);
-        bomb.SetExplotionDamage(Damage);
+        //bomb.SetExplotionDamage(Damage);
         bomb.Exploded.AddListener(Resume);
     }
 

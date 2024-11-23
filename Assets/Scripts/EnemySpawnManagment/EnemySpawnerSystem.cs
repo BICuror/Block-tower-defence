@@ -1,9 +1,10 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
 using WorldGeneration;
+using Random = UnityEngine.Random;
 
 namespace Combat
 {
@@ -19,13 +20,13 @@ namespace Combat
     
         public UnityEvent AllEnemiesDied;
     
-        public UnityEvent<EnemyHealth> EnemySpawned;
-        public UnityEvent<EnemyHealth> EnemyDied;
+        public Action<EnemyEntity> EnemySpawned;
+        public Action<EnemyEntity> EnemyDied;
         private float _currentHealthMultiplyer;
         public float HealthMultiplyer => _currentHealthMultiplyer;
     
-        private void InvokeEnemySpawned(EnemyHealth spawnedEnemy) => EnemySpawned.Invoke(spawnedEnemy);
-        private void InvokeEnemyDied(EnemyHealth spawnedEnemy) => EnemyDied.Invoke(spawnedEnemy);
+        private void InvokeEnemySpawned(EnemyEntity spawnedEnemy) => EnemySpawned?.Invoke(spawnedEnemy);
+        private void InvokeEnemyDied(EnemyEntity spawnedEnemy) => EnemyDied?.Invoke(spawnedEnemy);
     
         public void StartWave()
         {
@@ -55,7 +56,7 @@ namespace Combat
     
                 if (i + 1 == _spawners.Count)
                 {
-                    Debug.Log("Spawned enemies: for: " + (_islandData.WavesData.WaveHealth * _waveManager.GetCurrentWave() - leftHealthForWave).ToString() + " out of " + (_islandData.WavesData.WaveHealth * _waveManager.GetCurrentWave()).ToString());
+                    Debug.Log($"Spawned enemies: for: {_islandData.WavesData.WaveHealth * _waveManager.GetCurrentWave() - leftHealthForWave} out of {_islandData.WavesData.WaveHealth * _waveManager.GetCurrentWave()}");
                 }
     
                 _spawners[i].SetEnemiesToSpawn(waveGroup);
@@ -117,20 +118,20 @@ namespace Combat
         {
             _spawners.Add(spawner);
     
-            spawner.EnemySpawned.AddListener(InvokeEnemySpawned);
-            spawner.EnemyDied.AddListener(InvokeEnemyDied);
+            spawner.EnemySpawned += InvokeEnemySpawned;
+            spawner.EnemyDied += InvokeEnemyDied;
     
-            spawner.LastEnemyKilled.AddListener(CheckIfAllEnemiesDied);
+            spawner.LastEnemyKilled += CheckIfAllEnemiesDied;
         }
     
         public void RemoveSpawner(EnemySpawner spawner)
         {
             _spawners.Remove(spawner);
     
-            spawner.EnemySpawned.RemoveListener(InvokeEnemySpawned);
-            spawner.EnemyDied.RemoveListener(InvokeEnemyDied);
+            spawner.EnemySpawned -= InvokeEnemySpawned;
+            spawner.EnemyDied -= InvokeEnemyDied;
     
-            spawner.LastEnemyKilled.RemoveListener(CheckIfAllEnemiesDied);
+            spawner.LastEnemyKilled -= CheckIfAllEnemiesDied;
         }
     
         private void CheckIfAllEnemiesDied()

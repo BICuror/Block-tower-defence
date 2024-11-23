@@ -28,20 +28,24 @@ public sealed class HealthBar : Shaker
 
         _entityHealth.Damaged += UpdateBar;
         _entityHealth.Healed += UpdateBar;
-        UpdateBar();
+        UpdatePropertyBlock();
     }
 
     private void UpdateBar()
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new();
+        
+        DOTween.Kill(this);
 
-        if (_entityHealth.GetHp() < _displayedHealth)
+        float hpPercent = _entityHealth.GetHpPercent();
+
+        if (hpPercent < _displayedHealth)
         {
             Shake();
             DecreaseValue();
         }
-        else if (_entityHealth.GetHp() > _displayedHealth)
+        else if (hpPercent > _displayedHealth)
         {
             IncreaseValue();
         }
@@ -49,11 +53,11 @@ public sealed class HealthBar : Shaker
 
     private async void DecreaseValue()
     {
-        _displayedHealth = _entityHealth.GetHp();
+        _displayedHealth = _entityHealth.GetHpPercent();
+        UpdatePropertyBlock();
 
         await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
 
-        DOTween.Kill(this);
         DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference);
     }
 
@@ -65,23 +69,23 @@ public sealed class HealthBar : Shaker
 
     private async void IncreaseValue()
     {
-        _healthDifference = _entityHealth.GetHp();
+        _healthDifference = _entityHealth.GetHpPercent();
+        UpdatePropertyBlock();
 
         await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
 
-        DOTween.Kill(this);
         DOVirtual.Float(_displayedHealth, _healthDifference, HealthTweenDuration, UpdateDisplayedHealth);
     }
 
     private void UpdateDisplayedHealth(float value)
     {
-        _healthDifference = value;
+        _displayedHealth = value;
         UpdatePropertyBlock();
     }
 
     private void UpdatePropertyBlock()
     {
-        _materialPropertyBlock.SetFloat("Health", _healthDifference);
+        _materialPropertyBlock.SetFloat("Health", _displayedHealth);
         _materialPropertyBlock.SetFloat("HealthDifference", _healthDifference);
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
     }

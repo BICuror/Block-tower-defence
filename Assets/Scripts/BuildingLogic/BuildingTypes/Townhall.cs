@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Combat
 {
-    public sealed class Townhall : BuildingHealth
+    public sealed class Townhall : MonoBehaviour
     {
         [SerializeField] private DraggableObject[] _draggablesToCreateOnStart;
         [Inject] private DraggableCreator _draggableCreator;

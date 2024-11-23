@@ -1,25 +1,15 @@
+using System;
+using Cashing;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Combat
 {
     public class EnemyHealth : EntityHealth
     {
+        [Cached] private EnemyEntity _enemyEntity;
         [SerializeField] private float _attackDamage = 10f;
     
-        public UnityEvent<EnemyHealth> EnemyDeathEvent; 
-    
-        private float _attackMultipluer;
-    
-        public void SetEnemyData(EnemyHealthData enemyData)
-        {
-            ReceivePercentHeal(1f);
-        }
-    
-        public void MultiplyMaxHealth(float value) 
-        {
-            ReceivePercentHeal(1f);
-        }
+        public Action<EnemyEntity> EnemyDied; 
     
         private void OnCollisionEnter(Collision other) 
         {
@@ -34,8 +24,7 @@ namespace Combat
         public override void Die()
         {
             base.Die();
-            EnemyDeathEvent.Invoke(this);
-    
+            EnemyDied.Invoke(_enemyEntity);
             gameObject.SetActive(false);
         }
     }

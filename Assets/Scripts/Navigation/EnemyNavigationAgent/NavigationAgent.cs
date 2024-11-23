@@ -1,55 +1,58 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using Cashing;
+using Combat;
 
 namespace Navigation
 {
-    public sealed class NavigationAgent : DraggableObject
+    public sealed class NavigationAgent : MonoBehaviour
     {
+        [Cached] private DraggableEntity _draggableEntity;
+        [Cached] private Speed _speed;
         private NavigationAgentData _agentData;
         private MovmentNavigationModule _movmentModule;
         private RotationNavigationModule _rotationModule;
-        private NavigationNode _currentNode;
+        
+        private NavigationNode _startNode;
+        private NavigationNode _endNode;
         private NavigationNode _nextNode;
-        private NavigationNode _incomingNode;
 
         private void Start()
         {
-            PickedUp += StopAllCoroutines;
-            Placed += IterateToNextNode;
+            _draggableEntity.PickedUp += StopAllCoroutines;
+            _draggableEntity.Placed += Initialize;
         }
-
-        public void Init(NavigationAgentData agentData)
+        public void SetAgentData(NavigationAgentData agentData) => _agentData = agentData;
+        public void Initialize()
         {
             StopAllCoroutines();
-            _agentData = agentData;
 
-            _currentNode = NavigationNodeProvider.Instance.GetNavigationNode(transform.position);
-            _nextNode = _currentNode.GetNextNode();
-            _incomingNode = _nextNode.GetNextNode();
+            _startNode = NavigationNodeProvider.Instance.GetNavigationNode(transform.position);
+            _endNode = _startNode.GetNextNode();
+            _nextNode = _endNode.GetNextNode();
 
-            Vector2 currentPosition = new Vector2(_currentNode.Position.x, _currentNode.Position.z);
-            Vector2 nextPosition = new Vector2(_nextNode.Position.x, _nextNode.Position.z);
+            Vector2 currentPosition = new Vector2(_startNode.Position.x, _startNode.Position.z);
+            Vector2 nextPosition = new Vector2(_endNode.Position.x, _endNode.Position.z);
 
             Vector2Int previousRotation = new Vector2Int(Mathf.RoundToInt(currentPosition.x - nextPosition.x), Mathf.RoundToInt(currentPosition.y - nextPosition.y));
             
             _movmentModule = new MovmentNavigationModule(transform, _agentData);
             _rotationModule = new RotationNavigationModule(transform, previousRotation);
 
-            _movmentModule.SetDestanation(_currentNode.Position, _nextNode.Position);
-            _rotationModule.SetPositions(_nextNode.Position, _incomingNode.Position);
-
-            StartCoroutine(TravelToNode());
+            TravelToEndNode();
         }
 
         private void IterateToNextNode()
         {
-            _currentNode = _nextNode;
-            _nextNode = _incomingNode;   
-            _incomingNode = _incomingNode.GetNextNode();
+            _startNode = _endNode;
+            _endNode = _nextNode;   
+            _nextNode = _nextNode.GetNextNode();
+        }
 
-            _movmentModule.SetDestanation(_currentNode.Position, _nextNode.Position);
-            _rotationModule.SetPositions(_nextNode.Position, _incomingNode.Position);
+        private void TravelToEndNode()
+        {
+            _movmentModule.SetDestanation(_startNode.Position, _endNode.Position);
+            _rotationModule.SetPositions(_endNode.Position, _nextNode.Position);
 
             StartCoroutine(TravelToNode());
         }
@@ -58,10 +61,10 @@ namespace Navigation
         {
             float elapsedTime = 0f;
             float evaluatedTime = 0f;
-            while (elapsedTime <= _agentData.TimePerBlock)
-            {  
+            while (elapsedTime <= _speed.Value)
+            {
                 elapsedTime += Time.deltaTime;
-                evaluatedTime = elapsedTime / _agentData.TimePerBlock;
+                evaluatedTime = elapsedTime / _speed.Value;
 
                 _movmentModule.MoveTowardsNextPosition(evaluatedTime);
                 _rotationModule.RotateTowardsNode(evaluatedTime);
@@ -70,6 +73,7 @@ namespace Navigation
             } 
 
             IterateToNextNode();
+            TravelToEndNode();
         }
     }
 }

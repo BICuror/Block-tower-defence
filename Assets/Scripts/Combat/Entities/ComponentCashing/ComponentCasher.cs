@@ -112,8 +112,16 @@ namespace Cashing
         {
             for (int i = 0; i < fields.Length; i++)
             {
-                Type type = fields[i].FieldType; 
-                fields[i].SetValue(component, Resolve(type));
+                Type type = fields[i].FieldType;
+                try
+                {
+                    fields[i].SetValue(component, Resolve(type));
+                }
+                catch (Exception e)
+                {
+                    throw new Exception($"Failed to resolve component {type.Name} for {component.GetType().Name}");
+                }
+                
             }
         }
 

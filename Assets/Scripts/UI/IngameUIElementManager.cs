@@ -49,7 +49,16 @@ public sealed class IngameUIElementManager : MonoBehaviour
     }
     public void RemoveDynamicUIElement(DynamicUIElement element) => _dynamicUIElements.Remove(element);
 
-    public void RotateElement(IngameUIElement element) => element.LookAt(_camera.transform.position); 
+    public void RotateElement(IngameUIElement element)
+    {
+        // Quirky way
+        // element.LookAt(_camera.transform.position);
+        
+        // Normal way
+        Vector2 cameraPosition = _camera.WorldToScreenPoint(element.transform.position);
+        Vector3 worldPosition = _camera.ScreenToWorldPoint(cameraPosition);
+        element.LookAt(worldPosition);
+    }
 
     private void Update()
     {
@@ -57,7 +66,7 @@ public sealed class IngameUIElementManager : MonoBehaviour
         {
             if (_dynamicUIElements[i].gameObject.activeSelf)
             {
-                _dynamicUIElements[i].LookAt(_camera.transform.position);
+                RotateElement(_dynamicUIElements[i]);
             }
         }
     }
@@ -66,7 +75,7 @@ public sealed class IngameUIElementManager : MonoBehaviour
     {
         for (int i = 0; i < _staticUIElements.Count; i++)
         {
-            _staticUIElements[i].LookAt(_camera.transform.position);
+            RotateElement(_staticUIElements[i]);
         }
     }
 }

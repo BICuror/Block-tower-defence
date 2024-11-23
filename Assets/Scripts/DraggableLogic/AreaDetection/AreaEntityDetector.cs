@@ -52,11 +52,11 @@ namespace Combat
             if (entity.ComponentsContainer.Has<DraggableEntity>())
             {
                 DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
-
-                if (draggable.IsPlaced() == false)
-                {
-                    draggable.EntityPlaced += AddPlacedEntity;
-                }
+                
+                draggable.EntityPlaced += AddPlacedEntity; 
+                draggable.EntityPickedUp += RemovePickedUpEntity;
+                
+                if (draggable.IsPlaced() == false) return;
             }
             
             AddItem(entity.ComponentsContainer.Get<T>());
@@ -66,18 +66,12 @@ namespace Combat
         {
             DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
             
-            draggable.EntityPlaced -= AddPlacedEntity;
-            draggable.EntityPickedUp += RemovePickedUpEntity;
-
             AddItem(entity.ComponentsContainer.Get<T>());
         }
     
         private void RemovePickedUpEntity(CombatEntity entity)
         {
             DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
-            
-            draggable.EntityPickedUp -= RemovePickedUpEntity;
-            draggable.EntityPlaced += AddPlacedEntity;
             
             RemoveItem(entity.ComponentsContainer.Get<T>());
         }

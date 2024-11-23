@@ -1,17 +1,16 @@
-using UnityEngine;
-using Zenject;
 using WorldGeneration;
 using Combat;
+using UnityEngine;
 
 public sealed class EntryPoint : MonoBehaviour
 {
     [SerializeField] private IslandGenerator _islandGenerator;
-    [Inject] private WaveManager _waveManager; 
+    [SerializeField] private WaveStateMachine _waveManager; 
 
     private void Start()
     {
         _islandGenerator.GenerateIsland();
 
-        _waveManager.PrepeareWave();
+        _waveManager.TransitionIntoIdle();
     }
 }

@@ -15,11 +15,9 @@ public class ItemContainerManager : MonoBehaviour
     private void Awake()
     {
         _itemContainer.ContainerUpdated += UpdateContainer;
-        _waveManager.WaveStarted.AddListener(LockContainer);
-        _waveManager.WaveStopped.AddListener(UnlockContainer);
     }
 
-    public void UnlockContainer(float value)
+    public void UnlockContainer()
     {
         _itemContainerLocker.SetPossibleToRemoveItems(true);
         _itemContainerLocker.SetPossibleToAddItems(true);

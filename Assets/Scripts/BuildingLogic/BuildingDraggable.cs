@@ -2,24 +2,15 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using Cashing;
 using System;
+using System.Threading.Tasks;
 using Combat;
 using UnityEngine;
 
 public sealed class BuildingDraggable : DraggableEntity
 {
     [Cached] private BuildTime _buildTime;
-    private CancellationTokenSource _cancellationTokenSource;
+    private CancellationTokenSource _cancellationTokenSource = new();
     private bool _isBuilt = true;
-
-    private CancellationTokenSource CancellationTokenSource
-    {
-        get
-        {
-            if (_cancellationTokenSource == null) _cancellationTokenSource = new();
-            return _cancellationTokenSource;
-        }
-    }
-    
 
     public Action BuildCompleted;
     public Action<BuildingDraggable> BuildingPickedUp;
@@ -44,7 +35,17 @@ public sealed class BuildingDraggable : DraggableEntity
     private async void StartBuildingProcess()
     {
         BuildingPlaced?.Invoke(this);
-        await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: CancellationTokenSource.Token);
+
+        try
+        {
+            await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e)
+        {
+            TaskUtility.LogAsync(e);
+            return;
+        }
+
         CompleteBuild();
     }
 
@@ -57,8 +58,8 @@ public sealed class BuildingDraggable : DraggableEntity
 
     private void StopBuildingProcess()
     {
-        CancellationTokenSource.Cancel();
-        _cancellationTokenSource = null;
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource = new();
     }
 
     private void OnDestroy()

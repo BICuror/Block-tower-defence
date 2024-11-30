@@ -38,7 +38,17 @@ public class TaskCycle : MonoBehaviour
     private async void StartRechargeProcess()
     {
         _taskCycleIsActive = true;
-        await UniTask.WaitForSeconds(_taskRecharge.Value, cancellationToken: _cancellationTokenSource.Token);
+
+        try
+        {
+            await UniTask.WaitForSeconds(_taskRecharge.Value, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e)
+        {
+            TaskUtility.LogAsync(e);
+            return;
+        }
+        
         _taskCycleIsActive = false;
 
         if (_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke())

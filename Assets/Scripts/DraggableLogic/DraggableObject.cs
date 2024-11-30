@@ -11,7 +11,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
     [SerializeField] private Collider _collider;
     [SerializeField] private PlacementModule _placementRequirements;
     [SerializeField] private bool _isDraggable = true;
-    private DraggableState _draggableState;
+    protected DraggableState DraggableState;
 
     public Action PickedUp;
     public Action Placed;
@@ -21,7 +21,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
     
     void IDraggable.PickUp()
     {
-        _draggableState = DraggableState.Dragged;
+        DraggableState = DraggableState.Dragged;
         _collider.isTrigger = true;
 
         PickedUp?.Invoke();
@@ -29,17 +29,17 @@ public class DraggableObject : MonoBehaviour, IDraggable
     }
     void IDraggable.Place() 
     { 
-        _draggableState = DraggableState.Placed;
+        DraggableState = DraggableState.Placed;
         _collider.isTrigger = false;
 
         Placed?.Invoke();
         DraggablePlaced?.Invoke(this);
     }
-    bool IDraggable.IsDraggable() => _isDraggable && _draggableState == DraggableState.Placed;
+    bool IDraggable.IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
     PlacementModule IDraggable.GetPlacementModule() => _placementRequirements;
     
     public void SetDraggableState(bool state) => _isDraggable = state;
-    public bool IsPlaced() => _draggableState == DraggableState.Placed;
+    public bool IsPlaced() => DraggableState == DraggableState.Placed;
 }
 
 public enum DraggableState

@@ -7,10 +7,10 @@ public sealed class BuildingTaskCycle : TaskCycle
     private void Start()
     {
         _buildingDraggable.PickedUp += StopRechargeProcess;
-        _buildingDraggable.BuildCompleted += StartCycle;
+        _buildingDraggable.BuildCompleted += TryCycle;
     }
 
     protected override bool CanWork() => _buildingDraggable.IsBuilt; 
     
-    private void OnDestroy() => _buildingDraggable.BuildCompleted -= StartCycle;
+    private void OnDestroy() => _buildingDraggable.BuildCompleted -= TryCycle;
 }

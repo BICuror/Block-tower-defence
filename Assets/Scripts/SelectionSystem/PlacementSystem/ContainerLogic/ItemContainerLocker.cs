@@ -3,10 +3,12 @@ using UnityEngine;
 public sealed class ItemContainerLocker : MonoBehaviour
 {
     [SerializeField] private ItemsContainer _itemsContainer;
-    [SerializeField] private ItemDetector _itemDetector;
+    [SerializeField] private GameObject _itemPlacementPoint;
 
     private bool _possibleToAddItems;
     private bool _possibleToRemoveItems;
+
+    public bool PossibleToRemoveItems => _possibleToRemoveItems;
 
     public void SetPossibleToAddItems(bool state)
     {
@@ -25,11 +27,12 @@ public sealed class ItemContainerLocker : MonoBehaviour
         foreach (Item item in _itemsContainer.ContainedItems)
         {
             item.SetDraggableState(_possibleToRemoveItems);
+            Debug.Log($"Set draggable state: {item.gameObject.name}, {_possibleToRemoveItems}");
         }
     }
 
     private void UpdateItemDetectorState()
     {
-        _itemDetector.gameObject.SetActive(_possibleToAddItems);
+        _itemPlacementPoint.SetActive(_possibleToAddItems);
     }
 }

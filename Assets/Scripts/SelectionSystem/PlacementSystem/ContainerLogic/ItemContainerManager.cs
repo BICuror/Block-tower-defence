@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public class ItemContainerManager : MonoBehaviour
 {
@@ -19,7 +20,6 @@ public class ItemContainerManager : MonoBehaviour
 
     public void UnlockContainer()
     {
-        _itemContainerLocker.SetPossibleToRemoveItems(true);
         _itemContainerLocker.SetPossibleToAddItems(true);
     }
 
@@ -29,16 +29,16 @@ public class ItemContainerManager : MonoBehaviour
         
         _itemsContainerAnimator.TransitionToNewPositions(_itemContainer.ContainedItems, _transitionDuration);
         _itemContainerLocker.SetPossibleToRemoveItems(false);
-
-        StartCoroutine(WaitToEnableDraggable());
-    }   
-
-    private IEnumerator WaitToEnableDraggable()
-    {
-        yield return new WaitForSeconds(_transitionDuration);
-        _itemContainerLocker.SetPossibleToRemoveItems(true);
     }
 
+    public void UpdateContainedItems()
+    {
+        _itemContainer.ContainedItems.ForEach(item =>
+        {
+            item.DecreaseDuration();
+        });
+    }
+    
     public void LockContainer()
     {
         StopAllCoroutines();

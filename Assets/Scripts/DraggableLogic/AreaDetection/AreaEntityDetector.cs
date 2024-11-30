@@ -64,15 +64,11 @@ namespace Combat
         
         private void AddPlacedEntity(CombatEntity entity)
         {
-            DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
-            
             AddItem(entity.ComponentsContainer.Get<T>());
         }
     
         private void RemovePickedUpEntity(CombatEntity entity)
         {
-            DraggableEntity draggable = entity.ComponentsContainer.Get<DraggableEntity>();
-            
             RemoveItem(entity.ComponentsContainer.Get<T>());
         }
     }

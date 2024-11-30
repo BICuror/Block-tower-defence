@@ -5,13 +5,13 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 
-public sealed class HealthBar : Shaker
+public class HealthBar : Shaker
 {
+    [Cached] protected EntityHealth EntityHealth;
+    
     private const float HealthTweenDuration = 0.2f;
     private const float IdleTweenDuration = 0.3f;
-
-    [Cached] private EntityHealth _entityHealth;
-
+    
     private CancellationTokenSource _cancellationTokenSource = new();
     private MaterialPropertyBlock _materialPropertyBlock;
     private MeshRenderer _meshRenderer;
@@ -19,15 +19,15 @@ public sealed class HealthBar : Shaker
     private float _healthDifference = 1f;
     private float _displayedHealth = 1f;
 
-    private void Start()
+    protected void Start()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _materialPropertyBlock = new MaterialPropertyBlock();
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
 
-        _entityHealth.Damaged += UpdateBar;
-        _entityHealth.Healed += UpdateBar;
+        EntityHealth.Damaged += UpdateBar;
+        EntityHealth.Healed += UpdateBar;
         UpdatePropertyBlock();
     }
 
@@ -38,7 +38,7 @@ public sealed class HealthBar : Shaker
         
         DOTween.Kill(this);
 
-        float hpPercent = _entityHealth.GetHpPercent();
+        float hpPercent = EntityHealth.GetHpPercent();
 
         if (hpPercent < _displayedHealth)
         {
@@ -53,7 +53,7 @@ public sealed class HealthBar : Shaker
 
     private async void DecreaseValue()
     {
-        _displayedHealth = _entityHealth.GetHpPercent();
+        _displayedHealth = EntityHealth.GetHpPercent();
         UpdatePropertyBlock();
 
         await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
@@ -69,7 +69,7 @@ public sealed class HealthBar : Shaker
 
     private async void IncreaseValue()
     {
-        _healthDifference = _entityHealth.GetHpPercent();
+        _healthDifference = EntityHealth.GetHpPercent();
         UpdatePropertyBlock();
 
         await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
@@ -94,8 +94,8 @@ public sealed class HealthBar : Shaker
 
     private void OnDestroy()
     {
-        _entityHealth.Damaged -= UpdateBar;
-        _entityHealth.Healed -= UpdateBar;
+        EntityHealth.Damaged -= UpdateBar;
+        EntityHealth.Healed -= UpdateBar;
         
         _cancellationTokenSource.Cancel();
     }

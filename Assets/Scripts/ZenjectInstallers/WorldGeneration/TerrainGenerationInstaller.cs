@@ -11,6 +11,7 @@ namespace Combat
         [SerializeField] private WaveManager _waveManager; 
         [SerializeField] private IslandTerrainMeshCreator _islandTerrainMeshCreator;
         [SerializeField] private IslandDecorationContainer _islandDecorationContainer;
+        [SerializeField] private WaveStateMachine _waveStateMachine;
     
         public override void InstallBindings()
         {
@@ -18,6 +19,7 @@ namespace Combat
             Container.Bind<BiomeMapGenerator>().AsSingle().NonLazy();
             Container.Bind<HeightMapGenerator>().AsSingle().NonLazy();
     
+            Container.Bind<WaveStateMachine>().FromInstance(_waveStateMachine).AsSingle().NonLazy();
             Container.Bind<IslandDecorationGenerator>().FromInstance(_decorationGenerator).AsSingle().NonLazy();
             Container.Bind<IslandDecorationContainer>().FromInstance(_islandDecorationContainer).AsSingle().NonLazy();
             Container.Bind<IslandTerrainMeshCreator>().FromInstance(_islandTerrainMeshCreator).AsSingle().NonLazy();

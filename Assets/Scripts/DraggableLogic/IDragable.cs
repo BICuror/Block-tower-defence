@@ -4,5 +4,5 @@ public interface IDraggable
     void Place();  
 
     bool IsDraggable();   
-    PlacementCondition GetPlacementCondition();
+    PlacementModule GetPlacementModule();
 }

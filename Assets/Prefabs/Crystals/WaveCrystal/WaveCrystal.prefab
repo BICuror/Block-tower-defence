@@ -4994,8 +4994,8 @@ GameObject:
   - component: {fileID: 1796149009562982541}
   - component: {fileID: 2965325360236812804}
   - component: {fileID: 3846957756626827811}
-  - component: {fileID: -1666869676974778707}
   - component: {fileID: 1305424881754724633}
+  - component: {fileID: 4408472262627033674}
   m_Layer: 13
   m_Name: WaveCrystal
   m_TagString: Draggable
@@ -5091,22 +5091,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-1666869676974778707
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944490093618053086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec54c5efe2ca23a4cbc8689d7a98171c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _name: Wave crystal
-  _description: Place it on top of the main building to start next wave
-  _height: 1
-  _parametrs: []
 --- !u!114 &1305424881754724633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5119,14 +5103,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a70898ddcc4264bb02f33abc4eda73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _collider: {fileID: 1796149009562982541}
   _placementRequirements: {fileID: 11400000, guid: 075c8d6d778e98a429f7b23fd2db4776, type: 2}
   _isDraggable: 1
-  PickedUp:
-    m_PersistentCalls:
-      m_Calls: []
-  Placed:
-    m_PersistentCalls:
-      m_Calls: []
+  _itemModifierFactory: {fileID: 4408472262627033674}
+  _initialProperties:
+  - {fileID: 11400000, guid: aabdd10b31ab90948912001cbe855bbc, type: 2}
+--- !u!114 &4408472262627033674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944490093618053086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b746f208c7515e140aff6b3ab4bd7d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2403032933835088123
 GameObject:
   m_ObjectHideFlags: 0

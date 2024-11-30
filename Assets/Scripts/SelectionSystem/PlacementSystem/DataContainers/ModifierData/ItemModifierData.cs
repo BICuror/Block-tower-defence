@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class ItemModifierData : ScriptableObject
 {
-    [Range(1, 5)] [SerializeField] private int _quality = 3;
+    [Range(-5, 5)] [SerializeField] private int _quality = 3;
     [SerializeField] private string _modifierTypeName;
     [SerializeField] private string _apperanceConditionTypeName;
 

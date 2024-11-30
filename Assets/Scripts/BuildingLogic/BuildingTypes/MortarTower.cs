@@ -1,6 +1,7 @@
 using UnityEngine;
+using Combat;
 
-public sealed class MortarTower : CombatBuilding
+public sealed class MortarTower : DefaultCombatTaskConditionProvider
 {
     /*[Header("StatSettings")]
     [Range(0f, 1f)] [SerializeField] private float _explotionDamageMultiplyer;

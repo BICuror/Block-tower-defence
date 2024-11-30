@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -26,10 +25,11 @@ public sealed class ItemsContainer : MonoBehaviour
         _items.Add(item);
     
         item.ItemPickedUp += RemoveItem;
-
+        item.DurationEnded += RemoveItem;
+        
         item.transform.SetParent(_parent);
 
-        //item.EnableProperties();
+        item.EnableProperties();
 
         ItemAdded?.Invoke(item);
         ContainerUpdated?.Invoke();
@@ -40,10 +40,11 @@ public sealed class ItemsContainer : MonoBehaviour
         _items.Remove(item); 
         
         item.ItemPickedUp -= RemoveItem;
+        item.DurationEnded -= RemoveItem;
 
         item.transform.SetParent(null);
 
-        //item.DisableProperties();
+        item.DisableProperties();
         
         ItemRemoved?.Invoke(item);
         ContainerUpdated?.Invoke();

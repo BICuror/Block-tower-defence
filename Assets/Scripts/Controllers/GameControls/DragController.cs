@@ -1,17 +1,19 @@
-using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 
 public sealed class DragController : MonoBehaviour
 {
+    private const float ADDITIONAL_PLACEMENT_HEIGHT = 0.5f;
+    
     [Header("LayerSettings")]
     [SerializeField] private LayerSetting _draggableObjectLayerSettings;
     [SerializeField] private LayerSetting _activatableObjectLayerSettings;
 
     [Header("PlacementSettings")]
     [SerializeField] private LayerSetting _waterAndTerrainLayerSettings; 
-    [SerializeField] private PlacementCondition _defaultPlacementCondition;
+    [SerializeField] private PlacementModule _defaultPlacementModule;
 
     [Header("DragSettings")]
     [SerializeField] private float _placingHeight;
@@ -91,12 +93,14 @@ public sealed class DragController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit rayInfo, Mathf.Infinity, _waterAndTerrainLayerSettings.GetLayerMask()))
         {
             Vector3 roundedRayPosition = new Vector3(Mathf.RoundToInt(rayInfo.point.x), Mathf.RoundToInt(rayInfo.point.y), Mathf.RoundToInt(rayInfo.point.z));
+            
+            Vector2Int placementPosition = GetPlacmentPosition(roundedRayPosition.x, roundedRayPosition.z);
 
-            if (CanBePlacedAt(roundedRayPosition.x, roundedRayPosition.z))
+            if (CanBePlacedAt(placementPosition.x, placementPosition.y))
             {
-                float height = GetHeight(roundedRayPosition.x, roundedRayPosition.z);
+                float height = GetPlacementHeight(placementPosition.x, placementPosition.y);
                 
-                _lastValuablePosition = new Vector3(roundedRayPosition.x, height, roundedRayPosition.z);
+                _lastValuablePosition = new Vector3(placementPosition.x, height, placementPosition.y);
             }
         }
 
@@ -127,29 +131,19 @@ public sealed class DragController : MonoBehaviour
 
     private Vector3 GetLastSnappedGridPosition()
     {
-        Vector3 placePosition = new Vector3(Mathf.RoundToInt(_lastValuablePosition.x), 0, Mathf.RoundToInt(_lastValuablePosition.z)); 
+        Vector2Int placementPosition = GetPlacmentPosition(_lastValuablePosition.x, _lastValuablePosition.z);
+        
+        Vector3 placePosition = new Vector3(placementPosition.x, 0, placementPosition.y); 
 
-        float height = GetHeight(placePosition.x, placePosition.z);
+        float height = GetPlacementHeight(placePosition.x, placePosition.z);
     
         return new Vector3(placePosition.x, height, placePosition.z);    
     }
-
-    public bool CanBePlacedAt(float x, float z)
-    {
-        if (_currentIDraggable.GetPlacementCondition() != null)
-        {
-            return _currentIDraggable.GetPlacementCondition().IsSatisfied(_currentDraggableGameObject, Mathf.RoundToInt(x), Mathf.RoundToInt(z));
-        }
-        else 
-        {
-            return _defaultPlacementCondition.IsSatisfied(_currentDraggableGameObject, Mathf.RoundToInt(x), Mathf.RoundToInt(z));
-        }
-    }
-
-    private Vector3 FindSuitablePositionNearby(float centerX, float centerY)
+    
+    private Vector3 FindSuitablePositionNearby(float centerX, float centerZ)
     {
         int searchX = Mathf.RoundToInt(centerX);
-        int searchY = Mathf.RoundToInt(centerY);
+        int searchY = Mathf.RoundToInt(centerZ);
 
         for (int radius = 1; radius <= 10; radius++)
         {
@@ -178,18 +172,42 @@ public sealed class DragController : MonoBehaviour
         return Vector3.zero;
     }
     
-    private float GetHeight(float x, float y)
+    private bool CanBePlacedAt(float x, float z)
     {
-        float height = _placingHeight;
-
-        Ray heightRay = new Ray(new Vector3(x, 100000f, y), Vector3.down);
-
-        if (Physics.Raycast(heightRay, out RaycastHit heightRayInfo, Mathf.Infinity, _waterAndTerrainLayerSettings.GetLayerMask()))
-        {     
-            if (heightRayInfo.point.y < 1) height += 1;
-            else height += heightRayInfo.point.y;
+        int roundedX = Mathf.RoundToInt(x);
+        int roundedZ = Mathf.RoundToInt(z);
+        
+        if (_currentIDraggable.GetPlacementModule())
+        {
+            return _currentIDraggable.GetPlacementModule().CanBePlaced(_currentDraggableGameObject, roundedX, roundedZ);
         }
+        
+        return _defaultPlacementModule.CanBePlaced(_currentDraggableGameObject, roundedX, roundedZ);
+    }
 
-        return height;        
+    private float GetPlacementHeight(float x, float z)
+    {
+        int roundedX = Mathf.RoundToInt(x);
+        int roundedZ = Mathf.RoundToInt(z);
+        
+        if (_currentIDraggable.GetPlacementModule())
+        {
+            return _currentIDraggable.GetPlacementModule().GetHeight(roundedX, roundedZ) + ADDITIONAL_PLACEMENT_HEIGHT;
+        }
+        
+        return _defaultPlacementModule.GetHeight(roundedX, roundedZ) + ADDITIONAL_PLACEMENT_HEIGHT;      
+    }
+
+    private Vector2Int GetPlacmentPosition(float x, float z)
+    {
+        int roundedX = Mathf.RoundToInt(x);
+        int roundedZ = Mathf.RoundToInt(z);
+        
+        if (_currentIDraggable.GetPlacementModule())
+        {
+            return _currentIDraggable.GetPlacementModule().GetPlacementPosition(roundedX, roundedZ);
+        }
+        
+        return _defaultPlacementModule.GetPlacementPosition(roundedX, roundedZ);     
     }
 }

@@ -1,6 +1,6 @@
-using Cashing;
 using DG.Tweening;
 using UnityEngine;
+using Cashing;
 
 [RequireComponent(typeof(MeshRenderer))]
 
@@ -22,6 +22,8 @@ public sealed class BuildingProgressBar : Shaker
         
         _buildingDraggable.Placed += StartFillingBar;
         _buildingDraggable.PickedUp += StopFillingBar;
+        
+        gameObject.SetActive(false);
     }
 
     private void StartFillingBar()

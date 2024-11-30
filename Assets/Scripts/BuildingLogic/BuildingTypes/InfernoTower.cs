@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Combat;
 
-public sealed class InfernoTower : CombatBuilding
+public sealed class InfernoTower : DefaultCombatTaskConditionProvider
 {
     /*[Header("Stats")]
     [SerializeField] private AnimationCurve _damageCurve;

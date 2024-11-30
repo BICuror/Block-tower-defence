@@ -2,7 +2,7 @@ using Cashing;
 using Combat;
 using UnityEngine;
 
-public sealed class ArcherTower : MonoBehaviour
+public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 {
     [Cached] private EnemyAreaScaner _enemyAreaScaner;
     [Cached] private Damage _damage;
@@ -18,16 +18,13 @@ public sealed class ArcherTower : MonoBehaviour
 
     private void Start()
     {
+        base.Start();
         _arrowObjectPool = new ObjectPool<Arrow>(_arrowPrefab, 3);
 
         TaskCycle buildingTaskCycle = GetComponent<TaskCycle>();
 
-        buildingTaskCycle.ShouldWorkDelegate = ShouldWorkDelegate;
-
         buildingTaskCycle.TaskPerformed += Shoot;
     }
-
-    private bool ShouldWorkDelegate() => _enemyAreaScaner.IsEmpty == false;
 
     private void Shoot()
     {

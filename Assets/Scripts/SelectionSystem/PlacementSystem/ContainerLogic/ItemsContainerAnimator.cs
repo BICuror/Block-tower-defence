@@ -49,6 +49,8 @@ public class ItemsContainerAnimator : MonoBehaviour
 
     private IEnumerator StartTransitioningToNewPositions(List<Item> items, float duration)
     {
+        if (items.Count == 0) StopAllCoroutines();
+        
         List<Vector3> oldPositions = GetOldPositions(items);
         List<Vector3> newPositions = GetNewPositions(items);
 

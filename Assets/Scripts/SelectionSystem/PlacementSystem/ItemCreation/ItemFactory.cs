@@ -13,7 +13,10 @@ public sealed class ItemFactory : MonoBehaviour
     {
         Item item = Instantiate(_itemPrefab, new Vector3(12f, 7f, 12f), Quaternion.identity);
 
-        List<ItemPropertyData> propertyDatas = _modifierSelector.GetProperties(quality, strength);
+        int duration = 2;//Random.Range(1, 4);
+        item.SetDuration(duration);
+        
+        List<ItemPropertyData> propertyDatas = _modifierSelector.GetProperties(quality, Mathf.Min(1, Mathf.RoundToInt(strength / (float)duration)));
         item.AddPropertyDatas(propertyDatas);
 
         List<ItemRewardData> rewardDatas = _modifierSelector.GetRewards(quality, strength);

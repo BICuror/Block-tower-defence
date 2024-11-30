@@ -91,7 +91,7 @@ namespace Combat
     
             enemyEntity.Health.EnemyDied += RemoveEnemy;
     
-            EnemyDied.Invoke(enemyEntity);
+            EnemyDied?.Invoke(enemyEntity);
     
             if (_spawnedEnemies.Count == 0) LastEnemyKilled?.Invoke();
         }

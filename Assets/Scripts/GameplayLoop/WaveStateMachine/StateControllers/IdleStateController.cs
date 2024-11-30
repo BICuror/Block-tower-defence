@@ -41,6 +41,7 @@ public sealed class IdleStateController : WaveStateController
 
     protected override void OnEnterStateCompleted()
     {
+        _itemContainerManager.UpdateContainedItems();
         _itemContainerManager.UnlockContainer();
     }
 

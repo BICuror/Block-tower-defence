@@ -1,7 +1,8 @@
 using UnityEngine;
 using Zenject;
+using Combat;
 
-public sealed class BombCreatorTower : CombatBuilding
+public sealed class BombCreatorTower : DefaultCombatTaskConditionProvider
 {
     [Inject] private DraggableCreator _draggableCreator;
 
@@ -14,10 +15,10 @@ public sealed class BombCreatorTower : CombatBuilding
     private void Awake()
     {
         _buildingTaskCycle = GetComponent<BuildingTaskCycle>();
-        _buildingTaskCycle.ShouldWorkDelegate = DoesNotHasBomb;
+        //_buildingTaskCycle.ShouldWorkDelegate = DoesNotHasBomb;
         _buildingTaskCycle.TaskPerformed += CreateBomb;
     
-        _buildingTaskCycle.StartCycle();
+        _buildingTaskCycle.TryCycle();
     }
 
     private bool DoesNotHasBomb() => _draggableObject == null;
@@ -44,6 +45,6 @@ public sealed class BombCreatorTower : CombatBuilding
     {
         _draggableObject = null;
 
-        _buildingTaskCycle.StartCycle();
+        _buildingTaskCycle.TryCycle();
     }
 }

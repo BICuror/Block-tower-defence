@@ -1,6 +1,5 @@
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 using Zenject;
 
 public sealed class ItemModifierFactory : MonoBehaviour 

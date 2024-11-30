@@ -40,7 +40,6 @@ namespace Combat
             List.Clear();
         }
         
-        private void OnDisable() => RemoveAll();
         private void OnDestroy() => RemoveAll();
     }
 }

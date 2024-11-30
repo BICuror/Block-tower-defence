@@ -31,6 +31,7 @@ public class ItemModifierSelector : MonoBehaviour
         int negativeStrength = quality - strength;
 
         result.AddRange(GetItemModifiers<ItemPropertyData>(negativeStrength, negativeProperties));
+        result.AddRange(GetItemModifiers<ItemPropertyData>(positiveStrength, positiveProperties));
 
         return result;   
     }
@@ -74,15 +75,13 @@ public class ItemModifierSelector : MonoBehaviour
         while (selectedDatas.Count > 0)
         {
             int randomIndex = Random.Range(0, selectedDatas.Count);
-            
+
             if (GetAppeanceConditionValue(selectedDatas[randomIndex]))
             {
                 return selectedDatas[randomIndex];
             }
-            else 
-            {
-                selectedDatas.RemoveAt(randomIndex);
-            }
+
+            selectedDatas.RemoveAt(randomIndex);
         }
 
         Debug.LogError($"Not enough modifiers with quality of {quality}");

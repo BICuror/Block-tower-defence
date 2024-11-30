@@ -8,6 +8,17 @@ namespace Combat
         {
             if (other.gameObject.TryGetComponent(out T component))
             {
+                if (other.gameObject.TryGetComponent<DraggableObject>(out DraggableObject draggable))
+                {
+                    Debug.Log("Added DraggableObject");
+                    draggable.DraggablePlaced += AddPlacedDraggable;
+                    draggable.DraggablePickedUp += RemovePickedUpDraggable;
+                    
+                    if (!draggable.IsPlaced())
+                    {
+                        return;
+                    }
+                }
                 AddItem(component);
             }
         }
@@ -16,8 +27,24 @@ namespace Combat
         {
             if (other.gameObject.TryGetComponent(out T component))
             {
+                if (other.gameObject.TryGetComponent<DraggableObject>(out DraggableObject draggable))
+                {
+                    Debug.Log("Removed DraggableObject");
+                    draggable.DraggablePlaced -= AddPlacedDraggable;
+                    draggable.DraggablePickedUp -= RemovePickedUpDraggable;
+                }
+                
                 RemoveItem(component);
             }
+        }
+        private void AddPlacedDraggable(DraggableObject draggable)
+        { 
+            AddItem(draggable.GetComponent<T>());
+        }
+        
+        private void RemovePickedUpDraggable(DraggableObject draggable) 
+        {
+            RemoveItem(draggable.GetComponent<T>());
         }
     }
 }

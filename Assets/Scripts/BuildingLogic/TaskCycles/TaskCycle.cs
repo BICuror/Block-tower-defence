@@ -3,12 +3,12 @@ using System.Threading;
 using UnityEngine;
 using Cashing;
 using System;
+using Combat;
 
 public class TaskCycle : MonoBehaviour
 {
     [Cached] private TaskRecharge _taskRecharge;
-    public delegate bool ShouldWork(); 
-    public ShouldWork ShouldWorkDelegate;
+    [Cached] private DefaultCombatTaskConditionProvider _defaultCombatTaskConditionProvider;
     private bool _taskCycleIsActive;
     private CancellationTokenSource _cancellationTokenSource = new();
     
@@ -21,28 +21,29 @@ public class TaskCycle : MonoBehaviour
         _cancellationTokenSource.Dispose();
         _cancellationTokenSource = new();
     }
-    
-    public void StartCycle() => Recharge();
-    
-    private void Recharge()
+
+    public void TryCycle()
     {
-        if (CanWork() && _taskCycleIsActive == false)
-        {
-            _taskCycleIsActive = true;
-            StartRechargeProcess();
-        }
+        if (!CanWork()) return; 
+        
+        if (!_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke()) return;
+        
+        if (_taskCycleIsActive) return;
+
+        StartRechargeProcess();
     }
     
     protected virtual bool CanWork() => true;
     
     private async void StartRechargeProcess()
     {
+        _taskCycleIsActive = true;
         await UniTask.WaitForSeconds(_taskRecharge.Value, cancellationToken: _cancellationTokenSource.Token);
         _taskCycleIsActive = false;
 
-        if (ShouldWorkDelegate())
+        if (_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke())
         {
-            Recharge();
+            TryCycle();
             PerformTask();
         }
     }

@@ -5,11 +5,13 @@ using Zenject;
 
 public sealed class ItemFactory : MonoBehaviour
 {
+    [Inject] private DraggableCreator _draggableCreator;
+    
     [SerializeField] private Item _itemPrefab;
     [SerializeField] private ItemModifierSelector _modifierSelector;
     [SerializeField] private ItemModifierFactory _itemModifierFactory;
     
-    public void CreateItem(int quality, int strength)
+    public void CreateItem(int quality, int strength, Vector3 position)
     {
         Item item = Instantiate(_itemPrefab, new Vector3(12f, 7f, 12f), Quaternion.identity);
 

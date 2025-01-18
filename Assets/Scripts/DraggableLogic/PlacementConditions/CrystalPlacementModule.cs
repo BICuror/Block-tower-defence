@@ -8,41 +8,47 @@ public sealed class CrystalPlacementModule : PlacementModule
     [SerializeField] private LayerSetting _nonStackableLayerSetting;
     [SerializeField] private LayerSetting _townhallLayerSetting;
 
-    public override bool CanBePlaced(GameObject objectToPlace, int x, int z)
+    public override bool CanBePlaced(Vector2Int position)
     {
-        if (!Physics.Raycast(new Vector3(x, 100000f, z), Vector3.down, Mathf.Infinity, _sutableTerrainLayerSetting.GetLayerMask())) return false;
-
-        RaycastHit[] nonStackableHits = Physics.RaycastAll(new Vector3(x, 100000f, z), Vector3.down, Mathf.Infinity, _nonStackableLayerSetting.GetLayerMask());
-
-        if (nonStackableHits.Length == 0) return true;
-        if (nonStackableHits.Length == 1 && nonStackableHits[0].collider.gameObject == objectToPlace) return true;
+        if (TileMap.HasTile(position, _townhallLayerSetting)) return true;
         
-        return Physics.Raycast(new Vector3(x, 10000f, z), Vector3.down, Mathf.Infinity, _townhallLayerSetting.GetLayerMask());
-    }
-
-    public override float GetHeight(int x, int z)
-    {
-        Ray ray = new Ray(new Vector3(x, 10000f, z), Vector3.down);
+        if (!TileMap.HasTile(position, _sutableTerrainLayerSetting)) return false;
         
-        if (Physics.Raycast(ray, out RaycastHit townhallHit, Mathf.Infinity, _townhallLayerSetting.GetLayerMask()))
+        int nonStackableTiels = TileMap.GetTileCount(position, _nonStackableLayerSetting);
+
+        if (nonStackableTiels == 0) return true;
+        if (nonStackableTiels == 1)
         {
-            return townhallHit.point.y;
+            GameObject nonStackableTile = TileMap.GetHitObject(position, _nonStackableLayerSetting);
+
+            if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
+            {
+                return !draggableObject.IsPlaced();
+            }
         }
 
-        Physics.Raycast(ray, out RaycastHit terrainHit, Mathf.Infinity, _sutableTerrainLayerSetting.GetLayerMask());
+        return false; 
+    }
+
+    public override float GetHeight(Vector2Int position)
+    {
+        if (TileMap.HasTile(position, _townhallLayerSetting, out RaycastHit hit))
+        {
+            return hit.point.y;
+        }
         
-        return terrainHit.point.y;
+        return TileMap.GetHitInfo(position, _sutableTerrainLayerSetting).point.y + AdditionalPlacementHeight;
     }
     
-    public override Vector2Int GetPlacementPosition(int x, int z)
+    public override Vector2Int GetPlacementPosition(Vector2Int position)
     {
-        Ray ray = new Ray(new Vector3(x, 10000f, z), Vector3.down);
-        
-        if (Physics.Raycast(ray, out RaycastHit townhallHit, Mathf.Infinity, _townhallLayerSetting.GetLayerMask()))
+        if (TileMap.HasTile(position, _townhallLayerSetting))
         {
-            return new Vector2Int(Mathf.RoundToInt(townhallHit.transform.position.x), Mathf.RoundToInt(townhallHit.transform.position.z));
+            GameObject townhall = TileMap.GetHitObject(position, _townhallLayerSetting);
+            
+            return new Vector2Int(Mathf.RoundToInt(townhall.transform.position.x), Mathf.RoundToInt(townhall.transform.position.z));
         }
 
-        return new Vector2Int(x, z);
+        return position;
     }
 }

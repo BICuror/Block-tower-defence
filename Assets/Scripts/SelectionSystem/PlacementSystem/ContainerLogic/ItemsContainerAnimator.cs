@@ -8,6 +8,11 @@ using System;
 public class ItemsContainerAnimator : MonoBehaviour
 {
     [SerializeField] private AnimationCurve _movmentCurve;
+    [SerializeField] private AnimationCurve _radiusCurve;
+    [SerializeField] private int _maxItems;
+    [SerializeField] private float _maxRaduis = 1.4f;
+    
+    public float GetRadius(int itemsCount) => _radiusCurve.Evaluate(itemsCount / (float)_maxItems) * _maxRaduis;
 
     public void TransitionToNewPositions(List<Item> items, float duration)
     {
@@ -29,7 +34,9 @@ public class ItemsContainerAnimator : MonoBehaviour
             var cos = (float)Math.Round(Math.Cos(radians), 2);
             var sin = (float)Math.Round(Math.Sin(radians), 2);
         
-            newPositions.Add(new Vector3(cos * 1.4f, 0f, sin * 1.4f));
+            float radius = GetRadius(items.Count);
+            
+            newPositions.Add(new Vector3(cos * radius, 0f, sin * radius));
         }
 
         return newPositions;

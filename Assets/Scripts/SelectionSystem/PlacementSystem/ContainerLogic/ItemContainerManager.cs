@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using Combat;
-using Cysharp.Threading.Tasks;
 
 public class ItemContainerManager : MonoBehaviour
 {
@@ -28,7 +26,6 @@ public class ItemContainerManager : MonoBehaviour
         StopAllCoroutines();
         
         _itemsContainerAnimator.TransitionToNewPositions(_itemContainer.ContainedItems, _transitionDuration);
-        _itemContainerLocker.SetPossibleToRemoveItems(false);
     }
 
     public void UpdateContainedItems()

@@ -4,7 +4,7 @@ using Combat;
 
 public sealed class BombCreatorTower : DefaultCombatTaskConditionProvider
 {
-    [Inject] private DraggableCreator _draggableCreator;
+    /*[Inject] private DraggableCreator _draggableCreator;
 
     [SerializeField] private Bomb _bombPrefab;
 
@@ -46,5 +46,5 @@ public sealed class BombCreatorTower : DefaultCombatTaskConditionProvider
         _draggableObject = null;
 
         _buildingTaskCycle.TryCycle();
-    }
+    }*/
 }

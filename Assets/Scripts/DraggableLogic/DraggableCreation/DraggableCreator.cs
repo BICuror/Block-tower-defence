@@ -1,148 +1,87 @@
-using System.Collections.Generic;
-using UnityEngine;
-using System.Collections;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
+using System;
+using Random = UnityEngine.Random;
 
-public sealed class DraggableCreator : MonoBehaviour 
+public sealed class DraggableCreator : MonoBehaviour
 {
-    [Header("SpawnPositionSettings")]
-    [SerializeField] private GameObject _blankDraggable;
-
-    [SerializeField] private LayerSetting _terrainLayerSettings;    
-    [SerializeField] private LayerSetting solidObjectsLayerSettings;   
-
-    [Range(1f, 5f)] [SerializeField] private int _spawnRadius;
-
-    [Space] [Header("LaunchSettings")]
-    [SerializeField] private float _launchDuration;
-
-    [SerializeField] private float _launchMaxHeight;
-    
-    [SerializeField] private Launcher _defaultLauncherPrefab;
-    
-    private YieldInstruction _yieldInstruction = new WaitForFixedUpdate(); 
-
+    [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private DiContainer _diContainer;
     
-    public void CreateDraggableOnPosition(DraggableObject draggablePrefab, Vector3 centerPosition, Vector3 finalPosition)
-    {       
-        Launcher launcher = CreateLauncher(_defaultLauncherPrefab, centerPosition, finalPosition);
+    [Header("SpawnPositionSettings")]
+    [SerializeField] private GameObject _draggableBlocker;
+    [SerializeField] private LayerSetting _terrainLayerSettings;    
+    [SerializeField] private LayerSetting _solidObjectsLayerSettings;   
+    [Range(1f, 5f)] [SerializeField] private int _spawnRadius;
+    [SerializeField] private Launcher _defaultLauncherPrefab;
+    
+    public async UniTask<DraggableObject> CreateDraggableOnPosition(DraggableObject draggablePrefab, Vector3 centerPosition, Vector3 finalPosition, [Optional]Launcher launcherPrefab)
+    {
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
 
-        launcher.SetDraggablePrefab(draggablePrefab);
+        DraggableObject createdDraggable = 
+            _diContainer.InstantiatePrefab(draggablePrefab, finalPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
+        
+        createdDraggable.gameObject.SetActive(false);
+        
+        await CreateLauncher(centerPosition, finalPosition, launcherPrefab);
 
-        CreateBlankDraggable(finalPosition);
+        createdDraggable.gameObject.SetActive(true);
+        
+        return createdDraggable;
     }
 
-    public Launcher CreateDraggableOnRandomPosition(DraggableObject draggablePrefab, Vector3 centerPosition, [Optional]int radius, [Optional]LayerSetting terrainLayer, [Optional]Launcher launcherPrefab)
+    public async UniTask<DraggableObject> CreateDraggableOnRandomPosition(DraggableObject draggablePrefab, Vector3 startPositon, [Optional]int radius, [Optional]Launcher launcherPrefab)
     {
         if (radius == 0) radius = _spawnRadius;
-        if (terrainLayer == null) terrainLayer = _terrainLayerSettings; 
-        if (launcherPrefab == null) launcherPrefab = _defaultLauncherPrefab;
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
 
-        Vector3 finalPosition = GetRandomSpawnPosition(centerPosition, radius, terrainLayer);
-            
-        Launcher launcher = CreateLauncher(launcherPrefab, centerPosition, finalPosition);
+        Vector3 finalPosition = GetRandomSpawnPosition(draggablePrefab, startPositon, radius);
 
-        launcher.SetDraggablePrefab(draggablePrefab);
-
-        CreateBlankDraggable(finalPosition);
-
-        return launcher;
+        return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition);
     }
-
-    private void CreateBlankDraggable(Vector3 spawnPosition)
+    
+    private async UniTask CreateLauncher(Vector3 startPosition, Vector3 finalPosition, Launcher launcherPrefab)
     {
-        GameObject blankDraggable = Instantiate(_blankDraggable, spawnPosition, Quaternion.identity);
-
-        Destroy(blankDraggable, _launchDuration);
+        GameObject draggableBlocker = Instantiate(_draggableBlocker, startPosition, Quaternion.identity);
+        
+        Launcher launcher = Instantiate(launcherPrefab, startPosition, Quaternion.identity);
+        
+        await launcher.Launch(startPosition, finalPosition);
+        
+        Destroy(draggableBlocker);
     }
-
-    #region LauncherCreation
-    private Launcher CreateLauncher(Launcher launcherPrefab, Vector3 centerPosition, Vector3 finalPosition)
-    {
-        Launcher launcher = _diContainer.InstantiatePrefab(launcherPrefab.gameObject, centerPosition, Quaternion.identity, null).GetComponent<Launcher>();
-
-        StartCoroutine(LaunchLauncher(launcher, finalPosition));
-
-        return launcher;
-    }
-
-    private IEnumerator LaunchLauncher(Launcher launcher, Vector3 finalPosition)
-    {
-        Vector3 startPosition = launcher.transform.position;
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < _launchDuration)
-        {
-            yield return _yieldInstruction;
-
-            elapsedTime += Time.deltaTime;
-
-            float currentProgress = elapsedTime / _launchDuration;
-
-            Vector3 evaluetedPosition = Vector3.Lerp(startPosition, finalPosition, currentProgress);
-
-            evaluetedPosition.y = evaluetedPosition.y + (Mathf.Sin(currentProgress * 180f * Mathf.Deg2Rad)) * _launchMaxHeight; 
-
-            launcher.transform.position = evaluetedPosition;
-        }
-
-        launcher.Land(finalPosition);
-    }
-    #endregion
 
     #region SpawnPositionPicking
-    private Vector3 GetRandomSpawnPosition(Vector3 centerPosition, int radius, LayerSetting terrainLayer)
+    private Vector3 GetRandomSpawnPosition(DraggableObject draggableObject, Vector3 centerPosition, int radius)
     {
-        List<Vector3> allPossiblePositions = new List<Vector3>();
-
-        int currentRadius = radius;
-
         Vector2Int roundedCenterPosition = new Vector2Int(Mathf.RoundToInt(centerPosition.x), Mathf.RoundToInt(centerPosition.z));
 
-        while(allPossiblePositions.Count == 0)
+        while (radius <= _islandDataContainer.Data.IslandSize)
         {
-            currentRadius++;
+            List<Vector2Int> foundPositions = TileMap.GetSuitablePositionsInRaduis(IsSuitablePosition, roundedCenterPosition, radius);
 
-            allPossiblePositions.AddRange(GetPossiblePositionsInRadius(roundedCenterPosition, currentRadius, terrainLayer));
+            if (foundPositions.Count > 0)
+            {
+                Vector2Int selectedPosition = foundPositions[Random.Range(0, foundPositions.Count)];
+                
+                float height = draggableObject.GetPlacementModule().GetHeight(selectedPosition);
+
+                return new Vector3(selectedPosition.x, height, selectedPosition.y);
+            }
+            
+            radius++;
         }
         
-        return allPossiblePositions[Random.Range(0, allPossiblePositions.Count)];
-    }
+        throw new Exception($"No suitable position for {draggableObject} found, while trying to spawn at random position");
 
-    private List<Vector3> GetPossiblePositionsInRadius(Vector2Int roundedCenterPosition, int radius, LayerSetting terrainLayer)
-    {
-        List<Vector3> possiblePositions = new List<Vector3>();
-
-        int xMinPosition = roundedCenterPosition.x - radius;
-        int xMaxPosition = roundedCenterPosition.x + radius;
-
-        int zMinPosition = roundedCenterPosition.y - radius;
-        int zMaxPosition = roundedCenterPosition.y + radius;
-
-        for (int x = xMinPosition; x <= xMaxPosition; x++)
+        bool IsSuitablePosition(Vector2Int position)
         {
-            for (int z = zMinPosition; z <= zMaxPosition; z++)
-            {
-                if (x == xMinPosition || z == zMinPosition || x == xMaxPosition || z == zMaxPosition )
-                {
-                    Ray heightRay = new Ray(new Vector3(x, 10000f, z), Vector3.down);
-                    
-                    if (Physics.Raycast(heightRay, out RaycastHit rayInfo, Mathf.Infinity, terrainLayer.GetLayerMask()))
-                    {
-                        RaycastHit[] hits = Physics.RaycastAll(new Vector3(x, 10000f, z), Vector3.down, Mathf.Infinity, solidObjectsLayerSettings.GetLayerMask());
-
-                        if (hits.Length == 0)
-                        {
-                            possiblePositions.Add(new Vector3(x, rayInfo.point.y + 0.5f, z));
-                        }
-                    }                   
-                }
-            }
+            return draggableObject.GetPlacementModule().CanBePlaced(position);
         }
-        return possiblePositions;
     }
     #endregion
 }

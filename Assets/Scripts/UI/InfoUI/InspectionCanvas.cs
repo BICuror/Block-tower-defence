@@ -36,14 +36,14 @@ public sealed class InspectionCanvas : MonoBehaviour
 
             if (inspectable.TryGetComponent<AreaManager>(out AreaManager manager))
             {
-                if (inspectable.transform.parent != null && inspectable.transform.parent.TryGetComponent<SelectionOptionObject>(out SelectionOptionObject obj))
+                /*if (inspectable.transform.parent != null && inspectable.transform.parent.TryGetComponent<SelectionOptionObject>(out SelectionOptionObject obj))
                 {
                     _areaVisualisation.StopVisualisation();
                 }
                 else 
                 {
                     _areaVisualisation.ActivatePositionedViualisation(inspectable.gameObject, inspectable.transform.position);
-                }
+                }*/
             }
             else 
             {

@@ -1,25 +1,43 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
-using Zenject;
+using System.Threading;
+using UnityEngine;
+using System;
 
 public sealed class Launcher : MonoBehaviour
 {
-    public UnityEvent<DraggableObject> Landed;
-
-    private DraggableObject _draggablePrefab;
-
-    [Inject] private DiContainer _diContainer;
-
-    public void SetDraggablePrefab(DraggableObject draggable) => _draggablePrefab = draggable;
-
-    public void Land(Vector3 landPosition)
+    [SerializeField] private float _lifeTime = 1f;
+    [SerializeField] private float _maxHeight = 4f;
+    
+    private CancellationTokenSource _cancellationTokenSource = new();
+     
+    public UnityEvent Landed;
+    
+    public async UniTask Launch(Vector3 startPosition, Vector3 endPosition)
     {
-        DraggableObject draggable = _diContainer.InstantiatePrefab(_draggablePrefab.gameObject, landPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
+        float elapsedTime = 0f;
 
-        draggable.GetComponent<IDraggable>().Place();
+        while (elapsedTime < _lifeTime)
+        {
+            elapsedTime += Time.deltaTime;
 
-        Landed.Invoke(draggable);
+            float currentProgress = elapsedTime / _lifeTime;
+
+            Vector3 evaluetedPosition = Vector3.Lerp(startPosition, endPosition, currentProgress);
+
+            evaluetedPosition.y += (Mathf.Sin(currentProgress * 180f * Mathf.Deg2Rad)) * _maxHeight; 
+
+            transform.position = evaluetedPosition;
+
+            try
+            {
+                await UniTask.WaitForFixedUpdate(_cancellationTokenSource.Token);
+            }
+            catch (Exception e) { TaskUtility.LogAsync(e); }
+        }
+
+        Landed.Invoke();
     }
+
+    private void OnDestroy() => _cancellationTokenSource.Cancel();
 }

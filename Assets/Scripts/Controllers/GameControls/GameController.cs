@@ -12,7 +12,7 @@ public sealed class GameController : MonoBehaviour
     private GameControls _controls;
 
     private ControllerState _currentControllerState;
-    public enum ControllerState 
+    private enum ControllerState 
     {
         Idle,
         Dragging,

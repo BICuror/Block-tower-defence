@@ -1,10 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using WorldGeneration;
 
-public class SelectionOptionDataSelector : MonoBehaviour
+public sealed class SelectionOptionDataSelector : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataHolder;
 

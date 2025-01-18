@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -13,8 +14,10 @@ namespace Combat
             GetComponent<IDraggable>().Place();
         }
     
-        private void Start()
+        private async void Start()
         {
+            await UniTask.WaitForSeconds(1f);
+            
             for (int i = 0; i < _draggablesToCreateOnStart.Length; i++)
             {
                 _draggableCreator.CreateDraggableOnRandomPosition(_draggablesToCreateOnStart[i], transform.position, 4);

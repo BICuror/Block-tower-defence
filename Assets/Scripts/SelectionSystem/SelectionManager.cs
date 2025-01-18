@@ -1,25 +1,52 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public sealed class SelectionManager : MonoBehaviour
 {
-    private int _selectionSize = 3;
     private Queue<SelectionType> _enqeuedSelections = new();
+    
+    private SelectionType _currentSelection;
 
+    [SerializeField] private SelectionOptionObjectAreaDetector _selectionOptionObjectAreaDetector;
+    [SerializeField] private ItemDetector _itemDetector;
     [SerializeField] private BuildingSelector _buildingSelector;
 
-    public void EnqeueSelection(SelectionType type) => _enqeuedSelections.Enqueue(type); 
+    private async void Start()
+    {
+        await UniTask.WaitForSeconds(1);
+        
+        StartSelection(SelectionType.Building);
 
-    private void StartSelection()
+        _selectionOptionObjectAreaDetector.AddedItem += ResolveCurrentSelection;
+    }
+
+    public void EnqeueSelection(SelectionType type) => _enqeuedSelections.Enqueue(type);
+
+    public void StartQueuedSelection()
     {
         SelectionType type = _enqeuedSelections.Dequeue();
 
-        switch (type)
+        StartSelection(type);
+    }
+    
+    public void StartSelection(SelectionType type)
+    {
+        _currentSelection = type;
+        switch (_currentSelection)
         {
             case SelectionType.Building: _buildingSelector.StartBuildingsSelection(); break;
             default: break;
         }
+    }
+    
+    public void ResolveCurrentSelection(SelectionOptionObject optionObject)
+    {
+        
+    }
+
+    public bool SelectionOptionCanBePlaced(SelectionType type)
+    {
+        return type == _currentSelection;
     }
 }

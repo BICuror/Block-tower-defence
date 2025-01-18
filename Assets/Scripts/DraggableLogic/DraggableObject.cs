@@ -36,10 +36,11 @@ public class DraggableObject : MonoBehaviour, IDraggable
         DraggablePlaced?.Invoke(this);
     }
     bool IDraggable.IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
-    PlacementModule IDraggable.GetPlacementModule() => _placementRequirements;
     
     public void SetDraggableState(bool state) => _isDraggable = state;
     public bool IsPlaced() => DraggableState == DraggableState.Placed;
+    
+    public PlacementModule GetPlacementModule() => _placementRequirements;
 }
 
 public enum DraggableState

@@ -58,9 +58,9 @@ public class InspectorController : MonoBehaviour
     {
         Ray ray = _camera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _inspectableLayerSetting.GetLayerMask()))
+        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            if (rayInfo.collider.gameObject.TryGetComponent(out InspectableObject inspectable))
+            if (hit.collider.gameObject.TryGetComponent(out InspectableObject inspectable))
             {
                 _inspectable = inspectable;
                 InspectionStarted.Invoke(_inspectable);

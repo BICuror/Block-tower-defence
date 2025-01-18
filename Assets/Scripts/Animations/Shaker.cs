@@ -37,7 +37,7 @@ public abstract class Shaker : MonoBehaviour
     {
         SetDefaultValues();
 
-        DOTween.Kill(this);
+        DOTween.Complete(this);
         
         _shakeDatas.ForEach(shakeData =>
         {

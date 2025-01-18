@@ -2,7 +2,9 @@ using UnityEngine;
 
 public abstract class PlacementModule : ScriptableObject
 {
-    public abstract bool CanBePlaced(GameObject objectToPlace, int x, int z);
-    public abstract float GetHeight(int x, int z);
-    public abstract Vector2Int GetPlacementPosition(int x, int z);
+    [SerializeField] protected float AdditionalPlacementHeight = 0.5f;
+    
+    public abstract bool CanBePlaced(Vector2Int position);
+    public abstract float GetHeight(Vector2Int position);
+    public abstract Vector2Int GetPlacementPosition(Vector2Int position);
 }

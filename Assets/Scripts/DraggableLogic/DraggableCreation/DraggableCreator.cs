@@ -41,7 +41,7 @@ public sealed class DraggableCreator : MonoBehaviour
 
         Vector3 finalPosition = GetRandomSpawnPosition(draggablePrefab, startPositon, radius);
 
-        return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition);
+        return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition, launcherPrefab);
     }
     
     private async UniTask CreateLauncher(Vector3 startPosition, Vector3 finalPosition, Launcher launcherPrefab)

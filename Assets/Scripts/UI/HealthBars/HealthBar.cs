@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cashing;
 using Combat;
@@ -56,7 +57,11 @@ public class HealthBar : Shaker
         _displayedHealth = EntityHealth.GetHpPercent();
         UpdatePropertyBlock();
 
-        await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
+        try
+        {
+            await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e) { TaskUtility.LogAsync(e); }
 
         DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference);
     }
@@ -72,7 +77,12 @@ public class HealthBar : Shaker
         _healthDifference = EntityHealth.GetHpPercent();
         UpdatePropertyBlock();
 
-        await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
+        try
+        {
+            await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e) { TaskUtility.LogAsync(e); }
+        
 
         DOVirtual.Float(_displayedHealth, _healthDifference, HealthTweenDuration, UpdateDisplayedHealth);
     }

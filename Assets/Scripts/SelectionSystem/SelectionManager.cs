@@ -5,18 +5,17 @@ using UnityEngine;
 public sealed class SelectionManager : MonoBehaviour
 {
     private Queue<SelectionType> _enqeuedSelections = new();
-    
     private SelectionType _currentSelection;
 
     [SerializeField] private SelectionOptionObjectAreaDetector _selectionOptionObjectAreaDetector;
-    [SerializeField] private ItemDetector _itemDetector;
+    [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private BuildingSelector _buildingSelector;
-
+    
     private async void Start()
     {
         await UniTask.WaitForSeconds(1);
-        
         StartSelection(SelectionType.Building);
+        EnqeueSelection(SelectionType.Building);
 
         _selectionOptionObjectAreaDetector.AddedItem += ResolveCurrentSelection;
     }
@@ -39,10 +38,13 @@ public sealed class SelectionManager : MonoBehaviour
             default: break;
         }
     }
-    
-    public void ResolveCurrentSelection(SelectionOptionObject optionObject)
+
+    private void ResolveCurrentSelection(SelectionOptionObject optionObject)
     {
+        optionObject.ApplyEffect();
+        _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
         
+        StartQueuedSelection();
     }
 
     public bool SelectionOptionCanBePlaced(SelectionType type)

@@ -37,7 +37,7 @@ public abstract class Shaker : MonoBehaviour
     {
         SetDefaultValues();
 
-        DOTween.Complete(this);
+        DOTween.Complete(_mesh);
         
         _shakeDatas.ForEach(shakeData =>
         {
@@ -54,8 +54,8 @@ public abstract class Shaker : MonoBehaviour
         }
     }
     
-    private void OnDisable() => DOTween.Kill(this);
-    private void OnDestroy() => DOTween.Kill(this);
+    private void OnDisable() => DOTween.Kill(_mesh);
+    private void OnDestroy() => DOTween.Kill(_mesh);
 
     private enum ShakeType
     {

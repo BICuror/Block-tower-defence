@@ -14,17 +14,17 @@ public sealed class SelectionObjectPlacementCondition : PlacementModule
     {
         if (TileMap.HasTile(position, _townhallLayerSetting, out RaycastHit hit))
         {
-            SelectionManager selectionManager = hit.collider.transform.parent.parent.gameObject.GetComponent<BuildingEntity>().ComponentsContainer.Get<SelectionManager>();
+            SelectionManager selectionManager = hit.collider.transform.parent.gameObject.GetComponent<BuildingEntity>().ComponentsContainer.Get<SelectionManager>();
 
             return selectionManager.SelectionOptionCanBePlaced(_selectionType);
         }
         
         if (!TileMap.HasTile(position, _sutableTerrainLayerSetting)) return false;
         
-        int nonStackableTiels = TileMap.GetTileCount(position, _nonStackableLayerSetting);
+        int nonStackableTiles = TileMap.GetTileCount(position, _nonStackableLayerSetting);
 
-        if (nonStackableTiels == 0) return true;
-        if (nonStackableTiels == 1)
+        if (nonStackableTiles == 0) return true;
+        if (nonStackableTiles == 1)
         {
             GameObject nonStackableTile = TileMap.GetHitObject(position, _nonStackableLayerSetting);
 

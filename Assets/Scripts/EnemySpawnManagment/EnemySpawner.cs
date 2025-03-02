@@ -49,11 +49,11 @@ namespace Combat
         {
             _enemySpawnerInfoDisplayer.HideSpawnInfo();
 
-            for (int i = 0; i < 200; i++)
+            for (int i = 0; i < 500; i++)
             {
                 SpawnEnemyMut();
                 
-                await UniTask.WaitForSeconds(0.1f);
+                await UniTask.WaitForSeconds(0.01f);
                 
             }
             

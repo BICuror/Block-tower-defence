@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: ItemRewardData
   m_EditorClassIdentifier: 
   _quality: 1
-  _modifierTypeName: ItemReward
-  _apperanceConditionTypeName: 
+  _isUnique: 0
+  _effectTypeName: TestRewardEffect
+  _effectApperanceCondition: {fileID: 0}
+  _argumentsContainer:
+    _argumentItems: []
+  AllEffectTypeNames:
+  - StartAttackStateProperty
+  - StartBuildingSelectionRewardEffect
+  - StartBuildingUpgradeSelectionRewardEffect
+  - StartGlobalEffectSelectionRewardEffect
+  - TestRewardEffect

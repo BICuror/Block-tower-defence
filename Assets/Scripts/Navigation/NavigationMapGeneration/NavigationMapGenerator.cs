@@ -1,29 +1,56 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using WorldGeneration;
 
 namespace Navigation
 {
     public class NavigationMapGenerator : MonoBehaviour
     {
-        [Inject] private DefaultNavigationMapGenerator _defaultNavigationMapGenerator; 
-        [Inject] private IslandDataContainer _islandDataContainer;
-        [Inject] private OptionalNavigationMapGenerator _optionalNavigationMapGenerator;
+        [Inject] private NavigationNodeMapGenerator _navigationNodeMapGenerator;
+        [Inject] private OptionalTaskGenerator _optionalTaskGenerator;
         [Inject] private NavigationMapHolder _navigationMapHolder;
+        [Inject] private IslandDataContainer _islandDataContainer;
+        [Inject] private NavigationMapper _navigationMapper;
 
         public void GenerateMap()
         {
             ResetNavigationMap();
+            
+            _navigationNodeMapGenerator.GenerateNodeMap();
 
-            _defaultNavigationMapGenerator.GenerateDefaultNodeMap();
-        
-            _optionalNavigationMapGenerator.GenerateOptionalNodeMap();
+            GenerateMainNavigationLayer();
+            GenerateOptionalNavigationLayer();
         }
-
+        
         private void ResetNavigationMap()
         {
-            NavigationMap navMap = new NavigationMap(_islandDataContainer.Data.IslandSize);
-            _navigationMapHolder.SetNavigationMap(navMap);
+            _navigationMapHolder.Map.ResetNodeMap();
+            _navigationMapHolder.Map.ClearAllLayers();
+        }
+
+        private void GenerateMainNavigationLayer()
+        {
+            int centerPosition = _islandDataContainer.Data.IslandSize / 2;
+
+            CreateLayer(new Vector2Int(centerPosition, centerPosition), NavigationMapLayerType.Main);
+        }
+        
+        private void GenerateOptionalNavigationLayer()
+        {
+            List<INavigationCondition> conditions = _optionalTaskGenerator.Conditions;
+            List<Vector2Int> startingPositions = _optionalTaskGenerator.TaskPositions;
+
+            for (int i = 0; i < conditions.Count; i++)
+            {
+                CreateLayer(startingPositions[i], NavigationMapLayerType.AdditionalTask).SetNavigationCondition(conditions[i]);
+            }
+        }
+
+        private NavigationMapLayer CreateLayer(Vector2Int position, NavigationMapLayerType layerType)
+        {
+            Dictionary<Vector2Int, int> nodeWeights = _navigationMapper.GenerateNavigationLayerWeights(position);
+
+            return _navigationMapHolder.Map.CreateLayerAndAdd(nodeWeights, layerType);
         }
     }
 }

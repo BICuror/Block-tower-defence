@@ -50,7 +50,7 @@ namespace WorldGeneration
             {        
                 for (int z = 0; z < _islandData.IslandSize; z++)
                 {
-                    if (roadMap[x, z] == true) 
+                    if (roadMap[x, z]) 
                     {
                         if (heightMap[x, z] == 0) 
                         {
@@ -68,31 +68,6 @@ namespace WorldGeneration
             }
 
             return roadGrid;
-        }
-
-        private int[,] CreateNewHeaightMap(bool[,] roadMap, int[,] heightMap)
-        {
-            int[,] roadHeightMap = new int[_islandData.IslandSize, _islandData.IslandSize];
-
-            for (int x = 0; x < _islandData.IslandSize; x++)
-            {        
-                for (int z = 0; z < _islandData.IslandSize; z++)
-                {
-                    if (roadMap[x, z])
-                    {
-                        if (heightMap[x, z] == 0)
-                        {
-                            roadHeightMap[x, z] = 1;
-                        }
-                        else
-                        {
-                            roadHeightMap[x, z] = heightMap[x, z];
-                        }
-                    }
-                }
-            }
-
-            return roadHeightMap;
         }
     }
 }

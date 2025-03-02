@@ -5,10 +5,8 @@ using UnityEngine;
 public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 {
     [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    [Cached] private ProjectileSpeed _projectileSpeed;
     [Cached] private Damage _damage;
-    
-    [Header("Stats")]
-    [SerializeField] private float _arrowSpeed;
 
     [Header("Links")]
     [SerializeField] private Arrow _arrowPrefab;
@@ -38,7 +36,7 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
         currentArrow.gameObject.SetActive(true);
         currentArrow.SetContactDamage(_damage.Value);
 
-        currentArrow.GetRigidbody().AddForce(currentArrow.transform.forward * _arrowSpeed, ForceMode.Impulse);
+        currentArrow.GetRigidbody().AddForce(currentArrow.transform.forward * _projectileSpeed.Value, ForceMode.Impulse);
     }
 
     private void OnDestroy() => _arrowObjectPool.DestroyPool();

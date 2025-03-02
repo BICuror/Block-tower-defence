@@ -1,20 +1,20 @@
-using Cashing;
 using UnityEngine;
+using Cashing;
 
 public class AreaManager : MonoBehaviour
 {
     [Header("AreaSettings")]
-    protected float _height = 100f;
+    protected float Height = 100f;
     [SerializeField] private GameObject _reachAreaCollider;
-
     [Cached] protected ReachAreaScale _reachAreaScale;
-    private void Start() 
-    {   
-        //_reachAreaScale = this.GetStat<ReachAreaScale>();
+    
+    private void Start()
+    {
+        _reachAreaScale.ValueChanged += _ => UpdateScale();
         UpdateScale();
     }
 
-    public virtual void UpdateScale()
+    private void UpdateScale()
     {
         _reachAreaCollider.transform.localScale = GetScale();
     }
@@ -23,6 +23,6 @@ public class AreaManager : MonoBehaviour
     {
         float scale = _reachAreaScale.Value * 2f + 0.95f;
 
-        return new Vector3(scale, _height, scale);
+        return new Vector3(scale, Height, scale);
     }
 }

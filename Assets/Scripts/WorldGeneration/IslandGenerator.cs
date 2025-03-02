@@ -5,10 +5,7 @@ namespace WorldGeneration
 {
     public sealed class IslandGenerator : MonoBehaviour
     {
-        #region Dependencies
         [Inject] private IslandDataContainer _islandDataContainer;
-        private IslandData _islandData => _islandDataContainer.Data;
-        
         [Inject] private IslandDecorationGenerator _islandDecorationGenerator;
         [Inject] private EnviromentCreator _enviromentCreator;
         [Inject] private BiomeMapGenerator _biomeMapGenerator;
@@ -16,7 +13,8 @@ namespace WorldGeneration
         [Inject] private IslandTerrainMeshCreator _islandTerrainMeshCreator;
         [Inject] private IslandGridHolder _islandGridHolder;
         [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
-        #endregion
+        
+        private IslandData _islandData => _islandDataContainer.Data;
 
         public void GenerateIsland()
         {
@@ -47,7 +45,7 @@ namespace WorldGeneration
         
         private void ConvertHeightMapToBlockGrid()
         {
-            IslandHeightMapToGridConverter converter = new IslandHeightMapToGridConverter();
+            IslandHeightMapToGridConverter converter = new();
 
             _islandGridHolder.SetGrid(converter.Convert(_islandHeightMapHolder.Map, _islandData));
         }

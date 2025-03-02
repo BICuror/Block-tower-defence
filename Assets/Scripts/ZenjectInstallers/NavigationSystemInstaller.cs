@@ -4,17 +4,16 @@ using Navigation;
 
 public sealed class NavigationSystemInstaller : MonoInstaller
 {
-    [SerializeField] private DefaultNavigationMapGenerator _defaultNavigationMapGenerator;
-    [SerializeField] private OptionalNavigationMapGenerator _optionalNavigationMapGenerator;
+    [SerializeField] private NavigationNodeMapGenerator _navigationNodeMapGenerator;
     [SerializeField] private NavigationMapGenerator _navigationMapGenerator;
-
- 
+    [SerializeField] private NavigationMapHolder _navigationMapHolder;
+    [SerializeField] private NavigationMapper _navigationMapper;
+    
     public override void InstallBindings()
     {
-        Container.Bind<NavigationMapHolder>().AsSingle().NonLazy();
-
-        Container.Bind<DefaultNavigationMapGenerator>().FromInstance(_defaultNavigationMapGenerator).AsSingle().NonLazy();
-        Container.Bind<OptionalNavigationMapGenerator>().FromInstance(_optionalNavigationMapGenerator).AsSingle().NonLazy();
+        Container.Bind<NavigationNodeMapGenerator>().FromInstance(_navigationNodeMapGenerator).AsSingle().NonLazy();
         Container.Bind<NavigationMapGenerator>().FromInstance(_navigationMapGenerator).AsSingle().NonLazy();
+        Container.Bind<NavigationMapHolder>().FromInstance(_navigationMapHolder).AsSingle().NonLazy();
+        Container.Bind<NavigationMapper>().FromInstance(_navigationMapper).AsSingle().NonLazy();
     }
 }

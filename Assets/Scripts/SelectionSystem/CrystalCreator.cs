@@ -57,9 +57,7 @@ public sealed class CrystalCreator : MonoBehaviour
     {
         _currentIndex = 0;
         _spawnSchedule = new Dictionary<int, CrystalType>();
-
         
-
         List<CrystalType> typesToGenerate = new List<CrystalType>();
 
         for (int i = 0; i < _islandData.CrystalSettings.SpawnSettings.Length; i++)

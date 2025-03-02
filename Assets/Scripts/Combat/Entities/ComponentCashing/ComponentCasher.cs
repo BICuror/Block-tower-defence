@@ -103,8 +103,6 @@ namespace Cashing
             FieldInfo[] fields = type.GetFields(BINDING_FLAGS)
                 .Where(member => Attribute.IsDefined(member, typeof(CachedAttribute))).ToArray();
             
-            Debug.Log($"Found {fields.Count()} fields from {type.Name}");
-            
             return fields;
         }
         

@@ -1,15 +1,72 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
 namespace Navigation
 {
     public sealed class NavigationMap
     {
-        public NavigationMap(int size)
+        private readonly List<NavigationMapLayer> _navigationLayers = new();
+        private Dictionary<Vector2Int, NavigationNode> _nodeMap = new();
+        
+        public void SetNode(Vector2Int position, NavigationNode node) => _nodeMap.Add(position, node);
+        public bool NodeExists(Vector2Int position) => _nodeMap.ContainsKey(position);
+        public NavigationNode GetNode(Vector2Int position) => _nodeMap[position];
+        public void ResetNodeMap() => _nodeMap.Clear();
+        
+        public void ClearAllLayers() => _navigationLayers.Clear();
+
+        public NavigationMapLayer CreateLayerAndAdd(Dictionary<Vector2Int, int> _nodeWeights, NavigationMapLayerType layerType)
         {
-            _nodeMap = new NavigationNode[size, size];
+            NavigationMapLayer layer = new(_nodeWeights, layerType);
+            
+            _navigationLayers.Add(layer);
+            
+            return layer;
         }
+        
+        public bool HasActiveLayerOfType(NavigationMapLayerType layerType) => _navigationLayers.Exists(layer => layer.LayerType == layerType && layer.IsEnabled);
 
-        private NavigationNode[,] _nodeMap;
+        public NavigationMapLayer GetLayer(Vector2Int position, NavigationMapLayerType type)
+        {
+            List<NavigationMapLayer> layers = _navigationLayers.FindAll(layer => layer.LayerType == type && layer.IsEnabled).ToList();
+            
+            NavigationMapLayer mostSuitableLayer = layers[0];
 
-        public void SetNode(int x, int y, NavigationNode node) => _nodeMap[x, y] = node;
-        public NavigationNode GetNode(int x, int y) => _nodeMap[x, y];
-    } 
+            layers.ForEach(layer =>
+            {
+                if (layer.GetNodeWeight(position) < mostSuitableLayer.GetNodeWeight(position))
+                {
+                    mostSuitableLayer = layer;
+                }
+            });
+
+            return mostSuitableLayer;
+        }
+    }
+
+    public sealed class NavigationMapLayer
+    {
+        public NavigationMapLayer(Dictionary<Vector2Int, int> nodeWeights, NavigationMapLayerType layerType)
+        {
+            _nodeWeights = nodeWeights;
+            _layerType = layerType;
+        }
+        
+        public void SetNavigationCondition(INavigationCondition condition) => _navigationCondition = condition;
+
+        private Dictionary<Vector2Int, int> _nodeWeights;
+        private NavigationMapLayerType _layerType;
+        private INavigationCondition _navigationCondition;
+        public int GetNodeWeight(Vector2Int nodePositon) => _nodeWeights[nodePositon];
+        public int GetNodeWeight(NavigationNode node) => _nodeWeights[node.RoundedPosition];
+        public NavigationMapLayerType LayerType => _layerType;
+        public bool IsEnabled => _navigationCondition == null || _navigationCondition.GetValue();
+    }
+
+    public enum NavigationMapLayerType 
+    { 
+        Main, 
+        AdditionalTask
+    }
 }

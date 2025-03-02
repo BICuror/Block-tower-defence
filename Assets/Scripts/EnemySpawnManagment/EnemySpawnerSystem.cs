@@ -1,9 +1,10 @@
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
-using Zenject;
 using WorldGeneration;
+using UnityEngine;
+using Zenject;
+using System;
+
 using Random = UnityEngine.Random;
 
 namespace Combat
@@ -142,14 +143,6 @@ namespace Combat
             }        
     
             AllEnemiesDied.Invoke();
-        }
-    
-        public void KillAllEnemies()
-        {
-            for (int i = 0; i < _spawners.Count; i++)
-            {
-                _spawners[i].KillAllEnemies();
-            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -9,6 +10,9 @@ public sealed class WaveStateMachine : MonoBehaviour
     [SerializeField] private List<WaveStateController> _stateControllersList;
     private Dictionary<WaveState, WaveStateController> _stateControllers = new();
     private WaveState _currentState;
+
+    public Action<WaveState> StateStarted;
+    public Action<WaveState> StateEnded;
 
     private void Awake() => Initialize();
     private void Initialize()
@@ -41,10 +45,12 @@ public sealed class WaveStateMachine : MonoBehaviour
     private async UniTask TransitionOutOfCurrentState()
     {
         await _stateControllers[_currentState].TransitionOutOfState();
+        StateEnded?.Invoke(_currentState);
     }
 
     private async UniTask TransitionIntoNewState()
     {
+        StateStarted?.Invoke(_currentState);
         await _stateControllers[_currentState].TransitionIntoState();
     } 
 }

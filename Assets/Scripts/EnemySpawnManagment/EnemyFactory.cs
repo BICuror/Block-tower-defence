@@ -1,4 +1,5 @@
 using UnityEngine;
+using Zenject;
 
 namespace Combat
 {
@@ -7,6 +8,7 @@ namespace Combat
         private static EnemyFactory _instance;
         public static EnemyFactory Instance => _instance;
         
+        [Inject] DiContainer _container;
         [SerializeField] private EnemyEntity _blankEnemy; 
     
         private ObjectPool<EnemyEntity> _enemyPool;
@@ -15,7 +17,8 @@ namespace Combat
         {
             _instance = this;
     
-            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10);
+            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10, true);
+            _container.Inject(_enemyPool);
         }
     
         public EnemyEntity CreateEnemy(EnemyData _enemyDataToCreate)

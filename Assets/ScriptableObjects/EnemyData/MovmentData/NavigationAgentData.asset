@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21b5f35f9a377144198f33c822b7f815, type: 3}
   m_Name: NavigationAgentData
   m_EditorClassIdentifier: 
-  _timePerBlock: 1
-  _verticalCurveMultiplyer: 1.4
+  _prefferedNavigationLayer: 1
+  _navigationNodePickerType: NavigationAgentStraightNodePicker
+  _verticalCurveMultiplyer: 1.5
   _verticalMovmentCurve:
     serializedVersion: 2
     m_Curve:
@@ -71,3 +72,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  AllNavigationNodePickerTypes:
+  - NavigationAgentStraightNodePicker
+  - NavigationNodePickerDiagonalPicker

@@ -21,7 +21,7 @@ public sealed class OptionalTaskGenerator : MonoBehaviour
     {
         List<Vector2Int> spawnerPositions = _enemyBiomeContainer.GetEnemyBiomesPositions();
         
-        _taskPositions = _additionalNavigationPointsPositionGenerator.GeneratePositions(spawnerPositions);
+        _taskPositions = _additionalNavigationPointsPositionGenerator.GeneratePositionsAndConnectToRoad(spawnerPositions);
 
         _conditions = _additionalNavigationPointsSpawner.GeneratePointsAndConditions(_taskPositions);
     }   

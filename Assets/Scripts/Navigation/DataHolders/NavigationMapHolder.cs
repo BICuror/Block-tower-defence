@@ -1,11 +1,14 @@
+using UnityEngine;
+
 namespace Navigation
 {
-    public sealed class NavigationMapHolder
+    public sealed class NavigationMapHolder : MonoBehaviour
     {
-        private NavigationMap _navigationMap;
-
+        public static NavigationMapHolder Instance;
+        
+        private NavigationMap _navigationMap = new();
         public NavigationMap Map => _navigationMap;
 
-        public void SetNavigationMap(NavigationMap newMap) => _navigationMap = newMap;
+        private void Awake() => Instance = this;
     }
 }

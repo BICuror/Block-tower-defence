@@ -1,8 +1,8 @@
 public enum SelectionType
 {
     Building,
+    GlobalEffect,
     BuildingUpgrade,
-    GlobalUpgrade,
     Effect,
     Curse
 }

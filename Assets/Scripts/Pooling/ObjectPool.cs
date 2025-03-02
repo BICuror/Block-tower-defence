@@ -1,18 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public sealed class ObjectPool<T>: MonoBehaviour where T: Component
 {   
+    [Inject] private DiContainer _dIContainer;
+    private bool _useDependencyInjection;
+    
     private List<T> _pool;
     private int _pointer;
     private T _prefab;
     private Transform _container;
 
-    public ObjectPool(T prefab, int poolSize)
+    public ObjectPool(T prefab, int poolSize, bool useDependencyInjection = false)
     {
+        _useDependencyInjection = useDependencyInjection;
+        
         _container = new GameObject().transform;
-
+        
         _container.gameObject.name = this.GetType().ToString();
 
         _prefab = prefab;
@@ -78,9 +84,12 @@ public sealed class ObjectPool<T>: MonoBehaviour where T: Component
 
     private T CreatePooledObject()
     {
-        _pool.Add(Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container));
+        T pooledObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
+        _pool.Add(pooledObject);
+        
+        if (_useDependencyInjection) _dIContainer.Inject(pooledObject);
     
-        return _pool[_pool.Count - 1];
+        return pooledObject;
     }
 
     public void DisableAllObjects()

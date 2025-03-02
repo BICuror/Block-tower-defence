@@ -6,6 +6,14 @@ using System.Linq;
 
 public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
 {
+     private readonly Vector2Int[] _checkDirections = new Vector2Int[4]
+     {
+         Vector2Int.up,
+         Vector2Int.down,
+         Vector2Int.right,
+         Vector2Int.left
+     };
+     
     [Inject] private RoadMapHolder _roadMapHolder;
     [SerializeField] private LayerSetting _solidObjectsLayer;
     [SerializeField] private int _initialRaduis;
@@ -13,15 +21,8 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
     private bool[,] _roadMap => _roadMapHolder.Map;
     private int _currentMapCenter;
     private int _currentMapSize;
-    private Vector2Int[] _checkDirections = new Vector2Int[4]
-    {
-        Vector2Int.up,
-        Vector2Int.down,
-        Vector2Int.right,
-        Vector2Int.left
-    };
 
-    public List<Vector2Int> GeneratePositions(List<Vector2Int> spawnerPositions)
+    public List<Vector2Int> GeneratePositionsAndConnectToRoad(List<Vector2Int> spawnerPositions)
     {
         _currentMapSize = _roadMap.GetLength(0);
         _currentMapCenter = (_roadMap.GetLength(0) - 1) / 2;
@@ -212,13 +213,7 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
         return false;
     }
 
-    private bool IsValidForSpawnSearch(int x, int y)
-    {
-        return IsValidPosition(x, y) && _roadMap[x, y];
-    }
+    private bool IsValidForSpawnSearch(int x, int y) => IsValidPosition(x, y) && _roadMap[x, y];
 
-    private bool IsValidPosition(int x, int y)
-    {
-        return x >= 0 && x < _currentMapSize && y >= 0 && y < _currentMapSize;
-    }
+    private bool IsValidPosition(int x, int y) => x >= 0 && x < _currentMapSize && y >= 0 && y < _currentMapSize;
 }

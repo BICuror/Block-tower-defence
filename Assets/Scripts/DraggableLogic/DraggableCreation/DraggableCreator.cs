@@ -4,10 +4,12 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using System;
+using Combat;
 using Random = UnityEngine.Random;
 
 public sealed class DraggableCreator : MonoBehaviour
 {
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private DiContainer _diContainer;
     
@@ -22,8 +24,9 @@ public sealed class DraggableCreator : MonoBehaviour
     {
         if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
 
-        DraggableObject createdDraggable = 
-            _diContainer.InstantiatePrefab(draggablePrefab, finalPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
+        DraggableObject createdDraggable = _diContainer.InstantiatePrefab(draggablePrefab, finalPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
+
+        TryToAddToGlobalBuildingContainer(createdDraggable);
         
         createdDraggable.gameObject.SetActive(false);
         
@@ -53,6 +56,14 @@ public sealed class DraggableCreator : MonoBehaviour
         await launcher.Launch(startPosition, finalPosition);
         
         Destroy(draggableBlocker);
+    }
+
+    private void TryToAddToGlobalBuildingContainer(DraggableObject draggableObject)
+    {
+        if (draggableObject.TryGetComponent(out BuildingEntity buildingEntity))
+        {
+            _globalBuildingContainer.Add(buildingEntity);
+        }
     }
 
     #region SpawnPositionPicking

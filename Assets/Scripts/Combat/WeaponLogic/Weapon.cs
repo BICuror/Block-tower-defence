@@ -1,74 +1,93 @@
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 namespace Combat
 {
-    public class Weapon<T> : MonoBehaviour where T: CombatEntity
+    public abstract class Weapon : MonoBehaviour
     {
-        [SerializeField] protected Collider Collider;
+        [SerializeField] protected Collider Collider; 
         [SerializeField] protected Rigidbody Rigidbody;
-        public Rigidbody GetRigidbody() => Rigidbody;
+        protected CombatEntity OwnerEntity;
+        
+        private CancellationTokenSource _cancellationTokenSource = new();
+        private float _lifetime;
+        private bool _lifetimeTrackActive;
+        
+        public Rigidbody RB => Rigidbody;
     
-        [SerializeField] private List<Effect> _effect;
-    
-        private float _contactDamage;
-    
-        public UnityEvent HitSomething;
-        public UnityEvent HitEntity;
-        public UnityEvent KilledEntity;
-    
-        private void OnEnable()
+        public Action HitEntity;
+        public Action KilledEntity;
+        
+        public void Initialize(CombatEntity ownerEntity, float lifetime)
         {
-            Collider.enabled = true;
-    
-            CancelInvoke();
-            Invoke("Disable", 5f);
+            OwnerEntity = ownerEntity;
+            _lifetime = lifetime;
+
+            OnInitialized();
         }
+
+        protected virtual void OnInitialized() {}
     
-        private void Disable() => gameObject.SetActive(false);
-    
-        private void OnTriggerEnter(Collider other)
+        protected void DamageEntity(float damageAmount, CombatEntity receivingEntity)
         {
-            Collider.enabled = false;
-    
-            if (other.gameObject.TryGetComponent(out T entity))
-            {
-                DamageEntity(entity, _contactDamage);
+            if (!receivingEntity.Health.IsAlive()) return;
             
-                HitEntity.Invoke();
-            }
-    
-            HitSomething.Invoke();
+            float multipliedAttackDamage = OwnerEntity.DamageModifierContainer.DealerContainer.Modify(damageAmount, receivingEntity);
+            
+            receivingEntity.Health.ReceiveEnemyDamage(multipliedAttackDamage, OwnerEntity);
+            
+            HitEntity?.Invoke();
+            
+            if (!receivingEntity.Health.IsAlive()) KilledEntity?.Invoke();
         }
-    
-        protected virtual bool IsSutableTarget(T target) => true;
-    
-        protected void DamageEntity(CombatEntity entity, float damageAmount)
+        
+        #region StateManagements
+
+        private void OnEnable() => Enable();
+        
+        public void Enable()
         {
-            entity.Health.ReceiveDamage(damageAmount);
-    
-            if (entity.Health.IsAlive())
-            {
-                if (_effect.Count > 0)
-                {
-                    EntityEffectManager effectManager = entity.gameObject.GetComponent<EntityEffectManager>();
-    
-                    for (int i = 0; i < _effect.Count; i++)
-                    {
-                        if (entity.Health.IsAlive()) effectManager.ApplyEffect(_effect[i]);
-                    }
-                }
-            }
-            else
-            {
-                KilledEntity.Invoke();
-            }
+            StopLifetimeTrack();
+            StartLifetimeTrack();
+            SetState(true);
         }
-    
-        public void SetEffects(List<Effect> effects) => _effect = effects;
-    
-        public void SetContactDamage(float newDamage) => _contactDamage = newDamage;
+        
+        protected void Disable()
+        {
+            StopLifetimeTrack();
+            SetState(false);
+        }
+        
+        private async UniTask StartLifetimeTrack()
+        {
+            _lifetimeTrackActive = true;
+            
+            try
+            { 
+                await UniTask.WaitForSeconds(_lifetime, cancellationToken: _cancellationTokenSource.Token); 
+                Disable();
+            }
+            catch (Exception e) { TaskUtility.LogAsync(e); }
+
+            _lifetimeTrackActive = false;
+        }
+
+        private void StopLifetimeTrack()
+        {
+            if (!_lifetimeTrackActive) return;
+            
+            _cancellationTokenSource.Cancel();
+            _cancellationTokenSource = new();
+            _lifetimeTrackActive = false;
+        }
+        
+        private void SetState(bool state)
+        {
+            Collider.enabled = state;
+            gameObject.SetActive(state);
+        }
+        #endregion
     }
 }
-

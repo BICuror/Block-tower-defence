@@ -10,14 +10,25 @@ namespace Combat
         public Action<CombatEntity> EntityPickedUp;
         public Action<CombatEntity> EntityPlaced;
 
-        private void Start()
+        protected void Awake()
         {
+            base.Awake();
+            
             PickedUp += OnEntityPickedUp;
             Placed += OnEntityPlaced;
         }
-        
-        private void OnEntityPickedUp() => EntityPickedUp?.Invoke(_ownerEntity);
-        private void OnEntityPlaced() => EntityPlaced?.Invoke(_ownerEntity);
+
+        private void OnEntityPickedUp()
+        {
+            _ownerEntity.DamageModifierContainer.ReciverContainer.Add<InvincibilityDamageModifier>();
+            EntityPickedUp?.Invoke(_ownerEntity);
+        }
+
+        private void OnEntityPlaced()
+        {
+            _ownerEntity.DamageModifierContainer.ReciverContainer.Remove<InvincibilityDamageModifier>();
+            EntityPlaced?.Invoke(_ownerEntity);
+        }
 
         protected void OnDestroy()
         {

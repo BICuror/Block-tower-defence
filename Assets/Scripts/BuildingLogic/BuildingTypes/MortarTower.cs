@@ -1,47 +1,34 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Cashing;
 using Combat;
 
 public sealed class MortarTower : DefaultCombatTaskConditionProvider
 {
-    /*[Header("StatSettings")]
-    [Range(0f, 1f)] [SerializeField] private float _explotionDamageMultiplyer;
-    [SerializeField] private float _explotionRadius;
-    public float ExplotionDamage => Damage * _explotionDamageMultiplyer;
-
-    [Header("Links")]
-    [SerializeField] private EnemyAreaScaner _enemyAreaScaner;
-    [SerializeField] private MortarGrenade _grenadePrefab;
-    [SerializeField] private ApplyEffectContainer _applyEffectContainer;
-
-    private ObjectPool<MortarGrenade> _grenadeObjectPool; 
+    [SerializeField] private MortarProjectile projectilePrefab;
+    [Cached] private CombatEntity _ownerEntity;
+    [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    private TravelTime _travelTime;
+    
+    private WeaponPool<MortarProjectile> _grenadeObjectPool; 
 
     private void Start()
     {   
-        _grenadeObjectPool = new ObjectPool<MortarGrenade>(_grenadePrefab, 2);
+        base.Start();
+        _grenadeObjectPool = new WeaponPool<MortarProjectile>(projectilePrefab, 2, _ownerEntity, 10);
 
-        TaskCycle buildingTaskCycle = GetComponent<TaskCycle>();
-
-        buildingTaskCycle.ShouldWorkDelegate = ShouldWorkDelegate;
-
-        buildingTaskCycle.TaskPerformed.AddListener(Shoot);
+        _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Shoot;
+        _travelTime = _ownerEntity.StatContainer.Get<TravelTime>();
     }
-
-    private bool ShouldWorkDelegate() => _enemyAreaScaner.Empty() == false;
 
     private void Shoot()
     {
-        MortarGrenade currentGrenade = _grenadeObjectPool.GetNextPooledObject();
+        MortarProjectile currentProjectile = _grenadeObjectPool.GetPooledWeapon();
         
-        currentGrenade.transform.position = transform.position;
+        currentProjectile.transform.position = transform.position - new Vector3(0, 0.5f, 0);
 
-        currentGrenade.SetContactDamage(Damage);
-        currentGrenade.SetExplotionDamage(Damage * _explotionDamageMultiplyer);
-        currentGrenade.SetExplotionRaduis(_explotionRadius);
-
-        currentGrenade.SetEffects(_applyEffectContainer.GetApplyEffects());
-
-        currentGrenade.Launch(_enemyAreaScaner.GetRandomEnemy().transform.position);
+        currentProjectile.TravelToPoint(_enemyAreaScaner.RandomItem.transform.position, _travelTime.Value).Forget();
     }
 
-    private void OnDestroy() => _grenadeObjectPool.DestroyPool();*/
+    private void OnDestroy() => _grenadeObjectPool.DestroyPool();
 }

@@ -1,37 +1,47 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Combat
 {
-    public class Explotion : Weapon<CombatEntity>
+    public sealed class Explotion : Weapon
     {
         [SerializeField] private LayerSetting _enemyLayerSettings;
-    
-        [SerializeField] private float _explotionRadius;
-        public void SetExplotionRaduis(float value) => _explotionRadius = value;
-    
-        [SerializeField] private float _explotionDamage;
-        public void SetExplotionDamage(float value) => _explotionDamage = value;
-    
         [SerializeField] private VisualEffectHandler _explotionEffect;
-    
-        public void Explode()
+        [SerializeField] private float _defaultRadius = 1f;
+        
+        private ExplotionDamage _explotionDamage;
+        private ExplotionRadius _explotionRadius;
+        
+        public async UniTask Explode()
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _explotionRadius, _enemyLayerSettings.GetLayerMask());
-    
-            foreach (var t in hitEnemies)
-            {
-                DamageEntity(t.transform.gameObject.GetComponent<CombatEntity>(), _explotionDamage);
-            }
+            _explotionRadius = OwnerEntity.StatContainer.Get<ExplotionRadius>();
+            _explotionDamage = OwnerEntity.StatContainer.Get<ExplotionDamage>();
+
+            UpdateExplotionRadius(_explotionRadius.Value);
             
-            Instantiate(_explotionEffect, transform.position, Quaternion.identity).Play();
-    
-            Destroy(gameObject);
+            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _explotionRadius.Value, _enemyLayerSettings.GetLayerMask());
+
+            for (int i = 0; i < hitEnemies.Length; i++)
+            {
+                DamageEntity(_explotionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
+            }
+
+            await _explotionEffect.Play();
         }
-    
-        public void AwaitExplode(float time)
+
+        private void UpdateExplotionRadius(float explotionRaduis)
         {
-            Invoke("Explode", time);
+            float scale = _defaultRadius * explotionRaduis;
+            
+            _explotionEffect.transform.localScale = new Vector3(scale, scale, scale);
         }
+        
+#if UNITY_EDITOR        
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawSphere(transform.position, _defaultRadius);
+        }
+#endif
     }
 }

@@ -7,7 +7,6 @@ namespace Cashing
     public sealed class CachedComponentsContainer
     {
         private readonly Dictionary<Type, Component> _cachedComponents = new();
-        // TODO fix to be more reasonable
         private readonly Dictionary<Type, bool> _hasComponent = new();
         
         private GameObject _ownerObject;

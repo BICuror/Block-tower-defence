@@ -48,14 +48,6 @@ namespace Combat
         public async UniTask SpawnGroup()
         {
             _enemySpawnerInfoDisplayer.HideSpawnInfo();
-
-            for (int i = 0; i < 500; i++)
-            {
-                SpawnEnemyMut();
-                
-                await UniTask.WaitForSeconds(0.01f);
-                
-            }
             
             while (_enemiesToSpawn.Count > 0)
             {
@@ -64,20 +56,7 @@ namespace Combat
                 await UniTask.WaitForSeconds(SPAWN_DELAY);
             }
         }
-
-        private void SpawnEnemyMut()
-        {
-            EnemyEntity spawnedEnemy = EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0]);
-    
-            _spawnedEnemies.Add(spawnedEnemy);
-    
-            spawnedEnemy.transform.position = transform.position;
-    
-            spawnedEnemy.Health.EnemyDied += RemoveEnemy;
-    
-            EnemySpawned.Invoke(spawnedEnemy);
-        }
-
+        
         private void SpawnEnemy()
         {
             EnemyEntity spawnedEnemy = EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0]);
@@ -89,6 +68,7 @@ namespace Combat
             spawnedEnemy.transform.position = transform.position;
     
             spawnedEnemy.Health.EnemyDied += RemoveEnemy;
+            spawnedEnemy.ComponentsContainer.Get<EnemyBootstrap>().StartNavigation();
     
             EnemySpawned.Invoke(spawnedEnemy);
         }

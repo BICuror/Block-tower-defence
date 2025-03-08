@@ -1,6 +1,6 @@
-using System;
-using Cashing;
 using UnityEngine;
+using Cashing;
+using System;
 
 namespace Combat
 {
@@ -26,9 +26,14 @@ namespace Combat
         public bool IsFullHp() => _currentHp == _maxHpStat.Value;
 
         #region DamageRecivement 
-        public void ReceivePercentDamage(float percent) => ReceiveDamage(percent * _maxHpStat.Value);
-        public void ReceiveDamage(float damage)
+        public void ReceiveEnemyDamage(float damage, CombatEntity damageDealer) => ReceiveDamage(damage, damageDealer);
+        public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage, null);
+        private void ReceiveDamage(float damage, CombatEntity damageDealer)
         {
+            damage = _entity.DamageModifierContainer.ReciverContainer.Modify(damage, damageDealer);
+            
+            if (damage == 0 || !IsAlive()) return;
+            
             _currentHp -= damage;
     
             if (_currentHp <= 0) Die();
@@ -37,9 +42,10 @@ namespace Combat
         #endregion
         
         #region HealRecivement
-        public void ReceivePercentHeal(float percent) => ReceiveHeal(_maxHpStat.Value * percent);
         public void ReceiveHeal(float heal)
         {
+            if (heal == 0) return;
+            
             if (_currentHp + heal <= _maxHpStat.Value) _currentHp += heal;
             else _currentHp = _maxHpStat.Value;
             

@@ -7,7 +7,7 @@ public sealed class AttackStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
     [Inject] private RoadNodeGenerator _roadNodeGenerator;
-    [Inject] private EnemySpawnerSystem _enemySpawnerSystem;
+    [Inject] private EnemySpawnSystem _enemySpawnSystem;
     [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
 
     public override WaveState GetControlledState() => WaveState.Attack;
@@ -23,6 +23,6 @@ public sealed class AttackStateController : WaveStateController
 
     protected override void OnEnterStateCompleted()
     {
-        _enemySpawnerSystem.StartWave();
+        _enemySpawnSystem.StartWave();
     }
 }

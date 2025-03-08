@@ -135,7 +135,8 @@ namespace Navigation
             _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
         }
 
-        
+        private void OnDisable() => StopMovement();
+
         private List<Vector2Int> _checkDirections = new List<Vector2Int>()
         {
             Vector2Int.up,

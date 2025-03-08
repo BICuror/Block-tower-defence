@@ -33,7 +33,6 @@ namespace Combat
             _enemyHealth.Initialize();
     
             SetVisualData(enemyDataToSet);
-            Enable();
             //CreateSpecialObject(enemyDataToSet);
         }
     
@@ -54,7 +53,7 @@ namespace Combat
             //}
         }
 
-        private async void Enable() 
+        public async void StartNavigation() 
         {
             _animator.Play("Entry");
 

@@ -19,8 +19,10 @@ public sealed class BuildingDraggable : DraggableEntity
 
     public bool IsBuilt => _isBuilt;
 
-    private void Start()
-    {
+    private void Awake()
+    {;
+        base.Awake();
+        
         Placed += StartBuildingProcess;
         PickedUp += PickUpBuilding;
         PickedUp += StopBuildingProcess;

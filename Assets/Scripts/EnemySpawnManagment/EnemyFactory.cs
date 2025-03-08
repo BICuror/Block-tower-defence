@@ -17,7 +17,7 @@ namespace Combat
         {
             _instance = this;
     
-            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10, true);
+            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10, _container);
             _container.Inject(_enemyPool);
         }
     

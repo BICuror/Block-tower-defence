@@ -212,16 +212,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collider: {fileID: 4882402984552686305}
   Rigidbody: {fileID: 5705806797472689379}
-  _effect: []
-  HitSomething:
-    m_PersistentCalls:
-      m_Calls: []
-  HitEntity:
-    m_PersistentCalls:
-      m_Calls: []
-  KilledEntity:
-    m_PersistentCalls:
-      m_Calls: []
   _visualEffectHandler: {fileID: 2039955913314253843}
 --- !u!114 &2039955913314253843
 MonoBehaviour:
@@ -235,10 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f2d584b7158be448da997d8defc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectPlayed:
-    m_PersistentCalls:
-      m_Calls: []
-  _stopAction: 0
+  _stopAction: 2
   _visualEffect: {fileID: 4346660714281236764}
 --- !u!1 &4968782746188503327
 GameObject:

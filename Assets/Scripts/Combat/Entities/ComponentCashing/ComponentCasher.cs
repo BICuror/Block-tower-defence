@@ -119,7 +119,6 @@ namespace Cashing
                 {
                     throw new Exception($"Failed to resolve component {type.Name} for {component.GetType().Name}");
                 }
-                
             }
         }
 

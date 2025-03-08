@@ -6,7 +6,7 @@ namespace Combat
     {
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
     
-        private void Awake() => HitSomething.AddListener(OnHitSomehing);
+        private void Awake() => HitEntity += OnHitSomehing;
     
         private void OnHitSomehing()
         {

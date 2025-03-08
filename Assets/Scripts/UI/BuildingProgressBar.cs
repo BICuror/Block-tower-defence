@@ -29,18 +29,17 @@ public sealed class BuildingProgressBar : Shaker
     private void StartFillingBar()
     {
         gameObject.SetActive(true);
-        
+
         Shake();
 
-        _currentTween = DOVirtual.Float(1f, 0f, _buildTime.Value, SetPropertyBlock).SetEase(Ease.Linear)
-            .OnComplete(StopFillingBar);
+        _currentTween = DOVirtual.Float(1f, 0f, _buildTime.Value, SetPropertyBlock).SetEase(Ease.Linear).OnComplete(StopFillingBar);
     }
 
     private void StopFillingBar()
     {
-        if (_currentTween != null && _currentTween.IsPlaying()) _currentTween.Kill();
+        if (_currentTween != null && _currentTween.IsPlaying()) _currentTween.Complete();
 
-        transform.DOKill();
+        transform.DOComplete();
 
         gameObject.SetActive(false);
     }

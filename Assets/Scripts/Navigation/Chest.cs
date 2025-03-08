@@ -21,4 +21,9 @@ public sealed class Chest : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        _waveStateController.StateEnded -= TryToCreateItem;
+    }
 }

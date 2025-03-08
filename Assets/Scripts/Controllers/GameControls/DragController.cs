@@ -15,7 +15,6 @@ public sealed class DragController : MonoBehaviour
 
     [Header("DragSettings")]
     [SerializeField] private float _placingHeight;
-    [SerializeField] private float _dragSpeed;
 
     [Header("Links")]
     [SerializeField] private DraggableConnector _draggableConnector;
@@ -76,7 +75,7 @@ public sealed class DragController : MonoBehaviour
 
             _currentIDraggable.PickUp();
 
-            _draggableConnector.ConnectDraggable(_currentDraggableGameObject);
+            _draggableConnector.PickUpDraggable(_currentDraggableGameObject);
 
             if (CanBePlacedAt(GetPlacmentPosition(_lastValuablePosition)) == false)
             {
@@ -106,25 +105,17 @@ public sealed class DragController : MonoBehaviour
         MoveDraggable();
     }
 
-    private void MoveDraggable()
-    {
-        float distance = Vector3.Distance(_lastValuablePosition, _draggableConnector.transform.position);
-
-        _draggableConnector.transform.position = Vector3.MoveTowards(_draggableConnector.transform.position, _lastValuablePosition, _dragSpeed * distance);        
-    }
+    private void MoveDraggable() => _draggableConnector.MoveTowardsPosition(_lastValuablePosition);
 
     public void DropDraggable(Vector2 mousePosition)
     {
         TryDragTo(mousePosition);
-
-        _draggableConnector.DisconnectDraggable(_currentDraggableGameObject.gameObject);
-
-        _draggableConnector.StartPlacementAnimation(_currentDraggableGameObject, GetLastSnappedGridPosition());
-
+        
         DroppedObject.Invoke(_currentDraggableGameObject);
 
-        _currentIDraggable = null;
+        _draggableConnector.PlaceDraggable(_currentDraggableGameObject, _currentIDraggable, GetLastSnappedGridPosition());
 
+        _currentIDraggable = null;
         _currentDraggableGameObject = null;
     }
 

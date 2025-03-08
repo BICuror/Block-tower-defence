@@ -31,7 +31,6 @@ public sealed class AreaVisualisation : MonoBehaviour
     {
         if (draggable.TryGetComponent<AreaManager>(out AreaManager manager))
         { 
-            _draggableConnector.StopMovingCoroutine();
 
             ActivateVisualisation(draggable);
             

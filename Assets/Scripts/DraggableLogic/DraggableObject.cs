@@ -7,10 +7,12 @@ using Combat;
 [RequireComponent(typeof(Collider))]
 
 public class DraggableObject : MonoBehaviour, IDraggable
-{  
-    [SerializeField] private Collider _collider;
+{
+    [SerializeField] private DragAnimationObject _dragAnimationObject;
     [SerializeField] private PlacementModule _placementRequirements;
     [SerializeField] private bool _isDraggable = true;
+    private Collider _collider;
+    
     protected DraggableState DraggableState;
 
     public Action PickedUp;
@@ -18,6 +20,11 @@ public class DraggableObject : MonoBehaviour, IDraggable
     
     public Action<DraggableObject> DraggablePickedUp; 
     public Action<DraggableObject> DraggablePlaced;
+
+    protected void Awake()
+    {
+        _collider = GetComponent<Collider>();    
+    }
     
     void IDraggable.PickUp()
     {
@@ -27,6 +34,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
         PickedUp?.Invoke();
         DraggablePickedUp?.Invoke(this);
     }
+    
     void IDraggable.Place() 
     { 
         DraggableState = DraggableState.Placed;
@@ -35,12 +43,16 @@ public class DraggableObject : MonoBehaviour, IDraggable
         Placed?.Invoke();
         DraggablePlaced?.Invoke(this);
     }
+    
     bool IDraggable.IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
     
+    DragAnimationObject IDraggable.GetDragAnimationObject() => _dragAnimationObject;
+    
     public void SetDraggableState(bool state) => _isDraggable = state;
+    
     public bool IsPlaced() => DraggableState == DraggableState.Placed;
     
-    public PlacementModule GetPlacementModule() => _placementRequirements;
+    public PlacementModule GetPlacementModule() => _placementRequirements; 
 }
 
 public enum DraggableState

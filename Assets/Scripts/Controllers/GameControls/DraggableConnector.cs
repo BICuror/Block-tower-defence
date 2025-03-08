@@ -1,119 +1,96 @@
-using UnityEngine;
-using System.Collections;
-using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
+using UnityEngine;
+using DG.Tweening;
 
 public sealed class DraggableConnector : MonoBehaviour
 {
     [Header("JointSettings")]
     [SerializeField] private Joint _joint;
-    [SerializeField] private Vector3 _distance;
+    [SerializeField] private float _dragSpeed;
 
     [Header("PlacementSettings")]
     public UnityEvent<GameObject> PlacedDraggable;
-    [SerializeField] private int _placementFramesDuration;
-    private Coroutine _transformCoroutine;
-
-    private Vector3 rotStep;
-
-    public void StartPlacementAnimation(GameObject objectToPlace, Vector3 finalPosition)
+    [SerializeField] private float _placementDuration;
+    
+    public async UniTask PlaceDraggable(GameObject draggableObject, IDraggable draggable, Vector3 finalPosition)
     {
-        StartCoroutine(PlaceObject(objectToPlace, finalPosition));
+        DragAnimationObject dragAnimationObject = draggable.GetDragAnimationObject();
+        
+        dragAnimationObject.DisconnectFromJoint(_joint);
+        
+        await UniTask.WhenAll(MoveToFinalPosition(finalPosition), PlaceObject(dragAnimationObject, finalPosition));
 
-        _transformCoroutine = StartCoroutine(TransformMoving(finalPosition));
+        draggableObject.transform.SetParent(null);
+        draggableObject.transform.position = finalPosition;
+        
+        dragAnimationObject.SetInitialParent();
+        
+        draggable.Place();
+        PlacedDraggable.Invoke(draggableObject);
     }
 
-    private IEnumerator PlaceObject(GameObject objectToPlace, Vector3 finalPosition)
+    private async UniTask PlaceObject(DragAnimationObject dragAnimationObject, Vector3 finalPosition)
     {
-        YieldInstruction instruction = new WaitForFixedUpdate();
+        Vector3 initialPosition = dragAnimationObject.transform.position;
 
-        Vector3 initialPosition = objectToPlace.transform.position;
+        Vector3 initialRotation = dragAnimationObject.transform.rotation.eulerAngles;
 
-        Vector3 initialRotation = objectToPlace.transform.rotation.eulerAngles;
+        Vector3 finalRotation = new Vector3(0f, GetFinalYRotation(dragAnimationObject.transform.rotation.eulerAngles.y), 0f);
 
-        Vector3 finalRotation = new Vector3(0f, GetFinalYRotation(objectToPlace.transform.rotation.eulerAngles.y), 0f);
+        finalPosition += dragAnimationObject.InitialLocalPosition;
+        
+        await DOVirtual.Float(0f, 1f, _placementDuration + 0.05f, Evaluate).AsyncWaitForCompletion();
+        
+        Evaluate(1f);
 
-        for(float i = 0; i <= _placementFramesDuration; i++)
+        await UniTask.Yield();
+
+        void Evaluate(float value)
         {
-            yield return instruction;
-
-            float evaluatedValue = i / (float)_placementFramesDuration; 
-            
             float evaluatedX;
-            if (initialRotation.x > 180) evaluatedX = Mathf.Lerp(initialRotation.x, 360f, evaluatedValue);
-            else evaluatedX = Mathf.Lerp(initialRotation.x, 0, evaluatedValue);
-
-            float evaluatedY = Mathf.Lerp(initialRotation.y, finalRotation.y, evaluatedValue);
-            float evaluatedZ;
-            if (initialRotation.z > 180) evaluatedZ = Mathf.Lerp(initialRotation.z, 360f, evaluatedValue);
-            else evaluatedZ = Mathf.Lerp(initialRotation.z, 0, evaluatedValue);
-
-            objectToPlace.transform.position = Vector3.Lerp(initialPosition, finalPosition, evaluatedValue);
-
-            objectToPlace.transform.rotation = Quaternion.Euler(new Vector3(evaluatedX, evaluatedY, evaluatedZ));
-        }
-
-        PlaceDraggable(objectToPlace);
-    }
-
-    public void StopMovingCoroutine()
-    {
-        if (_transformCoroutine != null) StopCoroutine(_transformCoroutine);
-    }
-
-    private IEnumerator TransformMoving(Vector3 finalPosition)
-    {
-        YieldInstruction instruction = new WaitForFixedUpdate();
-
-        Vector3 connectorInitialPosition = transform.position;
-
-        for(float i = 0; i <= _placementFramesDuration; i++)
-        {
-            yield return instruction;
-
-            float evaluatedValue = i / (float)_placementFramesDuration; 
-
-            transform.position = Vector3.Lerp(connectorInitialPosition, finalPosition, evaluatedValue);
+            if (initialRotation.x > 180) evaluatedX = Mathf.Lerp(initialRotation.x, 360f, value);
+            else evaluatedX = Mathf.Lerp(initialRotation.x, 0, value);
+            
+            float evaluatedY = Mathf.Lerp(initialRotation.y, finalRotation.y, value); 
+            
+            float evaluatedZ; 
+            if (initialRotation.z > 180) evaluatedZ = Mathf.Lerp(initialRotation.z, 360f, value);
+            else evaluatedZ = Mathf.Lerp(initialRotation.z, 0, value);
+            
+            dragAnimationObject.transform.position = Vector3.Lerp(initialPosition, finalPosition, value);
+            dragAnimationObject.transform.rotation = Quaternion.Euler(new Vector3(evaluatedX, evaluatedY, evaluatedZ));
         }
     }
 
+    private async UniTask MoveToFinalPosition(Vector3 finalPosition)
+    {
+        await DOVirtual.Float(0f, 1f, _placementDuration, (value) => MoveTowardsPosition(finalPosition)).AsyncWaitForCompletion();
+    }
+    
     private float GetFinalYRotation(float currentRotation)
     {
         if (currentRotation >= 45 && currentRotation < 135) return 90f;
         if (currentRotation >= 135 && currentRotation < 225) return 180f;
         if (currentRotation >= 225 && currentRotation < 315) return 270f;
-        if (currentRotation >= 315 && currentRotation <= 360) return 360f;
-        else return 0f;
+        if (currentRotation >= 315 && currentRotation <= 360) return 360f; 
+        return 0f;
+    }
+    
+    public void PickUpDraggable(GameObject draggableObject)
+    {
+        IDraggable draggable = draggableObject.GetComponent<IDraggable>();
+        
+        draggable.GetDragAnimationObject().ConnectToJoint(_joint);
+        
+        draggableObject.transform.SetParent(transform); 
+        draggableObject.transform.localPosition = Vector3.zero;
     }
 
-    private void PlaceDraggable(GameObject draggable)
+    public void MoveTowardsPosition(Vector3 position)
     {
-        draggable.GetComponent<IDraggable>().Place();
+        float distance = Vector3.Distance(position, transform.position);
 
-        PlacedDraggable.Invoke(draggable);
+        transform.position = Vector3.MoveTowards(transform.position, position, _dragSpeed * distance);   
     }
-
-    public void ConnectDraggable(GameObject draggable)
-    {
-        draggable.transform.position = _joint.transform.position - _distance;
-
-        Rigidbody rigidbody = draggable.GetComponent<Rigidbody>();
-
-        rigidbody.useGravity = true;
-
-        rigidbody.constraints = RigidbodyConstraints.None; 
-
-        _joint.connectedBody = rigidbody;
-    } 
-
-    public void DisconnectDraggable(GameObject draggable)
-    {
-        Rigidbody rigidbody = draggable.GetComponent<Rigidbody>();
-
-        rigidbody.useGravity = false;
-
-        rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;;
-
-        _joint.connectedBody = null;
-    } 
 }

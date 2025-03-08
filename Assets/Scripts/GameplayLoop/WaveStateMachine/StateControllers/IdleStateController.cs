@@ -7,7 +7,7 @@ using Combat;
 public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
-    [Inject] private EnemySpawnerSystem _enemySpawnerSystem;
+    [Inject] private EnemySpawnSystem _enemySpawnSystem;
     [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
     [Inject] private RoadGenerator _roadGenerator;
     [Inject] private EnemyBiomeGenerator _enemyBiomeGenerator;
@@ -33,7 +33,7 @@ public sealed class IdleStateController : WaveStateController
         _roadGenerator.GenerateRoads();
         _enemyBiomesContainer.RegenerateBiomes();
         _enemyBiomesContainer.GenerateBiomesDecorations();
-        _enemySpawnerSystem.GenerateEnemyGroups();
+        _enemySpawnSystem.GenerateEnemyGroups();
 
         _enemyBiomesContainer.EnableBiomesTerrain(TransitionInDuration);
         _roadAnimator.StartAppearing(TransitionInDuration);

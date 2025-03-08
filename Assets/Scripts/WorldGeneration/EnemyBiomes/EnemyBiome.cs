@@ -16,7 +16,7 @@ namespace WorldGeneration
         [Inject] private EnemyBiomeMapGenerator _enemyBiomeMapGenerator;
         [Inject] private EnemyBiomeMapToGridConverter _enemyBiomeMapToGridConverter;
         [Inject] private OverlappingIslandDecorationsDisabler _overlappingIslandDecorationsDisabler;
-        [Inject] private EnemySpawnerSystem _enemySpawnerSystem;
+        [Inject] private EnemySpawnSystem _enemySpawnSystem;
         [Inject] private SpawnerRotator _spawnerRotator;
 
         [SerializeField] private TerrainSetter _terrainSetter;
@@ -35,7 +35,7 @@ namespace WorldGeneration
 
         private void Awake()
         {
-            _enemySpawnerSystem.AddSpawner(_enemySpawner);
+            _enemySpawnSystem.AddSpawner(_enemySpawner);
         }
 
         public void SetSpawnerNodeIndex(Vector2Int spawnerNodeIndex) => _spawnerNodeIndex = spawnerNodeIndex;
@@ -109,7 +109,7 @@ namespace WorldGeneration
 
         public void Destroy()
         {
-            _enemySpawnerSystem.RemoveSpawner(_enemySpawner);
+            _enemySpawnSystem.RemoveSpawner(_enemySpawner);
 
             Destroy(gameObject);
         }   

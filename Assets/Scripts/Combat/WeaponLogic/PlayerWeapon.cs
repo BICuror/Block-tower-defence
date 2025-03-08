@@ -1,4 +1,4 @@
 namespace Combat
 {
-    public class PlayerWeapon : Weapon<EnemyEntity> {}
+    public class PlayerWeapon : Weapon {}
 }

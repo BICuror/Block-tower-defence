@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 6707548566879710615}
   - component: {fileID: 5723087215702841355}
   - component: {fileID: 3694798262115348637}
+  - component: {fileID: 2968728104192368267}
   m_Layer: 11
   m_Name: MortarGrenade
   m_TagString: Untagged
@@ -597,10 +598,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2f2d584b7158be448da997d8defc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EffectPlayed:
-    m_PersistentCalls:
-      m_Calls: []
-  _stopAction: 0
+  _stopAction: 2
   _visualEffect: {fileID: 8132827000989462767}
 --- !u!114 &3694798262115348637
 MonoBehaviour:
@@ -616,28 +614,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Collider: {fileID: 1570403129830054135}
   Rigidbody: {fileID: 1728924383626925355}
-  _effect: []
-  HitSomething:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3672278026556080660}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  HitEntity:
-    m_PersistentCalls:
-      m_Calls: []
-  KilledEntity:
-    m_PersistentCalls:
-      m_Calls: []
+  _explotion: {fileID: 2968728104192368267}
   _enemyLayerSettings: {fileID: 11400000, guid: 06d08c6367264cc44a27bffbfedcbae9, type: 2}
   _heightCurve:
     serializedVersion: 2
@@ -668,46 +645,27 @@ MonoBehaviour:
   _visualEffectHandler: {fileID: 5723087215702841355}
   Enabled:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3672278026556080660}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   ReachedEnd:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3672278026556080660}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   Exploded:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5236044634505822894}
-        m_TargetAssemblyTypeName: SoundEffectPlayer, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &2968728104192368267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8934679735853998293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2064e2a1408c44b8349d96b54a970c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Collider: {fileID: 1570403129830054135}
+  Rigidbody: {fileID: 1728924383626925355}
+  _enemyLayerSettings: {fileID: 11400000, guid: 06d08c6367264cc44a27bffbfedcbae9, type: 2}
+  _explotionEffect: {fileID: 5723087215702841355}
+  _defaultRadius: 1

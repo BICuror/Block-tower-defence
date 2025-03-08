@@ -12,7 +12,7 @@ namespace Combat
     
         public override void ApplyTickEffectToEntity(EntityComponentsContainer componentsContainer)
         {
-            componentsContainer.Health.ReceivePercentHeal(_healStrength);
+            //componentsContainer.Health.ReceivePercentHeal(_healStrength);
         }
     }
 }

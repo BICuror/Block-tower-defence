@@ -1,13 +1,10 @@
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 using UnityEngine.VFX;
-using UnityEngine.Events;
+using UnityEngine;
 
 public sealed class VisualEffectHandler : MonoBehaviour
 {
-    public UnityEvent EffectPlayed;
-
     [SerializeField] private StopActionType _stopAction;
-
     [SerializeField] private VisualEffect _visualEffect;
 
     private float _disableTime;
@@ -17,27 +14,33 @@ public sealed class VisualEffectHandler : MonoBehaviour
         _disableTime = _visualEffect.GetFloat("MaxLifeTime"); 
     }
 
-    public void Play()
+    public async UniTask Play()
     {
         _visualEffect.gameObject.SetActive(true);
 
-        EffectPlayed.Invoke();
-
+        await UniTask.WaitForSeconds(_disableTime);
+        
         switch(_stopAction)
         {
-            case StopActionType.Disable: Invoke("DisableThisObject", _disableTime); break;
-            case StopActionType.Destroy: Invoke("DestroyThisObject", _disableTime); break;
+            case StopActionType.Disable: Disable(); break;
+            case StopActionType.Destroy: Destroy(); break;
+            case StopActionType.DisableEffect: DisableEffect(); break;
         }    
     }
 
-    private void DisableThisObject()
+    private void DisableEffect()
+    {
+        _visualEffect.gameObject.SetActive(false);
+    }
+
+    private void Disable()
     {
         _visualEffect.gameObject.SetActive(false);
 
         gameObject.SetActive(false);
     }
 
-    private void DestroyThisObject()
+    private void Destroy()
     {
         Destroy(gameObject);
     }
@@ -45,6 +48,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
     private enum StopActionType
     {
         Disable, 
-        Destroy
+        Destroy,
+        DisableEffect
     }
 }

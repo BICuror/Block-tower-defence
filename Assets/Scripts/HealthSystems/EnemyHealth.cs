@@ -15,7 +15,7 @@ namespace Combat
         {
             if (other.gameObject.TryGetComponent(out BuildingHealth buildingHealth))
             {
-                buildingHealth.ReceiveDamage(_attackDamage);
+                buildingHealth.ReceiveEnemyDamage(_attackDamage, _enemyEntity);
     
                 Die();
             }    

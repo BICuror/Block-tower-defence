@@ -7,13 +7,13 @@ namespace Combat
     
     public abstract class CombatEntity : EntityComponentCacher
     {
+        private EntityDamageModifierContainer _damageModifierContainer = new();
         [Cached] private EntityHealth _entityHealth;
         [Cached] private StatContainer _statContainer;
-        private EntityEffectManager _entityEffectManager;
 
         public CachedComponentsContainer ComponentsContainer => CachedComponentsContainer;
         public StatContainer StatContainer => _statContainer;
         public IHealth Health => CachedComponentsContainer.Get<EntityHealth>();
-        public EntityEffectManager EntityEffectManager => CachedComponentsContainer.Get<EntityEffectManager>();
+        public EntityDamageModifierContainer DamageModifierContainer => _damageModifierContainer;
     }
 }

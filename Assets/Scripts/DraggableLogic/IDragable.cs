@@ -5,4 +5,5 @@ public interface IDraggable
 
     bool IsDraggable();   
     PlacementModule GetPlacementModule();
+    DragAnimationObject GetDragAnimationObject();
 }

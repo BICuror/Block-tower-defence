@@ -15,7 +15,7 @@ public sealed class StatData : ScriptableObject
 
         if (statType == null)
         {
-            Debug.LogError("Wrong stat name");
+            Debug.LogError($"Wrong stat name {_statType}");
         }
     }
 }

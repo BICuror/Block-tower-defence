@@ -1,28 +1,28 @@
-using System.Collections;
+using System.Runtime.InteropServices;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public sealed class ObjectPool<T>: MonoBehaviour where T: Component
-{   
-    [Inject] private DiContainer _dIContainer;
-    private bool _useDependencyInjection;
-    
+public sealed class ObjectPool<T> : MonoBehaviour where T: Component
+{
     private List<T> _pool;
     private int _pointer;
     private T _prefab;
     private Transform _container;
-
-    public ObjectPool(T prefab, int poolSize, bool useDependencyInjection = false)
+    
+    private OnObjectInitialized _onObjectInitialized;
+    private DiContainer _diContainer;
+    
+    public ObjectPool(T prefab, int poolSize, [Optional]DiContainer diContainer, [Optional]OnObjectInitialized onObjectInitialized)
     {
-        _useDependencyInjection = useDependencyInjection;
+        _prefab = prefab;
+        _diContainer = diContainer;
+        _onObjectInitialized = onObjectInitialized;
         
         _container = new GameObject().transform;
         
-        _container.gameObject.name = this.GetType().ToString();
-
-        _prefab = prefab;
-
+        _container.gameObject.name = GetType().ToString();
+        
         InstantiatePool(poolSize);
     }
 
@@ -32,9 +32,10 @@ public sealed class ObjectPool<T>: MonoBehaviour where T: Component
 
         for (int i = 0; i < poolSize; i++)
         {   
-            _pool.Add(Object.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container));
-
-            _pool[i].gameObject.SetActive(false);   
+            T pooledObject = CreatePooledObject();
+            
+            _pool.Add(pooledObject);
+            pooledObject.gameObject.SetActive(false);
         }
     }
 
@@ -72,7 +73,7 @@ public sealed class ObjectPool<T>: MonoBehaviour where T: Component
             if (_pool[currentPointer].gameObject.activeSelf == false)
             {
                 element = _pool[currentPointer];
-            
+
                 return true;
             }
         }
@@ -80,16 +81,6 @@ public sealed class ObjectPool<T>: MonoBehaviour where T: Component
         element = null;
 
         return false;
-    }
-
-    private T CreatePooledObject()
-    {
-        T pooledObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
-        _pool.Add(pooledObject);
-        
-        if (_useDependencyInjection) _dIContainer.Inject(pooledObject);
-    
-        return pooledObject;
     }
 
     public void DisableAllObjects()
@@ -109,4 +100,17 @@ public sealed class ObjectPool<T>: MonoBehaviour where T: Component
 
         Destroy(_container.gameObject);
     }
+    
+    private T CreatePooledObject()
+    {
+        T pooledObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
+        _pool.Add(pooledObject);
+        
+        if (_diContainer != null) _diContainer.Inject(pooledObject);
+        if (_onObjectInitialized != null) _onObjectInitialized.Invoke(pooledObject);
+        
+        return pooledObject;
+    }
+    
+    public delegate void OnObjectInitialized(T pooledObject);
 }

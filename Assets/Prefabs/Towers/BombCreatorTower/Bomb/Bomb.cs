@@ -30,7 +30,7 @@ public sealed class Bomb : DraggableObject
 
         for (int i = 0; i < hitEntities.Length; i++)
         {
-            hitEntities[i].transform.gameObject.GetComponent<CombatEntity>().Health.ReceiveDamage(_explotionDamage);
+            hitEntities[i].transform.gameObject.GetComponent<CombatEntity>().Health.ReceiveEffectDamage(_explotionDamage);
         }
 
         _visualEffectHandler.Play();

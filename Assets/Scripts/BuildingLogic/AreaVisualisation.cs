@@ -44,32 +44,21 @@ public sealed class AreaVisualisation : MonoBehaviour
 
     public void ActivateVisualisation(GameObject draggable)
     {
-        if (draggable.TryGetComponent<AreaManager>(out AreaManager manager))
+        AreaScanerController[] areaScanerControllers = draggable.GetComponentsInChildren<AreaScanerController>();
+
+        for (int i = 0; i < areaScanerControllers.Length; i++)
         {
-            if (manager is CustomAreaManager)
-            {
-                _reachAreaVisualisation.sharedMesh = (manager as CustomAreaManager).GetCustomMesh();
-            }
-            else
-            {
-                _reachAreaVisualisation.sharedMesh = _defaultMesh; 
-            }
-
-            _reachAreaVisualisation.gameObject.SetActive(true);
-
-            if (_currentTween == null || _currentTween.IsPlaying()) _currentTween.Kill();
-
-            _currentTween = DOVirtual.Vector3(_reachAreaVisualisation.transform.localScale, manager.GetScale(), _visualisationDuration, SetVisualisationScale).SetEase(_visualisationAppearCurve);
+            areaScanerControllers[i].EnableVisualisation(_visualisationDuration, _visualisationAppearCurve);
         }
     }
 
     public void DisactivateVisualisation(GameObject draggable)
     {
-        if (draggable.TryGetComponent<AreaManager>(out AreaManager manager))
-        {   
-            if (_currentTween == null || _currentTween.IsPlaying()) _currentTween.Kill();
+        AreaScanerController[] areaScanerControllers = draggable.GetComponentsInChildren<AreaScanerController>();
 
-            _currentTween = DOVirtual.Vector3(_reachAreaVisualisation.transform.localScale, Vector3.zero, _visualisationDuration, SetVisualisationScale).SetEase(_visualisationDisappearCurve).OnComplete(DisableVisualisationObject);
+        for (int i = 0; i < areaScanerControllers.Length; i++)
+        {
+            areaScanerControllers[i].DisableVisualisation(_visualisationDuration, _visualisationDisappearCurve);
         }
     }
 

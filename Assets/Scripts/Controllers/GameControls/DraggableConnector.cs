@@ -19,32 +19,35 @@ public sealed class DraggableConnector : MonoBehaviour
         
         dragAnimationObject.DisconnectFromJoint(_joint);
         
-        await UniTask.WhenAll(MoveToFinalPosition(finalPosition), PlaceObject(dragAnimationObject, finalPosition));
+        MoveToFinalPosition(finalPosition);
+        PlaceObject(dragAnimationObject, finalPosition);
 
-        draggableObject.transform.SetParent(null);
-        draggableObject.transform.position = finalPosition;
+        await UniTask.WaitForSeconds(_placementDuration);
+        await UniTask.WaitForFixedUpdate();
+        
+        draggableObject.transform.parent = null;
+        draggableObject.transform.position = finalPosition; 
+        draggable.Place();
         
         dragAnimationObject.SetInitialParent();
-        
-        draggable.Place();
+
         PlacedDraggable.Invoke(draggableObject);
     }
 
     private async UniTask PlaceObject(DragAnimationObject dragAnimationObject, Vector3 finalPosition)
     {
+        finalPosition += dragAnimationObject.InitialLocalPosition;
+        
         Vector3 initialPosition = dragAnimationObject.transform.position;
 
         Vector3 initialRotation = dragAnimationObject.transform.rotation.eulerAngles;
 
         Vector3 finalRotation = new Vector3(0f, GetFinalYRotation(dragAnimationObject.transform.rotation.eulerAngles.y), 0f);
-
-        finalPosition += dragAnimationObject.InitialLocalPosition;
         
-        await DOVirtual.Float(0f, 1f, _placementDuration + 0.05f, Evaluate).AsyncWaitForCompletion();
-        
-        Evaluate(1f);
+        await DOVirtual.Float(0f, 1f, _placementDuration, Evaluate).AsyncWaitForCompletion();
 
-        await UniTask.Yield();
+        dragAnimationObject.transform.position = finalPosition;
+        dragAnimationObject.transform.rotation = Quaternion.Euler(finalRotation);
 
         void Evaluate(float value)
         {

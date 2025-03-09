@@ -24,7 +24,7 @@ public sealed class DragAnimationObject : MonoBehaviour
     {
         transform.position = joint.transform.position - new Vector3(0f, _heightDistance, 0f);
 
-        transform.SetParent(null);
+        transform.parent = null;
         
         _rigidbody.useGravity = true;
 
@@ -38,11 +38,12 @@ public sealed class DragAnimationObject : MonoBehaviour
         _rigidbody.useGravity = false;
         _rigidbody.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
         joint.connectedBody = null;
+        transform.parent = null;
     }
 
     public void SetInitialParent()
     {
-        transform.SetParent(_initialParent);
+        transform.parent = _initialParent;
         transform.localPosition = _initialLocalPosition;
     }
 }

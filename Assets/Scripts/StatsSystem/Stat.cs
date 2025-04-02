@@ -1,8 +1,10 @@
-using System;
+using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Stat
 {
+    private List<StatModifier> _statModifiers = new(0);
     private float _defaultValue;
     private float _flatAddition = 0f;
     private float _totalMultiplier = 1f;
@@ -15,6 +17,11 @@ public class Stat
     public Action<float> ValueChanged;
     public Action<int> RoundedValueChanged;
 
+    public void Reset()
+    {
+        _flatAddition = 0f;
+        _totalMultiplier = 1f;
+    }
     public void SetDefault(float value)
     {
         _defaultValue = value;
@@ -30,10 +37,31 @@ public class Stat
         _totalMultiplier += value;
         CalculateStatValue();
     }
+
+    public void AddStatModifier(StatModifier statModifier)
+    {
+        _statModifiers.Add(statModifier);
+        CalculateStatValue();
+    }
+
+    public void RemoveStatModifier(StatModifier statModifier)
+    {
+        _statModifiers.Remove(statModifier);
+        CalculateStatValue();
+    }
     
     private void CalculateStatValue()
     {
-        _value = (_defaultValue + _flatAddition) * _totalMultiplier;
+        float flatAddition = _flatAddition;
+        float multiplier = _totalMultiplier;
+        
+        for (int i = 0; i < _statModifiers.Count; i++)
+        {
+            flatAddition += _statModifiers[i].FlatModifier;
+            multiplier += _statModifiers[i].TotalMultiplier;
+        }
+        
+        _value = (_defaultValue + flatAddition) * multiplier;
         _roundedValue = Mathf.RoundToInt(_value);
 
         ValueChanged?.Invoke(_value);

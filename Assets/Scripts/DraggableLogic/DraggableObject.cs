@@ -14,6 +14,8 @@ public class DraggableObject : MonoBehaviour, IDraggable
     private Collider _collider;
     
     protected DraggableState DraggableState;
+    
+    public bool IsPlaced => DraggableState == DraggableState.Placed;
 
     public Action PickedUp;
     public Action Placed;
@@ -49,8 +51,6 @@ public class DraggableObject : MonoBehaviour, IDraggable
     DragAnimationObject IDraggable.GetDragAnimationObject() => _dragAnimationObject;
     
     public void SetDraggableState(bool state) => _isDraggable = state;
-    
-    public bool IsPlaced() => DraggableState == DraggableState.Placed;
     
     public PlacementModule GetPlacementModule() => _placementRequirements; 
 }

@@ -9,13 +9,9 @@ namespace Combat
         [SerializeField] private DraggableObject[] _draggablesToCreateOnStart;
         [Inject] private DraggableCreator _draggableCreator;
     
-        private void Awake()
-        {
-            GetComponent<IDraggable>().Place();
-        }
-    
         private async void Start()
         {
+            GetComponent<IDraggable>().Place();
             await UniTask.WaitForSeconds(1f);
             
             for (int i = 0; i < _draggablesToCreateOnStart.Length; i++)

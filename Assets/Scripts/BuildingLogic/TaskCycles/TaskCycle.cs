@@ -7,16 +7,21 @@ using Combat;
 
 public class TaskCycle : MonoBehaviour
 {
-    [Cached] private TaskRecharge _taskRecharge;
+    [Cached] private EntityHealth _ownerEntityHealth;
+    [Cached] private TaskRechargeDuration _taskRechargeDuration;
     [Cached] private DefaultCombatTaskConditionProvider _defaultCombatTaskConditionProvider;
     private bool _taskCycleIsActive;
     private CancellationTokenSource _cancellationTokenSource = new();
     
     public Action TaskPerformed;
+
+    private void Start()
+    {
+        _ownerEntityHealth.EntityDied += _ => StopRechargeProcess();
+    }
     
     public void StopRechargeProcess()
     {
-        _taskCycleIsActive = false;
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
         _cancellationTokenSource = new();
@@ -41,10 +46,11 @@ public class TaskCycle : MonoBehaviour
 
         try
         {
-            await UniTask.WaitForSeconds(_taskRecharge.Value, cancellationToken: _cancellationTokenSource.Token);
+            await UniTask.WaitForSeconds(_taskRechargeDuration.Value, cancellationToken: _cancellationTokenSource.Token);
         }
         catch (Exception e)
         {
+            _taskCycleIsActive = false;
             TaskUtility.LogAsync(e);
             return;
         }

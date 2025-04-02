@@ -14,7 +14,7 @@ namespace Combat
                     draggable.DraggablePlaced += AddPlacedDraggable;
                     draggable.DraggablePickedUp += RemovePickedUpDraggable;
                     
-                    if (!draggable.IsPlaced())
+                    if (!draggable.IsPlaced)
                     {
                         return;
                     }

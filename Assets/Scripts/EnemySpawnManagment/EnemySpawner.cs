@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Navigation;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -68,7 +69,7 @@ namespace Combat
             spawnedEnemy.transform.position = transform.position;
     
             spawnedEnemy.Health.EnemyDied += RemoveEnemy;
-            spawnedEnemy.ComponentsContainer.Get<EnemyBootstrap>().StartNavigation();
+            spawnedEnemy.ComponentsContainer.Get<NavigationAgent>().Initialize();
     
             EnemySpawned.Invoke(spawnedEnemy);
         }

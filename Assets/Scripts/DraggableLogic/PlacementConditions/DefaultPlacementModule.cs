@@ -20,7 +20,7 @@ public sealed class DefaultPlacementModule : PlacementModule
     
                 if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
                 {
-                    return !draggableObject.IsPlaced();
+                    return !draggableObject.IsPlaced;
                 }
             }
         }

@@ -74,9 +74,9 @@ namespace Combat
     
                     for (int enemyIndex = 0; enemyIndex < enemyAmount; enemyIndex++)
                     {
-                        if (healthLeft - currentPart.Data.HealthData.MaxHealth >= 0 || enemiesToSpawn.Count == 0)
+                        if (healthLeft - currentPart.Data.MaxHealth >= 0 || enemiesToSpawn.Count == 0)
                         {
-                            healthLeft -= currentPart.Data.HealthData.MaxHealth;
+                            healthLeft -= currentPart.Data.MaxHealth;
     
                             enemiesToSpawn.Add(currentPart.Data);
                         }

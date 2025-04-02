@@ -1,14 +1,14 @@
-using System;
-using System.Threading;
-using Cashing;
-using Combat;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 using DG.Tweening;
+using Cashing;
+using Combat;
+using System;
 
 public class HealthBar : Shaker
 {
-    [Cached] protected EntityHealth EntityHealth;
+    [Cached] protected EntityHealth OwnerHealth;
     
     private const float HealthTweenDuration = 0.2f;
     private const float IdleTweenDuration = 0.3f;
@@ -27,8 +27,10 @@ public class HealthBar : Shaker
         _materialPropertyBlock = new MaterialPropertyBlock();
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
 
-        EntityHealth.Damaged += UpdateBar;
-        EntityHealth.Healed += UpdateBar;
+        OwnerHealth.Damaged += UpdateBar;
+        OwnerHealth.Healed += UpdateBar;
+        OwnerHealth.EntityDied += _ => FillBar();
+        
         UpdatePropertyBlock();
     }
 
@@ -39,7 +41,7 @@ public class HealthBar : Shaker
         
         DOTween.Kill(this);
 
-        float hpPercent = EntityHealth.GetHpPercent();
+        float hpPercent = OwnerHealth.GetHpPercent();
 
         if (hpPercent < _displayedHealth)
         {
@@ -54,7 +56,7 @@ public class HealthBar : Shaker
 
     private async void DecreaseValue()
     {
-        _displayedHealth = EntityHealth.GetHpPercent();
+        _displayedHealth = OwnerHealth.GetHpPercent();
         UpdatePropertyBlock();
 
         try
@@ -74,7 +76,7 @@ public class HealthBar : Shaker
 
     private async void IncreaseValue()
     {
-        _healthDifference = EntityHealth.GetHpPercent();
+        _healthDifference = OwnerHealth.GetHpPercent();
         UpdatePropertyBlock();
 
         try
@@ -100,12 +102,19 @@ public class HealthBar : Shaker
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
     }
 
+    private void FillBar()
+    {
+        _displayedHealth = 1f;
+        _healthDifference = 1f;
+        UpdatePropertyBlock();
+    }
+
     private void OnDisable() => _cancellationTokenSource.Cancel();
 
     private void OnDestroy()
     {
-        EntityHealth.Damaged -= UpdateBar;
-        EntityHealth.Healed -= UpdateBar;
+        OwnerHealth.Damaged -= UpdateBar;
+        OwnerHealth.Healed -= UpdateBar;
         
         _cancellationTokenSource.Cancel();
     }

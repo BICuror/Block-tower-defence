@@ -23,7 +23,7 @@ public sealed class CrystalPlacementModule : PlacementModule
 
             if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
             {
-                return !draggableObject.IsPlaced();
+                return !draggableObject.IsPlaced;
             }
         }
 

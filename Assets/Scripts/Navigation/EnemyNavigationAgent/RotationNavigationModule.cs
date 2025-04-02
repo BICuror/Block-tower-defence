@@ -43,7 +43,7 @@ namespace Navigation
 
             Vector2 interpolatedPosition = Vector2.Lerp(_previousRotation, _newRotation, elapsedTime);
 
-            interpolatedPosition = interpolatedPosition + (_additionalRotationVector * (-elapsedTime * elapsedTime + elapsedTime) * 2f);
+            interpolatedPosition += (_additionalRotationVector * (-elapsedTime * elapsedTime + elapsedTime) * 2f);
 
             _agentObject.LookAt(new Vector3(_agentObject.position.x + interpolatedPosition.x, _agentObject.position.y, _agentObject.position.z + interpolatedPosition.y));
         }

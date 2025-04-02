@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: WeakRangerEnemyData
   m_EditorClassIdentifier: 
+  _speed: 0.8
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
-  _enemyHealthData: {fileID: 11400000, guid: fdeead55a1a984c4abfe6642ca829b19, type: 2}
+  _maxHealth: 5
+  _incomingDamageMultipluer: 1
   _mesh: {fileID: 4300000, guid: 1fb76cf6f6a5a3b4689b4e7e97ff9ea1, type: 3}
   _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}
-  _specialObject: {fileID: 7688208347547464120, guid: 3e832db8d639dfa4abcad08e5618b7ad, type: 3}
+  _hasObjectModificators: 1
+  _objectModificators:
+  - {fileID: 3846886491062329686, guid: fc09ed39e63b42f4ca2d502fa5108b65, type: 3}

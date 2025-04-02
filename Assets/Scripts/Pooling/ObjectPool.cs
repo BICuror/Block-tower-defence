@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public sealed class ObjectPool<T> : MonoBehaviour where T: Component
+public sealed class ObjectPool<T> where T: Component
 {
     private List<T> _pool;
     private int _pointer;
@@ -95,15 +95,15 @@ public sealed class ObjectPool<T> : MonoBehaviour where T: Component
     {
         for (int i = 0; i < _pool.Count; i++)
         {
-            if (_pool[i] != null) Destroy(_pool[i].gameObject);
+            if (_pool[i] != null) MonoBehaviour.Destroy(_pool[i].gameObject);
         }
 
-        Destroy(_container.gameObject);
+        MonoBehaviour.Destroy(_container.gameObject);
     }
     
     private T CreatePooledObject()
     {
-        T pooledObject = Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
+        T pooledObject = MonoBehaviour.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
         _pool.Add(pooledObject);
         
         if (_diContainer != null) _diContainer.Inject(pooledObject);

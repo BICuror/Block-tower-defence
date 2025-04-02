@@ -28,12 +28,14 @@ namespace Cashing
             CachedComponentsContainer.Initialize(gameObject); 
             StatContainer.Initialize();
             
-            CacheAll();
+            InjectAll();
         }
-        
-        private void CacheAll()
+
+        private void InjectAll() => InjectCachedToObjectAndChildren(gameObject);
+
+        public void InjectCachedToObjectAndChildren(GameObject injectReciver)
         {
-            Component[] components = GetComponentsInChildren<Component>().ToArray();
+            Component[] components = injectReciver.GetComponentsInChildren<Component>().ToArray();
             
             for (int i = 0; i < components.Length; i++) 
             {

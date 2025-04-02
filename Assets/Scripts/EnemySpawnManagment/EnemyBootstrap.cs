@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using Cashing;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Navigation;
+using Cashing;
+using Cysharp.Threading.Tasks;
 
 namespace Combat
 {
@@ -19,47 +17,60 @@ namespace Combat
         [Cached] private NavigationAgent _navMeshAgent;
         [Cached] private EnemyHealth _enemyHealth;
         [Cached] private StatContainer _statContainer;
+        [Cached] private HealthBar _healthBar;
+        [Cached] private EntityObjectModificatorContainer _entityObjectModificatorContainer;
+        [Cached] private Collider _collider;
         
         private EnemyData _enemyData;
     
-        public void SetEnemyData(EnemyData enemyDataToSet)
+        public async void SetEnemyData(EnemyData enemyDataToSet)
         {
             _enemyData = enemyDataToSet;
-            
-            _statContainer.Get<MaxHealth>().SetDefault(enemyDataToSet.HealthData.MaxHealth);
-            _statContainer.Get<Speed>().SetDefault(2f);
+
+            SetStats();
+            SetVisualData();
+            CreateSpecialObject();
             
             _navMeshAgent.SetAgentData(enemyDataToSet.NavigationData);
             _enemyHealth.Initialize();
-    
-            SetVisualData(enemyDataToSet);
-            //CreateSpecialObject(enemyDataToSet);
+
+            await UniTask.WaitForFixedUpdate();
+            
+            _collider.enabled = true;
+        }
+
+        private void SetStats()
+        {
+            MaxHealth maxHealthStat = _statContainer.Get<MaxHealth>(); 
+            maxHealthStat.Reset(); 
+            maxHealthStat.SetDefault(_enemyData.MaxHealth);
+            
+            Speed speedStat = _statContainer.Get<Speed>(); 
+            speedStat.Reset(); 
+            speedStat.SetDefault(_enemyData.Speed);
         }
     
-        private void SetVisualData(EnemyData enemyData)
+        private void SetVisualData()
         {
-            _meshFilter.sharedMesh = enemyData.GetMesh();
-            _meshRenderer.sharedMaterial = enemyData.GetMaterial();
+            _meshFilter.sharedMesh = _enemyData.Mesh;
+            _meshRenderer.sharedMaterial = _enemyData.Material;
             _GPUInstancerEnabler.EnableGPUInstancing();
         }
     
-        private void CreateSpecialObject(EnemyData enemyData)
+        private void CreateSpecialObject()
         {
-            //if (enemyData.GetSpecialObject() != null)
-            //{
-               // SpecialEnemyObject specialObject = Instantiate(enemyData.GetSpecialObject(), transform.position, transform.rotation, transform);
-            
-                //specialObject.SetEnemyHealth(_enemyHealth);
-            //}
+            if (_enemyData.HasObjectModificators)
+            {
+                _enemyData.ObjectModificators.ForEach(additionalObjectPrefab =>
+                {
+                    _entityObjectModificatorContainer.InstantiateAndAddModificator<GameObject>(additionalObjectPrefab);
+                });
+            }
         }
 
-        public async void StartNavigation() 
+        private void OnDisable()
         {
-            _animator.Play("Entry");
-
-            await UniTask.WaitForSeconds(1f);
-            
-            _navMeshAgent.Initialize();
+            _collider.enabled = false;
         }
     }
 }

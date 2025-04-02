@@ -23,7 +23,6 @@ public class Item : DraggableObject
     private void Awake()
     {
         base.Awake();
-        
         PickedUp += OnPickedUp;
         AddToggleEffectDatas(_initialRewardEffectDatas);
     }

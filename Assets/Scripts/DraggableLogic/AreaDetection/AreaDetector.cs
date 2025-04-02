@@ -32,11 +32,12 @@ namespace Combat
         
         private void RemoveAll()
         {
-            List.ForEach(item =>
+            while (List.Count > 0)
             {
-                if (item != null) RemoveItem(item);
-            });
-            
+                if (List[^1] != null) RemoveItem(List[^1]);
+                else List.RemoveAt(List.Count - 1);
+            }
+
             List.Clear();
         }
         

@@ -43,7 +43,7 @@ public sealed class DraggableConnector : MonoBehaviour
         Vector3 initialRotation = dragAnimationObject.transform.rotation.eulerAngles;
 
         Vector3 finalRotation = new Vector3(0f, GetFinalYRotation(dragAnimationObject.transform.rotation.eulerAngles.y), 0f);
-        
+
         await DOVirtual.Float(0f, 1f, _placementDuration, Evaluate).AsyncWaitForCompletion();
 
         dragAnimationObject.transform.position = finalPosition;

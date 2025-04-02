@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(EntityEffectData))]
+[CustomEditor(typeof(EntityModificationEffectData))]
 
-public class EntityEffectDataEditor : EffectDataCustomEditor<EntityEffect> {}
+public class EntityEffectDataEditor : EffectDataCustomEditor<EntityModificationEffect> {}
 
 #endif

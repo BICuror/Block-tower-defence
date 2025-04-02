@@ -27,7 +27,7 @@ public abstract class EffectData : ScriptableObject
     {
         if (string.IsNullOrEmpty(_effectTypeName) || EffectType == null)
         {
-            Debug.LogError("Invalid modifier type");
+            Debug.LogError("Invalid modifier type " + _effectTypeName);
         }
     }
 }

@@ -1,18 +1,17 @@
-using System.Collections.Generic;
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 using Cashing;
 using Zenject;
 using Combat;
 using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 
 namespace Navigation
 {
     public sealed class NavigationAgent : MonoBehaviour
     {
         [Inject] private NavigationMapHolder _navigationMapHolder;
+        [SerializeField] private Transform _rotationTarget;
         [Cached] private DraggableEntity _draggableEntity;
         [Cached] private Speed _speed;
         
@@ -54,7 +53,7 @@ namespace Navigation
             Vector2Int previousRotation = new Vector2Int(-Mathf.RoundToInt(currentPosition.x - nextPosition.x), -Mathf.RoundToInt(currentPosition.y - nextPosition.y));
             
             _movmentModule = new MovmentNavigationModule(transform, _agentData);
-            _rotationModule = new RotationNavigationModule(transform, previousRotation);
+            _rotationModule = new RotationNavigationModule(_rotationTarget, previousRotation);
 
             TravelToEndNode();
         }
@@ -136,13 +135,5 @@ namespace Navigation
         }
 
         private void OnDisable() => StopMovement();
-
-        private List<Vector2Int> _checkDirections = new List<Vector2Int>()
-        {
-            Vector2Int.up,
-            Vector2Int.down,
-            Vector2Int.right,
-            Vector2Int.left
-        };
     }
 }

@@ -3,16 +3,16 @@ public sealed class BuildingHealthBar : HealthBar
     private void Start()
     {
         base.Start();
-
-        EntityHealth.Healed += TryHideBar;
-        EntityHealth.Damaged += ShowBar;
+        
+        OwnerHealth.Healed += TryHideBar;
+        OwnerHealth.Damaged += ShowBar;
         
         gameObject.SetActive(false);
     }
 
     private void TryHideBar()
     {
-        if (EntityHealth.IsFullHp())
+        if (OwnerHealth.IsFullHp())
         {
             gameObject.SetActive(false);
         }

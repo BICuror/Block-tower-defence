@@ -27,7 +27,8 @@ public sealed class SpawnInfoObject : MonoBehaviour
 
     public void SetEnemiyData(EnemyData enemyData)
     {
-        _meshFilter.sharedMesh = enemyData.GetMesh();
+        _meshFilter.sharedMesh = enemyData.Mesh;
+        
     }
 
     public void SetAmount(int amount)

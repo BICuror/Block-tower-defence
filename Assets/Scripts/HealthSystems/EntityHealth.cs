@@ -55,6 +55,7 @@ namespace Combat
         
         public virtual void Die()
         {
+            _currentHp = 0;
             EntityDied?.Invoke(_entity);
         }
     }   

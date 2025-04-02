@@ -56,7 +56,7 @@ namespace Combat
                 draggable.EntityPlaced += AddPlacedEntity; 
                 draggable.EntityPickedUp += RemovePickedUpEntity;
                 
-                if (draggable.IsPlaced() == false) return;
+                if (draggable.IsPlaced == false) return;
             }
             
             AddItem(entity.ComponentsContainer.Get<T>());

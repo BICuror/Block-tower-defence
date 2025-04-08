@@ -7,10 +7,10 @@ public class InspectorController : MonoBehaviour
 {
     [SerializeField] private LayerSetting _inspectableLayerSetting;
 
-    private InspectableObject _inspectable;
+    //private InspectableObject _inspectable;
     private bool _lastSeenOnInspectable;
 
-    public UnityEvent<InspectableObject> InspectionStarted;
+    //public UnityEvent<InspectableObject> InspectionStarted;
     public UnityEvent InspectionEnded;
 
     private Camera _camera;
@@ -32,7 +32,7 @@ public class InspectorController : MonoBehaviour
         }
         else if (isOnInspectable && Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _inspectableLayerSetting.GetLayerMask()))
         {
-            if (_inspectable != null && rayInfo.collider.gameObject.GetComponent<InspectableObject>() != _inspectable) StartInspecting(mousePosition);
+          //  if (_inspectable != null && rayInfo.collider.gameObject.GetComponent<InspectableObject>() != _inspectable) StartInspecting(mousePosition);
         }
         else if (_lastSeenOnInspectable && isOnInspectable == false)
         {
@@ -48,7 +48,7 @@ public class InspectorController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _inspectableLayerSetting.GetLayerMask()))
         {
-            return (rayInfo.collider.gameObject.TryGetComponent(out InspectableObject inspectable));
+          //  return (rayInfo.collider.gameObject.TryGetComponent(out InspectableObject inspectable));
         }
 
         return false;
@@ -60,23 +60,23 @@ public class InspectorController : MonoBehaviour
 
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.TryGetComponent(out InspectableObject inspectable))
+       /*     if (hit.collider.gameObject.TryGetComponent(out InspectableObject inspectable))
             {
                 _inspectable = inspectable;
                 InspectionStarted.Invoke(_inspectable);
-            }
+            }*/
         }
     }
 
     public void TryToStopInspecting()
     {
-        if (_inspectable != null) StopInspecting();
+       // if (_inspectable != null) StopInspecting();
     }
 
     private void StopInspecting()
     {
         InspectionEnded.Invoke();
 
-        _inspectable = null;
+        //_inspectable = null;
     }
 }

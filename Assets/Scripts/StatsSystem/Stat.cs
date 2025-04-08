@@ -13,6 +13,9 @@ public class Stat
 
     public float Value => _value;
     public int RoundedValue => _roundedValue;
+    public float TotalMultiplier => _totalMultiplier;
+    public float FlatAddition => _flatAddition;
+    public float DefaultValue => _defaultValue;
 
     public Action<float> ValueChanged;
     public Action<int> RoundedValueChanged;

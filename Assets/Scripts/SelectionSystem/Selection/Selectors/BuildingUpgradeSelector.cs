@@ -17,7 +17,7 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         _buildingEntityToUpgrade.transform.position = _centerPosition.position;
         _buildingEntityToUpgrade.ComponentsContainer.Get<DraggableObject>().SetDraggableState(false);
         
-        List<EntityModificationEffectData> effectDatas = GetRandomEntityEffectDatas(_buildingEntityToUpgrade, _optionsAmount);
+        List<EntityModificatorData> effectDatas = GetRandomEntityEffectDatas(_buildingEntityToUpgrade, _optionsAmount);
 
         for (int i = 0; i < effectDatas.Count; i++)
         {
@@ -33,10 +33,10 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         _buildingEntityToUpgrade.ComponentsContainer.Get<DraggableObject>().SetDraggableState(true);
     }
 
-    private List<EntityModificationEffectData> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
+    private List<EntityModificatorData> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
     {
-        List<EntityModificationEffectData> resultEffectDatas = new();
-        List<EntityModificationEffectData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificationEffectContainer>().AvailableEffects;
+        List<EntityModificatorData> resultEffectDatas = new();
+        List<EntityModificatorData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificationEffectContainer>().AvailableEffects;
 
         for (int i = 0; i < amount; i++)
         {

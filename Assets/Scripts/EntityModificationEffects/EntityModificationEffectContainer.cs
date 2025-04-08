@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cashing;
 using Zenject;
@@ -6,38 +7,39 @@ using Combat;
 
 public sealed class EntityModificationEffectContainer : MonoBehaviour
 {
-    private readonly Dictionary<EntityModificationEffectData, List<EntityModificationEffect>> _activeEffects = new();
-    [SerializeField] private List<EntityModificationEffectData> _allAvailableEffects;
+    private readonly Dictionary<EntityModificatorData, List<EntityModificatior>> _activeEffects = new();
+    [SerializeField] private List<EntityModificatorData> _allAvailableEffects;
     [Inject] private EffectFactory _effectFactory;
     [Cached] private CombatEntity _ownerEntity;
     
-    public List<EntityModificationEffectData> AvailableEffects => new List<EntityModificationEffectData>(_allAvailableEffects);
+    public List<EntityModificatorData> AvailableEffects => new List<EntityModificatorData>(_allAvailableEffects);
+    public List<EntityModificatorData> ActiveEffect => _activeEffects.Keys.ToList();
     
-    public void AddEffect(EntityModificationEffectData modificationEffectData)
+    public void AddEffect(EntityModificatorData modificatorData)
     {
-        EntityModificationEffect modificationEffect = _effectFactory.CreateEntityModificationEffect(modificationEffectData);
-        modificationEffect.SetEntity(_ownerEntity);
+        EntityModificatior modificatior = _effectFactory.CreateEntityModificationEffect(modificatorData);
+        modificatior.SetEntity(_ownerEntity);
         
-        modificationEffect.Enable();
+        modificatior.Enable();
 
-        if (_activeEffects.TryGetValue(modificationEffectData, out var effectList))
+        if (_activeEffects.TryGetValue(modificatorData, out var effectList))
         {
-            effectList.Add(modificationEffect);
+            effectList.Add(modificatior);
         }
         else
         {
-            _activeEffects[modificationEffectData] = new() {modificationEffect};
+            _activeEffects[modificatorData] = new() {modificatior};
         }
     }
     
-    public void RemoveEffect(EntityModificationEffectData modificationEffectData)
+    public void RemoveEffect(EntityModificatorData modificatorData)
     {
-        if (_activeEffects.TryGetValue(modificationEffectData, out var effectList))
+        if (_activeEffects.TryGetValue(modificatorData, out var effectList))
         {
-            EntityModificationEffect modificationEffect = effectList[^1];
-            modificationEffect.Disable();
-            _activeEffects[modificationEffectData].Remove(modificationEffect);
+            EntityModificatior modificatior = effectList[^1];
+            modificatior.Disable();
+            _activeEffects[modificatorData].Remove(modificatior);
         }
-        else throw new KeyNotFoundException($"Tried to remove an effect {modificationEffectData.EffectType} but it doesn't exist");
+        else throw new KeyNotFoundException($"Tried to remove an effect {modificatorData.EffectType} but it doesn't exist");
     }
 }

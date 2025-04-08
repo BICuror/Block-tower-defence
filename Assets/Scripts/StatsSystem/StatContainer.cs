@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using System.Data;
+using System.Linq;
 
 public sealed class StatContainer : MonoBehaviour
 {
@@ -19,6 +20,11 @@ public sealed class StatContainer : MonoBehaviour
 
             AddStat(statInstance);
         }
+    }
+
+    public List<Stat> GetAllStats()
+    {
+        return _stats.Values.ToList();
     }
 
     #region Generic

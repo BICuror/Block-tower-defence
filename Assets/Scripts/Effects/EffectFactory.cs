@@ -32,11 +32,11 @@ public sealed class EffectFactory
         return effect;
     } 
 
-    public EntityModificationEffect CreateEntityModificationEffect(EntityModificationEffectData modificationEffectData)
+    public EntityModificatior CreateEntityModificationEffect(EntityModificatorData modificatorData)
     {
-        EntityModificationEffect modificationEffect = CreateEffectInstance<EntityModificationEffect>(modificationEffectData.EffectType);
-        modificationEffect.SetArgumentsContainer(modificationEffectData.ArgumentsContainer);
-        return modificationEffect;
+        EntityModificatior modificatior = CreateEffectInstance<EntityModificatior>(modificatorData.EffectType);
+        modificatior.SetArgumentsContainer(modificatorData.ArgumentsContainer);
+        return modificatior;
     } 
     
     private T CreateEffectInstance<T>(Type type)

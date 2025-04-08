@@ -1,0 +1,34 @@
+using UnityEngine;
+using System;
+using TMPro;
+
+public sealed class InspectionStatDetailsSubpanel : MonoBehaviour
+{
+    [SerializeField] private InspectionSubpanelHeader _header;
+    [SerializeField] private TextMeshProUGUI _totalStatValueTextField;
+    [SerializeField] private TextMeshProUGUI _multiplierStatValueTextField;
+    [SerializeField] private TextMeshProUGUI _flatAdditionStatValueTextField;
+    [SerializeField] private TextMeshProUGUI _baseStatValueTextField;
+
+    private Stat _stat;
+    
+    public void Initialize(Stat stat, StatTooltipTagData tagData)
+    {
+        _stat = stat;
+        
+        _header.SetTagData(tagData);
+
+        stat.ValueChanged += _ => UpdateStatValueDisplays();
+        UpdateStatValueDisplays();
+    }
+
+    private void UpdateStatValueDisplays()
+    {
+        _totalStatValueTextField.text = Math.Round(_stat.Value, 2).ToString();
+        _multiplierStatValueTextField.text = $"{Math.Round(_stat.TotalMultiplier * 100)}%"; 
+        _flatAdditionStatValueTextField.text = Math.Round(_stat.FlatAddition).ToString();
+        _baseStatValueTextField.text = Math.Round(_stat.DefaultValue).ToString();
+    }
+    
+    private void OnDestroy() => _stat.ValueChanged -= _ => UpdateStatValueDisplays();
+}

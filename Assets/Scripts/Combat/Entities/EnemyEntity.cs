@@ -2,6 +2,24 @@ namespace Combat
 {
     public sealed class EnemyEntity : CombatEntity
     {
-        public EnemyHealth Health => CachedComponentsContainer.Get<EnemyHealth>();
+        private EnemyHealth _health;
+        
+        public EnemyHealth EnemyHealth => _health;
+        public override EntityHealth Health => _health;
+
+        private void Awake()
+        {
+            _health = new();
+            ComponentsContainer.Add<EnemyHealth>(_health);
+            ComponentsContainer.Add<EntityHealth>(_health);
+            base.Awake();
+            InjectCached(_health);
+            _health.Died += HandleDeathEvent;
+        }
+        
+        private void HandleDeathEvent()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

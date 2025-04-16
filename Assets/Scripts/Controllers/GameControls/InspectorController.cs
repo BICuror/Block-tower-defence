@@ -1,18 +1,18 @@
+using Combat;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
+    [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltip;
+    [SerializeField] private InspectionTooltipBase _entityInspectionTooltipPrefab;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
-
-    //private InspectableObject _inspectable;
-    private bool _lastSeenOnInspectable;
-
-    //public UnityEvent<InspectableObject> InspectionStarted;
-    public UnityEvent InspectionEnded;
-
+    [SerializeField] private LayerSetting _uiLayerSetting;
+    
+    private GameObject _currentInspectionTooltip;
+    private Inspectable _inspectable;
+    
     private Camera _camera;
 
     private void Awake()
@@ -20,63 +20,87 @@ public class InspectorController : MonoBehaviour
         _camera = GetComponent<Camera>();
     }
     
-    public void TryToStartInspecting(Vector2 mousePosition)
-    {
-        bool isOnInspectable = IsOnInspectable(mousePosition);
-
-        Ray ray = _camera.ScreenPointToRay(mousePosition);
-
-        if (isOnInspectable && _lastSeenOnInspectable == false)
-        {
-            StartInspecting(mousePosition);
-        }
-        else if (isOnInspectable && Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _inspectableLayerSetting.GetLayerMask()))
-        {
-          //  if (_inspectable != null && rayInfo.collider.gameObject.GetComponent<InspectableObject>() != _inspectable) StartInspecting(mousePosition);
-        }
-        else if (_lastSeenOnInspectable && isOnInspectable == false)
-        {
-            StopInspecting();
-        }
-
-        _lastSeenOnInspectable = isOnInspectable;
-    }
-
-    private bool IsOnInspectable(Vector2 mousePosition)
+    public bool TryToStartInspecting(Vector2 mousePosition)
     {
         Ray ray = _camera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _inspectableLayerSetting.GetLayerMask()))
+        if (TileMap.HasTile(ray, _uiLayerSetting)) return false;
+        
+
+        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-          //  return (rayInfo.collider.gameObject.TryGetComponent(out InspectableObject inspectable));
+            Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
+            
+            if (!_inspectable)
+            {
+                StartInspecting(hoveredInspectable);
+            }
+
+            return true;
         }
 
         return false;
     }
 
-    public void StartInspecting(Vector2 mousePosition)
+    public bool TryStopInspecting(Vector2 mousePosition)
     {
         Ray ray = _camera.ScreenPointToRay(mousePosition);
 
+        if (TileMap.HasTile(ray, _uiLayerSetting, out RaycastHit uiHit))
+        {
+            return uiHit.collider.gameObject == _currentInspectionTooltip;
+        }
+
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-       /*     if (hit.collider.gameObject.TryGetComponent(out InspectableObject inspectable))
+            Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
+            
+            if (_inspectable != hoveredInspectable)
             {
-                _inspectable = inspectable;
-                InspectionStarted.Invoke(_inspectable);
-            }*/
+                StopInspecting();
+                StartInspecting(hoveredInspectable);
+            }
+            
+            return false;
+        }
+        
+        StopInspecting();
+        return true;
+    }
+
+    private void StartInspecting(Inspectable inspectable)
+    {
+        _inspectable = inspectable;
+
+        /*MeshRenderer[] meshRenderers = inspectable.GetComponentsInChildren<MeshRenderer>();
+        float maxHeight = 0;
+
+        for (int i = 0; i < meshRenderers.Length; i++)
+        {
+            maxHeight = Mathf.Max(meshRenderers[i].bounds.size.y, maxHeight);
+        }*/
+
+        if (inspectable.TryGetComponent<CombatEntity>(out CombatEntity combatEntity))
+        {
+            InspectionTooltipBase entityTooltip = Instantiate(_entityInspectionTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
+            entityTooltip.SetInspectable(inspectable);
+
+            _currentInspectionTooltip = entityTooltip.gameObject;
+        }
+        else if (inspectable.TryGetComponent<Item>(out Item item))
+        {
+            CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltip, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
+            crystalInspectionTooltip.SetInspectable(inspectable);
+
+            _currentInspectionTooltip = crystalInspectionTooltip.gameObject;
         }
     }
 
-    public void TryToStopInspecting()
+    public void StopInspecting()
     {
-       // if (_inspectable != null) StopInspecting();
-    }
-
-    private void StopInspecting()
-    {
-        InspectionEnded.Invoke();
-
-        //_inspectable = null;
+        if (!_inspectable) return;
+        
+        _inspectable = null;
+        Destroy(_currentInspectionTooltip);
     }
 }

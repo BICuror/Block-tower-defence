@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+using Random = UnityEngine.Random;
+
 public static class TileMap
 {
     private const float RAY_HEIGHT = 10000f;
@@ -26,6 +28,11 @@ public static class TileMap
     public static bool HasTile(Ray heightRay, LayerSetting layerSetting, out RaycastHit hit)
     {
         return Physics.Raycast(heightRay, out hit, RAY_LENGTH, layerSetting.GetLayerMask());
+    }
+    
+    public static bool HasTile(Ray heightRay, LayerSetting layerSetting)
+    {
+        return Physics.Raycast(heightRay, RAY_LENGTH, layerSetting.GetLayerMask());
     }
     
     #endregion
@@ -93,7 +100,33 @@ public static class TileMap
 
     #region FindSuitablePositionsInRaduis
 
-    public static List<Vector2Int> GetSuitablePositionsInRaduis(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
+    public static List<Vector2Int> ForceGetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
+    {
+        List<Vector2Int> foundPositions = GetSuitablePositionsInRadius(positionValidator, position, radius);
+
+        if (foundPositions.Count == 0)
+        {
+            int modifiedRadius = radius;
+                    
+            while (radius <= 13 && foundPositions.Count == 0)
+            {
+                modifiedRadius++;
+                
+                foundPositions = GetSuitablePositionsInRadius(positionValidator, position, modifiedRadius);
+    
+                if (foundPositions.Count > 0)
+                {
+                    return foundPositions;
+                }
+            }
+
+            return GetSuitablePositionsInRadius((Vector2Int _) => true, position, radius);
+        }
+        
+        return foundPositions;
+    }
+    
+    public static List<Vector2Int> GetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
     {
         List<Vector2Int> suitablePositions = new List<Vector2Int>();
 

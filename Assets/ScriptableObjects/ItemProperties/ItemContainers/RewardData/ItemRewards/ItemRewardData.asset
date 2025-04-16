@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quality: 1
   _isUnique: 0
-  _effectTypeName: TestRewardEffect
+  _effectTypeName: StartAttackStateProperty
   _effectApperanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems: []
   AllEffectTypeNames:
   - StartAttackStateProperty
-  - StartBuildingSelectionRewardEffect
-  - StartBuildingUpgradeSelectionRewardEffect
-  - StartGlobalEffectSelectionRewardEffect
-  - TestRewardEffect
+  - StartBuildingSelectionGlobalRewardEffect
+  - StartBuildingUpgradeSelectionGlobalRewardEffect
+  - StartGlobalEffectSelectionGlobalRewardEffect
+  - TestGlobalRewardEffect
+  _effectName: Wave starter
+  _effectDescription: Starts wave

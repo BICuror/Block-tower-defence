@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(RewardEffectData))]
+[CustomEditor(typeof(RewardGlobalEffectData))]
 
-public class RewardEffectDataEditor : EffectDataCustomEditor<RewardEffect> {}
+public class RewardEffectDataEditor : EffectDataCustomEditor<GlobalRewardEffect> {}
 
 #endif

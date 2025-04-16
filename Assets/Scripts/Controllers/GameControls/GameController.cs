@@ -12,12 +12,8 @@ public sealed class GameController : MonoBehaviour
     private GameControls _controls;
 
     private ControllerState _currentControllerState;
-    private enum ControllerState 
-    {
-        Idle,
-        Dragging,
-        Rotating,
-    }   
+
+    public ControllerState State => _currentControllerState;
 
     private void FixedUpdate()
     {
@@ -26,20 +22,31 @@ public sealed class GameController : MonoBehaviour
             case ControllerState.Idle: return; 
             case ControllerState.Dragging: _dragController.TryDragTo(GetPointerPosition()); break;
             case ControllerState.Rotating: _cameraRotationController.Rotate(GetPointerPosition()); break;
+            case ControllerState.Inspecting: return;
         }
     }
 
-    private void TryToFindInspectable()
+    private void UpdateInspectionState()
     {
         if (_currentControllerState == ControllerState.Idle)
         {
-            _inspectorController.TryToStartInspecting(GetPointerPosition());
+            if (_inspectorController.TryToStartInspecting(GetPointerPosition()))
+            {
+                _currentControllerState = ControllerState.Inspecting;
+            }
+        }
+        else if (_currentControllerState == ControllerState.Inspecting)
+        {
+            if (_inspectorController.TryStopInspecting(GetPointerPosition()))
+            {
+                _currentControllerState = ControllerState.Idle;
+            }
         }
     }
 
     private void TryPickUpDraggableOrRotateCamera()
     {
-        _inspectorController.TryToStopInspecting();
+        _inspectorController.StopInspecting();
 
         if(_dragController.ActivatedSomething(GetPointerPosition()))
         {
@@ -94,7 +101,7 @@ public sealed class GameController : MonoBehaviour
 
         _controls.TouchInput.PointerClick.canceled += _ => ReturnToIdleState();
 
-        _controls.TouchInput.PointerPosition.performed += _ => TryToFindInspectable();
+        _controls.TouchInput.PointerPosition.performed += _ => UpdateInspectionState();
 
         _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
         _controls.TouchInput.ScrolledDown.started += _ => _cameraZoomController.ZoomOut();
@@ -108,4 +115,12 @@ public sealed class GameController : MonoBehaviour
     }
 
     #endregion 
+    
+    public enum ControllerState 
+    {
+        Idle,
+        Dragging,
+        Rotating,
+        Inspecting,
+    }   
 }

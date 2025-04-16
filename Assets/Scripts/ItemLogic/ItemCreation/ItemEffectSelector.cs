@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public sealed class ItemEffectSelector : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataContainer;
-    [Inject] private EffectFactory _effectFactory;
+    [Inject] private GlobalEffectFactory _globalEffectFactory;
     private ItemModifiersSelectionContainer _temModifiersSelectionContainer;
 
     private void Awake()
@@ -16,38 +16,38 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
     #region ModifiersSelection
     
-    public List<ToggleEffectData> GetRandomToggleEffectDatas(int quality, int strength)
+    public List<ToggleGlobalEffectData> GetRandomToggleEffectDatas(int quality, int strength)
     {
-        List<ToggleEffectData> result = new();
+        List<ToggleGlobalEffectData> result = new();
 
-        List<ToggleEffectData> toggleEffectDatas = _temModifiersSelectionContainer.ItemToggleEffectContainer.EffectDatas;
+        List<ToggleGlobalEffectData> toggleEffectDatas = _temModifiersSelectionContainer.ItemToggleEffectContainer.EffectDatas;
 
-        List<ToggleEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.Quality >= 0);
-        List<ToggleEffectData> negatriveEffects = toggleEffectDatas.FindAll(effectData => effectData.Quality < 0); 
+        List<ToggleGlobalEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.Quality >= 0);
+        List<ToggleGlobalEffectData> negatriveEffects = toggleEffectDatas.FindAll(effectData => effectData.Quality < 0); 
 
         int positiveStrength = quality + strength;
         int negativeStrength = quality - strength;
 
-        //result.AddRange(GetItemEffectDatas<ToggleEffectData>(negativeStrength, negatriveEffects));
-        result.AddRange(GetItemEffectDatas<ToggleEffectData>(positiveStrength, positiveEffects));
+        //result.AddRange(GetItemEffectDatas<ToggleGlobalEffectData>(negativeStrength, negatriveEffects));
+        result.AddRange(GetItemEffectDatas<ToggleGlobalEffectData>(positiveStrength, positiveEffects));
 
         return result;   
     }
 
-    public List<RewardEffectData> GetRandomRewardEffectDatas(int quality, int strength)
+    public List<RewardGlobalEffectData> GetRandomRewardEffectDatas(int quality, int strength)
     {
-        List<RewardEffectData> result = new();
+        List<RewardGlobalEffectData> result = new();
 
-        List<RewardEffectData> rewardEffectDatas = _temModifiersSelectionContainer.ItemRewardEffectCotainer.EffectDatas;
+        List<RewardGlobalEffectData> rewardEffectDatas = _temModifiersSelectionContainer.ItemRewardEffectCotainer.EffectDatas;
 
         int positiveStrength = quality + strength;
         
-        result.AddRange(GetItemEffectDatas<RewardEffectData>(positiveStrength, rewardEffectDatas));
+        result.AddRange(GetItemEffectDatas<RewardGlobalEffectData>(positiveStrength, rewardEffectDatas));
 
         return result;
     }
 
-    private List<T> GetItemEffectDatas<T>(int strength, List<T> itemEffectDats) where T : EffectData
+    private List<T> GetItemEffectDatas<T>(int strength, List<T> itemEffectDats) where T : GlobalEffectData
     {
         if (strength == 0) strength = 1;
         
@@ -76,7 +76,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
         return result;
     }
 
-    private bool TryGetRandomEffectData<T>(int quality, List<T> datas, out T data) where T : EffectData
+    private bool TryGetRandomEffectData<T>(int quality, List<T> datas, out T data) where T : GlobalEffectData
     {
         List<T> selectedDatas = datas.FindAll(data => data.Quality == quality);
         data = null;
@@ -87,7 +87,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
             T selectedData = selectedDatas[randomIndex];
             
-            if (!selectedData.HasApperanceCondition || _effectFactory.GetAppearanceConditionValue(selectedData))
+            if (!selectedData.HasApperanceCondition || _globalEffectFactory.GetAppearanceConditionValue(selectedData))
             {
                 data = selectedData;
                 return true;

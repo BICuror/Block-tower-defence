@@ -1,8 +1,8 @@
 #if UNITY_EDITOR
 using UnityEditor;
 
-[CustomEditor(typeof(ToggleEffectData))]
+[CustomEditor(typeof(ToggleGlobalEffectData))]
 
-public class ToggleEffectDataEditor : EffectDataCustomEditor<ToggleEffect> {}
+public class ToggleEffectDataEditor : EffectDataCustomEditor<GlobalToggleEffect> {}
 
 #endif

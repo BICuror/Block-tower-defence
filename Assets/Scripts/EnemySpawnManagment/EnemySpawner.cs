@@ -68,7 +68,7 @@ namespace Combat
     
             spawnedEnemy.transform.position = transform.position;
     
-            spawnedEnemy.Health.EnemyDied += RemoveEnemy;
+            spawnedEnemy.EnemyHealth.EnemyDied += RemoveEnemy;
             spawnedEnemy.ComponentsContainer.Get<NavigationAgent>().Initialize();
     
             EnemySpawned.Invoke(spawnedEnemy);
@@ -78,7 +78,7 @@ namespace Combat
         {
             _spawnedEnemies.Remove(enemyEntity);
     
-            enemyEntity.Health.EnemyDied -= RemoveEnemy;
+            enemyEntity.EnemyHealth.EnemyDied -= RemoveEnemy;
     
             EnemyDied?.Invoke(enemyEntity);
     

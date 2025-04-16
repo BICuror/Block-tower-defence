@@ -1,15 +1,14 @@
-using UnityEngine;
+using Cashing;
 
 namespace Combat.Animation
 {
-    [RequireComponent(typeof(EntityHealth))]
-    
     public sealed class HitShaker : Shaker
     {
-        private void Awake()
+        [Cached] private EntityHealth _health;
+        
+        private void Start()
         {
-            base.Awake();
-            GetComponent<EntityHealth>().Damaged += Shake;
+            _health.Damaged += Shake;
         }
     }
 }

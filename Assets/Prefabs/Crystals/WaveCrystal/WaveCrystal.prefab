@@ -4998,6 +4998,7 @@ GameObject:
   - component: {fileID: 3846957756626827811}
   - component: {fileID: 1305424881754724633}
   - component: {fileID: 4408472262627033674}
+  - component: {fileID: -1740854102193638907}
   m_Layer: 13
   m_Name: WaveCrystal
   m_TagString: Draggable
@@ -5119,6 +5120,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b746f208c7515e140aff6b3ab4bd7d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1740854102193638907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944490093618053086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inspectableObjectName: 
+  _inspectableObjectDescription: 
 --- !u!1 &2403032933835088123
 GameObject:
   m_ObjectHideFlags: 0

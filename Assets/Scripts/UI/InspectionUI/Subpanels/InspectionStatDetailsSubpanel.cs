@@ -2,9 +2,8 @@ using UnityEngine;
 using System;
 using TMPro;
 
-public sealed class InspectionStatDetailsSubpanel : MonoBehaviour
+public sealed class InspectionStatDetailsSubpanel : InspectionSubpanelBase
 {
-    [SerializeField] private InspectionSubpanelHeader _header;
     [SerializeField] private TextMeshProUGUI _totalStatValueTextField;
     [SerializeField] private TextMeshProUGUI _multiplierStatValueTextField;
     [SerializeField] private TextMeshProUGUI _flatAdditionStatValueTextField;
@@ -15,9 +14,9 @@ public sealed class InspectionStatDetailsSubpanel : MonoBehaviour
     public void Initialize(Stat stat, StatTooltipTagData tagData)
     {
         _stat = stat;
-        
-        _header.SetTagData(tagData);
 
+        SetTagData(tagData);
+        
         stat.ValueChanged += _ => UpdateStatValueDisplays();
         UpdateStatValueDisplays();
     }

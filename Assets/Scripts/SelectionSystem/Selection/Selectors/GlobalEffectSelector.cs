@@ -13,7 +13,7 @@ public sealed class GlobalEffectSelector : MonoBehaviour
     
     public async void StartGlobalEffectSelection()
     {
-        List<ToggleEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_optionsAmount);
+        List<ToggleGlobalEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_optionsAmount);
 
         for (int i = 0; i < buildingDatas.Count; i++)
         {

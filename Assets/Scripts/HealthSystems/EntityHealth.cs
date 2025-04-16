@@ -1,10 +1,9 @@
-using UnityEngine;
 using Cashing;
 using System;
 
 namespace Combat
 {
-    public abstract class EntityHealth : MonoBehaviour, IHealth
+    public abstract class EntityHealth : IHealth
     {
         [Cached] private CombatEntity _entity;
         [Cached] private MaxHealth _maxHpStat;
@@ -12,13 +11,14 @@ namespace Combat
         
         public Action Damaged;
         public Action Healed;
+        public Action Died;
         public Action<CombatEntity> EntityDied; 
         
-        private void Start() => Initialize();
         public void Initialize()
         {
             _currentHp = _maxHpStat.Value;
         }
+        
         public float GetMaxHp() => _maxHpStat.Value;
         public float GetHp() => _currentHp;
         public float GetHpPercent() => _currentHp / _maxHpStat.Value;
@@ -56,6 +56,7 @@ namespace Combat
         public virtual void Die()
         {
             _currentHp = 0;
+            Died?.Invoke();
             EntityDied?.Invoke(_entity);
         }
     }   

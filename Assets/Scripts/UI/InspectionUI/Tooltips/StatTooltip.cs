@@ -1,3 +1,4 @@
+using UnityEngine.UI;
 using System.Linq;
 using UnityEngine;
 using System;
@@ -5,7 +6,8 @@ using TMPro;
 
 public sealed class StatTooltip : BaseTooltip
 {
-    [Header("UI Elements")]
+    [Header("UI Elements")] 
+    [SerializeField] private Image _statIconImage;
     [SerializeField] private TextMeshProUGUI _statNameText;
     [SerializeField] private TextMeshProUGUI _statValueText;
     [Header("Links")]
@@ -23,8 +25,9 @@ public sealed class StatTooltip : BaseTooltip
         if (tagData == null) return;
 
         _tagDataContainer.StatTagDatas.Add(tagData);
-        
-        _statNameText.text = _tooltipTextParser.ParseTooltipText($"#{tagData.Tag}");
+
+        _statIconImage.sprite = tagData.IconSprite;
+        _statNameText.text = _tooltipTextParser.GetTagHeaderWithoutIcon(tagData);
         _statValueText.text = Math.Round(stat.Value, 2).ToString();
     }
 }

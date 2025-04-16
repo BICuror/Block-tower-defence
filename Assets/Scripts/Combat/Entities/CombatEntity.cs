@@ -13,7 +13,8 @@ namespace Combat
 
         public CachedComponentsContainer ComponentsContainer => CachedComponentsContainer;
         public StatContainer StatContainer => _statContainer;
-        public IHealth Health => CachedComponentsContainer.Get<EntityHealth>();
         public EntityDamageModifierContainer DamageModifierContainer => _damageModifierContainer;
+        
+        public abstract EntityHealth Health { get; }
     }
 }

@@ -15,21 +15,20 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
 
     public void SetTooltipParser(TooltipParseTagDataContainer tooltipParseTagDataContainer)
     {
-        DestoryAllSubpanels();
+        ClearAllSubpanels();
 
         tooltipParseTagDataContainer.StatTagDatas.ForEach(tagData =>
-        {
-            InspectionStatSubpanel statSubpanel = Instantiate(_statSubpanelPrefab, _subpanelsContainer);
-            statSubpanel.Initialize(tagData);
-
-            if (_inspectedEntity != null)
+        { 
+            if (_inspectedEntity.StatContainer.Has(Type.GetType(tagData.AssociatedStatTypeName))) 
             {
-                if (_inspectedEntity.StatContainer.Has(Type.GetType(tagData.AssociatedStatTypeName)))
-                {
-                    Stat stat = _inspectedEntity.StatContainer.Get(Type.GetType(tagData.AssociatedStatTypeName));
-                    InspectionStatDetailsSubpanel statDetailsSubpanel = Instantiate(_statdetailsSubpanelPrefab, _subpanelsContainer);
-                    statDetailsSubpanel.Initialize(stat, tagData);
-                }
+                Stat stat = _inspectedEntity.StatContainer.Get(Type.GetType(tagData.AssociatedStatTypeName));
+                InspectionStatDetailsSubpanel statDetailsSubpanel = Instantiate(_statdetailsSubpanelPrefab, _subpanelsContainer);
+                statDetailsSubpanel.Initialize(stat, tagData);
+            }
+            else
+            {
+                InspectionStatSubpanel statSubpanel = Instantiate(_statSubpanelPrefab, _subpanelsContainer);
+                statSubpanel.Initialize(tagData);
             }
         });
 
@@ -46,7 +45,7 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
         });
     }
     
-    private void DestoryAllSubpanels()
+    public void ClearAllSubpanels()
     {
         for (int i = 0; i < _subpanelsContainer.childCount; i++)
         {

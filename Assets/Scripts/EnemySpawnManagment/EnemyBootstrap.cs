@@ -5,8 +5,6 @@ using Cysharp.Threading.Tasks;
 
 namespace Combat
 {
-    [RequireComponent(typeof(EnemyHealth))]
-    
     public sealed class EnemyBootstrap : MonoBehaviour
     {
         [SerializeField] private GPUInstancerEnabler _GPUInstancerEnabler;

@@ -9,6 +9,21 @@ public sealed class TooltipTextParser : MonoBehaviour
 
     [SerializeField] private TooltipTextParseDataContainer _tooltipTextParseDataContainer;
     [SerializeField] private TooltipAllTagDataContainer _allTagDataContainer;
+
+    public string GetTagDescription(TooltipTagData tagData)
+    {
+        return WrapInColor(tagData.TagText + ": ", tagData.TextColor) + ParseTooltipText(tagData.Description);
+    }
+    
+    public string GetTagHeaderWithoutIcon(TooltipTagData tagData)
+    {
+        return WrapInColor(tagData.TagText, tagData.TextColor);
+    }
+    
+    public string GetDefaultTagHeader(TooltipTagData tagData)
+    {
+        return GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData);
+    }
     
     public string ParseTooltipText(string tooltipText)
     {
@@ -35,12 +50,10 @@ public sealed class TooltipTextParser : MonoBehaviour
     private string ParseByTooltipTagData(string tooltipText, TooltipTagData tagData)
     {
         string initialParseText = TOOLTIP_TAG_START_CHAR + tagData.Tag;
-        
-        string finalText = GetStringSpriteFromData(tagData) + tagData.FinalText;
 
         while (tooltipText.Contains(initialParseText))
         {
-            tooltipText = tooltipText.Replace(initialParseText, finalText);
+            tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
         }
         
         return tooltipText;
@@ -85,6 +98,17 @@ public sealed class TooltipTextParser : MonoBehaviour
         text = text.Insert(replacementIndex, replacementValue); 
         
         return text;
+    }
+
+    #endregion
+
+    #region ColorParsing
+
+    private string WrapInColor(string initialString, Color color)
+    {
+        string colorCode = ColorUtility.ToHtmlStringRGB(color);
+        
+        return $"<color=#{colorCode}>{initialString}</color>";
     }
 
     #endregion

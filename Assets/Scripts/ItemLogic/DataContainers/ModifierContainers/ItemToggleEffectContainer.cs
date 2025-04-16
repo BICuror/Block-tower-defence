@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed class ItemToggleEffectContainer : ScriptableObject
 {
-    [SerializeField] private List<ToggleEffectData> _itemToggleEffectDatas;
+    [SerializeField] private List<ToggleGlobalEffectData> _itemToggleEffectDatas;
     
-    public List<ToggleEffectData> EffectDatas => new List<ToggleEffectData>(_itemToggleEffectDatas);
+    public List<ToggleGlobalEffectData> EffectDatas => new List<ToggleGlobalEffectData>(_itemToggleEffectDatas);
 }

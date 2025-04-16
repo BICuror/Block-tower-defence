@@ -14,7 +14,6 @@ namespace Combat
         {
             base.Die();
             BuildingDestroyed?.Invoke(_ownerEntity);
-            Destroy(gameObject);
         }
     }
 }

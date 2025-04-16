@@ -70,24 +70,14 @@ public sealed class DraggableCreator : MonoBehaviour
     private Vector3 GetRandomSpawnPosition(DraggableObject draggableObject, Vector3 centerPosition, int radius)
     {
         Vector2Int roundedCenterPosition = new Vector2Int(Mathf.RoundToInt(centerPosition.x), Mathf.RoundToInt(centerPosition.z));
-
-        while (radius <= _islandDataContainer.Data.IslandSize)
-        {
-            List<Vector2Int> foundPositions = TileMap.GetSuitablePositionsInRaduis(IsSuitablePosition, roundedCenterPosition, radius);
-
-            if (foundPositions.Count > 0)
-            {
-                Vector2Int selectedPosition = foundPositions[Random.Range(0, foundPositions.Count)];
-                
-                float height = draggableObject.GetPlacementModule().GetHeight(selectedPosition);
-
-                return new Vector3(selectedPosition.x, height, selectedPosition.y);
-            }
-            
-            radius++;
-        }
         
-        throw new Exception($"No suitable position for {draggableObject} found, while trying to spawn at random position");
+        List<Vector2Int> foundPositions = TileMap.ForceGetSuitablePositionsInRadius(IsSuitablePosition, roundedCenterPosition, radius);
+        
+        Vector2Int selectedPosition = foundPositions[Random.Range(0, foundPositions.Count)];
+        
+        float height = draggableObject.GetPlacementModule().GetHeight(selectedPosition);
+        
+        return new Vector3(selectedPosition.x, height, selectedPosition.y);
 
         bool IsSuitablePosition(Vector2Int position)
         {

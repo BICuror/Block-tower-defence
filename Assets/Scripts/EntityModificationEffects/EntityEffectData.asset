@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: EntityEffectData
   m_EditorClassIdentifier: 
-  _quality: 2
-  _isUnique: 0
-  _effectTypeName: TestEntityEffect
-  _apperanceConditionTypeName: 
+  _effectTypeName: TestEntityModificatior
+  _argumentsContainer:
+    _argumentItems: []
+  _modificatorName: test mod
+  _modificatorDescription: testing dis shit #dmg
+  AllEffectTypeNames:
+  - TestEntityModificatior

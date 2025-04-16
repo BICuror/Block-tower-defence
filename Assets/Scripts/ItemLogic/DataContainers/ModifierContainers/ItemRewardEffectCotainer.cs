@@ -5,7 +5,7 @@ using UnityEngine;
 
 public sealed class ItemRewardEffectCotainer : ScriptableObject
 {
-    [SerializeField] private List<RewardEffectData> _itemRewardEffectData;
+    [SerializeField] private List<RewardGlobalEffectData> _itemRewardEffectData;
     
-    public List<RewardEffectData> EffectDatas => new List<RewardEffectData>(_itemRewardEffectData);
+    public List<RewardGlobalEffectData> EffectDatas => new List<RewardGlobalEffectData>(_itemRewardEffectData);
 }

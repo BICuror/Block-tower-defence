@@ -13,14 +13,14 @@ public sealed class GlobalBuildingContainer : MonoBehaviour
     {
         if (_globalBuildingEntities.Contains(buildingEntity)) throw new DuplicateNameException();
 
-        buildingEntity.ComponentsContainer.Get<BuildingHealth>().BuildingDestroyed += RemoveUponDestroyment;
+        buildingEntity.BuildingHealth.BuildingDestroyed += RemoveUponDestroyment;
         
         _globalBuildingEntities.Add(buildingEntity);
     }
 
     private void RemoveUponDestroyment(BuildingEntity buildingEntity)
     {
-        buildingEntity.ComponentsContainer.Get<BuildingHealth>().BuildingDestroyed -= RemoveUponDestroyment;
+        buildingEntity.BuildingHealth.BuildingDestroyed -= RemoveUponDestroyment;
         
         _globalBuildingEntities.Remove(buildingEntity);
     }

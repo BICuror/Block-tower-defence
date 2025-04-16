@@ -4,15 +4,15 @@ public sealed class GlobalEffectSelectionOptionObject : SelectionOptionObject
 {
     [Inject] private GlobalEffectContainer _globalEffectContainer;
  
-    private ToggleEffectData _toggleEffectData;
+    private ToggleGlobalEffectData _toggleGlobalEffectData;
     
     public override void ApplyEffect()
     {
-        _globalEffectContainer.AddEffect(_toggleEffectData);
+        _globalEffectContainer.AddEffect(_toggleGlobalEffectData);
     }
 
-    public void SetGlobalEffectData(ToggleEffectData data)
+    public void SetGlobalEffectData(ToggleGlobalEffectData data)
     {
-        _toggleEffectData = data;
+        _toggleGlobalEffectData = data;
     }
 }

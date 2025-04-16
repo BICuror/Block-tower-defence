@@ -1,29 +1,29 @@
 using System.Collections;
 using UnityEngine.Events;
 using UnityEngine;
+using Cashing;
 
 namespace Combat.Animation
 {
-    [RequireComponent(typeof(EntityHealth))]
-    
     public sealed class HitHighlighter : MonoBehaviour
     {
+        [Cached] private EntityHealth _entityHealth;
         [SerializeField] private Material _highlightMaterial;
-        private Material _defaultMaterial;
-    
         [SerializeField] private MeshRenderer _meshRenderer;
-    
+        
+        private Material _defaultMaterial;
+        
         public UnityEvent Highlited;
         public UnityEvent Unhiglited;
     
         private float _highlightDuration = 0.1f;
         private YieldInstruction _yieldInstruction;
     
-        private void Awake()
+        private void Start()
         {
             _defaultMaterial = _meshRenderer.sharedMaterial;
     
-            GetComponent<EntityHealth>().Damaged += HiglightEntity;
+            _entityHealth.Damaged += HiglightEntity;
     
             _yieldInstruction = new WaitForSeconds(_highlightDuration);
     

@@ -1,6 +1,6 @@
 using Zenject;
 
-public sealed class StartAttackStateProperty : RewardEffect
+public sealed class StartAttackStateProperty : GlobalRewardEffect
 {
     [Inject] private WaveStateMachine _waveStateMachine;
     

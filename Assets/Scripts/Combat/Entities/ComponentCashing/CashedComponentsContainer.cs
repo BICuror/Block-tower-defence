@@ -6,7 +6,7 @@ namespace Cashing
 {
     public sealed class CachedComponentsContainer
     {
-        private readonly Dictionary<Type, Component> _cachedComponents = new();
+        private readonly Dictionary<Type, object> _cachedComponents = new();
         private readonly Dictionary<Type, bool> _hasComponent = new();
         
         private GameObject _ownerObject;
@@ -31,9 +31,9 @@ namespace Cashing
             _hasComponent.Add(componentType, false);
             return false;
         }
-        public Component Get(Type componentType)
+        public object Get(Type componentType)
         {
-            if (!_cachedComponents.TryGetValue(componentType, out Component component)) 
+            if (!_cachedComponents.TryGetValue(componentType, out object component)) 
             {
                 component = CashComponent(componentType);
             }
@@ -41,16 +41,17 @@ namespace Cashing
             return component;
         }
         
-        private Component CashComponent(Type componentType)
+        private object CashComponent(Type componentType)
         {
-            Component component = GetComponentFromOwner(componentType);
+            object component = GetComponentFromOwner(componentType);
             
             _cachedComponents.Add(componentType, component);
             _hasComponent.Add(componentType, true);
 
             return component;
         }
-        private Component GetComponentFromOwner(Type componentType)
+        
+        private object GetComponentFromOwner(Type componentType)
         {
             if (TryGetComponentFromOwner(componentType, out Component component))
             {
@@ -75,19 +76,28 @@ namespace Cashing
         #endregion
         
         #region Generic
-        public bool Has<T>() where T : Component
+
+        public void Add<T>(object component)
+        {
+            Type objectType = typeof(T);
+            
+            _cachedComponents.Add(objectType, component);
+            _hasComponent.Add(objectType, true);
+        }
+        
+        public bool Has<T>()
         {
             return HasComponent(typeof(T));
         }
-        public T Get<T>() where T : Component 
+        public T Get<T>() 
         {
             return (T)Get(typeof(T));
         }
-        private Component CashComponent<T>() where T: Component
+        private object CashComponent<T>()
         {
             return CashComponent(typeof(T));
         }
-        private T GetComponentFromOwner<T>() where T : Component
+        private T GetComponentFromOwner<T>()
         {
             return (T)GetComponentFromOwner(typeof(T));
         }

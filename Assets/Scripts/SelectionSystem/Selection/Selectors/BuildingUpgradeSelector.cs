@@ -36,7 +36,7 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
     private List<EntityModificatorData> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
     {
         List<EntityModificatorData> resultEffectDatas = new();
-        List<EntityModificatorData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificationEffectContainer>().AvailableEffects;
+        List<EntityModificatorData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificatorsContainer>().AvailableModificators;
 
         for (int i = 0; i < amount; i++)
         {

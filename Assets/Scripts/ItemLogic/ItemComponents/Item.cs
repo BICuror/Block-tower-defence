@@ -6,16 +6,20 @@ using Zenject;
 public class Item : DraggableObject
 {
     [Inject] private GlobalEffectContainer _globalEffectContainer;
-    [Inject] private EffectFactory _effectFactory;
+    [Inject] private GlobalEffectFactory _globalEffectFactory;
     
-    [SerializeField] private List<ToggleEffectData> _initialRewardEffectDatas;
+    [SerializeField] private List<ToggleGlobalEffectData> _initialRewardEffectDatas;
     
-    private List<ToggleEffectData> _toggleEffectDatas = new();
-    private List<RewardEffectData> _rewardDatas = new();
+    private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
+    private List<RewardGlobalEffectData> _rewardDatas = new();
     
-    private List<RewardEffect> _rewards = new();
+    private List<GlobalRewardEffect> _rewards = new();
 
     private int _duration;
+
+    public List<RewardGlobalEffectData> RewardDatas => _rewardDatas;
+    public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
+    public int Duration => _duration;
     
     public Action<Item> ItemPickedUp;
     public Action<Item> DurationEnded;
@@ -27,8 +31,8 @@ public class Item : DraggableObject
         AddToggleEffectDatas(_initialRewardEffectDatas);
     }
 
-    public void AddToggleEffectDatas(List<ToggleEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
-    public void AddRewardEffectDatas(List<RewardEffectData> rewardDatas) => _rewardDatas.AddRange(rewardDatas);
+    public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
+    public void AddRewardEffectDatas(List<RewardGlobalEffectData> rewardDatas) => _rewardDatas.AddRange(rewardDatas);
     
     public void SetDuration(int duration)
     {
@@ -51,7 +55,7 @@ public class Item : DraggableObject
     public void EnableEffects()
     {
         _globalEffectContainer.AddEffects(_toggleEffectDatas);
-        _effectFactory.CreateRewardEffect(_rewardDatas[0]).GrantReward();
+        _globalEffectFactory.CreateRewardEffect(_rewardDatas[0]).GrantReward();
     }
     
     public void DisableEffects()

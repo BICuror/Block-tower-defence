@@ -5,9 +5,9 @@ public abstract class EffectDataCustomEditor<T> : CustomTypeDropdownEditor<T>
 {
     protected override void ApplyDropdownItems(List<string> items)
     {
-        EffectData effectData = (EffectData)target;
+        GlobalEffectData globalEffectData = (GlobalEffectData)target;
 
-        effectData.AllEffectTypeNames = items;
+        globalEffectData.AllEffectTypeNames = items;
     }
 }
 #endif

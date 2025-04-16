@@ -1,16 +1,18 @@
+using Cashing;
 using Combat;
 using UnityEngine;
 
 public sealed class EnemyDeathExplotionManager : MonoBehaviour
 {
+    [Cached] private EntityHealth _entityHealth;
     [SerializeField] private VisualEffectHandler _visualEffectHandler;    
 
-    private void Awake()
+    private void Start()
     {
-        GetComponent<EntityHealth>().EntityDied += PlayExplotionVFX;
+        _entityHealth.EntityDied += PlayExplotionVFX;
     }
 
-    public void PlayExplotionVFX(CombatEntity enemyObject)
+    private void PlayExplotionVFX(CombatEntity enemyObject)
     {
         _visualEffectHandler.transform.SetParent(null);
 

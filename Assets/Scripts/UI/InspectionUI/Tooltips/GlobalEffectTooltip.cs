@@ -1,18 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class GlobalEffectTooltip : MonoBehaviour
+public sealed class GlobalEffectTooltip : BaseTooltip
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("UI Elements")]
+    [SerializeField] private TextMeshProUGUI _modificatorNameText;
+    [SerializeField] private TextMeshProUGUI _modificatorDescriptionText;
+    [Header("Links")] 
+    [SerializeField] private TooltipDataParser _tooltipDataParser;
+    [SerializeField] private TooltipTextParser _tooltipTextParser;
+    
+    private TooltipParseTagDataContainer _tagDataContainer = new();
 
-    // Update is called once per frame
-    void Update()
+    protected override TooltipParseTagDataContainer TagDataContainer => _tagDataContainer;
+    
+    public void SetEntityModificator(GlobalEffectData entityModificatorData)
     {
-        
+        _modificatorNameText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.EffectName);
+        _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.EffectDescription);
     }
 }

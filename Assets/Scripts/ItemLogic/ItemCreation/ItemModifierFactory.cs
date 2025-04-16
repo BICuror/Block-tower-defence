@@ -6,9 +6,9 @@ public sealed class ItemModifierFactory : MonoBehaviour
 {
     [Inject] private DiContainer _diContainer;
 
-    public ToggleEffect CreateProperty(Type type) => CreateEffectInstance<ToggleEffect>(type);
+    public GlobalToggleEffect CreateProperty(Type type) => CreateEffectInstance<GlobalToggleEffect>(type);
 
-    public RewardEffect CreateReward(Type type) => CreateEffectInstance<RewardEffect>(type);
+    public GlobalRewardEffect CreateReward(Type type) => CreateEffectInstance<GlobalRewardEffect>(type);
 
     private T CreateEffectInstance<T>(Type type)
     {

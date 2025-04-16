@@ -567,7 +567,6 @@ GameObject:
   - component: {fileID: 636929605024663641}
   - component: {fileID: 2136234543884238458}
   - component: {fileID: -4309444126084503179}
-  - component: {fileID: 2821463210539011180}
   - component: {fileID: 3707240021965539462}
   - component: {fileID: 3382772891182324139}
   - component: {fileID: 3706642640325084935}
@@ -580,6 +579,8 @@ GameObject:
   - component: {fileID: -4545223480081874719}
   - component: {fileID: -4194356339259609622}
   - component: {fileID: 1053291735897862576}
+  - component: {fileID: 8462334951062929804}
+  - component: {fileID: 5557728415372479728}
   m_Layer: 9
   m_Name: BlankEnemy
   m_TagString: Enemy
@@ -656,19 +657,6 @@ CapsuleCollider:
   m_Height: 1.4491887
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2821463210539011180
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340751470710948110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecd0e90006cbbdc45a7f8ea67bda557d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _attackDamage: 10
 --- !u!114 &3707240021965539462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,6 +863,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78980f7ab429c864b82b2b729aa524b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8462334951062929804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340751470710948110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inspectableObjectName: Pesant
+  _inspectableObjectDescription: Father, i think you should kill him
+--- !u!114 &5557728415372479728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7340751470710948110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3837b236e993244e922495d3c287a80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allAvailableModificators: []
 --- !u!1 &9064062526424563897
 GameObject:
   m_ObjectHideFlags: 0

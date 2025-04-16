@@ -5,37 +5,37 @@ using Zenject;
 public sealed class GlobalEffectContainer : MonoBehaviour
 {
     [Inject] private DiContainer _container;
-    [Inject] private EffectFactory _effectFactory;
+    [Inject] private GlobalEffectFactory _globalEffectFactory;
     
-    private Dictionary<ToggleEffectData, List<ToggleEffect>> _activeToggleEffects = new();
+    private Dictionary<ToggleGlobalEffectData, List<GlobalToggleEffect>> _activeToggleEffects = new();
 
-    public void AddEffects(List<ToggleEffectData> effectDatas) => effectDatas.ForEach(data => AddEffect(data));
+    public void AddEffects(List<ToggleGlobalEffectData> effectDatas) => effectDatas.ForEach(data => AddEffect(data));
     
-    public void AddEffect(ToggleEffectData effectData)
+    public void AddEffect(ToggleGlobalEffectData globalEffectData)
     {
-        ToggleEffect effect = _effectFactory.CreateToggleEffect(effectData);
+        GlobalToggleEffect effect = _globalEffectFactory.CreateToggleEffect(globalEffectData);
         effect.Enable();
 
-        if (_activeToggleEffects.TryGetValue(effectData, out var effectList))
+        if (_activeToggleEffects.TryGetValue(globalEffectData, out var effectList))
         {
             effectList.Add(effect);
         }
         else
         {
-            _activeToggleEffects[effectData] = new() {effect};
+            _activeToggleEffects[globalEffectData] = new() {effect};
         }
     }
     
-    public void RemoveEffects(List<ToggleEffectData> effectDatas) => effectDatas.ForEach(data => RemoveEffect(data));
+    public void RemoveEffects(List<ToggleGlobalEffectData> effectDatas) => effectDatas.ForEach(data => RemoveEffect(data));
 
-    public void RemoveEffect(ToggleEffectData effectData)
+    public void RemoveEffect(ToggleGlobalEffectData globalEffectData)
     {
-        if (_activeToggleEffects.TryGetValue(effectData, out var effectList))
+        if (_activeToggleEffects.TryGetValue(globalEffectData, out var effectList))
         {
-            ToggleEffect effect = effectList[^1];
+            GlobalToggleEffect effect = effectList[^1];
             effect.Disable();
-            _activeToggleEffects[effectData].Remove(effect);
+            _activeToggleEffects[globalEffectData].Remove(effect);
         }
-        else throw new KeyNotFoundException($"Tried to remove an effect {effectData.EffectType} but it doesn't exist");
+        else throw new KeyNotFoundException($"Tried to remove an effect {globalEffectData.EffectType} but it doesn't exist");
     }
 }

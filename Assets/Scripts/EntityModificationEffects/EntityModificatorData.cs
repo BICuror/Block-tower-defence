@@ -7,7 +7,7 @@ using System;
 
 public class EntityModificatorData : ScriptableObject
 {
-    [Header("EffectData")]
+    [Header("GlobalEffectData")]
     [Dropdown("AllEffectTypeNames")] [SerializeField] private string _effectTypeName;
     [SerializeField] private ArgumentsContainer _argumentsContainer;
  

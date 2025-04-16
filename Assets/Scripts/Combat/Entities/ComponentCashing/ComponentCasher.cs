@@ -43,20 +43,20 @@ namespace Cashing
             }
         }
 
-        private void InjectCached(Component component)
+        public void InjectCached(object injectReciverObject)
         {
-            Type componentType = component.GetType();
+            Type componentType = injectReciverObject.GetType();
             
             if (IsIgnoredComponent(componentType)) return;
             
             if (IsInjectable(componentType))
-                CacheFields(GetFieldsToCache(componentType), component);
+                CacheFields(GetFieldsToCache(componentType), injectReciverObject);
             
-            List<Type> subTypes = GetInjectableSubTypes(component);
+            List<Type> subTypes = GetInjectableSubTypes(injectReciverObject);
 
             subTypes.ForEach(subType =>
             {
-                CacheFields(GetFieldsToCache(subType), component);
+                CacheFields(GetFieldsToCache(subType), injectReciverObject);
             });
         }
 
@@ -74,11 +74,11 @@ namespace Cashing
             return false;
         }
         
-        private List<Type> GetInjectableSubTypes(Component component)
+        private List<Type> GetInjectableSubTypes(object injectReciverObject)
         {
             List<Type> subTypes = new();
             
-            Type baseType = component.GetType().BaseType();
+            Type baseType = injectReciverObject.GetType().BaseType();
             
             while (baseType != null && baseType != typeof(Component))
             {
@@ -108,18 +108,18 @@ namespace Cashing
             return fields;
         }
         
-        private void CacheFields(FieldInfo[] fields, Component component) 
+        private void CacheFields(FieldInfo[] fields, object injectReciverObject) 
         {
             for (int i = 0; i < fields.Length; i++)
             {
                 Type type = fields[i].FieldType;
                 try
                 {
-                    fields[i].SetValue(component, Resolve(type));
+                    fields[i].SetValue(injectReciverObject, Resolve(type));
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"Failed to resolve component {type.Name} for {component.GetType().Name}");
+                    throw new Exception($"Failed to resolve component {type.Name} for {injectReciverObject.GetType().Name}");
                 }
             }
         }

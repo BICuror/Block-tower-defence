@@ -22,10 +22,10 @@ public sealed class ItemFactory : MonoBehaviour
         int duration = 1;
         item.SetDuration(duration);
         
-        List<ToggleEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(quality, strength);
+        List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(quality, strength);
         item.AddToggleEffectDatas(toggleEfectDatas);
         
-        List<RewardEffectData> rewardDatas = _effectSelector.GetRandomRewardEffectDatas(quality, strength);
+        List<RewardGlobalEffectData> rewardDatas = _effectSelector.GetRandomRewardEffectDatas(quality, strength);
         item.AddRewardEffectDatas(rewardDatas);
     }
 }

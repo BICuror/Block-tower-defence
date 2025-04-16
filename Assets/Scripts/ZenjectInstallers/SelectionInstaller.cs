@@ -12,6 +12,7 @@ public sealed class SelectionInstaller : MonoInstaller
         Container.Bind<SelectionManager>().FromInstance(_selectionManager).AsSingle();
         Container.Bind<ItemContainerManager>().FromInstance(_itemContainerManager).AsSingle();
         Container.Bind<ItemFactory>().FromInstance(_itemFactory).AsSingle();
-        Container.Bind<EffectFactory>().AsSingle();
+        Container.Bind<GlobalEffectFactory>().AsSingle();
+        Container.Bind<EntityModificatorFactory>().AsSingle();
     }
 }

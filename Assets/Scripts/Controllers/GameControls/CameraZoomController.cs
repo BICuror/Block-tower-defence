@@ -1,13 +1,11 @@
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Camera))]
+[RequireComponent(typeof(GameController))]
 
 public sealed class CameraZoomController : MonoBehaviour
 {
-    public UnityEvent Zoomed;
-
     [Header("ZoomSettings")]
     [SerializeField] private float _zoomSensetivity;
     [SerializeField] private float _minZoomValue;
@@ -18,12 +16,14 @@ public sealed class CameraZoomController : MonoBehaviour
     [SerializeField] private AnimationCurve _zoomSmoothingCurve;
     
     private Camera _camera;
-
+    private GameController _gameController;
+    
     private float _finalZoom;
     private Tween _zoomTween;
 
     private void OnEnable()
     {
+        _gameController = GetComponent<GameController>();
         _camera = GetComponent<Camera>();
 
         _finalZoom = _camera.orthographicSize;
@@ -34,12 +34,12 @@ public sealed class CameraZoomController : MonoBehaviour
 
     private void ChangeZoomValue(float changeValue)
     {
+        if (_gameController.State == GameController.ControllerState.Inspecting) return;
+        
         _finalZoom = Mathf.Clamp( _finalZoom + changeValue, _minZoomValue, _maxZoomValue);
 
         if (_zoomTween != null) _zoomTween.Kill();
         _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve);
-    
-        Zoomed.Invoke();
     }
 
     private void SetZoom(float value) => _camera.orthographicSize = value;

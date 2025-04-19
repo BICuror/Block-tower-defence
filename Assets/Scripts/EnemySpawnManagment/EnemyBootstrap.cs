@@ -11,7 +11,8 @@ namespace Combat
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private MeshRenderer _meshRenderer;   
         [SerializeField] private Animator _animator;
-        
+
+        [Cached] private CombatEntity _combatEntity;
         [Cached] private NavigationAgent _navMeshAgent;
         [Cached] private EnemyHealth _enemyHealth;
         [Cached] private StatContainer _statContainer;

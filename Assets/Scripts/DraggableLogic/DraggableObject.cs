@@ -46,7 +46,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
         DraggablePlaced?.Invoke(this);
     }
     
-    bool IDraggable.IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
+    public bool IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
     
     DragAnimationObject IDraggable.GetDragAnimationObject() => _dragAnimationObject;
     

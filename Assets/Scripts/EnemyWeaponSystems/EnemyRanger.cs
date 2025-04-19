@@ -12,7 +12,7 @@ public sealed class EnemyRanger : MonoBehaviour
     [SerializeField] private List<Effect> _effectsToApply;
 
     [Header("Links")]
-    [SerializeField] private BuildingHealthAreaScaner _buildingHealthScaner;
+    [SerializeField] private BuildingAreaScaner _buildingHealthScaner;
     [SerializeField] private EnemyWeapon _projectilePrefab;
     [SerializeField] private Transform _shootingPoint;
 

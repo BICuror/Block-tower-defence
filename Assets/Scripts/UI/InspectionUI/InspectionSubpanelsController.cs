@@ -19,7 +19,7 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
 
         tooltipParseTagDataContainer.StatTagDatas.ForEach(tagData =>
         { 
-            if (_inspectedEntity.StatContainer.Has(Type.GetType(tagData.AssociatedStatTypeName))) 
+            if (_inspectedEntity && _inspectedEntity.StatContainer.Has(Type.GetType(tagData.AssociatedStatTypeName))) 
             {
                 Stat stat = _inspectedEntity.StatContainer.Get(Type.GetType(tagData.AssociatedStatTypeName));
                 InspectionStatDetailsSubpanel statDetailsSubpanel = Instantiate(_statdetailsSubpanelPrefab, _subpanelsContainer);

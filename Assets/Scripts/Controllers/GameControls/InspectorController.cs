@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InspectorController : MonoBehaviour
 {
+    [SerializeField] private EffectInspectionTooltipl _effectInspectionTooltipl;
     [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltip;
     [SerializeField] private InspectionTooltipBase _entityInspectionTooltipPrefab;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
@@ -80,7 +81,16 @@ public class InspectorController : MonoBehaviour
             maxHeight = Mathf.Max(meshRenderers[i].bounds.size.y, maxHeight);
         }*/
 
-        if (inspectable.TryGetComponent<CombatEntity>(out CombatEntity combatEntity))
+        if (inspectable.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
+        {
+            CombatEntity building = buildingOptionObject.GetComponentInChildren(typeof(CombatEntity)) as CombatEntity;
+            
+            InspectionTooltipBase entityTooltip = Instantiate(_entityInspectionTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
+            entityTooltip.SetInspectable(inspectable);
+
+            _currentInspectionTooltip = entityTooltip.gameObject;
+        }
+        else if (inspectable.TryGetComponent<CombatEntity>(out CombatEntity combatEntity))
         {
             InspectionTooltipBase entityTooltip = Instantiate(_entityInspectionTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
             entityTooltip.SetInspectable(inspectable);
@@ -93,6 +103,14 @@ public class InspectorController : MonoBehaviour
             crystalInspectionTooltip.SetInspectable(inspectable);
 
             _currentInspectionTooltip = crystalInspectionTooltip.gameObject;
+        }
+        else if (inspectable.TryGetComponent(out SelectionOptionObject optionObject))
+        {
+            EffectInspectionTooltipl effectInspectionTooltipl = Instantiate(_effectInspectionTooltipl, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
+            effectInspectionTooltipl.SetEffectDescription(optionObject.OptionDescription);
+            effectInspectionTooltipl.SetEffectName(optionObject.OptionName);
+
+            _currentInspectionTooltip = effectInspectionTooltipl.gameObject;
         }
     }
 

@@ -11,6 +11,9 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
     private BuildingEntity _draggablePrefab;
     private BuildingEntity _instantiatedBuilding;
 
+    public override string OptionName { get; }
+    public override string OptionDescription { get; }
+
     public override void ApplyEffect()
     {
         _draggableCreator.CreateDraggableOnRandomPosition(_draggablePrefab.GetComponent<DraggableObject>(), transform.position, 4);

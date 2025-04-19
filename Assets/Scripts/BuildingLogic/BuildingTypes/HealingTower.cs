@@ -10,7 +10,7 @@ public sealed class HealingTower : MonoBehaviour
     public float HealAmount => _healAmount;
 
     [Header("Links")]
-    [SerializeField] private BuildingHealthAreaScaner _buildingHealthAreaScaner;
+    [SerializeField] private BuildingAreaScaner _buildingHealthAreaScaner;
 
     [SerializeField] private BeamSystem _beamSystem;
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1524489999279150314}
   - component: {fileID: 7509068198737408320}
   - component: {fileID: 2556885879529233126}
+  - component: {fileID: -388466812591556620}
   m_Layer: 16
   m_Name: SelectionObject
   m_TagString: Untagged
@@ -68,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3691398b0f0a91c43ad6e3003d098869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 8258358647822520276}
+  _dragAnimationObject: {fileID: 0}
   _placementRequirements: {fileID: 11400000, guid: 737cb8c4e9c18c84ba9352f8e44f5d9f, type: 2}
   _isDraggable: 1
 --- !u!54 &7509068198737408320
@@ -111,3 +112,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buildingParent: {fileID: 7696658143379082585}
+--- !u!114 &-388466812591556620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7332636567985983062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inspectableObjectName: 
+  _inspectableObjectDescription: 

@@ -84,6 +84,7 @@ public sealed class DraggableConnector : MonoBehaviour
     {
         IDraggable draggable = draggableObject.GetComponent<IDraggable>();
         
+        draggable.PickUp();
         draggable.GetDragAnimationObject().ConnectToJoint(_joint);
         
         draggableObject.transform.SetParent(transform); 

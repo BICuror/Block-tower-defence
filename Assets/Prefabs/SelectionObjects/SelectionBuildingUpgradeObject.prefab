@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6982756978523785739}
   - component: {fileID: 2184172808081725063}
   - component: {fileID: 2062154613735269688}
+  - component: {fileID: 2790860968129490377}
   m_Layer: 16
   m_Name: SelectionBuildingUpgradeObject
   m_TagString: Untagged
@@ -69,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3691398b0f0a91c43ad6e3003d098869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _collider: {fileID: 5130176217259767657}
+  _dragAnimationObject: {fileID: 10635814137050252}
   _placementRequirements: {fileID: 11400000, guid: 9236a5acbc8e3664ea7bdb3b4e1de49a, type: 2}
   _isDraggable: 1
 --- !u!54 &2184172808081725063
@@ -111,6 +112,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957600227eec22540b5e702114a491d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2790860968129490377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318490472771455563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inspectableObjectName: 
+  _inspectableObjectDescription: 
 --- !u!1 &7232634966760712780
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +137,7 @@ GameObject:
   - component: {fileID: 8273601428931309997}
   - component: {fileID: 1694758204965478445}
   - component: {fileID: 5507530774567304758}
+  - component: {fileID: 10635814137050252}
   m_Layer: 16
   m_Name: Sphere
   m_TagString: Untagged
@@ -194,3 +210,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &10635814137050252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7232634966760712780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ec91d79cf22dc4a90c93e808a9cdb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _returnToDefaultYRotation: 0

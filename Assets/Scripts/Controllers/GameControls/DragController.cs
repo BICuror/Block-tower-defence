@@ -73,8 +73,6 @@ public sealed class DragController : MonoBehaviour
             _lastValuablePosition = rayInfo.collider.transform.position;
             _draggableConnector.transform.position = rayInfo.collider.transform.position;
 
-            _currentIDraggable.PickUp();
-
             _draggableConnector.PickUpDraggable(_currentDraggableGameObject);
 
             if (CanBePlacedAt(GetPlacmentPosition(_lastValuablePosition)) == false)

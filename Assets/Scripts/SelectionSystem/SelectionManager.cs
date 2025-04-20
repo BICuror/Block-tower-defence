@@ -20,7 +20,7 @@ public sealed class SelectionManager : MonoBehaviour
     {
         await UniTask.WaitForSeconds(1);
         
-        StartSelection(new SelectionSettings(SelectionType.GlobalEffect));
+        StartSelection(new SelectionSettings(SelectionType.Building));
         EnqeueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
         EnqeueSelection(new SelectionSettings(SelectionType.GlobalEffect));
 

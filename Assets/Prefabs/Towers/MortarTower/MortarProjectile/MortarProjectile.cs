@@ -15,7 +15,7 @@ namespace Combat
         protected override void OnInitialized()
         {
             _damage = OwnerEntity.StatContainer.Get<Damage>();
-            _explotion.Initialize(OwnerEntity, 100f);
+            _explotion.Initialize(OwnerEntity);
         }
 
         public async UniTask TravelToPoint(Vector3 finalPosition, float travelTime)

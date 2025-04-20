@@ -8,9 +8,12 @@ using Combat;
 public sealed class BuildingFetch : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
+    [SerializeField] private LayerSetting _roadLayerSetting;
     [SerializeField] private BuildingAreaScaner _buildingAreaScaner;
-    [SerializeField] private float _timePerTile = 1f;
     [SerializeField] private DraggableConnector _draggableConnector;
+    [SerializeField] private float _timePerTile = 1f;
+    [SerializeField] private float _fetchDistance = 3f;
+    [SerializeField] private FetchType _fetchType;
     private BuildingEntity _buildingEntity;
     private FetchState _currentState;
 
@@ -51,39 +54,64 @@ public sealed class BuildingFetch : MonoBehaviour
 
         _draggableConnector.PickUpDraggable(_buildingEntity.gameObject);
 
-        Vector3 newPosition = _buildingEntity.transform.position - _ownerEntity.transform.position +
-                              _buildingEntity.transform.position;
-
-        Vector3Int roundedPosition = Vector3Int.RoundToInt(newPosition);
-
-        Vector2Int roundedPosition2D =
-            new Vector2Int(Mathf.RoundToInt(roundedPosition.x), Mathf.RoundToInt(roundedPosition.z));
-
-        List<Vector2Int> possiblePositions = TileMap.ForceGetSuitablePositionsInRadius(
-            _buildingEntity.ComponentsContainer.Get<BuildingDraggable>().GetPlacementModule().CanBePlaced,
-            roundedPosition2D, 0);
-
-        roundedPosition2D = possiblePositions[Random.Range(0, possiblePositions.Count)];
-
-        Vector3Int roundedPlacePosition = new Vector3Int(roundedPosition2D.x,
-            (int)_buildingEntity.ComponentsContainer.Get<BuildingDraggable>().GetPlacementModule()
-                .GetHeight(roundedPosition2D), roundedPosition2D.y);
-
-        await MoveTo(roundedPlacePosition);
+        Vector3 placementPosition = GetValidPlacementPosition(GetDesiredPlacementPosition());
+        
+        await MoveTo(placementPosition);
 
         if (_currentState != FetchState.Dragging) return;
 
         await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject,
-            _buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), roundedPlacePosition);
+            _buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), placementPosition);
 
         _currentState = FetchState.Idle;
     }
 
     private async UniTask MoveTo(Vector3 position)
     {
-        await _draggableConnector.transform
-            .DOMove(position, Vector3.Distance(position, _draggableConnector.transform.position) * _timePerTile)
-            .AsyncWaitForCompletion();
+        float duration = Vector3.Distance(position, _draggableConnector.transform.position) * _timePerTile;
+        
+        await _draggableConnector.transform.DOMove(position, duration).AsyncWaitForCompletion();
+    }
+
+    private Vector3 GetDesiredPlacementPosition()
+    {
+        switch (_fetchType)
+        {
+            case FetchType.From:
+            {
+                Vector3 direction = (_buildingEntity.transform.position - _ownerEntity.transform.position).normalized;
+
+                return _buildingEntity.transform.position + direction * _fetchDistance;
+            }
+            case FetchType.To:
+            {
+                Vector3 direction = (_ownerEntity.transform.position - _buildingEntity.transform.position).normalized;
+
+                return _buildingEntity.transform.position + direction * _fetchDistance;
+            }
+        }
+
+        return Vector3.one;
+    }
+    
+    private Vector3 GetValidPlacementPosition(Vector3 desiredPosition)
+    {
+        Vector2Int roundedDesiredPosition = new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
+
+        List<Vector2Int> possiblePositions = TileMap.ForceGetSuitablePositionsInRadius(IsValidPosition, roundedDesiredPosition, 0);
+
+        Vector2Int finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
+
+        float height = _buildingEntity.ComponentsContainer.Get<BuildingDraggable>().GetPlacementModule().GetHeight(finalPosition);
+        
+        return new Vector3(finalPosition.x, height, finalPosition.y);
+        
+        bool IsValidPosition(Vector2Int position)
+        {
+            if (!_buildingEntity.ComponentsContainer.Get<BuildingDraggable>().GetPlacementModule().CanBePlaced(position)) return false;
+
+            return !TileMap.HasTile(position, _roadLayerSetting);
+        }
     }
 
     private async void OnOwnerDeath()
@@ -92,23 +120,9 @@ public sealed class BuildingFetch : MonoBehaviour
 
         if (_currentState == FetchState.Dragging)
         {
-            Vector3Int roundedPosition = Vector3Int.RoundToInt(_draggableConnector.transform.position);
-
-            Vector2Int roundedPosition2D =
-                new Vector2Int(Mathf.RoundToInt(roundedPosition.x), Mathf.RoundToInt(roundedPosition.z));
-
-            List<Vector2Int> possiblePositions = TileMap.ForceGetSuitablePositionsInRadius(
-                _buildingEntity.ComponentsContainer.Get<BuildingDraggable>().GetPlacementModule().CanBePlaced,
-                roundedPosition2D, 0);
-
-            roundedPosition2D = possiblePositions[Random.Range(0, possiblePositions.Count)];
-
-            Vector3Int roundedPlacePosition = new Vector3Int(roundedPosition2D.x,
-                (int)_buildingEntity.ComponentsContainer.Get<BuildingDraggable>().GetPlacementModule()
-                    .GetHeight(roundedPosition2D), roundedPosition2D.y);
-
-            await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject,
-                _buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), roundedPlacePosition);
+            Vector3 placementPosition = GetValidPlacementPosition(_draggableConnector.transform.position);
+            
+            await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject, _buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), placementPosition);
         }
 
         _currentState = FetchState.Idle;
@@ -122,5 +136,11 @@ public sealed class BuildingFetch : MonoBehaviour
         Idle,
         Chase,
         Dragging
+    }
+
+    private enum FetchType
+    {
+        To,
+        From
     }
 }

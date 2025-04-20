@@ -25,6 +25,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
             case StopActionType.Disable: Disable(); break;
             case StopActionType.Destroy: Destroy(); break;
             case StopActionType.DisableEffect: DisableEffect(); break;
+            case StopActionType.None: break;
         }    
     }
 
@@ -49,6 +50,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
     {
         Disable, 
         Destroy,
-        DisableEffect
+        DisableEffect,
+        None
     }
 }

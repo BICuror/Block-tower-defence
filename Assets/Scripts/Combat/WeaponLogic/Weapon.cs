@@ -5,42 +5,21 @@ using System;
 
 namespace Combat
 {
-    public abstract class Weapon : MonoBehaviour
+    public abstract class Weapon : WeaponBase
     {
         [SerializeField] protected Collider Collider; 
         [SerializeField] protected Rigidbody Rigidbody;
-        protected CombatEntity OwnerEntity;
         
         private CancellationTokenSource _cancellationTokenSource = new();
         private float _lifetime;
         private bool _lifetimeTrackActive;
         
         public Rigidbody RB => Rigidbody;
-    
-        public Action HitEntity;
-        public Action KilledEntity;
         
         public void Initialize(CombatEntity ownerEntity, float lifetime)
         {
-            OwnerEntity = ownerEntity;
+            base.Initialize(ownerEntity);
             _lifetime = lifetime;
-
-            OnInitialized();
-        }
-
-        protected virtual void OnInitialized() {}
-    
-        protected void DamageEntity(float damageAmount, CombatEntity receivingEntity)
-        {
-            if (!receivingEntity.Health.IsAlive()) return;
-            
-            float multipliedAttackDamage = OwnerEntity.DamageModifierContainer.DealerContainer.Modify(damageAmount, receivingEntity);
-            
-            receivingEntity.Health.ReceiveEnemyDamage(multipliedAttackDamage, OwnerEntity);
-            
-            HitEntity?.Invoke();
-            
-            if (!receivingEntity.Health.IsAlive()) KilledEntity?.Invoke();
         }
         
         #region StateManagements
@@ -88,6 +67,9 @@ namespace Combat
             Collider.enabled = state;
             gameObject.SetActive(state);
         }
+
+        private void OnDestroy() => StopLifetimeTrack();
+        
         #endregion
     }
 }

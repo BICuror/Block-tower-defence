@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Combat
 {
-    public sealed class Explotion : Weapon
+    public sealed class Explotion : WeaponBase
     {
         [SerializeField] private LayerSetting _enemyLayerSettings;
         [SerializeField] private VisualEffectHandler _explotionEffect;
@@ -11,12 +11,15 @@ namespace Combat
         
         private ExplotionDamage _explotionDamage;
         private ExplotionRadius _explotionRadius;
-        
-        public async UniTask Explode()
+
+        protected override void OnInitialized()
         {
             _explotionRadius = OwnerEntity.StatContainer.Get<ExplotionRadius>();
             _explotionDamage = OwnerEntity.StatContainer.Get<ExplotionDamage>();
+        }
 
+        public async UniTask Explode()
+        {
             UpdateExplotionRadius(_explotionRadius.Value);
             
             Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _explotionRadius.Value, _enemyLayerSettings.GetLayerMask());

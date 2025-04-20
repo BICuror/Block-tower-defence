@@ -14,6 +14,7 @@ namespace Combat
             ComponentsContainer.Add<EntityHealth>(_health);
             base.Awake();
             InjectCached(_health);
+            _health.Initialize();
             _health.Died += HandleDeathEvent;
         }
 

@@ -9,7 +9,7 @@ namespace Combat
         [Cached] BuildingEntity _ownerEntity;
         
         public Action<BuildingEntity> BuildingDestroyed;
-    
+        
         public override void Die()
         {
             base.Die();

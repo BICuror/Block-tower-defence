@@ -31,6 +31,8 @@ public sealed class InspectionTooltipBase : MonoBehaviour
         
         _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(_inspectable.Description));
         
+        Debug.LogWarning(inspectable.gameObject.name);
+        
         inspectable.GetComponent<CombatEntity>().StatContainer.GetAllStats().ForEach(stat =>
         {
             StatTooltip tooltip = Instantiate(_statTooltipPrefab, _statTooltipContainer);

@@ -86,7 +86,7 @@ public class InspectorController : MonoBehaviour
             CombatEntity building = buildingOptionObject.GetComponentInChildren(typeof(CombatEntity)) as CombatEntity;
             
             InspectionTooltipBase entityTooltip = Instantiate(_entityInspectionTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
-            entityTooltip.SetInspectable(inspectable);
+            entityTooltip.SetInspectable(building.ComponentsContainer.Get<Inspectable>());
 
             _currentInspectionTooltip = entityTooltip.gameObject;
         }

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System;
 
 namespace Combat
 {
@@ -35,8 +36,12 @@ namespace Combat
                 transform.position = currentPosition;
     
                 time += Time.fixedDeltaTime;
-    
-                await UniTask.WaitForFixedUpdate();
+
+                try
+                {
+                    await UniTask.WaitForFixedUpdate(cancellationToken: destroyCancellationToken);
+                }
+                catch (Exception e) { TaskUtility.LogAsync(e); }
             }
 
             Collider.enabled = false;

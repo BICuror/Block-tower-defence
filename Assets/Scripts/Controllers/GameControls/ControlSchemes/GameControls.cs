@@ -37,15 +37,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PointerClick"",
-                    ""type"": ""Button"",
-                    ""id"": ""f9e6ee71-80fb-438c-82c2-59953b554c6a"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""ScrolledUp"",
                     ""type"": ""Button"",
                     ""id"": ""8d42b8cc-62a2-4558-b5bd-b1c5bfe32f8b"",
@@ -58,6 +49,24 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""name"": ""ScrolledDown"",
                     ""type"": ""Button"",
                     ""id"": ""994459cd-2906-4f41-8ca8-ad8f73849ad7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LMB"",
+                    ""type"": ""Button"",
+                    ""id"": ""f9e6ee71-80fb-438c-82c2-59953b554c6a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RMB"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bf2ada9-6e15-4161-ad5f-b147e4afebc6"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -84,28 +93,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""PointerPosition"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""37a31609-f2e0-4531-b531-2b79bc820eb1"",
-                    ""path"": ""<Touchscreen>/touch0/press"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PointerClick"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""be2bb755-fa13-429f-be41-2a7028d557b4"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""PointerClick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -174,6 +161,28 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""ScrolledDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6443cff4-bb6c-4c3f-b7ea-e75ba0666e16"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Tap,Hold(duration=0.21)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RMB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""be2bb755-fa13-429f-be41-2a7028d557b4"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LMB"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -183,9 +192,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         // TouchInput
         m_TouchInput = asset.FindActionMap("TouchInput", throwIfNotFound: true);
         m_TouchInput_PointerPosition = m_TouchInput.FindAction("PointerPosition", throwIfNotFound: true);
-        m_TouchInput_PointerClick = m_TouchInput.FindAction("PointerClick", throwIfNotFound: true);
         m_TouchInput_ScrolledUp = m_TouchInput.FindAction("ScrolledUp", throwIfNotFound: true);
         m_TouchInput_ScrolledDown = m_TouchInput.FindAction("ScrolledDown", throwIfNotFound: true);
+        m_TouchInput_LMB = m_TouchInput.FindAction("LMB", throwIfNotFound: true);
+        m_TouchInput_RMB = m_TouchInput.FindAction("RMB", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -248,17 +258,19 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_TouchInput;
     private List<ITouchInputActions> m_TouchInputActionsCallbackInterfaces = new List<ITouchInputActions>();
     private readonly InputAction m_TouchInput_PointerPosition;
-    private readonly InputAction m_TouchInput_PointerClick;
     private readonly InputAction m_TouchInput_ScrolledUp;
     private readonly InputAction m_TouchInput_ScrolledDown;
+    private readonly InputAction m_TouchInput_LMB;
+    private readonly InputAction m_TouchInput_RMB;
     public struct TouchInputActions
     {
         private @GameControls m_Wrapper;
         public TouchInputActions(@GameControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @PointerPosition => m_Wrapper.m_TouchInput_PointerPosition;
-        public InputAction @PointerClick => m_Wrapper.m_TouchInput_PointerClick;
         public InputAction @ScrolledUp => m_Wrapper.m_TouchInput_ScrolledUp;
         public InputAction @ScrolledDown => m_Wrapper.m_TouchInput_ScrolledDown;
+        public InputAction @LMB => m_Wrapper.m_TouchInput_LMB;
+        public InputAction @RMB => m_Wrapper.m_TouchInput_RMB;
         public InputActionMap Get() { return m_Wrapper.m_TouchInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -271,15 +283,18 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @PointerPosition.started += instance.OnPointerPosition;
             @PointerPosition.performed += instance.OnPointerPosition;
             @PointerPosition.canceled += instance.OnPointerPosition;
-            @PointerClick.started += instance.OnPointerClick;
-            @PointerClick.performed += instance.OnPointerClick;
-            @PointerClick.canceled += instance.OnPointerClick;
             @ScrolledUp.started += instance.OnScrolledUp;
             @ScrolledUp.performed += instance.OnScrolledUp;
             @ScrolledUp.canceled += instance.OnScrolledUp;
             @ScrolledDown.started += instance.OnScrolledDown;
             @ScrolledDown.performed += instance.OnScrolledDown;
             @ScrolledDown.canceled += instance.OnScrolledDown;
+            @LMB.started += instance.OnLMB;
+            @LMB.performed += instance.OnLMB;
+            @LMB.canceled += instance.OnLMB;
+            @RMB.started += instance.OnRMB;
+            @RMB.performed += instance.OnRMB;
+            @RMB.canceled += instance.OnRMB;
         }
 
         private void UnregisterCallbacks(ITouchInputActions instance)
@@ -287,15 +302,18 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @PointerPosition.started -= instance.OnPointerPosition;
             @PointerPosition.performed -= instance.OnPointerPosition;
             @PointerPosition.canceled -= instance.OnPointerPosition;
-            @PointerClick.started -= instance.OnPointerClick;
-            @PointerClick.performed -= instance.OnPointerClick;
-            @PointerClick.canceled -= instance.OnPointerClick;
             @ScrolledUp.started -= instance.OnScrolledUp;
             @ScrolledUp.performed -= instance.OnScrolledUp;
             @ScrolledUp.canceled -= instance.OnScrolledUp;
             @ScrolledDown.started -= instance.OnScrolledDown;
             @ScrolledDown.performed -= instance.OnScrolledDown;
             @ScrolledDown.canceled -= instance.OnScrolledDown;
+            @LMB.started -= instance.OnLMB;
+            @LMB.performed -= instance.OnLMB;
+            @LMB.canceled -= instance.OnLMB;
+            @RMB.started -= instance.OnRMB;
+            @RMB.performed -= instance.OnRMB;
+            @RMB.canceled -= instance.OnRMB;
         }
 
         public void RemoveCallbacks(ITouchInputActions instance)
@@ -316,8 +334,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     public interface ITouchInputActions
     {
         void OnPointerPosition(InputAction.CallbackContext context);
-        void OnPointerClick(InputAction.CallbackContext context);
         void OnScrolledUp(InputAction.CallbackContext context);
         void OnScrolledDown(InputAction.CallbackContext context);
+        void OnLMB(InputAction.CallbackContext context);
+        void OnRMB(InputAction.CallbackContext context);
     }
 }

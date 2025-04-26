@@ -52,19 +52,6 @@ public class InspectorController : MonoBehaviour
             return uiHit.collider.gameObject == _currentInspectionTooltip;
         }
 
-        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
-        {
-            Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
-            
-            if (_inspectable != hoveredInspectable)
-            {
-                StopInspecting();
-                StartInspecting(hoveredInspectable);
-            }
-            
-            return false;
-        }
-        
         StopInspecting();
         return true;
     }
@@ -103,14 +90,6 @@ public class InspectorController : MonoBehaviour
             crystalInspectionTooltip.SetInspectable(inspectable);
 
             _currentInspectionTooltip = crystalInspectionTooltip.gameObject;
-        }
-        else if (inspectable.TryGetComponent(out SelectionOptionObject optionObject))
-        {
-            EffectInspectionTooltipl effectInspectionTooltipl = Instantiate(_effectInspectionTooltipl, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
-            effectInspectionTooltipl.SetEffectDescription(optionObject.OptionDescription);
-            effectInspectionTooltipl.SetEffectName(optionObject.OptionName);
-
-            _currentInspectionTooltip = effectInspectionTooltipl.gameObject;
         }
     }
 

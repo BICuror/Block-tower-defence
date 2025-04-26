@@ -1,23 +1,40 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 using Combat;
 
 public sealed class BuildingUpgradeSelector : MonoBehaviour
 {
-    [SerializeField] private BuildingEntity _buildingEntityToUpgrade;
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
+    [SerializeField] private DraggableConnector _draggableConnector;
     [SerializeField] private BuildingUpgradeSelectionOptionObject _buildingUpgradeSelectionOptionObjectPrefab;
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
-    [SerializeField] private int _optionsAmount = 3;
     [SerializeField] private Transform _centerPosition;
-    private Vector3 _initialPosition;
+    private BuildingEntity _buildingEntityToUpgrade;
+    private Vector3Int _initialPosition;
 
-    public async void StartGlobalEffectSelection()
+    private void Awake()
     {
-        _initialPosition = _buildingEntityToUpgrade.transform.position;
-        _buildingEntityToUpgrade.transform.position = _centerPosition.position;
-        _buildingEntityToUpgrade.ComponentsContainer.Get<DraggableObject>().SetDraggableState(false);
+        _draggableConnector.transform.SetParent(null);
+    }
+    
+    public async UniTask StartUpgradeSelection(SelectionSettings settings)
+    {
+        if (settings.SelectionArgument != null)
+        {
+            _buildingEntityToUpgrade = (BuildingEntity)settings.SelectionArgument;
+        }
+        else
+        {
+            _buildingEntityToUpgrade = _globalBuildingContainer.Entities[Random.Range(0, _globalBuildingContainer.Entities.Count)];
+        }
+            
+        _initialPosition = Vector3Int.RoundToInt(_buildingEntityToUpgrade.transform.position);
         
-        List<EntityModificatorData> effectDatas = GetRandomEntityEffectDatas(_buildingEntityToUpgrade, _optionsAmount);
+        await CaptureDraggable();
+        
+        List<EntityModificatorData> effectDatas = GetRandomEntityEffectDatas(_buildingEntityToUpgrade, 3);
 
         for (int i = 0; i < effectDatas.Count; i++)
         {
@@ -27,10 +44,9 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         }
     }
 
-    public void EndSelection()
+    public async UniTask EndSelection()
     {
-        _buildingEntityToUpgrade.transform.position = _initialPosition;
-        _buildingEntityToUpgrade.ComponentsContainer.Get<DraggableObject>().SetDraggableState(true);
+        await ReleaseDraggable();
     }
 
     private List<EntityModificatorData> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
@@ -46,5 +62,30 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         }
 
         return resultEffectDatas;
+    }
+    
+    private async UniTask CaptureDraggable()
+    {
+        _draggableConnector.gameObject.SetActive(true);
+        _draggableConnector.transform.position = _centerPosition.position;
+
+        await _draggableConnector.MoveTo(_buildingEntityToUpgrade.transform.position, 0.2f);
+        
+        _draggableConnector.PickUpDraggable(_buildingEntityToUpgrade.gameObject);
+
+        await _draggableConnector.MoveTo(_centerPosition.transform.position, 0.2f);
+    }
+
+    private async UniTask ReleaseDraggable()
+    {
+        _draggableConnector.transform.position = _centerPosition.position;
+
+        Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntityToUpgrade.ComponentsContainer.Get<BuildingDraggable>(), _initialPosition);
+
+        await _draggableConnector.MoveTo(placementPosition, 0.2f);
+
+        await _draggableConnector.PlaceDraggable(_buildingEntityToUpgrade.gameObject, _buildingEntityToUpgrade.ComponentsContainer.Get<BuildingDraggable>(), placementPosition);
+
+        _draggableConnector.gameObject.SetActive(false);
     }
 }

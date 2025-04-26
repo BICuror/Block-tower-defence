@@ -17,6 +17,7 @@ public sealed class IdleStateController : WaveStateController
     [Inject] private NavigationMapGenerator _navigationMapGenerator;
     [Inject] private ItemContainerManager _itemContainerManager;
     [Inject] private WaveManager _waveManager;
+    [Inject] private SelectionManager _selectionManager;
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
@@ -42,6 +43,7 @@ public sealed class IdleStateController : WaveStateController
     protected override void OnEnterStateCompleted()
     {
         _itemContainerManager.UpdateContainedItems();
+        _selectionManager.TryStartQueuedSelection();
         _itemContainerManager.UnlockContainer();
     }
 

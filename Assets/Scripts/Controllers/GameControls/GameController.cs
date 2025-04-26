@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 
 [RequireComponent(typeof(Camera))]
 
@@ -26,16 +28,9 @@ public sealed class GameController : MonoBehaviour
         }
     }
 
-    private void UpdateInspectionState()
+    private void TryReturnToIdleState()
     {
-        if (_currentControllerState == ControllerState.Idle)
-        {
-            if (_inspectorController.TryToStartInspecting(GetPointerPosition()))
-            {
-                _currentControllerState = ControllerState.Inspecting;
-            }
-        }
-        else if (_currentControllerState == ControllerState.Inspecting)
+        if (_currentControllerState == ControllerState.Inspecting)
         {
             if (_inspectorController.TryStopInspecting(GetPointerPosition()))
             {
@@ -46,13 +41,9 @@ public sealed class GameController : MonoBehaviour
 
     private void TryPickUpDraggableOrRotateCamera()
     {
-        _inspectorController.StopInspecting();
-
-        if(_dragController.ActivatedSomething(GetPointerPosition()))
-        {
-            _currentControllerState = ControllerState.Idle;
-        }
-        else if (_dragController.PickedUpDraggable(GetPointerPosition()))
+        StopInspecting();
+        
+        if (_dragController.PickedUpDraggable(GetPointerPosition()))
         {
             _currentControllerState = ControllerState.Dragging;
 
@@ -64,6 +55,29 @@ public sealed class GameController : MonoBehaviour
             
             _currentControllerState = ControllerState.Rotating;   
         }
+    }
+
+    private void TryActivateOrStartInspecting(InputAction.CallbackContext context)
+    {
+        StopInspecting();
+        
+        if (context.interaction is TapInteraction)
+        {
+            _dragController.ActivatedSomething(GetPointerPosition());
+        }
+        else if (context.interaction is HoldInteraction)
+        {
+            if (_inspectorController.TryToStartInspecting(GetPointerPosition()))
+            {
+                _currentControllerState = ControllerState.Inspecting;
+            }
+        }
+    }
+
+    private void StopInspecting()
+    {
+        _inspectorController.StopInspecting();
+        _currentControllerState = ControllerState.Idle;
     }
 
     private void ReturnToIdleState()
@@ -97,11 +111,13 @@ public sealed class GameController : MonoBehaviour
     {
         _controls = new GameControls();
 
-        _controls.TouchInput.PointerClick.started += _ => TryPickUpDraggableOrRotateCamera();
+        _controls.TouchInput.LMB.started += _ => TryPickUpDraggableOrRotateCamera();
 
-        _controls.TouchInput.PointerClick.canceled += _ => ReturnToIdleState();
+        _controls.TouchInput.LMB.canceled += _ => ReturnToIdleState();
+        
+        _controls.TouchInput.RMB.performed += TryActivateOrStartInspecting;
 
-        _controls.TouchInput.PointerPosition.performed += _ => UpdateInspectionState();
+        _controls.TouchInput.PointerPosition.performed += _ => TryReturnToIdleState();
 
         _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
         _controls.TouchInput.ScrolledDown.started += _ => _cameraZoomController.ZoomOut();

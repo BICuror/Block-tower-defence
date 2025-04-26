@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c804f5fb63bc1fe4197d7e091f47e777, type: 3}
   m_Name: HealthTooltipData
   m_EditorClassIdentifier: 
-  _tag: hp
+  _tag: maxhealth
   _tagText: Max health
-  _textColor: {r: 0, g: 0.8941177, b: 0.70980394, a: 1}
+  _textColor: {r: 0.06984719, g: 0.89411765, b: 0, a: 1}
   _iconSprite: {fileID: 1647297131, guid: f4c65bc4a49c2ac46bb9306ef012b6fd, type: 3}
-  _description: Damage dealt per hit
+  _description: Max healt
   _associatedStatTypeName: MaxHealth

@@ -31,7 +31,7 @@ public sealed class ItemsContainer : MonoBehaviour
         
         item.transform.SetParent(_parent);
 
-        item.EnableEffects();
+        item.EnableToggleEffects();
 
         ItemAdded?.Invoke(item);
         ContainerUpdated?.Invoke();
@@ -46,7 +46,7 @@ public sealed class ItemsContainer : MonoBehaviour
 
         item.transform.SetParent(null);
 
-        item.DisableEffects();
+        item.DisableToggleEffects();
         
         ItemRemoved?.Invoke(item);
         ContainerUpdated?.Invoke();

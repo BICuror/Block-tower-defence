@@ -19,7 +19,7 @@ namespace Navigation
         
         private NavigationAgentData _agentData;
         
-        private MovmentNavigationModule _movmentModule;
+        private MovementNavigationModule _movementModule;
         private RotationNavigationModule _rotationModule;
         private NavigationAgentNodePicker _navigationAgentNodePicker;
         
@@ -43,16 +43,17 @@ namespace Navigation
         public void Initialize()
         {
             _navigationMapHolder = NavigationMapHolder.Instance;
+            
             StopMovement();
             FindSuitableLayer();
             AdaptToNavigationLayer();
             
-            Vector2 currentPosition = new Vector2(_startNode.Position.x, _startNode.Position.z);
+            Vector2 currentPosition = new Vector2(transform.position.x, transform.position.z);
             Vector2 nextPosition = new Vector2(_endNode.Position.x, _endNode.Position.z);
 
             Vector2Int previousRotation = new Vector2Int(-Mathf.RoundToInt(currentPosition.x - nextPosition.x), -Mathf.RoundToInt(currentPosition.y - nextPosition.y));
             
-            _movmentModule = new MovmentNavigationModule(transform, _agentData);
+            _movementModule = new MovementNavigationModule(transform, _agentData);
             _rotationModule = new RotationNavigationModule(_rotationTarget, previousRotation);
 
             TravelToEndNode();
@@ -67,7 +68,7 @@ namespace Navigation
 
         private void TravelToEndNode()
         {
-            _movmentModule.SetDestanation(_startNode.Position, _endNode.Position);
+            _movementModule.SetDestanation(_startNode.Position, _endNode.Position);
             _rotationModule.SetPositions(_endNode.Position, _nextNode.Position);
 
             TravelToNode();
@@ -84,7 +85,7 @@ namespace Navigation
             {
                 elapsedTime += Time.fixedDeltaTime / _speed.Value / distance;
 
-                _movmentModule.MoveTowardsNextPosition(elapsedTime);
+                _movementModule.MoveTowardsNextPosition(elapsedTime);
                 _rotationModule.RotateTowardsNode(elapsedTime);
 
                 try

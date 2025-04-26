@@ -97,4 +97,11 @@ public sealed class DraggableConnector : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, position, _dragSpeed * distance);   
     }
+    
+    public async UniTask MoveTo(Vector3 position, float timePerTile)
+    {
+        float duration = Vector3.Distance(position, transform.position) * timePerTile;
+        
+        await transform.DOMove(position, duration).AsyncWaitForCompletion();
+    }
 }

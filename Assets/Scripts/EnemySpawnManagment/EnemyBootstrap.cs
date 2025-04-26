@@ -35,6 +35,7 @@ namespace Combat
 
             await UniTask.WaitForFixedUpdate();
             
+            _navMeshAgent.Initialize();
             _collider.enabled = true;
         }
 

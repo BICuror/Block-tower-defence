@@ -6,12 +6,14 @@ namespace Combat
     public sealed class EnemyFactory : MonoBehaviour
     {
         private static EnemyFactory _instance;
-        public static EnemyFactory Instance => _instance;
         
-        [Inject] DiContainer _container;
+        [Inject] private GlobalEnemyContainer _globalEnemyContainer;
+        [Inject] private DiContainer _container;
         [SerializeField] private EnemyEntity _blankEnemy; 
     
         private ObjectPool<EnemyEntity> _enemyPool;
+        
+        public static EnemyFactory Instance => _instance;
     
         private void Start()
         {
@@ -21,12 +23,16 @@ namespace Combat
             _container.Inject(_enemyPool);
         }
     
-        public EnemyEntity CreateEnemy(EnemyData _enemyDataToCreate)
+        public EnemyEntity CreateEnemy(EnemyData enemyDataToCreate, Vector3 spawnPosition)
         {
             EnemyEntity newEnemy = _enemyPool.GetNextPooledObject();
+            
+            newEnemy.transform.position = spawnPosition;
+            
+            newEnemy.ComponentsContainer.Get<EnemyBootstrap>().SetEnemyData(enemyDataToCreate);
     
-            newEnemy.ComponentsContainer.Get<EnemyBootstrap>().SetEnemyData(_enemyDataToCreate);
-    
+            _globalEnemyContainer.Add(newEnemy);
+            
             return newEnemy;
         }
     }

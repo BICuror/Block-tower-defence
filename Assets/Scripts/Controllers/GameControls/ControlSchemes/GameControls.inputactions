@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PointerClick",
-                    "type": "Button",
-                    "id": "f9e6ee71-80fb-438c-82c2-59953b554c6a",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "ScrolledUp",
                     "type": "Button",
                     "id": "8d42b8cc-62a2-4558-b5bd-b1c5bfe32f8b",
@@ -36,6 +27,24 @@
                     "name": "ScrolledDown",
                     "type": "Button",
                     "id": "994459cd-2906-4f41-8ca8-ad8f73849ad7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "LMB",
+                    "type": "Button",
+                    "id": "f9e6ee71-80fb-438c-82c2-59953b554c6a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RMB",
+                    "type": "Button",
+                    "id": "8bf2ada9-6e15-4161-ad5f-b147e4afebc6",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -62,28 +71,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "PointerPosition",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "37a31609-f2e0-4531-b531-2b79bc820eb1",
-                    "path": "<Touchscreen>/touch0/press",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PointerClick",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "be2bb755-fa13-429f-be41-2a7028d557b4",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "PointerClick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -150,6 +137,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScrolledDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6443cff4-bb6c-4c3f-b7ea-e75ba0666e16",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Tap,Hold(duration=0.21)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RMB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be2bb755-fa13-429f-be41-2a7028d557b4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LMB",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

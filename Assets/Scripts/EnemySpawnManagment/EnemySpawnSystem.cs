@@ -10,20 +10,22 @@ namespace Combat
 {
     public sealed class EnemySpawnSystem : MonoBehaviour
     {
+        [Inject] private GlobalEnemyContainer _globalEnemyContainer;
         [Inject] private IslandDataContainer _islandDataContainer;
         [Inject] private WaveManager _waveManager;
+        private List<EnemyEntity> _enemyEntities;
         private List<EnemySpawner> _spawners = new();
         private float _currentHealthMultiplyer;
         
         private IslandData _islandData => _islandDataContainer.Data;
         
-        public Action<EnemyEntity> EnemySpawned;
-        public Action<EnemyEntity> EnemyDied;
         public Action LastWaveEnemyDied;
-    
-        private void InvokeEnemySpawned(EnemyEntity spawnedEnemy) => EnemySpawned?.Invoke(spawnedEnemy);
-        private void InvokeEnemyDied(EnemyEntity spawnedEnemy) => EnemyDied?.Invoke(spawnedEnemy);
-    
+
+        private void Awake()
+        {
+            _globalEnemyContainer.EnemyRemoved += _ => CheckIfAllEnemiesDied();
+        }
+        
         public void StartWave()
         {
             for (int i = 0; i < _spawners.Count; i++)
@@ -111,28 +113,18 @@ namespace Combat
         public void AddSpawner(EnemySpawner spawner)
         {
             _spawners.Add(spawner);
-    
-            spawner.EnemySpawned += InvokeEnemySpawned;
-            spawner.EnemyDied += InvokeEnemyDied;
-    
-            spawner.LastEnemyKilled += CheckIfAllEnemiesDied;
         }
     
         public void RemoveSpawner(EnemySpawner spawner)
         {
             _spawners.Remove(spawner);
-    
-            spawner.EnemySpawned -= InvokeEnemySpawned;
-            spawner.EnemyDied -= InvokeEnemyDied;
-    
-            spawner.LastEnemyKilled -= CheckIfAllEnemiesDied;
         }
     
         private void CheckIfAllEnemiesDied()
         {
             for (int i = 0; i < _spawners.Count; i++)
             {
-                if (_spawners[i].AllEnemiesDead() == false || _spawners[i].SpawnedAllEnemies() == false) return;
+                if (_spawners[i].SpawnedAllEnemies() == false) return;
             }        
     
             LastWaveEnemyDied.Invoke();

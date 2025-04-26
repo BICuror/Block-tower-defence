@@ -16,55 +16,48 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private GlobalEffectSelector _globalEffectSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
     
-    private async void Start()
+    private void Start()
     {
-        await UniTask.WaitForSeconds(1);
-        
-        StartSelection(new SelectionSettings(SelectionType.Building));
-        EnqeueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
-        EnqeueSelection(new SelectionSettings(SelectionType.GlobalEffect));
-
-        _selectionOptionObjectAreaDetector.AddedItem += ResolveCurrentSelection;
+        _selectionOptionObjectAreaDetector.AddedItem += (optionObject) => ResolveCurrentSelection(optionObject).Forget();
     }
 
     public void EnqeueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
-
     
-    
-    public void StartSelection(SelectionSettings selectionSettings)
+    public async UniTask StartSelection(SelectionSettings selectionSettings)
     {
         _currentSelectionSettings = selectionSettings;
         switch (_currentSelectionSettings.Type)
         {
             case SelectionType.Building: _buildingSelector.StartBuildingsSelection(); break;
             case SelectionType.GlobalEffect: _globalEffectSelector.StartGlobalEffectSelection(); break;
-            case SelectionType.BuildingUpgrade: _buildingUpgradeSelector.StartGlobalEffectSelection(); break;
+            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(selectionSettings); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }
     }
 
-    private void ResolveCurrentSelection(SelectionOptionObject optionObject)
+    private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
     {
         optionObject.ApplyEffect();
-        EndSelection(_currentSelectionSettings);
         _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
+        await EndSelection(_currentSelectionSettings);
         
-        StartQueuedSelection();
+        TryStartQueuedSelection().Forget();
     }
-    private void StartQueuedSelection()
+    
+    public async UniTask TryStartQueuedSelection()
     {
         if (_enqeuedSelections.Count > 0)
         {
             SelectionSettings selectionSettings = _enqeuedSelections.Dequeue();
-            StartSelection(selectionSettings);
+            await StartSelection(selectionSettings);
         }
     }
     
-    private void EndSelection(SelectionSettings selectionSettings)
+    private async UniTask EndSelection(SelectionSettings selectionSettings)
     {
         switch (_currentSelectionSettings.Type)
         {
-            case SelectionType.BuildingUpgrade: _buildingUpgradeSelector.EndSelection(); break;
+            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
             default: break;
         }
     }

@@ -63,6 +63,13 @@ public class TaskCycle : MonoBehaviour
             PerformTask();
         }
     }
-    
-    private void PerformTask() => TaskPerformed?.Invoke();
+
+    public void PerformTask()
+    {
+        if (!CanWork()) return;
+        
+        if (!_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke()) return; 
+        
+        TaskPerformed?.Invoke();
+    }
 }

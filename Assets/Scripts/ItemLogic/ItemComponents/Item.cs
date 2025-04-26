@@ -47,20 +47,28 @@ public class Item : DraggableObject
 
         if (_duration <= 0)
         {
+            GrantRewardEffect();
             DurationEnded?.Invoke(this);
             Destroy(gameObject);
         }
     }
     
-    public void EnableEffects()
+    public void EnableToggleEffects()
     {
         _globalEffectContainer.AddEffects(_toggleEffectDatas);
-        _globalEffectFactory.CreateRewardEffect(_rewardDatas[0]).GrantReward();
     }
     
-    public void DisableEffects()
+    public void DisableToggleEffects()
     {
         _globalEffectContainer.RemoveEffects(_toggleEffectDatas);
+    }
+
+    private void GrantRewardEffect()
+    {
+        _rewardDatas.ForEach(rewardEffectData =>
+        {
+            _globalEffectFactory.CreateRewardEffect(rewardEffectData).GrantReward();
+        });
     }
 
     private void OnPickedUp() => ItemPickedUp?.Invoke(this);

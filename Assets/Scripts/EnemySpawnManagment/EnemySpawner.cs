@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using Cysharp.Threading.Tasks;
-using Navigation;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Combat
 {
@@ -14,20 +9,8 @@ namespace Combat
         private const float SPAWN_DELAY = 0.65f;
         
         [SerializeField] private EnemySpawnerInfoDisplayer _enemySpawnerInfoDisplayer;
-        private List<EnemyEntity> _spawnedEnemies; 
         private List<EnemyData> _enemiesToSpawn;
         
-        public Action<EnemyEntity> EnemySpawned;
-        public Action<EnemyEntity> EnemyDied;
-        public Action LastEnemyKilled;
-        
-        private void Awake()
-        {
-            _spawnedEnemies = new();
-    
-            LastEnemyKilled += TryToSpawnEnemy;
-        }
-    
         public void SetEnemiesToSpawn(List<EnemyData> enemiesToSpawn)
         {
             _enemiesToSpawn = enemiesToSpawn;
@@ -37,13 +20,12 @@ namespace Combat
     
         private void TryToSpawnEnemy() 
         {
-            if (AllEnemiesDead() && SpawnedAllEnemies() == false) 
+            if (SpawnedAllEnemies() == false) 
             {
                 SpawnEnemy();
             }
         }
     
-        public bool AllEnemiesDead() => _spawnedEnemies.Count == 0;
         public bool SpawnedAllEnemies() => _enemiesToSpawn.Count == 0;
 
         public async UniTask SpawnGroup()
@@ -60,29 +42,9 @@ namespace Combat
         
         private void SpawnEnemy()
         {
-            EnemyEntity spawnedEnemy = EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0]);
+            EnemyEntity spawnedEnemy = EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0], transform.position);
     
             _enemiesToSpawn.RemoveAt(0);
-    
-            _spawnedEnemies.Add(spawnedEnemy);
-    
-            spawnedEnemy.transform.position = transform.position;
-    
-            spawnedEnemy.EnemyHealth.EnemyDied += RemoveEnemy;
-            spawnedEnemy.ComponentsContainer.Get<NavigationAgent>().Initialize();
-    
-            EnemySpawned.Invoke(spawnedEnemy);
-        }
-    
-        private void RemoveEnemy(EnemyEntity enemyEntity)
-        {
-            _spawnedEnemies.Remove(enemyEntity);
-    
-            enemyEntity.EnemyHealth.EnemyDied -= RemoveEnemy;
-    
-            EnemyDied?.Invoke(enemyEntity);
-    
-            if (_spawnedEnemies.Count == 0) LastEnemyKilled?.Invoke();
         }
     }
 }

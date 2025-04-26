@@ -155,6 +155,30 @@ public static class TileMap
     }
 
     #endregion
+
+    #region GetNearestPlacePosition
+
+    public static Vector3 GetNearestPlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null)
+    {
+        Vector2Int roundedDesiredPosition = new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
+
+        List<Vector2Int> possiblePositions = ForceGetSuitablePositionsInRadius(IsValidPosition, roundedDesiredPosition, 0);
+
+        Vector2Int finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
+
+        float height = draggableObject.GetPlacementModule().GetHeight(finalPosition);
+        
+        return new Vector3(finalPosition.x, height, finalPosition.y);
+        
+        bool IsValidPosition(Vector2Int position)
+        {
+            if (!draggableObject.GetPlacementModule().CanBePlaced(position)) return false;
+
+            return positionValidator == null || positionValidator.Invoke(position);
+        }
+    }
+
+    #endregion
     
     private static Ray GetRay(Vector2Int position)
     {

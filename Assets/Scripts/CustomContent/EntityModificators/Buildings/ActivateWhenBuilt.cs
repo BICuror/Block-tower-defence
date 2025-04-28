@@ -1,6 +1,6 @@
 using Combat;
 
-public sealed class ActivateWhenBuilt : EntityModificatior
+public sealed class ActivateWhenBuilt : EntityModificator
 {
     private BuildingEntity _ownerBuildingEntity;
     

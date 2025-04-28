@@ -16,15 +16,20 @@ namespace Combat
         
         public void Initialize()
         {
-            _currentHp = _maxHpStat.Value;
+            _maxHpStat.ValueChanged += _ => ClampCurrentHpByMax();
         }
-        
+        public void RefilHP() => _currentHp = _maxHpStat.Value;
         public float GetMaxHp() => _maxHpStat.Value;
         public float GetHp() => _currentHp;
         public float GetHpPercent() => _currentHp / _maxHpStat.Value;
         public bool IsAlive() => _currentHp > 0;
         public bool IsFullHp() => _currentHp == _maxHpStat.Value;
 
+        private void ClampCurrentHpByMax()
+        {
+            if (_currentHp > _maxHpStat.Value) _currentHp = _maxHpStat.Value;
+        }
+        
         #region DamageRecivement 
         public void ReceiveEnemyDamage(float damage, CombatEntity damageDealer) => ReceiveDamage(damage, damageDealer);
         public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage, null);

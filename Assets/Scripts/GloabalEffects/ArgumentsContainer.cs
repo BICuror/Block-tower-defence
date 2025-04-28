@@ -24,6 +24,7 @@ using System;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.Int)] [SerializeField] private int _intArgument;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.Float)] [SerializeField] private float _floatArgument;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.GameObject)] [SerializeField] private GameObject _gameObjectArgument;
+    [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityModificatorData)] [SerializeField] private EntityModificatorData _entityModificatorData;
     
     public string ArgumentName => _argumentName;
 
@@ -34,6 +35,7 @@ using System;
             case ArgumentType.Int: return _intArgument;
             case ArgumentType.Float: return _floatArgument;
             case ArgumentType.GameObject: return _gameObjectArgument;
+            case ArgumentType.EntityModificatorData: return _entityModificatorData;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }
@@ -43,5 +45,6 @@ public enum ArgumentType
 {
     Int,
     Float,
-    GameObject
+    GameObject,
+    EntityModificatorData
 }

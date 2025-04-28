@@ -6,6 +6,6 @@ public sealed class BuildingsAmountApperanceCondition : EffectApperanceCondition
 
     public override bool GetValue()
     {
-        return _globalBuildingContainer.Entities.Count < Args.GetArgument<int>("MaxBuildngsAmount");
+        return _globalBuildingContainer.Entities.Count < Args.GetArgument<int>("MaxBuildingsAmount");
     }
 }

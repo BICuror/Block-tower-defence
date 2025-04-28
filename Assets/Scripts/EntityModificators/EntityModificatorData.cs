@@ -18,15 +18,9 @@ public class EntityModificatorData : ScriptableObject
     [HideInInspector] public List<string> AllEffectTypeNames;
     
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
-    public Type EffectType => Type.GetType(_effectTypeName);
+    public virtual Type EffectType => Type.GetType(_effectTypeName);
     public string ModificatorName => _modificatorName;
     public string ModificatorDescription => _modificatorDescription;
-    
-    private void OnValidate()
-    {
-        if (string.IsNullOrEmpty(_effectTypeName) || EffectType == null)
-        {
-            Debug.LogError("Invalid modifier type " + _effectTypeName);
-        }
-    }
+
+    public virtual void Modify(EntityModificator modificator) {}
 }

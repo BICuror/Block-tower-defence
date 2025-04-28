@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1836962346609186039}
   - component: {fileID: 5337911257198554168}
   - component: {fileID: 3266745875688254659}
-  - component: {fileID: 1271610750067798145}
+  - component: {fileID: 5670341234798761384}
   m_Layer: 0
   m_Name: DefaultLauncher
   m_TagString: Untagged
@@ -133,12 +133,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b608a9f490552147aa7bc17ee848f16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lifeTime: 1
+  _maxHeight: 4
   Landed:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1271610750067798145}
-        m_TargetAssemblyTypeName: VisualEffectPoolObjectHandler, Assembly-CSharp
-        m_MethodName: Stop
+      - m_Target: {fileID: 5670341234798761384}
+        m_TargetAssemblyTypeName: VisualEffectHandler, Assembly-CSharp
+        m_MethodName: PlayAndForget
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -172,7 +174,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
---- !u!114 &1271610750067798145
+--- !u!114 &5670341234798761384
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -181,11 +183,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1939450724479830521}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19786b6f7864c89478ed8f02778682bb, type: 3}
+  m_Script: {fileID: 11500000, guid: d2f2d584b7158be448da997d8defc89e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _stopAction: 0
-  _visualEffect: {fileID: 1836962346609186039}
+  _stopAction: 1
+  _visualEffect: {fileID: 2129431750140528835}
 --- !u!1001 &7587518800355939385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -323,6 +325,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd062b44e444e21429a29e79013c5621, type: 3}
+--- !u!2083052967 &2129431750140528835 stripped
+VisualEffect:
+  m_CorrespondingSourceObject: {fileID: 8413017411627834618, guid: bd062b44e444e21429a29e79013c5621, type: 3}
+  m_PrefabInstance: {fileID: 7587518800355939385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4885823539432662048 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3062912537016168473, guid: bd062b44e444e21429a29e79013c5621, type: 3}

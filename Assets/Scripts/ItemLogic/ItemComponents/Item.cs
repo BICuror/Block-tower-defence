@@ -8,18 +8,18 @@ public class Item : DraggableObject
     [Inject] private GlobalEffectContainer _globalEffectContainer;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
     
-    [SerializeField] private List<ToggleGlobalEffectData> _initialRewardEffectDatas;
-    
+    [SerializeField] private GameObject _destroyEffectPrefab;
     private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
     private List<RewardGlobalEffectData> _rewardDatas = new();
-    
-    private List<GlobalRewardEffect> _rewards = new();
-
     private int _duration;
+    private int _quality;
+    private int _strength;
 
     public List<RewardGlobalEffectData> RewardDatas => _rewardDatas;
     public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
     public int Duration => _duration;
+    public int Quality => _quality;
+    public int Strength => _strength;
     
     public Action<Item> ItemPickedUp;
     public Action<Item> DurationEnded;
@@ -27,18 +27,21 @@ public class Item : DraggableObject
     private void Awake()
     {
         base.Awake();
-        PickedUp += OnPickedUp;
-        AddToggleEffectDatas(_initialRewardEffectDatas);
+        PickedUp += () => ItemPickedUp?.Invoke(this);
     }
 
     public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
     public void AddRewardEffectDatas(List<RewardGlobalEffectData> rewardDatas) => _rewardDatas.AddRange(rewardDatas);
+
+    public void SetItemData(int quality, int strength)
+    {
+        _quality = quality;
+        _strength = strength;
+    }
     
     public void SetDuration(int duration)
     {
-        Debug.Log($"Duration used to be: {_duration}");
         _duration = duration;
-        Debug.Log($"Duration set to: {_duration}");
     }
 
     public void DecreaseDuration()
@@ -71,5 +74,8 @@ public class Item : DraggableObject
         });
     }
 
-    private void OnPickedUp() => ItemPickedUp?.Invoke(this);
+    private void OnDestroy()
+    {
+        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity);
+    }
 }

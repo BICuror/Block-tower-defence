@@ -8,11 +8,11 @@ public sealed class GlobalEffectFactory
 
     public bool GetAppearanceConditionValue(GlobalEffectData globalEffectData)
     {
-        EffectApperanceCondition condition = (EffectApperanceCondition)Activator.CreateInstance(globalEffectData.EffectApperanceCondition.ApperanceConditionType);
+        EffectApperanceCondition condition = (EffectApperanceCondition)Activator.CreateInstance(globalEffectData.EffectAppearanceCondition.ApperanceConditionType);
         
-        if (condition == null) throw new NullReferenceException($"Invalid condition type: {globalEffectData.EffectApperanceCondition.ApperanceConditionType}");
+        if (condition == null) throw new NullReferenceException($"Invalid condition type: {globalEffectData.EffectAppearanceCondition.ApperanceConditionType}");
         
-        condition.SetArgumentsContainer(globalEffectData.EffectApperanceCondition.ArgumentsContainer);
+        condition.SetArgumentsContainer(globalEffectData.EffectAppearanceCondition.ArgumentsContainer);
         _diContainer.Inject(condition);
 
         return condition.GetValue();

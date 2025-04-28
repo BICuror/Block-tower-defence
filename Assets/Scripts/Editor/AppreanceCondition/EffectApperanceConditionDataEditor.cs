@@ -6,14 +6,14 @@ using UnityEditor;
 
 #if UNITY_EDITOR
 
-[CustomEditor(typeof(EffectApperanceConditionData))]
+[CustomEditor(typeof(EffectAppearanceConditionData))]
 public sealed class EffectApperanceConditionDataEditor : CustomTypeDropdownEditor<EffectApperanceCondition>
 {
     protected override void ApplyDropdownItems(List<string> items)
     {
-        EffectApperanceConditionData apperanceConditionData = (EffectApperanceConditionData)target;
+        EffectAppearanceConditionData appearanceConditionData = (EffectAppearanceConditionData)target;
 
-        apperanceConditionData.AllConditioinTypeNames = items;
+        appearanceConditionData.AllConditioinTypeNames = items;
     }
 }
 #endif

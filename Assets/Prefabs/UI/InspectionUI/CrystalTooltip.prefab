@@ -110,6 +110,7 @@ MonoBehaviour:
   _inspectionSubpanelsController: {fileID: 2953025072565230696}
   _entityModificatorTooltipPrefab: {fileID: 2521535782548818131, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
   _entityModificatorTooltipParent: {fileID: 612609853589768455}
+  _durationTextField: {fileID: 5394468545300387969}
 --- !u!114 &2871898726855916236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -686,7 +687,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 5
   m_WholeNumbers: 1
-  m_Value: 4
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1377,7 +1378,7 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 5
   m_WholeNumbers: 1
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []

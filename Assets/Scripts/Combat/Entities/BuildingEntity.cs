@@ -15,6 +15,7 @@ namespace Combat
             base.Awake();
             InjectCached(_health);
             _health.Initialize();
+            _health.RefilHP();
             _health.Died += HandleDeathEvent;
         }
 

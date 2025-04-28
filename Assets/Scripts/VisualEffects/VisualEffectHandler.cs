@@ -13,6 +13,8 @@ public sealed class VisualEffectHandler : MonoBehaviour
     {
         _disableTime = _visualEffect.GetFloat("MaxLifeTime"); 
     }
+    
+    public void PlayAndForget() => Play().Forget();
 
     public async UniTask Play()
     {

@@ -44,6 +44,8 @@ namespace Navigation
         {
             _navigationMapHolder = NavigationMapHolder.Instance;
             
+            Debug.Log($"CURRENT POSITION {transform.position}");
+            
             StopMovement();
             FindSuitableLayer();
             AdaptToNavigationLayer();
@@ -113,6 +115,8 @@ namespace Navigation
         
         private void FindSuitableLayer()
         { 
+            Debug.Log($"CURRENT POSITION {transform.position}");
+            
             Vector2Int currentRoundedPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
             
             if (_agentData.PrefferedNavigationLayer == NavigationMapLayerType.AdditionalTask)
@@ -123,6 +127,9 @@ namespace Navigation
                     return;
                 }
             }
+            
+            Debug.Log($"TRYING TO FIND NODE AT {currentRoundedPosition}");
+            
             _currentNavigationMapLayer = _navigationMapHolder.Map.GetLayer(currentRoundedPosition, NavigationMapLayerType.Main);
         }
 

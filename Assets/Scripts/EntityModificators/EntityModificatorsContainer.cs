@@ -7,7 +7,7 @@ using Combat;
 
 public sealed class EntityModificatorsContainer : MonoBehaviour
 {
-    private readonly Dictionary<EntityModificatorData, List<EntityModificatior>> _appliedModificators = new();
+    private readonly Dictionary<EntityModificatorData, List<EntityModificator>> _appliedModificators = new();
     [SerializeField] private List<EntityModificatorData> _allAvailableModificators;
     [Inject] private EntityModificatorFactory _entityModificatorFactory;
     [Cached] private CombatEntity _ownerEntity;
@@ -17,18 +17,20 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
 
     public void AddEffect(EntityModificatorData modificatorData)
     {
-        EntityModificatior modificatior = _entityModificatorFactory.CreateEntityModificationEffect(modificatorData);
-        modificatior.SetEntity(_ownerEntity);
+        EntityModificator modificator = _entityModificatorFactory.CreateEntityModificationEffect(modificatorData);
+        modificator.SetEntity(_ownerEntity);
         
-        modificatior.Enable();
+        if (!modificator.CanBeApplied()) return;
+        
+        modificator.Enable();
 
         if (_appliedModificators.TryGetValue(modificatorData, out var effectList))
         {
-            effectList.Add(modificatior);
+            effectList.Add(modificator);
         }
         else
         {
-            _appliedModificators[modificatorData] = new() {modificatior};
+            _appliedModificators[modificatorData] = new() {modificator};
         }
     }
     
@@ -36,10 +38,9 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
     {
         if (_appliedModificators.TryGetValue(modificatorData, out var effectList))
         {
-            EntityModificatior modificatior = effectList[^1];
-            modificatior.Disable();
-            _appliedModificators[modificatorData].Remove(modificatior);
+            EntityModificator modificator = effectList[^1];
+            modificator.Disable();
+            _appliedModificators[modificatorData].Remove(modificator);
         }
-        else throw new KeyNotFoundException($"Tried to remove an effect {modificatorData.EffectType} but it doesn't exist");
     }
 }

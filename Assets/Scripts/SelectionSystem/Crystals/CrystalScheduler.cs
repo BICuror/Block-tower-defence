@@ -1,18 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
+using Combat;
 using UnityEngine;
+using Zenject;
 
-public class CrystalScheduler : MonoBehaviour
+public sealed class CrystalScheduler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Inject] private EnemySpawnSystem _enemySpawnSystem;
 }

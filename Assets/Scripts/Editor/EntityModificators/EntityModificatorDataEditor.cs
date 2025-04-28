@@ -4,7 +4,7 @@ using UnityEditor;
 
 [CustomEditor(typeof(EntityModificatorData))]
 
-public class EntityModificatorDataEditor : CustomTypeDropdownEditor<EntityModificatior>
+public class EntityModificatorDataEditor : CustomTypeDropdownEditor<EntityModificator>
 {
     protected override void ApplyDropdownItems(List<string> items)
     {

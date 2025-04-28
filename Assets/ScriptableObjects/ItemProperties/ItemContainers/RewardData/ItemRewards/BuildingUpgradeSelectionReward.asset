@@ -15,7 +15,7 @@ MonoBehaviour:
   _quality: 2
   _isUnique: 0
   _effectTypeName: StartBuildingUpgradeSelectionGlobalRewardEffect
-  _effectApperanceCondition: {fileID: 0}
+  effectAppearanceCondition: {fileID: 11400000, guid: f7c233961f01461439bbaee2707162a0, type: 2}
   _argumentsContainer:
     _argumentItems: []
   AllEffectTypeNames:
@@ -23,7 +23,6 @@ MonoBehaviour:
   - StartBuildingSelectionGlobalRewardEffect
   - StartBuildingUpgradeSelectionGlobalRewardEffect
   - StartGlobalEffectSelectionGlobalRewardEffect
-  - TestGlobalRewardEffect
   _effectName: Building upgrade selection
   _effectDescription: Upon completion starts building upgrade selection, where you
     choose one building upgrade to random exsisting building from 3 random upgrades

@@ -1,7 +1,6 @@
 using UnityEngine;
 using Navigation;
 using Cashing;
-using Cysharp.Threading.Tasks;
 
 namespace Combat
 {
@@ -22,7 +21,7 @@ namespace Combat
         
         private EnemyData _enemyData;
     
-        public async void SetEnemyData(EnemyData enemyDataToSet)
+        public void SetEnemyData(EnemyData enemyDataToSet)
         {
             _enemyData = enemyDataToSet;
 
@@ -31,10 +30,7 @@ namespace Combat
             CreateSpecialObject();
             
             _navMeshAgent.SetAgentData(enemyDataToSet.NavigationData);
-            _enemyHealth.Initialize();
-
-            await UniTask.WaitForFixedUpdate();
-            
+            _enemyHealth.RefilHP();
             _navMeshAgent.Initialize();
             _collider.enabled = true;
         }

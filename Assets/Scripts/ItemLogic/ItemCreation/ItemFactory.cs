@@ -21,6 +21,7 @@ public sealed class ItemFactory : MonoBehaviour
         
         int duration = 1;
         item.SetDuration(duration);
+        item.SetItemData(quality, strength);
         
         List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(quality, strength);
         item.AddToggleEffectDatas(toggleEfectDatas);

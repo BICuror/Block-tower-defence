@@ -13,9 +13,7 @@ namespace Combat
         [Inject] private GlobalEnemyContainer _globalEnemyContainer;
         [Inject] private IslandDataContainer _islandDataContainer;
         [Inject] private WaveManager _waveManager;
-        private List<EnemyEntity> _enemyEntities;
         private List<EnemySpawner> _spawners = new();
-        private float _currentHealthMultiplyer;
         
         private IslandData _islandData => _islandDataContainer.Data;
         

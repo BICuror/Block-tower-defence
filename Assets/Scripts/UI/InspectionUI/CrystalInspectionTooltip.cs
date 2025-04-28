@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public sealed class CrystalInspectionTooltip : MonoBehaviour
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
     [SerializeField] private GlobalEffectTooltip _entityModificatorTooltipPrefab;
     [SerializeField] private Transform _entityModificatorTooltipParent;
+    [SerializeField] private TextMeshProUGUI _durationTextField;
     
     private Inspectable _inspectable;
 
@@ -35,8 +37,12 @@ public sealed class CrystalInspectionTooltip : MonoBehaviour
             tooltip.TooltipClosed += _inspectionSubpanelsController.ClearAllSubpanels;
             tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
         });
-        
 
+        _negativeSlider.value = item.Strength - item.Quality;
+        _positiveSlider.value = item.Strength + item.Quality;
+
+        _durationTextField.text = item.Duration.ToString();
+        
         _layoutSizeController.RecalculateLayout();
     }
 }

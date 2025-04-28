@@ -87,7 +87,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
             T selectedData = selectedDatas[randomIndex];
             
-            if (!selectedData.HasApperanceCondition || _globalEffectFactory.GetAppearanceConditionValue(selectedData))
+            if (!selectedData.HasAppearanceCondition || _globalEffectFactory.GetAppearanceConditionValue(selectedData))
             {
                 data = selectedData;
                 return true;

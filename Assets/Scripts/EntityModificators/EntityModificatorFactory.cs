@@ -1,4 +1,3 @@
-using UnityEngine;
 using Zenject;
 using System;
 
@@ -6,11 +5,12 @@ public sealed class EntityModificatorFactory
 {
     [InjectLocal] private DiContainer _diContainer;
     
-    public EntityModificatior CreateEntityModificationEffect(EntityModificatorData modificatorData)
+    public EntityModificator CreateEntityModificationEffect(EntityModificatorData modificatorData)
     {
-        EntityModificatior modificatior = CreateEffectInstance<EntityModificatior>(modificatorData.EffectType);
-        modificatior.SetArgumentsContainer(modificatorData.ArgumentsContainer);
-        return modificatior;
+        EntityModificator modificator = CreateEffectInstance<EntityModificator>(modificatorData.EffectType);
+        modificator.SetArgumentsContainer(modificatorData.ArgumentsContainer);
+        modificatorData.Modify(modificator);
+        return modificator;
     } 
     
     private T CreateEffectInstance<T>(Type type)
@@ -20,7 +20,7 @@ public sealed class EntityModificatorFactory
         if (effect == null) throw new NullReferenceException($"Invalid effect type: {type}");
 
         _diContainer.Inject(effect);
-
+        
         return effect;
     }
 }

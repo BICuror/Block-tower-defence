@@ -47,6 +47,7 @@ namespace Combat
         #endregion
         
         #region HealRecivement
+        public void ReceivePercentHeal(float percent) => ReceiveHeal(percent * _maxHpStat.Value);
         public void ReceiveHeal(float heal)
         {
             if (heal == 0) return;

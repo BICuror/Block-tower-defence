@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -12.5}
-  m_SizeDelta: {x: -10, y: -35}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -3, y: -3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4916289064056642828
 CanvasRenderer:
@@ -251,7 +251,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1275.0001, y: -740.306}
-  m_SizeDelta: {x: 315, y: 80}
+  m_SizeDelta: {x: 315, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1526613851009508328
 CanvasRenderer:
@@ -300,6 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21e6e9ead3c4ae448fb1834d884dcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectionOptionObject: {fileID: 0}
   _nameTextField: {fileID: 6867329340117421209}
   _descriptionTextField: {fileID: 3062069637111788858}
   _tooltipTextParser: {fileID: 3449264828956304806}
@@ -322,7 +323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6097104551461657733
 RectTransform:
   m_ObjectHideFlags: 0
@@ -557,7 +558,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Insain things
+  m_text: 'Insain things
+
+    sdasas'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7c9e930a305a2d4a8574ce14918bb25, type: 2}
   m_sharedMaterial: {fileID: 2896826517314786894, guid: b7c9e930a305a2d4a8574ce14918bb25, type: 2}
@@ -584,7 +587,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
+  m_fontSize: 14.45
   m_fontSizeBase: 32
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -620,7 +623,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 25, y: 5, z: 25, w: 5}
+  m_margin: {x: 3, y: 1, z: 3, w: 1}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

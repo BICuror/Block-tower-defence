@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 using Cashing;
 using Combat;
-using UnityEngine.Tilemaps;
 
 public sealed class BuildingFetch : MonoBehaviour
 {
@@ -49,20 +47,23 @@ public sealed class BuildingFetch : MonoBehaviour
     {
         await _draggableConnector.MoveTo(_buildingEntity.transform.position, _timePerTile);
 
-        if (_currentState != FetchState.Chase) return;
+        if (_currentState != FetchState.Chase || !_buildingEntity.Draggable.IsDraggable())
+        {
+            _currentState = FetchState.Idle;
+            return;
+        }
 
         _currentState = FetchState.Dragging;
 
         _draggableConnector.PickUpDraggable(_buildingEntity.gameObject);
 
-        Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
+        Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
         
         await _draggableConnector.MoveTo(placementPosition, _timePerTile);
 
         if (_currentState != FetchState.Dragging) return;
 
-        await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject,
-            _buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), placementPosition);
+        await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject, _buildingEntity.Draggable, placementPosition);
 
         _currentState = FetchState.Idle;
     }
@@ -101,6 +102,7 @@ public sealed class BuildingFetch : MonoBehaviour
 
         _currentState = FetchState.Idle;
         _draggableConnector.DOKill();
+        _buildingAreaScaner.AddedItem -= TryStartChase;
         Destroy(_draggableConnector.gameObject);
         Destroy(gameObject);
     }

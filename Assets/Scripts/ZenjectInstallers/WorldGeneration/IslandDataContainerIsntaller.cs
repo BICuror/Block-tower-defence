@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using WorldGeneration;
 
 [CreateAssetMenu(menuName = "Installers/IslandDataContainerIsntaller")]
 

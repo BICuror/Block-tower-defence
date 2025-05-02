@@ -105,7 +105,7 @@ namespace WorldGeneration
             _blockGrid = blockGrid;
             _textureManager = textureManager;
 
-            _cubeFaces = new Dictionary <Vector3Int, FaceData>();
+            _cubeFaces = new Dictionary<Vector3Int, FaceData>();
 
             _cubeFaces.Add(Vector3Int.right, new FaceData(RightFace, RightTris, XUVOrder));
             _cubeFaces.Add(Vector3Int.left, new FaceData(LeftFace, LeftTris, XUVOrder));

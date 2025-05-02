@@ -30,7 +30,7 @@ RectTransform:
   m_GameObject: {fileID: 1541833790627440652}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.013, y: 0.013, z: 0.013}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5845229567176255158}
@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21e6e9ead3c4ae448fb1834d884dcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectionOptionObject: {fileID: 0}
   _nameTextField: {fileID: 6144585461686887719}
   _descriptionTextField: {fileID: 2339334506843987076}
   _tooltipTextParser: {fileID: 2726389010669833240}
@@ -141,6 +142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1356924299799822720}
     m_Modifications:
+    - target: {fileID: 3062069637111788858, guid: ffcf668de163c934b859484bcb35b877, type: 3}
+      propertyPath: m_fontSize
+      value: 14.45
+      objectReference: {fileID: 0}
     - target: {fileID: 3767030507997041338, guid: ffcf668de163c934b859484bcb35b877, type: 3}
       propertyPath: m_Name
       value: EffectTooltip
@@ -175,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6563496282593677064, guid: ffcf668de163c934b859484bcb35b877, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 80
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6563496282593677064, guid: ffcf668de163c934b859484bcb35b877, type: 3}
       propertyPath: m_LocalPosition.x

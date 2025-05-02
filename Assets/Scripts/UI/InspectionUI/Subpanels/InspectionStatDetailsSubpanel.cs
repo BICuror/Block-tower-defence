@@ -24,9 +24,9 @@ public sealed class InspectionStatDetailsSubpanel : InspectionSubpanelBase
     private void UpdateStatValueDisplays()
     {
         _totalStatValueTextField.text = Math.Round(_stat.Value, 2).ToString();
-        _multiplierStatValueTextField.text = $"{Math.Round(_stat.TotalMultiplier * 100)}%"; 
-        _flatAdditionStatValueTextField.text = Math.Round(_stat.FlatAddition).ToString();
-        _baseStatValueTextField.text = Math.Round(_stat.DefaultValue).ToString();
+        _multiplierStatValueTextField.text = $"{Math.Round(_stat.Multiplier * 100)}%"; 
+        _flatAdditionStatValueTextField.text = Math.Round(_stat.Flat).ToString();
+        _baseStatValueTextField.text = Math.Round(_stat.Default).ToString();
     }
     
     private void OnDestroy() => _stat.ValueChanged -= _ => UpdateStatValueDisplays();

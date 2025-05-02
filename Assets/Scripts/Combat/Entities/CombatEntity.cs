@@ -14,7 +14,7 @@ namespace Combat
         public CachedComponentsContainer ComponentsContainer => CachedComponentsContainer;
         public StatContainer StatContainer => _statContainer;
         public EntityDamageModifierContainer DamageModifierContainer => _damageModifierContainer;
-        
+        public DraggableObject Draggable => CachedComponentsContainer.Get<DraggableObject>();
         public abstract EntityHealth Health { get; }
     }
 }

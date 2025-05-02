@@ -1,52 +1,61 @@
 using System.Collections.Generic;
-using System;
+using System.Linq;
 
-public sealed class ListDictionary<T> 
+public sealed class ListDictionary<TKey, TValue> 
 {
-    private Dictionary<Type, List<T>> _dictionary = new();
-    private List<T> _allItems = new();
+    private Dictionary<TKey, List<TValue>> _dictionary = new();
+    private List<TValue> _allItems = new();
     
-    public delegate List<T> ListDictionarySorter(List<T> initialList);
+    public delegate List<TValue> ListDictionarySorter(List<TValue> initialList);
     private ListDictionarySorter _sorter;
+    
+    public ListDictionary() {}
     
     public ListDictionary(ListDictionarySorter sorter)
     {
         _sorter = sorter;
     }
     
-    public void Add(Type type, T value)
+    public void Add(TKey key, TValue value)
     {
-        if (_dictionary.ContainsKey(type))
+        if (_dictionary.ContainsKey(key))
         {
-            _dictionary[type].Add(value);
+            _dictionary[key].Add(value);
         }
         else
         {
-            _dictionary.Add(type, new List<T>() { value });
+            _dictionary.Add(key, new List<TValue>() { value });
         }
         
         _allItems.Add(value);
-        _allItems = _sorter.Invoke(_allItems);
+        
+        if (_sorter != null) _allItems = _sorter.Invoke(_allItems);
     }
 
-    public void Remove(Type type)
+    public TValue Remove(TKey key)
     {
-        T value = _dictionary[type][^1];
-        _dictionary[type].Remove(value);
+        TValue value = _dictionary[key][^1];
+        _dictionary[key].Remove(value);
         
         _allItems.Remove(value);
-        _allItems = _sorter.Invoke(_allItems);
+        
+        if (_dictionary[key].Count == 0) _dictionary.Remove(key);
+        
+        if (_sorter != null) _allItems = _sorter.Invoke(_allItems);
+
+        return value;
     }
 
-    public bool Contains(Type type)
+    public bool TryGetValue(TKey key, out List<TValue> value)
     {
-        if (_dictionary.TryGetValue(type, out List<T> list))
-        {
-            return list.Count > 0;
-        }
-
-        return false;
+        return _dictionary.TryGetValue(key, out value);
     }
     
-    public List<T> GetAllItems() => _allItems;
+    public bool Contains(TKey key)
+    {
+        return _dictionary.ContainsKey(key);
+    }
+    
+    public List<TValue> GetAllItems() => _allItems;
+    public List<TKey> GetAllKeys() => _dictionary.Keys.ToList();
 }

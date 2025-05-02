@@ -5,7 +5,7 @@ using System;
 
 public sealed class DamageModifierContainer
 {
-    private ListDictionary<DamageModifier> _modifiersDictionaryList;
+    private ListDictionary<Type, DamageModifier> _modifiersDictionaryList;
     private DamageModifier _currentSingleDamageModifier;
 
     public DamageModifierContainer()

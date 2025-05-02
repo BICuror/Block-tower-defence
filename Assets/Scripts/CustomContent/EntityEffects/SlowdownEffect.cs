@@ -14,7 +14,7 @@ namespace Combat
 
         public override void Update()
         {
-            _statModifier.FlatModifier = TIME_PER_BLOCK_TRAVELED_INCREASED_PER_STACK * Stack;
+            _statModifier.SetFlat(TIME_PER_BLOCK_TRAVELED_INCREASED_PER_STACK * Stack);
         }
 
         public override void ApplyToEntity()

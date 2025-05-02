@@ -5,66 +5,76 @@ using System;
 public class Stat
 {
     private List<StatModifier> _statModifiers = new(0);
-    private float _defaultValue;
-    private float _flatAddition = 0f;
-    private float _totalMultiplier = 1f;
+    private float _default;
+    private float _flat;
+    private float _multiplier = 1f;
     private float _value;
     private int _roundedValue;
 
+    protected virtual float MinimalValue { get => float.MinValue; }
+    
     public float Value => _value;
     public int RoundedValue => _roundedValue;
-    public float TotalMultiplier => _totalMultiplier;
-    public float FlatAddition => _flatAddition;
-    public float DefaultValue => _defaultValue;
+    public float Multiplier => _multiplier;
+    public float Flat => _flat;
+    public float Default => _default;
 
     public Action<float> ValueChanged;
     public Action<int> RoundedValueChanged;
 
     public void Reset()
     {
-        _flatAddition = 0f;
-        _totalMultiplier = 1f;
+        _flat = 0f;
+        _multiplier = 1f;
+        
+        _statModifiers.ForEach(RemoveStatModifier);
     }
+    
     public void SetDefault(float value)
     {
-        _defaultValue = value;
+        _default = value;
         CalculateStatValue();
     }
     public void ChangeFlat(float value)
     {
-        _flatAddition += value;
+        _flat += value;
         CalculateStatValue();
     }
     public void ChangeMultiplier(float value)
     {
-        _totalMultiplier += value;
+        _multiplier += value;
         CalculateStatValue();
     }
 
     public void AddStatModifier(StatModifier statModifier)
     {
+        statModifier.ModifierChanged += CalculateStatValue;
         _statModifiers.Add(statModifier);
         CalculateStatValue();
     }
 
     public void RemoveStatModifier(StatModifier statModifier)
     {
+        statModifier.ModifierChanged -= CalculateStatValue;
         _statModifiers.Remove(statModifier);
         CalculateStatValue();
     }
     
     private void CalculateStatValue()
     {
-        float flatAddition = _flatAddition;
-        float multiplier = _totalMultiplier;
+        float flatAddition = _flat;
+        float multiplier = _multiplier;
         
         for (int i = 0; i < _statModifiers.Count; i++)
         {
-            flatAddition += _statModifiers[i].FlatModifier;
-            multiplier += _statModifiers[i].TotalMultiplier;
+            flatAddition += _statModifiers[i].Flat;
+            multiplier += _statModifiers[i].Multiplier;
         }
         
-        _value = (_defaultValue + flatAddition) * multiplier;
+        _value = (_default + flatAddition) * multiplier;
+
+        if (_value < MinimalValue) _value = MinimalValue;
+        
         _roundedValue = Mathf.RoundToInt(_value);
 
         ValueChanged?.Invoke(_value);

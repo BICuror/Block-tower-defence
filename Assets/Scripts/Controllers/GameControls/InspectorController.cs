@@ -27,10 +27,32 @@ public class InspectorController : MonoBehaviour
 
         if (TileMap.HasTile(ray, _uiLayerSetting)) return false;
         
+        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+        {
+            Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
+            
+            if (!_inspectable)
+            {
+                StartInspecting(hoveredInspectable);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+    
+    public bool TryToStartInspectingItem(Vector2 mousePosition)
+    {
+        Ray ray = _camera.ScreenPointToRay(mousePosition);
+
+        if (TileMap.HasTile(ray, _uiLayerSetting)) return false;
 
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
             Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
+
+            if (hoveredInspectable.GetComponent<Item>() == null) return false;
             
             if (!_inspectable)
             {
@@ -49,6 +71,21 @@ public class InspectorController : MonoBehaviour
 
         if (TileMap.HasTile(ray, _uiLayerSetting, out RaycastHit uiHit))
         {
+            if (_inspectable.GetComponent<Item>() != null)
+            {
+                if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+                {
+                    Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
+
+                    if (hoveredInspectable != _inspectable && hoveredInspectable.GetComponent<Item>() != null)
+                    {
+                        StopInspecting();
+                        StartInspecting(hoveredInspectable);
+                        return false;
+                    }
+                }
+            }
+
             return uiHit.collider.gameObject == _currentInspectionTooltip;
         }
 

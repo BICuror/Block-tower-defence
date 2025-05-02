@@ -49,7 +49,7 @@ public sealed class DraggableCreator : MonoBehaviour
     
     private async UniTask CreateLauncher(Vector3 startPosition, Vector3 finalPosition, Launcher launcherPrefab)
     {
-        GameObject draggableBlocker = Instantiate(_draggableBlocker, startPosition, Quaternion.identity);
+        GameObject draggableBlocker = Instantiate(_draggableBlocker, finalPosition, Quaternion.identity);
         
         Launcher launcher = Instantiate(launcherPrefab, startPosition, Quaternion.identity);
         

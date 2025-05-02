@@ -35,12 +35,12 @@ public sealed class EntityModificatorStatChange : EntityModificator
             if (Entity.StatContainer.Has(statType))
             {
                 StatModifier modifier = new StatModifier();
-                modifier.FlatModifier = statChange.FlatChange;
-                modifier.TotalMultiplier = statChange.MultiplierChange;
                 
                 _modifiers.Add(statType, modifier);
-                
                 Entity.StatContainer.Get(statType).AddStatModifier(modifier);
+                
+                modifier.SetFlat(statChange.FlatChange);
+                modifier.SetMultiplier(statChange.MultiplierChange);
             }
         });
     }

@@ -6,6 +6,7 @@ using Zenject;
 public sealed class AttackStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
+    [SerializeField] private CrystalScheduler _crystalScheduler;
     [Inject] private RoadNodeGenerator _roadNodeGenerator;
     [Inject] private EnemySpawnSystem _enemySpawnSystem;
     [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
@@ -23,6 +24,7 @@ public sealed class AttackStateController : WaveStateController
 
     protected override void OnEnterStateCompleted()
     {
+        _crystalScheduler.ScheduleCrystals();
         _enemySpawnSystem.StartWave();
     }
 }

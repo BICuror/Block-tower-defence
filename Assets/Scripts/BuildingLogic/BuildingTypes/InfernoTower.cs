@@ -1,32 +1,23 @@
-using System.Collections;
 using System.Collections.Generic;
+using Cashing;
 using UnityEngine;
 using Combat;
 
 public sealed class InfernoTower : DefaultCombatTaskConditionProvider
 {
-    /*[Header("Stats")]
-    [SerializeField] private AnimationCurve _damageCurve;
-    [SerializeField] private float _damageAccselerationTime;
+    [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    
     private int _fullAccerationTicks;
     private float _elapsedTicks;
-    [SerializeField] private float _maxDamage;
-
-    [Header("Links")]    
-    [SerializeField] private EnemyAreaScaner _enemyAreaScaner;
-
-    [SerializeField] private ApplyEffectContainer _applyEffectContainer;
 
     [SerializeField] private BeamSystem _beamSystem;
 
     private EnemyHealth _currentEnemy;
-    private BuildingTaskCycle _buildingTaskCycle;
-    private Building _building;
-
-    public override string GetDamageValue() => Damage.ToString() + " / " + _maxDamage.ToString();
-
-    private void Start()
+    
+    /*private void Start()
     {
+        base.Start();
+        
         _buildingTaskCycle = GetComponent<BuildingTaskCycle>();
         _buildingTaskCycle.ShouldWorkDelegate = ShouldWork;
         _buildingTaskCycle.TaskPerformed.AddListener(Beam);
@@ -46,9 +37,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         _beamSystem.DisableBeam();
         _currentEnemy = null;
     }
-
-    private bool ShouldWork() => _enemyAreaScaner.Empty() == false;
-
+    
     private void SetRandomNewEnemy()
     {
         if (ShouldWork())
@@ -106,20 +95,5 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         _currentEnemy.GetHurt(Mathf.Lerp(Damage, _maxDamage, _damageCurve.Evaluate(evaluatedTime)));
 
         if (_currentEnemy != null && _currentEnemy.IsAlive()) ApplyEffectsToEnemy();
-    } 
-
-    private void ApplyEffectsToEnemy()
-    {
-        List<Effect> effectsToApply = _applyEffectContainer.GetApplyEffects();
-
-        if (effectsToApply.Count > 0)
-        { 
-            EnemyEffectManager enemyEffectManager = _currentEnemy.gameObject.GetComponent<EnemyEffectManager>();
-
-            for (int i = 0; i < effectsToApply.Count; i++)
-            {
-                if (_currentEnemy.IsAlive()) enemyEffectManager.ApplyEffect(effectsToApply[i]);
-            }
-        }
     }*/
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using Cashing;
 using Zenject;
@@ -7,13 +6,22 @@ using Combat;
 
 public sealed class EntityModificatorsContainer : MonoBehaviour
 {
-    private readonly Dictionary<EntityModificatorData, List<EntityModificator>> _appliedModificators = new();
+    private readonly ListDictionary<EntityModificatorData, EntityModificator> _appliedModificators = new();
+    [SerializeField] private List<EntityModificatorData> _initialModificatorDatas;
     [SerializeField] private List<EntityModificatorData> _allAvailableModificators;
     [Inject] private EntityModificatorFactory _entityModificatorFactory;
     [Cached] private CombatEntity _ownerEntity;
-    
+
     public List<EntityModificatorData> AvailableModificators => new List<EntityModificatorData>(_allAvailableModificators);
-    public List<EntityModificatorData> AppliedModificators => _appliedModificators.Keys.ToList();
+    public List<EntityModificatorData> AppliedModificators => _appliedModificators.GetAllKeys();
+
+    private void Start()
+    {
+        _initialModificatorDatas.ForEach(modificatorData =>
+        {
+            AddEffect(modificatorData);
+        });   
+    }
 
     public void AddEffect(EntityModificatorData modificatorData)
     {
@@ -24,23 +32,16 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
         
         modificator.Enable();
 
-        if (_appliedModificators.TryGetValue(modificatorData, out var effectList))
-        {
-            effectList.Add(modificator);
-        }
-        else
-        {
-            _appliedModificators[modificatorData] = new() {modificator};
-        }
+        _appliedModificators.Add(modificatorData, modificator);
     }
     
     public void RemoveEffect(EntityModificatorData modificatorData)
     {
-        if (_appliedModificators.TryGetValue(modificatorData, out var effectList))
+        if (_appliedModificators.Contains(modificatorData))
         {
-            EntityModificator modificator = effectList[^1];
+            EntityModificator modificator = _appliedModificators.Remove(modificatorData);
+            
             modificator.Disable();
-            _appliedModificators[modificatorData].Remove(modificator);
         }
     }
 }

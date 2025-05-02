@@ -52,6 +52,7 @@ public class Item : DraggableObject
         {
             GrantRewardEffect();
             DurationEnded?.Invoke(this);
+            Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
@@ -66,16 +67,11 @@ public class Item : DraggableObject
         _globalEffectContainer.RemoveEffects(_toggleEffectDatas);
     }
 
-    private void GrantRewardEffect()
+    public void GrantRewardEffect()
     {
         _rewardDatas.ForEach(rewardEffectData =>
         {
             _globalEffectFactory.CreateRewardEffect(rewardEffectData).GrantReward();
         });
-    }
-
-    private void OnDestroy()
-    {
-        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity);
     }
 }

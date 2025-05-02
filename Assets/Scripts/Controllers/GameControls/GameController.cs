@@ -21,7 +21,7 @@ public sealed class GameController : MonoBehaviour
     {
         switch(_currentControllerState)
         {
-            case ControllerState.Idle: return; 
+            case ControllerState.Idle: TryStartItemInspection(); return; 
             case ControllerState.Dragging: _dragController.TryDragTo(GetPointerPosition()); break;
             case ControllerState.Rotating: _cameraRotationController.Rotate(GetPointerPosition()); break;
             case ControllerState.Inspecting: return;
@@ -56,9 +56,19 @@ public sealed class GameController : MonoBehaviour
             _currentControllerState = ControllerState.Rotating;   
         }
     }
+    
+    private void TryStartItemInspection()
+    {
+        if (_inspectorController.TryToStartInspectingItem(GetPointerPosition())) 
+        { 
+            _currentControllerState = ControllerState.Inspecting;
+        }
+    }
 
     private void TryActivateOrStartInspecting(InputAction.CallbackContext context)
     {
+        if (_currentControllerState == ControllerState.Dragging) return;
+        
         StopInspecting();
         
         if (context.interaction is TapInteraction)

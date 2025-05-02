@@ -14,8 +14,11 @@ namespace Combat
         [Inject] private IslandDataContainer _islandDataContainer;
         [Inject] private WaveManager _waveManager;
         private List<EnemySpawner> _spawners = new();
+        private List<EnemyData> _waveEnemyDatas;
         
         private IslandData _islandData => _islandDataContainer.Data;
+
+        public IReadOnlyList<EnemyData> WaveEnemyDatas => _waveEnemyDatas;
         
         public Action LastWaveEnemyDied;
 
@@ -34,8 +37,10 @@ namespace Combat
     
         public void GenerateEnemyGroups()
         {
+            _waveEnemyDatas = new();
+            
             float leftHealthForWave = _islandData.WavesData.WaveHealth * _waveManager.GetCurrentWave();
-    
+            
             int enemiesAmount = 0;
     
             for (int i = 0; i < _spawners.Count; i++)
@@ -56,6 +61,8 @@ namespace Combat
                 }
     
                 _spawners[i].SetEnemiesToSpawn(waveGroup);
+                
+                _waveEnemyDatas.AddRange(waveGroup);
             }
         }
     
@@ -124,6 +131,8 @@ namespace Combat
             {
                 if (_spawners[i].SpawnedAllEnemies() == false) return;
             }        
+            
+            if (_globalEnemyContainer.Entities.Count > 0) return;
     
             LastWaveEnemyDied.Invoke();
         }

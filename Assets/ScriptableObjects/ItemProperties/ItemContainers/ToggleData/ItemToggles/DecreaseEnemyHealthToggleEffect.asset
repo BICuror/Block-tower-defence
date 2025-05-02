@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _quality: 1
   _isUnique: 0
-  _effectTypeName: EnemyHealthChangeToggleEffect
+  _effectTypeName: GlobalEnemyModificatorToggleEffect
   effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
@@ -25,7 +25,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: ac696a6058760aa499cb7b4f455a9348, type: 2}
   AllEffectTypeNames:
-  - EnemyHealthChangeToggleEffect
+  - GlobalBuildingModificatorToggleEffect
+  - GlobalEnemyModificatorToggleEffect
   - StartWaveGlobalToggleEffect
   _effectName: Enemy max health decrease
   _effectDescription: Decreases enemy max health by 20%

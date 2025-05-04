@@ -14,13 +14,11 @@ namespace WorldGeneration
         
             _decorationContainer.CreateNewContainer(areaSize);
 
-            IslandData.DecorationModule decorationModule;
-
             for (int x = 0; x < areaSize; x++)
             {
                 for (int z = 0; z < areaSize; z++)
                 {
-                    decorationModule = GetDecorationModule(x, z);
+                    DecorationModule decorationModule = GetDecorationModule(x, z);
 
                     if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f) && blockGrid.GetMaxHeight(x, z) > 0)
                     {         
@@ -30,7 +28,7 @@ namespace WorldGeneration
             }
         }
 
-        protected virtual IslandData.DecorationModule GetDecorationModule(int x, int z) => new IslandData.DecorationModule();
+        protected virtual DecorationModule GetDecorationModule(int x, int z) => new DecorationModule();
 
         private void CreateDecorations(DecorationData decoration, Vector3Int position, Vector2 offset)
         {
@@ -55,7 +53,7 @@ namespace WorldGeneration
             _decorationContainer.AddDecorations(position.x, position.z, decorations);
         }
 
-        private DecorationData GetRandomDecoration(IslandData.Decoration[] decorations)
+        private DecorationData GetRandomDecoration(Decoration[] decorations)
         {
             float random = Random.Range(0f, 1f);
 

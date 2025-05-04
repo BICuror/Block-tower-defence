@@ -37,20 +37,13 @@ namespace WorldGeneration
 
         [SerializeField] private Texture _enemyBiomeDecorationsTextures;
         public Texture EnemyBiomeDecorationsTextures => _enemyBiomeDecorationsTextures;
+        
+        [SerializeField] private CubeTextures _defaultTexture;
+        public CubeTextures DefaultTexture => _defaultTexture;
 
-        [Space]
-        [SerializeField] private CubeTextures _roadBlock;
-        public CubeTextures RoadBlock => _roadBlock;
-
-        [SerializeField] private CubeTextures _roadBlockOnWater;
-        public CubeTextures RoadBlockOnWater => _roadBlockOnWater;
-
-        [SerializeField] private CubeTextures _corruptionBlock;
-        public CubeTextures CorruptionBlock => _corruptionBlock;   
-
-        [SerializeField] private CubeTextures _corruptionBlockOnWater;
-        public CubeTextures CorruptionBlockOnWater => _corruptionBlockOnWater;    
-
+        [SerializeField] private TilemapData _roadTilemap;
+        public TilemapData RoadTilemap => _roadTilemap;
+        
         [Header("RoadSettings")][Space] 
         [SerializeField] private SpawnerPositionValidator _spawnerPositionValidator;
         public SpawnerPositionValidator SpawnerPositionValidator => _spawnerPositionValidator;
@@ -76,46 +69,10 @@ namespace WorldGeneration
         [SerializeField] private int _islandHeightOffset;
         public int IslandHeightOffset => _islandHeightOffset;
         
-        [System.Serializable] public struct NoiseSetting 
-        {
-            public AnimationCurve NoiseCurve;
-            public Vector2 NoiseScale;
-        }
-        
-        [System.Serializable] public struct Biome
-        {
-            [Range(0f, 1f)] public float AppearRate;
-            public string BiomeName;
-            public CubeTextures SurfaceBiomBlock;
-            public CubeTextures RockBiomeBlock;
-            public CubeTextures BedrockBiomBlock;
-
-            public float HeightMultiplier;
-
-            public NoiseSetting[] Noises;
-
-            public DecorationModule DecorationsModule;
-        }
-
-        [System.Serializable] public struct DecorationModule
-        {
-            [Range(0f, 1f)] public float DecorationAppearRate;
-            public Decoration[] Decorations; 
-
-        }
-
-        [System.Serializable] public struct Decoration
-        {
-            [Range(0f, 1f)] [SerializeField] private float _appearRate;
-            public float AppearRate => _appearRate;
-
-            public DecorationData DecorationData; 
-        }
-        
         [Header("BiomesGenerationSettings")][Space] 
         
-        [SerializeField] private Biome[] _biomes;
-        public Biome[] Biomes => _biomes;
+        [SerializeField] private BiomeSetting[] _biomes;
+        public BiomeSetting[] Biomes => _biomes;
 
         public NoiseSetting[] BiomeGenerationNoises;
 
@@ -133,6 +90,8 @@ namespace WorldGeneration
         [SerializeField] private int _corruptionLessZeroHeight;
         public int CorruptionLessZeroHeight => _corruptionLessZeroHeight;
 
+        [SerializeField] private TilemapData _enemyBiomeTilemap;
+        public TilemapData EnemyBiomeTilemap => _enemyBiomeTilemap;
 
         [System.Serializable] public struct EnemyBiomeStage
         {
@@ -188,5 +147,35 @@ namespace WorldGeneration
 
         [SerializeField] private int _flatHeightIncrease;
         public int FlatHeightIncrease => _flatHeightIncrease;
+    }
+    
+    [System.Serializable] public struct BiomeSetting
+    {
+        [Range(0f, 1f)] [SerializeField] private float _appearRate;
+        [SerializeField] private BiomeData _biomeData;
+            
+        public float AppearRate  => _appearRate;
+        public BiomeData Data => _biomeData;
+    }
+    
+    [System.Serializable] public struct NoiseSetting 
+    {
+        public AnimationCurve NoiseCurve;
+        public Vector2 NoiseScale;
+    }
+
+    [System.Serializable] public struct DecorationModule
+    {
+        [Range(0f, 1f)] public float DecorationAppearRate;
+        public Decoration[] Decorations; 
+
+    }
+
+    [System.Serializable] public struct Decoration
+    {
+        [Range(0f, 1f)] [SerializeField] private float _appearRate;
+        public float AppearRate => _appearRate;
+
+        public DecorationData DecorationData; 
     }
 }

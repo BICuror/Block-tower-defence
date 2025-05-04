@@ -4,10 +4,10 @@ namespace WorldGeneration
 {
     public sealed class EnemyBiomeDecorationGenerator : DecorationGenerator
     {
-        private IslandData.DecorationModule _decorationModule;
+        private DecorationModule _decorationModule;
 
-        public void SetDecorationModule(IslandData.DecorationModule decorationModule) => _decorationModule = decorationModule; 
+        public void SetDecorationModule(DecorationModule decorationModule) => _decorationModule = decorationModule; 
 
-        protected override IslandData.DecorationModule GetDecorationModule(int x, int z) => _decorationModule;
+        protected override DecorationModule GetDecorationModule(int x, int z) => _decorationModule;
     }
 }

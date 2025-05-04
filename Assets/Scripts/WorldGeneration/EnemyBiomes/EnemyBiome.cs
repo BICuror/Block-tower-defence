@@ -19,6 +19,7 @@ namespace WorldGeneration
         [Inject] private EnemySpawnSystem _enemySpawnSystem;
         [Inject] private SpawnerRotator _spawnerRotator;
 
+        [SerializeField] private EnemyBiomeTileTerrainGenerator _enemyBiomeTileTerrainGenerator;
         [SerializeField] private TerrainSetter _terrainSetter;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private EnemyBiomeDecorationGenerator _enemyBiomeDecorationGenerator;
@@ -80,7 +81,9 @@ namespace WorldGeneration
             _overlappingIslandDecorationsDisabler.DisableOverlappingIslandDecorations(enemyBiomeMap, GetStage(), GetBiomePosition());
 
             GenerateMesh(_currentBlockGrid);
-
+            
+            _enemyBiomeTileTerrainGenerator.GenerateTerrain(enemyBiomeMap);
+            
             _spawnerRotator.RotateSpawner(_enemySpawner.transform);
         }
 
@@ -101,7 +104,7 @@ namespace WorldGeneration
         {
             _terrainMeshGenerator.SetupGenerator(blockGrid, _textureManager);
             _terrainMeshGenerator.SetPosition(new Vector3Int((int)(transform.position.x), 0, (int)(transform.position.z)));
-
+            
             Mesh mesh = _terrainMeshGenerator.GetMesh();
 
             _terrainSetter.SetMesh(mesh);

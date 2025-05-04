@@ -15,7 +15,7 @@ namespace WorldGeneration
             _biomeSeed = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
         }
 
-        public IslandData.Biome GetBiomeAt(Vector2Int position)
+        public BiomeData GetBiomeAt(Vector2Int position)
         {
             float noisesAverageValue = GetAverageBiomeNoiseValue(position);
 
@@ -27,11 +27,11 @@ namespace WorldGeneration
 
                 if (biomeAppearanceChanse >= noisesAverageValue) 
                 {
-                    return _islandData.Biomes[i];
+                    return _islandData.Biomes[i].Data;
                 }
             }
 
-            return _islandData.Biomes[_islandData.Biomes.Length - 1];
+            return _islandData.Biomes[_islandData.Biomes.Length - 1].Data;
         }
 
         private float GetAverageBiomeNoiseValue(Vector2Int position)

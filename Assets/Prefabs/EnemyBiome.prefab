@@ -233,17 +233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a580839cde2a9b648b844aa0a93d80df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeBetweenSpawns: 0
   _enemySpawnerInfoDisplayer: {fileID: 3267209304793637048}
-  EnemySpawned:
-    m_PersistentCalls:
-      m_Calls: []
-  EnemyDied:
-    m_PersistentCalls:
-      m_Calls: []
-  LastEnemyKilled:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &6177820772775545984
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,6 +253,7 @@ GameObject:
   - component: {fileID: 891611346077369501}
   - component: {fileID: 4145828844707971013}
   - component: {fileID: 8385729584426442078}
+  - component: {fileID: 7041832723271390134}
   m_Layer: 14
   m_Name: EnemyBiome
   m_TagString: Untagged
@@ -294,7 +285,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6177820772775545984}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -364,6 +355,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc9dc9150dffc594eaa384245fadb71a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyBiomeTileTerrainGenerator: {fileID: 7041832723271390134}
   _terrainSetter: {fileID: 2313327703571308149}
   _enemySpawner: {fileID: 2969783673502583530}
   _enemyBiomeDecorationGenerator: {fileID: 256601164881805977}
@@ -496,3 +488,16 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &7041832723271390134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177820772775545984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3771768fb5fe61641beceb63694abf23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tileParent: {fileID: 8011564143771837536}

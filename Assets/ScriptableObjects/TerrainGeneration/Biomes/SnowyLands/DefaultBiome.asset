@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4a6e7d36b2886418cccf2573ce06be, type: 3}
+  m_Name: DefaultBiome
+  m_EditorClassIdentifier: 
+  _heightMultiplier: 3
+  _noiseSetting:
+  - NoiseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    NoiseScale: {x: 1, y: 1}
+  _decorationModule:
+    DecorationAppearRate: 0.25
+    Decorations:
+    - _appearRate: 0.237
+      DecorationData: {fileID: 11400000, guid: a21cd38cdfd1bce4fbeae69c4c6eecfd, type: 2}
+    - _appearRate: 0.378
+      DecorationData: {fileID: 11400000, guid: 7f3934c9411fbd24bb61c56a15a789b4, type: 2}
+    - _appearRate: 0.497
+      DecorationData: {fileID: 11400000, guid: f6df80aeb280ce343acd6ccfd249ef11, type: 2}
+    - _appearRate: 1
+      DecorationData: {fileID: 11400000, guid: 6c51ee8e810bc7b4db46c6d4fff55948, type: 2}
+  _tilemapData: {fileID: 11400000, guid: 671c9da6d6fbbc843bd8a02e278d62be, type: 2}

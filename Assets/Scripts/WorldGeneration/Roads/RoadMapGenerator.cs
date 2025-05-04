@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using System.Collections.Generic;
 
 namespace WorldGeneration
 {
@@ -10,6 +10,8 @@ namespace WorldGeneration
         [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
         [Inject] private RoadNodeGenerator _roadNodeGenerator;
         [Inject] private RoadMapHolder _roadMapHolder;
+        
+        [SerializeField] private RoadTileTerrainGenerator _terrainGenerator;
         
         private IslandData _islandData => _islandDataContainer.Data;
 
@@ -23,7 +25,9 @@ namespace WorldGeneration
             
             _roadMapHolder.SetRoadMap(roadMap);
 
-            AddCenterRoad();            
+            AddCenterRoad();          
+            
+            _terrainGenerator.GenerateTerrain();
         }
 
         private void AddCenterRoad()

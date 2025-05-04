@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4a6e7d36b2886418cccf2573ce06be, type: 3}
+  m_Name: PitBiome
+  m_EditorClassIdentifier: 
+  _heightMultiplier: 0
+  _noiseSetting:
+  - NoiseCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 2
+        outSlope: 2
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 0
+    NoiseScale: {x: 1, y: 1}
+  _decorationModule:
+    DecorationAppearRate: 0
+    Decorations:
+    - _appearRate: 1
+      DecorationData: {fileID: 11400000, guid: c45638f1b62dadb4693b449fb8ff1d75, type: 2}
+  _tilemapData: {fileID: 11400000, guid: 1fda8bcdf9f1c714ab37d637d38c6d95, type: 2}

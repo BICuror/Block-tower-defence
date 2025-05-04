@@ -6,7 +6,7 @@ namespace WorldGeneration
     {
         protected override void ApplyTextureToFace(Vector3Int position, Vector3Int checkDirection, BlockType blockType, FaceData faceToApply)
         {
-            CubeTextures cubeTextures = _textureManager.GetCubeTexture(position, blockType);
+            CubeTextures cubeTextures = _textureManager.GetCubeTexture();
 
             Vector2[] UVsToAdd = cubeTextures.GetUVsAtDirection(checkDirection);
 

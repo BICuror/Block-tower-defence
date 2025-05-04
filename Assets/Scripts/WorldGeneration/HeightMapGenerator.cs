@@ -64,16 +64,16 @@ namespace WorldGeneration
         {
             float height = 0f;
 
-            IslandData.Biome biomeAtCurrentPosition = _biomeMapGenerator.GetBiomeAt(position);
+            BiomeData biomeSettingAtCurrentPosition = _biomeMapGenerator.GetBiomeAt(position);
 
-            height += GetAverageNoiseAtPoint(position, biomeAtCurrentPosition.Noises);
+            height += GetAverageNoiseAtPoint(position, biomeSettingAtCurrentPosition.Noises);
 
-            height *= biomeAtCurrentPosition.HeightMultiplier;
+            height *= biomeSettingAtCurrentPosition.HeightMultiplier;
 
             return height;
         }
         
-        private float GetAverageNoiseAtPoint(Vector2Int position, IslandData.NoiseSetting[] noiseSettings)
+        private float GetAverageNoiseAtPoint(Vector2Int position, NoiseSetting[] noiseSettings)
         {
             float result = 0;
 

@@ -1,5 +1,4 @@
 using WorldGeneration;
-using Combat;
 using UnityEngine;
 
 public sealed class EntryPoint : MonoBehaviour

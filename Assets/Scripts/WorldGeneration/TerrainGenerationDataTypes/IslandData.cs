@@ -8,8 +8,12 @@ namespace WorldGeneration
     {
         [Header("EniviromentSettings")]
         [SerializeField] private GameObject _eniviromentObject;
-        public GameObject EniviromentObject => _eniviromentObject; 
+        public GameObject EniviromentObject => _eniviromentObject;
 
+        [Header("GlobalStats")] 
+        [SerializeField] private GlobalStatInitializerConfig _globalStatInitializerConfig;
+        public GlobalStatInitializerConfig GlobalStatInitializerConfig => _globalStatInitializerConfig;
+        
         [Header("SelectionSettings")][Space]
         [SerializeField] private SelectionContainer _selectionContainer;
         public SelectionContainer SelectionContainer => _selectionContainer;

@@ -15,7 +15,7 @@ public sealed class EntityModificatorStatChange : EntityModificator
     {
         foreach (StatChange statChange in _statChanges)
         {
-            Type statType = Type.GetType(statChange.StatTypeName);
+            Type statType = statChange.StatData.GetStatType();
             
             if (Entity.StatContainer.Has(statType))
             {
@@ -30,7 +30,7 @@ public sealed class EntityModificatorStatChange : EntityModificator
     {
         _statChanges.ForEach(statChange =>
         {
-            Type statType = Type.GetType(statChange.StatTypeName);
+            Type statType = statChange.StatData.GetStatType();
             
             if (Entity.StatContainer.Has(statType))
             {

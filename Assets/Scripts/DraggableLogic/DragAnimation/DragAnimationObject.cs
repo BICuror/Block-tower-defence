@@ -49,6 +49,7 @@ public sealed class DragAnimationObject : MonoBehaviour
     public void SetInitialParent()
     {
         transform.parent = _initialParent;
+        transform.localPosition = _initialLocalPosition;
         if (_returnToDefaultYRotation) transform.localRotation = Quaternion.Euler(0f, _initialLocalYRotation, 0f);
     }
 }

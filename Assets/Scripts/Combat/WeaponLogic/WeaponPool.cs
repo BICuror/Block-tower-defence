@@ -1,10 +1,12 @@
 using Combat;
 
-public sealed class WeaponPool<T> where T: Weapon
+public sealed class WeaponPool<T> where T : Weapon
 {
     private ObjectPool<T> _pool;
     private CombatEntity _ownerEntity;
     private float _weaponLifetime;
+    
+    public ObjectPool<T> Pool => _pool;
     
     public WeaponPool(T prefab, int poolSize, CombatEntity ownerEntity, float weaponLifetime, bool useDependencyInjection = false)
     {

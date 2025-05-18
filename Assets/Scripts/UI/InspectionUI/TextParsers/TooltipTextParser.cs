@@ -25,9 +25,9 @@ public sealed class TooltipTextParser : MonoBehaviour
         return GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData);
     }
     
-    public string ParseTooltipText(string tooltipText)
+    public string ParseTooltipText(string tooltipText, bool fullTag = true)
     {
-        tooltipText = ParseTooltipTextByTagDatas(tooltipText);   
+        tooltipText = ParseTooltipTextByTagDatas(tooltipText, fullTag);   
         tooltipText = ParseByParseData(tooltipText);
         
         return tooltipText;
@@ -35,25 +35,32 @@ public sealed class TooltipTextParser : MonoBehaviour
 
     #region TagParse
 
-    private string ParseTooltipTextByTagDatas(string tooltipText)
+    private string ParseTooltipTextByTagDatas(string tooltipText, bool fullTag = true)
     {
         IReadOnlyList<TooltipTagData> allTooltipTagDatas = _allTagDataContainer.GetAllTooltipTagDatas();
         
         foreach (TooltipTagData tagData in allTooltipTagDatas)
         {
-            tooltipText = ParseByTooltipTagData(tooltipText, tagData);
+            tooltipText = ParseByTooltipTagData(tooltipText, tagData, fullTag);
         }
 
         return tooltipText;
     }
 
-    private string ParseByTooltipTagData(string tooltipText, TooltipTagData tagData)
+    private string ParseByTooltipTagData(string tooltipText, TooltipTagData tagData, bool fullTag = true)
     {
         string initialParseText = TOOLTIP_TAG_START_CHAR + tagData.Tag;
 
         while (tooltipText.Contains(initialParseText))
         {
-            tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
+            if (fullTag)
+            {
+                tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
+            }
+            else
+            {
+                tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
+            }
         }
         
         return tooltipText;
@@ -92,8 +99,12 @@ public sealed class TooltipTextParser : MonoBehaviour
     private string ReplaceFirst(string text, string initialValue, string replacementValue) 
     { 
         int replacementIndex = text.IndexOf(initialValue);
+
+        int length = initialValue.Length;
+
+        if (length + replacementIndex + 1 < text.Length) length++;
         
-        text = text.Remove(replacementIndex, initialValue.Length);
+        text = text.Remove(replacementIndex, length);
         
         text = text.Insert(replacementIndex, replacementValue); 
         

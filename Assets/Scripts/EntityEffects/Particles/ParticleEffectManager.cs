@@ -5,15 +5,19 @@ using System;
 
 namespace Combat
 {
+    [RequireComponent(typeof(EntityEffectManager))]
+    
     public sealed class ParticleEffectManager : MonoBehaviour
     {
-        [Cached] private EntityEffectManager _entityEffectManager;
+        private EntityEffectManager _entityEffectManager;
         [Cached] private CombatEntity _onwerEntity;
         
         private Dictionary<Type, EntityEffectParticleHandler> _particleHandlers = new();
         
-        private void Start()
+        private void Awake()
         {
+            _entityEffectManager = GetComponent<EntityEffectManager>();
+            
             _entityEffectManager.EffectApplied += ApplyEffect;
             _entityEffectManager.EffectRemoved += RemoveEffect;
             _entityEffectManager.EffectUpdated += UpdateEffect;

@@ -11,7 +11,6 @@ public sealed class CrystalScheduler : MonoBehaviour
     [Inject] private WaveManager _waveManager;
     private int _currentWave;
     private int _itemsToSpawn;
-    private bool _spawned;
     
     private IslandData _islandData => _islandDataContainer.Data;
 
@@ -25,8 +24,6 @@ public sealed class CrystalScheduler : MonoBehaviour
         _currentWave = Mathf.Clamp(_waveManager.GetCurrentWave(), 0, _islandData.ItemGenerationConfig.MaxWave);
 
         _itemsToSpawn = Mathf.RoundToInt(_islandDataContainer.Data.ItemGenerationConfig.AmountCurve.Evaluate(_currentWave));
-        
-        _spawned = false;
     }
 
     private void TrySpawnItem(EnemyEntity enemyEntity)
@@ -37,22 +34,12 @@ public sealed class CrystalScheduler : MonoBehaviour
             {
                 SpawnItem(enemyEntity.transform.position);
             }
-
-            if (!_spawned)
-            {
-                SpawmStartWaveItem(enemyEntity.transform.position);
-            }
         }
         else
         {
             if (Random.Range(0f, 1f) < (_itemsToSpawn / _globalEnemyContainer.Entities.Count))
             {
                 SpawnItem(enemyEntity.transform.position);
-            }
-            
-            if (!_spawned && Random.Range(0f, 1f) < (1 / _globalEnemyContainer.Entities.Count))
-            {
-                SpawmStartWaveItem(enemyEntity.transform.position);
             }
         }
     }
@@ -65,12 +52,5 @@ public sealed class CrystalScheduler : MonoBehaviour
         _itemFactory.CreateItem(itemQualty, itemStrength, position);
         
         _itemsToSpawn--;
-    }
-
-    private void SpawmStartWaveItem(Vector3 position)
-    {
-        _itemFactory.CreateStartWaveItem(position);
-
-        _spawned = true;
     }
 }

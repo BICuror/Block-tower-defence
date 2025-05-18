@@ -8,6 +8,7 @@ public class Item : DraggableObject
     [Inject] private GlobalEffectContainer _globalEffectContainer;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
     
+    [SerializeField] private ItemColor _itemColor;
     [SerializeField] private GameObject _destroyEffectPrefab;
     private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
     private List<RewardGlobalEffectData> _rewardDatas = new();
@@ -20,6 +21,7 @@ public class Item : DraggableObject
     public int Duration => _duration;
     public int Quality => _quality;
     public int Strength => _strength;
+    public ItemColor ItemColor => _itemColor;
     
     public Action<Item> ItemPickedUp;
     public Action<Item> DurationEnded;
@@ -52,8 +54,7 @@ public class Item : DraggableObject
         {
             GrantRewardEffect();
             DurationEnded?.Invoke(this);
-            Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            DestroyItem();
         }
     }
     
@@ -73,5 +74,11 @@ public class Item : DraggableObject
         {
             _globalEffectFactory.CreateRewardEffect(rewardEffectData).GrantReward();
         });
+    }
+
+    public void DestroyItem()
+    {
+        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

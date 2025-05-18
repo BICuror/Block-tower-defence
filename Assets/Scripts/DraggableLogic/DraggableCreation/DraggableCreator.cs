@@ -46,6 +46,18 @@ public sealed class DraggableCreator : MonoBehaviour
 
         return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition, launcherPrefab);
     }
+
+    public async UniTask ActivateDraggableOnRandomPosition(DraggableObject draggable, Vector3 startPositon, [Optional] int radius, [Optional] Launcher launcherPrefab)
+    {
+        if (radius == 0) radius = _spawnRadius;
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
+        
+        Vector3 finalPosition = GetRandomSpawnPosition(draggable, startPositon, radius);
+        await CreateLauncher(startPositon, finalPosition, launcherPrefab);
+
+        draggable.transform.position = finalPosition;
+        draggable.gameObject.SetActive(true);
+    }
     
     private async UniTask CreateLauncher(Vector3 startPosition, Vector3 finalPosition, Launcher launcherPrefab)
     {

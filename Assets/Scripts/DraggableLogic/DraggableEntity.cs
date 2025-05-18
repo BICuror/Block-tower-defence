@@ -10,10 +10,8 @@ namespace Combat
         public Action<CombatEntity> EntityPickedUp;
         public Action<CombatEntity> EntityPlaced;
 
-        protected void Awake()
+        protected void Start()
         {
-            base.Awake();
-            
             PickedUp += OnEntityPickedUp;
             Placed += OnEntityPlaced;
         }

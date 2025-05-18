@@ -5,7 +5,6 @@ namespace Combat
         private EnemyHealth _health;
         
         public EnemyHealth EnemyHealth => _health;
-        public override EntityHealth Health => _health;
 
         private void Awake()
         {

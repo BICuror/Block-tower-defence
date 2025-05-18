@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: TakeDamageUponPlacement
+  m_EditorClassIdentifier: 
+  _effectTypeName: TakeDamageUponPlacement
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: HealthThreshold
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 0.5
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: DamagePercent
+      _intArgument: 1
+      _boolArgument: 0
+      _floatArgument: 0.1
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+  _modificatorName: Damage upon placement
+  _modificatorDescription: Takes #bad 10% bad# of #MaxHealth as #Damage when placed,
+    if #MaxHealth > 50%
+  AllEffectTypeNames:
+  - ActivateWhenBuilt
+  - DamageModifierEntityModificator
+  - EntityEffectEntityModificator
+  - EntityModificatorStatChange
+  - InvincibilityUntilPickUpEntityModifier
+  - ScaleDamageWithHeight
+  - TakeDamageUponPlacement

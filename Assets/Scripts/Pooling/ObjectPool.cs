@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +14,8 @@ public sealed class ObjectPool<T> where T: Component
     
     private OnObjectInitialized _onObjectInitialized;
     private DiContainer _diContainer;
+
+    private int ActiveCount => _pool.Count(pooledObject => pooledObject && pooledObject.gameObject.activeSelf);
     
     public ObjectPool(T prefab, int poolSize, [Optional]DiContainer diContainer, [Optional]OnObjectInitialized onObjectInitialized)
     {
@@ -91,14 +95,16 @@ public sealed class ObjectPool<T> where T: Component
         }
     }
 
-    public void DestroyPool()
+    public async void DestroyPool()
     {
+        await UniTask.WaitUntil(() => ActiveCount == 0);
+        
         for (int i = 0; i < _pool.Count; i++)
         {
             if (_pool[i] != null) MonoBehaviour.Destroy(_pool[i].gameObject);
         }
 
-        MonoBehaviour.Destroy(_container.gameObject);
+        if (_container) MonoBehaviour.Destroy(_container.gameObject);
     }
     
     private T CreatePooledObject()

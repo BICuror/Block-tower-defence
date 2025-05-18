@@ -573,7 +573,6 @@ GameObject:
   - component: {fileID: 259093938228366921}
   - component: {fileID: 625586418974731666}
   - component: {fileID: 7679030763716337191}
-  - component: {fileID: 6075295633985156519}
   - component: {fileID: 3388245152279836246}
   - component: {fileID: -4545223480081874719}
   - component: {fileID: -4194356339259609622}
@@ -772,25 +771,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rotationTarget: {fileID: 4632445729892911439}
---- !u!114 &6075295633985156519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7340751470710948110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c46f64bdb308df4b89db761591db20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _statInitializers:
-  - StructName: MaxHealth
-    _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
-    _defaultValue: 20
-  - StructName: Speed
-    _statData: {fileID: 11400000, guid: 88a57a3c7a16ca241abdc99cfc33c832, type: 2}
-    _defaultValue: 1
 --- !u!114 &3388245152279836246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -803,6 +783,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cf9e7e067e918449bf9f708a6d1ff9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statInitializers:
+  - StructName: MaxHealth
+    _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
+    _defaultValue: 20
+  - StructName: Speed
+    _statData: {fileID: 11400000, guid: 88a57a3c7a16ca241abdc99cfc33c832, type: 2}
+    _defaultValue: 1
 --- !u!114 &-4545223480081874719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -868,6 +855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3837b236e993244e922495d3c287a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialModificatorDatas: []
   _allAvailableModificators: []
 --- !u!114 &884761804409233052
 MonoBehaviour:

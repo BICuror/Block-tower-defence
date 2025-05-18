@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +15,8 @@ public sealed class CrystalInspectionTooltip : MonoBehaviour
     [SerializeField] private Transform _entityModificatorTooltipParent;
     [SerializeField] private TextMeshProUGUI _durationTextField;
     
+    private Dictionary<GlobalEffectData, GlobalEffectTooltip> _crystalTooltips = new();
+    
     private Inspectable _inspectable;
 
     public void SetInspectable(Inspectable inspectable)
@@ -24,18 +27,36 @@ public sealed class CrystalInspectionTooltip : MonoBehaviour
         
         item.RewardDatas.ForEach(modificatorData =>
         {
-            GlobalEffectTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
-            tooltip.SetEntityModificator(modificatorData);
-            tooltip.TooltipClosed += _inspectionSubpanelsController.ClearAllSubpanels;
-            tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
+            if (_crystalTooltips.ContainsKey(modificatorData))
+            {
+                _crystalTooltips[modificatorData].IncreaseAmount();
+            }
+            else
+            {
+                GlobalEffectTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
+                tooltip.SetEntityModificator(modificatorData);
+                tooltip.TooltipClosed += _inspectionSubpanelsController.ClearAllSubpanels;
+                tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
+                
+                _crystalTooltips.Add(modificatorData, tooltip);
+            }
         });
         
         item.ToggleEffectDatas.ForEach(modificatorData =>
         {
-            GlobalEffectTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
-            tooltip.SetEntityModificator(modificatorData);
-            tooltip.TooltipClosed += _inspectionSubpanelsController.ClearAllSubpanels;
-            tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
+            if (_crystalTooltips.ContainsKey(modificatorData))
+            {
+                _crystalTooltips[modificatorData].IncreaseAmount();
+            }
+            else
+            {
+                GlobalEffectTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
+                tooltip.SetEntityModificator(modificatorData);
+                tooltip.TooltipClosed += _inspectionSubpanelsController.ClearAllSubpanels;
+                tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
+                
+                _crystalTooltips.Add(modificatorData, tooltip);
+            }
         });
 
         _negativeSlider.value = item.Strength - item.Quality;

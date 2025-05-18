@@ -1,50 +1,47 @@
+using System.Collections.Generic;
 using UnityEngine;
+using Cashing;
 using Zenject;
 using Combat;
 
-public sealed class BombCreatorTower : DefaultCombatTaskConditionProvider
+public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 {
-    /*[Inject] private DraggableCreator _draggableCreator;
-
-    [SerializeField] private Bomb _bombPrefab;
-
-    private BuildingTaskCycle _buildingTaskCycle;
-
-    private DraggableObject _draggableObject;
-
-    private void Awake()
-    {
-        _buildingTaskCycle = GetComponent<BuildingTaskCycle>();
-        //_buildingTaskCycle.ShouldWorkDelegate = DoesNotHasBomb;
-        _buildingTaskCycle.TaskPerformed += CreateBomb;
+    [Inject] private DraggableCreator _draggableCreator;
+    [SerializeField] private Explotion _bombPrefab;
+    [Cached] private MaxEntities _maxEntities;
+    [Cached] private BuildingEntity _ownerEntity;
+    [Cached] private TaskCycle _taskCycle;
+    private List<Bomb> _createdBombs = new();
+    private WeaponBasePool<Explotion> _bombPool;
     
-        _buildingTaskCycle.TryCycle();
-    }
-
-    private bool DoesNotHasBomb() => _draggableObject == null;
-
-    private void CreateBomb()
+    private void Start()
     {
-        _buildingTaskCycle.StopRechargeProcess();
-
-        Launcher launcher = _draggableCreator.CreateDraggableOnRandomPosition(_bombPrefab, transform.position);
+        _bombPool = new WeaponBasePool<Explotion>(_bombPrefab, 5, _ownerEntity);
+        _taskCycle.TaskPerformed += CreateBomb;
+    }
     
-        launcher.Landed.AddListener(SubscribeToPlacement);
+    public ResolveTaskCondition GetTaskCondition() => LessThanMaxBombs;
+
+    private async void CreateBomb()
+    {
+        Explotion explotion = _bombPool.GetPooledWeapon();
+        Bomb bomb = explotion.GetComponent<Bomb>();
+        bomb.Exploded += RemoveDisabledBomb;
+        _createdBombs.Add(bomb);
+        
+        bomb.gameObject.SetActive(false);
+        
+        await _draggableCreator.ActivateDraggableOnRandomPosition(bomb, transform.position, 2);
+        
+        bomb.EnableExplotion();
     }
 
-    private void SubscribeToPlacement(DraggableObject draggableObject)
+    private void RemoveDisabledBomb(Bomb bomb)
     {
-        _draggableObject = draggableObject;
-
-        Bomb bomb = (draggableObject as Bomb);
-        //bomb.SetExplotionDamage(Damage);
-        bomb.Exploded.AddListener(Resume);
+        bomb.Exploded -= RemoveDisabledBomb;
+        _createdBombs.Remove(bomb);
+        _taskCycle.TryCycle();
     }
-
-    private void Resume()
-    {
-        _draggableObject = null;
-
-        _buildingTaskCycle.TryCycle();
-    }*/
+    
+    private bool LessThanMaxBombs() => _createdBombs.Count <= _maxEntities.RoundedValue;
 }

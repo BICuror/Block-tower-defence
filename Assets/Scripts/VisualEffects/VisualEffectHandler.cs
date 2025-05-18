@@ -7,6 +7,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
     [SerializeField] private StopActionType _stopAction;
     [SerializeField] private VisualEffect _visualEffect;
 
+    private Transform _initialParent;
     private float _disableTime;
 
     private void Awake()
@@ -18,6 +19,8 @@ public sealed class VisualEffectHandler : MonoBehaviour
 
     public async UniTask Play()
     {
+        SetNullParent();
+        
         _visualEffect.gameObject.SetActive(true);
 
         await UniTask.WaitForSeconds(_disableTime);
@@ -34,6 +37,8 @@ public sealed class VisualEffectHandler : MonoBehaviour
     private void DisableEffect()
     {
         _visualEffect.gameObject.SetActive(false);
+        
+        transform.SetParent(_initialParent);
     }
 
     private void Disable()
@@ -41,6 +46,8 @@ public sealed class VisualEffectHandler : MonoBehaviour
         _visualEffect.gameObject.SetActive(false);
 
         gameObject.SetActive(false);
+        
+        transform.SetParent(_initialParent);
     }
 
     private void Destroy()
@@ -48,6 +55,13 @@ public sealed class VisualEffectHandler : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void SetNullParent()
+    {
+        if (_initialParent == null) _initialParent = transform.parent;
+        
+        transform.SetParent(null);
+    }
+    
     private enum StopActionType
     {
         Disable, 

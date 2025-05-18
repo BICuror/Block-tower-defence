@@ -62,7 +62,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &2773508305360242773
 MonoBehaviour:
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &2198616959062082626
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,7 +129,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectionOptionObject: {fileID: 0}
-  _nameTextField: {fileID: 6144585461686887719}
   _descriptionTextField: {fileID: 2339334506843987076}
   _tooltipTextParser: {fileID: 2726389010669833240}
   _tooltipDataParser: {fileID: 7683282872971612278}
@@ -144,8 +143,16 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3062069637111788858, guid: ffcf668de163c934b859484bcb35b877, type: 3}
       propertyPath: m_fontSize
-      value: 14.45
+      value: 12.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3062069637111788858, guid: ffcf668de163c934b859484bcb35b877, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 267c059e5e5c0db41af2f35258bb0787, type: 2}
+    - target: {fileID: 3062069637111788858, guid: ffcf668de163c934b859484bcb35b877, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 500612685803309852, guid: 267c059e5e5c0db41af2f35258bb0787, type: 2}
     - target: {fileID: 3767030507997041338, guid: ffcf668de163c934b859484bcb35b877, type: 3}
       propertyPath: m_Name
       value: EffectTooltip
@@ -274,17 +281,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6563496282593677064, guid: ffcf668de163c934b859484bcb35b877, type: 3}
   m_PrefabInstance: {fileID: 722920418988616126}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6144585461686887719 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6867329340117421209, guid: ffcf668de163c934b859484bcb35b877, type: 3}
-  m_PrefabInstance: {fileID: 722920418988616126}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &7683282872971612278 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6965051409588926920, guid: ffcf668de163c934b859484bcb35b877, type: 3}

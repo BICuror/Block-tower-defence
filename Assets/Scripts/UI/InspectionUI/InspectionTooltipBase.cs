@@ -47,6 +47,7 @@ public sealed class InspectionTooltipBase : MonoBehaviour
             tooltip.SetEntityModificator(modificatorData);
             tooltip.TooltipClosed += () => _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(_inspectable.Description));
             tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
+            tooltip.SetAmount(inspectable.GetComponent<EntityModificatorsContainer>().GetModificatorsAmount(modificatorData));
         });
 
         _layoutSizeController.RecalculateLayout();

@@ -14,6 +14,8 @@ public sealed class WaveStateMachine : MonoBehaviour
     private Dictionary<WaveState, WaveStateController> _stateControllers = new();
     private WaveState _currentState;
 
+    public WaveState CurrentState => _currentState;
+    
     public Action<WaveState> StateStarted;
     public Action<WaveState> StateEnded;
 

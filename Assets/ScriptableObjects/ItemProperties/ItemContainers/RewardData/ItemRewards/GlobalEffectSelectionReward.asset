@@ -15,7 +15,7 @@ MonoBehaviour:
   _quality: 2
   _isUnique: 0
   _effectTypeName: StartGlobalEffectSelectionGlobalRewardEffect
-  _effectApperanceCondition: {fileID: 0}
+  effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems: []
   AllEffectTypeNames:
@@ -23,7 +23,4 @@ MonoBehaviour:
   - StartBuildingSelectionGlobalRewardEffect
   - StartBuildingUpgradeSelectionGlobalRewardEffect
   - StartGlobalEffectSelectionGlobalRewardEffect
-  - TestGlobalRewardEffect
-  _effectName: Effect selection
-  _effectDescription: Upon completion starts effect selection, where you choose one
-    permament effect from 3 random effects
+  _effectDescription: '#good Rewards effect good#'

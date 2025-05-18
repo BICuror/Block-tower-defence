@@ -18,6 +18,7 @@ public sealed class IdleStateController : WaveStateController
     [Inject] private ItemContainerManager _itemContainerManager;
     [Inject] private WaveManager _waveManager;
     [Inject] private SelectionManager _selectionManager;
+    [Inject] private ItemFactory _itemFactory;
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
@@ -38,6 +39,8 @@ public sealed class IdleStateController : WaveStateController
 
         _enemyBiomesContainer.EnableBiomesTerrain(TransitionInDuration);
         _roadAnimator.StartAppearing(TransitionInDuration);
+        
+        _itemFactory.CreateStartWaveItem(_itemContainerManager.transform.position);
     }
 
     protected override void OnEnterStateCompleted()
@@ -50,5 +53,6 @@ public sealed class IdleStateController : WaveStateController
     protected override void OnQuitStateStarted()
     {
         _itemContainerManager.LockContainer();
+        _itemFactory.DestoyAllUnusedItems();
     }
 }

@@ -17,7 +17,7 @@ public sealed class EntityModificatorTooltip : BaseTooltip
     public void SetEntityModificator(EntityModificatorData entityModificatorData)
     {
         _modificatorNameText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorName);
-        _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorDescription);
+        _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorDescription, false);
         
         _tagDataContainer = _tooltipDataParser.GetTooltipTagDataFromText(entityModificatorData.ModificatorDescription);
     }

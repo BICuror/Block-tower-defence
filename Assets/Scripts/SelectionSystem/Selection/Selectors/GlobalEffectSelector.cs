@@ -5,15 +5,15 @@ using Zenject;
 public sealed class GlobalEffectSelector : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataHolder;
+    [Inject] private GlobalStatContainer _globalStatContainer;
 
     [SerializeField] private ToggleEffectDataSelectionContainer _toggleEffectDataSelectionContainer;
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private GlobalEffectSelectionOptionObject _selectionObject;
-    [SerializeField] private int _optionsAmount = 3;
     
     public async void StartGlobalEffectSelection()
     {
-        List<ToggleGlobalEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_optionsAmount);
+        List<ToggleGlobalEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_globalStatContainer.Get<SelectionOptionsAmount>().RoundedValue);
 
         for (int i = 0; i < buildingDatas.Count; i++)
         {

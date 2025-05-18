@@ -4,10 +4,7 @@ using TMPro;
 
 public sealed class InspectionStatDetailsSubpanel : InspectionSubpanelBase
 {
-    [SerializeField] private TextMeshProUGUI _totalStatValueTextField;
-    [SerializeField] private TextMeshProUGUI _multiplierStatValueTextField;
-    [SerializeField] private TextMeshProUGUI _flatAdditionStatValueTextField;
-    [SerializeField] private TextMeshProUGUI _baseStatValueTextField;
+    [SerializeField] private TextMeshProUGUI _valueTextField;
 
     private Stat _stat;
     
@@ -23,10 +20,9 @@ public sealed class InspectionStatDetailsSubpanel : InspectionSubpanelBase
 
     private void UpdateStatValueDisplays()
     {
-        _totalStatValueTextField.text = Math.Round(_stat.Value, 2).ToString();
-        _multiplierStatValueTextField.text = $"{Math.Round(_stat.Multiplier * 100)}%"; 
-        _flatAdditionStatValueTextField.text = Math.Round(_stat.Flat).ToString();
-        _baseStatValueTextField.text = Math.Round(_stat.Default).ToString();
+        string valueText = $"({Math.Round(_stat.Default, 2)} + {Math.Round(_stat.GetFlatModifier())}) * {Math.Round(_stat.GetMultiplierModifier() * 100):F2} = {_stat.Value:F2}";
+        
+        _valueTextField.text = valueText;
     }
     
     private void OnDestroy() => _stat.ValueChanged -= _ => UpdateStatValueDisplays();

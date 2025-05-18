@@ -2,14 +2,13 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using System;
-using System.IO;
-using UnityEditor;
-using UnityEngine.Serialization;
 
 public abstract class GlobalEffectData : ScriptableObject
 {
     [Header("GlobalEffectData")]
-    [Range(-5, 5)] [SerializeField] private int _quality = 3;
+    [Range(1, 5)] [SerializeField] private int _quality = 3;
+    [SerializeField] private EffectType _effectType;
+    
     [SerializeField] private bool _isUnique = false;
     [Dropdown("AllEffectTypeNames")] [SerializeField] private string _effectTypeName;
     
@@ -22,19 +21,19 @@ public abstract class GlobalEffectData : ScriptableObject
     [Header("TooltipData")] 
     [SerializeField] private string _effectDescription;
     
+    public virtual Type EffectInstanceType => Type.GetType(_effectTypeName);
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public EffectAppearanceConditionData EffectAppearanceCondition => effectAppearanceCondition;
-    public Type EffectType => Type.GetType(_effectTypeName);
     public bool HasAppearanceCondition => effectAppearanceCondition;
     public int Quality => _quality;
     public bool IsUnique => _isUnique;
+    public EffectType EffectType => _effectType;
     public string EffectDescription => _effectDescription;
-    
-    private void OnValidate()
-    {
-        if (string.IsNullOrEmpty(_effectTypeName) || EffectType == null)
-        {
-            Debug.LogError($"Invalid modifier type {_effectTypeName} in {name} path: {AssetDatabase.GetAssetPath(this)}");
-        }
-    }
+}
+
+public enum EffectType
+{
+    Positive,
+    Negative,
+    Netral
 }

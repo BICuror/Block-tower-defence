@@ -2,12 +2,14 @@ using System;
 using Combat;
 using UnityEngine;
 
-public abstract class WeaponBase : MonoBehaviour
+public class WeaponBase : MonoBehaviour
 {
     protected CombatEntity OwnerEntity;
     
     public Action<CombatEntity> HitEntity;
     public Action<CombatEntity> KilledEntity;
+    
+    public CombatEntity GetOwnerEntity() => OwnerEntity;
     
     public void Initialize(CombatEntity ownerEntity)
     {

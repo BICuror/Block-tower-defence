@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cashing;
@@ -23,6 +24,8 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
         });   
     }
 
+    public int GetModificatorsAmount(EntityModificatorData modificatorData) => _appliedModificators.Get(modificatorData).Count;
+    
     public void AddEffect(EntityModificatorData modificatorData)
     {
         EntityModificator modificator = _entityModificatorFactory.CreateEntityModificationEffect(modificatorData);
@@ -33,6 +36,20 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
         modificator.Enable();
 
         _appliedModificators.Add(modificatorData, modificator);
+    }
+
+    public bool Has(Type modificatorType)
+    {
+        return _appliedModificators.GetAllKeys().Exists(data => data.EffectType == modificatorType);
+    }
+
+    public void RemoveEffect(Type modificatorType)
+    {
+        EntityModificatorData modificatorData = _appliedModificators.GetAllKeys().Find(data => data.EffectType == modificatorType);
+        
+        if (modificatorData == null) return;
+        
+        RemoveEffect(modificatorData);
     }
     
     public void RemoveEffect(EntityModificatorData modificatorData)

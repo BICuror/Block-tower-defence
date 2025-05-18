@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseEnemySpeedToggleEffect
   m_EditorClassIdentifier: 
   _quality: 1
+  _effectType: 1
   _isUnique: 0
   _effectTypeName: GlobalEnemyModificatorToggleEffect
   effectAppearanceCondition: {fileID: 0}
@@ -21,12 +22,14 @@ MonoBehaviour:
     - _argumentType: 3
       _argumentName: EntityModificatorData
       _intArgument: 0
+      _boolArgument: 0
       _floatArgument: 0
+      _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: f17266970283b374e94a5c1e33eef0a7, type: 2}
   AllEffectTypeNames:
   - GlobalBuildingModificatorToggleEffect
   - GlobalEnemyModificatorToggleEffect
+  - GlobalStatChangeToggleEffect
   - StartWaveGlobalToggleEffect
-  _effectName: Enemy speed increase
-  _effectDescription: Increase enemy speed by 25%
+  _effectDescription: '#bad +25% bad# enemy #Speed'

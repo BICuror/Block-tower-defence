@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 7569262230256014193}
   - component: {fileID: 6692096836456901224}
   - component: {fileID: 2314991022373557598}
-  - component: {fileID: 95610949715420079}
   - component: {fileID: 9082483487705635966}
   - component: {fileID: 4838709076698571072}
   - component: {fileID: -3365627974174819169}
@@ -160,25 +159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc21b5c84dbd70c48be280b79a8cc69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &95610949715420079
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6442317979181897654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c46f64bdb308df4b89db761591db20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _statInitializers:
-  - StructName: MaxHealth
-    _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
-    _defaultValue: 10
-  - StructName: BuildTime
-    _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    _defaultValue: 1
 --- !u!114 &9082483487705635966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -191,6 +171,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61a7e3cfd9fd824088e64d82332d009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _statInitializers:
+  - StructName: MaxHealth
+    _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
+    _defaultValue: 10
+  - StructName: BuildTime
+    _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
+    _defaultValue: 1
 --- !u!114 &4838709076698571072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3837b236e993244e922495d3c287a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _initialModificatorDatas: []
   _allAvailableModificators: []
 --- !u!1 &6813076032577213933
 GameObject:

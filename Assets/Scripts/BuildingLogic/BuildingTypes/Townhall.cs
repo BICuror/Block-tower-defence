@@ -11,7 +11,6 @@ namespace Combat
     
         private async void Start()
         {
-            GetComponent<IDraggable>().Place();
             await UniTask.WaitForSeconds(1f);
             
             for (int i = 0; i < _draggablesToCreateOnStart.Length; i++)

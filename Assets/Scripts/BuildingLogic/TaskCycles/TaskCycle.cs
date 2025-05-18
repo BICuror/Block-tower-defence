@@ -9,7 +9,7 @@ public class TaskCycle : MonoBehaviour
 {
     [Cached] private EntityHealth _ownerEntityHealth;
     [Cached] private TaskRechargeDuration _taskRechargeDuration;
-    [Cached] private DefaultCombatTaskConditionProvider _defaultCombatTaskConditionProvider;
+    [Cached] private ITaskConditionProvider _taskConditionProvider;
     private bool _taskCycleIsActive;
     private CancellationTokenSource _cancellationTokenSource = new();
     
@@ -31,7 +31,7 @@ public class TaskCycle : MonoBehaviour
     {
         if (!CanWork()) return; 
         
-        if (!_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke()) return;
+        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return;
         
         if (_taskCycleIsActive) return;
 
@@ -57,7 +57,7 @@ public class TaskCycle : MonoBehaviour
         
         _taskCycleIsActive = false;
 
-        if (_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke())
+        if (_taskConditionProvider.GetTaskCondition().Invoke())
         {
             TryCycle();
             PerformTask();
@@ -68,7 +68,7 @@ public class TaskCycle : MonoBehaviour
     {
         if (!CanWork()) return;
         
-        if (!_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke()) return; 
+        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return; 
         
         TaskPerformed?.Invoke();
     }

@@ -22,14 +22,14 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
         List<ToggleGlobalEffectData> toggleEffectDatas = _temModifiersSelectionContainer.ItemToggleEffectContainer.EffectDatas;
 
-        List<ToggleGlobalEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.Quality >= 0);
-        List<ToggleGlobalEffectData> negatriveEffects = toggleEffectDatas.FindAll(effectData => effectData.Quality < 0); 
+        List<ToggleGlobalEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Positive);
+        List<ToggleGlobalEffectData> negativeEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Negative); 
 
         int positiveStrength = quality + strength;
-        int negativeStrength = quality - strength;
+        int negativeStrength = strength - quality;
 
-        //result.AddRange(GetItemEffectDatas<ToggleGlobalEffectData>(negativeStrength, negatriveEffects));
-        result.AddRange(GetItemEffectDatas<ToggleGlobalEffectData>(positiveStrength, positiveEffects));
+        result.AddRange(GetItemEffectDatas(negativeStrength, negativeEffects));
+        result.AddRange(GetItemEffectDatas(positiveStrength, positiveEffects));
 
         return result;   
     }
@@ -42,43 +42,43 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
         int positiveStrength = quality + strength;
         
-        result.AddRange(GetItemEffectDatas<RewardGlobalEffectData>(positiveStrength, rewardEffectDatas));
+        result.AddRange(GetItemEffectDatas(positiveStrength, rewardEffectDatas));
 
         return result;
     }
 
     private List<T> GetItemEffectDatas<T>(int strength, List<T> itemEffectDats) where T : GlobalEffectData
     {
-        if (strength == 0) strength = 1;
+        if (strength < 1) strength = 1;
         
         List<T> result = new();
         Debug.Log($"Trying to find item effect data for {strength}");
-        List<int> nonEmptyQualities = PopulateNonEmptyQualityList(strength);
+        List<int> nonEmptyQualities = PopulateNonEmptyStrengthList(strength);
         int leftStrength = strength;
         
         while (leftStrength > 0 && nonEmptyQualities.Count > 0)
         {
-            int currentQuality = nonEmptyQualities[Random.Range(0, nonEmptyQualities.Count)];
+            int currentStrength = nonEmptyQualities[Random.Range(0, nonEmptyQualities.Count)];
 
-            if (TryGetRandomEffectData(currentQuality, itemEffectDats, out T effectData))
+            if (TryGetRandomEffectData(currentStrength, itemEffectDats, out T effectData))
             {
                 itemEffectDats.Remove(effectData);
                 result.Add(effectData);
 
-                leftStrength -= currentQuality;
+                leftStrength -= currentStrength;
             }
             else
             {
-                nonEmptyQualities.Remove(currentQuality);
+                nonEmptyQualities.Remove(currentStrength);
             }
         }
 
         return result;
     }
 
-    private bool TryGetRandomEffectData<T>(int quality, List<T> datas, out T data) where T : GlobalEffectData
+    private bool TryGetRandomEffectData<T>(int strength, List<T> datas, out T data) where T : GlobalEffectData
     {
-        List<T> selectedDatas = datas.FindAll(data => data.Quality == quality);
+        List<T> selectedDatas = datas.FindAll(data => data.Quality == strength);
         data = null;
         
         while (selectedDatas.Count > 0)
@@ -87,29 +87,37 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
             T selectedData = selectedDatas[randomIndex];
             
-            if (!selectedData.HasAppearanceCondition || _globalEffectFactory.GetAppearanceConditionValue(selectedData))
+            if (selectedData.HasAppearanceCondition)
             {
-                data = selectedData;
+                if (_globalEffectFactory.CanAppear(selectedData))
+                {
+                    data = selectedData; 
+                    return true;
+                }
+            }
+            else
+            {
+                data = selectedData; 
                 return true;
             }
 
             selectedDatas.RemoveAt(randomIndex);
         }
         
-        Debug.Log($"Couldn't find any effect for {quality}");
+        Debug.Log($"Couldn't find any effect for {strength}");
 
         return false;
     }
 
-    private List<int> PopulateNonEmptyQualityList(int maxQuality)
+    private List<int> PopulateNonEmptyStrengthList(int strength)
     {
         List<int> result = new();
-        int currentQuality = maxQuality;
+        int leftStrength = strength;
 
-        while (currentQuality > 0)
+        while (leftStrength > 0)
         {
-            result.Add(currentQuality);
-            currentQuality--;
+            result.Add(leftStrength);
+            leftStrength--;
         }
 
         return result;

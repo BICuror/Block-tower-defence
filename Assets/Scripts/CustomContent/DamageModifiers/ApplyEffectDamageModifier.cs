@@ -1,13 +1,23 @@
+using System;
 using Combat;
 
-public abstract class ApplyEffectDamageModifier : DamageModifier
+public sealed class ApplyEffectDamageModifier : DamageModifier
 {
+    private int _appliedStrength;
+    private Type _entityEffectType;
+    private float _effectDuration;
+
+    public void SetEffectData(Type entityEffectType, int appliedStrength, float effectDuration)
+    {
+        _entityEffectType = entityEffectType;
+        _appliedStrength = appliedStrength;
+        _effectDuration = effectDuration;
+    }
+    
     public override float Modify(CombatEntity otherEntity, float value)
     {
-        ApplyEffect(otherEntity.ComponentsContainer.Get<EntityEffectManager>());
+        otherEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(_entityEffectType, _appliedStrength, _effectDuration);
         
         return value;
     }
-
-    protected abstract void ApplyEffect(EntityEffectManager effectManager);
 }

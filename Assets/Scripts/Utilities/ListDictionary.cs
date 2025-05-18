@@ -29,9 +29,20 @@ public sealed class ListDictionary<TKey, TValue>
         
         _allItems.Add(value);
         
-        if (_sorter != null) _allItems = _sorter.Invoke(_allItems);
+        TrySort();
     }
 
+    public void Remove(TKey key, TValue value)
+    {
+        _dictionary[key].Remove(value);
+        
+        _allItems.Remove(value);
+        
+        if (_dictionary[key].Count == 0) _dictionary.Remove(key);
+        
+        TrySort();
+    }
+    
     public TValue Remove(TKey key)
     {
         TValue value = _dictionary[key][^1];
@@ -40,12 +51,17 @@ public sealed class ListDictionary<TKey, TValue>
         _allItems.Remove(value);
         
         if (_dictionary[key].Count == 0) _dictionary.Remove(key);
-        
-        if (_sorter != null) _allItems = _sorter.Invoke(_allItems);
+
+        TrySort();
 
         return value;
     }
 
+    public List<TValue> Get(TKey key)
+    {
+        return _dictionary[key];
+    }
+    
     public bool TryGetValue(TKey key, out List<TValue> value)
     {
         return _dictionary.TryGetValue(key, out value);
@@ -58,4 +74,9 @@ public sealed class ListDictionary<TKey, TValue>
     
     public List<TValue> GetAllItems() => _allItems;
     public List<TKey> GetAllKeys() => _dictionary.Keys.ToList();
+
+    private void TrySort()
+    {
+        if (_sorter != null) _allItems = _sorter.Invoke(_allItems);
+    }
 }

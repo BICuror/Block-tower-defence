@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: DamageIncreaseEntityModificator
+  m_EditorClassIdentifier: 
+  _effectTypeName: EntityModificatorStatChange
+  _argumentsContainer:
+    _argumentItems: []
+  _modificatorName: Damage up
+  _modificatorDescription: '#good +3 good# #Damage'
+  AllEffectTypeNames:
+  - EntityModificatorStatChange
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
+    FlatChange: 3
+    MultiplierChange: 0

@@ -13,11 +13,9 @@ public class Stat
 
     protected virtual float MinimalValue { get => float.MinValue; }
     
+    public float Default => _default;
     public float Value => _value;
     public int RoundedValue => _roundedValue;
-    public float Multiplier => _multiplier;
-    public float Flat => _flat;
-    public float Default => _default;
 
     public Action<float> ValueChanged;
     public Action<int> RoundedValueChanged;
@@ -58,6 +56,24 @@ public class Stat
         statModifier.ModifierChanged -= CalculateStatValue;
         _statModifiers.Remove(statModifier);
         CalculateStatValue();
+    }
+
+    public float GetFlatModifier()
+    {
+        float flat = _flat;
+        
+        _statModifiers.ForEach(modifier => flat += modifier.Flat);
+
+        return flat;
+    }
+    
+    public float GetMultiplierModifier()
+    {
+        float multiplier = _multiplier;
+        
+        _statModifiers.ForEach(modifier => multiplier += modifier.Multiplier);
+
+        return multiplier;
     }
     
     private void CalculateStatValue()

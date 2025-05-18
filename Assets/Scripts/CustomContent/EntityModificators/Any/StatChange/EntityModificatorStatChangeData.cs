@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(fileName = "EntityModificatorData", menuName = "EntityStatChangeModificatorData")]
+[CreateAssetMenu(fileName = "EntityModificatorData", menuName = "EntityModificators/EntityStatChangeModificatorData")]
 
 public sealed class EntityModificatorStatChangeData : EntityModificatorData
 {
@@ -25,7 +25,7 @@ public sealed class EntityModificatorStatChangeData : EntityModificatorData
  
 [Serializable] public sealed class StatChange
 {
-    public string StatTypeName;
+    public StatData StatData;
     public float FlatChange;
     public float MultiplierChange;
 }

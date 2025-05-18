@@ -1,11 +1,14 @@
-using Combat;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Combat;
 
 [RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
-    [SerializeField] private EffectInspectionTooltipl _effectInspectionTooltipl;
+    [SerializeField] private AreaVisualisation _areaVisualisation;
+    [SerializeField] private EffectInspectionTooltip effectInspectionTooltip;
     [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltip;
     [SerializeField] private InspectionTooltipBase _entityInspectionTooltipPrefab;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
@@ -29,14 +32,15 @@ public class InspectorController : MonoBehaviour
         
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
-            
-            if (!_inspectable)
+            if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
             {
-                StartInspecting(hoveredInspectable);
+                if (!_inspectable)
+                {
+                    StartInspecting(hoveredInspectable);
+                }
+    
+                return true;
             }
-
-            return true;
         }
 
         return false;
@@ -50,13 +54,14 @@ public class InspectorController : MonoBehaviour
 
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
-
-            if (hoveredInspectable.GetComponent<Item>() == null) return false;
-            
-            if (!_inspectable)
+            if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
             {
-                StartInspecting(hoveredInspectable);
+                if (hoveredInspectable.GetComponent<Item>() == null) return false;
+
+                if (!_inspectable)
+                {
+                    StartInspecting(hoveredInspectable);
+                }
             }
 
             return true;
@@ -88,6 +93,11 @@ public class InspectorController : MonoBehaviour
 
             return uiHit.collider.gameObject == _currentInspectionTooltip;
         }
+        
+        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit inspectableHit))
+        {
+            if (_inspectable.gameObject == inspectableHit.collider.gameObject) return false;
+        }
 
         StopInspecting();
         return true;
@@ -96,14 +106,17 @@ public class InspectorController : MonoBehaviour
     private void StartInspecting(Inspectable inspectable)
     {
         _inspectable = inspectable;
-
-        /*MeshRenderer[] meshRenderers = inspectable.GetComponentsInChildren<MeshRenderer>();
+        _inspectable.SetInspectedState(true);
+        
+        MeshRenderer[] meshRenderers = inspectable.GetComponentsInChildren<MeshRenderer>();
         float maxHeight = 0;
-
+        
+        _areaVisualisation.ActivateVisualisation(_inspectable.gameObject);
+        
         for (int i = 0; i < meshRenderers.Length; i++)
         {
             maxHeight = Mathf.Max(meshRenderers[i].bounds.size.y, maxHeight);
-        }*/
+        }
 
         if (inspectable.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
         {
@@ -134,6 +147,8 @@ public class InspectorController : MonoBehaviour
     {
         if (!_inspectable) return;
         
+        _areaVisualisation.DeactivateVisualisation(_inspectable.gameObject);
+        _inspectable.SetInspectedState(false);
         _inspectable = null;
         Destroy(_currentInspectionTooltip);
     }

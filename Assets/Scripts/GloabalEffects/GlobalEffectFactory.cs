@@ -6,7 +6,7 @@ public sealed class GlobalEffectFactory
 {
     [Inject] private DiContainer _diContainer;
 
-    public bool GetAppearanceConditionValue(GlobalEffectData globalEffectData)
+    public bool CanAppear(GlobalEffectData globalEffectData)
     {
         EffectApperanceCondition condition = (EffectApperanceCondition)Activator.CreateInstance(globalEffectData.EffectAppearanceCondition.ApperanceConditionType);
         
@@ -15,19 +15,20 @@ public sealed class GlobalEffectFactory
         condition.SetArgumentsContainer(globalEffectData.EffectAppearanceCondition.ArgumentsContainer);
         _diContainer.Inject(condition);
 
-        return condition.GetValue();
+        return condition.CanAppear();
     }
 
     public GlobalToggleEffect CreateToggleEffect(ToggleGlobalEffectData globalEffectData)
     {
-        GlobalToggleEffect effect = CreateEffectInstance<GlobalToggleEffect>(globalEffectData.EffectType);
+        GlobalToggleEffect effect = CreateEffectInstance<GlobalToggleEffect>(globalEffectData.EffectInstanceType);
         effect.SetArgumentsContainer(globalEffectData.ArgumentsContainer);
+        globalEffectData.Modify(effect);
         return effect;
     } 
 
     public GlobalRewardEffect CreateRewardEffect(RewardGlobalEffectData globalEffectData)
     {
-        GlobalRewardEffect effect = CreateEffectInstance<GlobalRewardEffect>(globalEffectData.EffectType);
+        GlobalRewardEffect effect = CreateEffectInstance<GlobalRewardEffect>(globalEffectData.EffectInstanceType);
         effect.SetArgumentsContainer(globalEffectData.ArgumentsContainer);
         return effect;
     } 

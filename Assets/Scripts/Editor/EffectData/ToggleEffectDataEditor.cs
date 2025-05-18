@@ -1,8 +1,17 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEditor;
 
-[CustomEditor(typeof(ToggleGlobalEffectData))]
+[CustomEditor(typeof(ToggleGlobalEffectData), true)]
 
-public class ToggleEffectDataEditor : EffectDataCustomEditor<GlobalToggleEffect> {}
+public class ToggleEffectDataEditor : CustomTypeDropdownEditor<GlobalToggleEffect>
+{
+    protected override void ApplyDropdownItems(List<string> items)
+    {
+        ToggleGlobalEffectData modificatorData = (ToggleGlobalEffectData)target;
+
+        modificatorData.AllEffectTypeNames = items;
+    }
+}
 
 #endif

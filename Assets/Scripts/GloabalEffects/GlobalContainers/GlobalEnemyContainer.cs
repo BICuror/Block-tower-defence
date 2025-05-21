@@ -16,7 +16,7 @@ public sealed class GlobalEnemyContainer
     {
         if (_globalEnemyEntities.Contains(enemyEntity)) throw new DuplicateNameException();
 
-        enemyEntity.EnemyHealth.EnemyDied  += RemoveUponDestroyment;
+        enemyEntity.EnemyHealth.EnemyDied += RemoveUponDestroyment;
         
         _globalEnemyEntities.Add(enemyEntity);
         

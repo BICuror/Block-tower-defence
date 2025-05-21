@@ -20,22 +20,20 @@ public sealed class EntityEffectRemovalHandler
         _cancelationTokenSource = new();
         WaitToRemoveEffect(duration);
     }
-
-    public void UpdateRemovalTimer(float duration)
-    {
-        _cancelationTokenSource.Cancel();
-        _cancelationTokenSource = new();
-        SetRemovalTimer(duration);
-    }
     
     private async UniTask WaitToRemoveEffect(float duration)
     {
         try
         {
             await UniTask.WaitForSeconds(duration, cancellationToken: _cancelationTokenSource.Token);
-            EffectRemovalTimerFinished?.Invoke(_effectType);
         }
-        catch (Exception e) { TaskUtility.LogAsync(e); }
+        catch (Exception e)
+        {
+            TaskUtility.LogAsync(e);
+            return;
+        }
+        
+        EffectRemovalTimerFinished?.Invoke(_effectType);
     }
 
     public void StopRemovalTimer()

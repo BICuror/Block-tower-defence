@@ -13,9 +13,9 @@ public sealed class EnemyAreaHeal : MonoBehaviour
         _enemyAreaScaner.RemovedItem += RemoveHealEffect;
     }
     
-    private void ApplyHealEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(typeof(OnFireEffect), 1);
+    private void ApplyHealEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(typeof(HealEffect), 1);
     
-    private void RemoveHealEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().RemoveEffect(typeof(OnFireEffect), 1);
+    private void RemoveHealEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().RemoveEffect(typeof(HealEffect), 1);
 
     private void OnDestroy()
     {

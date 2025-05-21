@@ -29,7 +29,7 @@ public class HealthBar : Shaker
 
         OwnerHealth.Damaged += UpdateBar;
         OwnerHealth.Healed += UpdateBar;
-        OwnerHealth.EntityDied += _ => FillBar();
+        OwnerHealth.Died += FillBar;
         
         UpdatePropertyBlock();
     }

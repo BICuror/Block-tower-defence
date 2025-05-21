@@ -26,12 +26,13 @@ namespace Combat
         public void SetStack(int strength)
         {
             TrueStack = strength;
-            Stack = strength;
+            Stack = Math.Clamp(TrueStack, 0, MaxStacks);
         }
+        
         public void ChangeStack(int strengthIncrease)
         {
             TrueStack += strengthIncrease;
-            Stack = Math.Clamp(Stack + strengthIncrease, 0, MaxStacks);
+            Stack = Math.Clamp(TrueStack, 0, MaxStacks);
         }
         
         public virtual void Update() {}

@@ -57,7 +57,7 @@ public sealed class WaveStateMachine : MonoBehaviour
 
     private async UniTask TransitionIntoNewState()
     {
-        StateStarted?.Invoke(_currentState);
         await _stateControllers[_currentState].TransitionIntoState();
+        StateStarted?.Invoke(_currentState);
     } 
 }

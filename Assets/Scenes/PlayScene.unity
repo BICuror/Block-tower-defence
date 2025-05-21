@@ -9461,6 +9461,14 @@ PrefabInstance:
       propertyPath: enemySpawnSystem
       value: 
       objectReference: {fileID: 910443199}
+    - target: {fileID: 8643825667521868239, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _enemySpawnSystem
+      value: 
+      objectReference: {fileID: 910443199}
+    - target: {fileID: 8643825667521868239, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _enemySpawnGroupCompiler
+      value: 
+      objectReference: {fileID: 8679370445069788122}
     - target: {fileID: 8667078185026777112, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _roadGenerator
       value: 
@@ -9595,6 +9603,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8679370445069788118}
+    - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8679370445069788122}
     - targetCorrespondingSourceObject: {fileID: 1892278381407435233, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 474860759}
@@ -9625,6 +9636,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 687e0b0216b9c7245a4bfdb815fdc5c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8679370445069788122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679370445069788117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a388e1cc2838e10408b4f5498f6bad62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

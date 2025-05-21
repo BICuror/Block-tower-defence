@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using Cashing;
 using System;
-using System.Linq;
 
 namespace Combat
 {
@@ -10,11 +10,11 @@ namespace Combat
     {
         [Cached] private DraggableObject _draggableObject;
         [Cached] private CombatEntity _ownerEntity;
+        [Cached] private EntityHealth _entityHealth;
         private Dictionary<Type, EntityEffect> _appliedEffects = new();
         private Dictionary<Type, EntityEffectRemovalHandler> _removalHandlers = new();
-        private bool _effectsCanBeSet = true;
         
-        private bool EffectsCanBeApplied => _draggableObject.IsPlaced;
+        private bool EffectsCanBeApplied => _draggableObject.IsPlaced && _entityHealth.IsAlive();
 
         public Action<Type> EffectApplied;
         public Action<Type> EffectUpdated;
@@ -24,7 +24,7 @@ namespace Combat
         {
             DraggableObject draggableObject = _ownerEntity.ComponentsContainer.Get<DraggableObject>();
             
-            _ownerEntity.ComponentsContainer.Get<EntityHealth>().EntityDied += _ => RemoveAllEffects();
+            _ownerEntity.Health.Died += RemoveAllEffects;
             draggableObject.PickedUp += RemoveAllEffects;
         }
         
@@ -40,17 +40,14 @@ namespace Combat
             {
                 UpdateEffect(exsistingEffect, effectType, strength);
                 
-                _removalHandlers[effectType].UpdateRemovalTimer(duration);
+                _removalHandlers[effectType].SetRemovalTimer(duration);
             }
-            else
+            else if (ApplyEffect(effectType, strength))
             {
-                if (ApplyEffect(effectType, strength))
-                {
-                    EntityEffectRemovalHandler removalHandler = new(effectType);
-                    removalHandler.SetRemovalTimer(duration);
-                    removalHandler.EffectRemovalTimerFinished += RemoveEffect;
-                    _removalHandlers.Add(effectType, removalHandler);
-                }
+                EntityEffectRemovalHandler removalHandler = new(effectType);
+                removalHandler.SetRemovalTimer(duration);
+                removalHandler.EffectRemovalTimerFinished += RemoveEffect;
+                _removalHandlers.Add(effectType, removalHandler);
             }
         }
         
@@ -72,11 +69,11 @@ namespace Combat
         {
             EntityEffect effect = EntityEffectFactory.Instance.CreateEntityEffect(effectType);
             effect.SetEntity(_ownerEntity); 
-            effect.SetStack(strength);
 
             if (!effect.CanBeApplied()) return false;
             
             _appliedEffects.Add(effectType, effect); 
+            effect.SetStack(strength);
             effect.ApplyToEntity();
             
             EffectApplied?.Invoke(effectType);
@@ -92,17 +89,12 @@ namespace Combat
             EffectUpdated?.Invoke(effectType);
         }
         
-        public void RemoveAllEffects()
+        private void RemoveAllEffects()
         {
-            List<Type> effectTypes = _appliedEffects.Keys.ToList();
-            
-            while (_appliedEffects.Count > 0)
-            {
-                RemoveEffect(effectTypes[^1]);
-            }
+            _appliedEffects.Keys.ToList().ForEach(RemoveEffect);
         }
 
-        public void RemoveEffect(Type effectType) => RemoveEffect(effectType, int.MaxValue);
+        private void RemoveEffect(Type effectType) => RemoveEffect(effectType, int.MaxValue);
         
         public void RemoveEffect(Type effectType, int strength)
         {
@@ -113,7 +105,7 @@ namespace Combat
                 if (exsistingEffect.TrueStack > 0)
                 {
                     exsistingEffect.Update();
-                                
+                
                     EffectUpdated?.Invoke(effectType);
                 }
                 else
@@ -123,14 +115,19 @@ namespace Combat
                                 
                     if (_removalHandlers.ContainsKey(effectType))
                     {
-                        _removalHandlers[effectType].StopRemovalTimer();
                         _removalHandlers[effectType].EffectRemovalTimerFinished -= RemoveEffect;
+                        _removalHandlers[effectType].StopRemovalTimer();
                         _removalHandlers.Remove(effectType);
                     }
                                 
                     EffectRemoved?.Invoke(effectType);
                 }
             }
+        }
+
+        private void RemoveEffect()
+        {
+            
         }
     }
 }

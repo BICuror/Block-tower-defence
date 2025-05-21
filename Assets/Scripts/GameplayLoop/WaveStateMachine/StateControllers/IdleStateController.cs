@@ -7,18 +7,17 @@ using Combat;
 public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
-    [Inject] private EnemySpawnSystem _enemySpawnSystem;
-    [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
-    [Inject] private RoadGenerator _roadGenerator;
-    [Inject] private EnemyBiomeGenerator _enemyBiomeGenerator;
     [Inject] private IslandDecorationContainer _decorationContainer;
-    [Inject] private RoadMapGenerator _roadMapGenerator;
-    [Inject] private OptionalTaskGenerator _optionalTaskGenerator; 
     [Inject] private NavigationMapGenerator _navigationMapGenerator;
+    [Inject] private OptionalTaskGenerator _optionalTaskGenerator; 
     [Inject] private ItemContainerManager _itemContainerManager;
-    [Inject] private WaveManager _waveManager;
+    [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
+    [Inject] private EnemyBiomeGenerator _enemyBiomeGenerator;
+    [Inject] private RoadMapGenerator _roadMapGenerator;
     [Inject] private SelectionManager _selectionManager;
+    [Inject] private RoadGenerator _roadGenerator;
     [Inject] private ItemFactory _itemFactory;
+    [Inject] private WaveManager _waveManager;
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
@@ -35,7 +34,6 @@ public sealed class IdleStateController : WaveStateController
         _roadGenerator.GenerateRoads();
         _enemyBiomesContainer.RegenerateBiomes();
         _enemyBiomesContainer.GenerateBiomesDecorations();
-        _enemySpawnSystem.GenerateEnemyGroups();
 
         _enemyBiomesContainer.EnableBiomesTerrain(TransitionInDuration);
         _roadAnimator.StartAppearing(TransitionInDuration);

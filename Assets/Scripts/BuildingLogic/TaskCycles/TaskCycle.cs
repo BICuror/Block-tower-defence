@@ -17,7 +17,7 @@ public class TaskCycle : MonoBehaviour
 
     private void Start()
     {
-        _ownerEntityHealth.EntityDied += _ => StopRechargeProcess();
+        _ownerEntityHealth.Died += StopRechargeProcess;
     }
     
     public void StopRechargeProcess()
@@ -71,5 +71,10 @@ public class TaskCycle : MonoBehaviour
         if (!_taskConditionProvider.GetTaskCondition().Invoke()) return; 
         
         TaskPerformed?.Invoke();
+    }
+
+    protected void OnDestroy()
+    {
+        _ownerEntityHealth.Died += StopRechargeProcess;
     }
 }

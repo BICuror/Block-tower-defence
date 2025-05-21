@@ -1,14 +1,15 @@
 using UnityEngine;
 using Zenject;
 using Combat;
-using UnityEngine.Serialization;
 
 public sealed class EnemySpawnManagmentInstaller : MonoInstaller
 {
-    [FormerlySerializedAs("_enemySpawnerSystem")] [SerializeField] private EnemySpawnSystem enemySpawnSystem;
+    [SerializeField] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
+    [SerializeField] private EnemySpawnSystem _enemySpawnSystem;
 
     public override void InstallBindings()
     {
-        Container.Bind<EnemySpawnSystem>().FromInstance(enemySpawnSystem).AsSingle().NonLazy();
+        Container.Bind<EnemySpawnGroupCompiler>().FromInstance(_enemySpawnGroupCompiler).AsSingle().NonLazy();
+        Container.Bind<EnemySpawnSystem>().FromInstance(_enemySpawnSystem).AsSingle().NonLazy();
     }
 }

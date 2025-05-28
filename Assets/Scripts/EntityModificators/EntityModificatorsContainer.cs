@@ -40,12 +40,12 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
 
     public bool Has(Type modificatorType)
     {
-        return _appliedModificators.GetAllKeys().Exists(data => data.EffectType == modificatorType);
+        return _appliedModificators.GetAllKeys().Exists(data => data.ModificatorInstanceType == modificatorType);
     }
 
     public void RemoveEffect(Type modificatorType)
     {
-        EntityModificatorData modificatorData = _appliedModificators.GetAllKeys().Find(data => data.EffectType == modificatorType);
+        EntityModificatorData modificatorData = _appliedModificators.GetAllKeys().Find(data => data.ModificatorInstanceType == modificatorType);
         
         if (modificatorData == null) return;
         

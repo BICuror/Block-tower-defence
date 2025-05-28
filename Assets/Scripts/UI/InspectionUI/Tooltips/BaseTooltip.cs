@@ -5,6 +5,8 @@ using TMPro;
 
 public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
+    [SerializeField] private CanvasGroup _selectedState;
+    [SerializeField] private CanvasGroup _amountGroup;
     [SerializeField] private TextMeshProUGUI _amountTextField;
     private int _itemAmount = 1;
     
@@ -15,11 +17,13 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
     
     public void OnPointerEnter(PointerEventData eventData)
     {
+        _selectedState.gameObject.SetActive(true);
         TooltipOpened.Invoke(TagDataContainer);
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
+        _selectedState.gameObject.SetActive(false);
         TooltipClosed.Invoke();
     }
 
@@ -28,7 +32,7 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
         _itemAmount++;
         
         _amountTextField.gameObject.SetActive(true);
-        _amountTextField.text = $"x{_itemAmount}";
+        _amountTextField.text = _itemAmount.ToString();
     }
     
     public void SetAmount(int amount)
@@ -37,7 +41,7 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
         
         _itemAmount = amount;
         
-        _amountTextField.gameObject.SetActive(true);
-        _amountTextField.text = $"x{_itemAmount}";
+        _amountGroup.gameObject.SetActive(true);
+        _amountTextField.text = _itemAmount.ToString();
     }
 }

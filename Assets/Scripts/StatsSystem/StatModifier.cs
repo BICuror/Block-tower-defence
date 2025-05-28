@@ -10,6 +10,12 @@ public sealed class StatModifier
     
     public Action ModifierChanged;
 
+    public StatModifier(float flat = 0, float multiplier = 0)
+    {
+        _multiplier = multiplier;
+        _flat = flat;
+    }
+
     public void SetMultiplier(float value)
     {
         _multiplier = value;

@@ -7,7 +7,7 @@ public sealed class EntityModificatorFactory
     
     public EntityModificator CreateEntityModificationEffect(EntityModificatorData modificatorData)
     {
-        EntityModificator modificator = CreateEffectInstance<EntityModificator>(modificatorData.EffectType);
+        EntityModificator modificator = CreateEffectInstance<EntityModificator>(modificatorData.ModificatorInstanceType);
         modificator.SetArgumentsContainer(modificatorData.ArgumentsContainer);
         modificatorData.Modify(modificator);
         return modificator;

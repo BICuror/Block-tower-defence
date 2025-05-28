@@ -114,7 +114,7 @@ public sealed class TooltipTextParser : MonoBehaviour
     #endregion
 
     #region ColorParsing
-
+    
     private string WrapInColor(string initialString, Color color)
     {
         string colorCode = ColorUtility.ToHtmlStringRGB(color);

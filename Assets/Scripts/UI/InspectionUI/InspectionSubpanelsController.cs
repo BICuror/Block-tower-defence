@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using Combat;
 
 public sealed class InspectionSubpanelsController : MonoBehaviour
@@ -10,7 +11,8 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
     [SerializeField] private InspectionStatDetailsSubpanel _statdetailsSubpanelPrefab;
     [SerializeField] private InspectionEffectSubPanel _effectSubpanelPrefab;
     [SerializeField] private InspectionKeywordSubpanel _keywordSubpanelPrefab;
-
+    private List<InspectionSubpanelBase> _instantiatedTooltips = new();
+    
     public CombatEntity _inspectedEntity;
 
     public void SetTooltipParser(TooltipParseTagDataContainer tooltipParseTagDataContainer)
@@ -24,11 +26,13 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
                 Stat stat = _inspectedEntity.StatContainer.Get(Type.GetType(tagData.AssociatedStatTypeName));
                 InspectionStatDetailsSubpanel statDetailsSubpanel = Instantiate(_statdetailsSubpanelPrefab, _subpanelsContainer);
                 statDetailsSubpanel.Initialize(stat, tagData);
+                _instantiatedTooltips.Add(statDetailsSubpanel);
             }
             else
             {
                 InspectionStatSubpanel statSubpanel = Instantiate(_statSubpanelPrefab, _subpanelsContainer);
                 statSubpanel.Initialize(tagData);
+                _instantiatedTooltips.Add(statSubpanel);
             }
         });
 
@@ -36,20 +40,24 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
         {
             InspectionEffectSubPanel effectSubpanel = Instantiate(_effectSubpanelPrefab, _subpanelsContainer);
             effectSubpanel.Initialize(tagData);
+            _instantiatedTooltips.Add(effectSubpanel);
         });
 
         tooltipParseTagDataContainer.KeywordTagDatas.ForEach(tagData =>
         {
             InspectionKeywordSubpanel keywordSubpanel = Instantiate(_keywordSubpanelPrefab, _subpanelsContainer);
             keywordSubpanel.Initialize(tagData);
+            _instantiatedTooltips.Add(keywordSubpanel);
         });
     }
     
     public void ClearAllSubpanels()
     {
-        for (int i = 0; i < _subpanelsContainer.childCount; i++)
+        for (int i = 0; i < _instantiatedTooltips.Count; i++)
         {
-            Destroy(_subpanelsContainer.GetChild(_subpanelsContainer.childCount - i - 1).gameObject);
+            _instantiatedTooltips[i].Disable();
         }
+        
+        _instantiatedTooltips.Clear();
     }
 }

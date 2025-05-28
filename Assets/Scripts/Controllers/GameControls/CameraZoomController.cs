@@ -21,6 +21,8 @@ public sealed class CameraZoomController : MonoBehaviour
     private float _finalZoom;
     private Tween _zoomTween;
 
+    public float ZoomPercent => _finalZoom / _maxZoomValue;
+    
     private void OnEnable()
     {
         _gameController = GetComponent<GameController>();
@@ -36,7 +38,7 @@ public sealed class CameraZoomController : MonoBehaviour
     {
         if (_gameController.State == GameController.ControllerState.Inspecting) return;
         
-        _finalZoom = Mathf.Clamp( _finalZoom + changeValue, _minZoomValue, _maxZoomValue);
+        _finalZoom = Mathf.Clamp(_finalZoom + changeValue, _minZoomValue, _maxZoomValue);
 
         if (_zoomTween != null) _zoomTween.Kill();
         _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve);

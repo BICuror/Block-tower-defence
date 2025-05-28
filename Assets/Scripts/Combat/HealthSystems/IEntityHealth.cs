@@ -10,7 +10,7 @@ namespace Combat
         public bool IsAlive();
         public bool IsFullHp();
         
-        public void ReceiveEnemyDamage(float damage, CombatEntity damageDealer);
+        public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer);
         public void ReceiveEffectDamage(float damage);
     
         public void ReceiveHeal(float heal);

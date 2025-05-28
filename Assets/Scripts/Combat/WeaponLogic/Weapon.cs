@@ -25,6 +25,7 @@ namespace Combat
         #region StateManagements
 
         private void OnEnable() => Enable();
+        private void OnDisable() => StopLifetimeTrack();
         
         public void Enable()
         {
@@ -35,12 +36,12 @@ namespace Combat
         
         protected void Disable()
         {
-            StopLifetimeTrack();
             SetState(false);
         }
         
         private async UniTask StartLifetimeTrack()
         {
+            _cancellationTokenSource = new();
             _lifetimeTrackActive = true;
             
             try
@@ -58,7 +59,6 @@ namespace Combat
             if (!_lifetimeTrackActive) return;
             
             _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new();
             _lifetimeTrackActive = false;
         }
         

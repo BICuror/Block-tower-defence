@@ -1,29 +1,31 @@
+using WorldGeneration;
 using UnityEngine;
 using Zenject;
+using Combat;
 
 public sealed class Chest : MonoBehaviour
 {
-    [Inject] private WaveStateMachine _waveStateController;
+    [Inject] private EnemySpawnSystem _waveStateController;
     [Inject] private ItemFactory _itemFactory;
+    [Inject] private SpawnerRotator _spawnerRotator;
 
     private void Awake()
     {
-        _waveStateController.StateEnded += TryToCreateItem;
+        _waveStateController.LastWaveEnemyDied += CreateItem;
+        _spawnerRotator.RotateSpawner(transform);
     }
 
-    private void TryToCreateItem(WaveState waveState)
+    private void CreateItem()
     {
-        if (waveState == WaveState.Attack)
-        {
-            _itemFactory.CreateItem(1, 2, transform.position);
+        _itemFactory.CreateItem(1, 2, transform.position);
             
-            _waveStateController.StateEnded -= TryToCreateItem;
-            Destroy(gameObject);
-        }
+        _waveStateController.LastWaveEnemyDied -= CreateItem;
+        
+        Destroy(gameObject);
     }
 
     private void OnDestroy()
     {
-        _waveStateController.StateEnded -= TryToCreateItem;
+        _waveStateController.LastWaveEnemyDied -= CreateItem;
     }
 }

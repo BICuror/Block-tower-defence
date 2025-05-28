@@ -99,7 +99,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 15
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 4096
@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 1059655805564234580}
   - component: {fileID: 5506116140626820261}
   - component: {fileID: 476589444468877297}
+  - component: {fileID: 1651257805764581588}
   m_Layer: 0
   m_Name: EffectSubPanel
   m_TagString: Untagged
@@ -319,3 +320,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipTextParseDataContainer: {fileID: 11400000, guid: 359a39f7e36031346ae08f9bca021430, type: 2}
   _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
+--- !u!225 &1651257805764581588
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8016574771388511436}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0

@@ -103,7 +103,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         return enemiesToSpawn;
     }
 
-    private List<EnemyData> GetEnemyGroupPart(List<EnemyWaveGroup.GroupPart> groupParts, ref float leftHealth)
+    public List<EnemyData> GetEnemyGroupPart(List<EnemyWaveGroup.GroupPart> groupParts, ref float leftHealth)
     {
         List<EnemyData> groupEnemies = new List<EnemyData>();
         

@@ -45,18 +45,14 @@ public sealed class ObjectPool<T> where T: Component
 
     public T GetNextPooledObject()
     {
-        MovePointer();
-
         if (HasFreeElement(out T element))
         {
             element.gameObject.SetActive(true);
 
             return element;
         }
-        else 
-        {
-            return CreatePooledObject();
-        }
+
+        return CreatePooledObject();
     }   
     
     private void MovePointer()
@@ -70,13 +66,11 @@ public sealed class ObjectPool<T> where T: Component
     {
         for (int i = 0; i < _pool.Count; i++)
         {
-            int currentPointer = _pointer + i;
-
-            if (currentPointer >= _pool.Count) currentPointer -= _pool.Count;
-
-            if (_pool[currentPointer].gameObject.activeSelf == false)
+            MovePointer();
+            
+            if (!_pool[_pointer].gameObject.activeSelf)
             {
-                element = _pool[currentPointer];
+                element = _pool[_pointer];
 
                 return true;
             }
@@ -110,6 +104,7 @@ public sealed class ObjectPool<T> where T: Component
     private T CreatePooledObject()
     {
         T pooledObject = MonoBehaviour.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
+        pooledObject.gameObject.SetActive(true);
         _pool.Add(pooledObject);
         
         if (_diContainer != null) _diContainer.Inject(pooledObject);

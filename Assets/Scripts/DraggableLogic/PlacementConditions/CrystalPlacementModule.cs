@@ -1,3 +1,4 @@
+using Combat;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CrystalPlacementModule", menuName = "PlacementConditions/CrystalPlacementModule")]
@@ -10,7 +11,12 @@ public sealed class CrystalPlacementModule : PlacementModule
 
     public override bool CanBePlaced(Vector2Int position)
     {
-        if (TileMap.HasTile(position, _townhallLayerSetting)) return true;
+        if (TileMap.HasTile(position, _townhallLayerSetting))
+        {
+            GameObject townhall = TileMap.GetHitObject(position, _townhallLayerSetting).transform.parent.gameObject;
+            
+            return townhall.GetComponentInChildren<SelectionManager>().SelectionCount == 0;
+        }
         
         if (!TileMap.HasTile(position, _sutableTerrainLayerSetting)) return false;
         

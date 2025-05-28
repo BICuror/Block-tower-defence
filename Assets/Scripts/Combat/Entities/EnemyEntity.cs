@@ -1,5 +1,9 @@
+using UnityEngine;
+
 namespace Combat
 {
+    [RequireComponent(typeof(ContactDamage))]
+    
     public sealed class EnemyEntity : CombatEntity
     {
         private EnemyHealth _health;

@@ -17,6 +17,7 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
     private void Awake()
     {
         _draggableConnector.transform.SetParent(null);
+        _draggableConnector.transform.localScale = Vector3.one;
     }
     
     public async UniTask StartUpgradeSelection(SelectionSettings settings)
@@ -67,13 +68,16 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
     private async UniTask CaptureDraggable()
     {
         _draggableConnector.gameObject.SetActive(true);
-        _draggableConnector.transform.position = _centerPosition.position;
 
         _draggableConnector.transform.position = _buildingEntityToUpgrade.transform.position;
         
         _draggableConnector.PickUpDraggable(_buildingEntityToUpgrade.gameObject);
-
+        
         await _draggableConnector.MoveTo(_centerPosition.transform.position, 0.5f);
+        
+        await UniTask.WaitForFixedUpdate();
+        
+        _buildingEntityToUpgrade.transform.localPosition = Vector3.zero;
     }
 
     private async UniTask ReleaseDraggable()

@@ -22,9 +22,7 @@ public class WeaponBase : MonoBehaviour
     {
         if (!receivingEntity.Health.IsAlive()) return;
             
-        float multipliedAttackDamage = OwnerEntity.DamageModifierContainer.DealerContainer.Modify(damageAmount, receivingEntity);
-            
-        receivingEntity.Health.ReceiveEnemyDamage(multipliedAttackDamage, OwnerEntity);
+        receivingEntity.Health.ReceiveEnemyDamage(damageAmount, OwnerEntity);
             
         HitEntity?.Invoke(receivingEntity);
             

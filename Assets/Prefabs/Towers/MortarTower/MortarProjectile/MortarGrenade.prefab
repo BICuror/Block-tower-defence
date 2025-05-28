@@ -1,148 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2613832718609763191
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 214309517139385300}
-  - component: {fileID: 7124685464173330639}
-  - component: {fileID: 5236044634505822894}
-  m_Layer: 11
-  m_Name: ExplotionSound
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &214309517139385300
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2613832718609763191}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8384597497454215277}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &7124685464173330639
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2613832718609763191}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 7131358868849296675, guid: fef380e363c4e5b4ab97386603477bad, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 6570d18243abea94cab9970fc7a00391, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 0.67
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &5236044634505822894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2613832718609763191}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d08f70d8b43f894198d8bc362b84718, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _pitchChangeStrategyType: 0
-  _pitchChangeStrength: 0.1
 --- !u!1 &3672278026556080660
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,6 +94,7 @@ GameObject:
   - component: {fileID: 411050936941841310}
   - component: {fileID: 5667517536058185790}
   - component: {fileID: 8132827000989462767}
+  - component: {fileID: 7688635772607685248}
   m_Layer: 11
   m_Name: ExplotionVisualEffect
   m_TagString: Untagged
@@ -385,6 +243,20 @@ VisualEffect:
         m_Overridden: 1
     m_Bool:
       m_Array: []
+--- !u!114 &7688635772607685248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4010489942963258852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2f2d584b7158be448da997d8defc89e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stopAction: 3
+  _visualEffect: {fileID: 8132827000989462767}
 --- !u!1 &8934679735853998293
 GameObject:
   m_ObjectHideFlags: 0
@@ -397,7 +269,6 @@ GameObject:
   - component: {fileID: 1570403129830054135}
   - component: {fileID: 1728924383626925355}
   - component: {fileID: 6707548566879710615}
-  - component: {fileID: 5723087215702841355}
   - component: {fileID: 3694798262115348637}
   - component: {fileID: 2968728104192368267}
   m_Layer: 11
@@ -422,7 +293,6 @@ Transform:
   m_Children:
   - {fileID: 411050936941841310}
   - {fileID: 2493619557138649849}
-  - {fileID: 214309517139385300}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1570403129830054135
@@ -586,20 +456,6 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
---- !u!114 &5723087215702841355
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8934679735853998293}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2f2d584b7158be448da997d8defc89e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _stopAction: 2
-  _visualEffect: {fileID: 8132827000989462767}
 --- !u!114 &3694798262115348637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,17 +497,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _maxHeight: 5
-  _travelTime: 1.5
-  _visualEffectHandler: {fileID: 5723087215702841355}
-  Enabled:
-    m_PersistentCalls:
-      m_Calls: []
-  ReachedEnd:
-    m_PersistentCalls:
-      m_Calls: []
-  Exploded:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2968728104192368267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -664,8 +509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2064e2a1408c44b8349d96b54a970c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Collider: {fileID: 1570403129830054135}
-  Rigidbody: {fileID: 1728924383626925355}
   _enemyLayerSettings: {fileID: 11400000, guid: 06d08c6367264cc44a27bffbfedcbae9, type: 2}
-  _explotionEffect: {fileID: 5723087215702841355}
+  _explotionEffect: {fileID: 7688635772607685248}
   _defaultRadius: 1

@@ -35,13 +35,9 @@ namespace Combat
     
                 transform.position = currentPosition;
     
-                time += Time.fixedDeltaTime;
-
-                try
-                {
-                    await UniTask.WaitForFixedUpdate(cancellationToken: destroyCancellationToken);
-                }
-                catch (Exception e) { TaskUtility.LogAsync(e); }
+                time += Time.fixedDeltaTime; 
+                
+                await UniTask.WaitForFixedUpdate();
             }
 
             Collider.enabled = false;

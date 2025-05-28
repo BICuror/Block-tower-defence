@@ -20,7 +20,7 @@ public sealed class InspectionStatDetailsSubpanel : InspectionSubpanelBase
 
     private void UpdateStatValueDisplays()
     {
-        string valueText = $"({Math.Round(_stat.Default, 2)} + {Math.Round(_stat.GetFlatModifier())}) * {Math.Round(_stat.GetMultiplierModifier() * 100):F2} = {_stat.Value:F2}";
+        string valueText = $"({Math.Round(_stat.Default, 2)} + {Math.Round(_stat.GetFlatModifier())}) * {Math.Round(_stat.GetMultiplierModifier() * 100):F0}% = {_stat.Value:F2}";
         
         _valueTextField.text = valueText;
     }

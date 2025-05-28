@@ -32,7 +32,13 @@ namespace Combat
         
         #region DamageRecivement 
         public void ReceivePercentEffectDamage(float percent) => ReceiveDamage(_maxHpStat.Value * percent, null);
-        public void ReceiveEnemyDamage(float damage, CombatEntity damageDealer) => ReceiveDamage(damage, damageDealer);
+
+        public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
+        {
+            float resultDamage = damageDealer.DamageModifierContainer.DealerContainer.Modify(baseDamage, _entity);
+            
+            ReceiveDamage(resultDamage, damageDealer);
+        }
         public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage, null);
         private void ReceiveDamage(float damage, CombatEntity damageDealer)
         {

@@ -6,9 +6,7 @@ public class ReturnDamageModifier : DamageModifier
     {
         if (otherEntity.Health.IsAlive())
         {
-            float backDamage = OwnerEntity.DamageModifierContainer.DealerContainer.Modify(value, otherEntity);
-            
-            otherEntity.Health.ReceiveEnemyDamage(backDamage, otherEntity);
+            otherEntity.Health.ReceiveEnemyDamage(value, otherEntity);
         }
         
         return value;

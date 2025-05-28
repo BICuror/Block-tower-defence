@@ -21,6 +21,8 @@ public sealed class SelectionManager : MonoBehaviour
         _selectionOptionObjectAreaDetector.AddedItem += (optionObject) => ResolveCurrentSelection(optionObject).Forget();
     }
 
+    public int SelectionCount => _enqeuedSelections.Count;
+    
     public void EnqeueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
     
     public async UniTask StartSelection(SelectionSettings selectionSettings)
@@ -46,7 +48,7 @@ public sealed class SelectionManager : MonoBehaviour
     
     public async UniTask TryStartQueuedSelection()
     {
-        if (_enqeuedSelections.Count > 0)
+        if (SelectionCount > 0)
         {
             SelectionSettings selectionSettings = _enqeuedSelections.Dequeue();
             await StartSelection(selectionSettings);

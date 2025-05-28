@@ -52,6 +52,7 @@ GameObject:
   - component: {fileID: 8701364025746998132}
   - component: {fileID: 3961331482114920432}
   - component: {fileID: 5087343061853482187}
+  - component: {fileID: 8257513214410736894}
   m_Layer: 0
   m_Name: CrystalTooltip
   m_TagString: Untagged
@@ -80,7 +81,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 325, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7133618000469586913
 CanvasRenderer:
@@ -104,12 +105,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _negativeSlider: {fileID: 7155446673720206844}
   _positiveSlider: {fileID: 5822332444231549592}
-  _tooltipDataParser: {fileID: 3961331482114920432}
-  _layoutSizeController: {fileID: 5087343061853482187}
-  _inspectionSubpanelsController: {fileID: 2953025072565230696}
-  _entityModificatorTooltipPrefab: {fileID: 2521535782548818131, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
-  _entityModificatorTooltipParent: {fileID: 612609853589768455}
   _durationTextField: {fileID: 5394468545300387969}
+  _inspectionSubpanelsController: {fileID: 2953025072565230696}
+  _layoutSizeController: {fileID: 5087343061853482187}
+  _entityModificatorTooltipPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
+  _tooltipDataParser: {fileID: 3961331482114920432}
+  _entityModificatorTooltipParent: {fileID: 612609853589768455}
 --- !u!114 &2871898726855916236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,6 +194,18 @@ MonoBehaviour:
   - {fileID: 612609853589768455}
   - {fileID: 6156070538785157371}
   - {fileID: 1581158546983494758}
+--- !u!225 &8257513214410736894
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1834353976828441996
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,7 +317,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 10}
+  m_SizeDelta: {x: 125, y: 10}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &7155446673720206844
 MonoBehaviour:
@@ -626,7 +639,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 25, y: 0}
+  m_AnchoredPosition: {x: 25, y: 10}
   m_SizeDelta: {x: 325, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4111730330058022451
@@ -812,7 +825,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 10}
+  m_SizeDelta: {x: 125, y: 10}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &5822332444231549592
 MonoBehaviour:
@@ -1034,7 +1047,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &3303577814268129211
 MonoBehaviour:
@@ -1054,7 +1067,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: 10
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1

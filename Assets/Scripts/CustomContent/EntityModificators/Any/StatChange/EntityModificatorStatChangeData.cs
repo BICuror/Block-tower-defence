@@ -8,7 +8,7 @@ public sealed class EntityModificatorStatChangeData : EntityModificatorData
 {
     [SerializeField] private List<StatChange> _statChanges;
     
-    public override Type EffectType => typeof(EntityModificatorStatChange);
+    public override Type ModificatorInstanceType => typeof(EntityModificatorStatChange);
     
     public override void Modify(EntityModificator modificator)
     {

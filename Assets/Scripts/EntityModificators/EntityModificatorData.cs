@@ -12,13 +12,15 @@ public class EntityModificatorData : ScriptableObject
     [SerializeField] private ArgumentsContainer _argumentsContainer;
  
     [Header("UI Data")]
+    [SerializeField] private EffectType _effectType;
     [SerializeField] private string _modificatorName;
     [SerializeField] private string _modificatorDescription;
     
     [HideInInspector] public List<string> AllEffectTypeNames;
     
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
-    public virtual Type EffectType => Type.GetType(_effectTypeName);
+    public virtual Type ModificatorInstanceType => Type.GetType(_effectTypeName);
+    public EffectType EffectType => _effectType;
     public string ModificatorName => _modificatorName;
     public string ModificatorDescription => _modificatorDescription;
 

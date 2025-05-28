@@ -1,8 +1,9 @@
+using System.Linq;
 using UnityEngine;
 using Combat;
 using TMPro;
 
-public sealed class InspectionTooltipBase : MonoBehaviour
+public sealed class InspectionTooltipBase : InspectionPanel
 {
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _nameTextField;
@@ -28,10 +29,10 @@ public sealed class InspectionTooltipBase : MonoBehaviour
         _nameTextField.text = _tooltipTextParser.ParseTooltipText(_inspectable.Name);
         _descriptionTextField.text = _tooltipTextParser.ParseTooltipText(_inspectable.Description);
         _inspectionSubpanelsController._inspectedEntity = inspectable.GetComponent<CombatEntity>();
+
+        bool isEnemyEntity = _inspectionSubpanelsController._inspectedEntity is EnemyEntity;
         
         _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(_inspectable.Description));
-        
-        Debug.LogWarning(inspectable.gameObject.name);
         
         inspectable.GetComponent<CombatEntity>().StatContainer.GetAllStats().ForEach(stat =>
         {
@@ -41,10 +42,13 @@ public sealed class InspectionTooltipBase : MonoBehaviour
             tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
         });
         
-        inspectable.GetComponent<EntityModificatorsContainer>().AppliedModificators.ForEach(modificatorData =>
+        inspectable.GetComponent<EntityModificatorsContainer>().AppliedModificators.OrderBy(data => data.EffectType == EffectType.Positive).ToList().ForEach(modificatorData =>
         {
             EntityModificatorTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
-            tooltip.SetEntityModificator(modificatorData);
+            
+            bool isNegativeEffect = (isEnemyEntity && modificatorData.EffectType == EffectType.Positive) || (!isEnemyEntity && modificatorData.EffectType == EffectType.Negative);
+            
+            tooltip.SetEntityModificator(modificatorData, isNegativeEffect);
             tooltip.TooltipClosed += () => _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(_inspectable.Description));
             tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
             tooltip.SetAmount(inspectable.GetComponent<EntityModificatorsContainer>().GetModificatorsAmount(modificatorData));

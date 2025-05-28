@@ -31,12 +31,15 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+  _effectType: 0
   _modificatorName: Balls of steel
   _modificatorDescription: '#Invincibility until picked up'
   AllEffectTypeNames:
   - ActivateWhenBuilt
   - DamageModifierEntityModificator
+  - DealMoreDamageWhenMoreCrystalsSelected
   - EntityEffectEntityModificator
   - EntityModificatorStatChange
   - InvincibilityUntilPickUpEntityModifier
   - ScaleDamageWithHeight
+  - TakeDamageUponPlacement

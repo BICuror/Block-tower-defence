@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7701910660540990657}
   - component: {fileID: 7229441903558152796}
   - component: {fileID: 3493066278714942707}
+  - component: {fileID: 2085071407115104009}
   m_Layer: 5
   m_Name: CrystalTooltipCanvas
   m_TagString: Untagged
@@ -30,7 +31,7 @@ RectTransform:
   m_GameObject: {fileID: 5856907361893770013}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4376773181098451956}
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7701910660540990657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,12 +131,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _negativeSlider: {fileID: 5332626448975241838}
   _positiveSlider: {fileID: 8755314147487712522}
-  _tooltipDataParser: {fileID: 2284858453490550882}
-  _layoutSizeController: {fileID: 8058581137846528857}
-  _inspectionSubpanelsController: {fileID: 123651071355706362}
-  _entityModificatorTooltipPrefab: {fileID: 2521535782548818131, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
-  _entityModificatorTooltipParent: {fileID: 2435433907765448341}
   _durationTextField: {fileID: 7174528709187575571}
+  _inspectionSubpanelsController: {fileID: 123651071355706362}
+  _layoutSizeController: {fileID: 8058581137846528857}
+  _entityModificatorTooltipPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
+  _tooltipDataParser: {fileID: 2284858453490550882}
+  _entityModificatorTooltipParent: {fileID: 2435433907765448341}
+--- !u!225 &2085071407115104009
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5856907361893770013}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &2975765921392641938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,19 +171,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 612609853589768455, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 612609853589768455, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 612609853589768455, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 325
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 612609853589768455, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -35
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 777958129399263962, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_Name
@@ -214,7 +227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1581158546983494758, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 325
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 1581158546983494758, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
       propertyPath: m_SizeDelta.y

@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Cashing;
 
 public class AreaManager : MonoBehaviour
 {
-    [SerializeField] private AreaScanerController _mainScanerController;
+    [SerializeField] private List<AreaScanerController> _mainScanerControllers;
     [Cached] protected ReachAreaScale _reachAreaScale;
     
     private void Start()
@@ -14,6 +15,17 @@ public class AreaManager : MonoBehaviour
 
     private void UpdateScale()
     {
-        _mainScanerController.SetScale(_reachAreaScale.RoundedValue);
+        _mainScanerControllers.ForEach(scanerContoller => scanerContoller.SetScale(_reachAreaScale.RoundedValue));
+    }
+
+    public void AddAreaScanerController(AreaScanerController areaScanerController)
+    {
+        _mainScanerControllers.Add(areaScanerController);
+        UpdateScale();
+    }
+
+    public void RemoveAreaScanerController(AreaScanerController areaScanerController)
+    {
+        _mainScanerControllers.Remove(areaScanerController);
     }
 }

@@ -34,7 +34,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
         }    
     }
 
-    private void DisableEffect()
+    public void DisableEffect()
     {
         _visualEffect.gameObject.SetActive(false);
         

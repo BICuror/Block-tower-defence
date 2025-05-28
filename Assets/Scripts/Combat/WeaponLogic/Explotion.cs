@@ -30,6 +30,8 @@ namespace Combat
             }
 
             await _explotionEffect.Play();
+            
+            _explotionEffect.DisableEffect();
         }
 
         private void UpdateExplotionRadius(float explotionRaduis)

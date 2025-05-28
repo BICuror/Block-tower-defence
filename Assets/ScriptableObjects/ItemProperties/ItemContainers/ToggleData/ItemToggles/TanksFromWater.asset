@@ -9,27 +9,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
-  m_Name: IncreaseBuildingDamageToggleEffect
+  m_Script: {fileID: 11500000, guid: 1165e2371af6f074390831cde16f1b38, type: 3}
+  m_Name: TanksFromWater
   m_EditorClassIdentifier: 
   _quality: 1
-  _effectType: 0
+  _effectType: 1
   _isUnique: 0
-  _effectTypeName: GlobalBuildingModificatorToggleEffect
+  _effectTypeName: AdditionalEnemyGroupFromWaterToggleEffect
   effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 3
-      _argumentName: EntityModificatorData
+    - _argumentType: 1
+      _argumentName: MinimalDistanceToCenter
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0
+      _floatArgument: 4.5
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: 6a160496e2cdbfd47a00ca23c7829fff, type: 2}
+      _entityModificatorData: {fileID: 0}
   AllEffectTypeNames:
+  - AdditionalEnemyGroupFromWaterToggleEffect
+  - AdditionalEnemyGroupToggleEffect
   - GlobalBuildingModificatorToggleEffect
   - GlobalEnemyModificatorToggleEffect
   - GlobalStatChangeToggleEffect
   - StartWaveGlobalToggleEffect
-  _effectDescription: '#good +3 good# buidling #Damage'
+  _effectDescription: Spawns #bad 6 enemies bad# from water nearby roads
+  _enemyGroup:
+    _groupHealth: 150
+    _groupParts:
+    - _enemyData: {fileID: 11400000, guid: c1de2e8fa0e57cb4daf570d39ee50590, type: 2}
+      _minAmount: 6
+      _maxAmount: 6

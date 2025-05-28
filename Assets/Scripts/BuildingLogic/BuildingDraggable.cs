@@ -2,9 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using Cashing;
 using System;
-using System.Threading.Tasks;
 using Combat;
-using UnityEngine;
 
 public sealed class BuildingDraggable : DraggableEntity
 {

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: BuildingTaskActivatorOnShoot
+  m_EditorClassIdentifier: 
+  _effectTypeName: ModificatorObjectApplyerEntityModificator
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 2
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 1727960946741506579, guid: 75f0864389e45e94c91c1c17096e9432, type: 3}
+      _entityModificatorData: {fileID: 0}
+  _effectType: 0
+  _modificatorName: Activate when built
+  _modificatorDescription: On shoot 25% to make another building in area shoot
+  AllEffectTypeNames:
+  - ActivateWhenBuilt
+  - DamageModifierEntityModificator
+  - DealMoreDamageWhenMoreCrystalsSelected
+  - EntityEffectEntityModificator
+  - EntityModificatorStatChange
+  - InvincibilityUntilPickUpEntityModifier
+  - ModificatorObjectApplyerEntityModificator
+  - ScaleDamageWithHeight
+  - TakeDamageUponPlacement

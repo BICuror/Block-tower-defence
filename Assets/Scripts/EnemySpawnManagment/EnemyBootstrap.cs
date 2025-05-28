@@ -44,6 +44,10 @@ namespace Combat
             Speed speedStat = _statContainer.Get<Speed>(); 
             speedStat.Reset(); 
             speedStat.SetDefault(_enemyData.Speed);
+            
+            ContactDamage contactDamageStat = _statContainer.Get<ContactDamage>();
+            contactDamageStat.Reset();
+            contactDamageStat.SetDefault(_enemyData.ContactDamage);
         }
     
         private void SetVisualData()

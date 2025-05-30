@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: BuildTimeIncrease
+  m_EditorClassIdentifier: 
+  _effectTypeName: EntityModificatorStatChange
+  _argumentsContainer:
+    _argumentItems: []
+  _effectType: 1
+  _modificatorName: Build time up
+  _modificatorDescription: '#bad +100% bad# #BuildTime'
+  AllEffectTypeNames:
+  - EntityModificatorStatChange
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
+    FlatChange: 0
+    MultiplierChange: 1

@@ -23,6 +23,7 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
     - _argumentType: 1
       _argumentName: Duration
       _intArgument: 0
@@ -31,6 +32,16 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+    - _argumentType: 6
+      _argumentName: EntityEffectParticleHandler
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 848744844543777820, guid: 6720f4f1703cef941a05e2948a90a811, type: 3}
   _effectType: 0
   _modificatorName: Activate when built
   _modificatorDescription: '#good -40% good# #Recharge for 5 seconds on activation'
@@ -43,5 +54,6 @@ MonoBehaviour:
   - FasterRechargeOnActivation
   - InvincibilityUntilPickUpEntityModifier
   - ModificatorObjectApplyerEntityModificator
+  - MoreDamageNearbyWater
   - ScaleDamageWithHeight
   - TakeDamageUponPlacement

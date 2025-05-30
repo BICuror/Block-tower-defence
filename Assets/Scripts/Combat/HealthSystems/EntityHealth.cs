@@ -35,15 +35,15 @@ namespace Combat
 
         public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
         {
-            float resultDamage = damageDealer.DamageModifierContainer.DealerContainer.Modify(baseDamage, _entity);
+            float outDamage = damageDealer.DamageModifierContainer.DealerContainer.Modify(baseDamage, _entity);
+            
+            float resultDamage = _entity.DamageModifierContainer.ReciverContainer.Modify(outDamage, damageDealer);
             
             ReceiveDamage(resultDamage, damageDealer);
         }
         public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage, null);
         private void ReceiveDamage(float damage, CombatEntity damageDealer)
         {
-            damage = _entity.DamageModifierContainer.ReciverContainer.Modify(damage, damageDealer);
-            
             if (damage == 0 || !IsAlive()) return;
             
             _currentHp -= damage;

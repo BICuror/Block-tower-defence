@@ -16,6 +16,7 @@ namespace Combat
         public bool IsEmpty => List.Count == 0;
         public T RandomItem => List[Random.Range(0, List.Count)];
         public T FirstItem => List[0];
+        public int Count => List.Count;
         
         public IReadOnlyList<T> GetList() => List;
         

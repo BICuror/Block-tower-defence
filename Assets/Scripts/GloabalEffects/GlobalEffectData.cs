@@ -19,7 +19,7 @@ public abstract class GlobalEffectData : ScriptableObject
     [HideInInspector] public List<string> AllEffectTypeNames;
 
     [Header("TooltipData")] 
-    [SerializeField] private string _effectDescription;
+    [TextArea] [SerializeField] private string _effectDescription;
     
     public virtual Type EffectInstanceType => Type.GetType(_effectTypeName);
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;

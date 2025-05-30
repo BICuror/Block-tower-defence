@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using System;
 
 public abstract class Shaker : MonoBehaviour
 {

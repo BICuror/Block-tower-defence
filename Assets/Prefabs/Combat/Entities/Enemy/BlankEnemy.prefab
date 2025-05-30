@@ -916,7 +916,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 457579739052988430}
+  - {fileID: 4383354899656838722}
   m_Father: {fileID: 636929605024663641}
   m_LocalEulerAnglesHint: {x: 98.537994, y: 0, z: 0}
 --- !u!114 &5905841826671251466
@@ -931,7 +931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdc3c16d2e109dd4f88c61ac251905c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1001 &1960618609583709053
+--- !u!1001 &2429951944755318065
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -983,42 +983,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildHealthBar
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1719823647871379870, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6705449521769836683, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8217881437147038847}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
---- !u!4 &457579739052988430 stripped
+--- !u!4 &4383354899656838722 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2120107346048484211, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
-  m_PrefabInstance: {fileID: 1960618609583709053}
+  m_PrefabInstance: {fileID: 2429951944755318065}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &5060655017085021174 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6705449521769836683, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
-  m_PrefabInstance: {fileID: 1960618609583709053}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8217881437147038847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5060655017085021174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffc2400e3686f6f459438667a55c4608, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shakeDatas:
-  - ShakeType: 0
-    Duration: 0.3
-    Strength: 0.04
-  - ShakeType: 1
-    Duration: 0.3
-    Strength: 45
-  _mesh: {fileID: 457579739052988430}

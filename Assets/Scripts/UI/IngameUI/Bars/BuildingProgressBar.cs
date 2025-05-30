@@ -3,7 +3,7 @@ using Cashing;
 
 [RequireComponent(typeof(MeshRenderer))]
 
-public sealed class BuildingProgressBar : ProgressBarBase
+public class BuildingProgressBar : ProgressBarBase
 {
     [Cached] private BuildingDraggable _buildingDraggable;
     [Cached] private BuildTime _buildTime;

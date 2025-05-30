@@ -124,10 +124,5 @@ namespace Combat
                 }
             }
         }
-
-        private void RemoveEffect()
-        {
-            
-        }
     }
 }

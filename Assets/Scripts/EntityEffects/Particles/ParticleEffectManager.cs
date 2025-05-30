@@ -13,6 +13,7 @@ namespace Combat
         [Cached] private CombatEntity _onwerEntity;
         
         private Dictionary<Type, EntityEffectParticleHandler> _particleHandlers = new();
+        private List<EntityEffectParticleHandler> _customHandlers = new();
         
         private void Awake()
         {
@@ -21,6 +22,25 @@ namespace Combat
             _entityEffectManager.EffectApplied += ApplyEffect;
             _entityEffectManager.EffectRemoved += RemoveEffect;
             _entityEffectManager.EffectUpdated += UpdateEffect;
+        }
+
+        public EntityEffectParticleHandler ApplyCustomEffect(EntityEffectParticleHandler effectPrefab)
+        {
+            EntityEffectParticleHandler particleHandler = Instantiate(effectPrefab);
+            particleHandler.AdaptToEntity(_onwerEntity);
+            
+            _customHandlers.Add(particleHandler);
+
+            return particleHandler;
+        }
+
+        public async void DestroyCustomEffect(EntityEffectParticleHandler effectInstance)
+        {
+            _customHandlers.Remove(effectInstance);
+
+            await effectInstance.Remove();
+            
+            Destroy(effectInstance.gameObject);
         }
     
         private void ApplyEffect(Type effectType)

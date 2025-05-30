@@ -1,3 +1,6 @@
+using System;
+using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine.VFX;
 using UnityEngine;
 using Combat;
@@ -6,7 +9,7 @@ public sealed class EntityEffectParticleHandler : MonoBehaviour
 {
     [SerializeField] private VisualEffect _visualEffect;
     [SerializeField] private bool _hasIntensity = true;
-    [SerializeField] private string _intensityFieldName = "Intensity";
+    [ShowIf("_hasIntensity")] [SerializeField] private string _intensityFieldName = "Intensity";
     
     public void UpdateEffectStrength(float strength)
     {
@@ -26,11 +29,20 @@ public sealed class EntityEffectParticleHandler : MonoBehaviour
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
         transform.localScale = Vector3.one;
+        _visualEffect.Play();
     }
 
-    public void Remove()
+    public async UniTask Remove()
     {
         transform.SetParent(null);
+        _visualEffect.Stop();
+
+        try
+        {
+            await UniTask.WaitForSeconds(_visualEffect.GetFloat("MaxLifeTime") * 2, cancellationToken: destroyCancellationToken);
+        }
+        catch (Exception e) { TaskUtility.LogAsync(e); }
+        
         gameObject.SetActive(false);
     }
 }

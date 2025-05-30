@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6447114768740418421}
   - component: {fileID: 3083656707644227352}
   - component: {fileID: 1369106543872428827}
-  - component: {fileID: 2836432513169635611}
+  - component: {fileID: 5628379896825255019}
   m_Layer: 7
   m_Name: BuildBar
   m_TagString: Untagged
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2836432513169635611
+--- !u!114 &5628379896825255019
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,11 +97,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shakeDatas:
-  - ShakeType: 1
-    Duration: 0.4
-    Strength: 25
   - ShakeType: 0
-    Duration: 0.4
-    Strength: 0.02
+    Duration: 0.3
+    Strength: 0.04
+  - ShakeType: 1
+    Duration: 0.3
+    Strength: 45
   _mesh: {fileID: 6447114768740418421}
   _barMaterial: {fileID: 2100000, guid: e4d5124eb24758641bf202cf5c10c0b6, type: 2}

@@ -1,10 +1,12 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
+using Combat;
 
 public sealed class FasterRechargeOnActivation : EntityModificator
 {
     private CancellationTokenSource _cancellationTokenSource = new();
+    private EntityEffectParticleHandler _entityEffectParticleHandler;
     private StatModifier _statModifier;
     private bool _isActive;
 
@@ -35,14 +37,15 @@ public sealed class FasterRechargeOnActivation : EntityModificator
         _isActive = true;
         
         StartCountdownToDeactivation();
-        
+
+        _entityEffectParticleHandler = Entity.ComponentsContainer.Get<ParticleEffectManager>().ApplyCustomEffect(Args.GetArgument<EntityEffectParticleHandler>("EntityEffectParticleHandler"));
         Entity.StatContainer.Get<TaskRechargeDuration>().AddStatModifier(_statModifier);
     }
     
     private void Deactivate()
     {
         _isActive = false;
-     
+        Entity.ComponentsContainer.Get<ParticleEffectManager>().DestroyCustomEffect(_entityEffectParticleHandler);
         Entity.StatContainer.Get<TaskRechargeDuration>().RemoveStatModifier(_statModifier);
     }
 

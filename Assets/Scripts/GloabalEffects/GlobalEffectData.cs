@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
-using System;
 
 public abstract class GlobalEffectData : ScriptableObject
 {
@@ -10,18 +9,16 @@ public abstract class GlobalEffectData : ScriptableObject
     [SerializeField] private EffectType _effectType;
     
     [SerializeField] private bool _isUnique = false;
-    [Dropdown("AllEffectTypeNames")] [SerializeField] private string _effectTypeName;
+    [SerializeField] private List<InstanceItemTypeContainer> _instanceItemTypeContainers;
     
     [Header("EffectAppearanceCondition")]
     [SerializeField] private EffectAppearanceConditionData effectAppearanceCondition;
     [ShowIf("HasAppearanceCondition", true)] [SerializeField] private ArgumentsContainer _argumentsContainer;
-    
-    [HideInInspector] public List<string> AllEffectTypeNames;
 
     [Header("TooltipData")] 
     [TextArea] [SerializeField] private string _effectDescription;
     
-    public virtual Type EffectInstanceType => Type.GetType(_effectTypeName);
+    public List<InstanceItemTypeContainer> InstanceItemTypeContainers => _instanceItemTypeContainers;
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public EffectAppearanceConditionData EffectAppearanceCondition => effectAppearanceCondition;
     public bool HasAppearanceCondition => effectAppearanceCondition;
@@ -29,6 +26,13 @@ public abstract class GlobalEffectData : ScriptableObject
     public bool IsUnique => _isUnique;
     public EffectType EffectType => _effectType;
     public string EffectDescription => _effectDescription;
+    
+    public virtual void Modify(GlobalEffect effect) {}
+    
+    public void SetItemTypeNames(List<string> itemTypeNames)
+    {
+        _instanceItemTypeContainers.ForEach(itemTypeContainer => itemTypeContainer.AllEffectTypeNames = itemTypeNames);
+    }
 }
 
 public enum EffectType

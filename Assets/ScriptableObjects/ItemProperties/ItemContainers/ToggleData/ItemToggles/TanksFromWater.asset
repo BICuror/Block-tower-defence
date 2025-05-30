@@ -16,6 +16,16 @@ MonoBehaviour:
   _effectType: 1
   _isUnique: 0
   _effectTypeName: AdditionalEnemyGroupFromWaterToggleEffect
+  _instanceItemTypeContainers:
+  - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
@@ -27,6 +37,7 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
   AllEffectTypeNames:
   - AdditionalEnemyGroupFromWaterToggleEffect
   - AdditionalEnemyGroupToggleEffect
@@ -34,6 +45,7 @@ MonoBehaviour:
   - GlobalEnemyModificatorToggleEffect
   - GlobalStatChangeToggleEffect
   - StartWaveGlobalToggleEffect
+  - TurnLastEnemyIntoMiniboss
   _effectDescription: Spawns #bad 6 enemies bad# from water nearby roads
   _enemyGroup:
     _groupHealth: 150

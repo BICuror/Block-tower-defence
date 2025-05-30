@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: InvincibleAgainstMarked
   m_EditorClassIdentifier: 
   _effectTypeName: DamageModifierEntityModificator
+  _itemTypeContainers:
+  - _itemTypeName: DamageModifierEntityModificator
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 4
@@ -23,6 +37,7 @@ MonoBehaviour:
       _stringArgument: InvincibleAgainstMarked
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsDealerDamageModifier
       _intArgument: 0
@@ -31,6 +46,7 @@ MonoBehaviour:
       _stringArgument: HealDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
   _effectType: 0
   _modificatorName: Vampire
   _modificatorDescription: Doesn't take damage from #Mark #bad enemies bad#

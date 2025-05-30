@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Cashing;
@@ -7,7 +6,7 @@ using Combat;
 
 public sealed class EntityModificatorsContainer : MonoBehaviour
 {
-    private readonly ListDictionary<EntityModificatorData, EntityModificator> _appliedModificators = new();
+    private readonly ListDictionary<EntityModificatorData, List<EntityModificator>> _appliedModificators = new();
     [SerializeField] private List<EntityModificatorData> _initialModificatorDatas;
     [SerializeField] private List<EntityModificatorData> _allAvailableModificators;
     [Inject] private EntityModificatorFactory _entityModificatorFactory;
@@ -28,37 +27,38 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
     
     public void AddEffect(EntityModificatorData modificatorData)
     {
-        EntityModificator modificator = _entityModificatorFactory.CreateEntityModificationEffect(modificatorData);
-        modificator.SetEntity(_ownerEntity);
-        
-        if (!modificator.CanBeApplied()) return;
-        
-        modificator.Enable();
+        List<EntityModificator> modificators = _entityModificatorFactory.CreateEntityModificators(modificatorData);
 
-        _appliedModificators.Add(modificatorData, modificator);
+        for (int i = 0; i < modificators.Count; i++)
+        {
+            modificators[i].SetEntity(_ownerEntity);
+
+            if (!modificators[i].CanBeApplied())
+            {
+                modificators.RemoveAt(i);
+                i--;
+                continue;
+            }
+                    
+            modificators[i].Enable();
+        }
+        
+
+        _appliedModificators.Add(modificatorData, modificators);
     }
 
-    public bool Has(Type modificatorType)
+    public bool Has(EntityModificatorData modificatorData)
     {
-        return _appliedModificators.GetAllKeys().Exists(data => data.ModificatorInstanceType == modificatorType);
-    }
-
-    public void RemoveEffect(Type modificatorType)
-    {
-        EntityModificatorData modificatorData = _appliedModificators.GetAllKeys().Find(data => data.ModificatorInstanceType == modificatorType);
-        
-        if (modificatorData == null) return;
-        
-        RemoveEffect(modificatorData);
+        return _appliedModificators.GetAllKeys().Contains(modificatorData);
     }
     
     public void RemoveEffect(EntityModificatorData modificatorData)
     {
         if (_appliedModificators.Contains(modificatorData))
         {
-            EntityModificator modificator = _appliedModificators.Remove(modificatorData);
+            List<EntityModificator> modificators = _appliedModificators.Remove(modificatorData);
             
-            modificator.Disable();
+            modificators.ForEach(modificator => modificator.Disable());
         }
     }
 }

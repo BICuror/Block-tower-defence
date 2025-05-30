@@ -3,7 +3,7 @@ using Combat;
 
 public sealed class InvincibilityUntilPickUpEntityModifier : EntityModificator
 {
-    public override bool CanBeApplied() => !Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(typeof(InvincibilityUntilPickUpEntityModifier));
+    public override bool CanBeApplied() => !Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
     
     public override void Enable()
     {
@@ -25,6 +25,6 @@ public sealed class InvincibilityUntilPickUpEntityModifier : EntityModificator
 
     private void Remove()
     {
-        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveEffect(typeof(InvincibilityUntilPickUpEntityModifier));
+        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveEffect(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
     }
 }

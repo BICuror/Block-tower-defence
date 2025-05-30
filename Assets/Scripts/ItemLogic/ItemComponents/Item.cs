@@ -72,7 +72,7 @@ public class Item : DraggableObject
     {
         _rewardDatas.ForEach(rewardEffectData =>
         {
-            _globalEffectFactory.CreateRewardEffect(rewardEffectData).GrantReward();
+            _globalEffectFactory.CreateRewardEffects(rewardEffectData).ForEach(rewardEffect => rewardEffect.GrantReward());
         });
     }
 

@@ -28,7 +28,7 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
 
         List<ToggleGlobalEffectData> sortedToggleEffectDatas = item.ToggleEffectDatas.OrderBy(item => item.EffectType == EffectType.Negative).ToList();
 
-        ToggleGlobalEffectData startWaveToggleEffectData = sortedToggleEffectDatas.Find(effectData => effectData.EffectInstanceType == typeof(StartWaveGlobalToggleEffect));
+        ToggleGlobalEffectData startWaveToggleEffectData = sortedToggleEffectDatas.Find(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect)));
 
         if (startWaveToggleEffectData != null)
         {

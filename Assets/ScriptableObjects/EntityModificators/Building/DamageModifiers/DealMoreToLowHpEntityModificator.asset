@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: DealMoreToLowHpEntityModificator
   m_EditorClassIdentifier: 
   _effectTypeName: DamageModifierEntityModificator
+  _itemTypeContainers:
+  - _itemTypeName: DamageModifierEntityModificator
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 4
@@ -23,6 +37,7 @@ MonoBehaviour:
       _stringArgument: DealMoreToLowHpDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsDealerDamageModifier
       _intArgument: 0
@@ -31,6 +46,7 @@ MonoBehaviour:
       _stringArgument: DealMoreToLowHpDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
     - _argumentType: 1
       _argumentName: Multiplier
       _intArgument: 0
@@ -39,6 +55,7 @@ MonoBehaviour:
       _stringArgument: DealMoreToLowHpDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
     - _argumentType: 1
       _argumentName: Threshold
       _intArgument: 0
@@ -47,6 +64,8 @@ MonoBehaviour:
       _stringArgument: DealMoreToLowHpDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+  _effectType: 0
   _modificatorName: ASSasin
   _modificatorDescription: '#good +200% good# #Damage to entities with #MaxHealth
     < 50%'
@@ -56,6 +75,9 @@ MonoBehaviour:
   - DealMoreDamageWhenMoreCrystalsSelected
   - EntityEffectEntityModificator
   - EntityModificatorStatChange
+  - FasterRechargeOnActivation
   - InvincibilityUntilPickUpEntityModifier
+  - ModificatorObjectApplyerEntityModificator
+  - MoreDamageNearbyWater
   - ScaleDamageWithHeight
   - TakeDamageUponPlacement

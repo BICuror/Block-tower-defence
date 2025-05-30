@@ -10,7 +10,7 @@ public class RewardEffectDataEditor : CustomTypeDropdownEditor<GlobalRewardEffec
     {
         RewardGlobalEffectData modificatorData = (RewardGlobalEffectData)target;
 
-        modificatorData.AllEffectTypeNames = items;
+        modificatorData.SetItemTypeNames(items);
     }
 }
 

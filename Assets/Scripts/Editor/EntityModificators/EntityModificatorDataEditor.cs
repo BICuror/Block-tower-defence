@@ -10,7 +10,7 @@ public class EntityModificatorDataEditor : CustomTypeDropdownEditor<EntityModifi
     {
         EntityModificatorData modificatorData = (EntityModificatorData)target;
 
-        modificatorData.AllEffectTypeNames = items;
+        modificatorData.SetItemTypeNames(items);
     }
 }
 #endif

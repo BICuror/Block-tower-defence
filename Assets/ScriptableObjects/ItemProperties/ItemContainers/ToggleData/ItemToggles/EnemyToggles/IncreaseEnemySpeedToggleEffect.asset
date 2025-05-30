@@ -16,6 +16,16 @@ MonoBehaviour:
   _effectType: 1
   _isUnique: 0
   _effectTypeName: GlobalEnemyModificatorToggleEffect
+  _instanceItemTypeContainers:
+  - _itemTypeName: GlobalEnemyModificatorToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
@@ -27,9 +37,13 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: f17266970283b374e94a5c1e33eef0a7, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
   AllEffectTypeNames:
+  - AdditionalEnemyGroupFromWaterToggleEffect
+  - AdditionalEnemyGroupToggleEffect
   - GlobalBuildingModificatorToggleEffect
   - GlobalEnemyModificatorToggleEffect
   - GlobalStatChangeToggleEffect
   - StartWaveGlobalToggleEffect
+  - TurnLastEnemyIntoMiniboss
   _effectDescription: '#bad +25% bad# enemy #Speed'

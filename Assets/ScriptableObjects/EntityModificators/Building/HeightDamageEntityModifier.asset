@@ -13,13 +13,35 @@ MonoBehaviour:
   m_Name: HeightDamageEntityModifier
   m_EditorClassIdentifier: 
   _effectTypeName: ScaleDamageWithHeight
+  _itemTypeContainers:
+  - _itemTypeName: ScaleDamageWithHeight
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
+  _effectType: 0
   _modificatorName: Stand tall
   _modificatorDescription: '#good +25% good# #Damage for each tile above sea level.
     4 #MaxStack'
   AllEffectTypeNames:
   - ActivateWhenBuilt
   - DamageModifierEntityModificator
+  - DealMoreDamageWhenMoreCrystalsSelected
+  - EntityEffectEntityModificator
   - EntityModificatorStatChange
+  - FasterRechargeOnActivation
+  - InvincibilityUntilPickUpEntityModifier
+  - ModificatorObjectApplyerEntityModificator
+  - MoreDamageNearbyWater
   - ScaleDamageWithHeight
+  - TakeDamageUponPlacement

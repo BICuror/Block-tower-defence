@@ -13,12 +13,34 @@ MonoBehaviour:
   m_Name: PerformTaskWhenBuilt
   m_EditorClassIdentifier: 
   _effectTypeName: ActivateWhenBuilt
+  _itemTypeContainers:
+  - _itemTypeName: ActivateWhenBuilt
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
+  _effectType: 0
   _modificatorName: Activate when built
   _modificatorDescription: Performs task when building built
   AllEffectTypeNames:
   - ActivateWhenBuilt
   - DamageModifierEntityModificator
+  - DealMoreDamageWhenMoreCrystalsSelected
+  - EntityEffectEntityModificator
   - EntityModificatorStatChange
+  - FasterRechargeOnActivation
+  - InvincibilityUntilPickUpEntityModifier
+  - ModificatorObjectApplyerEntityModificator
+  - MoreDamageNearbyWater
   - ScaleDamageWithHeight
+  - TakeDamageUponPlacement

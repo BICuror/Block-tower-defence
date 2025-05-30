@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: MoreDamageNearbyWaterTiles
   m_EditorClassIdentifier: 
   _effectTypeName: MoreDamageNearbyWater
+  _itemTypeContainers:
+  - _itemTypeName: MoreDamageNearbyWater
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -23,6 +37,7 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
     - _argumentType: 2
       _argumentName: AreaPrefab
       _intArgument: 0
@@ -31,6 +46,7 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
   _effectType: 0
   _modificatorName: Activate when built
   _modificatorDescription: '#good +8% good# #Damage for each <color=blue>water</color>

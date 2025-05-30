@@ -13,8 +13,16 @@ MonoBehaviour:
   m_Name: GlobalEffectSelectionReward
   m_EditorClassIdentifier: 
   _quality: 2
+  _effectType: 0
   _isUnique: 0
   _effectTypeName: StartGlobalEffectSelectionGlobalRewardEffect
+  _instanceItemTypeContainers:
+  - _itemTypeName: StartGlobalEffectSelectionGlobalRewardEffect
+    AllEffectTypeNames:
+    - StartAttackStateProperty
+    - StartBuildingSelectionGlobalRewardEffect
+    - StartBuildingUpgradeSelectionGlobalRewardEffect
+    - StartGlobalEffectSelectionGlobalRewardEffect
   effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems: []

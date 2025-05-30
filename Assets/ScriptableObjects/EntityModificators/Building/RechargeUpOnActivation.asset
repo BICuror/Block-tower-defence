@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: RechargeUpOnActivation
   m_EditorClassIdentifier: 
   _effectTypeName: FasterRechargeOnActivation
+  _itemTypeContainers:
+  - _itemTypeName: FasterRechargeOnActivation
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1

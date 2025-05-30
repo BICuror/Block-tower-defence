@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: Polifem
   m_EditorClassIdentifier: 
   _effectTypeName: EntityModificatorStatChange
+  _itemTypeContainers:
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
   _effectType: 0
@@ -20,7 +34,17 @@ MonoBehaviour:
   _modificatorDescription: '#good +150% good# #Damage, #bad +70% bad# #Recharge,
     #bad +50% bad# #BuildTime'
   AllEffectTypeNames:
+  - ActivateWhenBuilt
+  - DamageModifierEntityModificator
+  - DealMoreDamageWhenMoreCrystalsSelected
+  - EntityEffectEntityModificator
   - EntityModificatorStatChange
+  - FasterRechargeOnActivation
+  - InvincibilityUntilPickUpEntityModifier
+  - ModificatorObjectApplyerEntityModificator
+  - MoreDamageNearbyWater
+  - ScaleDamageWithHeight
+  - TakeDamageUponPlacement
   _statChanges:
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: 0

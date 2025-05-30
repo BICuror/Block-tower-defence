@@ -6,15 +6,16 @@ public sealed class DragAnimationObject : MonoBehaviour
 {
     [SerializeField] private bool _returnToDefaultYRotation = false;
     
-    private float _heightDistance;
+    private float _meshHegiht;
     private Transform _initialParent;
     private Vector3 _initialLocalPosition;
     private float _initialLocalYRotation;
     public Vector3 InitialLocalPosition => _initialLocalPosition;
+    public float MeshHeight => _meshHegiht;
     
     private void Awake()
     {
-        _heightDistance = GetComponent<MeshRenderer>().bounds.size.y;
+        _meshHegiht = GetComponent<MeshRenderer>().bounds.size.y;
         _initialParent = transform.parent;
         _initialLocalPosition = transform.localPosition;
         _initialLocalYRotation = transform.localRotation.eulerAngles.y;
@@ -29,7 +30,7 @@ public sealed class DragAnimationObject : MonoBehaviour
     {
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
         
-        transform.position = joint.transform.position - new Vector3(0f, _heightDistance, 0f);
+        transform.position = joint.transform.position - new Vector3(0f, _meshHegiht, 0f);
 
         rigidbody.mass = 5f;
         transform.parent = null;

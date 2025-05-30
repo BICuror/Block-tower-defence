@@ -18,28 +18,39 @@ public sealed class GlobalEffectFactory
         return condition.CanAppear();
     }
 
-    public GlobalToggleEffect CreateToggleEffect(ToggleGlobalEffectData globalEffectData)
+    public List<GlobalToggleEffect> CreateToggleEffects(ToggleGlobalEffectData globalEffectData)
     {
-        GlobalToggleEffect effect = CreateEffectInstance<GlobalToggleEffect>(globalEffectData.EffectInstanceType);
-        effect.SetArgumentsContainer(globalEffectData.ArgumentsContainer);
-        globalEffectData.Modify(effect);
-        return effect;
+        List<GlobalToggleEffect> toggleEffects = new();
+        
+        globalEffectData.InstanceItemTypeContainers.ForEach(instanceItemTypeContainer =>
+        {
+            toggleEffects.Add(CreateEffectInstance<GlobalToggleEffect>(globalEffectData, instanceItemTypeContainer.InstanceType));
+        });
+        
+        return toggleEffects;
     } 
 
-    public GlobalRewardEffect CreateRewardEffect(RewardGlobalEffectData globalEffectData)
+    public List<GlobalRewardEffect> CreateRewardEffects(RewardGlobalEffectData globalEffectData)
     {
-        GlobalRewardEffect effect = CreateEffectInstance<GlobalRewardEffect>(globalEffectData.EffectInstanceType);
-        effect.SetArgumentsContainer(globalEffectData.ArgumentsContainer);
-        return effect;
+        List<GlobalRewardEffect> rewardEffects = new();
+
+        globalEffectData.InstanceItemTypeContainers.ForEach(instanceItemTypeContainer =>
+        {
+            rewardEffects.Add(CreateEffectInstance<GlobalRewardEffect>(globalEffectData, instanceItemTypeContainer.InstanceType));
+        });
+        
+        return rewardEffects;
     } 
     
-    private T CreateEffectInstance<T>(Type type)
+    private T CreateEffectInstance<T>(GlobalEffectData effectData, Type type) where T : GlobalEffect
     {
         T effect = (T)Activator.CreateInstance(type);
 
         if (effect == null) throw new NullReferenceException($"Invalid effect type: {type}");
 
         _diContainer.Inject(effect);
+        effect.SetArgumentsContainer(effectData.ArgumentsContainer); 
+        effectData.Modify(effect);
 
         return effect;
     }
@@ -48,7 +59,7 @@ public sealed class GlobalEffectFactory
     {
         List<GlobalToggleEffect> resultEffectList = new();
         
-        effectDatas.ForEach(effectData => resultEffectList.Add(CreateToggleEffect(effectData)));
+        effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateToggleEffects(effectData)));
 
         return resultEffectList;
     }
@@ -57,7 +68,7 @@ public sealed class GlobalEffectFactory
     {
         List<GlobalRewardEffect> resultEffectList = new();
         
-        effectDatas.ForEach(effectData => resultEffectList.Add(CreateRewardEffect(effectData)));
+        effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateRewardEffects(effectData)));
 
         return resultEffectList;
     }

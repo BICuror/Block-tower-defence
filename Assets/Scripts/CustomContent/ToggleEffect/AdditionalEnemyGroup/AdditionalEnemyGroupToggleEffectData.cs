@@ -7,20 +7,16 @@ using System;
 public sealed class AdditionalEnemyGroupToggleEffectData : ToggleGlobalEffectData
 {
     [SerializeField] private AdditionalEnemyGroup _enemyGroup;
-    public override Type EffectInstanceType => typeof(AdditionalEnemyGroupToggleEffect);
     
-    public override void Modify(GlobalToggleEffect effect)
+    public override void Modify(GlobalEffect effect)
     {
+        if (effect is not AdditionalEnemyGroupToggleEffect) return;
+        
         AdditionalEnemyGroupToggleEffect additionalGroupToggleEffect = (AdditionalEnemyGroupToggleEffect)effect;
         
         additionalGroupToggleEffect.SetAdditionalEnemyGroup(_enemyGroup);
     }
     
-    private void OnValidate()
-    {
-        AllEffectTypeNames = new List<string>{"AdditionalEnemyGroupToggleEffect"};
-    }
-
     [Serializable] public sealed class AdditionalEnemyGroup
     {
         [SerializeField] private float _groupHealth;

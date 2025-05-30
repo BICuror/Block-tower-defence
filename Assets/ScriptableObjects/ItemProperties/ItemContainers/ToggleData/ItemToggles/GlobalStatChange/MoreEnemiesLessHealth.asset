@@ -9,14 +9,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
-  m_Name: InvincibleEnemiesUntilPickup
+  m_Script: {fileID: 11500000, guid: c7e36d4158907f74088b84bbd4ad37d8, type: 3}
+  m_Name: MoreEnemiesLessHealth
   m_EditorClassIdentifier: 
   _quality: 1
   _effectType: 1
   _isUnique: 0
-  _effectTypeName: GlobalEnemyModificatorToggleEffect
   _instanceItemTypeContainers:
+  - _itemTypeName: GlobalStatChangeToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   - _itemTypeName: GlobalEnemyModificatorToggleEffect
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
@@ -36,24 +44,11 @@ MonoBehaviour:
       _floatArgument: 0
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: c94b14fd96c8fc24590cf01a28042e27, type: 2}
+      _entityModificatorData: {fileID: 11400000, guid: d4060e4162d8f624e8b2a639f0ebafc7, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
-    - _argumentType: 0
-      _argumentName: Chance
-      _intArgument: 25
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: c94b14fd96c8fc24590cf01a28042e27, type: 2}
-      _entityEffectParticleHandler: {fileID: 0}
-  AllEffectTypeNames:
-  - AdditionalEnemyGroupFromWaterToggleEffect
-  - AdditionalEnemyGroupToggleEffect
-  - GlobalBuildingModificatorToggleEffect
-  - GlobalEnemyModificatorToggleEffect
-  - GlobalStatChangeToggleEffect
-  - StartWaveGlobalToggleEffect
-  - TurnLastEnemyIntoMiniboss
-  _effectDescription: Enemies have #bad 25% bad# chance of being #Invincibility until
-    picked up
+  _effectDescription: '#bad +50% bad# #bad enemies bad# #good -50% good# #bad enemy
+    bad# #MaxHealth'
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 6e5fae9541dd9ca4785dd9fcbb8f9465, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.5

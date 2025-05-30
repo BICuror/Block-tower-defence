@@ -10,7 +10,7 @@ public class ToggleEffectDataEditor : CustomTypeDropdownEditor<GlobalToggleEffec
     {
         ToggleGlobalEffectData modificatorData = (ToggleGlobalEffectData)target;
 
-        modificatorData.AllEffectTypeNames = items;
+        modificatorData.SetItemTypeNames(items);
     }
 }
 

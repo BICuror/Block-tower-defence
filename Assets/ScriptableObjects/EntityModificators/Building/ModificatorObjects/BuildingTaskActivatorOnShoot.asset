@@ -13,6 +13,20 @@ MonoBehaviour:
   m_Name: BuildingTaskActivatorOnShoot
   m_EditorClassIdentifier: 
   _effectTypeName: ModificatorObjectApplyerEntityModificator
+  _itemTypeContainers:
+  - _itemTypeName: ModificatorObjectApplyerEntityModificator
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - InvincibilityUntilPickUpEntityModifier
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 2
@@ -23,6 +37,7 @@ MonoBehaviour:
       _stringArgument: 
       _gameObjectArgument: {fileID: 1727960946741506579, guid: 75f0864389e45e94c91c1c17096e9432, type: 3}
       _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
   _effectType: 0
   _modificatorName: Activate when built
   _modificatorDescription: On shoot 25% to make another building in area shoot
@@ -32,7 +47,9 @@ MonoBehaviour:
   - DealMoreDamageWhenMoreCrystalsSelected
   - EntityEffectEntityModificator
   - EntityModificatorStatChange
+  - FasterRechargeOnActivation
   - InvincibilityUntilPickUpEntityModifier
   - ModificatorObjectApplyerEntityModificator
+  - MoreDamageNearbyWater
   - ScaleDamageWithHeight
   - TakeDamageUponPlacement

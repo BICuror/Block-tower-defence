@@ -15,12 +15,28 @@ MonoBehaviour:
   _quality: 1
   _effectType: 0
   _isUnique: 0
-  _effectTypeName: EntityModificatorStatChange
+  _effectTypeName: AdditionalEnemyGroupFromWaterToggleEffect
+  _instanceItemTypeContainers:
+  - _itemTypeName: GlobalStatChangeToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems: []
   AllEffectTypeNames:
-  - EntityModificatorStatChange
+  - AdditionalEnemyGroupFromWaterToggleEffect
+  - AdditionalEnemyGroupToggleEffect
+  - GlobalBuildingModificatorToggleEffect
+  - GlobalEnemyModificatorToggleEffect
+  - GlobalStatChangeToggleEffect
+  - StartWaveGlobalToggleEffect
+  - TurnLastEnemyIntoMiniboss
   _effectDescription: '#good +1 good# selection option'
   _statChanges:
   - StatData: {fileID: 11400000, guid: b3695c95de33ccc4cb99860d4e89b924, type: 2}

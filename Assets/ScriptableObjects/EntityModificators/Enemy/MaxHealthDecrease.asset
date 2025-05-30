@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: Soymilk
+  m_Name: MaxHealthDecrease
   m_EditorClassIdentifier: 
-  _effectTypeName: EntityModificatorStatChange
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -29,25 +28,10 @@ MonoBehaviour:
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
-  _effectType: 0
-  _modificatorName: Shalowminded
-  _modificatorDescription: '#good -70% good# #Recharge, #bad -70% bad# #Damage'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
+  _effectType: 1
+  _modificatorName: Hp down
+  _modificatorDescription: '#bad -20% bad# #MaxHealth'
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
+  - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     FlatChange: 0
-    MultiplierChange: -0.7
-  - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    FlatChange: 0
-    MultiplierChange: -0.7
+    MultiplierChange: 0.2

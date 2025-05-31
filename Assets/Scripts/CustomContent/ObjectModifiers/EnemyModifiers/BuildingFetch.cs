@@ -63,7 +63,7 @@ public sealed class BuildingFetch : MonoBehaviour
     {
         await _draggableConnector.MoveToPerTile(_buildingEntity.transform.position, _timePerTile);
 
-        if (_currentState == FetchState.Chase)
+        if (_currentState == FetchState.Chase && _buildingEntity)
         {
             SetState(FetchState.Dragging);
             

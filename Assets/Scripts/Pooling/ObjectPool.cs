@@ -15,6 +15,8 @@ public sealed class ObjectPool<T> where T: Component
     private OnObjectInitialized _onObjectInitialized;
     private DiContainer _diContainer;
 
+    public IReadOnlyList<T> Pool => _pool;
+    
     private int ActiveCount => _pool.Count(pooledObject => pooledObject && pooledObject.gameObject.activeSelf);
     
     public ObjectPool(T prefab, int poolSize, [Optional]DiContainer diContainer, [Optional]OnObjectInitialized onObjectInitialized)

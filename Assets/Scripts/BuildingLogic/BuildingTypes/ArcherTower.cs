@@ -16,6 +16,8 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 
     private WeaponPool<Arrow> _arrowObjectPool;
 
+    public WeaponPool<Arrow> WeaponPool => _arrowObjectPool;
+
     private void Start()
     {
         base.Start();

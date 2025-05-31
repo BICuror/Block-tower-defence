@@ -6,6 +6,7 @@ namespace Combat
     {
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
         private Damage _damage;
+        private bool _isPiercing;
         
         protected override void OnInitialized()
         {
@@ -18,13 +19,15 @@ namespace Combat
             {
                 DamageEntity(_damage.Value, enemyEntity);
 
-                Collider.enabled = false;
+                if (_isPiercing) return;
                 
+                Collider.enabled = false;
                 Rigidbody.velocity = Vector3.zero;
                 await _visualEffectHandler.Play();
-                
                 Disable();
             }
         }
+
+        public void SetPiercingState(bool state) => _isPiercing = true;
     }
 }

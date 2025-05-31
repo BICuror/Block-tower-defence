@@ -18,8 +18,9 @@ namespace Combat
         
         public void Initialize(CombatEntity ownerEntity, float lifetime)
         {
-            base.Initialize(ownerEntity);
+            OwnerEntity = ownerEntity;
             _lifetime = lifetime;
+            OnInitialized();
         }
         
         #region StateManagements

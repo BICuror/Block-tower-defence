@@ -6,6 +6,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
 {
     [SerializeField] private WeaponBase _weaponBase;
     [SerializeField] private BeamSystem _beamSystem;
+    [SerializeField] private Transform _sourceTransform;
     
     [Cached] private TaskRechargeDuration _taskCycleRechargeDuration;
     [Cached] private EnemyAreaScaner _enemyAreaScaner;
@@ -26,6 +27,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Beam;
         _ownerEntity.Draggable.PickedUp += ClearEnemy;
         _enemyAreaScaner.RemovedItem += TryClearEnemy; 
+        _beamSystem.SetSource(_sourceTransform);
     }  
     
     private void Beam()

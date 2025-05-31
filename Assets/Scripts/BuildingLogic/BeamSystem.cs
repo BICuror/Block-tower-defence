@@ -1,27 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
+using System;
 
 public sealed class BeamSystem : MonoBehaviour
 {
     [SerializeField] private BeamType _beamType;
-
     [SerializeField] private Material _beamMaterial;
-
     [SerializeField] private LineRenderer _lineRenderer;
-
-    [SerializeField] private Transform _beamSource;
-
     [SerializeField] private MeshRenderer[] _additionalRenderers;
-
-    private Transform _target;
-
-    private YieldInstruction _rechargeInstruction;
+    private CancellationTokenSource _cancellationTokenSource = new();
+    private Transform[] _targets = new Transform[2];
 
     private void Awake()
     {
-        _rechargeInstruction = new WaitForFixedUpdate();
-
         _beamMaterial = new Material(_beamMaterial);
 
         _lineRenderer.sharedMaterial = _beamMaterial;
@@ -37,45 +29,62 @@ public sealed class BeamSystem : MonoBehaviour
         _beamMaterial.SetFloat("Alpha", alpha);
     }
 
+    public void SetSource(Transform source)
+    {
+        _targets[0] = source;    
+    }
+    
     public void SetTarget(Transform target)
     {
-        StopAllCoroutines();
+        DisableBeam();
  
         _lineRenderer.positionCount = 2;
+        _targets[1] = target;
 
-        _target = target;
+        if (_beamType == BeamType.Dynamic)
+        {
+            KeepUpBeamToTarget();
+        }
+        else
+        {
+            UpdateLinePositions();
+        }
+    }
 
-        UpdateLinePositions();
+    private async UniTask KeepUpBeamToTarget()
+    {
+        while (_targets[0] && _targets[1])
+        {   
+            UpdateLinePositions();
 
-        if (_beamType == BeamType.Dynamic) StartCoroutine(KeepUpBeamToTarget());
+            try
+            {
+                await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
+            }
+            catch (Exception e)
+            {
+                TaskUtility.LogAsync(e);
+                break;
+            }
+        }
     }
 
     public void DisableBeam()
     {
-        StopAllCoroutines();
-
         _lineRenderer.positionCount = 0;
-
-        _target = null;
-
-        SetAlpha(0);
-    }
-
-    private IEnumerator KeepUpBeamToTarget()
-    {
-        while (true)
-        {   
-            UpdateLinePositions();
-
-            yield return _rechargeInstruction;
-        }
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource = new();
     }
 
     private void UpdateLinePositions()
     {
-        _lineRenderer.SetPosition(0, _beamSource.position);
+        _lineRenderer.SetPosition(0, _targets[0].position);
+        _lineRenderer.SetPosition(1, _targets[1].position);
+    }
 
-        _lineRenderer.SetPosition(1, _target.position);
+    private void OnDestroy()
+    {
+        DisableBeam();
     }
 }
 

@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: DamageReturnerEntityModificator
   m_EditorClassIdentifier: 
-  _effectTypeName: DamageModifierEntityModificator
   _itemTypeContainers:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
@@ -25,6 +26,7 @@ MonoBehaviour:
     - InvincibilityUntilPickUpEntityModifier
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MultishotEntityModificator
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -47,18 +49,16 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+    - _argumentType: 5
+      _argumentName: IsBuildingModificator
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: ReturnDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
   _effectType: 0
   _modificatorName: Back striker
-  _modificatorDescription: Attacks back when dealt damage
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
+  _modificatorDescription: Upon taking #Damage attacks with same #Damage all enemies
+    in area

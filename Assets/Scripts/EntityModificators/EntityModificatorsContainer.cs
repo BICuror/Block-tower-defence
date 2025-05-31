@@ -3,6 +3,7 @@ using UnityEngine;
 using Cashing;
 using Zenject;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class EntityModificatorsContainer : MonoBehaviour
 {
@@ -15,8 +16,10 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
     public List<EntityModificatorData> AvailableModificators => new List<EntityModificatorData>(_allAvailableModificators);
     public List<EntityModificatorData> AppliedModificators => _appliedModificators.GetAllKeys();
 
-    private void Start()
+    private async void Start()
     {
+        await UniTask.WaitForFixedUpdate();
+        
         _initialModificatorDatas.ForEach(modificatorData =>
         {
             AddEffect(modificatorData);

@@ -13,6 +13,8 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     [Cached] private TaskCycle _taskCycle;
     private List<Bomb> _createdBombs = new();
     private WeaponBasePool<Explotion> _bombPool;
+
+    public int ActiveBombs => _createdBombs.Count;
     
     private void Start()
     {
@@ -22,7 +24,7 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     
     public ResolveTaskCondition GetTaskCondition() => LessThanMaxBombs;
 
-    private async void CreateBomb()
+    public async void CreateBomb()
     {
         Explotion explotion = _bombPool.GetPooledWeapon();
         Bomb bomb = explotion.GetComponent<Bomb>();
@@ -44,4 +46,6 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     }
     
     private bool LessThanMaxBombs() => _createdBombs.Count <= _maxEntities.RoundedValue;
+
+    private void OnDestroy() => _bombPool.DestroyPool();
 }

@@ -404,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weaponBase: {fileID: 6512528250351581515}
   _beamSystem: {fileID: 3628266454779129155}
+  _sourceTransform: {fileID: 3327264118850545295}
 --- !u!114 &3628266454779129155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,7 +420,6 @@ MonoBehaviour:
   _beamType: 0
   _beamMaterial: {fileID: 2100000, guid: 223d65bd64c0c714eb337e3d88523e55, type: 2}
   _lineRenderer: {fileID: 6182569289293184499}
-  _beamSource: {fileID: 3327264118850545295}
   _additionalRenderers:
   - {fileID: 5437488158903258658}
   - {fileID: 4897873884192661854}

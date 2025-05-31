@@ -1,0 +1,83 @@
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
+using Combat;
+
+public sealed class PropogationStrike : WeaponBase
+{
+    [SerializeField] private LayerSetting _layerSetting;
+    [SerializeField] private BeamSystem _beamSystem;
+    [SerializeField] private float _stepDuration;
+    private List<CombatEntity> _targetedEnemes = new();
+    private PropogationDamageMiultiplier _propogationDamageMultiplier;
+    private PropogationRadius _propogationRadius;
+    private Damage _damage;
+    private float _lastDamage;
+
+    protected override void OnInitialized()
+    {
+        _propogationDamageMultiplier = OwnerEntity.StatContainer.Get<PropogationDamageMiultiplier>();
+        _propogationRadius = OwnerEntity.StatContainer.Get<PropogationRadius>();
+        _damage = OwnerEntity.StatContainer.Get<Damage>();
+    }
+    
+    public async UniTask StartPropogationStrike(CombatEntity initialEntity, Transform initialTransform = null)
+    {
+        _targetedEnemes.Clear();
+        
+        if (initialTransform)
+        {   
+            _beamSystem.SetSource(initialTransform);
+            _beamSystem.SetTarget(initialEntity.transform);
+        }
+        else
+        {
+            _beamSystem.DisableBeam();
+        }
+        
+        await UniTask.WaitForSeconds(_stepDuration);
+
+        CombatEntity currentEntity = initialEntity;
+        
+        _lastDamage = _damage.Value;
+        
+        while (currentEntity)
+        {
+            currentEntity.Health.ReceiveEnemyDamage(_lastDamage, OwnerEntity);
+            _lastDamage *= _propogationDamageMultiplier.Value;
+            _targetedEnemes.Add(currentEntity);
+            
+            await UniTask.WaitForSeconds(_stepDuration);
+            
+            CombatEntity newTargetEntity = GetEnemiesInRadius(currentEntity.transform.position);
+            
+            if (!newTargetEntity) break;
+
+            _beamSystem.SetSource(currentEntity.transform);
+            _beamSystem.SetTarget(newTargetEntity.transform);
+
+            currentEntity = newTargetEntity;
+        }
+
+        gameObject.SetActive(false);
+        _beamSystem.DisableBeam();
+    }
+
+    private CombatEntity GetEnemiesInRadius(Vector3 centerPosition)
+    {
+        Collider[] enemyColliders = Physics.OverlapSphere(centerPosition, _propogationRadius.Value, _layerSetting.GetLayerMask());
+
+        for (int i = 0; i < enemyColliders.Length; i++)
+        {
+            if (enemyColliders[i].gameObject.TryGetComponent(out CombatEntity entity))
+            {
+                if (!_targetedEnemes.Contains(entity))
+                {
+                    return entity;
+                }
+            }
+        }
+
+        return null;
+    }
+}

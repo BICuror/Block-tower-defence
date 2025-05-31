@@ -14,6 +14,7 @@ public class TaskCycle : MonoBehaviour
     private CancellationTokenSource _cancellationTokenSource = new();
     
     public Action TaskPerformed;
+    public Action TaskCycled;
 
     private void Start()
     {
@@ -59,6 +60,7 @@ public class TaskCycle : MonoBehaviour
 
         if (_taskConditionProvider.GetTaskCondition().Invoke())
         {
+            TaskCycled?.Invoke();
             TryCycle();
             PerformTask();
         }

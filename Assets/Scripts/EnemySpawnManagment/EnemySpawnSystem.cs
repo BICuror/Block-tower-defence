@@ -52,8 +52,6 @@ namespace Combat
     
         private void CheckIfAllEnemiesDied()
         {
-   
-            
             if (_globalEnemyContainer.Entities.Count > 0) return;
     
             LastWaveEnemyDied.Invoke();

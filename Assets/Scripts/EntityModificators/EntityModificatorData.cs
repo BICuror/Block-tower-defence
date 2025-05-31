@@ -13,7 +13,7 @@ public class EntityModificatorData : ScriptableObject
     [Header("UI Data")]
     [SerializeField] private EffectType _effectType;
     [SerializeField] private string _modificatorName;
-    [SerializeField] private string _modificatorDescription;
+    [TextArea] [SerializeField] private string _modificatorDescription;
     
     public List<InstanceItemTypeContainer> ItemTypeContainers => _itemTypeContainers;
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;

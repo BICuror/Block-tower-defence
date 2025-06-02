@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Combat
 {
-    public sealed class MortarProjectile : PlayerWeapon
+    public sealed class MortarProjectile : Weapon
     {
         [SerializeField] Explotion _explotion; 
         [SerializeField] private LayerSetting _enemyLayerSettings; 

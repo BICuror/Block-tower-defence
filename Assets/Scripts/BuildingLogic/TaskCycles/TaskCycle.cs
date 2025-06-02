@@ -47,7 +47,14 @@ public class TaskCycle : MonoBehaviour
 
         try
         {
-            await UniTask.WaitForSeconds(_taskRechargeDuration.Value, cancellationToken: _cancellationTokenSource.Token);
+            float elapsedTime = 0;
+                
+            while (elapsedTime < _taskRechargeDuration.Value)
+            {
+                await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
+                    
+                elapsedTime += Time.fixedDeltaTime;
+            }
         }
         catch (Exception e)
         {

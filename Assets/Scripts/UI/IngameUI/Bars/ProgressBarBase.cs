@@ -23,6 +23,8 @@ public abstract class ProgressBarBase : Shaker
     
     protected async UniTask FillBar(float initialValue, float finalValue, float tweenDuration)
     {
+        StopBarFill();
+        
         CurrentTween = DOVirtual.Float(initialValue, finalValue, tweenDuration, SetPropertyBlock).SetEase(Ease.Linear).OnComplete(StopBarFill);
 
         await CurrentTween.AsyncWaitForCompletion();

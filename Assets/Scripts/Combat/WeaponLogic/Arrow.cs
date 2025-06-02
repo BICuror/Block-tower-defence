@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Combat
 {
-    public sealed class Arrow : PlayerWeapon
+    public sealed class Arrow : Weapon
     {
         [SerializeField] private TrailRenderer _trailRenderer;
         [SerializeField] private VisualEffectHandler _visualEffectHandler;

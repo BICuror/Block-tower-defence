@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using UnityEngine;
 using Cashing;
 using System;
 using Combat;
@@ -16,7 +17,8 @@ public sealed class BuildingDraggable : DraggableEntity
     private bool _hasBuildTime;
     
     public Action BuildCompleted;
-    public Action BuildingProcessStarted;
+    public Action BuildProgressStarted;
+    public Action<float> BuildProcessUpdated;
     public Action<BuildingDraggable> BuildingPickedUp;
     public Action<BuildingDraggable> BuildingPlaced;
     public Action<BuildingDraggable> BuildingBuilt;
@@ -52,11 +54,23 @@ public sealed class BuildingDraggable : DraggableEntity
 
         if (_hasBuildTime && _waveStateMachine.CurrentState == WaveState.Attack)
         {
-            BuildingProcessStarted?.Invoke();
+            BuildProgressStarted?.Invoke();
+            BuildProcessUpdated?.Invoke(0);
             
             try
             {
-                await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: _cancellationTokenSource.Token);
+                float elapsedTime = 0;
+                
+                while (elapsedTime < _buildTime.Value)
+                {
+                    await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
+                    
+                    elapsedTime += Time.fixedDeltaTime;
+                    
+                    BuildProcessUpdated?.Invoke(elapsedTime / _buildTime.Value);
+                }
+                
+                BuildProcessUpdated?.Invoke(1f);
             }
             catch (Exception e)
             {

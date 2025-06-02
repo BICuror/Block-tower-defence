@@ -25,8 +25,8 @@ namespace Combat
         
         #region StateManagements
 
-        private void OnEnable() => Enable();
-        private void OnDisable() => StopLifetimeTrack();
+        protected void OnEnable() => Enable();
+        protected void OnDisable() => StopLifetimeTrack();
         
         public void Enable()
         {

@@ -3,14 +3,20 @@ using System.Threading;
 using Cashing;
 using System;
 using Combat;
+using Zenject;
 
 public sealed class BuildingDraggable : DraggableEntity
 {
-    [Cached] private BuildTime _buildTime;
+    [Inject] private WaveStateMachine _waveStateMachine;
+    [Cached] private CombatEntity _ownerEntity;
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _isBuilt = true;
-
+    
+    private BuildTime _buildTime;
+    private bool _hasBuildTime;
+    
     public Action BuildCompleted;
+    public Action BuildingProcessStarted;
     public Action<BuildingDraggable> BuildingPickedUp;
     public Action<BuildingDraggable> BuildingPlaced;
     public Action<BuildingDraggable> BuildingBuilt;
@@ -26,6 +32,14 @@ public sealed class BuildingDraggable : DraggableEntity
         PickedUp += StopBuildingProcess;
     }
 
+    private void Start()
+    {
+        base.Start();
+
+        _hasBuildTime = _ownerEntity.StatContainer.Has<BuildTime>();
+        if (_hasBuildTime) _buildTime = _ownerEntity.StatContainer.Get<BuildTime>();
+    }
+
     private void PickUpBuilding()
     {
         _isBuilt = false;
@@ -36,16 +50,21 @@ public sealed class BuildingDraggable : DraggableEntity
     {
         BuildingPlaced?.Invoke(this);
 
-        try
+        if (_hasBuildTime && _waveStateMachine.CurrentState == WaveState.Attack)
         {
-            await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: _cancellationTokenSource.Token);
+            BuildingProcessStarted?.Invoke();
+            
+            try
+            {
+                await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: _cancellationTokenSource.Token);
+            }
+            catch (Exception e)
+            {
+                TaskUtility.LogAsync(e);
+                return;
+            }
         }
-        catch (Exception e)
-        {
-            TaskUtility.LogAsync(e);
-            return;
-        }
-
+        
         CompleteBuild();
     }
 

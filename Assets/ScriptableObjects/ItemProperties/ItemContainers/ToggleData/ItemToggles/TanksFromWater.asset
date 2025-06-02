@@ -15,7 +15,6 @@ MonoBehaviour:
   _quality: 1
   _effectType: 1
   _isUnique: 0
-  _effectTypeName: AdditionalEnemyGroupFromWaterToggleEffect
   _instanceItemTypeContainers:
   - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
     AllEffectTypeNames:
@@ -26,7 +25,6 @@ MonoBehaviour:
     - GlobalStatChangeToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -38,14 +36,9 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
-  AllEffectTypeNames:
-  - AdditionalEnemyGroupFromWaterToggleEffect
-  - AdditionalEnemyGroupToggleEffect
-  - GlobalBuildingModificatorToggleEffect
-  - GlobalEnemyModificatorToggleEffect
-  - GlobalStatChangeToggleEffect
-  - StartWaveGlobalToggleEffect
-  - TurnLastEnemyIntoMiniboss
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectName: Unrelenting waters
   _effectDescription: Spawns #bad 6 enemies bad# from water nearby roads
   _enemyGroup:
     _groupHealth: 150

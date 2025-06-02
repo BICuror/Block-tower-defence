@@ -4,9 +4,15 @@ namespace Combat
 {
     public sealed class Arrow : PlayerWeapon
     {
+        [SerializeField] private TrailRenderer _trailRenderer;
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
         private Damage _damage;
         private bool _isPiercing;
+
+        private void OnEnable()
+        {
+            base.OnEnable();   
+        }
         
         protected override void OnInitialized()
         {
@@ -25,9 +31,10 @@ namespace Combat
                 Rigidbody.velocity = Vector3.zero;
                 await _visualEffectHandler.Play();
                 Disable();
+                _trailRenderer.Clear();
             }
         }
 
-        public void SetPiercingState(bool state) => _isPiercing = true;
+        public void SetPiercingState(bool state) => _isPiercing = state;
     }
 }

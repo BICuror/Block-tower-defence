@@ -14,7 +14,7 @@ public class BuildingProgressBar : ProgressBarBase
     {
         base.Start();
         
-        _buildingDraggable.Placed += StartFillingBar;
+        _buildingDraggable.BuildingProcessStarted += StartFillingBar;
         _buildingDraggable.PickedUp += StopFillingBar;
         
         gameObject.SetActive(false);

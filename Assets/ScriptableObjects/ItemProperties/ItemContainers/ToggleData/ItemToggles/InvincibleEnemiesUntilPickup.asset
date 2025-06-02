@@ -15,7 +15,6 @@ MonoBehaviour:
   _quality: 1
   _effectType: 1
   _isUnique: 0
-  _effectTypeName: GlobalEnemyModificatorToggleEffect
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalEnemyModificatorToggleEffect
     AllEffectTypeNames:
@@ -26,7 +25,6 @@ MonoBehaviour:
     - GlobalStatChangeToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -47,13 +45,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: c94b14fd96c8fc24590cf01a28042e27, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
-  AllEffectTypeNames:
-  - AdditionalEnemyGroupFromWaterToggleEffect
-  - AdditionalEnemyGroupToggleEffect
-  - GlobalBuildingModificatorToggleEffect
-  - GlobalEnemyModificatorToggleEffect
-  - GlobalStatChangeToggleEffect
-  - StartWaveGlobalToggleEffect
-  - TurnLastEnemyIntoMiniboss
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectName: Untouchable
   _effectDescription: Enemies have #bad 25% bad# chance of being #Invincibility until
     picked up

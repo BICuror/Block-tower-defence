@@ -1,11 +1,12 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 using TMPro;
 
 public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
-    [SerializeField] private CanvasGroup _selectedState;
+    [SerializeField] private List<CanvasGroup> _selectedState;
     [SerializeField] private CanvasGroup _amountGroup;
     [SerializeField] private TextMeshProUGUI _amountTextField;
     private int _itemAmount = 1;
@@ -17,13 +18,13 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
     
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _selectedState.gameObject.SetActive(true);
+        _selectedState.ForEach(group => group.gameObject.SetActive(true));
         TooltipOpened.Invoke(TagDataContainer);
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
-        _selectedState.gameObject.SetActive(false);
+        _selectedState.ForEach(group => group.gameObject.SetActive(false));
         TooltipClosed.Invoke();
     }
 

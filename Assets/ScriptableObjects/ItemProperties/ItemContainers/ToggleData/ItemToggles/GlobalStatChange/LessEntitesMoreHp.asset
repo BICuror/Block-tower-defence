@@ -34,7 +34,6 @@ MonoBehaviour:
     - GlobalStatChangeToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -46,6 +45,9 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: ac696a6058760aa499cb7b4f455a9348, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectName: Horde
   _effectDescription: '#good -50% good# #bad enemies bad# #bad +50% bad# #bad enemy
     bad# #MaxHealth'
   _statChanges:

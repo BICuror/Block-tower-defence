@@ -15,7 +15,6 @@ MonoBehaviour:
   _quality: 1
   _effectType: 1
   _isUnique: 0
-  _effectTypeName: GlobalBuildingModificatorToggleEffect
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalBuildingModificatorToggleEffect
     AllEffectTypeNames:
@@ -26,7 +25,6 @@ MonoBehaviour:
     - GlobalStatChangeToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  effectAppearanceCondition: {fileID: 0}
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -38,12 +36,7 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: 706dd01b4f6134c4bb2c63dc9517e525, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
-  AllEffectTypeNames:
-  - AdditionalEnemyGroupFromWaterToggleEffect
-  - AdditionalEnemyGroupToggleEffect
-  - GlobalBuildingModificatorToggleEffect
-  - GlobalEnemyModificatorToggleEffect
-  - GlobalStatChangeToggleEffect
-  - StartWaveGlobalToggleEffect
-  - TurnLastEnemyIntoMiniboss
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectName: Slower build
   _effectDescription: All building #bad +100% bad# #BuildTime

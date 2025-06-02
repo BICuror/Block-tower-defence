@@ -6,15 +6,22 @@ public sealed class EffectInspectionTooltip : MonoBehaviour, IPointerEnterHandle
 {
     [SerializeField] private SelectionOptionObject _selectionOptionObject;
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
+    [SerializeField] private TextMeshProUGUI _nameTextField;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
     [SerializeField] private TooltipDataParser _tooltipDataParser;
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
 
     private void Start()
     {
+        SetEffectName(_selectionOptionObject.OptionName);
         SetEffectDescription(_selectionOptionObject.OptionDescription);
     }
 
+    private void SetEffectName(string effectName)
+    {
+        _nameTextField.text = effectName;
+    }
+    
     private void SetEffectDescription(string effectDescription)
     {
         _descriptionTextField.text = _tooltipTextParser.ParseTooltipText(effectDescription, false);

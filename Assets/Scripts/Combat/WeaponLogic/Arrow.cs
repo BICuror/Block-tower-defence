@@ -8,11 +8,6 @@ namespace Combat
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
         private Damage _damage;
         private bool _isPiercing;
-
-        private void OnEnable()
-        {
-            base.OnEnable();   
-        }
         
         protected override void OnInitialized()
         {

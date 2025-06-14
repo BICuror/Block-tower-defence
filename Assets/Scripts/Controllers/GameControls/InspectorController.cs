@@ -1,5 +1,6 @@
 using UnityEngine;
 using Combat;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Camera))]
 
@@ -10,7 +11,7 @@ public class InspectorController : MonoBehaviour
     [SerializeField] private AreaVisualisation _areaVisualisation;
     [SerializeField] private EffectInspectionTooltip effectInspectionTooltip;
     [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltip;
-    [SerializeField] private InspectionTooltipBase _entityInspectionTooltipPrefab;
+    [FormerlySerializedAs("_entityInspectionTooltipPrefab")] [SerializeField] private EntityTooltip entityEntityTooltipPrefab;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
     [SerializeField] private LayerSetting _uiLayerSetting;
     
@@ -96,7 +97,7 @@ public class InspectorController : MonoBehaviour
         
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit inspectableHit))
         {
-            if (_inspectable.gameObject == inspectableHit.collider.gameObject) return false;
+            if (!_inspectable || _inspectable.gameObject == inspectableHit.collider.gameObject) return false;
         }
 
         StopInspecting();
@@ -122,7 +123,7 @@ public class InspectorController : MonoBehaviour
         {
             CombatEntity building = buildingOptionObject.GetComponentInChildren(typeof(CombatEntity)) as CombatEntity;
             
-            InspectionTooltipBase entityTooltip = Instantiate(_entityInspectionTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
+            EntityTooltip entityTooltip = Instantiate(entityEntityTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
             entityTooltip.SetInspectable(building.ComponentsContainer.Get<Inspectable>());
             entityTooltip.transform.localScale *= _uiScaleCurve.Evaluate(_cameraZoomController.ZoomPercent);
             
@@ -130,7 +131,7 @@ public class InspectorController : MonoBehaviour
         }
         else if (inspectable.TryGetComponent<CombatEntity>(out CombatEntity combatEntity))
         {
-            InspectionTooltipBase entityTooltip = Instantiate(_entityInspectionTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
+            EntityTooltip entityTooltip = Instantiate(entityEntityTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
             entityTooltip.SetInspectable(inspectable);
             entityTooltip.transform.localScale *= _uiScaleCurve.Evaluate(_cameraZoomController.ZoomPercent);
 

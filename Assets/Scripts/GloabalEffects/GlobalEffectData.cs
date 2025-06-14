@@ -15,6 +15,7 @@ public abstract class GlobalEffectData : ScriptableObject
     [Space] [Header("EffectAppearanceCondition")] 
     [SerializeField] private bool _hasEffectAppearanceCondition;
     [AllowNesting] [ShowIf("_hasEffectAppearanceCondition")] [SerializeField] private EffectAppearanceConditionData _effectAppearanceCondition;
+    [AllowNesting] [ShowIf("_hasEffectAppearanceCondition")] [SerializeField] private ArgumentsContainer _effectAppearanceConditionArgumentsContainer;
 
     [Space] [Header("TooltipData")] 
     [SerializeField] private string _effectName;
@@ -23,6 +24,7 @@ public abstract class GlobalEffectData : ScriptableObject
     public List<InstanceItemTypeContainer> InstanceItemTypeContainers => _instanceItemTypeContainers;
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public EffectAppearanceConditionData EffectAppearanceCondition => _effectAppearanceCondition;
+    public ArgumentsContainer EffectAppearanceConditionArgumentsContainer => _effectAppearanceConditionArgumentsContainer;
     public bool HasAppearanceCondition => _hasEffectAppearanceCondition;
     public int Quality => _quality;
     public bool IsUnique => _isUnique;

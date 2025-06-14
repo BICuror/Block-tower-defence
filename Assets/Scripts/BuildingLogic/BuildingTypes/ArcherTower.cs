@@ -6,7 +6,7 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 {
     [Cached] private CombatEntity _ownerEntity;
     [Cached] private ProjectileSpeed _projectileSpeed;
-    [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    [Cached] private AreaEntityDetector _enemyAreaScaner;
 
     [SerializeField] private float _arrowLifetime = 5f;
     

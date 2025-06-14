@@ -1017,9 +1017,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6265238225611001804}
   - component: {fileID: 1447282862454525545}
-  - component: {fileID: 2912613493614904356}
   - component: {fileID: 6089523009492727702}
-  m_Layer: 8
+  - component: {fileID: 4542055457573126804}
+  m_Layer: 10
   m_Name: AreaCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1063,18 +1063,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2912613493614904356
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9118523001119138576}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02b85437885af24abd5d5cb55cc94d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6089523009492727702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1089,6 +1077,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _visualisationTransform: {fileID: 6021271923918943051}
   _height: 100
+--- !u!114 &4542055457573126804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9118523001119138576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1879462297090038190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1100,6 +1100,14 @@ PrefabInstance:
     - target: {fileID: 2545892451231810395, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}
       propertyPath: m_Name
       value: AreaVisualisation
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545892451231810395, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4305954298659649991, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5303810901234821861, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}
       propertyPath: m_LocalPosition.x

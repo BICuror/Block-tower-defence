@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 2891506851429857677}
   - component: {fileID: 94222333710006159}
   - component: {fileID: 4011914566333112739}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AreaParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5129,7 +5129,6 @@ GameObject:
   - component: {fileID: 7114909489339946991}
   - component: {fileID: 2059461565097816955}
   - component: {fileID: 4894305466429284830}
-  - component: {fileID: 8411192559760644699}
   m_Layer: 7
   m_Name: MortarTower
   m_TagString: Draggable
@@ -5282,15 +5281,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas:
-  - {fileID: 11400000, guid: 965d8a0600408424b9cb12f910cb1a27, type: 2}
-  - {fileID: 11400000, guid: 6cce0aa5c95bbc043abcdec995f8f3d2, type: 2}
-  - {fileID: 11400000, guid: 5bd2b83d5e5630c48b3f0ad5be66fe85, type: 2}
+  - {fileID: 11400000, guid: baf101d91b46e2b4a97b9b1a0b46e6a0, type: 2}
+  - {fileID: 11400000, guid: d89d5d7abe0ee884fbd8be4783b7cc0d, type: 2}
+  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
   _allAvailableModificators:
   - {fileID: 11400000, guid: 6685707fc08ff944c950dd4c7669e840, type: 2}
   - {fileID: 11400000, guid: e4911ca152b6a1d4ea5d49f48a35dd67, type: 2}
   - {fileID: 11400000, guid: 5b1f0399001e3da499f9eda44aad3d6c, type: 2}
   - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
-  - {fileID: 11400000, guid: 3804cef48b643f84b969eed76086ce72, type: 2}
   - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
 --- !u!114 &8048016232359269500
 MonoBehaviour:
@@ -5367,18 +5365,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inspectableObjectName: Mortar tower
   _inspectableObjectDescription: Shots an arching projectile, that explodes on collision
---- !u!114 &8411192559760644699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4325617312332438261}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59554cdbae90ade4cbbc1fead608a8b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4972928926287705394
 GameObject:
   m_ObjectHideFlags: 0
@@ -5389,9 +5375,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7200357285044078783}
   - component: {fileID: 7497259276786968705}
-  - component: {fileID: 647556643720725446}
   - component: {fileID: 2069619986377199839}
-  m_Layer: 8
+  - component: {fileID: 5102377944676202765}
+  m_Layer: 10
   m_Name: AreaCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5435,18 +5421,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &647556643720725446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4972928926287705394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02b85437885af24abd5d5cb55cc94d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2069619986377199839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5459,8 +5433,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c649f4cda4f6041ae9f368578bdc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _autoScale: 0
+  _hasVisualisation: 1
   _visualisationTransform: {fileID: 5364188672156161428}
   _height: 100
+--- !u!114 &5102377944676202765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4972928926287705394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6932643110177499358
 GameObject:
   m_ObjectHideFlags: 0
@@ -5472,7 +5460,7 @@ GameObject:
   - component: {fileID: 5364188672156161428}
   - component: {fileID: 8494822860769381528}
   - component: {fileID: 2837229764607412858}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: AreaVisualisation
   m_TagString: Untagged
   m_Icon: {fileID: 0}

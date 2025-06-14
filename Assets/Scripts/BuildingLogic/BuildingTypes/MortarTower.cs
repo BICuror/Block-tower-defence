@@ -6,8 +6,8 @@ using Combat;
 public sealed class MortarTower : DefaultCombatTaskConditionProvider
 {
     [SerializeField] private MortarProjectile projectilePrefab;
+    [Cached] private AreaEntityDetector _enemyAreaScaner;
     [Cached] private CombatEntity _ownerEntity;
-    [Cached] private EnemyAreaScaner _enemyAreaScaner;
     private TravelTime _travelTime;
     
     private WeaponPool<MortarProjectile> _grenadeObjectPool; 

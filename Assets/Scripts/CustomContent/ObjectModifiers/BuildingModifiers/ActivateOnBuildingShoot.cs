@@ -7,15 +7,12 @@ using Random = UnityEngine.Random;
 public sealed class ActivateOnBuildingShoot : MonoBehaviour
 {
     [Range(0, 100)] [SerializeField] private float _chance;
-    [SerializeField] private AreaScanerController _areaScanerController;
-    [SerializeField] private BuildingAreaScaner _buildingAreaScaner;
+    [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private ActivationType _activationType;
-    [Cached] private CombatEntity _combatEntity;
     [Cached] private TaskCycle _taskCycle;
     
     private void Start()
     {
-        _combatEntity.ComponentsContainer.Get<AreaManager>().AddAreaScanerController(_areaScanerController);
         _taskCycle.TaskPerformed += TryToActivate;
     }
 
@@ -42,7 +39,6 @@ public sealed class ActivateOnBuildingShoot : MonoBehaviour
 
     private void OnDestroy()
     {
-        _combatEntity.ComponentsContainer.Get<AreaManager>().RemoveAreaScanerController(_areaScanerController);
         _taskCycle.TaskPerformed -= TryToActivate;
     }
 

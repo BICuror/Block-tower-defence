@@ -8,13 +8,13 @@ public sealed class BuildingFetch : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
     [SerializeField] private LayerSetting _roadLayerSetting;
-    [SerializeField] private BuildingAreaScaner _buildingAreaScaner;
+    [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private DraggableConnector _draggableConnector;
     [SerializeField] private Animator _animator;
     [SerializeField] private float _timePerTile = 1f;
     [SerializeField] private float _fetchDistance = 3f;
     [SerializeField] private FetchType _fetchType;
-    private BuildingEntity _buildingEntity;
+    private CombatEntity _currentTargetEntity;
     private FetchState _currentState;
 
     private void Start()
@@ -35,48 +35,48 @@ public sealed class BuildingFetch : MonoBehaviour
         }
     }
 
-    private void TryStartChase(BuildingEntity buildingEntity)
+    private void TryStartChase(CombatEntity entity)
     {
         if (_currentState != FetchState.Idle) return;
 
-        if (buildingEntity.Draggable.IsDraggable())
+        if (entity.Draggable.IsDraggable())
         {
             SetState(FetchState.Chase);
 
-            _buildingEntity = buildingEntity;
-            _buildingEntity.Draggable.PickedUp += StopChase;
+            _currentTargetEntity = entity;
+            _currentTargetEntity.Draggable.PickedUp += StopChase;
 
-            FetchBuilding();
+            FetchEntity();
         }
     }
 
     private void StopChase()
     {
-        _buildingEntity.Draggable.PickedUp -= StopChase;
-        _buildingEntity = null;
+        _currentTargetEntity.Draggable.PickedUp -= StopChase;
+        _currentTargetEntity = null;
         
         SetState(FetchState.Idle);
         _draggableConnector.StopCurrentMovement();
     }
     
-    private async UniTask FetchBuilding()
+    private async UniTask FetchEntity()
     {
-        await _draggableConnector.MoveToPerTile(_buildingEntity.transform.position, _timePerTile);
+        await _draggableConnector.MoveToPerTile(_currentTargetEntity.transform.position, _timePerTile);
 
-        if (_currentState == FetchState.Chase && _buildingEntity)
+        if (_currentState == FetchState.Chase && _currentTargetEntity)
         {
             SetState(FetchState.Dragging);
             
-            _buildingEntity.Draggable.PickedUp -= StopChase;
-            _draggableConnector.PickUpDraggable(_buildingEntity.gameObject);
+            _currentTargetEntity.Draggable.PickedUp -= StopChase;
+            _draggableConnector.PickUpDraggable(_currentTargetEntity.gameObject);
        
-            Vector3 travelDestination = TileMap.GetNearestPlacePosition(_buildingEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
+            Vector3 travelDestination = TileMap.GetNearestPlacePosition(_currentTargetEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
                
             await _draggableConnector.MoveToPerTile(travelDestination, _timePerTile);
             
-            Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntity.Draggable, _draggableConnector.transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
+            Vector3 placementPosition = TileMap.GetNearestPlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
        
-            await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject, _buildingEntity.Draggable, placementPosition);
+            await _draggableConnector.PlaceDraggable(_currentTargetEntity.gameObject, _currentTargetEntity.Draggable, placementPosition);
         }
         
         SetState(FetchState.Idle);
@@ -88,15 +88,15 @@ public sealed class BuildingFetch : MonoBehaviour
         {
             case FetchType.From:
             {
-                Vector3 direction = (_buildingEntity.transform.position - _ownerEntity.transform.position).normalized;
+                Vector3 direction = (_currentTargetEntity.transform.position - _ownerEntity.transform.position).normalized;
 
-                return _buildingEntity.transform.position + direction * _fetchDistance;
+                return _currentTargetEntity.transform.position + direction * _fetchDistance;
             }
             case FetchType.To:
             {
-                Vector3 direction = (_ownerEntity.transform.position - _buildingEntity.transform.position).normalized;
+                Vector3 direction = (_ownerEntity.transform.position - _currentTargetEntity.transform.position).normalized;
 
-                return _buildingEntity.transform.position + direction * _fetchDistance;
+                return _currentTargetEntity.transform.position + direction * _fetchDistance;
             }
         }
 

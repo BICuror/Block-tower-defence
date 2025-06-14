@@ -5,14 +5,17 @@ using System;
 public sealed class EntityEffectRemovalHandler
 {
     private CancellationTokenSource _cancelationTokenSource = new();
+    private int _temporaryStacks;
     private Type _effectType;
     
-    public Action<Type> EffectRemovalTimerFinished;
+    public Action<Type, int> EffectRemovalTimerFinished;
 
     public EntityEffectRemovalHandler(Type effectType)
     {
         _effectType = effectType;
     }
+    
+    public void AddStacks(int count) => _temporaryStacks += count;
     
     public void SetRemovalTimer(float duration)
     {
@@ -33,7 +36,7 @@ public sealed class EntityEffectRemovalHandler
             return;
         }
         
-        EffectRemovalTimerFinished?.Invoke(_effectType);
+        EffectRemovalTimerFinished?.Invoke(_effectType, _temporaryStacks);
     }
 
     public void StopRemovalTimer()

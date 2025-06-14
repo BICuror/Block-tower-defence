@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: DealMoreToFullHpEntityModificator
   m_EditorClassIdentifier: 
-  _effectTypeName: DamageModifierEntityModificator
   _itemTypeContainers:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
@@ -25,6 +26,8 @@ MonoBehaviour:
     - InvincibilityUntilPickUpEntityModifier
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -56,18 +59,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 1
+  _tags: 
   _effectType: 0
   _modificatorName: Sniper
   _modificatorDescription: '#good +300% good# #Damage to entities with full #MaxHealth'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement

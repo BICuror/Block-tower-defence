@@ -12,7 +12,7 @@ public sealed class GlobalEffectFactory
         
         if (condition == null) throw new NullReferenceException($"Invalid condition type: {globalEffectData.EffectAppearanceCondition.ApperanceConditionType}");
         
-        condition.SetArgumentsContainer(globalEffectData.EffectAppearanceCondition.ArgumentsContainer);
+        condition.SetArgumentsContainer(globalEffectData.EffectAppearanceConditionArgumentsContainer);
         _diContainer.Inject(condition);
 
         return condition.CanAppear();

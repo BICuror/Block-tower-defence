@@ -5,7 +5,7 @@ using Combat;
 public sealed class LightningTower : DefaultCombatTaskConditionProvider
 {
     [Cached] private CombatEntity _ownerEntity;
-    [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    [Cached] private AreaEntityDetector _enemyAreaScaner;
 
     [Header("Links")] 
     [SerializeField] private PropogationStrike _ligningPrefab;

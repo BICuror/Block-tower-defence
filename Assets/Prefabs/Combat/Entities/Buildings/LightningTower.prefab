@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1416141264222967859}
   - component: {fileID: 5091613612116002736}
-  - component: {fileID: 2386242361452363544}
   - component: {fileID: 6962649217439341937}
-  m_Layer: 8
+  - component: {fileID: 481595160355705259}
+  m_Layer: 10
   m_Name: AreaCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,18 +56,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2386242361452363544
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 209760879920306152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02b85437885af24abd5d5cb55cc94d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6962649217439341937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,8 +68,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c649f4cda4f6041ae9f368578bdc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _autoScale: 0
+  _hasVisualisation: 1
   _visualisationTransform: {fileID: 5685913978622280730}
   _height: 100
+--- !u!114 &481595160355705259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 209760879920306152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1092245443807038022
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,7 +207,7 @@ GameObject:
   - component: {fileID: 1410273415550178716}
   - component: {fileID: 3215068463728486603}
   - component: {fileID: 5506449404124663275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AreaParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5060,7 +5062,7 @@ GameObject:
   - component: {fileID: 5685913978622280730}
   - component: {fileID: 4413538264369728183}
   - component: {fileID: 8060017451699843998}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: AreaVisualisation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5546,8 +5548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inspectableObjectName: Archer tower
-  _inspectableObjectDescription: Shoots rapidly, targets one enemy
+  _inspectableObjectName: Lightning tower
+  _inspectableObjectDescription: Uses #PropogationKeyword
 --- !u!114 &6499896294953490330
 MonoBehaviour:
   m_ObjectHideFlags: 0

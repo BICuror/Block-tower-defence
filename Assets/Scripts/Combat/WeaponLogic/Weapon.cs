@@ -35,7 +35,7 @@ namespace Combat
             SetState(true);
         }
         
-        protected void Disable()
+        public void Disable()
         {
             SetState(false);
         }

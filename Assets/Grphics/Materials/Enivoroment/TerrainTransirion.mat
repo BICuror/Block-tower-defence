@@ -21,8 +21,7 @@ Material:
   m_CustomRenderQueue: 2445
   stringTagMap:
     RenderType: TransparentCutout
-  disabledShaderPasses:
-  - SHADOWCASTER
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -66,7 +65,7 @@ Material:
     - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 0
-    - _CastShadows: 0
+    - _CastShadows: 1
     - _Cull: 2
     - _DstBlend: 0
     - _Float: 2

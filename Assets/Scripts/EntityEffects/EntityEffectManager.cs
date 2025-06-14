@@ -14,8 +14,9 @@ namespace Combat
         private Dictionary<Type, EntityEffect> _appliedEffects = new();
         private Dictionary<Type, EntityEffectRemovalHandler> _removalHandlers = new();
         
+        public List<Type> AppliedEffectTypes => _appliedEffects.Keys.ToList();
         private bool EffectsCanBeApplied => _draggableObject.IsPlaced && _entityHealth.IsAlive();
-
+        
         public Action<Type> EffectApplied;
         public Action<Type> EffectUpdated;
         public Action<Type> EffectRemoved;
@@ -27,6 +28,8 @@ namespace Combat
             _ownerEntity.Health.Died += RemoveAllEffects;
             draggableObject.PickedUp += RemoveAllEffects;
         }
+        
+        public bool HasEffect(EntityEffectType effectType) => _appliedEffects.Values.ToList().Exists(effect => effect.EffectType == effectType);
         
         public bool HasEffect(Type effectType) => _appliedEffects.ContainsKey(effectType);
         
@@ -40,15 +43,29 @@ namespace Combat
             {
                 UpdateEffect(exsistingEffect, effectType, strength);
                 
-                _removalHandlers[effectType].SetRemovalTimer(duration);
+                if (_removalHandlers.TryGetValue(effectType, out EntityEffectRemovalHandler removalHandler))
+                { 
+                    removalHandler.SetRemovalTimer(duration);
+                    removalHandler.AddStacks(strength);
+                }
+                else
+                {
+                    AddRemovalHandler(effectType, strength, duration);
+                }
             }
             else if (ApplyEffect(effectType, strength))
             {
-                EntityEffectRemovalHandler removalHandler = new(effectType);
-                removalHandler.SetRemovalTimer(duration);
-                removalHandler.EffectRemovalTimerFinished += RemoveEffect;
-                _removalHandlers.Add(effectType, removalHandler);
+                AddRemovalHandler(effectType, strength, duration);
             }
+        }
+
+        private void AddRemovalHandler(Type effectType, int strength, float duration)
+        {
+            EntityEffectRemovalHandler removalHandler = new(effectType);
+            removalHandler.SetRemovalTimer(duration);
+            removalHandler.AddStacks(strength);
+            removalHandler.EffectRemovalTimerFinished += RemoveEffect;
+            _removalHandlers.Add(effectType, removalHandler);
         }
         
         public void TryApplyEffect(Type effectType, int strength)

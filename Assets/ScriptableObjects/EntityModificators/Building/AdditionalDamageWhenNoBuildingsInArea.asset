@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: AdditionalDamageWhenNoBuildingsInArea
   m_EditorClassIdentifier: 
-  _effectTypeName: ModificatorObjectApplyerEntityModificator
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
@@ -25,6 +26,8 @@ MonoBehaviour:
     - InvincibilityUntilPickUpEntityModifier
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -38,18 +41,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 1
+  _tags: 
   _effectType: 0
   _modificatorName: Activate when built
   _modificatorDescription: '#good +60% good# #Damage when no buildings in area'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement

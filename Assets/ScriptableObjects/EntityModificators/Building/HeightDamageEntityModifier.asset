@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: HeightDamageEntityModifier
   m_EditorClassIdentifier: 
-  _effectTypeName: ScaleDamageWithHeight
   _itemTypeContainers:
   - _itemTypeName: ScaleDamageWithHeight
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
@@ -25,23 +26,15 @@ MonoBehaviour:
     - InvincibilityUntilPickUpEntityModifier
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
+  _rarity: 0
+  _tags: 
   _effectType: 0
   _modificatorName: Stand tall
   _modificatorDescription: '#good +25% good# #Damage for each tile above sea level.
-    4 #MaxStack'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
+    #MaxStack = 4'

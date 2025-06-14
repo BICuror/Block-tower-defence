@@ -12,9 +12,10 @@ public sealed class InspectionSubpanelsController : MonoBehaviour
     [SerializeField] private InspectionEffectSubPanel _effectSubpanelPrefab;
     [SerializeField] private InspectionKeywordSubpanel _keywordSubpanelPrefab;
     private List<InspectionSubpanelBase> _instantiatedTooltips = new();
-    
-    public CombatEntity _inspectedEntity;
+    private CombatEntity _inspectedEntity;
 
+    public void SetInspectedEntity(CombatEntity entity) => _inspectedEntity = entity;
+    
     public void SetTooltipParser(TooltipParseTagDataContainer tooltipParseTagDataContainer)
     {
         ClearAllSubpanels();

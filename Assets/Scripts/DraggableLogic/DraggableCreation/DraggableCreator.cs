@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using System;
 using Combat;
 using Random = UnityEngine.Random;
 

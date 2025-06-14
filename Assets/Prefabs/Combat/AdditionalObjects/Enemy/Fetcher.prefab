@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8600448821511227275}
   - component: {fileID: 654536325772575667}
   - component: {fileID: 2759670999689310138}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Fetcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 4714158572919951339}
   - component: {fileID: 6908260108327085784}
   - component: {fileID: 3308620164211795971}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Rigidbody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 2245227049299137848}
   - component: {fileID: 1646797328114858710}
   - component: {fileID: 403995037450332614}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: AreaParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5024,8 +5024,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1267363964856090382}
   - component: {fileID: 703636801614402623}
-  - component: {fileID: 5623735344055245695}
-  m_Layer: 10
+  - component: {fileID: 5639661037102452828}
+  m_Layer: 8
   m_Name: FetchArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5069,7 +5069,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5623735344055245695
+--- !u!114 &5639661037102452828
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5078,7 +5078,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6340539738409227213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9141d5181a24fb54280f59f3af4ee703, type: 3}
+  m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6705213991885586685
@@ -5091,7 +5091,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1200717303680069589}
   - component: {fileID: 1844838674522657510}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: DraggableConnector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5143,7 +5143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5610602154595883985}
   - component: {fileID: 138710280716226583}
-  m_Layer: 7
+  m_Layer: 12
   m_Name: Fetcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5180,7 +5180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _roadLayerSetting: {fileID: 11400000, guid: aee0fa32245326240beeee71c24afffb, type: 2}
-  _buildingAreaScaner: {fileID: 5623735344055245695}
+  _buildingAreaScaner: {fileID: 5639661037102452828}
   _draggableConnector: {fileID: 1844838674522657510}
   _animator: {fileID: 338228426991660645}
   _timePerTile: 0.7
@@ -5197,7 +5197,7 @@ GameObject:
   - component: {fileID: 8752622478611136695}
   - component: {fileID: 3939499326876082206}
   - component: {fileID: 3934545283484490890}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: AreaVisualisation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5322,6 +5322,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7029948723529949830, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: -2639638324218457063, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -84.9969
@@ -5338,6 +5342,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: hyena_maws
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1790183945725220954, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 2854563699051640978, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -46.770844
@@ -5349,6 +5361,14 @@ PrefabInstance:
     - target: {fileID: 2854563699051640978, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.00013516625
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905609870639353253, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7205140776170859923, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Materials.Array.data[0]

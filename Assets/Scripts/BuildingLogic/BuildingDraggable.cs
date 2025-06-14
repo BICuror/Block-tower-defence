@@ -9,7 +9,6 @@ using Zenject;
 public sealed class BuildingDraggable : DraggableEntity
 {
     [Inject] private WaveStateMachine _waveStateMachine;
-    [Cached] private CombatEntity _ownerEntity;
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _isBuilt = true;
     
@@ -38,8 +37,8 @@ public sealed class BuildingDraggable : DraggableEntity
     {
         base.Start();
 
-        _hasBuildTime = _ownerEntity.StatContainer.Has<BuildTime>();
-        if (_hasBuildTime) _buildTime = _ownerEntity.StatContainer.Get<BuildTime>();
+        _hasBuildTime = OwnerEntity.StatContainer.Has<BuildTime>();
+        if (_hasBuildTime) _buildTime = OwnerEntity.StatContainer.Get<BuildTime>();
     }
 
     private void PickUpBuilding()

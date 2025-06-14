@@ -16,9 +16,9 @@ public sealed class EntityModificatorTooltip : BaseTooltip
 
     protected override TooltipParseTagDataContainer TagDataContainer => _tagDataContainer;
     
-    public void SetEntityModificator(EntityModificatorData entityModificatorData, bool isNegative)
+    public void SetEntityModificator(EntityModificatorData entityModificatorData)
     {
-        _negativeCanvasGroups.ForEach(group => group.gameObject.SetActive(isNegative));
+        _negativeCanvasGroups.ForEach(group => group.gameObject.SetActive(entityModificatorData.EffectType == EffectType.Negative));
         
         _modificatorNameText.text = entityModificatorData.ModificatorName;
         _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorDescription, false);

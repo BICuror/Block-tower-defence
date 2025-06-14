@@ -4,22 +4,20 @@ using Combat;
 
 public sealed class AdditionalDamageWhenNoBuildingsAround : MonoBehaviour
 {
-    [SerializeField] private AreaScanerController _areaScanerController;
-    [SerializeField] private BuildingAreaScaner _buildingAreaScaner;
-    [Cached] private CombatEntity _combatEntity;
+    [SerializeField] private AreaEntityDetector _buildingAreaScaner;
+    [Cached] private Damage _damage;
     private StatModifier _statModifier = new StatModifier();
     
     private void Start()
     {
-        _combatEntity.ComponentsContainer.Get<AreaManager>().AddAreaScanerController(_areaScanerController);
 
-        _combatEntity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
+        _damage.AddStatModifier(_statModifier);
         
         _buildingAreaScaner.AddedItem += RecalculateDamageBoost;
         _buildingAreaScaner.RemovedItem += RecalculateDamageBoost;
     }
 
-    private void RecalculateDamageBoost(BuildingEntity _)
+    private void RecalculateDamageBoost(CombatEntity _)
     {
         if (_buildingAreaScaner.Count == 0)
         {
@@ -33,7 +31,7 @@ public sealed class AdditionalDamageWhenNoBuildingsAround : MonoBehaviour
 
     private void OnDestroy()
     {
-        _combatEntity.StatContainer.Get<Damage>().RemoveStatModifier(_statModifier);
+        _damage.RemoveStatModifier(_statModifier);
         
         _buildingAreaScaner.AddedItem -= RecalculateDamageBoost;
         _buildingAreaScaner.RemovedItem -= RecalculateDamageBoost;

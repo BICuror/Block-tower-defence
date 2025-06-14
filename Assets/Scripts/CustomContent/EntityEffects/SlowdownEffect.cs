@@ -1,32 +1,32 @@
-using UnityEngine;
+using Combat;
 
-namespace Combat
+public sealed class SlowdownEffect : EntityEffect
 {
-    public sealed class SlowdownEffect : EntityEffect
+    private float _slowdownPerStack;
+    private StatModifier _statModifier;
+
+    public override EntityEffectType EffectType => EntityEffectType.Negative;
+    public override bool CanBeApplied() => Entity.StatContainer.Has<Speed>();
+    
+    protected override void OnInitialized()
     {
-        private const float TIME_PER_BLOCK_TRAVELED_INCREASED_PER_STACK = 0.25f;
-        private StatModifier _statModifier;
-        
-        protected override void OnInitialized()
-        {
-            throw new System.NotImplementedException();
-        }
+        _slowdownPerStack = ArgumentsContainer.GetArgument<float>("SlowdownPerStack");
+        _statModifier = new StatModifier(multiplier: _slowdownPerStack * Stack);
+    }
 
-        public override void Update()
-        {
-            _statModifier.SetFlat(TIME_PER_BLOCK_TRAVELED_INCREASED_PER_STACK * Stack);
-        }
+    public override void Update()
+    {
+        _statModifier.SetMultiplier(_slowdownPerStack * Stack);
+    }
 
-        public override void ApplyToEntity()
-        {
-            _statModifier = new StatModifier();
-            
-            Entity.StatContainer.Get<Speed>().AddStatModifier(_statModifier);
-        }
+    public override void ApplyToEntity()
+    {
+        Entity.StatContainer.Get<Speed>().AddStatModifier(_statModifier);
+        Update();
+    }
 
-        public override void RemoveFromEntity()
-        {
-            Entity.StatContainer.Get<Speed>().RemoveStatModifier(_statModifier);
-        }
+    public override void RemoveFromEntity()
+    {
+        Entity.StatContainer.Get<Speed>().RemoveStatModifier(_statModifier);
     }
 }

@@ -31,7 +31,10 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
 
         foreach (Vector2Int spawnerPosition in spawnerPositions)
         {
-            navigationPointsPositions.Add(FindRandomPosition(spawnerPosition, _initialRaduis));
+            if (TryFindRandomPosition(spawnerPosition, _initialRaduis, out Vector2Int selectedPosition))
+            {
+                navigationPointsPositions.Add(selectedPosition);
+            }
         }
 
         return navigationPointsPositions;
@@ -39,7 +42,7 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
     
     private bool[,] _positionCheckMap;
 
-    private Vector2Int FindRandomPosition(Vector2Int centerPosition, int startingRadius)
+    private bool TryFindRandomPosition(Vector2Int centerPosition, int startingRadius, out Vector2Int selectedPoisition)
     {
         for (int radius = startingRadius; radius > 1; radius--)
         {
@@ -60,13 +63,16 @@ public sealed class AdditionalNavigationPointsPositionGenerator : MonoBehaviour
                 {   
                     ConnectPositionsOnRoadMap(position, roadTile);
 
-                    return position;
+                    selectedPoisition = position;
+                    return true;
                 }
             }         
         }
     
         Debug.LogError("Couldn't find suitable random position");            
-        return new Vector2Int(0, 0);
+        selectedPoisition = new Vector2Int(0, 0);
+        
+        return false;
     }
 
     private bool HasSolidObjects(int x, int y)

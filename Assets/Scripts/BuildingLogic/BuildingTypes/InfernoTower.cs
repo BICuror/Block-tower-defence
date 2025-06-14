@@ -9,14 +9,14 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     [SerializeField] private Transform _sourceTransform;
     
     [Cached] private TaskRechargeDuration _taskCycleRechargeDuration;
-    [Cached] private EnemyAreaScaner _enemyAreaScaner;
+    [Cached] private AreaEntityDetector _enemyAreaScaner;
     [Cached] private ChargeDuration _chargeDuration;
     [Cached] private CombatEntity _ownerEntity;
     [Cached] private MaxDamage _maxDamage;
     [Cached] private Damage _damage;
     private float _elapsedTime;
     
-    private EnemyEntity _currentEnemy;
+    private CombatEntity _currentEnemy;
     
     private void Start()
     {
@@ -58,7 +58,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         if (_elapsedTime > _chargeDuration.Value) _elapsedTime = _chargeDuration.Value;
     }
 
-    private void TryClearEnemy(EnemyEntity removedEnemy)
+    private void TryClearEnemy(CombatEntity removedEnemy)
     {
         if (removedEnemy == _currentEnemy)
         {

@@ -6,9 +6,9 @@ public sealed class ModificatorObjectApplyerEntityModificator : EntityModificato
     
     public override void Enable()
     {
-        _instantiatedObjectModificator = Object.Instantiate(Args.GetArgument<GameObject>("ObjectModificator"));
+        GameObject prefab = Args.GetArgument<GameObject>("ObjectModificator");
         
-        Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().AddModificator(_instantiatedObjectModificator);
+        _instantiatedObjectModificator = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator<GameObject>(prefab);
     }
 
     public override void Disable()

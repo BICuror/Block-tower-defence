@@ -27,9 +27,9 @@ public sealed class VisualEffectHandler : MonoBehaviour
         
         switch(_stopAction)
         {
-            case StopActionType.Disable: Disable(); break;
+            case StopActionType.DisableSelfAndEffect: Disable(); break;
             case StopActionType.Destroy: Destroy(); break;
-            case StopActionType.DisableEffect: DisableEffect(); break;
+            case StopActionType.DisableEffect: Disable(); break;
             case StopActionType.None: break;
         }    
     }
@@ -64,7 +64,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
     
     private enum StopActionType
     {
-        Disable, 
+        DisableSelfAndEffect, 
         Destroy,
         DisableEffect,
         None

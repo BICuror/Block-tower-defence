@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
+  m_Name: BuildingBuildTimeIncreaseEachTimeBuild
+  m_EditorClassIdentifier: 
+  _quality: 1
+  _effectType: 1
+  _isUnique: 0
+  _instanceItemTypeContainers:
+  - _itemTypeName: GlobalBuildingModificatorToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 3
+      _argumentName: EntityModificatorData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 11400000, guid: 1926c51b6e643ae4bab92639d54671b6, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _effectName: Regress
+  _effectDescription: '#good Buildings good# #bad +25% bad# #BuildTime each time
+    build complete'

@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6314322098691127340}
   - component: {fileID: 6572344066138958970}
-  - component: {fileID: 7744100592673617006}
-  - component: {fileID: 4515044311332862942}
-  m_Layer: 8
+  - component: {fileID: 2464600000665108992}
+  - component: {fileID: 5558077077214755958}
+  m_Layer: 10
   m_Name: HealingArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -56,7 +56,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7744100592673617006
+--- !u!114 &2464600000665108992
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -65,10 +65,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3846886491062329686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d02b85437885af24abd5d5cb55cc94d9, type: 3}
+  m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4515044311332862942
+--- !u!114 &5558077077214755958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,11 +77,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3846886491062329686}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b225efd704cd094c8b6e546785d3c08, type: 3}
+  m_Script: {fileID: 11500000, guid: e5deac325b90aa54eaa65fc7b6904668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healEffect: {fileID: 11400000, guid: 90152d98a5185ee4a945fb631141e2fa, type: 2}
-  _enemyAreaScaner: {fileID: 7744100592673617006}
+  _areaEntityDetector: {fileID: 2464600000665108992}
+  _effectTypeName: HealEffect
+  _effectStaks: 1
 --- !u!1 &5795425735031104749
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,7 +94,7 @@ GameObject:
   - component: {fileID: 6429996747317466443}
   - component: {fileID: 7311777537153035872}
   - component: {fileID: 4354289160155954208}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: AreaVisualisation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +178,7 @@ GameObject:
   - component: {fileID: 7345842757266751859}
   - component: {fileID: 4169040134080265282}
   - component: {fileID: 4522417429347261762}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: AreaParticles
   m_TagString: Untagged
   m_Icon: {fileID: 0}

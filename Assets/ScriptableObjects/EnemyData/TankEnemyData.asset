@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: TankEnemyData
   m_EditorClassIdentifier: 
-  _speed: 1
-  _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
+  _contactDamage: 10
   _maxHealth: 25
-  _incomingDamageMultipluer: 0.9
+  _speed: 1.8
+  _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: 2534964839176971238, guid: db8802b864268d348a1601dbf333690f, type: 3}
   _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}
   _hasObjectModificators: 1

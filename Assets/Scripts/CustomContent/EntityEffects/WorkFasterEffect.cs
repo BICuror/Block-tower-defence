@@ -2,14 +2,14 @@ namespace Combat
 {
     public sealed class WorkFasterEffect : EntityEffect
     {
-        private const float WORK_TIME_MODIFIER_DECREASE = -0.3f;
         private StatModifier _statModifier = new StatModifier();
         
+        public override EntityEffectType EffectType => EntityEffectType.Positive;
         public override bool CanBeApplied() => Entity.ComponentsContainer.Has<TaskCycle>();
         
         protected override void OnInitialized()
         {
-            _statModifier.SetFlat(WORK_TIME_MODIFIER_DECREASE);
+            _statModifier.SetFlat(ArgumentsContainer.GetArgument<float>("RechargeSpeedIncrease"));
         }
 
         public override void ApplyToEntity()

@@ -433,7 +433,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -441,6 +441,174 @@ TextureImporter:
       bones: []
       spriteID: acb44aa2a77494e458820571e1a878f0
       internalID: -1408547033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SlowdownEffectTooltipIcon
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 798
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbb80c9b8e6ded643a7ee4b0f835a651
+      internalID: -1379777271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StackTooltipData
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 798
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1ac657180bc5cf044b7d051876a57a57
+      internalID: 741723918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ProjectileSpeedTooltip
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 798
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a712528e9a913494ea343f1cb7b64b39
+      internalID: -53656890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TravelTimeTooltip
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 798
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44c17086339dbe746be2a04b2b1df137
+      internalID: -255249925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MaxEntitiesTooltip
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5990e7d197f8aa4889d1b99aba9401a
+      internalID: -617606169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PropogationRangeTooltip
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a27678851c177c84287bf7e0025dc807
+      internalID: -98197151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PropogationDamageMultiplierTooltip
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e919deb760d039949932bc19007fa329
+      internalID: 672983621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PiercingTooltip
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3cc5913ba348954ca54f1198ed02bab
+      internalID: 1683251753
       vertices: []
       indices: 
       edges: []
@@ -466,12 +634,20 @@ TextureImporter:
       Invinsibility: 1125429245
       MarkIcon: -1408547033
       MaxDamage: 775677324
+      MaxEntitiesTooltip: -617606169
       MaxHealthTooltip: -439191689
       MaxStacksTooltip: -1537043687
       OnFire: 1002134821
+      PiercingTooltip: 1683251753
+      ProjectileSpeedTooltip: -53656890
+      PropogationDamageMultiplierTooltip: 672983621
+      PropogationRangeTooltip: -98197151
       ReachTooltip: -1860937847
       RechargeTooltip: -792330246
+      SlowdownEffectTooltipIcon: -1379777271
       SpeedTooltip: -875806093
+      StackTooltipData: 741723918
+      TravelTimeTooltip: -255249925
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

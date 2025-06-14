@@ -121,12 +121,11 @@ MonoBehaviour:
   _descriptionTextField: {fileID: 2255416978109414096}
   _tooltipTextParser: {fileID: 4785652978308094393}
   _tooltipDataParser: {fileID: 8854417045769029075}
+  _tooltipStatContainer: {fileID: 8294096960088250724}
   _layoutSizeController: {fileID: 174557836359501484}
   _inspectionSubpanelsController: {fileID: 1901641001545973562}
   _entityModificatorTooltipPrefab: {fileID: 2304773713715259059, guid: afaa34f46685a114dbb08c6fc8a2c129, type: 3}
   _entityModificatorTooltipParent: {fileID: 5025355869358665784}
-  _statTooltipPrefab: {fileID: 5687756083734673182, guid: 82b343939ae090546b83c2616510f717, type: 3}
-  _statTooltipContainer: {fileID: 8687646588564428746}
 --- !u!114 &5358264753533238342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,11 +264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2685206266730369085, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2685206266730369085, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2685206266730369085, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
       propertyPath: m_SizeDelta.x
@@ -285,7 +284,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2685206266730369085, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -34
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2919170861722065787, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
       propertyPath: m_fontSize
@@ -709,6 +708,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8247081773986075027, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
   m_PrefabInstance: {fileID: 4021190704889192875}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8294096960088250724 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4959781064709044431, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
+  m_PrefabInstance: {fileID: 4021190704889192875}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06d8cd8521fde0a4d803c8efc6756fb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8633219666948634486 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4612099640142485213, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
@@ -735,11 +745,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1117.1204, y: 379.90268, z: 1}
   m_Center: {x: -6.361532, y: 182.29726, z: 0.000018325814}
---- !u!224 &8687646588564428746 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5719179203484694113, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
-  m_PrefabInstance: {fileID: 4021190704889192875}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8854417045769029075 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5561689112559215736, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}

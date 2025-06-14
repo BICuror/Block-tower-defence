@@ -27,6 +27,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -58,6 +59,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 2
+  _tags: 
   _effectType: 0
   _modificatorName: Back striker
   _modificatorDescription: Upon taking #Damage attacks with same #Damage all enemies

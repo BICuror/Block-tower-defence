@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Data;
 
 public class Stat
 {
@@ -12,10 +13,13 @@ public class Stat
     private int _roundedValue;
 
     protected virtual float MinimalValue { get => float.MinValue; }
+    //used purely for ui
+    public virtual bool LowValueIsGood { get => false; }
     
     public float Default => _default;
     public float Value => _value;
     public int RoundedValue => _roundedValue;
+    public bool IsModified => _statModifiers.Count > 0 || _flat != 0 || _multiplier != 1f;
 
     public Action<float> ValueChanged;
     public Action<int> RoundedValueChanged;
@@ -44,8 +48,12 @@ public class Stat
         CalculateStatValue();
     }
 
+    public bool IsApplied(StatModifier statModifier) => _statModifiers.Contains(statModifier);
+    
     public void AddStatModifier(StatModifier statModifier)
     {
+        if (IsApplied(statModifier)) throw new DuplicateNameException("Tried to add same stat modifier twice");
+        
         statModifier.ModifierChanged += CalculateStatValue;
         _statModifiers.Add(statModifier);
         CalculateStatValue();

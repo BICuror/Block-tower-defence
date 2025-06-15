@@ -20,11 +20,14 @@ public sealed class EntityTooltip : InspectionPanel
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
     [SerializeField] private EntityModificatorTooltip _entityModificatorTooltipPrefab;
     [SerializeField] private Transform _entityModificatorTooltipParent;
+    [SerializeField] private PointFollowerUI _pointFollowerUI;
     
     private Inspectable _inspectable;
 
     public void SetInspectable(Inspectable inspectable)
     {
+        _pointFollowerUI.SetTarget(inspectable.transform);
+        
         CombatEntity entity = inspectable.GetComponent<CombatEntity>();
         _inspectable = inspectable;
         

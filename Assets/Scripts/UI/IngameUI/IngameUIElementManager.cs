@@ -81,6 +81,6 @@ public sealed class IngameUIElementManager : MonoBehaviour
             RotateElement(_staticUIElements[i]);
         }
         
-        StaticElementsUpdated.Invoke();
+        StaticElementsUpdated?.Invoke();
     }
 }

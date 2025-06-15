@@ -1,9 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CanvasGroup))]
 
-public abstract class InspectionPanel : MonoBehaviour
+public abstract class InspectionPanel : MonoBehaviour, IPointerExitHandler
 {
     private float _fadeDuration = 0.2f;
     private CanvasGroup _mainGroup;
@@ -11,18 +12,23 @@ public abstract class InspectionPanel : MonoBehaviour
     private void Awake()
     {
         _mainGroup = GetComponent<CanvasGroup>();
-        Enable();
     }
     
-    public void Enable()
+    private void OnEnable()
     {
         _mainGroup.alpha = 0f;
         _mainGroup.DOFade(1f, _fadeDuration);
     }
 
-    public void Disable()
+    private void Disable()
     {
         _mainGroup.DOKill();
-        _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => Destroy(gameObject));
+        _mainGroup.DOFade(0f, _fadeDuration);
+        gameObject.SetActive(false);
+    }
+    
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        Disable();
     }
 }

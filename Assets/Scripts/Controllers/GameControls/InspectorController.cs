@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 public class InspectorController : MonoBehaviour
 {
+    [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
     [SerializeField] private CameraZoomController _cameraZoomController;
     [SerializeField] private AnimationCurve _uiScaleCurve;
     [SerializeField] private AreaVisualisation _areaVisualisation;
@@ -92,7 +93,7 @@ public class InspectorController : MonoBehaviour
                 }
             }
 
-            return uiHit.collider.gameObject == _inspectionPanel.gameObject;
+            return true;
         }
         
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit inspectableHit))
@@ -121,23 +122,13 @@ public class InspectorController : MonoBehaviour
 
         if (inspectable.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
         {
-            CombatEntity building = buildingOptionObject.GetComponentInChildren(typeof(CombatEntity)) as CombatEntity;
-            
-            EntityTooltip entityTooltip = Instantiate(entityEntityTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
-            entityTooltip.SetInspectable(building.ComponentsContainer.Get<Inspectable>());
-            entityTooltip.transform.localScale *= _uiScaleCurve.Evaluate(_cameraZoomController.ZoomPercent);
-            
-            _inspectionPanel = entityTooltip;
+            _inspectionTooltipManager.ActivateEntityTooltip(inspectable);
         }
-        else if (inspectable.TryGetComponent<CombatEntity>(out CombatEntity combatEntity))
+        else if (inspectable.TryGetComponent(out CombatEntity combatEntity))
         {
-            EntityTooltip entityTooltip = Instantiate(entityEntityTooltipPrefab, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
-            entityTooltip.SetInspectable(inspectable);
-            entityTooltip.transform.localScale *= _uiScaleCurve.Evaluate(_cameraZoomController.ZoomPercent);
-
-            _inspectionPanel = entityTooltip;
+            _inspectionTooltipManager.ActivateEntityTooltip(inspectable);
         }
-        else if (inspectable.TryGetComponent<Item>(out Item item))
+        else if (inspectable.TryGetComponent(out Item item))
         {
             CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltip, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
             crystalInspectionTooltip.SetInspectable(inspectable);
@@ -154,6 +145,5 @@ public class InspectorController : MonoBehaviour
         _areaVisualisation.DeactivateVisualisation(_inspectable.gameObject);
         _inspectable.SetInspectedState(false);
         _inspectable = null;
-        _inspectionPanel.Disable();
     }
 }

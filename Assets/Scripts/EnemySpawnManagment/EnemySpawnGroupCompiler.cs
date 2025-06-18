@@ -1,9 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using WorldGeneration;
 using UnityEngine;
 using Zenject;
 using Combat;
+
+using Random = System.Random;
 
 public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     private List<AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup> _additionalGroups = new();
     private int _currentWaveSeed;
     private int _currentGroupSeed;
+
+    private Random _random = new();
     
     private IslandData _islandData => _islandDataContainer.Data;
 
@@ -35,8 +38,8 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     private void GenerateWaveSeed()
     {
         _additionalGroups.Clear();
-        _currentWaveSeed = Random.Range(int.MinValue, int.MaxValue); 
-        _currentGroupSeed = Random.Range(int.MinValue, int.MaxValue); 
+        _currentWaveSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue); 
+        _currentGroupSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue); 
         GenerateEnemyGroups();
     }
 
@@ -49,11 +52,11 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 
     private void GenerateAdditionalEnemyGroups()
     {
-        Random.InitState(_currentGroupSeed);
+        _random = new Random(_currentGroupSeed);
         
         _additionalGroups.ForEach(group =>
         {
-            EnemySpawner randomEnemySpawner = _enemyBiomeContainer.EnemyBiomeList[Random.Range(0, _enemyBiomeContainer.EnemyBiomeList.Count)].EnemySpawner;
+            EnemySpawner randomEnemySpawner = _enemyBiomeContainer.EnemyBiomeList[_random.Next(0, _enemyBiomeContainer.EnemyBiomeList.Count)].EnemySpawner;
             
             float groupHealth = group.GroupHealth;
             
@@ -77,7 +80,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     {
         _enemySpawnDatas.Clear();
         
-        Random.InitState(_currentWaveSeed);
+        _random = new Random(_currentWaveSeed);
         
         for (int i = 0; i < _enemyBiomeContainer.EnemyBiomeList.Count; i++)
         {
@@ -111,7 +114,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         {
             EnemyWaveGroup.GroupPart currentPart = groupParts[enemyGroupPartIndex];
             
-            int enemyAmount = Random.Range(currentPart.MinAmount, currentPart.MaxAmount);
+            int enemyAmount = _random.Next(currentPart.MinAmount, currentPart.MaxAmount);
 
             for (int enemyIndex = 0; enemyIndex < enemyAmount; enemyIndex++)
             {
@@ -147,7 +150,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
             }
         }
 
-        return suitableGroups[Random.Range(0, suitableGroups.Count)];
+        return suitableGroups[_random.Next(0, suitableGroups.Count)];
     }
 
     private void ApplyEnemyWaveDatas()

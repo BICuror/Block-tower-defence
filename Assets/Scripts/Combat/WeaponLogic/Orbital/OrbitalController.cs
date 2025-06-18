@@ -6,8 +6,7 @@ using Combat;
 
 public sealed class OrbitalController : MonoBehaviour
 {
-    [SerializeField] private Orbital _orbitalPrefab;
-    [SerializeField] private GameObject _orbitalsParent;
+    [SerializeField] private Transform _orbitalsParent;
     [SerializeField] private List<Transform> _orbitalPositions;
     [Cached] private ReachAreaScale _reachAreaScale;
     [Cached] private BuildingDraggable _buildingDraggable;
@@ -18,29 +17,25 @@ public sealed class OrbitalController : MonoBehaviour
     {
         _buildingDraggable.BuildCompleted += Enable;
         _buildingDraggable.PickedUp += Disable;
-
-        InstantiateAndAddOrbital(_orbitalPrefab);
-        InstantiateAndAddOrbital(_orbitalPrefab);
-        InstantiateAndAddOrbital(_orbitalPrefab);
-        InstantiateAndAddOrbital(_orbitalPrefab);
     }
 
     private void Enable()
     {
-        _orbitalsParent.SetActive(true);
+        _orbitalsParent.gameObject.SetActive(true);
         _instantiatedOrbitals.ForEach(orbital => orbital.gameObject.SetActive(true));
         PositionAllOrbitals();
     }
 
     private void Disable()
     {
-        _orbitalsParent.SetActive(false);
+        _orbitalsParent.gameObject.SetActive(false);
         _instantiatedOrbitals.ForEach(orbital => orbital.gameObject.SetActive(false));
     }
     
     public void InstantiateAndAddOrbital(Orbital orbitalPrefab)
     {
         Orbital orbital = Instantiate(orbitalPrefab);
+        orbital.transform.SetParent(_orbitalsParent);
         orbital.SetTravelPoints(_orbitalPositions);
         orbital.Initialize(_ownerEntity);
         _instantiatedOrbitals.Add(orbital);
@@ -48,8 +43,17 @@ public sealed class OrbitalController : MonoBehaviour
         PositionAllOrbitals();
     }
     
+    public void RemoveOrbital(Orbital orbitalToRemove)
+    { 
+        _instantiatedOrbitals.Remove(orbitalToRemove);
+        
+        PositionAllOrbitals();
+    }
+    
     private void PositionAllOrbitals()
     {
+        _instantiatedOrbitals.ForEach(orbital => orbital.CancelMovement());
+        
         List<Vector3> localOrbitalPositions = GetNewPositions();
         List<Transform> targetTransforms = GetTargetTransforms();
         
@@ -57,8 +61,6 @@ public sealed class OrbitalController : MonoBehaviour
         {
             _instantiatedOrbitals[i].transform.position = _orbitalsParent.transform.position + localOrbitalPositions[i];
             _instantiatedOrbitals[i].SetNextTarget(targetTransforms[i]);
-            
-            Debug.Log($"Launched orbital {i} at {_orbitalPositions.IndexOf(targetTransforms[i])}");
         }
     }
     
@@ -66,7 +68,7 @@ public sealed class OrbitalController : MonoBehaviour
     {
         List<Vector3> newPositions = new();
 
-        float step = 360f / _instantiatedOrbitals.Count;
+        float step = 360f / (_instantiatedOrbitals.Count);
 
         for (int i = 0; i < _instantiatedOrbitals.Count; i++)
         {
@@ -75,29 +77,31 @@ public sealed class OrbitalController : MonoBehaviour
             var sin = (float)Math.Sin(radians);
 
             float radius = _reachAreaScale.RoundedValue;
-
-            if (Math.Abs(cos) > Math.Abs(sin))
+            
+            /*if (Math.Abs(cos) > Math.Abs(sin))
             {
-                if (sin > 0) sin = 1f;
-                else sin = -1f;
+                sin = GetNormalizedValue(sin);
             }
             else if (Math.Abs(cos) < Math.Abs(sin))
             {
-                if (cos > 0) cos = 1f;
-                else cos = -1f;
+                cos = GetNormalizedValue(cos);
             }
             else
             {
-                if (sin > 0) sin = 1f;
-                else sin = -1f;
-                if (cos > 0) cos = 1f;
-                else cos = -1f;
-            }
+                sin = GetNormalizedValue(sin);
+                cos = GetNormalizedValue(cos);
+            }*/
             
             newPositions.Add(new Vector3(cos * radius, 0f, sin * radius));
         }
 
         return newPositions;
+
+        float GetNormalizedValue(float value)
+        {
+            if (value > 0) return 1f;
+            return -1f;
+        }
     }
     
     private List<Transform> GetTargetTransforms()
@@ -109,19 +113,15 @@ public sealed class OrbitalController : MonoBehaviour
 
         for (int i = 0; i < _instantiatedOrbitals.Count; i++)
         {
-            if (angle < 90f) targets.Add(_orbitalPositions[0]);
-            else if (angle < 180f) targets.Add(_orbitalPositions[1]);
-            else if (angle < 270f) targets.Add(_orbitalPositions[2]);
-            else targets.Add(_orbitalPositions[3]);
+            if (angle < 45f) targets.Add(_orbitalPositions[0]);
+            else if (angle < 135f) targets.Add(_orbitalPositions[1]);
+            else if (angle < 225f) targets.Add(_orbitalPositions[2]);
+            else if (angle < 315f) targets.Add(_orbitalPositions[3]);
+            else targets.Add(_orbitalPositions[0]);
                 
             angle += step;
         }
 
         return targets;
-    }
-    
-    public void RemoveOrbital(Orbital orbitalToRemove)
-    { 
-        _instantiatedOrbitals.Remove(orbitalToRemove);
     }
 }

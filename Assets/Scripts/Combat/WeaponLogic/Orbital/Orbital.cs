@@ -13,7 +13,7 @@ public sealed class Orbital : WeaponBase
     private CancellationTokenSource _cancellationTokenSource = new();
     private List<Transform> _targetTransforms;
     private int _currentTargetIndex;
-    private ProjectileSpeed _speed;
+    private OrbitalSpeed _speed;
     private Damage _damage;
     
     public void SetTravelPoints(List<Transform> targetTransforms)
@@ -24,18 +24,16 @@ public sealed class Orbital : WeaponBase
     public void SetNextTarget(Transform targetTransform)
     {
         _currentTargetIndex = _targetTransforms.IndexOf(targetTransform);
-        TravelToNextTarget();
+        _trailRenderer.Clear();
+        TravelToNextTarget(transform.position);
     }
 
-    private async UniTask TravelToNextTarget()
+    private async UniTask TravelToNextTarget(Vector3 startPosition)
     {
         CancelMovement();
         float duration = Vector3.Distance(transform.position, _targetTransforms[_currentTargetIndex].position) * _speed.Value;
         
-        int previousTargetIndex = _currentTargetIndex - 1;
-        if (previousTargetIndex < 0) previousTargetIndex = _targetTransforms.Count - 1;
-        
-        transform.DOMove(_targetTransforms[_currentTargetIndex].position, duration).SetEase(Ease.Linear).From(_targetTransforms[previousTargetIndex].position).AsyncWaitForCompletion();
+        transform.DOMove(_targetTransforms[_currentTargetIndex].position, duration).SetEase(Ease.Linear).From(startPosition);
         
         try
         {
@@ -48,11 +46,13 @@ public sealed class Orbital : WeaponBase
             return;
         }
         
+        Vector3 endPosition = _targetTransforms[_currentTargetIndex].position;
+        
         _currentTargetIndex++;
 
         if (_currentTargetIndex >= _targetTransforms.Count) _currentTargetIndex = 0;
 
-        TravelToNextTarget();
+        TravelToNextTarget(endPosition);
     }
 
     private void OnDisable()
@@ -60,18 +60,22 @@ public sealed class Orbital : WeaponBase
         _trailRenderer.Clear();
         CancelMovement();
     }
-    private void OnEnable() => _trailRenderer.Clear();
 
-    private void CancelMovement()
+    private void OnEnable()
     {
-        transform.DOComplete();
+        _trailRenderer.Clear();
+    }
+
+    public void CancelMovement()
+    {
+        transform.DOKill();
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new();
     }
         
     protected override void OnInitialized()
     {
-        _speed = OwnerEntity.StatContainer.Get<ProjectileSpeed>();
+        _speed = OwnerEntity.StatContainer.Get<OrbitalSpeed>();
         _damage = OwnerEntity.StatContainer.Get<Damage>();
     }
     

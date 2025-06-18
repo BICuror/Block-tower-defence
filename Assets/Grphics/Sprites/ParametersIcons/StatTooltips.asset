@@ -225,6 +225,12 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: PiercingTooltip
     m_HashCode: -189539944
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 24
+    m_Scale: 1
+    m_Name: OrbitalSpeedTooltipIcon
+    m_HashCode: 138477302
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -602,7 +608,7 @@ MonoBehaviour:
       m_HorizontalBearingY: 80
       m_HorizontalAdvance: 100
     m_GlyphRect:
-      m_X: 305
+      m_X: 304
       m_Y: 697
       m_Width: 100
       m_Height: 100
@@ -610,5 +616,21 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: 1683251753, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  - m_Index: 24
+    m_Metrics:
+      m_Width: 100
+      m_Height: 100
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 100
+    m_GlyphRect:
+      m_X: 405
+      m_Y: 697
+      m_Width: 100
+      m_Height: 100
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1412815817, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

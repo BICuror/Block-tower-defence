@@ -24,5 +24,7 @@ public sealed class EntityModificatorTooltip : BaseTooltip
         _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorDescription, false);
         
         _tagDataContainer = _tooltipDataParser.GetTooltipTagDataFromText(entityModificatorData.ModificatorDescription);
+
+        UpdateContentSizeFilters();
     }
 }

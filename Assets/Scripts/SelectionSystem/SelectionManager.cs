@@ -15,10 +15,14 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private GlobalEffectSelector _globalEffectSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
+    private bool _optionCanBePlaced;
     
     private void Start()
     {
         _selectionOptionObjectAreaDetector.AddedItem += (optionObject) => ResolveCurrentSelection(optionObject).Forget();
+        
+        EnqeueSelection(new SelectionSettings(SelectionType.Building));
+        EnqeueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
     }
 
     public int SelectionCount => _enqeuedSelections.Count;
@@ -30,11 +34,13 @@ public sealed class SelectionManager : MonoBehaviour
         _currentSelectionSettings = selectionSettings;
         switch (_currentSelectionSettings.Type)
         {
-            case SelectionType.Building: _buildingSelector.StartBuildingsSelection(); break;
-            case SelectionType.GlobalEffect: _globalEffectSelector.StartGlobalEffectSelection(); break;
+            case SelectionType.Building: await _buildingSelector.StartBuildingsSelection(); break;
+            case SelectionType.GlobalEffect: await _globalEffectSelector.StartGlobalEffectSelection(); break;
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(selectionSettings); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }
+
+        _optionCanBePlaced = true;
     }
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
@@ -57,15 +63,18 @@ public sealed class SelectionManager : MonoBehaviour
     
     private async UniTask EndSelection(SelectionSettings selectionSettings)
     {
+        _optionCanBePlaced = false;
+        
         switch (_currentSelectionSettings.Type)
         {
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
+            case SelectionType.Building: await UniTask.WaitForSeconds(1f); break;
             default: break;
         }
     }
     
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
-        return type == _currentSelectionSettings.Type;
+        return _optionCanBePlaced && type == _currentSelectionSettings.Type;
     }
 }

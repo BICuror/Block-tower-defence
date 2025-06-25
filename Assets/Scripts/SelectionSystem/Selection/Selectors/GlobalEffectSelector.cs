@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,7 @@ public sealed class GlobalEffectSelector : MonoBehaviour
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private GlobalEffectSelectionOptionObject _selectionObject;
     
-    public async void StartGlobalEffectSelection()
+    public async UniTask StartGlobalEffectSelection()
     {
         List<ToggleGlobalEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_globalStatContainer.Get<SelectionOptionsAmount>().RoundedValue);
 

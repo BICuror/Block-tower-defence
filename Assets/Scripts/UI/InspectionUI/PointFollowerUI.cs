@@ -1,33 +1,27 @@
-using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public sealed class PointFollowerUI : MonoBehaviour
 {
-    [SerializeField] private Transform _uiTargetPoint;
-    [SerializeField] private RectTransform _bordersRect;
-    private float _halfHeight;
-    private float _halfWidth;
-    private Canvas _parentCanvas;
+    [SerializeField] private RectTransform _inspectablePosition;
+    private RectTransform _parentRect;
+    private RectTransform _rect;
     private Transform _target;
-    Vector3[] _borderPoints = new Vector3[4];
     
+    public float TopOffset => _rect.sizeDelta.y / 2 ;
+    public float BottomOffset => _rect.sizeDelta.y / 2 ;
+    public float RightOffset => _rect.sizeDelta.x / 2 ;
+    public float LeftOffset => _rect.sizeDelta.x / 2 ;
+
     private void Awake()
     {
-        _parentCanvas = transform.root.gameObject.GetComponent<Canvas>();
-        
-        RectTransform rectTransform = GetComponent<RectTransform>();
-        
-        _halfHeight = rectTransform.sizeDelta.y / 2; 
-        _halfWidth = rectTransform.sizeDelta.x / 2;
+        _rect = transform as RectTransform;
+        _parentRect = transform.parent as RectTransform;
     }
     
     public void SetTarget(Transform target)
     {
         _target = target;
-        
-        Vector2 position = TransformWorldPositionToUIPosition(_target.position);
-        transform.localPosition = position;
         
         UpdatePosition();
     }
@@ -38,37 +32,14 @@ public sealed class PointFollowerUI : MonoBehaviour
     {
         await UniTask.WaitForEndOfFrame();
         
-        _bordersRect.GetLocalCorners(_borderPoints);
+        Vector2 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, _target.position);
         
-        Vector3 position = TransformWorldPositionToUIPosition(_target.position);
-
-        if (position.x - _halfWidth < _borderPoints[0].x)
-        {
-            position.x = _borderPoints[0].x + _halfWidth;
-        }
-        else if (position.x + _halfWidth > _borderPoints[2].x)
-        {
-            position.x = _borderPoints[2].x - _halfWidth;
-        }
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(_parentRect, targetScreenPosition, null, out Vector2 resultPoint);
         
-        if (position.y - _halfHeight < _borderPoints[0].y)
-        {
-            position.y = _borderPoints[0].y + _halfHeight;
-        }
-        else if (position.y + _halfHeight > _borderPoints[2].y)
-        {
-            position.y = _borderPoints[2].y - _halfHeight;
-        }
-
-        transform.localPosition = position;
-    }
-    
-    private Vector2 TransformWorldPositionToUIPosition(Vector3 worldPos)
-    {
-        Vector3 screenPos = Camera.main.WorldToScreenPoint(worldPos);
-
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(_parentCanvas.transform as RectTransform, screenPos, _parentCanvas.worldCamera, out Vector2 uiPosition);
+        Vector2 preferedUIPosition = resultPoint - _inspectablePosition.anchoredPosition;
         
-        return uiPosition;
+        Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(this, preferedUIPosition);
+        
+        transform.GetComponent<RectTransform>().localPosition = finalPosition;
     }
 }

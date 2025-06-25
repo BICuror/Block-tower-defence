@@ -17,8 +17,8 @@ public sealed class SelectionOptionObjectController : MonoBehaviour
 
     public async UniTask<T> CreateSelectionOptionObject<T>(T selectionObjectPrefab) where T : SelectionOptionObject
     {
-        DraggableObject draggableObjectPrefab = selectionObjectPrefab.GetComponent<DraggableObject>(); 
-        
+        DraggableObject draggableObjectPrefab = selectionObjectPrefab.GetComponent<DraggableObject>();
+
         T selectionOptionObject = (await _draggableCreator.CreateDraggableOnRandomPosition(draggableObjectPrefab, transform.position, 5)).GetComponent<T>();
 
         _selectionOptionObjects.Add(selectionOptionObject);

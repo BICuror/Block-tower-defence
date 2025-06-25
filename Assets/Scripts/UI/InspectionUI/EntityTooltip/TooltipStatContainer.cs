@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEngine.Rendering;
 using System.Linq;
 using UnityEngine;
 using Combat;
@@ -17,10 +16,22 @@ public sealed class TooltipStatContainer : MonoBehaviour
     
     public Action<TooltipParseTagDataContainer> TooltipOpened;
     public Action TooltipClosed;
-    
+
+    private void Awake()
+    {
+        InitializeCustomTooltips();
+    }
+
     public void SetInspectedEntity(CombatEntity entity)
     {
-        InitializeCustomTooltips(entity);
+        for (int i = 0; i < _instantiatedTooltips.Count; i++)
+        {
+            Destroy(_instantiatedTooltips[i].gameObject);
+        }
+        
+        _instantiatedTooltips.Clear();
+        
+        EnableCustomTooltips(entity);
         InitializeStatTooltips(entity);
         SortStatTooltips();
     }
@@ -53,7 +64,7 @@ public sealed class TooltipStatContainer : MonoBehaviour
         }
     }
 
-    private void InitializeCustomTooltips(CombatEntity entity)
+    private void EnableCustomTooltips(CombatEntity entity)
     {
         _customStatTypeNames.ForEach(typeName =>
         {
@@ -68,9 +79,16 @@ public sealed class TooltipStatContainer : MonoBehaviour
             if (hasStat)
             {
                 statTooltip.SetStat(entity.StatContainer.Get(statType));
-                statTooltip.TooltipOpened += (value) => TooltipOpened?.Invoke(value);
-                statTooltip.TooltipClosed += () => TooltipClosed?.Invoke();
             }
+        });
+    }
+    
+    private void InitializeCustomTooltips()
+    {
+        _customStatTooltips.ForEach(statTooltip =>
+        {
+            statTooltip.TooltipOpened += (value) => TooltipOpened?.Invoke(value);
+            statTooltip.TooltipClosed += () => TooltipClosed?.Invoke();
         });
     }
 }

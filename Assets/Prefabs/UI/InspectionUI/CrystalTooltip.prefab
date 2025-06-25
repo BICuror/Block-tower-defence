@@ -111,6 +111,7 @@ MonoBehaviour:
   _entityModificatorTooltipPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
   _tooltipDataParser: {fileID: 3961331482114920432}
   _entityModificatorTooltipParent: {fileID: 612609853589768455}
+  _pointFollowerUI: {fileID: 0}
 --- !u!114 &2871898726855916236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +191,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 327f241f4f13f324ea7249f556c03842, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _contentSizeFitters:
+  - {fileID: 5778367387859996406}
+  - {fileID: 1224362466023082563}
   _controllerRectTransforms:
   - {fileID: 612609853589768455}
   - {fileID: 6156070538785157371}
@@ -713,7 +717,6 @@ MonoBehaviour:
   _statdetailsSubpanelPrefab: {fileID: 3572429366544310188, guid: 00dfd00fcbf429f43b4d545ac0c0c4d7, type: 3}
   _effectSubpanelPrefab: {fileID: 5506116140626820261, guid: 55f1a81d30aac6a43a5c99cdfb52769f, type: 3}
   _keywordSubpanelPrefab: {fileID: 6053860424955338455, guid: bf86bfee8e5df0f4a8d7b5ab9e7cf56f, type: 3}
-  _inspectedEntity: {fileID: 0}
 --- !u!1 &6160117450418352079
 GameObject:
   m_ObjectHideFlags: 0

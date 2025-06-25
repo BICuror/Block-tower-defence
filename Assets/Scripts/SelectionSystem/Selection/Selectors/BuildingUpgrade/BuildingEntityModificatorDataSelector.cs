@@ -82,14 +82,16 @@ public sealed class BuildingEntityModificatorDataSelector : MonoBehaviour
         
         availableModificatorRarityDrops.ForEach(group => totalChanse += group.DropChance);
         
-        float currentChanse = Random.Range(0f, totalChanse);
+        float currentChanse = Random.Range(0, totalChanse);
         
-        for (int i = 0; i < _additionalChansePerSameTag; i++)
+        for (int i = 0; i < availableModificatorRarityDrops.Count; i++)
         {
             if (availableModificatorRarityDrops[i].DropChance >= currentChanse)
             {
                 return availableModificatorRarityDrops[i].Rarity;
             }
+            
+            currentChanse -= availableModificatorRarityDrops[i].DropChance;
         }
         
         throw new Exception("No modificator rarity available");

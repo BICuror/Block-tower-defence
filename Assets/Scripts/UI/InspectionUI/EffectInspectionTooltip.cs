@@ -4,15 +4,19 @@ using TMPro;
 
 public sealed class EffectInspectionTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private SelectionOptionObject _selectionOptionObject;
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
     [SerializeField] private TextMeshProUGUI _nameTextField;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
     [SerializeField] private TooltipDataParser _tooltipDataParser;
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
+    [SerializeField] private PointFollowerUI _pointFollowerUI;
+    private SelectionOptionObject _selectionOptionObject;
 
-    private void Start()
+    public void SetSelectionOptionObject(SelectionOptionObject selectionOptionObject)
     {
+        _selectionOptionObject = selectionOptionObject;
+        
+        _pointFollowerUI.SetTarget(selectionOptionObject.transform);
         SetEffectName(_selectionOptionObject.OptionName);
         SetEffectDescription(_selectionOptionObject.OptionDescription);
     }

@@ -1,45 +1,25 @@
 using UnityEngine;
 using Combat;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
     [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
-    [SerializeField] private CameraZoomController _cameraZoomController;
-    [SerializeField] private AnimationCurve _uiScaleCurve;
     [SerializeField] private AreaVisualisation _areaVisualisation;
-    [SerializeField] private EffectInspectionTooltip effectInspectionTooltip;
-    [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltip;
-    [FormerlySerializedAs("_entityInspectionTooltipPrefab")] [SerializeField] private EntityTooltip entityEntityTooltipPrefab;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
-    [SerializeField] private LayerSetting _uiLayerSetting;
     
-    private InspectionPanel _inspectionPanel;
     private Inspectable _inspectable;
-    
-    private Camera _camera;
-
-    private void Awake()
-    {
-        _camera = GetComponent<Camera>();
-    }
     
     public bool TryToStartInspecting(Vector2 mousePosition)
     {
-        Ray ray = _camera.ScreenPointToRay(mousePosition);
-
-        if (TileMap.HasTile(ray, _uiLayerSetting)) return false;
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
             if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
-            {
-                if (!_inspectable)
-                {
-                    StartInspecting(hoveredInspectable);
-                }
+            { 
+                StartInspecting(hoveredInspectable);
     
                 return true;
             }
@@ -50,23 +30,19 @@ public class InspectorController : MonoBehaviour
     
     public bool TryToStartInspectingItem(Vector2 mousePosition)
     {
-        Ray ray = _camera.ScreenPointToRay(mousePosition);
-
-        if (TileMap.HasTile(ray, _uiLayerSetting)) return false;
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
+            if (hit.collider.gameObject.TryGetComponent(out Item item))
             {
-                if (hoveredInspectable.GetComponent<Item>() == null) return false;
-
-                if (!_inspectable)
-                {
-                    StartInspecting(hoveredInspectable);
-                }
+                _inspectable = hit.collider.gameObject.GetComponent<Inspectable>();
+                _inspectable.SetInspectedState(true);
+                
+                _inspectionTooltipManager.ActivateCrystalTooltip(item);
+                
+                return true;
             }
-
-            return true;
         }
 
         return false;
@@ -74,34 +50,28 @@ public class InspectorController : MonoBehaviour
 
     public bool TryStopInspecting(Vector2 mousePosition)
     {
-        Ray ray = _camera.ScreenPointToRay(mousePosition);
-
-        if (TileMap.HasTile(ray, _uiLayerSetting, out RaycastHit uiHit))
+        if (_inspectable != null && _inspectable.TryGetComponent<Item>(out Item inspectedItem))
         {
-            if (_inspectable.GetComponent<Item>() != null)
-            {
-                if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
-                {
-                    Inspectable hoveredInspectable = hit.collider.GetComponent<Inspectable>();
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-                    if (hoveredInspectable != _inspectable && hoveredInspectable.GetComponent<Item>() != null)
+            if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+            {
+                if (hit.collider.gameObject.TryGetComponent(out Item item))
+                {
+                    if (inspectedItem != item)
                     {
                         StopInspecting();
-                        StartInspecting(hoveredInspectable);
+                        TryToStartInspectingItem(mousePosition);
                         return false;
                     }
                 }
             }
-
-            return true;
         }
         
-        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit inspectableHit))
-        {
-            if (!_inspectable || _inspectable.gameObject == inspectableHit.collider.gameObject) return false;
-        }
-
+        if (_inspectionTooltipManager.NonIdleTooltipsOpened) return false;
+        
         StopInspecting();
+
         return true;
     }
 
@@ -110,31 +80,15 @@ public class InspectorController : MonoBehaviour
         _inspectable = inspectable;
         _inspectable.SetInspectedState(true);
         
-        MeshRenderer[] meshRenderers = inspectable.GetComponentsInChildren<MeshRenderer>();
-        float maxHeight = 0;
-        
         _areaVisualisation.ActivateVisualisation(_inspectable.gameObject);
         
-        for (int i = 0; i < meshRenderers.Length; i++)
-        {
-            maxHeight = Mathf.Max(meshRenderers[i].bounds.size.y, maxHeight);
-        }
-
         if (inspectable.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
         {
-            _inspectionTooltipManager.ActivateEntityTooltip(inspectable);
+            _inspectionTooltipManager.ActivateEntityTooltip(buildingOptionObject.InstantiatedBuilding);
         }
         else if (inspectable.TryGetComponent(out CombatEntity combatEntity))
         {
-            _inspectionTooltipManager.ActivateEntityTooltip(inspectable);
-        }
-        else if (inspectable.TryGetComponent(out Item item))
-        {
-            CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltip, inspectable.transform.position + new Vector3(0f, 1 / 2, 0f), Quaternion.identity);
-            crystalInspectionTooltip.SetInspectable(inspectable);
-            crystalInspectionTooltip.transform.localScale *= _uiScaleCurve.Evaluate(_cameraZoomController.ZoomPercent);
-
-            _inspectionPanel = crystalInspectionTooltip;
+            _inspectionTooltipManager.ActivateEntityTooltip(combatEntity);
         }
     }
 
@@ -142,6 +96,7 @@ public class InspectorController : MonoBehaviour
     {
         if (!_inspectable) return;
         
+        _inspectionTooltipManager.CloseAllTooltips();
         _areaVisualisation.DeactivateVisualisation(_inspectable.gameObject);
         _inspectable.SetInspectedState(false);
         _inspectable = null;

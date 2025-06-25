@@ -40,7 +40,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
         List<RewardGlobalEffectData> rewardEffectDatas = _temModifiersSelectionContainer.ItemRewardEffectCotainer.EffectDatas;
 
-        int positiveStrength = quality + strength;
+        int positiveStrength = strength;
         
         result.AddRange(GetItemEffectDatas(positiveStrength, rewardEffectDatas));
 

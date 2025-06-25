@@ -53,6 +53,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
     public void SetDraggableState(bool state) => _isDraggable = state;
     
     public PlacementModule GetPlacementModule() => _placementRequirements; 
+    public void SetNewDragAnimationObject(DragAnimationObject newAnimationObject) => _dragAnimationObject = newAnimationObject;
 }
 
 public enum DraggableState

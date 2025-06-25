@@ -2,10 +2,12 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using TMPro;
 
 public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointerEnterHandler
 {
+    [SerializeField] private List<ContentSizeFitter> _contentSizeFitters;
     [SerializeField] private List<CanvasGroup> _selectedState;
     [SerializeField] private CanvasGroup _amountGroup;
     [SerializeField] private TextMeshProUGUI _amountTextField;
@@ -34,6 +36,8 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
         
         _amountTextField.gameObject.SetActive(true);
         _amountTextField.text = _itemAmount.ToString();
+        
+        GetComponent<RectTransform>().ForceUpdateRectTransforms();
     }
     
     public void SetAmount(int amount)
@@ -44,5 +48,15 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
         
         _amountGroup.gameObject.SetActive(true);
         _amountTextField.text = _itemAmount.ToString();
+        
+        GetComponent<RectTransform>().ForceUpdateRectTransforms();
+    }
+
+    public void UpdateContentSizeFilters()
+    {
+        _contentSizeFitters.ForEach(contentSizeFitter =>
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(contentSizeFitter.transform as RectTransform);
+        });
     }
 }

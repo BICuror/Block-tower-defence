@@ -19,7 +19,7 @@ public sealed class StatTooltip : BaseTooltip
     [Header("Links")]
     [SerializeField] private TooltipAllTagDataContainer _allTagDataContainer;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
-    private TooltipParseTagDataContainer _tagDataContainer = new();
+    private TooltipParseTagDataContainer _tagDataContainer;
     private Stat _stat;
     
     protected override TooltipParseTagDataContainer TagDataContainer => _tagDataContainer;
@@ -37,6 +37,7 @@ public sealed class StatTooltip : BaseTooltip
         
         if (tagData == null) return;
 
+        _tagDataContainer = new();
         _tagDataContainer.StatTagDatas.Add(tagData);
 
         _statIconImage.sprite = tagData.IconSprite;
@@ -62,7 +63,7 @@ public sealed class StatTooltip : BaseTooltip
         StatValueChanged?.Invoke();
     }
     
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (_stat != null) _stat.ValueChanged -= HandleStatValueChange;
     }

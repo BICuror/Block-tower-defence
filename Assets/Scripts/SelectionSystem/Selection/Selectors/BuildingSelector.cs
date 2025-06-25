@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -10,7 +11,7 @@ public sealed class BuildingSelector : MonoBehaviour
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private BuildingSelectionOptionObject _selectionObject;
     
-    public async void StartBuildingsSelection()
+    public async UniTask StartBuildingsSelection()
     {
         BuildingSelectionOptionDataContainer datasContainer = _islandDataHolder.Data.SelectionContainer.BuildingSelectionOptionDataContainer;
         

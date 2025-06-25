@@ -41,6 +41,7 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         for (int i = 0; i < effectDatas.Count; i++)
         {
             BuildingUpgradeSelectionOptionObject selectionOptionObject = await _selectionOptionObjectController.CreateSelectionOptionObject(_buildingUpgradeSelectionOptionObjectPrefab);
+            
             selectionOptionObject.SetTargetBuildingEntity(_buildingEntityToUpgrade);
             selectionOptionObject.SetEffectData(effectDatas[i]);
         }

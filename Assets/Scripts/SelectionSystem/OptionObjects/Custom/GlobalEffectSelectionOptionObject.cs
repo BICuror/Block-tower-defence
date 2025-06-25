@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 public sealed class GlobalEffectSelectionOptionObject : SelectionOptionObject

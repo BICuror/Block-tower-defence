@@ -15,17 +15,16 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
     [SerializeField] private GlobalEffectTooltip _entityModificatorTooltipPrefab;
     [SerializeField] private TooltipDataParser _tooltipDataParser;
     [SerializeField] private Transform _entityModificatorTooltipParent;
+    [SerializeField] private PointFollowerUI _pointFollowerUI;
     
     private Dictionary<GlobalEffectData, GlobalEffectTooltip> _crystalTooltips = new();
     
-    private Inspectable _inspectable;
-
-    public void SetInspectable(Inspectable inspectable)
+    public void SetItem(Item item)
     {
-        _inspectable = inspectable;
-
-        Item item = inspectable.GetComponent<Item>();
-
+        
+        _crystalTooltips.Values.ToList().ForEach(tooltip => Destroy(tooltip.gameObject));
+        _crystalTooltips.Clear();
+        
         List<ToggleGlobalEffectData> sortedToggleEffectDatas = item.ToggleEffectDatas.OrderBy(item => item.EffectType == EffectType.Negative).ToList();
 
         ToggleGlobalEffectData startWaveToggleEffectData = sortedToggleEffectDatas.Find(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect)));
@@ -45,6 +44,8 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
         _durationTextField.text = item.Duration.ToString();
         
         _layoutSizeController.RecalculateLayout();
+        
+        _pointFollowerUI.SetTarget(item.transform);
     }
 
     private void CreateTooltip(GlobalEffectData globalEffectData)

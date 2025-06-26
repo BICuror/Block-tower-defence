@@ -15,7 +15,9 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private GlobalEffectSelector _globalEffectSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
-    private bool _optionCanBePlaced;
+    private bool _selectionIsActive;
+    
+    public bool SelectionPhaseIsActive => _enqeuedSelections.Count != 0 || _selectionIsActive;
     
     private void Start()
     {
@@ -24,8 +26,6 @@ public sealed class SelectionManager : MonoBehaviour
         EnqeueSelection(new SelectionSettings(SelectionType.Building));
         EnqeueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
     }
-
-    public int SelectionCount => _enqeuedSelections.Count;
     
     public void EnqeueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
     
@@ -40,7 +40,7 @@ public sealed class SelectionManager : MonoBehaviour
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }
 
-        _optionCanBePlaced = true;
+        _selectionIsActive = true;
     }
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
@@ -54,7 +54,7 @@ public sealed class SelectionManager : MonoBehaviour
     
     public async UniTask TryStartQueuedSelection()
     {
-        if (SelectionCount > 0)
+        if (_enqeuedSelections.Count > 0)
         {
             SelectionSettings selectionSettings = _enqeuedSelections.Dequeue();
             await StartSelection(selectionSettings);
@@ -63,7 +63,7 @@ public sealed class SelectionManager : MonoBehaviour
     
     private async UniTask EndSelection(SelectionSettings selectionSettings)
     {
-        _optionCanBePlaced = false;
+        _selectionIsActive = false;
         
         switch (_currentSelectionSettings.Type)
         {
@@ -75,6 +75,6 @@ public sealed class SelectionManager : MonoBehaviour
     
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
-        return _optionCanBePlaced && type == _currentSelectionSettings.Type;
+        return _selectionIsActive && type == _currentSelectionSettings.Type;
     }
 }

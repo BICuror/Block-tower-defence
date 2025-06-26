@@ -52,7 +52,7 @@ public abstract class BaseTooltip : MonoBehaviour, IPointerExitHandler, IPointer
         GetComponent<RectTransform>().ForceUpdateRectTransforms();
     }
 
-    public void UpdateContentSizeFilters()
+    protected void UpdateContentSizeFilters()
     {
         _contentSizeFitters.ForEach(contentSizeFitter =>
         {

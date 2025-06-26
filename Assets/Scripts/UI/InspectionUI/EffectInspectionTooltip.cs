@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public sealed class EffectInspectionTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public sealed class EffectInspectionTooltip : InspectionPanel, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private List<ContentSizeFitter> _contentSizeFitters;
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
     [SerializeField] private TextMeshProUGUI _nameTextField;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
@@ -19,6 +22,7 @@ public sealed class EffectInspectionTooltip : MonoBehaviour, IPointerEnterHandle
         _pointFollowerUI.SetTarget(selectionOptionObject.transform);
         SetEffectName(_selectionOptionObject.OptionName);
         SetEffectDescription(_selectionOptionObject.OptionDescription);
+        UpdateContentSizeFilters();
     }
 
     private void SetEffectName(string effectName)
@@ -39,5 +43,13 @@ public sealed class EffectInspectionTooltip : MonoBehaviour, IPointerEnterHandle
     public void OnPointerExit(PointerEventData eventData)
     {
         _inspectionSubpanelsController.ClearAllSubpanels();
+    }    
+    
+    private void UpdateContentSizeFilters()
+    {
+        _contentSizeFitters.ForEach(contentSizeFitter =>
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(contentSizeFitter.transform as RectTransform);
+        });
     }
 }

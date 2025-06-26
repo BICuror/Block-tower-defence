@@ -15,7 +15,7 @@ public sealed class CrystalPlacementModule : PlacementModule
         {
             GameObject townhall = TileMap.GetHitObject(position, _townhallLayerSetting).transform.parent.gameObject;
             
-            return townhall.GetComponentInChildren<SelectionManager>().SelectionCount == 0;
+            return townhall.GetComponentInChildren<SelectionManager>().SelectionPhaseIsActive == false;
         }
         
         if (!TileMap.HasTile(position, _sutableTerrainLayerSetting)) return false;

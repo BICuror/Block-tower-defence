@@ -30,8 +30,6 @@ public sealed class PointFollowerUI : MonoBehaviour
     
     private async void UpdatePosition()
     {
-        await UniTask.WaitForEndOfFrame();
-        
         Vector2 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, _target.position);
         
         RectTransformUtility.ScreenPointToLocalPointInRectangle(_parentRect, targetScreenPosition, null, out Vector2 resultPoint);

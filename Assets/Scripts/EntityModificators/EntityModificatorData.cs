@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Ligofff.CustomSOIcons;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -13,21 +14,39 @@ public class EntityModificatorData : ScriptableObject
     [Header("SelectionData")] 
     [SerializeField] private EntityModifcationRarity _rarity;
     [SerializeField] private List<EntityModifcatorTag> _tags;
-    
-    [Header("UI Data")]
     [SerializeField] private EffectType _effectType;
+    [SerializeField] private bool _isUnique;
+
+    [Header("RequiredTags")]
+    [SerializeField] private bool _hasRequiredTags;
+    [AllowNesting] [ShowIf("_hasRequiredTags")] [SerializeField] private EntityModifierTagRequirementsContainer _reqiredOwnerTags;
+    [AllowNesting] [ShowIf("_hasRequiredTags")] [SerializeField] private EntityModifierTagRequirementsContainer _reqiredOtherEntityTags;
+
+    [Header("BlockTags")] 
+    [SerializeField] private bool _hasBlockTags;
+    [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOwnerTags;
+    [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOtherEntityTags;
+    
+    [Header("UI Data")] 
+    [SerializeField] private Sprite _icon;
     [SerializeField] private string _modificatorName;
     [TextArea] [SerializeField] private string _modificatorDescription;
     
     public List<InstanceItemTypeContainer> ItemTypeContainers => _itemTypeContainers;
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public EffectType EffectType => _effectType;
-    
     public EntityModifcationRarity Rarity => _rarity;
     public List<EntityModifcatorTag> Tags => _tags;
-    
+    public bool IsUnique => _isUnique;
+    [CustomAssetIcon] public Sprite Icon => _icon;
     public string ModificatorName => _modificatorName;
     public string ModificatorDescription => _modificatorDescription;
+    public bool HasRequiredTags => _hasRequiredTags;
+    public bool HasBlockTags => _hasBlockTags;
+    public List<EntityEffectTagReqirement> ReqiredOwnerTags => _reqiredOwnerTags.Requirements;
+    public List<EntityEffectTagReqirement> ReqiredOtherEntityTags => _reqiredOtherEntityTags.Requirements;
+    public List<EntityEffectTagReqirement> BlockOwnerTags => _blockOwnerTags.Requirements;
+    public List<EntityEffectTagReqirement> BlockOtherEntityTags => _blockOtherEntityTags.Requirements;
 
     public virtual void Modify(EntityModificator modificator) {}
 

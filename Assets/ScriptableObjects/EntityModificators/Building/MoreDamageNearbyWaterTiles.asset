@@ -23,9 +23,12 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
@@ -53,6 +56,7 @@ MonoBehaviour:
   _rarity: 1
   _tags: 
   _effectType: 0
+  _icon: {fileID: 0}
   _modificatorName: Activate when built
   _modificatorDescription: '#good +8% good# #Damage for each <color=blue>water</color>
     tile in 1 #Reach'

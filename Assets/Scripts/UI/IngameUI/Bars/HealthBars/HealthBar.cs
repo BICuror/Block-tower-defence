@@ -6,7 +6,7 @@ using Cashing;
 using Combat;
 using System;
 
-public class HealthBar : Shaker
+public abstract class HealthBar : Shaker
 {
     [Cached] protected EntityHealth OwnerHealth;
     
@@ -20,21 +20,17 @@ public class HealthBar : Shaker
     private float _healthDifference = 1f;
     private float _displayedHealth = 1f;
 
-    protected void Start()
+    protected void Initialize()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _materialPropertyBlock = new MaterialPropertyBlock();
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
-
-        OwnerHealth.Damaged += UpdateBar;
-        OwnerHealth.Healed += UpdateBar;
-        OwnerHealth.Died += FillBar;
         
         UpdatePropertyBlock();
     }
-
-    private void UpdateBar()
+    
+    protected void UpdateBar()
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new();
@@ -63,17 +59,15 @@ public class HealthBar : Shaker
         {
             await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
         }
-        catch (Exception e) { TaskUtility.LogAsync(e); }
+        catch (Exception e)
+        {
+            TaskUtility.LogAsync(e);
+            return;
+        }
 
         DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference);
     }
-
-    private void UpdateHealthDifference(float value)
-    {
-        _healthDifference = value;
-        UpdatePropertyBlock();
-    }
-
+    
     private async void IncreaseValue()
     {
         _healthDifference = OwnerHealth.GetHpPercent();
@@ -83,12 +77,22 @@ public class HealthBar : Shaker
         {
             await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
         }
-        catch (Exception e) { TaskUtility.LogAsync(e); }
+        catch (Exception e)
+        {
+            TaskUtility.LogAsync(e);
+            return;
+        }
         
 
         DOVirtual.Float(_displayedHealth, _healthDifference, HealthTweenDuration, UpdateDisplayedHealth);
     }
-
+    
+    private void UpdateHealthDifference(float value)
+    {
+        _healthDifference = value;
+        UpdatePropertyBlock();
+    }
+    
     private void UpdateDisplayedHealth(float value)
     {
         _displayedHealth = value;
@@ -102,19 +106,23 @@ public class HealthBar : Shaker
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
     }
 
-    private void FillBar()
+    protected void FillBar()
     {
         _displayedHealth = 1f;
         _healthDifference = 1f;
         UpdatePropertyBlock();
     }
 
-    private void OnDisable() => _cancellationTokenSource.Cancel();
-
-    private void OnDestroy()
+    protected void OnDisable()
     {
-        OwnerHealth.Damaged -= UpdateBar;
-        OwnerHealth.Healed -= UpdateBar;
+        base.OnDisable();
+        
+        _cancellationTokenSource.Cancel();
+    }
+
+    protected void OnDestroy()
+    {
+        base.OnDestroy();
         
         _cancellationTokenSource.Cancel();
     }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Zenject;
 using System;
+using UnityEngine;
 
 public sealed class GlobalEffectFactory
 {
@@ -8,14 +9,20 @@ public sealed class GlobalEffectFactory
 
     public bool CanAppear(GlobalEffectData globalEffectData)
     {
-        EffectApperanceCondition condition = (EffectApperanceCondition)Activator.CreateInstance(globalEffectData.EffectAppearanceCondition.ApperanceConditionType);
-        
-        if (condition == null) throw new NullReferenceException($"Invalid condition type: {globalEffectData.EffectAppearanceCondition.ApperanceConditionType}");
-        
-        condition.SetArgumentsContainer(globalEffectData.EffectAppearanceConditionArgumentsContainer);
-        _diContainer.Inject(condition);
-
-        return condition.CanAppear();
+        try
+        {
+            EffectApperanceCondition condition = (EffectApperanceCondition)Activator.CreateInstance(globalEffectData.EffectAppearanceCondition.ApperanceConditionType);
+            
+            condition.SetArgumentsContainer(globalEffectData.EffectAppearanceConditionArgumentsContainer); 
+            _diContainer.Inject(condition);
+            
+            return condition.CanAppear();
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Effect data has appearance condition, but doesn't have type {globalEffectData.name}");
+            throw e;
+        }
     }
 
     public List<GlobalToggleEffect> CreateToggleEffects(ToggleGlobalEffectData globalEffectData)

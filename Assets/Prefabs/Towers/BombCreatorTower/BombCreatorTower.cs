@@ -6,6 +6,7 @@ using Combat;
 
 public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 {
+    [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private DraggableCreator _draggableCreator;
     [SerializeField] private Explotion _bombPrefab;
     [Cached] private MaxEntities _maxEntities;
@@ -20,6 +21,27 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     {
         _bombPool = new WeaponBasePool<Explotion>(_bombPrefab, 5, _ownerEntity);
         _taskCycle.TaskPerformed += CreateBomb;
+        _waveStateMachine.StateStarted += HandleWaveStateChange;
+    }
+
+    private void HandleWaveStateChange(WaveState waveState)
+    {
+        if (waveState == WaveState.Attack)
+        {
+            _taskCycle.TryCycle();
+        }
+        else
+        {
+            IReadOnlyList<Explotion> bombs = _bombPool.Pool.Pool;
+
+            for (int i = 0; i < bombs.Count; i++)
+            {
+                if (bombs[i].GetComponent<DraggableObject>().IsPlaced)
+                {
+                    bombs[i].gameObject.SetActive(false);
+                }
+            }
+        }
     }
     
     public ResolveTaskCondition GetTaskCondition() => LessThanMaxBombs;
@@ -45,7 +67,11 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         _taskCycle.TryCycle();
     }
     
-    private bool LessThanMaxBombs() => _createdBombs.Count <= _maxEntities.RoundedValue;
+    private bool LessThanMaxBombs() => _createdBombs.Count <= _maxEntities.RoundedValue && _waveStateMachine.CurrentState == WaveState.Attack;
 
-    private void OnDestroy() => _bombPool.DestroyPool();
+    private void OnDestroy()
+    {
+        _bombPool.DestroyPool();
+        _waveStateMachine.StateStarted -= HandleWaveStateChange;
+    } 
 }

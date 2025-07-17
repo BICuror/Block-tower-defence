@@ -23,9 +23,12 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
@@ -71,6 +74,7 @@ MonoBehaviour:
   _rarity: 1
   _tags: 
   _effectType: 0
-  _modificatorName: ASSasin
+  _icon: {fileID: 741723918, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _modificatorName: Reaper
   _modificatorDescription: '#good +200% good# #Damage to entities with #MaxHealth
     < 50%'

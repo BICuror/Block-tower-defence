@@ -5284,7 +5284,6 @@ MonoBehaviour:
   _allAvailableModificators:
   - {fileID: 11400000, guid: 6cce0aa5c95bbc043abcdec995f8f3d2, type: 2}
   - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
-  - {fileID: 11400000, guid: 5bd2b83d5e5630c48b3f0ad5be66fe85, type: 2}
   - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
   - {fileID: 11400000, guid: 7186276ae6f62df4dbd8f8a85c146e7e, type: 2}
   - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
@@ -5332,16 +5331,16 @@ MonoBehaviour:
     _defaultValue: 4
   - StructName: Damage
     _statData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
-    _defaultValue: 250
+    _defaultValue: 5
   - StructName: TravelTime
     _statData: {fileID: 11400000, guid: 5e8b85fba4737254599072092f655308, type: 2}
     _defaultValue: 1
   - StructName: ExplotionDamage
     _statData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    _defaultValue: 1
+    _defaultValue: 4
   - StructName: ExplotionRadius
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    _defaultValue: 3
+    _defaultValue: 4
 --- !u!114 &7114909489339946991
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,34 +1,44 @@
+using System;
+using UnityEngine.EventSystems;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(CanvasGroup))]
 
 public abstract class InspectionPanel : MonoBehaviour, IPointerExitHandler
 {
+    [SerializeField] private CanvasGroup _mainGroup;
     private float _fadeDuration = 0.2f;
-    private CanvasGroup _mainGroup;
+    private bool _initialized;
 
-    private void Awake()
-    {
-        _mainGroup = GetComponent<CanvasGroup>();
-    }
+    public Action Closed;
     
-    private void OnEnable()
+    public void Enable()
     {
-        _mainGroup.alpha = 0f;
-        _mainGroup.DOFade(1f, _fadeDuration);
+        _initialized = false;
+        gameObject.SetActive(true);
+        _mainGroup.DOKill();
+        
+        _mainGroup.DOFade(1f, _fadeDuration).OnComplete(() => _initialized = true);
     }
 
-    private void Disable()
+    public void Disable()
     {
         _mainGroup.DOKill();
-        _mainGroup.DOFade(0f, _fadeDuration);
-        gameObject.SetActive(false);
+        _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => gameObject.SetActive(false));
     }
     
     public void OnPointerExit(PointerEventData eventData)
     {
+        if (!_initialized) return;
+        
+        Closed?.Invoke();
+        
         Disable();
+    }
+
+    private void OnDestroy()
+    {
+        _mainGroup.DOKill();
     }
 }

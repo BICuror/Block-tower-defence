@@ -16,7 +16,7 @@ public sealed class ChanceToDropCrystalsFromEnemies : GlobalToggleEffect
     {
         if (Random.Range(0, 100) <= Args.GetArgument<int>("ChanceToDropCrystal"))
         {
-            _itemFactory.CreateItem(1, 2, enemyEntity.transform.position);
+            _itemFactory.CreateItem(1, 1, enemyEntity.transform.position);
         }
     }
     

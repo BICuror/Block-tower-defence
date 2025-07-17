@@ -5,13 +5,15 @@ using Random = UnityEngine.Random;
 
 public sealed class ItemEffectSelector : MonoBehaviour
 {
+    [SerializeField] private ItemFactory _itemFactory;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
-    private ItemModifiersSelectionContainer _temModifiersSelectionContainer;
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
+    private ItemModifiersSelectionContainer _itemModifiersSelectionContainer;
 
     private void Awake()
     {
-        _temModifiersSelectionContainer = _islandDataContainer.Data.ItemModifiersSelectionContainer;
+        _itemModifiersSelectionContainer = _islandDataContainer.Data.ItemModifiersSelectionContainer;
     }
 
     #region ModifiersSelection
@@ -20,16 +22,16 @@ public sealed class ItemEffectSelector : MonoBehaviour
     {
         List<ToggleGlobalEffectData> result = new();
 
-        List<ToggleGlobalEffectData> toggleEffectDatas = _temModifiersSelectionContainer.ItemToggleEffectContainer.EffectDatas;
+        List<ToggleGlobalEffectData> toggleEffectDatas = _itemModifiersSelectionContainer.ItemToggleEffectContainer.EffectDatas;
 
-        List<ToggleGlobalEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Positive);
+        //List<ToggleGlobalEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Positive);
         List<ToggleGlobalEffectData> negativeEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Negative); 
 
-        int positiveStrength = quality + strength;
-        int negativeStrength = strength - quality;
+        //int positiveStrength = quality + strength;
+        int negativeStrength = strength;
 
+        //result.AddRange(GetItemEffectDatas(positiveStrength, positiveEffects));
         result.AddRange(GetItemEffectDatas(negativeStrength, negativeEffects));
-        result.AddRange(GetItemEffectDatas(positiveStrength, positiveEffects));
 
         return result;   
     }
@@ -38,11 +40,11 @@ public sealed class ItemEffectSelector : MonoBehaviour
     {
         List<RewardGlobalEffectData> result = new();
 
-        List<RewardGlobalEffectData> rewardEffectDatas = _temModifiersSelectionContainer.ItemRewardEffectCotainer.EffectDatas;
+        List<RewardGlobalEffectData> rewardEffectDatas = _itemModifiersSelectionContainer.ItemRewardEffectCotainer.EffectDatas;
 
-        int positiveStrength = strength;
+       // int positiveStrength = strength + quality;
         
-        result.AddRange(GetItemEffectDatas(positiveStrength, rewardEffectDatas));
+        result.AddRange(GetItemEffectDatas(1, rewardEffectDatas));
 
         return result;
     }
@@ -60,9 +62,9 @@ public sealed class ItemEffectSelector : MonoBehaviour
         {
             int currentStrength = nonEmptyQualities[Random.Range(0, nonEmptyQualities.Count)];
 
-            if (TryGetRandomEffectData(currentStrength, itemEffectDats, out T effectData))
+            if (TryGetRandomEffectData(currentStrength, new List<T>(itemEffectDats), out T effectData))
             {
-                itemEffectDats.Remove(effectData);
+                if (effectData.IsUnique) itemEffectDats.Remove(effectData);
                 result.Add(effectData);
 
                 leftStrength -= currentStrength;
@@ -75,7 +77,21 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
         return result;
     }
+    
+    private List<int> PopulateNonEmptyStrengthList(int strength)
+    {
+        List<int> result = new();
+        int leftStrength = strength;
 
+        while (leftStrength > 0)
+        {
+            result.Add(leftStrength);
+            leftStrength--;
+        }
+
+        return result;
+    }
+    
     private bool TryGetRandomEffectData<T>(int strength, List<T> datas, out T data) where T : GlobalEffectData
     {
         List<T> selectedDatas = datas.FindAll(data => data.Quality == strength);
@@ -84,8 +100,12 @@ public sealed class ItemEffectSelector : MonoBehaviour
         while (selectedDatas.Count > 0)
         {
             int randomIndex = Random.Range(0, selectedDatas.Count);
-
             T selectedData = selectedDatas[randomIndex];
+            selectedDatas.RemoveAt(randomIndex);
+         
+            if (selectedData.IsUnique && CheckToKeepUniqueEffect(selectedData)) continue;
+
+            if (!CheckIfEffectTagRequirementsAreMet(selectedData)) continue;
             
             if (selectedData.HasAppearanceCondition)
             {
@@ -100,28 +120,46 @@ public sealed class ItemEffectSelector : MonoBehaviour
                 data = selectedData; 
                 return true;
             }
-
-            selectedDatas.RemoveAt(randomIndex);
         }
         
-        Debug.Log($"Couldn't find any effect for {strength}");
+        Debug.LogError($"Couldn't find any effect for {strength}");
 
         return false;
     }
 
-    private List<int> PopulateNonEmptyStrengthList(int strength)
+    private bool CheckToKeepUniqueEffect<T>(T effectData) where T : GlobalEffectData
     {
-        List<int> result = new();
-        int leftStrength = strength;
-
-        while (leftStrength > 0)
-        {
-            result.Add(leftStrength);
-            leftStrength--;
-        }
-
-        return result;
+        return _itemFactory.CreatedItems.Exists(item =>
+            item.RewardDatas.Exists(data => data == effectData) ||
+            item.ToggleEffectDatas.Exists(data => data == effectData));
     }
 
+    private bool CheckIfEffectTagRequirementsAreMet<T>(T effectData) where T : GlobalEffectData
+    {
+        if (!effectData.HasRequiredTags && !effectData.HasBlockTags) return true;
+        
+        List<GlobalEffectData> createdGlobalEffectDatas = new();
+        List<EntityModifcatorTag> buildingsTags = _globalBuildingContainer.GetBuildingTags();
+        
+        _itemFactory.CreatedItems.ForEach(item =>
+        {
+            createdGlobalEffectDatas.AddRange(item.ToggleEffectDatas);
+            createdGlobalEffectDatas.AddRange(item.RewardDatas);
+        });
+        
+        if (effectData.HasRequiredTags) 
+        {
+            if (!EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.RequiredBuildingTags)) return false;
+            if (!GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.RequiredGlobalEffectsTags)) return false;
+        }
+        if (effectData.HasBlockTags)
+        {
+            if (EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.BlockBuildingsTags)) return false;
+            if (GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.BlockGlobalEffectTags)) return false;
+        }
+
+        return true;
+    }
+    
     #endregion
 }

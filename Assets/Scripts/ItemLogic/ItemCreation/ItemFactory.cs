@@ -18,7 +18,8 @@ public sealed class ItemFactory : MonoBehaviour
     private List<Item> _createdItems = new();
     private ListDictionary<ItemColor, Item> _usedItemColors = new();
     
-
+    public List<Item> CreatedItems => _createdItems;
+    
     public async void CreateItem(int quality, int strength, Vector3 centerPosition)
     {
         Item itemPrefab = GetItemPrefab();
@@ -48,10 +49,14 @@ public sealed class ItemFactory : MonoBehaviour
         Item item = itemDraggable.GetComponent<Item>();
         
         item.SetItemData(0, 1);
+        item.SetDuration(1);
         
         List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(0, 1);
         toggleEfectDatas.Add(_startWaveEffectData);
         item.AddToggleEffectDatas(toggleEfectDatas);
+        
+        List<RewardGlobalEffectData> rewardDatas = _effectSelector.GetRandomRewardEffectDatas(0, 0);
+        item.AddRewardEffectDatas(rewardDatas);
     }
 
     public void DestoyAllUnusedItems()

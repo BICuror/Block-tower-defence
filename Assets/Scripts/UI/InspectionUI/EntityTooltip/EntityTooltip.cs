@@ -30,7 +30,7 @@ public sealed class EntityTooltip : InspectionPanel
         _tooltipEntityModificatorContainer.TooltipClosed += ReturnToDefaultInspectionState;
     }
 
-    public void SetEntity(CombatEntity entity)
+    public void Initialize(CombatEntity entity)
     {
         _inspectable = entity.ComponentsContainer.Get<Inspectable>();
         

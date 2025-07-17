@@ -36,6 +36,15 @@ public sealed class DraggableCreator : MonoBehaviour
         return createdDraggable;
     }
 
+    public async UniTask<DraggableObject> CreateDraggableOnNearbyPosition(DraggableObject draggablePrefab, Vector3 startPositon, Vector3 finalPosition, [Optional]Launcher launcherPrefab)
+    {
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
+
+        finalPosition = GetRandomSpawnPosition(draggablePrefab, finalPosition, 0);
+
+        return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition, launcherPrefab);
+    }
+    
     public async UniTask<DraggableObject> CreateDraggableOnRandomPosition(DraggableObject draggablePrefab, Vector3 startPositon, [Optional]int radius, [Optional]Launcher launcherPrefab)
     {
         if (radius == 0) radius = _spawnRadius;

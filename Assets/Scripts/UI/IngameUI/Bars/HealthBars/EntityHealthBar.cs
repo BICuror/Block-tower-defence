@@ -1,13 +1,21 @@
 public sealed class EntityHealthBar : HealthBar
 {
+    private bool _isInitialized;
+    
     private void Start()
     {
-        base.Start();
+        Initialize();
         
         OwnerHealth.Healed += TryHideBar;
+        
+        OwnerHealth.Damaged += UpdateBar;
+        OwnerHealth.Healed += UpdateBar;
+        
         OwnerHealth.Damaged += ShowBar;
         
         gameObject.SetActive(false);
+
+        _isInitialized = true;
     }
 
     private void TryHideBar()
@@ -21,5 +29,17 @@ public sealed class EntityHealthBar : HealthBar
     private void ShowBar()
     {
         gameObject.SetActive(true);
+    }
+
+    private void OnDestroy()
+    {
+        base.OnDestroy();
+        
+        OwnerHealth.Healed -= TryHideBar;
+        
+        OwnerHealth.Damaged -= UpdateBar;
+        OwnerHealth.Healed -= UpdateBar;
+        
+        OwnerHealth.Damaged -= ShowBar;
     }
 }

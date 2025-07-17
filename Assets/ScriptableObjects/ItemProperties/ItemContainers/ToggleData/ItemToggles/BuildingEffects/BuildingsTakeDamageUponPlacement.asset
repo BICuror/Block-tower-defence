@@ -20,9 +20,11 @@ MonoBehaviour:
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
+    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
@@ -38,6 +40,8 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
   _effectName: Shady buildings
   _effectDescription: Buildings take #bad 10% bad# of #MaxHealth as #Damage when
-    placed, if #MaxHealth > 50%
+    placed, if #MaxHealth > 25%

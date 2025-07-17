@@ -23,9 +23,12 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
@@ -44,6 +47,7 @@ MonoBehaviour:
   _rarity: 1
   _tags: 
   _effectType: 0
+  _icon: {fileID: -368388063, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Field medic
   _modificatorDescription: On shoot <color=green>heal 5%</color> another building
     in area

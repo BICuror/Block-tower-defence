@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: EnemiesDropCrystals
   m_EditorClassIdentifier: 
-  _quality: 1
-  _effectType: 0
-  _isUnique: 0
   _instanceItemTypeContainers:
   - _itemTypeName: ChanceToDropCrystalsFromEnemies
     AllEffectTypeNames:
@@ -31,16 +28,31 @@ MonoBehaviour:
     _argumentItems:
     - _argumentType: 0
       _argumentName: ChanceToDropCrystal
-      _intArgument: 8
+      _intArgument: 5
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: f17266970283b374e94a5c1e33eef0a7, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
+  _quality: 1
+  _effectType: 0
+  _isUnique: 0
+  _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
   _effectAppearanceConditionArgumentsContainer:
     _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: 0}
   _effectName: Eat the rich
-  _effectDescription: On #bad enemy bad# death 7% to create #Crystal
+  _effectDescription: On #bad enemy bad# death 5% to create #Crystal

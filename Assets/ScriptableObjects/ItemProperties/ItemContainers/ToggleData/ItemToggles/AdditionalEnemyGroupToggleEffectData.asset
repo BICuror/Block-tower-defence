@@ -20,20 +20,24 @@ MonoBehaviour:
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
+    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
     _argumentItems: []
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
   _effectName: Invasion
-  _effectDescription: Adds 2 #bad healer units bad# to random spawner
+  _effectDescription: Adds 4 #bad healer units bad# to random spawner
   _enemyGroup:
     _groupHealth: 100
     _groupParts:
     - _enemyData: {fileID: 11400000, guid: b790f7537f5e81947aad532a8b726f5a, type: 2}
-      _minAmount: 2
-      _maxAmount: 2
+      _minAmount: 4
+      _maxAmount: 4

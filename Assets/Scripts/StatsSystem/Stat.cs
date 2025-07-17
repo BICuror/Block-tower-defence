@@ -28,8 +28,11 @@ public class Stat
     {
         _flat = 0f;
         _multiplier = 1f;
-        
-        _statModifiers.ForEach(RemoveStatModifier);
+
+        while (_statModifiers.Count > 0)
+        {
+            RemoveStatModifier(_statModifiers[0]);
+        }
     }
     
     public void SetDefault(float value)

@@ -56,7 +56,7 @@ public abstract class Shaker : MonoBehaviour
         }
     }
     
-    private void OnDisable() => _mesh.DOComplete();
+    protected void OnDisable() => _mesh.DOComplete();
     protected void OnDestroy() => _mesh.DOComplete();
 
     private enum ShakeType

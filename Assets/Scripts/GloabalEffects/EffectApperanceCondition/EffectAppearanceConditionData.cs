@@ -13,12 +13,4 @@ public class EffectAppearanceConditionData : ScriptableObject
     [HideInInspector] public List<string> AllConditioinTypeNames;
     
     public Type ApperanceConditionType => Type.GetType(_apperanceConditionTypeName);
-    
-    private void OnValidate()
-    {
-        if (string.IsNullOrEmpty(_apperanceConditionTypeName) || AllConditioinTypeNames == null)
-        {
-            Debug.LogError($"Invalid apperance condition type in {name}");
-        }
-    }
 }

@@ -3,11 +3,12 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Combat;
+using UnityEngine.Serialization;
 
 public sealed class BuildingUpgradeSelector : MonoBehaviour
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
-    [SerializeField] private BuildingEntityModificatorDataSelector _buildingEntityModificatorDataSelector;
+    [SerializeField] private EntityModificatorDataSelector _entityModificatorDataSelector;
     [SerializeField] private DraggableConnector _draggableConnector;
     [SerializeField] private BuildingUpgradeSelectionOptionObject _buildingUpgradeSelectionOptionObjectPrefab;
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
@@ -36,14 +37,18 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         
         await CaptureDraggable();
         
-        List<EntityModificatorData> effectDatas = _buildingEntityModificatorDataSelector.GetRandomEntityEffectDatas(_buildingEntityToUpgrade, 3);
-
-        for (int i = 0; i < effectDatas.Count; i++)
+        List<EntityModificatorData> modifierDatas = _entityModificatorDataSelector.GetRandomEntityEffectDatas(_buildingEntityToUpgrade, 3);
+        
+        await _selectionOptionObjectController.CreateSelectionOptionObjects(_buildingUpgradeSelectionOptionObjectPrefab, modifierDatas.Count, InitializeSelectionOption);
+        
+        void InitializeSelectionOption(BuildingUpgradeSelectionOptionObject selectionOptionObject)
         {
-            BuildingUpgradeSelectionOptionObject selectionOptionObject = await _selectionOptionObjectController.CreateSelectionOptionObject(_buildingUpgradeSelectionOptionObjectPrefab);
+            int prefabIndex = Random.Range(0, modifierDatas.Count);
             
             selectionOptionObject.SetTargetBuildingEntity(_buildingEntityToUpgrade);
-            selectionOptionObject.SetEffectData(effectDatas[i]);
+            selectionOptionObject.SetEffectData(modifierDatas[prefabIndex]);
+
+            modifierDatas.RemoveAt(prefabIndex);
         }
     }
 

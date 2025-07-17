@@ -5274,7 +5274,7 @@ MonoBehaviour:
     _defaultValue: 3
   - StructName: OrbitalSpeed
     _statData: {fileID: 11400000, guid: 67b5674c445dc2740986e971fd3574cc, type: 2}
-    _defaultValue: 0.04
+    _defaultValue: 0.1
 --- !u!114 &5709133665173226101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5290,20 +5290,14 @@ MonoBehaviour:
   _initialModificatorDatas: []
   _allAvailableModificators:
   - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
-  - {fileID: 11400000, guid: 5bd2b83d5e5630c48b3f0ad5be66fe85, type: 2}
-  - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
-  - {fileID: 11400000, guid: 7186276ae6f62df4dbd8f8a85c146e7e, type: 2}
   - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
   - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
   - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
   - {fileID: 11400000, guid: 5b1f0399001e3da499f9eda44aad3d6c, type: 2}
   - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
-  - {fileID: 11400000, guid: 3785840dde8e03942a3e5403c67b6654, type: 2}
   - {fileID: 11400000, guid: baf101d91b46e2b4a97b9b1a0b46e6a0, type: 2}
   - {fileID: 11400000, guid: 351be86ab5475164394a85c2f95d9a81, type: 2}
-  - {fileID: 11400000, guid: d89d5d7abe0ee884fbd8be4783b7cc0d, type: 2}
   - {fileID: 11400000, guid: 4724c287469796c4c9cbb5bbea681100, type: 2}
-  - {fileID: 11400000, guid: e4911ca152b6a1d4ea5d49f48a35dd67, type: 2}
 --- !u!114 &5220538212850705305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5328,8 +5322,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inspectableObjectName: Archer tower
-  _inspectableObjectDescription: Shoots rapidly, targets one enemy
+  _inspectableObjectName: Orbital tower
+  _inspectableObjectDescription: Has orbitals, which deal damage on border of reach
+    area
 --- !u!114 &1179167039576349397
 MonoBehaviour:
   m_ObjectHideFlags: 0

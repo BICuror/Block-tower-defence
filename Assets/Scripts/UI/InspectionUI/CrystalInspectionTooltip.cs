@@ -1,14 +1,11 @@
 using System.Collections.Generic;
-using UnityEngine.UI;
 using System.Linq;
 using UnityEngine;
 using TMPro;
 
 public sealed class CrystalInspectionTooltip : InspectionPanel
 {
-    [Header("links")] 
-    [SerializeField] private Slider _negativeSlider;
-    [SerializeField] private Slider _positiveSlider;
+    [Header("Links")] 
     [SerializeField] private TextMeshProUGUI _durationTextField;
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
     [SerializeField] private LayoutSizeController _layoutSizeController;
@@ -19,9 +16,8 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
     
     private Dictionary<GlobalEffectData, GlobalEffectTooltip> _crystalTooltips = new();
     
-    public void SetItem(Item item)
+    public void Initialize(Item item)
     {
-        
         _crystalTooltips.Values.ToList().ForEach(tooltip => Destroy(tooltip.gameObject));
         _crystalTooltips.Clear();
         
@@ -37,9 +33,6 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
         
         item.RewardDatas.OrderBy(data => data.EffectType == EffectType.Negative).ToList().ForEach(CreateTooltip);
         sortedToggleEffectDatas.ForEach(CreateTooltip);
-        
-        _negativeSlider.value = item.Strength - item.Quality;
-        _positiveSlider.value = item.Strength + item.Quality;
 
         _durationTextField.text = item.Duration.ToString();
         

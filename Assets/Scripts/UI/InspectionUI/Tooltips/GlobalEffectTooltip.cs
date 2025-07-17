@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +8,7 @@ public sealed class GlobalEffectTooltip : BaseTooltip
     [Header("UI Elements")] 
     [SerializeField] private TextMeshProUGUI _modificationNameText;
     [SerializeField] private TextMeshProUGUI _modificatorDescriptionText;
+    [SerializeField] private Image _iconImage;
     [Header("Links")] 
     [SerializeField] private TooltipDataParser _tooltipDataParser;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
@@ -24,5 +26,7 @@ public sealed class GlobalEffectTooltip : BaseTooltip
         _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(globalEffectData.EffectDescription, false);
         
         _negativeCanvasGroup.ForEach(group => group.gameObject.SetActive(globalEffectData.EffectType == EffectType.Negative));
+
+        _iconImage.sprite = globalEffectData.Icon;
     }
 }

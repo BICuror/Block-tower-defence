@@ -12,19 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: MoreDamageWhenCrystals
   m_EditorClassIdentifier: 
-  _effectTypeName: DealMoreDamageWhenMoreCrystalsSelected
   _itemTypeContainers:
   - _itemTypeName: DealMoreDamageWhenMoreCrystalsSelected
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -33,7 +39,7 @@ MonoBehaviour:
       _argumentName: Multiplier
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -47,18 +53,9 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 0
+  _tags: 
   _effectType: 0
-  _modificatorName: More damage when crysals
-  _modificatorDescription: '#good +50% good# #Damage when active #Crystal > 2'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
+  _icon: {fileID: 473409037, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _modificatorName: Crystal enthusiast
+  _modificatorDescription: '#good +100% good# #Damage when active #Crystal > 3'

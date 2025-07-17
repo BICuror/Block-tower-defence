@@ -20,9 +20,11 @@ MonoBehaviour:
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
+    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
@@ -47,6 +49,8 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
   _effectName: Untouchable
   _effectDescription: Enemies have #bad 25% bad# chance of being #Invincibility until
     picked up

@@ -12,19 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: TakeDamageUponPlacement
   m_EditorClassIdentifier: 
-  _effectTypeName: TakeDamageUponPlacement
   _itemTypeContainers:
   - _itemTypeName: TakeDamageUponPlacement
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -33,7 +39,7 @@ MonoBehaviour:
       _argumentName: HealthThreshold
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 0.25
       _stringArgument: 0.5
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -47,19 +53,9 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 0
+  _tags: 
   _effectType: 1
   _modificatorName: Damage upon placement
   _modificatorDescription: Takes #bad 10% bad# of #MaxHealth as #Damage when placed,
-    if #MaxHealth > 50%
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
+    if #MaxHealth > 25%

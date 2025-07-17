@@ -20,7 +20,7 @@ public sealed class Chest : MonoBehaviour
 
     private void CreateItem()
     {
-        _itemFactory.CreateItem(1, 2, transform.position);
+        _itemFactory.CreateItem(1, 1, transform.position);
         Unsubscribe();
         _ownerEntity.Health.Die();
     }

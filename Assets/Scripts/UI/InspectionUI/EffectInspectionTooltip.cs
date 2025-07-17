@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine;
@@ -7,6 +8,7 @@ using TMPro;
 public sealed class EffectInspectionTooltip : InspectionPanel, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private List<ContentSizeFitter> _contentSizeFitters;
+    [SerializeField] private Image _effectIcon;
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
     [SerializeField] private TextMeshProUGUI _nameTextField;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
@@ -15,13 +17,17 @@ public sealed class EffectInspectionTooltip : InspectionPanel, IPointerEnterHand
     [SerializeField] private PointFollowerUI _pointFollowerUI;
     private SelectionOptionObject _selectionOptionObject;
 
-    public void SetSelectionOptionObject(SelectionOptionObject selectionOptionObject)
+    public async UniTask SetSelectionOptionObject(SelectionOptionObject selectionOptionObject)
     {
         _selectionOptionObject = selectionOptionObject;
         
         _pointFollowerUI.SetTarget(selectionOptionObject.transform);
         SetEffectName(_selectionOptionObject.OptionName);
         SetEffectDescription(_selectionOptionObject.OptionDescription);
+        _effectIcon.sprite = _selectionOptionObject.Icon;
+        
+        await UniTask.WaitForFixedUpdate();
+        
         UpdateContentSizeFilters();
     }
 
@@ -42,6 +48,7 @@ public sealed class EffectInspectionTooltip : InspectionPanel, IPointerEnterHand
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        base.OnPointerExit(eventData);
         _inspectionSubpanelsController.ClearAllSubpanels();
     }    
     

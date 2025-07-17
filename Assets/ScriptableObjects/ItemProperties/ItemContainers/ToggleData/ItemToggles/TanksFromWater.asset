@@ -20,9 +20,11 @@ MonoBehaviour:
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
+    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
@@ -38,11 +40,13 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
   _effectName: Unrelenting waters
-  _effectDescription: Spawns #bad 6 enemies bad# from water nearby roads
+  _effectDescription: Spawns #bad 8-10 enemies bad# from water nearby roads
   _enemyGroup:
     _groupHealth: 150
     _groupParts:
     - _enemyData: {fileID: 11400000, guid: c1de2e8fa0e57cb4daf570d39ee50590, type: 2}
-      _minAmount: 6
-      _maxAmount: 6
+      _minAmount: 8
+      _maxAmount: 10

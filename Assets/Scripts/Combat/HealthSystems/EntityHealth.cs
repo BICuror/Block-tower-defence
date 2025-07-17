@@ -20,7 +20,7 @@ namespace Combat
             _maxHealth = _maxHpStat.Value;
             _maxHpStat.ValueChanged += _ => ClampCurrentHpByMax();
         }
-        public void RefilHP() => _currentHp = _maxHealth;
+        public void RefilHP() => ReceiveHeal(_maxHealth);
         public float GetMaxHp() => _maxHealth;
         public float GetHp() => _currentHp;
         public float GetHpPercent() => _currentHp / _maxHealth;

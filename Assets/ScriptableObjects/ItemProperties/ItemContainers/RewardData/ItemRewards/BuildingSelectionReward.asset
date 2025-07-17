@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc939952872e07a4abf1cdafc82fad67, type: 3}
   m_Name: BuildingSelectionReward
   m_EditorClassIdentifier: 
-  _quality: 2
+  _quality: 1
   _effectType: 0
-  _isUnique: 0
+  _isUnique: 1
   _instanceItemTypeContainers:
   - _itemTypeName: StartBuildingSelectionGlobalRewardEffect
     AllEffectTypeNames:
@@ -24,7 +24,9 @@ MonoBehaviour:
     - StartGlobalEffectSelectionGlobalRewardEffect
   _argumentsContainer:
     _argumentItems: []
-  _hasEffectAppearanceCondition: 1
+  _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 11400000, guid: f7c233961f01461439bbaee2707162a0, type: 2}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
   _effectName: New building
   _effectDescription: '#good Rewards building good#'

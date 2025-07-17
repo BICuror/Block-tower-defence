@@ -37,9 +37,31 @@ public class InspectorController : MonoBehaviour
             if (hit.collider.gameObject.TryGetComponent(out Item item))
             {
                 _inspectable = hit.collider.gameObject.GetComponent<Inspectable>();
+                
                 _inspectable.SetInspectedState(true);
                 
                 _inspectionTooltipManager.ActivateCrystalTooltip(item);
+                
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    public bool TryToStartInspectingEffect(Vector2 mousePosition)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.TryGetComponent(out BuildingUpgradeSelectionOptionObject buildingUpgradeSelectionOptionObject))
+            {
+                _inspectable = hit.collider.gameObject.GetComponent<Inspectable>();
+                
+                _inspectable.SetInspectedState(true);
+                
+                _inspectionTooltipManager.ActivateEffectTooltip(buildingUpgradeSelectionOptionObject);
                 
                 return true;
             }
@@ -62,6 +84,24 @@ public class InspectorController : MonoBehaviour
                     {
                         StopInspecting();
                         TryToStartInspectingItem(mousePosition);
+                        return false;
+                    }
+                }
+            }
+        }
+        
+        if (_inspectable != null && _inspectable.TryGetComponent<BuildingUpgradeSelectionOptionObject>(out BuildingUpgradeSelectionOptionObject selectionOptionObjectInspectable))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+            if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+            {
+                if (hit.collider.gameObject.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
+                {
+                    if (selectionOptionObjectInspectable != selectionOptionObject)
+                    {
+                        StopInspecting();
+                        TryToStartInspectingEffect(mousePosition);
                         return false;
                     }
                 }

@@ -23,9 +23,12 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
@@ -44,5 +47,6 @@ MonoBehaviour:
   _rarity: 1
   _tags: 
   _effectType: 0
-  _modificatorName: Sloooooooowmo
+  _icon: {fileID: -836971711, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _modificatorName: Slowmo
   _modificatorDescription: Apply #SlowdownEffect to all #bad enemies bad# in area

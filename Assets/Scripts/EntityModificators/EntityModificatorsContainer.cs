@@ -64,4 +64,19 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
             modificators.ForEach(modificator => modificator.Disable());
         }
     }
+
+    public List<EntityModifcatorTag> GetAppliedTags()
+    {
+        List<EntityModifcatorTag> entityModifcatorTags = new();
+        
+        _appliedModificators.GetAllKeys().ForEach(modificatorData =>
+        {
+            for (int i = 0; i < _appliedModificators.Get(modificatorData).Count; i++)
+            {
+                modificatorData.Tags.ForEach(tag => entityModifcatorTags.Add(tag));
+            }
+        });
+
+        return entityModifcatorTags;
+    }
 }

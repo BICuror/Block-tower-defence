@@ -14,13 +14,17 @@ public sealed class GlobalEffectSelector : MonoBehaviour
     
     public async UniTask StartGlobalEffectSelection()
     {
-        List<ToggleGlobalEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_globalStatContainer.Get<SelectionOptionsAmount>().RoundedValue);
+        List<ToggleGlobalEffectData> effectDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_globalStatContainer.Get<SelectionOptionsAmount>().RoundedValue);
 
-        for (int i = 0; i < buildingDatas.Count; i++)
+        await _selectionOptionObjectController.CreateSelectionOptionObjects(_selectionObject, effectDatas.Count, InitializeSelectionOption);
+        
+        void InitializeSelectionOption(GlobalEffectSelectionOptionObject selectionOptionObject)
         {
-            GlobalEffectSelectionOptionObject selectionOptionObject = await _selectionOptionObjectController.CreateSelectionOptionObject(_selectionObject);
+            int prefabIndex = Random.Range(0, effectDatas.Count);
             
-            selectionOptionObject.SetGlobalEffectData(buildingDatas[i]);
+            selectionOptionObject.SetGlobalEffectData(effectDatas[prefabIndex]);
+
+            effectDatas.RemoveAt(prefabIndex);
         }
     }
 }

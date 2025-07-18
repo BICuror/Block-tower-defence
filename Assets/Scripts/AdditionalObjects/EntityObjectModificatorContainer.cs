@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cashing;
+using Zenject;
 using Combat;
 
 public sealed class EntityObjectModificatorContainer : MonoBehaviour
 {
+    [Inject] private DiContainer _diContainer;
     [Cached] private EntityComponentCacher _ownerComponentCacher;
     [Cached] private EntityHealth _entityHealth;
     
@@ -17,7 +19,7 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
 
     public T InstantiateAndAddModificator<T>(GameObject prefab)
     {
-        GameObject modificator = Instantiate(prefab, transform);
+        GameObject modificator = _diContainer.InstantiatePrefab(prefab, transform);
         
         AddModificator(modificator);
         

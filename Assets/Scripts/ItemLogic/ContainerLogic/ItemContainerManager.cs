@@ -6,7 +6,6 @@ using Zenject;
 public class ItemContainerManager : MonoBehaviour
 {
     [Inject] private WaveManager _waveManager;
-    [SerializeField] private float _transitionDuration = 0.6f;
     [SerializeField] private ItemsContainer _itemContainer;
     [SerializeField] private ItemsContainerAnimator _itemsContainerAnimator;
     [SerializeField] private ItemContainerLocker _itemContainerLocker;
@@ -14,6 +13,10 @@ public class ItemContainerManager : MonoBehaviour
     private void Awake()
     {
         _itemContainer.ContainerUpdated += UpdateContainer;
+        _itemContainer.ItemInspectionEnded += StartContainerAnimation;
+        _itemContainer.ItemInspectionStarted += StopContainerAnimation;
+        
+        _itemsContainerAnimator.StartRotation();
     }
 
     public void UnlockContainer()
@@ -24,13 +27,14 @@ public class ItemContainerManager : MonoBehaviour
     private void UpdateContainer()
     {
         StopAllCoroutines();
-        
-        _itemsContainerAnimator.TransitionToNewPositions(_itemContainer.ContainedItems, _transitionDuration);
+        _itemsContainerAnimator.TransitionToNewPositions();
     }
 
     public void UpdateContainedItems()
     {
-        _itemContainer.ContainedItems.ForEach(item =>
+        List<Item> items = new List<Item>(_itemContainer.ContainedItems);
+        
+        items.ForEach(item =>
         {
             item.DecreaseDuration();
         });
@@ -41,5 +45,18 @@ public class ItemContainerManager : MonoBehaviour
         StopAllCoroutines();
         _itemContainerLocker.SetPossibleToRemoveItems(false);
         _itemContainerLocker.SetPossibleToAddItems(false);
+    }
+
+    private void StartContainerAnimation()
+    {
+        if (!_itemContainer.IsItemInspected)
+        {
+            _itemsContainerAnimator.StartRotation();
+        }
+    }
+
+    private void StopContainerAnimation()
+    {
+        _itemsContainerAnimator.StopRotation();
     }
 }

@@ -2,19 +2,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-using Random = UnityEngine.Random;
-
 public sealed class ItemsContainer : MonoBehaviour
 {
     [SerializeField] private ItemDetector _itemDetector;    
     [SerializeField] private Transform _parent;
     private List<Item> _items = new();
 
-    public List<Item> ContainedItems => new List<Item>(_items);
+    public bool IsItemInspected => _items.Exists(item => item.GetComponent<Inspectable>().IsInspected);
+    public List<Item> ContainedItems => _items;
 
     public Action ContainerUpdated;
     public Action<Item> ItemAdded;
     public Action<Item> ItemRemoved;
+    public Action ItemInspectionStarted;
+    public Action ItemInspectionEnded;
 
     private void Start()
     {
@@ -33,6 +34,11 @@ public sealed class ItemsContainer : MonoBehaviour
 
         item.EnableToggleEffects();
 
+        Inspectable inspectable = item.GetComponent<Inspectable>();
+        
+        inspectable.InspectionStarted += OnItemInspectionStarted;
+        inspectable.InspectionEnded += OnItemInspectionEnded;
+
         ItemAdded?.Invoke(item);
         ContainerUpdated?.Invoke();
     }
@@ -48,7 +54,15 @@ public sealed class ItemsContainer : MonoBehaviour
 
         item.DisableToggleEffects();
         
+        Inspectable inspectable = item.GetComponent<Inspectable>();
+        
+        inspectable.InspectionStarted -= OnItemInspectionStarted;
+        inspectable.InspectionEnded -= OnItemInspectionEnded;
+        
         ItemRemoved?.Invoke(item);
         ContainerUpdated?.Invoke();
     }
+    
+    private void OnItemInspectionStarted() => ItemInspectionStarted?.Invoke();
+    private void OnItemInspectionEnded() => ItemInspectionEnded?.Invoke();
 }

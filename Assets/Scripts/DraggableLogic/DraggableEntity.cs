@@ -5,29 +5,27 @@ namespace Combat
 {
     public class DraggableEntity : DraggableObject
     {
-        [Cached] private CombatEntity _ownerEntity;
+        [Cached] protected CombatEntity OwnerEntity;
         
         public Action<CombatEntity> EntityPickedUp;
         public Action<CombatEntity> EntityPlaced;
 
-        protected void Awake()
+        protected void Start()
         {
-            base.Awake();
-            
             PickedUp += OnEntityPickedUp;
             Placed += OnEntityPlaced;
         }
 
         private void OnEntityPickedUp()
         {
-            _ownerEntity.DamageModifierContainer.ReciverContainer.Add<InvincibilityDamageModifier>();
-            EntityPickedUp?.Invoke(_ownerEntity);
+            OwnerEntity.DamageModifierContainer.ReciverContainer.Add<InvincibilityDamageModifier>();
+            EntityPickedUp?.Invoke(OwnerEntity);
         }
 
         private void OnEntityPlaced()
         {
-            _ownerEntity.DamageModifierContainer.ReciverContainer.Remove<InvincibilityDamageModifier>();
-            EntityPlaced?.Invoke(_ownerEntity);
+            OwnerEntity.DamageModifierContainer.ReciverContainer.Remove<InvincibilityDamageModifier>();
+            EntityPlaced?.Invoke(OwnerEntity);
         }
 
         protected void OnDestroy()

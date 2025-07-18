@@ -7,6 +7,7 @@ namespace Combat
     {
         [Cached] private CombatEntity _entity;
         [Cached] private MaxHealth _maxHpStat;
+        private float _maxHealth;
         private float _currentHp;
         
         public Action Damaged;
@@ -16,27 +17,39 @@ namespace Combat
         
         public void Initialize()
         {
+            _maxHealth = _maxHpStat.Value;
             _maxHpStat.ValueChanged += _ => ClampCurrentHpByMax();
         }
-        public void RefilHP() => _currentHp = _maxHpStat.Value;
-        public float GetMaxHp() => _maxHpStat.Value;
+        public void RefilHP() => ReceiveHeal(_maxHealth);
+        public float GetMaxHp() => _maxHealth;
         public float GetHp() => _currentHp;
-        public float GetHpPercent() => _currentHp / _maxHpStat.Value;
+        public float GetHpPercent() => _currentHp / _maxHealth;
         public bool IsAlive() => _currentHp > 0;
-        public bool IsFullHp() => _currentHp == _maxHpStat.Value;
+        public bool IsFullHp() => _currentHp == _maxHealth;
 
         private void ClampCurrentHpByMax()
         {
-            if (_currentHp > _maxHpStat.Value) _currentHp = _maxHpStat.Value;
+            float healthPercent = GetHpPercent();
+
+            _maxHealth = _maxHpStat.Value;
+
+            _currentHp = _maxHealth * healthPercent;
         }
         
         #region DamageRecivement 
-        public void ReceiveEnemyDamage(float damage, CombatEntity damageDealer) => ReceiveDamage(damage, damageDealer);
-        public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage, null);
-        private void ReceiveDamage(float damage, CombatEntity damageDealer)
+        public void ReceivePercentEffectDamage(float percent) => ReceiveDamage(_maxHealth * percent);
+
+        public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
         {
-            damage = _entity.DamageModifierContainer.ReciverContainer.Modify(damage, damageDealer);
+            float outDamage = damageDealer.DamageModifierContainer.DealerContainer.Modify(baseDamage, _entity);
             
+            float resultDamage = _entity.DamageModifierContainer.ReciverContainer.Modify(outDamage, damageDealer);
+            
+            ReceiveDamage(resultDamage);
+        }
+        public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage);
+        private void ReceiveDamage(float damage)
+        {
             if (damage == 0 || !IsAlive()) return;
             
             _currentHp -= damage;
@@ -47,13 +60,13 @@ namespace Combat
         #endregion
         
         #region HealRecivement
-        public void ReceivePercentHeal(float percent) => ReceiveHeal(percent * _maxHpStat.Value);
+        public void ReceivePercentHeal(float percent) => ReceiveHeal(percent * _maxHealth);
         public void ReceiveHeal(float heal)
         {
             if (heal == 0) return;
             
-            if (_currentHp + heal <= _maxHpStat.Value) _currentHp += heal;
-            else _currentHp = _maxHpStat.Value;
+            if (_currentHp + heal < _maxHealth) _currentHp += heal;
+            else _currentHp = _maxHealth;
             
             Healed?.Invoke();
         }

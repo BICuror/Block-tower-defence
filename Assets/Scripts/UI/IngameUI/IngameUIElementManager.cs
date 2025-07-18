@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ public sealed class IngameUIElementManager : MonoBehaviour
 
     private List<StaticUIElement> _staticUIElements;
     private List<DynamicUIElement> _dynamicUIElements;
+
+    public Action StaticElementsUpdated;
 
     private void Awake()
     {
@@ -77,5 +80,7 @@ public sealed class IngameUIElementManager : MonoBehaviour
         {
             RotateElement(_staticUIElements[i]);
         }
+        
+        StaticElementsUpdated?.Invoke();
     }
 }

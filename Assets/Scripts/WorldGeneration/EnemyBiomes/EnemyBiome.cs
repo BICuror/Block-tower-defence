@@ -26,14 +26,15 @@ namespace WorldGeneration
         [SerializeField] private TerrainAnimator _terrainAnimator;
         [SerializeField] private EnemyBiomeDecorationMaterialChanger _enemyBiomeDecorationManager;
 
+        private int _currentStage;
         private Vector2Int _centerPosition;
         private BlockGrid _currentBlockGrid;
-
         private Vector2Int _spawnerNodeIndex;
+        
         public Vector2Int SpawnerNodeIndex => _spawnerNodeIndex;
-
-        private int _currentStage;
-
+        public int CurrentStage => _currentStage;
+        public EnemySpawner EnemySpawner => _enemySpawner;
+        
         private void Awake()
         {
             _enemySpawnSystem.AddSpawner(_enemySpawner);

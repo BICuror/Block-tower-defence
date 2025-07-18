@@ -13,13 +13,21 @@ MonoBehaviour:
   m_Name: StartWaveToggleEffect
   m_EditorClassIdentifier: 
   _quality: 1
+  _effectType: 0
   _isUnique: 0
-  _effectTypeName: StartWaveGlobalToggleEffect
-  _effectApperanceCondition: {fileID: 0}
+  _instanceItemTypeContainers:
+  - _itemTypeName: StartWaveGlobalToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
     _argumentItems: []
-  AllEffectTypeNames:
-  - StartWaveGlobalToggleEffect
-  - TestGlobalToggleEffect
-  _effectName: Starts wave
-  _effectDescription: starts wave
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectName: START
+  _effectDescription: '#good Starts wave good#'

@@ -5,18 +5,42 @@ using System;
 
 namespace Combat
 {
+    [RequireComponent(typeof(EntityEffectManager))]
+    
     public sealed class ParticleEffectManager : MonoBehaviour
     {
-        [Cached] private EntityEffectManager _entityEffectManager;
+        private EntityEffectManager _entityEffectManager;
         [Cached] private CombatEntity _onwerEntity;
         
         private Dictionary<Type, EntityEffectParticleHandler> _particleHandlers = new();
+        private List<EntityEffectParticleHandler> _customHandlers = new();
         
-        private void Start()
+        private void Awake()
         {
+            _entityEffectManager = GetComponent<EntityEffectManager>();
+            
             _entityEffectManager.EffectApplied += ApplyEffect;
             _entityEffectManager.EffectRemoved += RemoveEffect;
             _entityEffectManager.EffectUpdated += UpdateEffect;
+        }
+
+        public EntityEffectParticleHandler ApplyCustomEffect(EntityEffectParticleHandler effectPrefab)
+        {
+            EntityEffectParticleHandler particleHandler = Instantiate(effectPrefab);
+            particleHandler.AdaptToEntity(_onwerEntity);
+            
+            _customHandlers.Add(particleHandler);
+
+            return particleHandler;
+        }
+
+        public async void DestroyCustomEffect(EntityEffectParticleHandler effectInstance)
+        {
+            _customHandlers.Remove(effectInstance);
+
+            await effectInstance.Remove();
+            
+            Destroy(effectInstance.gameObject);
         }
     
         private void ApplyEffect(Type effectType)

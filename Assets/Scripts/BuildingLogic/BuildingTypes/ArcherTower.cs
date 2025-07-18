@@ -5,8 +5,8 @@ using Combat;
 public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 {
     [Cached] private CombatEntity _ownerEntity;
-    private EnemyAreaScaner _enemyAreaScaner;
-    private ProjectileSpeed _projectileSpeed;
+    [Cached] private ProjectileSpeed _projectileSpeed;
+    [Cached] private AreaEntityDetector _enemyAreaScaner;
 
     [SerializeField] private float _arrowLifetime = 5f;
     
@@ -16,14 +16,14 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 
     private WeaponPool<Arrow> _arrowObjectPool;
 
+    public WeaponPool<Arrow> WeaponPool => _arrowObjectPool;
+
     private void Start()
     {
         base.Start();
         _arrowObjectPool = new WeaponPool<Arrow>(_arrowPrefab, 3, _ownerEntity, _arrowLifetime);
 
         _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Shoot;
-        _enemyAreaScaner = _ownerEntity.ComponentsContainer.Get<EnemyAreaScaner>();
-        _projectileSpeed = _ownerEntity.StatContainer.Get<ProjectileSpeed>();
     }
 
     private void Shoot()

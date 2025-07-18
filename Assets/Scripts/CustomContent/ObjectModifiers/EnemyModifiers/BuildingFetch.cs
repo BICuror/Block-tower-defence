@@ -8,64 +8,78 @@ public sealed class BuildingFetch : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
     [SerializeField] private LayerSetting _roadLayerSetting;
-    [SerializeField] private BuildingAreaScaner _buildingAreaScaner;
+    [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private DraggableConnector _draggableConnector;
+    [SerializeField] private Animator _animator;
     [SerializeField] private float _timePerTile = 1f;
     [SerializeField] private float _fetchDistance = 3f;
     [SerializeField] private FetchType _fetchType;
-    private BuildingEntity _buildingEntity;
+    private CombatEntity _currentTargetEntity;
     private FetchState _currentState;
 
     private void Start()
     {
         _ownerEntity.Health.Died += OnOwnerDeath;
         _buildingAreaScaner.AddedItem += TryStartChase;
+        
         _draggableConnector.transform.SetParent(null);
     }
 
     private void FixedUpdate()
     {
         if (_currentState == FetchState.Idle)
+        {
             _draggableConnector.MoveTowardsPosition(_ownerEntity.transform.position);
+            
+            _draggableConnector.transform.rotation = _ownerEntity.ComponentsContainer.Get<DragAnimationObject>().transform.rotation;
+        }
     }
 
-    private async void TryStartChase(BuildingEntity buildingEntity)
+    private void TryStartChase(CombatEntity entity)
     {
         if (_currentState != FetchState.Idle) return;
 
-        if (buildingEntity.ComponentsContainer.Get<BuildingDraggable>().IsDraggable())
+        if (entity.Draggable.IsDraggable())
         {
-            _currentState = FetchState.Chase;
+            SetState(FetchState.Chase);
 
-            _buildingEntity = buildingEntity;
+            _currentTargetEntity = entity;
+            _currentTargetEntity.Draggable.PickedUp += StopChase;
 
-            FetchBuilding();
+            FetchEntity();
         }
     }
 
-    private async UniTask FetchBuilding()
+    private void StopChase()
     {
-        await _draggableConnector.MoveTo(_buildingEntity.transform.position, _timePerTile);
-
-        if (_currentState != FetchState.Chase || !_buildingEntity.Draggable.IsDraggable())
-        {
-            _currentState = FetchState.Idle;
-            return;
-        }
-
-        _currentState = FetchState.Dragging;
-
-        _draggableConnector.PickUpDraggable(_buildingEntity.gameObject);
-
-        Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
+        _currentTargetEntity.Draggable.PickedUp -= StopChase;
+        _currentTargetEntity = null;
         
-        await _draggableConnector.MoveTo(placementPosition, _timePerTile);
+        SetState(FetchState.Idle);
+        _draggableConnector.StopCurrentMovement();
+    }
+    
+    private async UniTask FetchEntity()
+    {
+        await _draggableConnector.MoveToPerTile(_currentTargetEntity.transform.position, _timePerTile);
 
-        if (_currentState != FetchState.Dragging) return;
-
-        await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject, _buildingEntity.Draggable, placementPosition);
-
-        _currentState = FetchState.Idle;
+        if (_currentState == FetchState.Chase && _currentTargetEntity)
+        {
+            SetState(FetchState.Dragging);
+            
+            _currentTargetEntity.Draggable.PickedUp -= StopChase;
+            _draggableConnector.PickUpDraggable(_currentTargetEntity.gameObject);
+       
+            Vector3 travelDestination = TileMap.GetNearestPlacePosition(_currentTargetEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
+               
+            await _draggableConnector.MoveToPerTile(travelDestination, _timePerTile);
+            
+            Vector3 placementPosition = TileMap.GetNearestPlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
+       
+            await _draggableConnector.PlaceDraggable(_currentTargetEntity.gameObject, _currentTargetEntity.Draggable, placementPosition);
+        }
+        
+        SetState(FetchState.Idle);
     }
     
     private Vector3 GetDesiredPlacementPosition()
@@ -74,15 +88,15 @@ public sealed class BuildingFetch : MonoBehaviour
         {
             case FetchType.From:
             {
-                Vector3 direction = (_buildingEntity.transform.position - _ownerEntity.transform.position).normalized;
+                Vector3 direction = (_currentTargetEntity.transform.position - _ownerEntity.transform.position).normalized;
 
-                return _buildingEntity.transform.position + direction * _fetchDistance;
+                return _currentTargetEntity.transform.position + direction * _fetchDistance;
             }
             case FetchType.To:
             {
-                Vector3 direction = (_ownerEntity.transform.position - _buildingEntity.transform.position).normalized;
+                Vector3 direction = (_ownerEntity.transform.position - _currentTargetEntity.transform.position).normalized;
 
-                return _buildingEntity.transform.position + direction * _fetchDistance;
+                return _currentTargetEntity.transform.position + direction * _fetchDistance;
             }
         }
 
@@ -92,19 +106,20 @@ public sealed class BuildingFetch : MonoBehaviour
     private async void OnOwnerDeath()
     {
         _ownerEntity.Health.Died -= OnOwnerDeath;
-
-        if (_currentState == FetchState.Dragging)
-        {
-            Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
-            
-            await _draggableConnector.PlaceDraggable(_buildingEntity.gameObject, _buildingEntity.ComponentsContainer.Get<BuildingDraggable>(), placementPosition);
-        }
-
-        _currentState = FetchState.Idle;
-        _draggableConnector.DOKill();
         _buildingAreaScaner.AddedItem -= TryStartChase;
-        Destroy(_draggableConnector.gameObject);
+        
         Destroy(gameObject);
+
+        await UniTask.WaitUntil(() => _currentState == FetchState.Idle);
+        
+        Destroy(_draggableConnector.gameObject);
+    }
+
+    private void SetState(FetchState state)
+    {
+        _currentState = state;
+        
+        //_animator.SetBool("IsOpen", _currentState != FetchState.Idle);
     }
 
     private enum FetchState

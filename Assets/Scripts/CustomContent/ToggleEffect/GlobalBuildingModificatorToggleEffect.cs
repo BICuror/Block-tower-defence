@@ -1,6 +1,5 @@
 using Zenject;
 using Combat;
-using UnityEngine;
 
 public sealed class GlobalBuildingModificatorToggleEffect : GlobalToggleEffect
 {

@@ -1,40 +1,53 @@
-using Combat;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.Events;
+using Combat;
+using System;
 
 public sealed class Bomb : DraggableObject
 {  
-    [SerializeField] private VisualEffectHandler _visualEffectHandler; 
-    [SerializeField] private LayerSetting _enemyLayerSettings;
+    [SerializeField] private Explotion _explotion;
+    private CancellationTokenSource _cancellationTokenSource = new();
+    private bool _canBeExploded;
 
-    [Header("BombStats")]
-    [SerializeField] private float _explotionRadius;
-    [SerializeField] private float _explotionDamage;
-    [SerializeField] private float _preparationTime; 
-    public void SetExplotionDamage(float value) => _explotionDamage = value;
-
-    public UnityEvent Exploded;
-
-    private void Start() => Placed += PrepeareToExplode;
-
-    private void PrepeareToExplode()
+    public Action<Bomb> Exploded;
+    
+    public void Awake()
     {
-        SetDraggableState(false);
-
-        Invoke("Explode", _preparationTime);
-    }
-
-    private void Explode()
-    {
-        Collider[] hitEntities = Physics.OverlapSphere(transform.position, _explotionRadius, _enemyLayerSettings.GetLayerMask());
-
-        for (int i = 0; i < hitEntities.Length; i++)
-        {
-            hitEntities[i].transform.gameObject.GetComponent<CombatEntity>().Health.ReceiveEffectDamage(_explotionDamage);
-        }
-
-        _visualEffectHandler.Play();
+        base.Awake();
         
-        Exploded.Invoke();
+        Placed += StartExplotion;
+        PickedUp += StopExplotion;
+    }
+    
+    public void EnableExplotion() => _canBeExploded = true;
+    
+    private async void StartExplotion()
+    {
+        if (!_canBeExploded) return;
+        
+        try
+        {
+            await UniTask.WaitForSeconds(_explotion.GetOwnerEntity().StatContainer.Get<ExplotionDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
+            Explode();
+        }
+        catch (Exception e)
+        {
+            TaskUtility.LogAsync(e);
+        } 
+    }
+    
+    private void StopExplotion()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource = new();
+    }
+    
+    private async void Explode()
+    {
+        gameObject.SetActive(false);
+        _canBeExploded = false;
+        await _explotion.Explode();
+        Exploded.Invoke(this);
     }
 }

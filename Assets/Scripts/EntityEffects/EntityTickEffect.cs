@@ -14,17 +14,10 @@ public abstract class EntityTickEffect : EntityEffect
         _secondsPerTick = ArgumentsContainer.GetArgument<float>("SecondsPerTick");
     }
 
-    public override void Update()
-    {
-        _cancelationTokenSource.Cancel();
-        _cancelationTokenSource = new();
-        InvokeTickEffect();
-    }
+    public override void Update() {}
 
     public override void ApplyToEntity()
     {
-        _cancelationTokenSource.Cancel();
-        _cancelationTokenSource = new();
         InvokeTickEffect();
     }
 

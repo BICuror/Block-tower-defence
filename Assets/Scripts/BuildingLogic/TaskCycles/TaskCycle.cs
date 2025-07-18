@@ -9,15 +9,16 @@ public class TaskCycle : MonoBehaviour
 {
     [Cached] private EntityHealth _ownerEntityHealth;
     [Cached] private TaskRechargeDuration _taskRechargeDuration;
-    [Cached] private DefaultCombatTaskConditionProvider _defaultCombatTaskConditionProvider;
+    [Cached] private ITaskConditionProvider _taskConditionProvider;
     private bool _taskCycleIsActive;
     private CancellationTokenSource _cancellationTokenSource = new();
     
     public Action TaskPerformed;
+    public Action TaskCycled;
 
     private void Start()
     {
-        _ownerEntityHealth.EntityDied += _ => StopRechargeProcess();
+        _ownerEntityHealth.Died += StopRechargeProcess;
     }
     
     public void StopRechargeProcess()
@@ -31,7 +32,7 @@ public class TaskCycle : MonoBehaviour
     {
         if (!CanWork()) return; 
         
-        if (!_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke()) return;
+        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return;
         
         if (_taskCycleIsActive) return;
 
@@ -46,7 +47,14 @@ public class TaskCycle : MonoBehaviour
 
         try
         {
-            await UniTask.WaitForSeconds(_taskRechargeDuration.Value, cancellationToken: _cancellationTokenSource.Token);
+            float elapsedTime = 0;
+                
+            while (elapsedTime < _taskRechargeDuration.Value)
+            {
+                await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
+                    
+                elapsedTime += Time.fixedDeltaTime;
+            }
         }
         catch (Exception e)
         {
@@ -57,8 +65,9 @@ public class TaskCycle : MonoBehaviour
         
         _taskCycleIsActive = false;
 
-        if (_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke())
+        if (_taskConditionProvider.GetTaskCondition().Invoke())
         {
+            TaskCycled?.Invoke();
             TryCycle();
             PerformTask();
         }
@@ -68,8 +77,13 @@ public class TaskCycle : MonoBehaviour
     {
         if (!CanWork()) return;
         
-        if (!_defaultCombatTaskConditionProvider.GetTaskCondition().Invoke()) return; 
+        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return; 
         
         TaskPerformed?.Invoke();
+    }
+
+    protected void OnDestroy()
+    {
+        _ownerEntityHealth.Died += StopRechargeProcess;
     }
 }

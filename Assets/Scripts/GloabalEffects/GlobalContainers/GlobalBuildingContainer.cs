@@ -1,6 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
+using System;
 using Combat;
 
 public sealed class GlobalBuildingContainer
@@ -12,6 +12,22 @@ public sealed class GlobalBuildingContainer
     
     public IReadOnlyList<BuildingEntity> Entities => _globalBuildingEntities;
 
+    public List<EntityModifcatorTag> GetBuildingTags(BuildingEntity excludedEntity = null)
+    {
+        List<BuildingEntity> includedBuildings = new List<BuildingEntity>(_globalBuildingEntities);
+        
+        if (excludedEntity) includedBuildings.Remove(excludedEntity);
+        
+        List<EntityModifcatorTag> resultTags = new();
+        
+        includedBuildings.ForEach(building =>
+        {
+            resultTags.AddRange(building.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags());
+        });
+        
+        return resultTags;
+    }
+    
     public void Add(BuildingEntity buildingEntity)
     {
         if (_globalBuildingEntities.Contains(buildingEntity)) throw new DuplicateNameException();

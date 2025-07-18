@@ -1,25 +1,30 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
 public sealed class GlobalEffectSelector : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataHolder;
+    [Inject] private GlobalStatContainer _globalStatContainer;
 
     [SerializeField] private ToggleEffectDataSelectionContainer _toggleEffectDataSelectionContainer;
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private GlobalEffectSelectionOptionObject _selectionObject;
-    [SerializeField] private int _optionsAmount = 3;
     
-    public async void StartGlobalEffectSelection()
+    public async UniTask StartGlobalEffectSelection()
     {
-        List<ToggleGlobalEffectData> buildingDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_optionsAmount);
+        List<ToggleGlobalEffectData> effectDatas = _toggleEffectDataSelectionContainer.GetGlobalEffects(_globalStatContainer.Get<SelectionOptionsAmount>().RoundedValue);
 
-        for (int i = 0; i < buildingDatas.Count; i++)
+        await _selectionOptionObjectController.CreateSelectionOptionObjects(_selectionObject, effectDatas.Count, InitializeSelectionOption);
+        
+        void InitializeSelectionOption(GlobalEffectSelectionOptionObject selectionOptionObject)
         {
-            GlobalEffectSelectionOptionObject selectionOptionObject = await _selectionOptionObjectController.CreateSelectionOptionObject(_selectionObject);
+            int prefabIndex = Random.Range(0, effectDatas.Count);
             
-            selectionOptionObject.SetGlobalEffectData(buildingDatas[i]);
+            selectionOptionObject.SetGlobalEffectData(effectDatas[prefabIndex]);
+
+            effectDatas.RemoveAt(prefabIndex);
         }
     }
 }

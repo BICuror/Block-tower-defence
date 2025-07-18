@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
-using System;
 using Combat;
 using Random = UnityEngine.Random;
 
@@ -37,6 +36,15 @@ public sealed class DraggableCreator : MonoBehaviour
         return createdDraggable;
     }
 
+    public async UniTask<DraggableObject> CreateDraggableOnNearbyPosition(DraggableObject draggablePrefab, Vector3 startPositon, Vector3 finalPosition, [Optional]Launcher launcherPrefab)
+    {
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
+
+        finalPosition = GetRandomSpawnPosition(draggablePrefab, finalPosition, 0);
+
+        return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition, launcherPrefab);
+    }
+    
     public async UniTask<DraggableObject> CreateDraggableOnRandomPosition(DraggableObject draggablePrefab, Vector3 startPositon, [Optional]int radius, [Optional]Launcher launcherPrefab)
     {
         if (radius == 0) radius = _spawnRadius;
@@ -45,6 +53,18 @@ public sealed class DraggableCreator : MonoBehaviour
         Vector3 finalPosition = GetRandomSpawnPosition(draggablePrefab, startPositon, radius);
 
         return await CreateDraggableOnPosition(draggablePrefab, startPositon, finalPosition, launcherPrefab);
+    }
+
+    public async UniTask ActivateDraggableOnRandomPosition(DraggableObject draggable, Vector3 startPositon, [Optional] int radius, [Optional] Launcher launcherPrefab)
+    {
+        if (radius == 0) radius = _spawnRadius;
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
+        
+        Vector3 finalPosition = GetRandomSpawnPosition(draggable, startPositon, radius);
+        await CreateLauncher(startPositon, finalPosition, launcherPrefab);
+
+        draggable.transform.position = finalPosition;
+        draggable.gameObject.SetActive(true);
     }
     
     private async UniTask CreateLauncher(Vector3 startPosition, Vector3 finalPosition, Launcher launcherPrefab)

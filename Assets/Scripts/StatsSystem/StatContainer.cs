@@ -1,17 +1,16 @@
-using UnityEngine;
 using System.Collections.Generic;
-using System;
+using UnityEngine;
 using System.Data;
 using System.Linq;
+using System;
 
-public sealed class StatContainer : MonoBehaviour
+public class StatContainer
 {
-    [SerializeField] private StatInitializer[] _statInitializers;
     private readonly Dictionary<Type, Stat> _stats = new();
 
-    public void Initialize()
+    public void AddStats(StatInitializer[] statInitializers)
     {
-        foreach (StatInitializer statInitializer in _statInitializers)
+        foreach (StatInitializer statInitializer in statInitializers)
         {
             Type statType = statInitializer.StatData.GetStatType();
 
@@ -67,33 +66,14 @@ public sealed class StatContainer : MonoBehaviour
         }
         else throw new DuplicateNameException($"Stat with type {statType.ToString()} already exists.");
     }
-    
-    private void OnValidate()
-    {
-        try
-        {
-            for (int i = 0; i < _statInitializers.Length; i++)
-            {
-                _statInitializers[i].StructName = _statInitializers[i].StatData.GetStatType().ToString();
+}
 
-                Type statType = _statInitializers[i].StatData.GetStatType();
-                
-                if (Has(statType))
-                {
-                    Get(statType).SetDefault(_statInitializers[i].DefaultValue);
-                }
-            }
-        }
-        catch (Exception ex) { Debug.LogWarning(ex.Message); }
-    }
+[Serializable] public struct StatInitializer
+{
+    [HideInInspector] public string StructName;
+    [SerializeField] private StatData _statData;
+    [SerializeField] private float _defaultValue;
 
-    [Serializable] private struct StatInitializer
-    {
-        [HideInInspector] public string StructName;
-        [SerializeField] private StatData _statData;
-        [SerializeField] private float _defaultValue;
-
-        public StatData StatData => _statData;
-        public float DefaultValue => _defaultValue;
-    }
+    public StatData StatData => _statData;
+    public float DefaultValue => _defaultValue;
 }

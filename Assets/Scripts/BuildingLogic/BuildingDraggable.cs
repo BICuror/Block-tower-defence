@@ -1,18 +1,23 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using UnityEngine;
 using Cashing;
 using System;
-using System.Threading.Tasks;
 using Combat;
-using UnityEngine;
+using Zenject;
 
 public sealed class BuildingDraggable : DraggableEntity
 {
-    [Cached] private BuildTime _buildTime;
+    [Inject] private WaveStateMachine _waveStateMachine;
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _isBuilt = true;
-
+    
+    private BuildTime _buildTime;
+    private bool _hasBuildTime;
+    
     public Action BuildCompleted;
+    public Action BuildProgressStarted;
+    public Action<float> BuildProcessUpdated;
     public Action<BuildingDraggable> BuildingPickedUp;
     public Action<BuildingDraggable> BuildingPlaced;
     public Action<BuildingDraggable> BuildingBuilt;
@@ -28,6 +33,14 @@ public sealed class BuildingDraggable : DraggableEntity
         PickedUp += StopBuildingProcess;
     }
 
+    private void Start()
+    {
+        base.Start();
+
+        _hasBuildTime = OwnerEntity.StatContainer.Has<BuildTime>();
+        if (_hasBuildTime) _buildTime = OwnerEntity.StatContainer.Get<BuildTime>();
+    }
+
     private void PickUpBuilding()
     {
         _isBuilt = false;
@@ -38,16 +51,33 @@ public sealed class BuildingDraggable : DraggableEntity
     {
         BuildingPlaced?.Invoke(this);
 
-        try
+        if (_hasBuildTime && _waveStateMachine.CurrentState == WaveState.Attack)
         {
-            await UniTask.WaitForSeconds(_buildTime.Value, cancellationToken: _cancellationTokenSource.Token);
+            BuildProgressStarted?.Invoke();
+            BuildProcessUpdated?.Invoke(0);
+            
+            try
+            {
+                float elapsedTime = 0;
+                
+                while (elapsedTime < _buildTime.Value)
+                {
+                    await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
+                    
+                    elapsedTime += Time.fixedDeltaTime;
+                    
+                    BuildProcessUpdated?.Invoke(elapsedTime / _buildTime.Value);
+                }
+                
+                BuildProcessUpdated?.Invoke(1f);
+            }
+            catch (Exception e)
+            {
+                TaskUtility.LogAsync(e);
+                return;
+            }
         }
-        catch (Exception e)
-        {
-            TaskUtility.LogAsync(e);
-            return;
-        }
-
+        
         CompleteBuild();
     }
 

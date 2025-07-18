@@ -1,14 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using ModestTree;
+using System.Linq;
 using UnityEngine;
+using ModestTree;
+using System;
 
 namespace Cashing
 {
-    [RequireComponent(typeof(StatContainer))]
-    
     public abstract class EntityComponentCacher : MonoBehaviour
     {
         private const BindingFlags BINDING_FLAGS = BindingFlags.Instance | BindingFlags.NonPublic;
@@ -17,22 +15,27 @@ namespace Cashing
             "UnityEngine", 
             "UnityEditor"
         };
-        private StatContainer StatContainer;
         
-        protected readonly CachedComponentsContainer CachedComponentsContainer = new();
+        [SerializeField] private StatInitializer[] _statInitializers;
+        
+        private readonly StatContainer _statContainer = new();
+        private readonly CachedComponentsContainer _cachedComponentsContainer = new();
+        
+        public StatContainer StatContainer => _statContainer;
+        public CachedComponentsContainer ComponentsContainer => _cachedComponentsContainer;
 
         protected void Awake()
         {
-            StatContainer = GetComponent<StatContainer>();
-            
-            CachedComponentsContainer.Initialize(gameObject); 
-            StatContainer.Initialize();
+            _cachedComponentsContainer.Initialize(gameObject);
+            InitializeStatContainer();
             
             InjectAll();
         }
 
-        private void InjectAll() => InjectCachedToObjectAndChildren(gameObject);
+        #region Cache
 
+        private void InjectAll() => InjectCachedToObjectAndChildren(gameObject);
+        
         public void InjectCachedToObjectAndChildren(GameObject injectReciver)
         {
             Component[] components = injectReciver.GetComponentsInChildren<Component>().ToArray();
@@ -49,8 +52,7 @@ namespace Cashing
             
             if (IsIgnoredComponent(componentType)) return;
             
-            if (IsInjectable(componentType))
-                CacheFields(GetFieldsToCache(componentType), injectReciverObject);
+            if (IsInjectable(componentType)) CacheFields(GetFieldsToCache(componentType), injectReciverObject);
             
             List<Type> subTypes = GetInjectableSubTypes(injectReciverObject);
 
@@ -128,10 +130,37 @@ namespace Cashing
         {
             if (type.IsSubclassOf(typeof(Stat)))
             {
-                return StatContainer.Get(type);
+                return _statContainer.Get(type);
             }
             
-            return CachedComponentsContainer.Get(type);
+            return _cachedComponentsContainer.Get(type);
         }
+
+        #endregion
+
+        #region StatContainer
+        
+        private void InitializeStatContainer()
+        {
+            _statContainer.AddStats(_statInitializers);
+            _cachedComponentsContainer.Add<StatContainer>(_statContainer);
+        }
+        
+        private void OnValidate()
+        {
+            for (int i = 0; i < _statInitializers.Length; i++)
+            {
+                _statInitializers[i].StructName = _statInitializers[i].StatData.GetStatType().ToString();
+
+                Type statType = _statInitializers[i].StatData.GetStatType();
+            
+                if (_statContainer.Has(statType))
+                {
+                    _statContainer.Get(statType).SetDefault(_statInitializers[i].DefaultValue);
+                }
+            }
+        }
+        
+        #endregion
     }
 }

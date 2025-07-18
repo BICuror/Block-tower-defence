@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165e2371af6f074390831cde16f1b38, type: 3}
+  m_Name: TanksFromWater
+  m_EditorClassIdentifier: 
+  _quality: 1
+  _effectType: 1
+  _isUnique: 0
+  _instanceItemTypeContainers:
+  - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - ChanceToDropCrystalsFromEnemies
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: MinimalDistanceToCenter
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 4.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _effectName: Unrelenting waters
+  _effectDescription: Spawns #bad 8-10 enemies bad# from water nearby roads
+  _enemyGroup:
+    _groupHealth: 150
+    _groupParts:
+    - _enemyData: {fileID: 11400000, guid: c1de2e8fa0e57cb4daf570d39ee50590, type: 2}
+      _minAmount: 8
+      _maxAmount: 10

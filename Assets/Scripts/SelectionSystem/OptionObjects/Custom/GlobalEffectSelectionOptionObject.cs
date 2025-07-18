@@ -1,4 +1,5 @@
-using UnityEditor.Localization.Plugins.XLIFF.V20;
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 public sealed class GlobalEffectSelectionOptionObject : SelectionOptionObject
@@ -7,7 +8,9 @@ public sealed class GlobalEffectSelectionOptionObject : SelectionOptionObject
  
     private ToggleGlobalEffectData _toggleGlobalEffectData;
 
+    public override string OptionName => _toggleGlobalEffectData.EffectName;
     public override string OptionDescription => _toggleGlobalEffectData.EffectDescription;
+    public override Sprite Icon { get; }
 
     public override void ApplyEffect()
     {

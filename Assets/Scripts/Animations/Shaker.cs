@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
+using System;
 
 public abstract class Shaker : MonoBehaviour
 {
@@ -24,10 +24,12 @@ public abstract class Shaker : MonoBehaviour
         if (_mesh == null) _mesh = transform;
         GetDefaultValues();
     }
+    
     private void GetDefaultValues()
     {
         _defaultScale = _mesh.localScale; 
     }
+    
     private void SetDefaultValues()
     { 
         _mesh.localScale = _defaultScale;
@@ -54,8 +56,8 @@ public abstract class Shaker : MonoBehaviour
         }
     }
     
-    private void OnDisable() => DOTween.Kill(_mesh);
-    private void OnDestroy() => DOTween.Kill(_mesh);
+    protected void OnDisable() => _mesh.DOComplete();
+    protected void OnDestroy() => _mesh.DOComplete();
 
     private enum ShakeType
     {

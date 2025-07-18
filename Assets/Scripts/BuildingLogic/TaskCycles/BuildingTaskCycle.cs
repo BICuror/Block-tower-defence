@@ -10,7 +10,11 @@ public sealed class BuildingTaskCycle : TaskCycle
         _buildingDraggable.BuildCompleted += TryCycle;
     }
 
-    protected override bool CanWork() => _buildingDraggable.IsBuilt; 
-    
-    private void OnDestroy() => _buildingDraggable.BuildCompleted -= TryCycle;
+    protected override bool CanWork() => _buildingDraggable.IsBuilt;
+
+    private void OnDestroy()
+    {
+        base.OnDestroy();
+        _buildingDraggable.BuildCompleted -= TryCycle;
+    } 
 }

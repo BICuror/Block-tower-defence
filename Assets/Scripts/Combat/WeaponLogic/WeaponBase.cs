@@ -2,12 +2,14 @@ using System;
 using Combat;
 using UnityEngine;
 
-public abstract class WeaponBase : MonoBehaviour
+public class WeaponBase : MonoBehaviour
 {
     protected CombatEntity OwnerEntity;
     
     public Action<CombatEntity> HitEntity;
     public Action<CombatEntity> KilledEntity;
+    
+    public CombatEntity GetOwnerEntity() => OwnerEntity;
     
     public void Initialize(CombatEntity ownerEntity)
     {
@@ -20,9 +22,7 @@ public abstract class WeaponBase : MonoBehaviour
     {
         if (!receivingEntity.Health.IsAlive()) return;
             
-        float multipliedAttackDamage = OwnerEntity.DamageModifierContainer.DealerContainer.Modify(damageAmount, receivingEntity);
-            
-        receivingEntity.Health.ReceiveEnemyDamage(multipliedAttackDamage, OwnerEntity);
+        receivingEntity.Health.ReceiveEnemyDamage(damageAmount, OwnerEntity);
             
         HitEntity?.Invoke(receivingEntity);
             

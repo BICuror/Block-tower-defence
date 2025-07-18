@@ -1,16 +1,16 @@
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(Renderer))]
 
 public sealed class GPUInstancerEnabler : MonoBehaviour
 {
-    private MeshRenderer _meshRenderer;
+    private Renderer _renderer;
 
     private MaterialPropertyBlock _materialPropertyBlock; 
 
     private void Awake()
     {
-        _meshRenderer = GetComponent<MeshRenderer>();
+        _renderer = GetComponent<Renderer>();
         _materialPropertyBlock = new MaterialPropertyBlock();
     }
 
@@ -18,6 +18,6 @@ public sealed class GPUInstancerEnabler : MonoBehaviour
 
     public void EnableGPUInstancing()
     {
-        _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
+        _renderer.SetPropertyBlock(_materialPropertyBlock);
     }
 }

@@ -22,26 +22,6 @@ public sealed class AreaVisualisation : MonoBehaviour
 
     private Tween _currentTween;
 
-    private void SetVisualisationScale(Vector3 scale)
-    {
-        _reachAreaVisualisation.transform.localScale = scale;
-    }
-
-    public void ActivatePositionedViualisation(GameObject draggable, Vector3 newPosition)
-    {
-        if (draggable.TryGetComponent<AreaManager>(out AreaManager manager))
-        { 
-
-            ActivateVisualisation(draggable);
-            
-            transform.position = newPosition;
-        }
-        else 
-        {
-            StopVisualisation();
-        }
-    }
-
     public void ActivateVisualisation(GameObject draggable)
     {
         AreaScanerController[] areaScanerControllers = draggable.GetComponentsInChildren<AreaScanerController>();
@@ -52,7 +32,7 @@ public sealed class AreaVisualisation : MonoBehaviour
         }
     }
 
-    public void DisactivateVisualisation(GameObject draggable)
+    public void DeactivateVisualisation(GameObject draggable)
     {
         AreaScanerController[] areaScanerControllers = draggable.GetComponentsInChildren<AreaScanerController>();
 
@@ -61,14 +41,4 @@ public sealed class AreaVisualisation : MonoBehaviour
             areaScanerControllers[i].DisableVisualisation(_visualisationDuration, _visualisationDisappearCurve);
         }
     }
-
-    public void StopVisualisation()
-    {
-        if (_currentTween == null || _currentTween.IsPlaying()) _currentTween.Kill();
-
-        _currentTween = DOVirtual.Vector3(_reachAreaVisualisation.transform.localScale, Vector3.zero, _inspectionDissapearDuraion, SetVisualisationScale).SetEase(_inspectionDissapearCurve).OnComplete(DisableVisualisationObject);
-        
-    }
-
-    private void DisableVisualisationObject() => _reachAreaVisualisation.gameObject.SetActive(false);
 }

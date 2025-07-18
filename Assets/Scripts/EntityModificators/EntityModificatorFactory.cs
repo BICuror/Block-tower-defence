@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Zenject;
 using System;
 
@@ -5,13 +6,26 @@ public sealed class EntityModificatorFactory
 {
     [InjectLocal] private DiContainer _diContainer;
     
-    public EntityModificator CreateEntityModificationEffect(EntityModificatorData modificatorData)
+    public List<EntityModificator> CreateEntityModificators(EntityModificatorData modificatorData)
     {
-        EntityModificator modificator = CreateEffectInstance<EntityModificator>(modificatorData.EffectType);
+        List<EntityModificator> modificators = new();
+        
+        modificatorData.ItemTypeContainers.ForEach(itemTypeContainer =>
+        {
+            modificators.Add(CreateEntityModificator(modificatorData, itemTypeContainer.InstanceType));
+        });
+        
+        return modificators;
+    }
+
+    private EntityModificator CreateEntityModificator(EntityModificatorData modificatorData, Type instanceType)
+    {
+        EntityModificator modificator = CreateEffectInstance<EntityModificator>(instanceType);
         modificator.SetArgumentsContainer(modificatorData.ArgumentsContainer);
         modificatorData.Modify(modificator);
+        
         return modificator;
-    } 
+    }   
     
     private T CreateEffectInstance<T>(Type type)
     {

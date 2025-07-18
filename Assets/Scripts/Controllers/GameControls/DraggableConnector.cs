@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine;
@@ -12,6 +13,7 @@ public sealed class DraggableConnector : MonoBehaviour
     [Header("PlacementSettings")]
     public UnityEvent<GameObject> PlacedDraggable;
     [SerializeField] private float _placementDuration;
+    private Tween _movmentTween;
     
     public async UniTask PlaceDraggable(GameObject draggableObject, IDraggable draggable, Vector3 finalPosition)
     {
@@ -19,10 +21,9 @@ public sealed class DraggableConnector : MonoBehaviour
         
         dragAnimationObject.DisconnectFromJoint(_joint);
         
-        MoveToFinalPosition(finalPosition);
-        PlaceObject(dragAnimationObject, finalPosition);
+        MoveTo(finalPosition, _placementDuration);
+        await PlaceObject(dragAnimationObject, finalPosition);
 
-        await UniTask.WaitForSeconds(_placementDuration);
         await UniTask.WaitForFixedUpdate();
         
         draggableObject.transform.parent = null;
@@ -46,8 +47,7 @@ public sealed class DraggableConnector : MonoBehaviour
 
         await DOVirtual.Float(0f, 1f, _placementDuration, Evaluate).AsyncWaitForCompletion();
 
-        dragAnimationObject.transform.position = finalPosition;
-        dragAnimationObject.transform.rotation = Quaternion.Euler(finalRotation);
+        Evaluate(1);
 
         void Evaluate(float value)
         {
@@ -64,20 +64,6 @@ public sealed class DraggableConnector : MonoBehaviour
             dragAnimationObject.transform.position = Vector3.Lerp(initialPosition, finalPosition, value);
             dragAnimationObject.transform.rotation = Quaternion.Euler(new Vector3(evaluatedX, evaluatedY, evaluatedZ));
         }
-    }
-
-    private async UniTask MoveToFinalPosition(Vector3 finalPosition)
-    {
-        await DOVirtual.Float(0f, 1f, _placementDuration, (value) => MoveTowardsPosition(finalPosition)).AsyncWaitForCompletion();
-    }
-    
-    private float GetFinalYRotation(float currentRotation)
-    {
-        if (currentRotation >= 45 && currentRotation < 135) return 90f;
-        if (currentRotation >= 135 && currentRotation < 225) return 180f;
-        if (currentRotation >= 225 && currentRotation < 315) return 270f;
-        if (currentRotation >= 315 && currentRotation <= 360) return 360f; 
-        return 0f;
     }
     
     public void PickUpDraggable(GameObject draggableObject)
@@ -98,10 +84,36 @@ public sealed class DraggableConnector : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, position, _dragSpeed * distance);   
     }
     
-    public async UniTask MoveTo(Vector3 position, float timePerTile)
+    public async UniTask MoveTo(Vector3 targetPosition, float duration)
     {
-        float duration = Vector3.Distance(position, transform.position) * timePerTile;
+        if (_movmentTween != null && _movmentTween.IsActive()) _movmentTween.Complete();
         
-        await transform.DOMove(position, duration).AsyncWaitForCompletion();
+        _movmentTween = transform.DOMove(targetPosition, duration).SetEase(Ease.Linear);
+        
+        await _movmentTween.AsyncWaitForCompletion();
     }
+    
+    public async UniTask MoveToPerTile(Vector3 targetPosition, float timePerTile)
+    {
+        float duration = timePerTile * Vector3.Distance(transform.position, targetPosition);
+
+        await MoveTo(targetPosition, duration);
+    }
+
+    public void StopCurrentMovement()
+    {
+        if (_movmentTween != null && _movmentTween.IsActive()) _movmentTween.Kill();
+    }
+    
+    private float GetFinalYRotation(float currentRotation)
+    {
+        if (currentRotation >= 45 && currentRotation < 135) return 90f;
+        if (currentRotation >= 135 && currentRotation < 225) return 180f;
+        if (currentRotation >= 225 && currentRotation < 315) return 270f;
+        if (currentRotation >= 315 && currentRotation <= 360) return 360f; 
+        return 0f;
+    }
+
+
+    private void OnDestroy() => StopCurrentMovement();
 }

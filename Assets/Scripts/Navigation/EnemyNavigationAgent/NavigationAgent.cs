@@ -5,6 +5,7 @@ using Cashing;
 using Zenject;
 using Combat;
 using System;
+using System.Collections.Generic;
 
 namespace Navigation
 {
@@ -28,6 +29,14 @@ namespace Navigation
         private NavigationNode _endNode;
         private NavigationNode _nextNode;
 
+        private List<Vector2Int> _checkDirection = new List<Vector2Int>()
+        {
+            Vector2Int.down,
+            Vector2Int.left,
+            Vector2Int.right,
+            Vector2Int.up
+        };
+        
         private void Start()
         {
             _draggableEntity.PickedUp += StopMovement;
@@ -115,10 +124,20 @@ namespace Navigation
         
         private void FindSuitableLayer()
         { 
-            Debug.Log($"CURRENT POSITION {transform.position}");
-            
             Vector2Int currentRoundedPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
-            
+
+            if (!_navigationMapHolder.Map.NodeExists(currentRoundedPosition))
+            {
+                for (int i = 0; i < _checkDirection.Count; i++)
+                {
+                    if (_navigationMapHolder.Map.NodeExists(currentRoundedPosition + _checkDirection[i]))
+                    {
+                        currentRoundedPosition += _checkDirection[i];
+                        break;
+                    }
+                }
+            }
+                
             if (_agentData.PrefferedNavigationLayer == NavigationMapLayerType.AdditionalTask)
             {
                 if (_navigationMapHolder.Map.HasActiveLayerOfType(NavigationMapLayerType.AdditionalTask))
@@ -128,8 +147,6 @@ namespace Navigation
                 }
             }
             
-            Debug.Log($"TRYING TO FIND NODE AT {currentRoundedPosition}");
-            
             _currentNavigationMapLayer = _navigationMapHolder.Map.GetLayer(currentRoundedPosition, NavigationMapLayerType.Main);
         }
 
@@ -137,7 +154,7 @@ namespace Navigation
         {
             Vector2Int currentRoundedPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
 
-            _startNode = _navigationMapHolder.Map.GetNode(currentRoundedPosition);
+            _startNode = new NavigationNode(currentRoundedPosition, Mathf.RoundToInt(transform.position.y));
             _endNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, currentRoundedPosition);
             _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
         }

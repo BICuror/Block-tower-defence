@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
+  m_Name: HeallBuidlingPerCrystals
+  m_EditorClassIdentifier: 
+  _quality: 1
+  _effectType: 1
+  _isUnique: 0
+  _instanceItemTypeContainers:
+  - _itemTypeName: HealEachBuildingPerCrystal
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: HealPercent
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.1
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 11400000, guid: 6a29148f2287efe4e8c0f36637559a70, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
+  _hasEffectAppearanceCondition: 1
+  _effectAppearanceCondition: {fileID: 11400000, guid: 71a96db705c18504a9e3ae03b9badc9b, type: 2}
+  _effectName: Last stand
+  _effectDescription: Buildings <color=green>heal 10%</color> for each active #Crystal
+    at the start of wave

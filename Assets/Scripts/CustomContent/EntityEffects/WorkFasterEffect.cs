@@ -2,29 +2,24 @@ namespace Combat
 {
     public sealed class WorkFasterEffect : EntityEffect
     {
-        private const float WORK_TIME_MODIFIER_DECREASE = 0.3f;
-
+        private StatModifier _statModifier = new StatModifier();
+        
+        public override EntityEffectType EffectType => EntityEffectType.Positive;
+        public override bool CanBeApplied() => Entity.ComponentsContainer.Has<TaskCycle>();
+        
         protected override void OnInitialized()
         {
-            throw new System.NotImplementedException();
+            _statModifier.SetFlat(ArgumentsContainer.GetArgument<float>("RechargeSpeedIncrease"));
         }
-
-        public override void Update() {}
 
         public override void ApplyToEntity()
         {
-            if (Entity.StatContainer.TryGetComponent<TaskRechargeDuration>(out TaskRechargeDuration taskRechargeDuration))
-            {
-                taskRechargeDuration.ChangeMultiplier(-WORK_TIME_MODIFIER_DECREASE);
-            }
+            Entity.StatContainer.Get<TaskRechargeDuration>().AddStatModifier(_statModifier);
         }
 
         public override void RemoveFromEntity()
         {
-            if (Entity.StatContainer.TryGetComponent<TaskRechargeDuration>(out TaskRechargeDuration taskRechargeDuration))
-            {
-                taskRechargeDuration.ChangeMultiplier(WORK_TIME_MODIFIER_DECREASE);
-            }
+            Entity.StatContainer.Get<TaskRechargeDuration>().RemoveStatModifier(_statModifier);
         }
     }
 }

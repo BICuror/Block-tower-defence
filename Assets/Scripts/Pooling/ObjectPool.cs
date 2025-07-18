@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +14,10 @@ public sealed class ObjectPool<T> where T: Component
     
     private OnObjectInitialized _onObjectInitialized;
     private DiContainer _diContainer;
+
+    public IReadOnlyList<T> Pool => _pool;
+    
+    private int ActiveCount => _pool.Count(pooledObject => pooledObject && pooledObject.gameObject.activeSelf);
     
     public ObjectPool(T prefab, int poolSize, [Optional]DiContainer diContainer, [Optional]OnObjectInitialized onObjectInitialized)
     {
@@ -41,18 +47,14 @@ public sealed class ObjectPool<T> where T: Component
 
     public T GetNextPooledObject()
     {
-        MovePointer();
-
         if (HasFreeElement(out T element))
         {
             element.gameObject.SetActive(true);
 
             return element;
         }
-        else 
-        {
-            return CreatePooledObject();
-        }
+
+        return CreatePooledObject();
     }   
     
     private void MovePointer()
@@ -66,13 +68,11 @@ public sealed class ObjectPool<T> where T: Component
     {
         for (int i = 0; i < _pool.Count; i++)
         {
-            int currentPointer = _pointer + i;
-
-            if (currentPointer >= _pool.Count) currentPointer -= _pool.Count;
-
-            if (_pool[currentPointer].gameObject.activeSelf == false)
+            MovePointer();
+            
+            if (!_pool[_pointer].gameObject.activeSelf)
             {
-                element = _pool[currentPointer];
+                element = _pool[_pointer];
 
                 return true;
             }
@@ -91,19 +91,22 @@ public sealed class ObjectPool<T> where T: Component
         }
     }
 
-    public void DestroyPool()
+    public async void DestroyPool()
     {
+        await UniTask.WaitUntil(() => ActiveCount == 0);
+        
         for (int i = 0; i < _pool.Count; i++)
         {
             if (_pool[i] != null) MonoBehaviour.Destroy(_pool[i].gameObject);
         }
 
-        MonoBehaviour.Destroy(_container.gameObject);
+        if (_container) MonoBehaviour.Destroy(_container.gameObject);
     }
     
     private T CreatePooledObject()
     {
         T pooledObject = MonoBehaviour.Instantiate(_prefab, Vector3.zero, Quaternion.identity, _container);
+        pooledObject.gameObject.SetActive(true);
         _pool.Add(pooledObject);
         
         if (_diContainer != null) _diContainer.Inject(pooledObject);

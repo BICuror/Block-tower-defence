@@ -7,19 +7,28 @@ public sealed class DamageModifierContainer
 {
     private ListDictionary<Type, DamageModifier> _modifiersDictionaryList;
     private DamageModifier _currentSingleDamageModifier;
+    private CombatEntity _ownerEntity;
 
-    public DamageModifierContainer()
+    public DamageModifierContainer(CombatEntity ownerEntity)
     {
         _modifiersDictionaryList = new(SortDamageModifiers);
+        _ownerEntity = ownerEntity;
     }
     
     public void Add(Type modifierType) 
     {
         DamageModifier modifier = (DamageModifier)Activator.CreateInstance(modifierType);
-        
+
+        Add(modifier);
+    }
+
+    public void Add(DamageModifier modifier)
+    {
+        modifier.SetOwner(_ownerEntity);
+                
         if (modifier.Order != ResolveOrder.Single)
         {
-            _modifiersDictionaryList.Add(modifierType, modifier);
+            _modifiersDictionaryList.Add(modifier.GetType(), modifier);
         }
         else
         {
@@ -36,6 +45,20 @@ public sealed class DamageModifierContainer
         else if (_currentSingleDamageModifier != null)
         {
             _currentSingleDamageModifier = null;
+        }
+    }
+
+    public void Remove(DamageModifier modifier)
+    {
+        Type modifierType = modifier.GetType();
+        
+        if (_currentSingleDamageModifier == modifier)
+        {
+            _currentSingleDamageModifier = null;
+        }
+        else if (_modifiersDictionaryList.Contains(modifierType))
+        {
+            _modifiersDictionaryList.Remove(modifierType, modifier);
         }
     }
     

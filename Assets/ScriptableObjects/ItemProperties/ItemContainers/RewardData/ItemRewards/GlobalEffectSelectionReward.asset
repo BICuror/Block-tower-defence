@@ -13,17 +13,18 @@ MonoBehaviour:
   m_Name: GlobalEffectSelectionReward
   m_EditorClassIdentifier: 
   _quality: 2
+  _effectType: 0
   _isUnique: 0
-  _effectTypeName: StartGlobalEffectSelectionGlobalRewardEffect
-  _effectApperanceCondition: {fileID: 0}
+  _instanceItemTypeContainers:
+  - _itemTypeName: StartGlobalEffectSelectionGlobalRewardEffect
+    AllEffectTypeNames:
+    - StartAttackStateProperty
+    - StartBuildingSelectionGlobalRewardEffect
+    - StartBuildingUpgradeSelectionGlobalRewardEffect
+    - StartGlobalEffectSelectionGlobalRewardEffect
   _argumentsContainer:
     _argumentItems: []
-  AllEffectTypeNames:
-  - StartAttackStateProperty
-  - StartBuildingSelectionGlobalRewardEffect
-  - StartBuildingUpgradeSelectionGlobalRewardEffect
-  - StartGlobalEffectSelectionGlobalRewardEffect
-  - TestGlobalRewardEffect
-  _effectName: Effect selection
-  _effectDescription: Upon completion starts effect selection, where you choose one
-    permament effect from 3 random effects
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectName: Global upgrade
+  _effectDescription: '#good Rewards effect good#'

@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro;
 using DG.Tweening;
+using TMPro;
 
 public sealed class SpawnInfoObject : MonoBehaviour
 {
@@ -19,16 +19,13 @@ public sealed class SpawnInfoObject : MonoBehaviour
     }
 
     public void Disappear()
-    {
-        transform.DOScale(Vector3.zero, _animationDuration).OnComplete(DestroyYourself);
+    { 
+        transform.DOScale(Vector3.zero, _animationDuration).OnComplete(() => Destroy(gameObject));
     }
-
-    private void DestroyYourself() => Destroy(gameObject);
 
     public void SetEnemiyData(EnemyData enemyData)
     {
         _meshFilter.sharedMesh = enemyData.Mesh;
-        
     }
 
     public void SetAmount(int amount)

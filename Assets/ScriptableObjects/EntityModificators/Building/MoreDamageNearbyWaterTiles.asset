@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: MoreDamageNearbyWaterTiles
+  m_EditorClassIdentifier: 
+  _itemTypeContainers:
+  - _itemTypeName: MoreDamageNearbyWater
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
+    - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - PiercingArrows
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: MultiplierPerTile
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.08
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+    - _argumentType: 2
+      _argumentName: AreaPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 1
+  _tags: 
+  _effectType: 0
+  _icon: {fileID: 0}
+  _modificatorName: Activate when built
+  _modificatorDescription: '#good +8% good# #Damage for each <color=blue>water</color>
+    tile in 1 #Reach'

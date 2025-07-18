@@ -1,3 +1,4 @@
+using UnityEngine;
 using Zenject;
 using Combat;
 
@@ -5,9 +6,12 @@ public sealed class GlobalEnemyModificatorToggleEffect : GlobalToggleEffect
 {
     [Inject] private GlobalEnemyContainer _globalEnemyContainer;
     private EntityModificatorData _entityModificatorData;
+    private int _chance = 100;
     
     public override void Enable()
     {
+        if (Args.HasArgument("Chance")) _chance = Args.GetArgument<int>("Chance");
+        
         _entityModificatorData = Args.GetArgument<EntityModificatorData>("EntityModificatorData");
         
         _globalEnemyContainer.EnemyAdded += AddEntityModificator;
@@ -32,7 +36,10 @@ public sealed class GlobalEnemyModificatorToggleEffect : GlobalToggleEffect
 
     private void AddEntityModificator(EnemyEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+        if (Random.Range(0, 100) <= _chance)
+        {
+            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+        }
     }
 
     private void RemoveEntityModificator(EnemyEntity entity)

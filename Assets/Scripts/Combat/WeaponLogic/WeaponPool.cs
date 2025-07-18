@@ -1,12 +1,17 @@
+using System.Collections.Generic;
 using Combat;
 
-public sealed class WeaponPool<T> where T: Weapon
+public sealed class WeaponPool<T> where T : WeaponBase
 {
     private ObjectPool<T> _pool;
     private CombatEntity _ownerEntity;
     private float _weaponLifetime;
+
+    private List<WeaponPoolModifier> _weaponModifiers = new();
     
-    public WeaponPool(T prefab, int poolSize, CombatEntity ownerEntity, float weaponLifetime, bool useDependencyInjection = false)
+    public ObjectPool<T> Pool => _pool;
+    
+    public WeaponPool(T prefab, int poolSize, CombatEntity ownerEntity, float weaponLifetime = 0, bool useDependencyInjection = false)
     {
         _ownerEntity = ownerEntity; 
         _weaponLifetime = weaponLifetime;
@@ -19,6 +24,45 @@ public sealed class WeaponPool<T> where T: Weapon
 
     private void OnPooledObjectCreated(T pooledObject)
     {
-        pooledObject.Initialize(_ownerEntity, _weaponLifetime);
+        if (_weaponLifetime != 0)
+        {
+            (pooledObject as Weapon).Initialize(_ownerEntity, _weaponLifetime);
+        }
+        else
+        {
+            pooledObject.Initialize(_ownerEntity);
+        }
+        
+        _weaponModifiers.ForEach(modifier => modifier.AddWeaponModification(pooledObject));
     }
+
+    public void AddWeaponModifier(WeaponPoolModifier modifier)
+    {
+        _weaponModifiers.Add(modifier);
+
+        IReadOnlyList<T> poolContent = _pool.Pool;
+
+        for (int i = 0; i < poolContent.Count; i++)
+        {
+            modifier.AddWeaponModification(poolContent[i]);
+        }
+    }
+
+    public void RemoveWeaponModifier(WeaponPoolModifier modifier)
+    {
+        _weaponModifiers.Remove(modifier);
+
+        IReadOnlyList<T> poolContent = _pool.Pool;
+
+        for (int i = 0; i < poolContent.Count; i++)
+        {
+            modifier.RemoveWeaponModification(poolContent[i]);
+        }
+    }
+}
+
+public abstract class WeaponPoolModifier
+{
+    public abstract void AddWeaponModification(WeaponBase weapon);
+    public abstract void RemoveWeaponModification(WeaponBase weapon);
 }

@@ -8,16 +8,18 @@ namespace Combat
     {
         [SerializeField] private DraggableObject[] _draggablesToCreateOnStart;
         [Inject] private DraggableCreator _draggableCreator;
-    
+        [Inject] private ItemFactory _itemFactory;
+        
         private async void Start()
         {
-            GetComponent<IDraggable>().Place();
             await UniTask.WaitForSeconds(1f);
             
             for (int i = 0; i < _draggablesToCreateOnStart.Length; i++)
             {
                 _draggableCreator.CreateDraggableOnRandomPosition(_draggablesToCreateOnStart[i], transform.position, 4);
             }
+            
+            _itemFactory.CreateItem(1, 1, transform.position);
         }
         
         public void SetPosition(Vector3 newPosition)

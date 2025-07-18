@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Data;
 
 public class Stat
 {
@@ -12,12 +13,13 @@ public class Stat
     private int _roundedValue;
 
     protected virtual float MinimalValue { get => float.MinValue; }
+    //used purely for ui
+    public virtual bool LowValueIsGood { get => false; }
     
+    public float Default => _default;
     public float Value => _value;
     public int RoundedValue => _roundedValue;
-    public float Multiplier => _multiplier;
-    public float Flat => _flat;
-    public float Default => _default;
+    public bool IsModified => _statModifiers.Count > 0 || _flat != 0 || _multiplier != 1f;
 
     public Action<float> ValueChanged;
     public Action<int> RoundedValueChanged;
@@ -26,8 +28,11 @@ public class Stat
     {
         _flat = 0f;
         _multiplier = 1f;
-        
-        _statModifiers.ForEach(RemoveStatModifier);
+
+        while (_statModifiers.Count > 0)
+        {
+            RemoveStatModifier(_statModifiers[0]);
+        }
     }
     
     public void SetDefault(float value)
@@ -46,8 +51,12 @@ public class Stat
         CalculateStatValue();
     }
 
+    public bool IsApplied(StatModifier statModifier) => _statModifiers.Contains(statModifier);
+    
     public void AddStatModifier(StatModifier statModifier)
     {
+        if (IsApplied(statModifier)) throw new DuplicateNameException("Tried to add same stat modifier twice");
+        
         statModifier.ModifierChanged += CalculateStatValue;
         _statModifiers.Add(statModifier);
         CalculateStatValue();
@@ -58,6 +67,24 @@ public class Stat
         statModifier.ModifierChanged -= CalculateStatValue;
         _statModifiers.Remove(statModifier);
         CalculateStatValue();
+    }
+
+    public float GetFlatModifier()
+    {
+        float flat = _flat;
+        
+        _statModifiers.ForEach(modifier => flat += modifier.Flat);
+
+        return flat;
+    }
+    
+    public float GetMultiplierModifier()
+    {
+        float multiplier = _multiplier;
+        
+        _statModifiers.ForEach(modifier => multiplier += modifier.Multiplier);
+
+        return multiplier;
     }
     
     private void CalculateStatValue()

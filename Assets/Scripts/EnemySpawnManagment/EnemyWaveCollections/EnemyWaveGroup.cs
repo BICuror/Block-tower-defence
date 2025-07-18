@@ -1,11 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyWaveGroup", menuName = "SpawnManagement/EnemyWaveGroup")]
 
 public sealed class EnemyWaveGroup : ScriptableObject 
 {    
-    [SerializeField] private GroupPart[] _groupParts;
-    public GroupPart[] GroupParts => _groupParts;
+    [SerializeField] private List<GroupPart> _groupParts;
+    public List<GroupPart> GroupParts => _groupParts;
     
     [SerializeField] private int _firstPossibleWaveEncounter, _lastPossibleWaveEncounter;
     public int FirstPossibleWaveEncounter => _firstPossibleWaveEncounter;

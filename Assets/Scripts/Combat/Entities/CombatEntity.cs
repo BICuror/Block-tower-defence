@@ -1,20 +1,25 @@
-using UnityEngine;
 using Cashing;
+using System;
 
 namespace Combat
 {
-    [RequireComponent(typeof(StatContainer))]
-    
-    public abstract class CombatEntity : EntityComponentCacher
+    public abstract class CombatEntity : EntityComponentCacher, IActivatable
     {
-        private EntityDamageModifierContainer _damageModifierContainer = new();
-        [Cached] private EntityHealth _entityHealth;
-        [Cached] private StatContainer _statContainer;
+        private EntityDamageModifierContainer _damageModifierContainer;
 
-        public CachedComponentsContainer ComponentsContainer => CachedComponentsContainer;
-        public StatContainer StatContainer => _statContainer;
         public EntityDamageModifierContainer DamageModifierContainer => _damageModifierContainer;
-        public DraggableObject Draggable => CachedComponentsContainer.Get<DraggableObject>();
-        public abstract EntityHealth Health { get; }
+        public DraggableObject Draggable => ComponentsContainer.Get<DraggableObject>();
+        public EntityHealth Health => ComponentsContainer.Get<EntityHealth>();
+
+        public Action Activated;
+
+        protected void Awake()
+        {
+            base.Awake();
+            
+            _damageModifierContainer = new EntityDamageModifierContainer(this);
+        }
+
+        public void Activate() => Activated?.Invoke();
     }
 }

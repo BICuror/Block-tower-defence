@@ -1,14 +1,15 @@
+using System.Collections.Generic;
 using Combat;
 
 public class ReturnDamageModifier : DamageModifier
 {
     public override float Modify(CombatEntity otherEntity, float value)
     {
-        if (otherEntity.Health.IsAlive())
+        IReadOnlyList<CombatEntity> entitiesInArea = OwnerEntity.ComponentsContainer.Get<AreaEntityDetector>().GetList();
+
+        for (int i = 0; i < entitiesInArea.Count; i++)
         {
-            float backDamage = OwnerEntity.DamageModifierContainer.DealerContainer.Modify(value, otherEntity);
-            
-            otherEntity.Health.ReceiveEnemyDamage(backDamage, otherEntity);
+            entitiesInArea[i].Health.ReceiveEnemyDamage(value, OwnerEntity);
         }
         
         return value;

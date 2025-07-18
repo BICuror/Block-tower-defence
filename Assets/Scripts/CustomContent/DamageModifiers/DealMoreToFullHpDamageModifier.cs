@@ -6,7 +6,7 @@ public sealed class DealMoreToFullHpDamageModifier : DamageModifier
     {
         if (otherEntity.Health.GetHpPercent() == 1f)
         {
-            return value * 3f;
+            return value * Args.GetArgument<float>("DamageMultiplier");
         }
         
         return value;

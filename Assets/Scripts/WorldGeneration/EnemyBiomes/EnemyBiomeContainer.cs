@@ -7,17 +7,17 @@ namespace WorldGeneration
     public sealed class EnemyBiomeContainer
     {
         [Inject] private IslandDataContainer _islandDataContainer;
+        private List<EnemyBiome> _enemyBiomes = new();
+        
         private IslandData _islandData => _islandDataContainer.Data;
-
-        private List<EnemyBiome> _enemyBiomes = new List<EnemyBiome>();
         public IReadOnlyList<EnemyBiome> EnemyBiomeList => _enemyBiomes;
-
         public int EnemyBiomeAmount => _enemyBiomes.Count;
 
         public void AddBiome(EnemyBiome biomeToAdd)
         {
             _enemyBiomes.Add(biomeToAdd);
         }
+        
         public void DisableBiomesTerrain(float duration)
         {
             for (int i = 0; i < _enemyBiomes.Count; i++)

@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using Cashing;
 using System;
-using System.Linq;
 
 namespace Combat
 {
@@ -10,12 +10,13 @@ namespace Combat
     {
         [Cached] private DraggableObject _draggableObject;
         [Cached] private CombatEntity _ownerEntity;
+        [Cached] private EntityHealth _entityHealth;
         private Dictionary<Type, EntityEffect> _appliedEffects = new();
         private Dictionary<Type, EntityEffectRemovalHandler> _removalHandlers = new();
-        private bool _effectsCanBeSet = true;
         
-        private bool EffectsCanBeApplied => _draggableObject.IsPlaced;
-
+        public List<Type> AppliedEffectTypes => _appliedEffects.Keys.ToList();
+        private bool EffectsCanBeApplied => _draggableObject.IsPlaced && _entityHealth.IsAlive();
+        
         public Action<Type> EffectApplied;
         public Action<Type> EffectUpdated;
         public Action<Type> EffectRemoved;
@@ -24,78 +25,93 @@ namespace Combat
         {
             DraggableObject draggableObject = _ownerEntity.ComponentsContainer.Get<DraggableObject>();
             
-            _ownerEntity.ComponentsContainer.Get<EntityHealth>().EntityDied += _ => RemoveAllEffects();
+            _ownerEntity.Health.Died += RemoveAllEffects;
             draggableObject.PickedUp += RemoveAllEffects;
         }
+        
+        public bool HasEffect(EntityEffectType effectType) => _appliedEffects.Values.ToList().Exists(effect => effect.EffectType == effectType);
         
         public bool HasEffect(Type effectType) => _appliedEffects.ContainsKey(effectType);
         
         public float GetEffectPercentStrength(Type effect) => (float)_appliedEffects[effect].Stack / (float)_appliedEffects[effect].MaxStacks;
 
-        public void ApplyTemporaryEffect(Type effectType, int strength, float duration)
+        public void TryApplyTemporaryEffect(Type effectType, int strength, float duration)
         {
             if (!EffectsCanBeApplied) return;
 
             if (_appliedEffects.TryGetValue(effectType, out EntityEffect exsistingEffect))
             {
-                exsistingEffect.ChangeStack(strength);
-                exsistingEffect.Update();
+                UpdateEffect(exsistingEffect, effectType, strength);
                 
-                EffectUpdated?.Invoke(effectType);
+                if (_removalHandlers.TryGetValue(effectType, out EntityEffectRemovalHandler removalHandler))
+                { 
+                    removalHandler.SetRemovalTimer(duration);
+                    removalHandler.AddStacks(strength);
+                }
+                else
+                {
+                    AddRemovalHandler(effectType, strength, duration);
+                }
             }
-            else
+            else if (ApplyEffect(effectType, strength))
             {
-                EntityEffect effect = EntityEffectFactory.Instance.CreateEntityEffect(effectType);
-                effect.SetEntity(_ownerEntity); 
-                effect.SetStack(strength);
-                
-                _appliedEffects.Add(effectType, effect); 
-                effect.ApplyToEntity();
-                
-                EntityEffectRemovalHandler removalHandler = new(effectType);
-                removalHandler.SetRemovalTimer(duration);
-                removalHandler.EffectRemovalTimerFinished += RemoveEffect;
-                _removalHandlers.Add(effectType, removalHandler);
-                
-                EffectApplied?.Invoke(effectType);
+                AddRemovalHandler(effectType, strength, duration);
             }
         }
+
+        private void AddRemovalHandler(Type effectType, int strength, float duration)
+        {
+            EntityEffectRemovalHandler removalHandler = new(effectType);
+            removalHandler.SetRemovalTimer(duration);
+            removalHandler.AddStacks(strength);
+            removalHandler.EffectRemovalTimerFinished += RemoveEffect;
+            _removalHandlers.Add(effectType, removalHandler);
+        }
         
-        public void ApplyEffect(Type effectType, int strength)
+        public void TryApplyEffect(Type effectType, int strength)
         {
             if (!EffectsCanBeApplied) return;
             
             if (_appliedEffects.TryGetValue(effectType, out EntityEffect exsistingEffect))
             {
-                exsistingEffect.ChangeStack(strength);
-                exsistingEffect.Update();
-                
-                EffectUpdated?.Invoke(effectType);
+                UpdateEffect(exsistingEffect, effectType, strength);
             }
             else
             {
-                EntityEffect effect = EntityEffectFactory.Instance.CreateEntityEffect(effectType);
-                effect.SetEntity(_ownerEntity); 
-                effect.SetStack(strength);
-                
-                _appliedEffects.Add(effectType, effect); 
-                effect.ApplyToEntity();
-                
-                EffectApplied?.Invoke(effectType);
-            }
-        }
-        
-        public void RemoveAllEffects()
-        {
-            List<Type> effectTypes = _appliedEffects.Keys.ToList();
-            
-            while (_appliedEffects.Count > 0)
-            {
-                RemoveEffect(effectTypes[^1]);
+                ApplyEffect(effectType, strength);
             }
         }
 
-        public void RemoveEffect(Type effectType) => RemoveEffect(effectType, int.MaxValue);
+        private bool ApplyEffect(Type effectType, int strength)
+        {
+            EntityEffect effect = EntityEffectFactory.Instance.CreateEntityEffect(effectType);
+            effect.SetEntity(_ownerEntity); 
+
+            if (!effect.CanBeApplied()) return false;
+            
+            _appliedEffects.Add(effectType, effect); 
+            effect.SetStack(strength);
+            effect.ApplyToEntity();
+            
+            EffectApplied?.Invoke(effectType);
+            
+            return true;
+        }
+
+        private void UpdateEffect(EntityEffect exsistingEffect, Type effectType, int strength)
+        {
+            exsistingEffect.ChangeStack(strength);
+            exsistingEffect.Update();
+                
+            EffectUpdated?.Invoke(effectType);
+        }
+        
+        private void RemoveAllEffects()
+        {
+            _appliedEffects.Keys.ToList().ForEach(RemoveEffect);
+        }
+
+        private void RemoveEffect(Type effectType) => RemoveEffect(effectType, int.MaxValue);
         
         public void RemoveEffect(Type effectType, int strength)
         {
@@ -106,7 +122,7 @@ namespace Combat
                 if (exsistingEffect.TrueStack > 0)
                 {
                     exsistingEffect.Update();
-                                
+                
                     EffectUpdated?.Invoke(effectType);
                 }
                 else
@@ -116,8 +132,8 @@ namespace Combat
                                 
                     if (_removalHandlers.ContainsKey(effectType))
                     {
-                        _removalHandlers[effectType].StopRemovalTimer();
                         _removalHandlers[effectType].EffectRemovalTimerFinished -= RemoveEffect;
+                        _removalHandlers[effectType].StopRemovalTimer();
                         _removalHandlers.Remove(effectType);
                     }
                                 

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-[CustomEditor(typeof(EntityModificatorData))]
+[CustomEditor(typeof(EntityModificatorData), true)]
 
 public class EntityModificatorDataEditor : CustomTypeDropdownEditor<EntityModificator>
 {
@@ -10,7 +10,7 @@ public class EntityModificatorDataEditor : CustomTypeDropdownEditor<EntityModifi
     {
         EntityModificatorData modificatorData = (EntityModificatorData)target;
 
-        modificatorData.AllEffectTypeNames = items;
+        modificatorData.SetItemTypeNames(items);
     }
 }
 #endif

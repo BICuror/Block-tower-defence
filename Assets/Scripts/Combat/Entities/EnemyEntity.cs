@@ -1,11 +1,14 @@
+using UnityEngine;
+
 namespace Combat
 {
+    [RequireComponent(typeof(ContactDamage))]
+    
     public sealed class EnemyEntity : CombatEntity
     {
         private EnemyHealth _health;
         
         public EnemyHealth EnemyHealth => _health;
-        public override EntityHealth Health => _health;
 
         private void Awake()
         {

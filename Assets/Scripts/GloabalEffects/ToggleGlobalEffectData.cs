@@ -2,4 +2,4 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "ToggleGlobalEffectData", menuName = "Effects/ToggleGlobalEffectData")]
 
-public sealed class ToggleGlobalEffectData : GlobalEffectData {}
+public class ToggleGlobalEffectData : GlobalEffectData {}

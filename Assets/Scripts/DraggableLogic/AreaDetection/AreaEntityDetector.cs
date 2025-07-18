@@ -2,14 +2,12 @@ using UnityEngine;
 
 namespace Combat
 {
-    public class AreaEntityDetector<T> : AreaDetector<T> where T : Component
+    public class AreaEntityDetector : AreaDetector<CombatEntity>
     {
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
-                if (!entity.ComponentsContainer.Has<T>()) return;
-                
                 RemoveEntity(entity);
             }
         }
@@ -29,15 +27,13 @@ namespace Combat
                 draggable.EntityPickedUp -= RemovePickedUpEntity;
             }
             
-            RemoveItem(entity.ComponentsContainer.Get<T>());
+            RemoveItem(entity);
         }
         
         private void OnTriggerEnter(Collider other)
         { 
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
-                if (!entity.ComponentsContainer.Has<T>()) return;
-                
                 OnEntityFound(entity);
             }
         }
@@ -59,17 +55,17 @@ namespace Combat
                 if (draggable.IsPlaced == false) return;
             }
             
-            AddItem(entity.ComponentsContainer.Get<T>());
+            AddItem(entity);
         }
         
         private void AddPlacedEntity(CombatEntity entity)
         {
-            AddItem(entity.ComponentsContainer.Get<T>());
+            AddItem(entity);
         }
     
         private void RemovePickedUpEntity(CombatEntity entity)
         {
-            RemoveItem(entity.ComponentsContainer.Get<T>());
+            RemoveItem(entity);
         }
     }
 }

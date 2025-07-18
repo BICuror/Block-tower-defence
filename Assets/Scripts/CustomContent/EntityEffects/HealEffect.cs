@@ -2,6 +2,8 @@ public sealed class HealEffect : EntityTickEffect
 { 
     private float _healAmount;
 
+    public override EntityEffectType EffectType => EntityEffectType.Positive;
+
     protected override void OnInitialized()
     {
         base.OnInitialized();

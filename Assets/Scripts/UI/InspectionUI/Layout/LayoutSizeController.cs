@@ -1,16 +1,25 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 using UnityEngine;
 
 public sealed class LayoutSizeController : MonoBehaviour
-{
-    [Tooltip("Layout resize goes from first element to last")]
+{ 
+    [SerializeField] private List<ContentSizeFitter> _contentSizeFitters;
     [SerializeField] private List<RectTransform> _controllerRectTransforms;
 
-    public void RecalculateLayout()
+    public async void RecalculateLayout()
     {
-        for (int i = 0; i < _controllerRectTransforms.Count; i++)
+        await UniTask.WaitForFixedUpdate();
+        
+        _contentSizeFitters.ForEach(contentSizeFitter =>
         {
-            _controllerRectTransforms[i].ForceUpdateRectTransforms();
-        }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(contentSizeFitter.transform as RectTransform);
+        });
+        
+        _controllerRectTransforms.ForEach(controller =>
+        {
+            controller.ForceUpdateRectTransforms();
+        });
     }
 }

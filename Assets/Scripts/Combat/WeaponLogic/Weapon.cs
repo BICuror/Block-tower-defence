@@ -18,13 +18,15 @@ namespace Combat
         
         public void Initialize(CombatEntity ownerEntity, float lifetime)
         {
-            base.Initialize(ownerEntity);
+            OwnerEntity = ownerEntity;
             _lifetime = lifetime;
+            OnInitialized();
         }
         
         #region StateManagements
 
-        private void OnEnable() => Enable();
+        protected void OnEnable() => Enable();
+        protected void OnDisable() => StopLifetimeTrack();
         
         public void Enable()
         {
@@ -33,14 +35,14 @@ namespace Combat
             SetState(true);
         }
         
-        protected void Disable()
+        public void Disable()
         {
-            StopLifetimeTrack();
             SetState(false);
         }
         
         private async UniTask StartLifetimeTrack()
         {
+            _cancellationTokenSource = new();
             _lifetimeTrackActive = true;
             
             try
@@ -58,7 +60,6 @@ namespace Combat
             if (!_lifetimeTrackActive) return;
             
             _cancellationTokenSource.Cancel();
-            _cancellationTokenSource = new();
             _lifetimeTrackActive = false;
         }
         

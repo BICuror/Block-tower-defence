@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
+using Zenject;
 
 public sealed class SelectionManager : MonoBehaviour
 {
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
+    [Inject] private WaveStateMachine _waveStateMachine;
     private Queue<SelectionSettings> _enqeuedSelections = new();
     private SelectionSettings _currentSelectionSettings;
 
@@ -15,12 +18,25 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private GlobalEffectSelector _globalEffectSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
+    private bool _selectionIsActive;
     
-    private void Start()
+    public bool SelectionPhaseIsActive => _enqeuedSelections.Count != 0 || _selectionIsActive;
+    
+    private async void Start()
     {
         _selectionOptionObjectAreaDetector.AddedItem += (optionObject) => ResolveCurrentSelection(optionObject).Forget();
-    }
+        
+        EnqeueSelection(new SelectionSettings(SelectionType.Building));
+        EnqeueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
 
+        await UniTask.WaitForSeconds(5);
+
+        _waveStateMachine.StateStarted += (state) =>
+        {
+            if (state == WaveState.Idle) EnqeueSelection(new SelectionSettings(SelectionType.Building));
+        };
+    }
+    
     public void EnqeueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
     
     public async UniTask StartSelection(SelectionSettings selectionSettings)
@@ -28,11 +44,21 @@ public sealed class SelectionManager : MonoBehaviour
         _currentSelectionSettings = selectionSettings;
         switch (_currentSelectionSettings.Type)
         {
-            case SelectionType.Building: _buildingSelector.StartBuildingsSelection(); break;
-            case SelectionType.GlobalEffect: _globalEffectSelector.StartGlobalEffectSelection(); break;
+            case SelectionType.Building:
+            {
+                if (_globalBuildingContainer.Entities.Count > 3)
+                {
+                    _currentSelectionSettings.Type = SelectionType.BuildingUpgrade;
+                    await _buildingUpgradeSelector.StartUpgradeSelection(selectionSettings);
+                }
+                else await _buildingSelector.StartBuildingsSelection(); break;
+            }
+            case SelectionType.GlobalEffect: await _globalEffectSelector.StartGlobalEffectSelection(); break;
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(selectionSettings); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }
+
+        _selectionIsActive = true;
     }
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
@@ -55,15 +81,18 @@ public sealed class SelectionManager : MonoBehaviour
     
     private async UniTask EndSelection(SelectionSettings selectionSettings)
     {
+        _selectionIsActive = false;
+        
         switch (_currentSelectionSettings.Type)
         {
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
+            case SelectionType.Building: await UniTask.WaitForSeconds(1f); break;
             default: break;
         }
     }
     
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
-        return type == _currentSelectionSettings.Type;
+        return _selectionIsActive && type == _currentSelectionSettings.Type;
     }
 }

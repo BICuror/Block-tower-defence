@@ -2,6 +2,7 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace Combat
 {
@@ -15,6 +16,7 @@ namespace Combat
         public bool IsEmpty => List.Count == 0;
         public T RandomItem => List[Random.Range(0, List.Count)];
         public T FirstItem => List[0];
+        public int Count => List.Count;
         
         public IReadOnlyList<T> GetList() => List;
         
@@ -32,10 +34,9 @@ namespace Combat
         
         private void RemoveAll()
         {
-            while (List.Count > 0)
+            for (int i = 0; i < List.Count; i++)
             {
-                if (List[^1] != null) RemoveItem(List[^1]);
-                else List.RemoveAt(List.Count - 1);
+                RemovedItem?.Invoke(List[i]);
             }
 
             List.Clear();

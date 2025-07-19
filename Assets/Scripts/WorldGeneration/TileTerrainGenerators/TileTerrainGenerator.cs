@@ -5,6 +5,7 @@ using System.Linq;
 using ModestTree;
 using Zenject;
 using System;
+using Random = UnityEngine.Random;
 
 public abstract class TileTerrainGenerator : MonoBehaviour
 {
@@ -30,15 +31,15 @@ public abstract class TileTerrainGenerator : MonoBehaviour
 
         if (neighborPositions.Count == 4)
         {
-            InstantiateTile(TileType.TopTile, position, 0); 
+            InstantiateTile(TileType.TopTile, position, 0f); 
         }
         else if (neighborPositions.Count == 0)
         {
-            InstantiateTile(TileType.FourSideTile, position, 0);
+            InstantiateTile(TileType.FourSideTile, position, Random.Range(0, 4) * 90f);
         }
         else if (neighborPositions.Count == 1)
         {
-            InstantiateTile(TileType.ThreeSideTile, position, 90 * CheckDirections.IndexOf(neighborPositions[0]));
+            InstantiateTile(TileType.ThreeSideTile, position, 90 * CheckDirections.IndexOf(neighborPositions[0]) + 90f, true);
         }
         else if (neighborPositions.Count == 2)
         {
@@ -57,14 +58,14 @@ public abstract class TileTerrainGenerator : MonoBehaviour
 
                 if (mainIndex == 0 && secondIndex == 3) mainIndex = 3; 
                 
-                InstantiateTile(TileType.CornerTile, position, 90 * mainIndex);
+                InstantiateTile(TileType.CornerTile, position, 90 * mainIndex - 90f);
             }
         }
         else
         {
             Vector2Int emptyPosition = CheckDirections.Except(neighborPositions).ToArray()[0];
             
-            InstantiateTile(TileType.OneSideTile, position, 90 * CheckDirections.IndexOf(emptyPosition) - 90f);
+            InstantiateTile(TileType.OneSideTile, position, 90 * CheckDirections.IndexOf(emptyPosition) + 90f, true);
         }
     }
 
@@ -94,13 +95,15 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     
     protected abstract TilemapData GetTilemapData(int x, int z); 
     
-    private void InstantiateTile(TileType type, Vector3Int position, float rotation)
+    private void InstantiateTile(TileType type, Vector3Int position, float rotation, bool canBeMirroredByZ = false)
     {
         TilemapData tilemapData = GetTilemapData(position.x, position.z);
         
         MeshRenderer tilePrefab = GetTilePrefab(type, tilemapData);
 
-        MeshRenderer tile = Instantiate(tilePrefab, _tileParent.position + position, Quaternion.Euler(-90f, rotation, 0), _tileParent);
+        MeshRenderer tile = Instantiate(tilePrefab, _tileParent.position + position, Quaternion.Euler(0f, rotation, 0), _tileParent);
+        
+        if (canBeMirroredByZ && Random.Range(0, 100) < 50f) tile.transform.localScale = new Vector3(1f, 1f, -1f);
         
         _instantiatedTiles.Add(tile);
     }

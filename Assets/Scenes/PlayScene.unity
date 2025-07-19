@@ -1398,8 +1398,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startWaveEffectData: {fileID: 11400000, guid: 54b0011c9fe0eb44cb43f251a49980b4, type: 2}
-  _itemPrefab: {fileID: 1305424881754724633, guid: bd5ef9bc5516fd74794200825c4cb0e9, type: 3}
   _effectSelector: {fileID: 694478734}
+  _itemsPrefabs: []
+  _waveItemPrefab: {fileID: 1305424881754724633, guid: bd5ef9bc5516fd74794200825c4cb0e9, type: 3}
 --- !u!114 &694478734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1412,6 +1413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5553528eee2180c47829feb171234677, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemFactory: {fileID: 694478733}
 --- !u!1 &703253488
 GameObject:
   m_ObjectHideFlags: 0
@@ -1876,6 +1878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317bb1e42b6a0da468a80febe1738f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entityModificatorDataSelector: {fileID: 0}
   _draggableConnector: {fileID: 1735415306}
   _buildingUpgradeSelectionOptionObjectPrefab: {fileID: 2062154613735269688, guid: d73f234d51e6f7b4c839cfb5cc483066, type: 3}
   _selectionOptionObjectController: {fileID: 1034691484}
@@ -2201,11 +2204,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1e2ffacf44ac34c8ef5ef96de12e8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _effectInspectionTooltipl: {fileID: 2707820754901906885, guid: 1ac9ed5a88b3dcb4098ab4433d859e25, type: 3}
-  _crystalInspectionTooltip: {fileID: 3493066278714942707, guid: 0a5ad62bfdb12bc42bd41be10ebc9c8e, type: 3}
-  _entityInspectionTooltipPrefab: {fileID: 7826273197769579782, guid: eb6bdbaa010b2f04d97cd22193747df7, type: 3}
+  _inspectionTooltipManager: {fileID: 0}
+  _areaVisualisation: {fileID: 0}
   _inspectableLayerSetting: {fileID: 11400000, guid: dd0975408650bdc42b28faf1ec9dce23, type: 2}
-  _uiLayerSetting: {fileID: 11400000, guid: d41fc38c6abdcf04e95454decda69bc1, type: 2}
 --- !u!1 &1010296631
 GameObject:
   m_ObjectHideFlags: 0
@@ -2440,7 +2441,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectionOptionObjectController: {fileID: 1034691484}
   _selectionObject: {fileID: 4838049607833077331, guid: 7ae7dfa30d49c494b954d0173595a93f, type: 3}
-  _optionsAmount: 3
 --- !u!114 &1034691484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2453,6 +2453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3638fe4927734a0488f20521c9ed886c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _creationRadius: 5
 --- !u!114 &1034691485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2468,7 +2469,6 @@ MonoBehaviour:
   _toggleEffectDataSelectionContainer: {fileID: 11400000, guid: 9a15d347404936540b17d0eb7f724f54, type: 2}
   _selectionOptionObjectController: {fileID: 1034691484}
   _selectionObject: {fileID: -8859770004929897270, guid: 824af044e046744499bbfed0004bacd8, type: 3}
-  _optionsAmount: 3
 --- !u!1 &1048195748
 GameObject:
   m_ObjectHideFlags: 0
@@ -3532,6 +3532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292f385fe07534e48a2be71b96e17a1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _itemsContainer: {fileID: 1923945687}
   _movmentCurve:
     serializedVersion: 2
     m_Curve:
@@ -3589,8 +3590,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _transitionDuration: 1.6
   _maxItems: 10
   _maxRaduis: 1.5
+  _defultRotationSpeed: 0.2
 --- !u!114 &1923945689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3617,7 +3620,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6a8ecba9316074e878946ed559c35a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitionDuration: 0.6
   _itemContainer: {fileID: 1923945687}
   _itemsContainerAnimator: {fileID: 1923945688}
   _itemContainerLocker: {fileID: 1923945689}
@@ -3887,7 +3889,7 @@ Transform:
   m_GameObject: {fileID: 1982758044}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8986,7 +8988,6 @@ GameObject:
   - component: {fileID: 5777981871361408667}
   - component: {fileID: 8464262724155894543}
   - component: {fileID: 8464262724155894545}
-  - component: {fileID: 8464262724155894549}
   - component: {fileID: 8464262724155894548}
   - component: {fileID: 8464262724155894551}
   - component: {fileID: 8464262724155894552}
@@ -9285,25 +9286,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b61a7e3cfd9fd824088e64d82332d009, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &8464262724155894549
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356044629221714169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c46f64bdb308df4b89db761591db20e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   _statInitializers:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
-    _defaultValue: 100
-  - StructName: BuildTime
-    _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    _defaultValue: 2
+    _defaultValue: 50
 --- !u!114 &8464262724155894551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9416,6 +9402,18 @@ PrefabInstance:
       propertyPath: _islandDecorationContainer
       value: 
       objectReference: {fileID: 2099434308}
+    - target: {fileID: 3377614663823165482, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _itemFactory
+      value: 
+      objectReference: {fileID: 694478733}
+    - target: {fileID: 3377614663823165482, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _itemsContainer
+      value: 
+      objectReference: {fileID: 1923945687}
+    - target: {fileID: 3377614663823165482, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _itemContainerManager
+      value: 
+      objectReference: {fileID: 1923945690}
     - target: {fileID: 3455974183712510898, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _navigationMapper
       value: 
@@ -9501,9 +9499,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 910443199}
     - target: {fileID: 8643825667521868239, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _enemySpawnSystem
+      value: 
+      objectReference: {fileID: 910443199}
+    - target: {fileID: 8643825667521868239, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _enemySpawnerSystem
       value: 
       objectReference: {fileID: 910443199}
+    - target: {fileID: 8643825667521868239, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _enemySpawnGroupCompiler
+      value: 
+      objectReference: {fileID: 8679370445069788124}
     - target: {fileID: 8667078185026777112, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _roadGenerator
       value: 
@@ -9638,6 +9644,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8679370445069788118}
+    - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8679370445069788124}
     - targetCorrespondingSourceObject: {fileID: 1238328245262806678, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2070163776}
@@ -9694,6 +9703,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tileParent: {fileID: 1014722197}
+--- !u!114 &8679370445069788124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8679370445069788117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a388e1cc2838e10408b4f5498f6bad62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,12 +1,13 @@
 using UnityEngine;
 using Navigation;
 using Cashing;
+using UnityEngine.Serialization;
 
 namespace Combat
 {
     public sealed class EnemyBootstrap : MonoBehaviour
     {
-        [SerializeField] private GPUInstancerEnabler _GPUInstancerEnabler;
+        [FormerlySerializedAs("_GPUInstancerEnabler")] [SerializeField] private GPUInstanceEnabler gpuInstanceEnabler;
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private MeshRenderer _meshRenderer;   
         [SerializeField] private Animator _animator;
@@ -54,7 +55,7 @@ namespace Combat
         {
             _meshFilter.sharedMesh = _enemyData.Mesh;
             _meshRenderer.sharedMaterial = _enemyData.Material;
-            _GPUInstancerEnabler.EnableGPUInstancing();
+            gpuInstanceEnabler.EnableGPUInstancing();
         }
     
         private void CreateSpecialObject()

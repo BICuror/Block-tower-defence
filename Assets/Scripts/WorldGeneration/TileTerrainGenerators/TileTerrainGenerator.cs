@@ -13,7 +13,7 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     [Inject] private RoadMapHolder _roadMapHolder;
     [SerializeField] private Transform _tileParent;
 
-    private List<MeshRenderer> _instantiatedTiles = new();
+    private List<GPUInstanceEnabler> _instantiatedTiles = new();
     
     protected Vector2Int[] CheckDirections = new Vector2Int[4]
     {
@@ -22,6 +22,8 @@ public abstract class TileTerrainGenerator : MonoBehaviour
         Vector2Int.down,
         Vector2Int.left
     };
+
+    public List<GPUInstanceEnabler> InstantiatedTiles => _instantiatedTiles;
     
     protected void GenerateTile(int x, int y, int z)
     { 
@@ -99,16 +101,16 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     {
         TilemapData tilemapData = GetTilemapData(position.x, position.z);
         
-        MeshRenderer tilePrefab = GetTilePrefab(type, tilemapData);
+        GPUInstanceEnabler tilePrefab = GetTilePrefab(type, tilemapData);
 
-        MeshRenderer tile = Instantiate(tilePrefab, _tileParent.position + position, Quaternion.Euler(0f, rotation, 0), _tileParent);
+        GPUInstanceEnabler tile = Instantiate(tilePrefab, _tileParent.position + position, Quaternion.Euler(0f, rotation, 0), _tileParent);
         
         if (canBeMirroredByZ && Random.Range(0, 100) < 50f) tile.transform.localScale = new Vector3(1f, 1f, -1f);
         
         _instantiatedTiles.Add(tile);
     }
 
-    private MeshRenderer GetTilePrefab(TileType type, TilemapData tilemapData)
+    private GPUInstanceEnabler GetTilePrefab(TileType type, TilemapData tilemapData)
     {
         switch (type)
         {

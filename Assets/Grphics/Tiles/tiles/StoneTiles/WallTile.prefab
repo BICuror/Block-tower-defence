@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2263039642158649422}
   - component: {fileID: 2259547284304452045}
   - component: {fileID: 4754119654134298042}
+  - component: {fileID: 2178640855147285691}
   m_Layer: 0
   m_Name: WallTile
   m_TagString: Untagged
@@ -83,3 +84,15 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2228262887125687321}
   m_Mesh: {fileID: -6686972915969242016, guid: ad80c30da32d9024d939226c90fb1454, type: 3}
+--- !u!114 &2178640855147285691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2228262887125687321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54e623cf358ac834d91feb24509c8111, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

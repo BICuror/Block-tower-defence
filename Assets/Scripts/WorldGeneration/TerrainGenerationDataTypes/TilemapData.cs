@@ -4,19 +4,19 @@ using UnityEngine;
 
 public sealed class TilemapData : ScriptableObject
 {
-    [SerializeField] private MeshRenderer _defaultTile;
-    [SerializeField] private MeshRenderer _fourSideTile;
-    [SerializeField] private MeshRenderer _threeSideTile;
-    [SerializeField] private MeshRenderer _twoSideTile;
-    [SerializeField] private MeshRenderer _cornerTile;
-    [SerializeField] private MeshRenderer _oneSideTile;
-    [SerializeField] private MeshRenderer _topTile;
+    [SerializeField] private GPUInstanceEnabler _defaultTile;
+    [SerializeField] private GPUInstanceEnabler _fourSideTile;
+    [SerializeField] private GPUInstanceEnabler _threeSideTile;
+    [SerializeField] private GPUInstanceEnabler _twoSideTile;
+    [SerializeField] private GPUInstanceEnabler _cornerTile;
+    [SerializeField] private GPUInstanceEnabler _oneSideTile;
+    [SerializeField] private GPUInstanceEnabler _topTile;
 
-    public MeshRenderer DefaultTile => _defaultTile;
-    public MeshRenderer FourSideTile => _fourSideTile;
-    public MeshRenderer ThreeSideTile => _threeSideTile;
-    public MeshRenderer TwoSideTile => _twoSideTile;
-    public MeshRenderer CornerTile => _cornerTile;
-    public MeshRenderer OneSideTile => _oneSideTile;
-    public MeshRenderer TopTile => _topTile;
+    public GPUInstanceEnabler DefaultTile => _defaultTile;
+    public GPUInstanceEnabler FourSideTile => _fourSideTile;
+    public GPUInstanceEnabler ThreeSideTile => _threeSideTile;
+    public GPUInstanceEnabler TwoSideTile => _twoSideTile;
+    public GPUInstanceEnabler CornerTile => _cornerTile;
+    public GPUInstanceEnabler OneSideTile => _oneSideTile;
+    public GPUInstanceEnabler TopTile => _topTile;
 }

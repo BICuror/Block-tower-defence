@@ -7,12 +7,10 @@ namespace WorldGeneration
     public sealed class TerrainAnimator : MonoBehaviour
     {
         [SerializeField] private AnimationCurve _transitionCurve;
-
         [SerializeField] private float _radius;
-
         [SerializeField] private Material _baseMaterial;
-
         [SerializeField] private Material _transitionMaterial;
+        [SerializeField] private TileTerrainGenerator _tileTerrainGenerator;
         public Material TransitionMaterial => _transitionMaterial;
 
         private MeshRenderer _meshRenderer;
@@ -44,6 +42,12 @@ namespace WorldGeneration
 
         public void StartDisappearing(float duration)
         {
+            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile =>
+            {
+                tile.Renderer.sharedMaterial = _transitionMaterial;
+                tile.EnableGPUInstancing();
+            });
+            
             _meshRenderer.sharedMaterial = _transitionMaterial;
             
             AnitmationStarted.Invoke();
@@ -53,6 +57,12 @@ namespace WorldGeneration
 
         public void StartAppearing(float duration)
         {
+            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile =>
+            {
+                tile.Renderer.sharedMaterial = _transitionMaterial;
+                tile.EnableGPUInstancing();
+            });
+            
             _meshRenderer.sharedMaterial = _transitionMaterial;
 
             DOVirtual.Float(0, _radius, duration, SetRadiusToTransitionMaterial).SetEase(_transitionCurve).OnComplete(Appear);
@@ -60,6 +70,12 @@ namespace WorldGeneration
 
         private void Appear()
         {
+            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile =>
+            {
+                tile.Renderer.sharedMaterial = _baseMaterial;
+                tile.EnableGPUInstancing();
+            });
+            
             _meshRenderer.sharedMaterial = _baseMaterial;
 
             AnimationEnded.Invoke();

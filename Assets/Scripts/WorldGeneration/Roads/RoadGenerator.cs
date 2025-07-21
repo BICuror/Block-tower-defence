@@ -6,19 +6,18 @@ namespace WorldGeneration
 {
     public sealed class RoadGenerator : MonoBehaviour
     {
-        [Inject] private IslandDataContainer _islandDataContainer;
-        private IslandData _islandData => _islandDataContainer.Data;
-        
         [Inject] private TextureManager _textureManager;
         [Inject] private HeightMapGenerator _heightMapGenerator;
         [Inject] private IslandDecorationContainer _islandDecorationContainer;
         [Inject] private IslandGridHolder _islandGridHolder;
- 
-        private BlockGrid _roadGrid;
-        public BlockGrid RoadGrid => _roadGrid;
-
-        [SerializeField] private TerrainSetter _roadTerrainSetter;
         [Inject] private RoadMapHolder _roadMapHolder;
+        [Inject] private IslandDataContainer _islandDataContainer;
+        [SerializeField] private RoadTileTerrainGenerator _terrainGenerator;
+        [SerializeField] private TerrainSetter _roadTerrainSetter;
+        private BlockGrid _roadGrid;
+        
+        public BlockGrid RoadGrid => _roadGrid;
+        private IslandData _islandData => _islandDataContainer.Data;
 
         public void GenerateRoads()
         {
@@ -28,6 +27,7 @@ namespace WorldGeneration
             _roadGrid = ConvertRoadBlockGrid(roadMap, heightMap);
 
             GenerateRoadMesh(_roadGrid);
+            _terrainGenerator.GenerateTerrain();
         }
 
         private void GenerateRoadMesh(BlockGrid roadBlockGrid)

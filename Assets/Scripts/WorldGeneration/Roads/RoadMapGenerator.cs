@@ -11,8 +11,6 @@ namespace WorldGeneration
         [Inject] private RoadNodeGenerator _roadNodeGenerator;
         [Inject] private RoadMapHolder _roadMapHolder;
         
-        [SerializeField] private RoadTileTerrainGenerator _terrainGenerator;
-        
         private IslandData _islandData => _islandDataContainer.Data;
 
         public void GenerateRoads()
@@ -25,9 +23,7 @@ namespace WorldGeneration
             
             _roadMapHolder.SetRoadMap(roadMap);
 
-            AddCenterRoad();          
-            
-            _terrainGenerator.GenerateTerrain();
+            AddCenterRoad();
         }
 
         private void AddCenterRoad()

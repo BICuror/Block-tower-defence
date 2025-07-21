@@ -17,11 +17,10 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 2999
   stringTagMap:
     RenderType: Transparent
-  disabledShaderPasses:
-  - DepthOnly
+  disabledShaderPasses: []
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -113,7 +112,7 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
-    - _QueueOffset: 0
+    - _QueueOffset: -1
     - _ReceiveShadows: 1
     - _Smoothness: 0
     - _SmoothnessTextureChannel: 0
@@ -123,10 +122,10 @@ Material:
     - _Surface: 1
     - _WorkflowMode: 1
     - _ZTest: 4
-    - _ZWrite: 0
-    - _ZWriteControl: 0
+    - _ZWrite: 1
+    - _ZWriteControl: 1
     m_Colors:
-    - Center: {r: 0, g: 0, b: 0, a: 0}
+    - Center: {r: 12, g: 0, b: 12, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

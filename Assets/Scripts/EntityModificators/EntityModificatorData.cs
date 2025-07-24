@@ -19,6 +19,8 @@ public class EntityModificatorData : ScriptableObject
 
     [Header("RequiredTags")]
     [SerializeField] private bool _hasRequiredTags;
+
+    [AllowNesting] [ShowIf("_hasRequiredTags")] [SerializeField] private bool _anyRequired;
     [AllowNesting] [ShowIf("_hasRequiredTags")] [SerializeField] private EntityModifierTagRequirementsContainer _reqiredOwnerTags;
     [AllowNesting] [ShowIf("_hasRequiredTags")] [SerializeField] private EntityModifierTagRequirementsContainer _reqiredOtherEntityTags;
 
@@ -65,10 +67,8 @@ public enum EntityModifcationRarity
 
 public enum EntityModifcatorTag
 {
-    MaxHealth,
-    Damage,
-    Reach,
-    Mark,
-    Stun,
-    Activation,
+    Heal,
+    AppliesNegativeEffect,
+    RemovesRecharge,
+    ChangesRecharge,
 }

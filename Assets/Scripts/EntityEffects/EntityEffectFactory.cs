@@ -24,7 +24,7 @@ public sealed class EntityEffectFactory : MonoBehaviour
     {
         EntityEffect effect = Activator.CreateInstance(effectType) as EntityEffect;
         EntityEffectData effectData = _effectDataContainer.GetEffectData(effectType);
-        effect.Initialize(effectData.ArgumentsContainer, effectData.MaxStacks);
+        effect.Initialize(effectData.ArgumentsContainer, effectData);
         return effect;
     }
 }

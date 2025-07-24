@@ -56,17 +56,20 @@ MonoBehaviour:
   _argumentsContainer:
     _argumentItems: []
   _rarity: 2
-  _tags: 
+  _tags: 02000000
   _effectType: 0
-  _isUnique: 0
+  _isUnique: 1
   _hasRequiredTags: 0
+  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 3
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _icon: {fileID: 1125429245, guid: 1931599c4107e624a84165116f765cd5, type: 3}

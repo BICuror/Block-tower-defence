@@ -74,6 +74,20 @@ MonoBehaviour:
   _rarity: 2
   _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 1
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements:
+    - Tag: 1
+      Amount: 1
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
   _icon: {fileID: -1379777271, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Stacker
-  _modificatorDescription: On hit apply 1 #Stack of each effect entity has
+  _modificatorDescription: '#OnHit apply 1 #Stack of each #bad negative bad# effect'

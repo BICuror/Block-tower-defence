@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f437222f5be2f344697bfb7f3967ab00, type: 3}
+  m_Name: StunEffectTooltipData
+  m_EditorClassIdentifier: 
+  _tag: Stun
+  _tagText: Stun
+  _textColor: {r: 1, g: 0.8929986, b: 0, a: 1}
+  _iconSprite: {fileID: -589584921, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _description: 'Entity cannot #Attack and move '
+  _associatedEffectTypeName: StunEffect

@@ -12,22 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: StartWaveToggleEffect
   m_EditorClassIdentifier: 
-  _quality: 1
-  _effectType: 0
-  _isUnique: 0
   _instanceItemTypeContainers:
   - _itemTypeName: StartWaveGlobalToggleEffect
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
+    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
     _argumentItems: []
+  _quality: 1
+  _effectType: 0
+  _isUnique: 0
+  _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: -53656890, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _effectName: START
   _effectDescription: '#good Starts wave good#'

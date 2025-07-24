@@ -3,19 +3,22 @@ using Combat;
 
 public abstract class EntityEffect
 {
+    private EntityEffectData _effectData;
     protected ArgumentsContainer ArgumentsContainer;
     protected CombatEntity Entity;
-    public int MaxStacks;
     public int TrueStack;
     public int Stack;
+    
+    public int MaxStacks => _effectData.MaxStacks;
+    public EntityEffectData EffectData => _effectData;
     
     public abstract EntityEffectType EffectType { get; }
     public virtual bool CanBeApplied() => true;
     
-    public void Initialize(ArgumentsContainer argumentsContainer, int maxStacks)
+    public void Initialize(ArgumentsContainer argumentsContainer, EntityEffectData effectData)
     {
         ArgumentsContainer = argumentsContainer;
-        MaxStacks = maxStacks;
+        _effectData = effectData;
         OnInitialized();
     }
 

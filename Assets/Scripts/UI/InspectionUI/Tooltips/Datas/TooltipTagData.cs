@@ -1,3 +1,4 @@
+using Ligofff.CustomSOIcons;
 using UnityEngine;
 
 public abstract class TooltipTagData : ScriptableObject
@@ -10,7 +11,7 @@ public abstract class TooltipTagData : ScriptableObject
     
     public string Tag => _tag;
     public string TagText => _tagText;
-    public Sprite IconSprite => _iconSprite;
+    [CustomAssetIcon] public Sprite IconSprite => _iconSprite;
     public string Description => _description;
     public Color TextColor => _textColor;
 }

@@ -47,6 +47,17 @@ MonoBehaviour:
   _rarity: 1
   _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
   _icon: {fileID: -1537043687, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Early shift
-  _modificatorDescription: On shoot 25% to make another building in area shoot
+  _modificatorDescription: On #Action 25% to invoke other building #Action in #ReachAreaScale

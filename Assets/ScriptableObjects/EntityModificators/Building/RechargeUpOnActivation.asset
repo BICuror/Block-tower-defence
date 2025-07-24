@@ -12,19 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: RechargeUpOnActivation
   m_EditorClassIdentifier: 
-  _effectTypeName: FasterRechargeOnActivation
   _itemTypeContainers:
   - _itemTypeName: FasterRechargeOnActivation
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
     - InvincibilityUntilPickUpEntityModifier
+    - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - PiercingArrows
     - ScaleDamageWithHeight
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -56,18 +62,20 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 848744844543777820, guid: 6720f4f1703cef941a05e2948a90a811, type: 3}
+  _rarity: 0
+  _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _icon: {fileID: 0}
   _modificatorName: Activate when built
-  _modificatorDescription: '#good -40% good# #Recharge for 5 seconds on activation'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
+  _modificatorDescription: '#good -40% good# #Recharge for 5 seconds on #Activation'

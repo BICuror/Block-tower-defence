@@ -15,6 +15,8 @@ namespace Combat
         private Dictionary<Type, EntityEffectRemovalHandler> _removalHandlers = new();
         
         public List<Type> AppliedEffectTypes => _appliedEffects.Keys.ToList();
+        public Dictionary<Type, EntityEffect> AppliedEffects => _appliedEffects;
+        
         private bool EffectsCanBeApplied => _draggableObject.IsPlaced && _entityHealth.IsAlive();
         
         public Action<Type> EffectApplied;

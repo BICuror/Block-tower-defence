@@ -125,9 +125,20 @@ MonoBehaviour:
   _rarity: 0
   _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
   _icon: {fileID: -875806093, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Fire hook
-  _modificatorDescription: '#bad -100% bad# #Damage, on hit apply 3 #OnFire'
+  _modificatorDescription: '#bad -100% bad# #Damage, #OnHit apply 3 #OnFire'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: 0

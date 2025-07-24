@@ -11,7 +11,10 @@ public sealed class AddAdditionalStackToEveryEffect : DamageModifier
         
         effectManager.AppliedEffectTypes.ForEach(appliedEffectType =>
         {
-            effectManager.TryApplyTemporaryEffect(appliedEffectType, strength, duration);
+            if (effectManager.AppliedEffects[appliedEffectType].EffectType == EntityEffectType.Negative)
+            {
+                effectManager.TryApplyTemporaryEffect(appliedEffectType, strength, duration);
+            }
         });
 
         return value;

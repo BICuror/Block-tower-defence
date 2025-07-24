@@ -622,7 +622,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -630,6 +630,111 @@ TextureImporter:
       bones: []
       spriteID: 8490baf2114754140b89df966e5a9d43
       internalID: -1412815817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: StunTooltipIcon
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 967848ea27d396b43a6a51ccf9939625
+      internalID: -589584921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnHitTooltipIcon
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 974aa8efb248f074d825320af46a56bd
+      internalID: -1882775376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ActionStatTooltip
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbb21e68f393f754da6ad596951a4207
+      internalID: 1859461284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AreaStatTooltip
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7faacbb821313054398988310986453c
+      internalID: -913185330
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ActivationStatTooltip
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1cbbd31037729ef4db7eb43db6f5ba5a
+      internalID: -164964044
       vertices: []
       indices: 
       edges: []
@@ -645,6 +750,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      ActionStatTooltip: 1859461284
+      ActivationStatTooltip: -164964044
+      AreaStatTooltip: -913185330
       BuildTimeTooltip: 1968931674
       Charge: -686756865
       Crystal: 371838837
@@ -659,6 +767,7 @@ TextureImporter:
       MaxHealthTooltip: -439191689
       MaxStacksTooltip: -1537043687
       OnFire: 1002134821
+      OnHitTooltipIcon: -1882775376
       OrbitalSpeedTooltipIcon: -1412815817
       PiercingTooltip: 1683251753
       ProjectileSpeedTooltip: -53656890
@@ -669,6 +778,7 @@ TextureImporter:
       SlowdownEffectTooltipIcon: -1379777271
       SpeedTooltip: -875806093
       StackTooltipData: 741723918
+      StunTooltipIcon: -589584921
       TravelTimeTooltip: -255249925
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

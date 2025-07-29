@@ -34,7 +34,7 @@ public abstract class EntityTickEffect : EntityEffect
         }
         catch (Exception e)
         {
-            TaskUtility.LogAsync(e);
+            e.LogAsync();
             return;
         }
         

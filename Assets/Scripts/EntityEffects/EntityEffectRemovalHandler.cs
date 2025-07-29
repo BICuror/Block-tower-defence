@@ -32,7 +32,7 @@ public sealed class EntityEffectRemovalHandler
         }
         catch (Exception e)
         {
-            TaskUtility.LogAsync(e);
+            e.LogAsync();
             return;
         }
         

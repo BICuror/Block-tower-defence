@@ -8,6 +8,7 @@ namespace WorldGeneration
         [Inject] private TextureManager _textureManager;
 
         [SerializeField] private TerrainSetter _islandTerrainSetter;
+        [SerializeField] private TerrainSetter _islandBottomTerrainSetter;
 
         public void CreateMesh(BlockGrid blockGrid)
         {
@@ -15,9 +16,9 @@ namespace WorldGeneration
 
             meshGenerator.SetupGenerator(blockGrid, _textureManager);
 
-            Mesh mesh = meshGenerator.GetMesh();
-
-            _islandTerrainSetter.SetMesh(mesh);
+            _islandBottomTerrainSetter.SetMesh(meshGenerator.GetBottomMesh());
+            
+            _islandTerrainSetter.SetMesh(meshGenerator.GetDefaultMesh());
         }
     }
 }

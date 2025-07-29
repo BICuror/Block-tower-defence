@@ -8,7 +8,7 @@ public sealed class EntityEffectEntityModificator : EntityModificator
     {
         _createdModifier = (ApplyEffectDamageModifier)Activator.CreateInstance(typeof(ApplyEffectDamageModifier));
         
-        _createdModifier.SetEffectData(Type.GetType(Args.GetArgument<string>("EffectTypeName")), Args.GetArgument<int>("EffectStrength"), Args.GetArgument<float>("EffectDuration"));
+        _createdModifier.SetArgumentsContainer(Args);
         
         Entity.DamageModifierContainer.DealerContainer.Add(_createdModifier);
     }

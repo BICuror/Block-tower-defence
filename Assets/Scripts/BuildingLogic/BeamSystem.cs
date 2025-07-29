@@ -63,7 +63,7 @@ public sealed class BeamSystem : MonoBehaviour
             }
             catch (Exception e)
             {
-                TaskUtility.LogAsync(e);
+                e.LogAsync();
                 break;
             }
         }

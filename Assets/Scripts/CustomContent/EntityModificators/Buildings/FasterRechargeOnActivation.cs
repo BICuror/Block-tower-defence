@@ -20,12 +20,8 @@ public sealed class FasterRechargeOnActivation : EntityModificator
     }
 
     private async UniTask StartCountdownToDeactivation()
-    {
-        try
-        {
-            await UniTask.WaitForSeconds(Args.GetArgument<float>("Duration"), cancellationToken: _cancellationTokenSource.Token);
-        }
-        catch (Exception e) { TaskUtility.LogAsync(e); }
+    { 
+        await UniTask.WaitForSeconds(Args.GetArgument<float>("Duration"), cancellationToken: _cancellationTokenSource.Token).SuppressCancellationThrow();
         
         Deactivate();
     }

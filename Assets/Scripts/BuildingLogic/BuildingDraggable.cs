@@ -8,7 +8,6 @@ using Zenject;
 
 public sealed class BuildingDraggable : DraggableEntity
 {
-    [Inject] private WaveStateMachine _waveStateMachine;
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _isBuilt = true;
     
@@ -51,7 +50,7 @@ public sealed class BuildingDraggable : DraggableEntity
     {
         BuildingPlaced?.Invoke(this);
 
-        if (_hasBuildTime && _waveStateMachine.CurrentState == WaveState.Attack)
+        if (_hasBuildTime)
         {
             BuildProgressStarted?.Invoke();
             BuildProcessUpdated?.Invoke(0);
@@ -73,7 +72,7 @@ public sealed class BuildingDraggable : DraggableEntity
             }
             catch (Exception e)
             {
-                TaskUtility.LogAsync(e);
+                e.LogAsync();
                 return;
             }
         }

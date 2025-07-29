@@ -34,6 +34,8 @@ namespace WorldGeneration
 
         private void GenerateNewSeeds()
         {
+            RandomExstentions.ReInitializeUnityRandom();
+            
             _heightMapGenerator.GenerateNewSeed();
 
             _biomeMapGenerator.GenerateNewSeed();

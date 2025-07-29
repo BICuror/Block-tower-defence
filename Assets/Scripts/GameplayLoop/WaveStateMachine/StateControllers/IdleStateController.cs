@@ -27,14 +27,13 @@ public sealed class IdleStateController : WaveStateController
 
         _decorationContainer.ActivateAllDecorations();
         _enemyBiomesContainer.DestroyOldBiomes();
-        _enemyBiomeGenerator.TryGenerateNewBiome();
-        _roadMapGenerator.GenerateRoads();
-        _optionalTaskGenerator.GenerateTasksAndModifyRoadMap();
-        _navigationMapGenerator.GenerateMap();
-        _roadGenerator.GenerateRoads();
-        _enemyBiomesContainer.RegenerateBiomes();
-        _enemyBiomesContainer.GenerateBiomesDecorations();
 
+        TryGenerateNewEnemyBiome();
+
+        RegenerateRoads();
+        
+        RegenerateEnemyBiomes();
+        
         _enemyBiomesContainer.EnableBiomesTerrain(TransitionInDuration);
         _roadAnimator.StartAppearing(TransitionInDuration);
         
@@ -43,6 +42,8 @@ public sealed class IdleStateController : WaveStateController
 
     protected override void OnEnterStateCompleted()
     {
+        RandomExstentions.ReInitializeUnityRandom();
+        
         _itemContainerManager.UpdateContainedItems();
         _selectionManager.TryStartQueuedSelection();
         _itemContainerManager.UnlockContainer();
@@ -52,5 +53,30 @@ public sealed class IdleStateController : WaveStateController
     {
         _itemContainerManager.LockContainer();
         _itemFactory.DestoyAllUnusedItems();
+    }
+
+    private void TryGenerateNewEnemyBiome()
+    {
+        RandomExstentions.ReInitializeUnityRandom();
+        
+        _enemyBiomeGenerator.TryGenerateNewBiome();
+    }
+
+    private void RegenerateEnemyBiomes()
+    {
+        RandomExstentions.ReInitializeUnityRandom();
+        
+        _enemyBiomesContainer.RegenerateBiomes();
+        _enemyBiomesContainer.GenerateBiomesDecorations();
+    }
+    
+    private void RegenerateRoads()
+    {
+        RandomExstentions.ReInitializeUnityRandom();
+        
+        _roadMapGenerator.GenerateRoads();
+        _optionalTaskGenerator.GenerateTasksAndModifyRoadMap();
+        _navigationMapGenerator.GenerateMap();
+        _roadGenerator.GenerateRoads();
     }
 }

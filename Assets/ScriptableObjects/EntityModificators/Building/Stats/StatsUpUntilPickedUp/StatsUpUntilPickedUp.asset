@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: StatsUpUntilPickedUp
+  m_EditorClassIdentifier: 
+  _itemTypeContainers:
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
+    - InvincibleWhileBuidlging
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - PiercingArrows
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
+  - _itemTypeName: ApplyModificatorOnWaveStartRemoveUponPickup
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - CreateBombsAtWaveStart
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - FasterRechargeOnActivation
+    - IncreaseBuildTimeEachBuilt
+    - InvincibleWhileBuidlging
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - PiercingArrows
+    - ScaleDamageWithHeight
+    - TakeDamageUponPlacement
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 3
+      _argumentName: EntityModificatorData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 11400000, guid: 45e151d14096c5040a3e3107f50b3f57, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
+  _rarity: 0
+  _tags: 
+  _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _icon: {fileID: 0}
+  _modificatorName: Strong foundation
+  _modificatorDescription: At wave start  #good +50% good# #Damage, #good +1 good#
+    #Reach, #good -30% good# #Recharge until picked up,  #bad +0.5 bad# #BuildTime
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.5

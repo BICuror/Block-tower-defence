@@ -37,7 +37,7 @@ namespace WorldGeneration
             roadMeshGenerator.SetupGenerator(roadBlockGrid, _textureManager);
             roadMeshGenerator.SetIslandGrid(_islandGridHolder.Grid);
             
-            Mesh roadMesh = roadMeshGenerator.GetMesh();
+            Mesh roadMesh = roadMeshGenerator.GetDefaultMesh();
             
             _roadTerrainSetter.SetMesh(roadMesh); 
         }

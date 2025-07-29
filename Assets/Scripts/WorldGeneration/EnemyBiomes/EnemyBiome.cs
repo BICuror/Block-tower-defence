@@ -106,7 +106,7 @@ namespace WorldGeneration
             _terrainMeshGenerator.SetupGenerator(blockGrid, _textureManager);
             _terrainMeshGenerator.SetPosition(new Vector3Int((int)(transform.position.x), 0, (int)(transform.position.z)));
             
-            Mesh mesh = _terrainMeshGenerator.GetMesh();
+            Mesh mesh = _terrainMeshGenerator.GetDefaultMesh();
 
             _terrainSetter.SetMesh(mesh);
         }

@@ -1,5 +1,6 @@
 using System;
 using Combat;
+using Random = UnityEngine.Random;
 
 public abstract class EntityEffect
 {

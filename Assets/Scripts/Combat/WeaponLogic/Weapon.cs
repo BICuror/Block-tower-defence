@@ -50,7 +50,7 @@ namespace Combat
                 await UniTask.WaitForSeconds(_lifetime, cancellationToken: _cancellationTokenSource.Token); 
                 Disable();
             }
-            catch (Exception e) { TaskUtility.LogAsync(e); }
+            catch (Exception e) { e.LogAsync(); }
 
             _lifetimeTrackActive = false;
         }

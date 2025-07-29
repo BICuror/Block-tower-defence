@@ -30,7 +30,7 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
     
     public override void ApplyEffect()
     {
-        _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_modificatorData);
+        _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_modificatorData);
     }
 
     private void OnDestroy()

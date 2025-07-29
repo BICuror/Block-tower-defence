@@ -7,11 +7,12 @@ using Combat;
 
 public class TaskCycle : MonoBehaviour
 {
-    [Cached] private EntityHealth _ownerEntityHealth;
-    [Cached] private TaskRechargeDuration _taskRechargeDuration;
     [Cached] private ITaskConditionProvider _taskConditionProvider;
-    private bool _taskCycleIsActive;
+    [Cached] private TaskRechargeDuration _taskRechargeDuration;
+    [Cached] private EntityHealth _ownerEntityHealth;
     private CancellationTokenSource _cancellationTokenSource = new();
+    private bool _taskCycleIsActive;
+    private int _taskBlockStack;
     
     public Action TaskPerformed;
     public Action TaskCycled;
@@ -20,14 +21,16 @@ public class TaskCycle : MonoBehaviour
     {
         _ownerEntityHealth.Died += StopRechargeProcess;
     }
-    
-    public void StopRechargeProcess()
-    {
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
-        _cancellationTokenSource = new();
-    }
 
+    public void AddBlockStack() => _taskBlockStack++;
+
+    public void RemoveBlockStack()
+    {
+        if (_taskBlockStack <= 0) Debug.LogError("Trying to remove block stack, while block stack is empty");
+
+        _taskBlockStack--;
+    }
+    
     public void TryCycle()
     {
         if (!CanWork()) return; 
@@ -39,7 +42,28 @@ public class TaskCycle : MonoBehaviour
         StartRechargeProcess();
     }
     
+    public void PerformTask()
+    {
+        if (!CanWork()) return;
+        
+        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return; 
+        
+        TaskPerformed?.Invoke();
+    }
+    
     protected virtual bool CanWork() => true;
+    
+    protected void StopRechargeProcess()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new();
+    }
+    
+    protected void OnDestroy()
+    {
+        _ownerEntityHealth.Died += StopRechargeProcess;
+    }
     
     private async void StartRechargeProcess()
     {
@@ -52,14 +76,14 @@ public class TaskCycle : MonoBehaviour
             while (elapsedTime < _taskRechargeDuration.Value)
             {
                 await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
-                    
-                elapsedTime += Time.fixedDeltaTime;
+                  
+                if (_taskBlockStack <= 0) elapsedTime += Time.fixedDeltaTime;
             }
         }
         catch (Exception e)
         {
             _taskCycleIsActive = false;
-            TaskUtility.LogAsync(e);
+            e.LogAsync();
             return;
         }
         
@@ -71,19 +95,5 @@ public class TaskCycle : MonoBehaviour
             TryCycle();
             PerformTask();
         }
-    }
-
-    public void PerformTask()
-    {
-        if (!CanWork()) return;
-        
-        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return; 
-        
-        TaskPerformed?.Invoke();
-    }
-
-    protected void OnDestroy()
-    {
-        _ownerEntityHealth.Died += StopRechargeProcess;
     }
 }

@@ -61,30 +61,21 @@ public abstract class HealthBar : Shaker
         }
         catch (Exception e)
         {
-            TaskUtility.LogAsync(e);
+            e.LogAsync();
             return;
         }
 
         DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference);
     }
     
-    private async void IncreaseValue()
+    private void IncreaseValue()
     {
-        _healthDifference = OwnerHealth.GetHpPercent();
-        UpdatePropertyBlock();
-
-        try
+        DOVirtual.Float(_displayedHealth, OwnerHealth.GetHpPercent(), HealthTweenDuration, value =>
         {
-            await UniTask.WaitForSeconds(IdleTweenDuration, cancellationToken: _cancellationTokenSource.Token);
-        }
-        catch (Exception e)
-        {
-            TaskUtility.LogAsync(e);
-            return;
-        }
-        
-
-        DOVirtual.Float(_displayedHealth, _healthDifference, HealthTweenDuration, UpdateDisplayedHealth);
+            _healthDifference = value;
+            _displayedHealth = value;
+            UpdatePropertyBlock();
+        });
     }
     
     private void UpdateHealthDifference(float value)
@@ -104,13 +95,6 @@ public abstract class HealthBar : Shaker
         _materialPropertyBlock.SetFloat("Health", _displayedHealth);
         _materialPropertyBlock.SetFloat("HealthDifference", _healthDifference);
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
-    }
-
-    protected void FillBar()
-    {
-        _displayedHealth = 1f;
-        _healthDifference = 1f;
-        UpdatePropertyBlock();
     }
 
     protected void OnDisable()

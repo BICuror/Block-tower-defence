@@ -5,7 +5,7 @@ using Zenject;
 
 namespace WorldGeneration
 {
-    public class MeshGenerator: MonoBehaviour
+    public class MeshGenerator : MonoBehaviour
     {
         #region FaceData
         protected readonly Vector3[] RightFace = new Vector3[]
@@ -114,14 +114,39 @@ namespace WorldGeneration
             _cubeFaces.Add(Vector3Int.back, new FaceData(BackFace, BackTris, ZUVOrder));
         }
 
-        public Mesh GetMesh()
+        public Mesh GetBottomMesh()
         {
             for (int x = 0; x < _blockGrid.GetSize(); x++)
             {
                 for (int z = 0; z < _blockGrid.GetSize(); z++)
                 {
                     CheckAroundPositionToCreateWall(new Vector3Int(x, 0, z));
-                    
+                }
+            }
+
+            Mesh mesh = new Mesh();
+
+            mesh.SetVertices(_vertices);
+            mesh.SetIndices(_indices, MeshTopology.Triangles, 0);
+            mesh.SetUVs(0, UVs);
+
+            mesh.RecalculateBounds();
+            mesh.RecalculateTangents();
+            mesh.RecalculateNormals();
+
+            _vertices = new List<Vector3>();
+            _indices = new List<int>();
+            UVs = new List<Vector2>();
+
+            return mesh;
+        }
+        
+        public Mesh GetDefaultMesh()
+        {
+            for (int x = 0; x < _blockGrid.GetSize(); x++)
+            {
+                for (int z = 0; z < _blockGrid.GetSize(); z++)
+                {
                     for (int y = 0; y < _blockGrid.GetHeight(); y++)
                     {
                         CheckAroundPosition(new Vector3Int(x, y, z));
@@ -173,9 +198,7 @@ namespace WorldGeneration
         private void SetWallFace(Vector3Int position, int index)
         {
             FaceData faceToApply = _cubeFaces[_wallCheckDirections[index]];
-
-            ApplyTextureToFace(position, _wallCheckDirections[index], _blockGrid.GetBlockType(position), faceToApply);
-
+            
             ApplyWallVerticies(faceToApply, position);
             
             ApplyIndecies(faceToApply);          
@@ -222,14 +245,10 @@ namespace WorldGeneration
         {
             FaceData faceToApply = _cubeFaces[_allCheckDirections[index]];
 
-            ApplyTextureToFace(position, _allCheckDirections[index], _blockGrid.GetBlockType(position), faceToApply);
-
             ApplyVerticies(faceToApply, position);
             
             ApplyIndecies(faceToApply);          
         }
-
-        protected virtual void ApplyTextureToFace(Vector3Int position, Vector3Int checkDirection, BlockType blockType, FaceData faceToApply) {}
 
         private void ApplyVerticies(FaceData faceToApply, Vector3Int position)
         {

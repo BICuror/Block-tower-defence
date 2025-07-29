@@ -42,7 +42,7 @@ public sealed class Orbital : WeaponBase
         }
         catch (Exception e)
         {
-            TaskUtility.LogAsync(e);
+            e.LogAsync();
             return;
         }
         

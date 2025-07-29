@@ -17,7 +17,7 @@ public sealed class TurnLastEnemyIntoMiniboss : GlobalToggleEffect
         {
             EnemyEntity lastEnemy = _globalEnemyContainer.Entities[0];
 
-            lastEnemy.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+            lastEnemy.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
             lastEnemy.EnemyHealth.EnemyDied += RemoveEntityModificator;
             
             lastEnemy.Health.ReceivePercentHeal(1f);
@@ -26,7 +26,7 @@ public sealed class TurnLastEnemyIntoMiniboss : GlobalToggleEffect
 
     private void RemoveEntityModificator(EnemyEntity enemyEntity)
     {
-        enemyEntity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveEffect(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+        enemyEntity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
 
         enemyEntity.EnemyHealth.EnemyDied -= RemoveEntityModificator;
     }

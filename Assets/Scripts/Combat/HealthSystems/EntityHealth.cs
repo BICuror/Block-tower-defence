@@ -46,6 +46,12 @@ namespace Combat
             float resultDamage = _entity.DamageModifierContainer.ReciverContainer.Modify(outDamage, damageDealer);
             
             ReceiveDamage(resultDamage);
+
+            if (!IsAlive())
+            {
+                damageDealer.DamageModifierContainer.InvokeOnKillEffects(_entity);
+                _entity.DamageModifierContainer.InvokeOnDeathEffects(damageDealer);
+            }
         }
         public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage);
         private void ReceiveDamage(float damage)

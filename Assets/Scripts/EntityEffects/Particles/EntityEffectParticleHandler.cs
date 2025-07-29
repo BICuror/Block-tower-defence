@@ -50,12 +50,8 @@ public sealed class EntityEffectParticleHandler : MonoBehaviour
     {
         transform.SetParent(null);
         _visualEffect.Stop();
-
-        try
-        {
-            await UniTask.WaitForSeconds(_visualEffect.GetFloat("MaxLifeTime") * 2, cancellationToken: destroyCancellationToken);
-        }
-        catch (Exception e) { TaskUtility.LogAsync(e); }
+        
+        await UniTask.WaitForSeconds(_visualEffect.GetFloat("MaxLifeTime"), cancellationToken: destroyCancellationToken).SuppressCancellationThrow();
         
         gameObject.SetActive(false);
     }

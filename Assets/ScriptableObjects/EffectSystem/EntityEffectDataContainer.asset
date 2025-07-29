@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effectDatas:
     _serializedList:
+    - Key: SpeedUpEffect
+      Value: {fileID: 11400000, guid: 9138bb7b2cac32948b4a1f388db869b1, type: 2}
     - Key: HealEffect
       Value: {fileID: 11400000, guid: b589752669a55224d8e020673b38f281, type: 2}
     - Key: InvincibilityEffect
@@ -24,3 +26,5 @@ MonoBehaviour:
       Value: {fileID: 11400000, guid: c4bb1660ba235174e81b740e6ad14b12, type: 2}
     - Key: SlowdownEffect
       Value: {fileID: 11400000, guid: 57cc7125de655224d85ee877b5d528be, type: 2}
+    - Key: StunEffect
+      Value: {fileID: 11400000, guid: 1218452fb73820a409a612f32efe2e11, type: 2}

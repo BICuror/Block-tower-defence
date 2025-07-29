@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
@@ -5,7 +6,6 @@ using Cashing;
 using Zenject;
 using Combat;
 using System;
-using System.Collections.Generic;
 
 namespace Navigation
 {
@@ -17,17 +17,15 @@ namespace Navigation
         [Cached] private Speed _speed;
         
         private CancellationTokenSource _movementCancellationTokenSource = new();
-        
         private NavigationAgentData _agentData;
-        
         private MovementNavigationModule _movementModule;
         private RotationNavigationModule _rotationModule;
         private NavigationAgentNodePicker _navigationAgentNodePicker;
-        
         private NavigationMapLayer _currentNavigationMapLayer;
         private NavigationNode _startNode;
         private NavigationNode _endNode;
         private NavigationNode _nextNode;
+        private bool _isEnabled;
 
         private List<Vector2Int> _checkDirection = new List<Vector2Int>()
         {
@@ -43,6 +41,9 @@ namespace Navigation
             _draggableEntity.Placed += Initialize;
         }
 
+        public void Disable() => _isEnabled = false;
+        public void Enable() => _isEnabled = true;
+
         public void SetAgentData(NavigationAgentData agentData)
         {
             _agentData = agentData;
@@ -52,8 +53,6 @@ namespace Navigation
         public void Initialize()
         {
             _navigationMapHolder = NavigationMapHolder.Instance;
-            
-            Debug.Log($"CURRENT POSITION {transform.position}");
             
             StopMovement();
             FindSuitableLayer();
@@ -67,6 +66,7 @@ namespace Navigation
             _movementModule = new MovementNavigationModule(transform, _agentData);
             _rotationModule = new RotationNavigationModule(_rotationTarget, previousRotation);
 
+            Enable();
             TravelToEndNode();
         }
 
@@ -102,10 +102,12 @@ namespace Navigation
                 try
                 {
                     await UniTask.WaitForFixedUpdate(_movementCancellationTokenSource.Token);
+
+                    if (!_isEnabled) await UniTask.WaitUntil(() => _isEnabled);
                 }
                 catch (Exception e)
                 {
-                    TaskUtility.LogAsync(e);
+                    e.LogAsync();
                     return;
                 }
             }

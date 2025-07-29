@@ -5,8 +5,12 @@ using TMPro;
 
 public sealed class CrystalInspectionTooltip : InspectionPanel
 {
-    [Header("Links")] 
+    [Header("HeaderParameters")] 
+    [SerializeField] private CanvasGroup _startWaveCanvasGroup;
+    [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
     [SerializeField] private TextMeshProUGUI _durationTextField;
+    
+    [Header("Links")] 
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
     [SerializeField] private LayoutSizeController _layoutSizeController;
     [SerializeField] private GlobalEffectTooltip _entityModificatorTooltipPrefab;
@@ -21,26 +25,33 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
         _crystalTooltips.Values.ToList().ForEach(tooltip => Destroy(tooltip.gameObject));
         _crystalTooltips.Clear();
         
-        List<ToggleGlobalEffectData> sortedToggleEffectDatas = item.ToggleEffectDatas.OrderBy(item => item.EffectType == EffectType.Negative).ToList();
+        CreateTooltips(item);
 
-        ToggleGlobalEffectData startWaveToggleEffectData = sortedToggleEffectDatas.Find(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect)));
-
-        if (startWaveToggleEffectData != null)
-        {
-            sortedToggleEffectDatas.Remove(startWaveToggleEffectData);
-            CreateTooltip(startWaveToggleEffectData);
-        }
-        
-        item.RewardDatas.OrderBy(data => data.EffectType == EffectType.Negative).ToList().ForEach(CreateTooltip);
-        sortedToggleEffectDatas.ForEach(CreateTooltip);
-
+        _rewardsAmountTextField.text = item.RewardDatas.Count.ToString();
         _durationTextField.text = item.Duration.ToString();
+        _startWaveCanvasGroup.gameObject.SetActive(item.ToggleEffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
         
         _layoutSizeController.RecalculateLayout();
         
         _pointFollowerUI.SetTarget(item.transform);
     }
 
+    private void CreateTooltips(Item item)
+    {
+        List<ToggleGlobalEffectData> sortedToggleEffectDatas = item.ToggleEffectDatas.OrderBy(item => item.EffectType == EffectType.Negative).ToList();
+        
+        ToggleGlobalEffectData startWaveEffect = item.ToggleEffectDatas.Find(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect)));
+
+        _startWaveCanvasGroup.gameObject.SetActive(startWaveEffect);
+
+        if (startWaveEffect)
+        {
+            sortedToggleEffectDatas.Remove(startWaveEffect);
+        }
+        
+        sortedToggleEffectDatas.ForEach(CreateTooltip);
+    }
+    
     private void CreateTooltip(GlobalEffectData globalEffectData)
     {
         if (_crystalTooltips.ContainsKey(globalEffectData))

@@ -9,7 +9,7 @@ public class ReturnDamageModifier : DamageModifier
 
         for (int i = 0; i < entitiesInArea.Count; i++)
         {
-            entitiesInArea[i].Health.ReceiveEnemyDamage(value, OwnerEntity);
+            entitiesInArea[i].Health.ReceiveEnemyDamage(OwnerEntity.StatContainer.Get<Damage>().Value, OwnerEntity);
         }
         
         return value;

@@ -6,12 +6,12 @@ public sealed class ApplyEffectDamageModifier : DamageModifier
     private int _appliedStrength;
     private Type _entityEffectType;
     private float _effectDuration;
-
-    public void SetEffectData(Type entityEffectType, int appliedStrength, float effectDuration)
+    
+    public override void Initialize()
     {
-        _entityEffectType = entityEffectType;
-        _appliedStrength = appliedStrength;
-        _effectDuration = effectDuration;
+        _appliedStrength = Args.GetArgument<int>("EffectStrength");
+        _effectDuration = Args.GetArgument<float>("EffectDuration");
+        _entityEffectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
     }
     
     public override float Modify(CombatEntity otherEntity, float value)

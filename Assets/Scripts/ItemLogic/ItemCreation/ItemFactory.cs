@@ -9,7 +9,8 @@ public sealed class ItemFactory : MonoBehaviour
 {
     [Inject] private ItemsContainer _itemsContainer;
     [Inject] private DraggableCreator _draggableCreator;
-    
+
+    [SerializeField] private RewardGlobalEffectData _buildingEffectData;
     [SerializeField] private ToggleGlobalEffectData _startWaveEffectData; 
     [SerializeField] private ItemEffectSelector _effectSelector;
     [SerializeField] private List<Item> _itemsPrefabs;
@@ -54,8 +55,8 @@ public sealed class ItemFactory : MonoBehaviour
         List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(0, 1);
         toggleEfectDatas.Add(_startWaveEffectData);
         item.AddToggleEffectDatas(toggleEfectDatas);
-        
-        List<RewardGlobalEffectData> rewardDatas = _effectSelector.GetRandomRewardEffectDatas(0, 0);
+
+        List<RewardGlobalEffectData> rewardDatas = new List<RewardGlobalEffectData>() {_buildingEffectData};
         item.AddRewardEffectDatas(rewardDatas);
     }
 

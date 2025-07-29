@@ -25,6 +25,7 @@ public sealed class DamageModifierContainer
     public void Add(DamageModifier modifier)
     {
         modifier.SetOwner(_ownerEntity);
+        modifier.Initialize();
                 
         if (modifier.Order != ResolveOrder.Single)
         {

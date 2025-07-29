@@ -31,10 +31,7 @@ public sealed class Bomb : DraggableObject
             await UniTask.WaitForSeconds(_explotion.GetOwnerEntity().StatContainer.Get<ExplotionDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
             Explode();
         }
-        catch (Exception e)
-        {
-            TaskUtility.LogAsync(e);
-        } 
+        catch (Exception e) { e.LogAsync(); } 
     }
     
     private void StopExplotion()

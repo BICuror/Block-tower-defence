@@ -7,7 +7,6 @@ using Zenject;
 public sealed class SelectionManager : MonoBehaviour
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
-    [Inject] private WaveStateMachine _waveStateMachine;
     private Queue<SelectionSettings> _enqeuedSelections = new();
     private SelectionSettings _currentSelectionSettings;
 
@@ -30,11 +29,6 @@ public sealed class SelectionManager : MonoBehaviour
         EnqeueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
 
         await UniTask.WaitForSeconds(5);
-
-        _waveStateMachine.StateStarted += (state) =>
-        {
-            if (state == WaveState.Idle) EnqeueSelection(new SelectionSettings(SelectionType.Building));
-        };
     }
     
     public void EnqeueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);

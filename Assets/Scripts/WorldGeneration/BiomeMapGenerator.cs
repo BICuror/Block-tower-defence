@@ -12,7 +12,9 @@ namespace WorldGeneration
         
         public void GenerateNewSeed()
         {
-            _biomeSeed = new Vector2(Random.Range(-1f, 1f), Random.Range(-1f, 1f));
+            float islandSize = _islandData.IslandSize;
+            
+            _biomeSeed = new Vector2(Random.Range(-islandSize, islandSize), Random.Range(-islandSize, islandSize));
         }
 
         public BiomeData GetBiomeAt(Vector2Int position)
@@ -42,7 +44,7 @@ namespace WorldGeneration
             {
                 float perlinNoiseX = _biomeSeed.x + position.x / (float)_islandData.IslandSize * _islandData.BiomeGenerationNoises[i].NoiseScale.x;
                 float perlinNoiseY = _biomeSeed.y + position.y / (float)_islandData.IslandSize * _islandData.BiomeGenerationNoises[i].NoiseScale.y;
-
+                
                 float evaluatedValue = _islandData.BiomeGenerationNoises[i].NoiseCurve.Evaluate(Mathf.PerlinNoise(perlinNoiseX, perlinNoiseY));
 
                 average += evaluatedValue;

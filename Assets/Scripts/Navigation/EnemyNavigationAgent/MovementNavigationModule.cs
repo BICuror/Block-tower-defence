@@ -9,7 +9,7 @@ namespace Navigation
         private Vector3 _startPosition;
         private Vector3 _endPosition;
 
-        private bool _sameHeightMovment;
+        private bool _nonsameHeightMovment;
 
         public MovementNavigationModule(Transform agentObject, NavigationAgentData navigationAgentData)
         {
@@ -24,7 +24,7 @@ namespace Navigation
             _startPosition = startPosition;
             _endPosition = endPosition;
 
-            _sameHeightMovment = Mathf.Abs(_startPosition.y - endPosition.y) >= 1f;
+            _nonsameHeightMovment = Mathf.Abs(_startPosition.y - endPosition.y) >= 1f;
         }
 
         public void MoveTowardsNextPosition(float elapsedTime)
@@ -33,7 +33,7 @@ namespace Navigation
 
             Vector3 resultPosition = Vector3.Lerp(_startPosition, _endPosition, evaluatedPosition);
 
-            if (_sameHeightMovment) 
+            if (_nonsameHeightMovment) 
             {
                 resultPosition.y += _agentData.VerticalMovmentCurve.Evaluate(elapsedTime) * _agentData.VerticalCurveMultiplyer;
             }

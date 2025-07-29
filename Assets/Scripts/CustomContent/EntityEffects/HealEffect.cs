@@ -12,6 +12,6 @@ public sealed class HealEffect : EntityTickEffect
     
     protected override void Tick()
     {
-        Entity.Health.ReceiveHeal(_healAmount);
+        Entity.Health.ReceivePercentHeal(_healAmount);
     }
 }

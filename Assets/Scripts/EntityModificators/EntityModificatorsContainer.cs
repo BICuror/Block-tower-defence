@@ -22,13 +22,13 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
         
         _initialModificatorDatas.ForEach(modificatorData =>
         {
-            AddEffect(modificatorData);
+            AddModificator(modificatorData);
         });   
     }
 
     public int GetModificatorsAmount(EntityModificatorData modificatorData) => _appliedModificators.Get(modificatorData).Count;
     
-    public void AddEffect(EntityModificatorData modificatorData)
+    public void AddModificator(EntityModificatorData modificatorData)
     {
         List<EntityModificator> modificators = _entityModificatorFactory.CreateEntityModificators(modificatorData);
 
@@ -55,7 +55,7 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
         return _appliedModificators.GetAllKeys().Contains(modificatorData);
     }
     
-    public void RemoveEffect(EntityModificatorData modificatorData)
+    public void RemoveModificator(EntityModificatorData modificatorData)
     {
         if (_appliedModificators.Contains(modificatorData))
         {

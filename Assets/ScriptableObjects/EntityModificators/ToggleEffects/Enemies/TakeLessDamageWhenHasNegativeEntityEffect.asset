@@ -16,6 +16,8 @@ MonoBehaviour:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
@@ -24,13 +26,14 @@ MonoBehaviour:
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
     - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
     - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
@@ -39,7 +42,7 @@ MonoBehaviour:
       _intArgument: 0
       _boolArgument: 0
       _floatArgument: 0
-      _stringArgument: TakeLessDamageWhenAffectedByNegativeEntityEffects
+      _stringArgument: NegativeEffectsDamageModificator
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
@@ -64,6 +67,19 @@ MonoBehaviour:
   _rarity: 2
   _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _icon: {fileID: 0}
   _modificatorName: Vampire
   _modificatorDescription: If has #bad negative bad# effect, take #good -25% good#
     #Damage

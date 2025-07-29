@@ -2,10 +2,10 @@ using UnityEngine;
 
 public static class CombatUtilities
 {
-    private const float _isolationRadius = 1f;
+    private const float ISLOATION_CUBE_RADIUS = 1f;
 
     public static bool EntityIsIsolated(GameObject gameObject)
     {
-        return Physics.OverlapSphere(gameObject.transform.position, _isolationRadius, gameObject.layer).Length <= 1;
+        return Physics.OverlapSphere(gameObject.transform.position, ISLOATION_CUBE_RADIUS, gameObject.layer).Length <= 1;
     }
 }

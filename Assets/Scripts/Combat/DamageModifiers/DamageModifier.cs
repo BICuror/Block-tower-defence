@@ -8,6 +8,7 @@ public abstract class DamageModifier
 
     public void SetOwner(CombatEntity ownerEntity) => OwnerEntity = ownerEntity;
     public void SetArgumentsContainer(ArgumentsContainer argumentsContainer) => Args = argumentsContainer;
+    public virtual void Initialize() {}
     
     public abstract float Modify(CombatEntity otherEntity, float value);
 }

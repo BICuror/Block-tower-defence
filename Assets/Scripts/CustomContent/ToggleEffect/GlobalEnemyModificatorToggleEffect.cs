@@ -38,12 +38,12 @@ public sealed class GlobalEnemyModificatorToggleEffect : GlobalToggleEffect
     {
         if (Random.Range(0, 100) <= _chance)
         {
-            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorData);
         }
     }
 
     private void RemoveEntityModificator(EnemyEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveEffect(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorData);
     }
 }

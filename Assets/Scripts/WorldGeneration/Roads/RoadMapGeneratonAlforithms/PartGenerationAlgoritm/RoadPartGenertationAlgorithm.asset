@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d76790ed5447343a3f48f160d94b7d, type: 3}
+  m_Name: RoadPartGenertationAlgorithm
+  m_EditorClassIdentifier: 
+  _exstensiedOverlappingSearch: 0
+  _maxLength: 45
+  _minLength: 25
+  _snapToTownhallDistance: 5
+  _roadPartDatas:
+  - {fileID: 11400000, guid: 41afb1f2dff659b44a8f829b0d597558, type: 2}
+  - {fileID: 11400000, guid: 73c7a5fdbce073a4999a66a63cc56a26, type: 2}
+  - {fileID: 11400000, guid: 6d0751be074ca4e4f93490b9f985e987, type: 2}
+  - {fileID: 11400000, guid: 5cf948bb01ff1f142a461b9b15a88909, type: 2}
+  - {fileID: 11400000, guid: 1cc81ed8b3ec85e4794a1b92d9052f51, type: 2}
+  - {fileID: 11400000, guid: 0c29247700d0a1c4c92d30ccb70c6af0, type: 2}

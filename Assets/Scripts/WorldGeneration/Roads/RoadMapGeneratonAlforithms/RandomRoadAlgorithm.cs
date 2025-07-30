@@ -48,19 +48,6 @@ namespace WorldGeneration
             return _roadMap;
         }
 
-        private Vector2Int FindSpawnerNodeIndex(Vector2Int position, Vector2Int[,] nodes, int amountOfNodes)
-        {
-            for (int x = 0; x < amountOfNodes; x++)
-            {
-                for(int y = 0; y < amountOfNodes; y++)
-                {
-                    if (position.x == nodes[x, y].x && position.y == nodes[x, y].y) return new Vector2Int(x, y);
-                }
-            }
-            return new Vector2Int(0,0);
-        }
-
-
         private void CreateRandomSpawnerRoad(Vector2Int currentPosition, Vector2Int[,] roadNodes)
         {
             currentPosition = roadNodes[currentPosition.x, currentPosition.y];

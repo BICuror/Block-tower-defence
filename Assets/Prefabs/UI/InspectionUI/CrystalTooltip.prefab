@@ -71,7 +71,6 @@ GameObject:
   - component: {fileID: 1224362466023082563}
   - component: {fileID: 8701364025746998132}
   - component: {fileID: 3961331482114920432}
-  - component: {fileID: 5087343061853482187}
   - component: {fileID: 8257513214410736894}
   - component: {fileID: 2843232672469811050}
   m_Layer: 0
@@ -123,16 +122,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411bc0e54cbb0344aa76bc534bc68389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _contentSizeFitters:
+  - {fileID: 8686663593294039458}
+  - {fileID: 612609853589768455}
+  _layoutControllers: 1
+  _inspectablePosition: {fileID: 4143902417288304505}
+  _yOffset: 0
   _mainGroup: {fileID: 8257513214410736894}
-  _startWaveCanvasGroup: {fileID: 6023732871413341965}
+  _fadeDuration: 0.2
   _rewardsAmountTextField: {fileID: 5394468545300387969}
   _durationTextField: {fileID: 5394468545300387969}
+  _startWaveCanvasGroup: {fileID: 6023732871413341965}
   _inspectionSubpanelsController: {fileID: 2953025072565230696}
-  _layoutSizeController: {fileID: 5087343061853482187}
   _entityModificatorTooltipPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
   _tooltipDataParser: {fileID: 3961331482114920432}
-  _entityModificatorTooltipParent: {fileID: 612609853589768455}
-  _pointFollowerUI: {fileID: 2843232672469811050}
+  _tooltipParent: {fileID: 612609853589768455}
 --- !u!114 &2871898726855916236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,26 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
---- !u!114 &5087343061853482187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777958129399263962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327f241f4f13f324ea7249f556c03842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _contentSizeFitters:
-  - {fileID: 5778367387859996406}
-  - {fileID: 6452153543671932997}
-  - {fileID: 1224362466023082563}
-  _controllerRectTransforms:
-  - {fileID: 612609853589768455}
-  - {fileID: 1581158546983494758}
-  - {fileID: 6156070538785157371}
 --- !u!225 &8257513214410736894
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -244,10 +228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1dd01d03aa620488a41b6a1e8040d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inspectablePosition: {fileID: 4143902417288304505}
-  _yOffset: 50
-  _parentRect: {fileID: 0}
-  _rect: {fileID: 0}
 --- !u!1 &1940541286815373205
 GameObject:
   m_ObjectHideFlags: 0

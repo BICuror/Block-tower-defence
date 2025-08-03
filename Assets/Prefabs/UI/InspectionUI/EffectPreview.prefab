@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 272690981735911592}
   - component: {fileID: 1550593450988585162}
   - component: {fileID: 8713793091378861059}
-  - component: {fileID: 1355645407997563984}
   - component: {fileID: 9009782526213209366}
   - component: {fileID: 5905362260314203850}
   - component: {fileID: 2364438044622368734}
@@ -81,24 +80,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
---- !u!114 &1355645407997563984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2843698938620316056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 327f241f4f13f324ea7249f556c03842, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _contentSizeFitters:
-  - {fileID: 8709669446003616130}
-  - {fileID: 7803697042804045205}
-  _controllerRectTransforms:
-  - {fileID: 4703359963641309619}
-  - {fileID: 9217865993405890130}
 --- !u!225 &9009782526213209366
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -123,10 +104,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1dd01d03aa620488a41b6a1e8040d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inspectablePosition: {fileID: 3646605401754678380}
-  _yOffset: -15
-  _parentRect: {fileID: 0}
-  _rect: {fileID: 0}
 --- !u!114 &2364438044622368734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,10 +116,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49232ac98105574794d9fb753ee517e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainGroup: {fileID: 9009782526213209366}
   _contentSizeFitters:
-  - {fileID: 8709669446003616130}
-  - {fileID: 7803697042804045205}
+  - {fileID: 5762406530955340478}
+  - {fileID: 9217865993405890130}
+  _layoutControllers: 1
+  _inspectablePosition: {fileID: 3646605401754678380}
+  _yOffset: 0
+  _mainGroup: {fileID: 9009782526213209366}
+  _fadeDuration: 0.2
   _previewName: {fileID: 4564997724490142321}
   _previewImage: {fileID: 1666409319470236751}
 --- !u!1 &2961782866590981547

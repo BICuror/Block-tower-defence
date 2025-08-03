@@ -16,26 +16,26 @@ public sealed class InspectionTooltipPositioner : MonoBehaviour
         _instance = this;
     } 
     
-    public Vector3 GetPosition(PointFollowerUI pointFollower, Vector2 preferedPosition)
+    public Vector3 GetPosition(PointFollowingCanvasUIElement.PointFollowingElementOffsetContainer offsetsContainer, Vector2 preferredPosition)
     {
-        if (preferedPosition.y + pointFollower.TopOffset > _upCorner.transform.localPosition.y)
+        if (preferredPosition.y + offsetsContainer.TopOffset > _upCorner.transform.localPosition.y)
         {
-            preferedPosition.y = _upCorner.transform.localPosition.y - pointFollower.TopOffset;
+            preferredPosition.y = _upCorner.transform.localPosition.y - offsetsContainer.TopOffset;
         }
-        else if (preferedPosition.y - pointFollower.BottomOffset < _downCorner.transform.localPosition.y)
+        else if (preferredPosition.y - offsetsContainer.BottomOffset < _downCorner.transform.localPosition.y)
         {
-            preferedPosition.y = _downCorner.transform.localPosition.y + pointFollower.BottomOffset;
-        }
-        
-        if (preferedPosition.x - pointFollower.LeftOffset < _leftCorner.transform.localPosition.x)
-        {
-            preferedPosition.x = _leftCorner.transform.localPosition.x + pointFollower.LeftOffset;
-        }
-        else if (preferedPosition.x + pointFollower.RightOffset > _rightCorner.transform.localPosition.x)
-        {
-            preferedPosition.x = _rightCorner.transform.localPosition.x - pointFollower.RightOffset;
+            preferredPosition.y = _downCorner.transform.localPosition.y + offsetsContainer.BottomOffset;
         }
         
-        return preferedPosition;
+        if (preferredPosition.x - offsetsContainer.LeftOffset < _leftCorner.transform.localPosition.x)
+        {
+            preferredPosition.x = _leftCorner.transform.localPosition.x + offsetsContainer.LeftOffset;
+        }
+        else if (preferredPosition.x + offsetsContainer.RightOffset > _rightCorner.transform.localPosition.x)
+        {
+            preferredPosition.x = _rightCorner.transform.localPosition.x - offsetsContainer.RightOffset;
+        }
+        
+        return preferredPosition;
     }
 }

@@ -62,7 +62,6 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
     
     private bool IterateNextRoadStep(Vector2Int currentPosition)
     {
-        Debug.Log(currentPosition);
         List<RoadPartData> roadPartDatas = _roadPartDatas.OrderBy(item => Random.Range(0, _roadPartDatas.Count)).ToList();
         
         for (int roadPartIndex = 0; roadPartIndex < roadPartDatas.Count; roadPartIndex++)

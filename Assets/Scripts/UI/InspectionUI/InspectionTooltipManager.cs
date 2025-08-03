@@ -1,118 +1,210 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine;
 using Combat;
+using System;
+using System.Threading.Tasks;
 
 public sealed class InspectionTooltipManager : MonoBehaviour
 {
     private static InspectionTooltipManager _instance;
     public static InspectionTooltipManager Instance => _instance;
     
-    [SerializeField] private DragController _dragController;
-    [SerializeField] private EntityTooltip _entityTooltip;
-    [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltip;
-    [SerializeField] private EffectInspectionTooltip _effectInspectionTooltip;
-    [SerializeField] private EffectInspectionTooltipPreview _effectPreviewTooltipPrefab;
-    private readonly List<EffectInspectionTooltipPreview> _instantiatedEffectTooltips = new();
-    private InspectionState _inspectionState = InspectionState.Idle;
+    [Header("ActivityCondition")]
+    [SerializeField] [Range(-1f, 1f)] private float _directionDotProductThreshold = -0.2f;
+    [SerializeField] private float _wrongDirectionMaxDistance = 100;
     
-    public bool NonIdleTooltipsOpened => _inspectionState != InspectionState.Idle;
-
+    [SerializeField] private Transform _uiRoot;
+    [SerializeField] private DragController _dragController;
+    [SerializeField] private EntityTooltip _entityTooltipPrefab;
+    [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltipPrefab;
+    [SerializeField] private EffectInspectionTooltip _effectInspectionTooltipPrefab;
+    [SerializeField] private EffectInspectionTooltipPreview _effectPreviewTooltipPrefab;
+    
+    private CancellationTokenSource _activeSinglePopupCancelationTokenSource = new();
+    private readonly ListDictionary<UILayer, PointFollowingCanvasUIElement> _layers = new(); 
+    private UILayer _currentActiveLayer;
+    
+    public bool NonIdleTooltipsOpened => _layers.Contains(UILayer.Single);
+    
     private void Awake()
     {
         _instance = this;
         
         _dragController.PickedObject.AddListener(_ =>
         {
-            _inspectionState = InspectionState.Inspecting;
-            UpdateEffectTooltipStates();
+            DisableActiveSinglePopup();
+            SetActiveLayer(UILayer.None);
         });
-        _dragController.DroppedObject.AddListener(_ =>
+        _dragController.DroppedObject.AddListener(_ => SetActiveLayer(UILayer.Group));
+    }
+    
+    public async UniTask SetActiveLayer(UILayer layer)
+    {
+        Debug.Log("SetLayer " + layer);
+        
+        _currentActiveLayer = layer;
+
+        if (layer == UILayer.Single)
         {
-            _inspectionState = InspectionState.Idle;
-            UpdateEffectTooltipStates();
-        });
+            await UpdateTooltipStates(UILayer.Group);
+            await UpdateTooltipStates(UILayer.Single);
+        }
+        else
+        {
+            if (_layers.Contains(UILayer.Single))
+            {
+                List<UniTask> destroymentTasks = new();
 
-        _entityTooltip.Closed += CloseAllTooltips;
-        _crystalInspectionTooltip.Closed += CloseAllTooltips;
-        _effectInspectionTooltip.Closed += CloseAllTooltips;
+                List<PointFollowingCanvasUIElement> elements = new List<PointFollowingCanvasUIElement>(_layers.Get(UILayer.Single));
+                
+                elements.ForEach(element =>
+                {
+                    if (element) destroymentTasks.Add(DestroyElement(element));
+                });
+   
+                await UniTask.WhenAll(destroymentTasks);
+            }
+            
+            await UpdateTooltipStates(UILayer.Group);
+        }
     }
     
-    public void ActivateEntityTooltip(CombatEntity entity)
+    public async UniTask OpenEntityTooltip(CombatEntity entity)
     {
-        _inspectionState = InspectionState.Inspecting;
-
-        _entityTooltip.Initialize(entity);
-        _crystalInspectionTooltip.Disable();
-        _effectInspectionTooltip.Disable();
-        _entityTooltip.Enable();
-        UpdateEffectTooltipStates();
+        EntityTooltip entityTooltip = Instantiate(_entityTooltipPrefab, _uiRoot);
+           
+        await entityTooltip.Initialize(entity);
+        
+        _layers.Add(UILayer.Single, entityTooltip);
+        
+        SetActiveLayer(UILayer.Single);
+        
+        await KeepElementActiveWhileNeeded(entityTooltip);
     }
 
-    public void ActivateCrystalTooltip(Item item)
+    public async UniTask OpenCrystalTooltip(Item item)
     {
-        _inspectionState = InspectionState.Inspecting;
+        CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltipPrefab, _uiRoot);
+           
+        await crystalInspectionTooltip.Initialize(item);
         
-        _crystalInspectionTooltip.Initialize(item);
-        _entityTooltip.Disable();
-        _effectInspectionTooltip.Disable();
-        _crystalInspectionTooltip.Enable();
-        UpdateEffectTooltipStates();
+        _layers.Add(UILayer.Single, crystalInspectionTooltip);
+        
+        SetActiveLayer(UILayer.Single);
+        
+        await KeepElementActiveWhileNeeded(crystalInspectionTooltip);
     }
     
-    public void ActivateEffectTooltip(SelectionOptionObject selectionOptionObject)
+    public async UniTask OpenEffectTooltip(SelectionOptionObject selectionOptionObject)
     {
-        _inspectionState = InspectionState.Inspecting;
+        EffectInspectionTooltip effectInspectionTooltip = Instantiate(_effectInspectionTooltipPrefab, _uiRoot);
         
-        _effectInspectionTooltip.SetSelectionOptionObject(selectionOptionObject);
-        _entityTooltip.Disable();
-        _crystalInspectionTooltip.Disable();
-        _effectInspectionTooltip.Enable();
-        UpdateEffectTooltipStates();
+        await effectInspectionTooltip.SetSelectionOptionObject(selectionOptionObject);
+        
+        _layers.Add(UILayer.Single, effectInspectionTooltip);
+        
+        SetActiveLayer(UILayer.Single);
+        
+        await KeepElementActiveWhileNeeded(effectInspectionTooltip);
     }
 
-    public EffectInspectionTooltipPreview CreateEffectTooltip(SelectionOptionObject selectionOptionObject)
+    public async UniTask<EffectInspectionTooltipPreview> OpenEffectPreviewTooltip(SelectionOptionObject selectionOptionObject)
     {
-        EffectInspectionTooltipPreview effectPreviewTooltip = Instantiate(_effectPreviewTooltipPrefab, _entityTooltip.transform.parent);
-        effectPreviewTooltip.gameObject.SetActive(_inspectionState == InspectionState.Idle);
-        effectPreviewTooltip.GetComponent<PointFollowerUI>().SetTarget(selectionOptionObject.transform);
-        
-        _instantiatedEffectTooltips.Add(effectPreviewTooltip);
+        EffectInspectionTooltipPreview effectPreviewTooltip = Instantiate(_effectPreviewTooltipPrefab, _uiRoot);
+        await effectPreviewTooltip.Initialilize(selectionOptionObject);
+
+        _layers.Add(UILayer.Group, effectPreviewTooltip);
+        UpdateTooltipStates(UILayer.Group);
         
         return effectPreviewTooltip;
     }
 
-    public void DestroyEffectTooltip(EffectInspectionTooltipPreview effectPreviewTooltip)
+    public async UniTask DestroyElement(PointFollowingCanvasUIElement element)
     {
-        _instantiatedEffectTooltips.Remove(effectPreviewTooltip);
-        Destroy(effectPreviewTooltip.gameObject);
+        if (_layers.Contains(UILayer.Single)) _layers.Remove(UILayer.Single, element);
+        if (_layers.Contains(UILayer.Group)) _layers.Remove(UILayer.Group, element);
+        await element.Disable();
+        Destroy(element.gameObject);
     }
     
-    private void UpdateEffectTooltipStates()
+    public void DisableActiveSinglePopup()
     {
-        if (_inspectionState == InspectionState.Idle)
-        {
-            _instantiatedEffectTooltips.ForEach(effectTooltip => effectTooltip.Enable());
-        }
-        else
-        {
-            _instantiatedEffectTooltips.ForEach(effectTooltip => effectTooltip.Disable());
-        }
+        _activeSinglePopupCancelationTokenSource.Cancel();
+        _activeSinglePopupCancelationTokenSource = new();
     }
     
-    public void CloseAllTooltips()
+    private async UniTask UpdateTooltipStates(UILayer layer)
     {
-        _inspectionState = InspectionState.Idle;
-        
-        _entityTooltip.Disable();
-        _crystalInspectionTooltip.Disable();
-        _effectInspectionTooltip.Disable();
-        
-        UpdateEffectTooltipStates();
+        if (!_layers.Contains(layer)) return;
+
+        _layers.Get(layer).ForEach(async (element) => 
+        {
+            await SetElementState(element, _currentActiveLayer == layer);
+        });
     }
 
-    private enum InspectionState
+    private async UniTask SetElementState(PointFollowingCanvasUIElement element, bool state)
     {
-        Idle,
-        Inspecting
+        if (element.IsActive == state) return;
+
+        if (state) await element.Enable();
+        else await element.Disable();
     }
+    
+    private async UniTask KeepElementActiveWhileNeeded(PointFollowingCanvasUIElement element)
+    {
+        DisableActiveSinglePopup();
+        element.PointerEntered += OnEnteringElement;
+        element.PointerExited += OnExitingElement;
+        bool hasBeenEntered = false;
+        
+        try
+        {
+            Vector2 initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 currentPosition;
+            float distance;
+            bool isValid;
+
+            do
+            {
+                await UniTask.WaitForFixedUpdate(cancellationToken: _activeSinglePopupCancelationTokenSource.Token);
+
+                currentPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
+                distance = Vector2.Distance(initialPosition, currentPosition);
+
+                isValid = hasBeenEntered || (Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance);
+            } 
+            while (isValid);
+        }
+        catch (Exception e)
+        {
+            e.LogAsync();
+        }
+
+        SetActiveLayer(UILayer.Group);
+        
+        return;
+        
+        void OnEnteringElement()
+        {
+            element.PointerExited -= OnEnteringElement;
+            hasBeenEntered = true;
+        }
+        
+        void OnExitingElement()
+        {
+            element.PointerExited -= OnExitingElement;
+            DisableActiveSinglePopup();
+        }
+    }
+}
+
+public enum UILayer
+{
+    None,
+    Group,
+    Single
 }

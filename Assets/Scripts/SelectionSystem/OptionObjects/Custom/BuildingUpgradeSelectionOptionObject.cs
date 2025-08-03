@@ -1,5 +1,5 @@
-using Combat;
 using UnityEngine;
+using Combat;
 
 public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
 {
@@ -13,19 +13,11 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
 
     public void SetTargetBuildingEntity(BuildingEntity buildingEntity) => _targetBuildingEntity = buildingEntity;
 
-    public void SetEffectData(EntityModificatorData modificatorData)
+    public async void SetEffectData(EntityModificatorData modificatorData)
     {
         _modificatorData = modificatorData;
 
-        _effectPreviewTooltip = InspectionTooltipManager.Instance.CreateEffectTooltip(this);
-        _effectPreviewTooltip.SetEffectPreview(modificatorData.Icon, _modificatorData.ModificatorName);
-        
-        _effectPreviewTooltip.PointerEntered += OpenEffectInspectionTooltip;
-    }
-
-    private void OpenEffectInspectionTooltip()
-    {
-        InspectionTooltipManager.Instance.ActivateEffectTooltip(this);
+        _effectPreviewTooltip = await InspectionTooltipManager.Instance.OpenEffectPreviewTooltip(this);
     }
     
     public override void ApplyEffect()
@@ -35,7 +27,6 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
 
     private void OnDestroy()
     {
-        InspectionTooltipManager.Instance.DestroyEffectTooltip(_effectPreviewTooltip);
-        InspectionTooltipManager.Instance.CloseAllTooltips();
+        InspectionTooltipManager.Instance.DestroyElement(_effectPreviewTooltip);
     }
 }

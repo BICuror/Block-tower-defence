@@ -1,8 +1,9 @@
 using UnityEngine;
 using Combat;
+using Cysharp.Threading.Tasks;
 using TMPro;
 
-public sealed class EntityTooltip : InspectionPanel
+public sealed class EntityTooltip : PointFollowingCanvasUIElement
 {
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _nameTextField;
@@ -14,10 +15,8 @@ public sealed class EntityTooltip : InspectionPanel
 
     [Header("Links")] 
     [SerializeField] private TooltipEntityModificatorContainer _tooltipEntityModificatorContainer;
-    [SerializeField] private TooltipStatContainer _tooltipStatContainer;
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
-    [SerializeField] private LayoutSizeController _layoutSizeController;
-    [SerializeField] private PointFollowerUI _pointFollowerUI;
+    [SerializeField] private TooltipStatContainer _tooltipStatContainer;
     
     private Inspectable _inspectable;
 
@@ -30,7 +29,7 @@ public sealed class EntityTooltip : InspectionPanel
         _tooltipEntityModificatorContainer.TooltipClosed += ReturnToDefaultInspectionState;
     }
 
-    public void Initialize(CombatEntity entity)
+    public async UniTask Initialize(CombatEntity entity)
     {
         _inspectable = entity.ComponentsContainer.Get<Inspectable>();
         
@@ -40,22 +39,11 @@ public sealed class EntityTooltip : InspectionPanel
         
         _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(_inspectable.Description));
 
-        InitializeTooltipStatContainer(entity);
-        InitializeEntityModificatorContainer(entity);
-
-        _layoutSizeController.RecalculateLayout();
-        
-        _pointFollowerUI.SetTarget(entity.transform);
-    }
-
-    private void InitializeTooltipStatContainer(CombatEntity entity)
-    {
         _tooltipStatContainer.SetInspectedEntity(entity);
-    }    
-    
-    private void InitializeEntityModificatorContainer(CombatEntity entity)
-    {
         _tooltipEntityModificatorContainer.SetInspectedEntity(entity);
+        
+        SetTarget(entity.transform);
+        await RebuildLayoutAndCalculateOffsets();
     }
 
     private void ReturnToDefaultInspectionState()

@@ -1,39 +1,34 @@
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using TMPro;
 
-public sealed class CrystalInspectionTooltip : InspectionPanel
+public sealed class CrystalInspectionTooltip : PointFollowingCanvasUIElement
 {
     [Header("HeaderParameters")] 
-    [SerializeField] private CanvasGroup _startWaveCanvasGroup;
     [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
     [SerializeField] private TextMeshProUGUI _durationTextField;
+    [SerializeField] private CanvasGroup _startWaveCanvasGroup;
     
     [Header("Links")] 
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
-    [SerializeField] private LayoutSizeController _layoutSizeController;
     [SerializeField] private GlobalEffectTooltip _entityModificatorTooltipPrefab;
     [SerializeField] private TooltipDataParser _tooltipDataParser;
-    [SerializeField] private Transform _entityModificatorTooltipParent;
-    [SerializeField] private PointFollowerUI _pointFollowerUI;
+    [SerializeField] private Transform _tooltipParent;
     
     private Dictionary<GlobalEffectData, GlobalEffectTooltip> _crystalTooltips = new();
     
-    public void Initialize(Item item)
+    public async UniTask Initialize(Item item)
     {
-        _crystalTooltips.Values.ToList().ForEach(tooltip => Destroy(tooltip.gameObject));
-        _crystalTooltips.Clear();
-        
         CreateTooltips(item);
 
         _rewardsAmountTextField.text = item.RewardDatas.Count.ToString();
         _durationTextField.text = item.Duration.ToString();
         _startWaveCanvasGroup.gameObject.SetActive(item.ToggleEffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
         
-        _layoutSizeController.RecalculateLayout();
-        
-        _pointFollowerUI.SetTarget(item.transform);
+        SetTarget(item.transform);
+        await RebuildLayoutAndCalculateOffsets();
     }
 
     private void CreateTooltips(Item item)
@@ -60,7 +55,7 @@ public sealed class CrystalInspectionTooltip : InspectionPanel
         }
         else
         {
-            GlobalEffectTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
+            GlobalEffectTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _tooltipParent);
             tooltip.SetEntityModificator(globalEffectData);
             tooltip.TooltipClosed += _inspectionSubpanelsController.ClearAllSubpanels;
             tooltip.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;

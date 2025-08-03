@@ -11,7 +11,7 @@ public class InspectorController : MonoBehaviour
     
     private Inspectable _inspectable;
     
-    public bool TryToStartInspecting(Vector2 mousePosition)
+    public void TryToStartInspecting(Vector2 mousePosition)
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
@@ -20,125 +20,68 @@ public class InspectorController : MonoBehaviour
             if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
             { 
                 StartInspecting(hoveredInspectable);
-    
-                return true;
+                
+                return;
             }
         }
-
-        return false;
+        
+        _inspectionTooltipManager.SetActiveLayer(UILayer.Group);
     }
     
-    public bool TryToStartInspectingItem(Vector2 mousePosition)
+    public void TryToStartIdleInspecting(Vector2 mousePosition)
     {
+        if (_inspectionTooltipManager.NonIdleTooltipsOpened) return;
+        
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
+        
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.TryGetComponent(out Item item))
+            if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
             {
-                _inspectable = hit.collider.gameObject.GetComponent<Inspectable>();
-                
-                _inspectable.SetInspectedState(true);
-                
-                _inspectionTooltipManager.ActivateCrystalTooltip(item);
-                
-                return true;
-            }
-        }
-
-        return false;
-    }
-    
-    public bool TryToStartInspectingEffect(Vector2 mousePosition)
-    {
-        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
-        {
-            if (hit.collider.gameObject.TryGetComponent(out BuildingUpgradeSelectionOptionObject buildingUpgradeSelectionOptionObject))
-            {
-                _inspectable = hit.collider.gameObject.GetComponent<Inspectable>();
-                
-                _inspectable.SetInspectedState(true);
-                
-                _inspectionTooltipManager.ActivateEffectTooltip(buildingUpgradeSelectionOptionObject);
-                
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public bool TryStopInspecting(Vector2 mousePosition)
-    {
-        if (_inspectable != null && _inspectable.TryGetComponent<Item>(out Item inspectedItem))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-            if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
-            {
-                if (hit.collider.gameObject.TryGetComponent(out Item item))
+                if (hoveredInspectable.CanBeIdleInspected)
                 {
-                    if (inspectedItem != item)
-                    {
-                        StopInspecting();
-                        TryToStartInspectingItem(mousePosition);
-                        return false;
-                    }
+                    StartInspecting(hoveredInspectable);
                 }
             }
         }
-        
-        if (_inspectable != null && _inspectable.TryGetComponent<BuildingUpgradeSelectionOptionObject>(out BuildingUpgradeSelectionOptionObject selectionOptionObjectInspectable))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-
-            if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
-            {
-                if (hit.collider.gameObject.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
-                {
-                    if (selectionOptionObjectInspectable != selectionOptionObject)
-                    {
-                        StopInspecting();
-                        TryToStartInspectingEffect(mousePosition);
-                        return false;
-                    }
-                }
-            }
-        }
-        
-        if (_inspectionTooltipManager.NonIdleTooltipsOpened) return false;
-        
-        StopInspecting();
-
-        return true;
     }
-
-    private void StartInspecting(Inspectable inspectable)
+    
+    
+    private async void StartInspecting(Inspectable inspectable)
     {
+        if (_inspectable && _inspectable == inspectable) return;
+        if (inspectable.IsInspected) return;
+        
         _inspectable = inspectable;
         _inspectable.SetInspectedState(true);
         
         _areaVisualisation.ActivateVisualisation(_inspectable.gameObject);
         
+        _inspectionTooltipManager.DisableActiveSinglePopup();
+        
         if (inspectable.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
         {
-            _inspectionTooltipManager.ActivateEntityTooltip(buildingOptionObject.InstantiatedBuilding);
+            await _inspectionTooltipManager.OpenEntityTooltip(buildingOptionObject.InstantiatedBuilding);
         }
         else if (inspectable.TryGetComponent(out CombatEntity combatEntity))
         {
-            _inspectionTooltipManager.ActivateEntityTooltip(combatEntity);
+            await _inspectionTooltipManager.OpenEntityTooltip(combatEntity);
         }
-    }
+        else if (inspectable.TryGetComponent(out Item item))
+        {
+            await _inspectionTooltipManager.OpenCrystalTooltip(item);
+        }        
+        else if (inspectable.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
+        {
+            await _inspectionTooltipManager.OpenEffectTooltip(selectionOptionObject);
+        }
 
-    public void StopInspecting()
-    {
-        if (!_inspectable) return;
+        if (inspectable)
+        {
+            _areaVisualisation.DeactivateVisualisation(inspectable.gameObject);
+            inspectable.SetInspectedState(false);
+        }
         
-        _inspectionTooltipManager.CloseAllTooltips();
-        _areaVisualisation.DeactivateVisualisation(_inspectable.gameObject);
-        _inspectable.SetInspectedState(false);
         _inspectable = null;
     }
 }

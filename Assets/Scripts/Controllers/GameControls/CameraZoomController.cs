@@ -1,5 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(Camera))]
 [RequireComponent(typeof(GameController))]
@@ -20,8 +21,6 @@ public sealed class CameraZoomController : MonoBehaviour
     
     private float _finalZoom;
     private Tween _zoomTween;
-
-    public float ZoomPercent => _finalZoom / _maxZoomValue;
     
     private void OnEnable()
     {
@@ -36,7 +35,7 @@ public sealed class CameraZoomController : MonoBehaviour
 
     private void ChangeZoomValue(float changeValue)
     {
-        if (_gameController.State == GameController.ControllerState.Inspecting) return;
+        if (InspectionTooltipManager.Instance.NonIdleTooltipsOpened) return;
         
         _finalZoom = Mathf.Clamp(_finalZoom + changeValue, _minZoomValue, _maxZoomValue);
 
@@ -45,10 +44,4 @@ public sealed class CameraZoomController : MonoBehaviour
     }
 
     private void SetZoom(float value) => _camera.orthographicSize = value;
-
-    public void ZoomOutOnDefeat()
-    {
-        if (_zoomTween != null) _zoomTween.Kill();
-        _zoomTween = DOVirtual.Float(_camera.orthographicSize, 18f, 3f, SetZoom).SetEase(_zoomSmoothingCurve);
-    }
 }

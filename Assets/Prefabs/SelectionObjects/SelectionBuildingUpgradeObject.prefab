@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6982756978523785739}
   - component: {fileID: 2184172808081725063}
   - component: {fileID: 2062154613735269688}
+  - component: {fileID: 6144259287728203604}
   m_Layer: 16
   m_Name: SelectionBuildingUpgradeObject
   m_TagString: Untagged
@@ -113,6 +114,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 957600227eec22540b5e702114a491d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6144259287728203604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4318490472771455563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _canBeIdleInspected: 1
+  _inspectableObjectName: 
+  _inspectableObjectDescription: 
 --- !u!1 &6344769459362493446
 GameObject:
   m_ObjectHideFlags: 0

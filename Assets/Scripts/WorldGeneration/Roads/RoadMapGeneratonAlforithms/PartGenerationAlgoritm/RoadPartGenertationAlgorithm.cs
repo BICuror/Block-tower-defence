@@ -3,61 +3,21 @@ using WorldGeneration;
 using System.Linq;
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "RoadPartGenertationAlgorithm", menuName = "Generation/RoadMapGeneratoionAlgorithm/RoadPartGenertationAlgorithm")]
 
 public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 {
-    [SerializeField] private bool _exstensiedOverlappingSearch = true;
     [SerializeField] private int _maxLength;
     [SerializeField] private int _minLength;
-    [SerializeField] private float _snapToTownhallDistance = 5;
+    [SerializeField] private float _snapToEndPositionDistance = 5;
     [SerializeField] private List<RoadPartData> _roadPartDatas;
-    Vector2Int[] _checkDirections = new Vector2Int[4]
-    {
-        Vector2Int.up,
-        Vector2Int.down,
-        Vector2Int.left, 
-        Vector2Int.right
-    };
-    private bool[,] _tempRoadmap;
-    private int _centerIndex;
-    private Vector2Int _currentStartPosition;
-    private Vector2Int _currentEndPosition;
     
-    public override bool[,] GenerateRoadMap(Vector2Int[,] roadNodes, List<Vector2Int> spawnerNodes, IslandData islandData)
+    public override bool TryGenerateRoadMap()
     {
-        _islandData = islandData;
-        _roadMap = new bool[_islandData.IslandSize, _islandData.IslandSize];
-
-        _centerIndex = (islandData.IslandSize - 1) / 2;
-
-        for (int i = 0; i < spawnerNodes.Count; i++)
-        {  
-            _roadMap[spawnerNodes[i].x, spawnerNodes[i].y] = true;
-            
-            GenerateRoad(spawnerNodes[i], new Vector2Int(_centerIndex, _centerIndex));
-        }
-
-        return _roadMap;
-    }
-
-    public void GenerateRoad(Vector2Int initialPosition, Vector2Int finalPosition)
-    {
-        _tempRoadmap = new bool[_islandData.IslandSize, _islandData.IslandSize];
-        _currentStartPosition = initialPosition;
-        _currentEndPosition = finalPosition;
-        
-        if (!IterateNextRoadStep(initialPosition)) MoveRoadTo(initialPosition, finalPosition);
-        
-        for (int x = 0; x < _islandData.IslandSize; x++)
-        {
-            for (int z = 0; z < _islandData.IslandSize; z++)
-            {
-                if (_tempRoadmap[x, z]) _roadMap[x, z] = true;
-            }
-        }
+        return IterateNextRoadStep(StartPosition);
     }
     
     private bool IterateNextRoadStep(Vector2Int currentPosition)
@@ -80,23 +40,23 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
                 { 
                     Vector2Int endPosition = offset + GetLocalExitPosition(rotatedGrids[gridRotationIndex]);
                     
-                    float distanceToEnd = Vector2.Distance(endPosition, _currentEndPosition);
+                    float distanceToEnd = Vector2.Distance(endPosition, EndPosition);
                     
-                    if (HasAValidRoadFromStartToEnd(_currentStartPosition, _currentEndPosition, _minLength, _maxLength, out int resultLength))
+                    if (HasAValidRoadFromStartToEnd(StartPosition, EndPosition, _minLength, _maxLength, out int resultLength))
                     {
                         Debug.Log(resultLength);
                         return true;
                     }
                     
-                    if (!HasAValidRoadFromStartToEnd(_currentStartPosition, endPosition, int.MinValue, int.MaxValue, out int currentPathLength))
+                    if (!HasAValidRoadFromStartToEnd(StartPosition, endPosition, int.MinValue, int.MaxValue, out int currentPathLength))
                     {
                         RemoveGrid(rotatedGrids[gridRotationIndex], offset);
                         continue;
                     }
 
-                    if (distanceToEnd <= _snapToTownhallDistance && currentPathLength > _minLength && currentPathLength < _maxLength + distanceToEnd)
+                    if (distanceToEnd <= _snapToEndPositionDistance && currentPathLength > _minLength && currentPathLength < _maxLength + distanceToEnd)
                     {
-                        MoveRoadTo(endPosition, _currentEndPosition);
+                        ConnectPoints(endPosition, EndPosition);
                         Debug.Log(currentPathLength + distanceToEnd);
                         return true;
                     }
@@ -122,7 +82,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
     private bool HasAValidRoadFromStartToEnd(Vector2Int startingPosition, Vector2Int endPosition, int minWeight, int maxWeight, out int resultLength)
     {
-        int[,] weightMap = new int[_islandData.IslandSize, _islandData.IslandSize];
+        int[,] weightMap = new int[IslandData.IslandSize, IslandData.IslandSize];
         
         bool result = GetMinLength(startingPosition, 0, out int length);
 
@@ -145,13 +105,13 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
             List<int> weights = new List<int>();
 
-            for (int i = 0; i < _checkDirections.Length; i++)
+            for (int i = 0; i < CheckDirections.Length; i++)
             {
-                Vector2Int checkPosition = _checkDirections[i] + position;
+                Vector2Int checkPosition = CheckDirections[i] + position;
                 
                 if (!IsInBorders(checkPosition)) continue;
                 
-                if (_roadMap[checkPosition.x, checkPosition.y] || _tempRoadmap[checkPosition.x, checkPosition.y])
+                if (RoadMap[checkPosition.x, checkPosition.y] || TempRoadmap[checkPosition.x, checkPosition.y])
                 {
                     if (weightMap[checkPosition.x, checkPosition.y] == 0 || weightMap[checkPosition.x, checkPosition.y] > weight + 1) 
                     {
@@ -192,7 +152,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
                 if (roadPartGrid[x, z] == RoadPartTileState.Exit || roadPartGrid[x, z] == RoadPartTileState.Solid)
                 {
-                    _tempRoadmap[xCheck, zCheck] = true;
+                    TempRoadmap[xCheck, zCheck] = true;
                 }
             }
         }
@@ -222,28 +182,11 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
                     if (!IsInBorders(new Vector2Int(xCheck, zCheck))) return true;
                 }
                 
-                if (_roadMap[xCheck, zCheck] || _tempRoadmap[xCheck, zCheck]) return true;
+                if (RoadMap[xCheck, zCheck] || TempRoadmap[xCheck, zCheck]) return true;
             }
         }
 
         return false;        
-    }
-
-    private bool HasTilesNearby(Vector2Int position)
-    {
-        if (Vector2.Distance(new Vector2Int(_centerIndex, _centerIndex), position) <= _snapToTownhallDistance) return false;
-        
-        for (int i = 0; i < _checkDirections.Length; i++)
-        {
-            Vector2Int checkPosition = _checkDirections[i] + position;
-
-            if (IsInBorders(checkPosition))
-            {
-                if (_tempRoadmap[checkPosition.x, checkPosition.y]) return true;
-            }
-        }
-
-        return false;
     }
     
     private void RemoveGrid(RoadPartTileState[,] roadPartGrid, Vector2Int offset)
@@ -259,7 +202,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
                 if (roadPartGrid[x, z] == RoadPartTileState.Solid || roadPartGrid[x, z] == RoadPartTileState.Exit)
                 {
-                    _tempRoadmap[xCheck, zCheck] = false;
+                    TempRoadmap[xCheck, zCheck] = false;
                 }
             }
         }

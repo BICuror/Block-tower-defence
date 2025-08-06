@@ -32,43 +32,28 @@ namespace WorldGeneration
             Vector2Int.right
         };
 
-        public override bool[,] GenerateRoadMap(Vector2Int[,] roadNodes, List<Vector2Int> spawnerNodes, IslandData islandData)
+        public override bool TryGenerateRoadMap(out bool[,] roadMap)
         {
-            _islandData = islandData;
-
-            _roadMap = new bool[_islandData.IslandSize, _islandData.IslandSize];
-
-            for (int i = 0; i < spawnerNodes.Count; i++)
-            {  
-                Vector2Int currentSpawnerPosition = FindSpawnerNodeIndex(spawnerNodes[i], roadNodes, _islandData.AmountOfRoadNodes);
-
-                CreateRandomSpawnerRoad(currentSpawnerPosition, roadNodes);
-            }
-
-            return _roadMap;
+            CreateRandomSpawnerRoad(currentSpawnerPosition, roadNodes);
         }
 
         private void CreateRandomSpawnerRoad(Vector2Int currentPosition, Vector2Int[,] roadNodes)
         {
             currentPosition = roadNodes[currentPosition.x, currentPosition.y];
 
-            int middleIndex = (_islandData.IslandSize - 1) / 2;
-
-            Vector2Int centerPosition = new Vector2Int(middleIndex, middleIndex);
-
             int iteration = 0;
 
             int createdTiles = 0;
 
-            while(centerPosition != currentPosition)
+            while(EndPosition != currentPosition)
             {
                 iteration++;
 
-                _roadMap[currentPosition.x, currentPosition.y] = true;
+                RoadMap[currentPosition.x, currentPosition.y] = true;
 
                 Vector2Int direction = new Vector2Int();
 
-                bool closeToMainBuilding = Vector2Int.Distance(currentPosition, centerPosition) <= _snapToMainBuildingDistance;
+                bool closeToMainBuilding = Vector2Int.Distance(currentPosition, EndPosition) <= _snapToMainBuildingDistance;
 
                 bool shouldUseRandomDirection = (closeToMainBuilding == false) && ShouldUseRandomDirection(iteration) && createdTiles <= _maxRandomTiles;
 
@@ -80,7 +65,7 @@ namespace WorldGeneration
                 }
                 else
                 {
-                    direction = new Vector2Int(NormalizeNumber(middleIndex - currentPosition.x), NormalizeNumber(middleIndex - currentPosition.y));
+                    direction = new Vector2Int(NormalizeNumber(EndPosition.x - currentPosition.x), NormalizeNumber(EndPosition.y - currentPosition.y));
                 }
                 
                 if (direction.x != 0 && direction.y != 0)
@@ -98,15 +83,15 @@ namespace WorldGeneration
 
                 createdTiles++;
 
-                _roadMap[currentPosition.x, currentPosition.y] = true;
+                RoadMap[currentPosition.x, currentPosition.y] = true;
             }
         }
 
         private bool ShouldUseRandomDirection(int currentIteration)
         {
             if (currentIteration < _maxIteraions && Random.Range(0f, 1f) <= _chanseForRandomDirection) return true;
-            else if (currentIteration >= _maxIteraions && Random.Range(0f, 1f) <= _chanseForRandomDirectionAfterAllIterations) return true;
-            else return false;
+            if (currentIteration >= _maxIteraions && Random.Range(0f, 1f) <= _chanseForRandomDirectionAfterAllIterations) return true;
+            return false;
         }
 
         private bool HasFutureMoves(Vector2Int position, int iteration)
@@ -119,36 +104,19 @@ namespace WorldGeneration
                 {
                     if (iteration == 0) return true;
 
-                    bool hadRoadTile = _roadMap[currentPosition.x, currentPosition.y];
+                    bool hadRoadTile = RoadMap[currentPosition.x, currentPosition.y];
 
-                    _roadMap[currentPosition.x, currentPosition.y] = true;
+                    RoadMap[currentPosition.x, currentPosition.y] = true;
                     
                     bool hasMoves = HasFutureMoves(currentPosition, iteration - 1);
                     
-                    _roadMap[currentPosition.x, currentPosition.y] = hadRoadTile;
+                    RoadMap[currentPosition.x, currentPosition.y] = hadRoadTile;
                 
                     if (hasMoves) return true;
-                }
-                else 
-                {
-                    continue;
                 }
             }
 
             return false;
-        }
-
-        private bool CheckForNerbyRoadPositions(Vector2Int position)
-        {
-            int count = 0;
-
-            for (int i = 0; i < _checkDirections.Length; i++)
-            {
-                Vector2Int currentCheckPosition = position + _checkDirections[i];
-                if (IsInBorders(currentCheckPosition) && _roadMap[currentCheckPosition.x, currentCheckPosition.y]) count++;
-            }
-
-            return count == _allowedBlocksNerby;
         }
     }
 }

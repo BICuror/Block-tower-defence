@@ -12,40 +12,25 @@ namespace WorldGeneration
         [Range(0f, 1f)] [SerializeField] private float _chanseToTurnBack = 0.75f;
         [SerializeField] private int _pathRoundness = 1;
         private bool[,] _touchedNodesMap;
-
-
-        public override bool[,] GenerateRoadMap(Vector2Int[,] roadNodes, List<Vector2Int> spawnerNodes, IslandData islandData)
+        
+        public override bool TryGenerateRoadMap()
         {
-            _islandData = islandData;
+            _touchedNodesMap = new bool[IslandData.AmountOfRoadNodes, IslandData.AmountOfRoadNodes];
 
-            _roadMap = new bool[_islandData.IslandSize, _islandData.IslandSize];
-
-            _touchedNodesMap = new bool[_islandData.AmountOfRoadNodes, _islandData.AmountOfRoadNodes];
-
-            for (int i = 0; i < spawnerNodes.Count; i++)
-            {  
-                Vector2Int currentSpawnerPosition = FindSpawnerNodeIndex(spawnerNodes[i], roadNodes, _islandData.AmountOfRoadNodes);
-
-                CreateSpawnerRoad(currentSpawnerPosition, roadNodes);
-            }
-
-            return _roadMap;
+            return CreateSpawnerRoad();
         }
         
-        private void CreateSpawnerRoad(Vector2Int current, Vector2Int[,] roadNodes)
+        private bool CreateSpawnerRoad()
         {
-            int middleIndex = (_islandData.AmountOfRoadNodesBetweenCenterAndEdge * 2 + 2) / 2;
-
-            _roadMap[roadNodes[current.x, current.y].x, roadNodes[current.x, current.y].y] = true;
-
-            _touchedNodesMap[current.x, current.y] = true;
-
-            int iterator = 0;
+            Vector2Int currentNodeIndex = GetClosestNodeIndex(StartPosition);
+            
+            ConnectPoints(StartPosition, RoadNodes[currentNodeIndex.x, currentNodeIndex.y]);
+            
             while (current.x != middleIndex && current.y != middleIndex)
             {
                 Vector2Int next = GetNextNodeIndex(middleIndex, current.x, current.y);
 
-                MoveRoadTo(roadNodes[current.x, current.y], roadNodes[current.x + next.x, current.y + next.y]);
+                ConnectPoints(roadNodes[current.x, current.y], roadNodes[current.x + next.x, current.y + next.y]);
 
                 current.x += next.x;
                 current.y += next.y;
@@ -54,22 +39,44 @@ namespace WorldGeneration
 
                 if (iterator > _maxIterationsForPathGeneration) 
                 {
-                    MoveRoadTo(roadNodes[current.x, current.y], roadNodes[middleIndex, middleIndex]); 
+                    ConnectPoints(roadNodes[current.x, current.y], roadNodes[middleIndex, middleIndex]); 
                     current.x = middleIndex;
                     current.y = middleIndex;
                 }     
                 iterator++;
             }
 
-            MoveRoadTo(roadNodes[current.x, current.y], roadNodes[middleIndex, middleIndex]);
+            ConnectPoints(roadNodes[current.x, current.y], roadNodes[middleIndex, middleIndex]);
         }
 
+        private Vector2Int GetClosestNodeIndex(Vector2Int position)
+        {
+            Vector2Int bestVectorIndex = Vector2Int.zero;
+            float bestDistance = float.MaxValue;
+            
+            for (int x = 0; x < RoadNodes.GetLength(0); x++)
+            {
+                for (int z = 0; z < RoadNodes.GetLength(1); z++)
+                {
+                    float distance = Vector2Int.Distance(position, new Vector2Int(x, z));
+
+                    if (bestDistance > distance)
+                    {
+                        bestDistance = distance;
+                        bestVectorIndex = new Vector2Int(x, z);
+                    }
+                }
+            }
+            
+            return bestVectorIndex;
+        }
+        
         private Vector2Int GetNextNodeIndex(int middleIndex, int xIndex, int yIndex)
         {
             int xDifference = NormalizeNumber(middleIndex - xIndex);
             int yDifference = NormalizeNumber(middleIndex - yIndex);
 
-            if (xIndex != 0 && xIndex != _islandData.AmountOfRoadNodes - 1)
+            if (xIndex != 0 && xIndex != IslandData.AmountOfRoadNodes - 1)
             {
                 if (xDifference == 0) 
                 {
@@ -82,7 +89,7 @@ namespace WorldGeneration
                 }
             }
 
-            if (yIndex != 0 && yIndex != _islandData.AmountOfRoadNodes - 1)
+            if (yIndex != 0 && yIndex != IslandData.AmountOfRoadNodes - 1)
             {
                 if (yDifference == 0)
                 {

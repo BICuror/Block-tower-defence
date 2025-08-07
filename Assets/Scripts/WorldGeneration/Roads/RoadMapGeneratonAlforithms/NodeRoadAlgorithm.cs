@@ -22,11 +22,13 @@ namespace WorldGeneration
         
         private bool CreateSpawnerRoad()
         {
+            Vector2Int endNodeIndex = GetClosestNodeIndex(EndPosition);
+            
             Vector2Int currentNodeIndex = GetClosestNodeIndex(StartPosition);
             
             ConnectPoints(StartPosition, RoadNodes[currentNodeIndex.x, currentNodeIndex.y]);
             
-            while (current.x != middleIndex && current.y != middleIndex)
+            while (endNodeIndex != currentNodeIndex)
             {
                 Vector2Int next = GetNextNodeIndex(middleIndex, current.x, current.y);
 
@@ -46,7 +48,7 @@ namespace WorldGeneration
                 iterator++;
             }
 
-            ConnectPoints(roadNodes[current.x, current.y], roadNodes[middleIndex, middleIndex]);
+            ConnectPoints(EndPosition, RoadNodes[endNodeIndex.x, endNodeIndex.y]);
         }
 
         private Vector2Int GetClosestNodeIndex(Vector2Int position)

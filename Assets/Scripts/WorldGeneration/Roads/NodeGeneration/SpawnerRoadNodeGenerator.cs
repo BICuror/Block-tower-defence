@@ -11,7 +11,7 @@ namespace WorldGeneration
 
         [Inject] private RoadNodeGenerator _roadNodeGenerator;
 
-        public Vector2Int GetRandomEnemySpawnerNodeIndex(IReadOnlyList<Vector2Int> exsistingBiomesIndexList)
+        public Vector2Int GetRandomEnemySpawnerNodeIndex(List<Vector2Int> exsistingBiomesIndexList)
         {
             IReadOnlyList<int> xNodes = _roadNodeGenerator.XNodes;
             IReadOnlyList<int> zNodes = _roadNodeGenerator.ZNodes;
@@ -22,7 +22,7 @@ namespace WorldGeneration
             {
                 for (int z = 0; z < zNodes.Count; z++)
                 {
-                    if(_islandData.SpawnerPositionValidator.IsValidPosition(x, xNodes.Count, z, zNodes.Count))
+                    if(_islandData.SpawnerPositionValidator.IsValidPosition(x, xNodes.Count, z, zNodes.Count, exsistingBiomesIndexList))
                     {
                         possibleNodes.Add(new Vector2Int(x, z));   
                     }

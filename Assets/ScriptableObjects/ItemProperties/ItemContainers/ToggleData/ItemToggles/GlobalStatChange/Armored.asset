@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7e36d4158907f74088b84bbd4ad37d8, type: 3}
-  m_Name: LessEntitesMoreHp
+  m_Name: Armored
   m_EditorClassIdentifier: 
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalStatChangeToggleEffect
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
-    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
@@ -28,7 +27,6 @@ MonoBehaviour:
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
-    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
@@ -48,7 +46,7 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
   _quality: 1
   _effectType: 1
-  _isUnique: 0
+  _isUnique: 1
   _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
@@ -64,10 +62,10 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: 0}
-  _effectName: Horde
-  _effectDescription: '#good -50% good# #bad enemies bad# #bad +50% bad# #bad enemy
-    bad# #MaxHealth'
+  _icon: {fileID: -255249925, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _effectName: Armored
+  _effectDescription: '#good -50% good# #bad enemies bad#, but #bad +50% enemy bad#
+    #MaxHealth'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 6e5fae9541dd9ca4785dd9fcbb8f9465, type: 2}
     FlatChange: 0

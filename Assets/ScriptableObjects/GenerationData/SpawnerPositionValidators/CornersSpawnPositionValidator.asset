@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d616901560ef93c449940172b3ec2ad0, type: 3}
   m_Name: CornersSpawnPositionValidator
   m_EditorClassIdentifier: 
-  _nodesStrength: 1
+  _minimalNodeDistance: 2
+  _maxRangeFromCorners: 2

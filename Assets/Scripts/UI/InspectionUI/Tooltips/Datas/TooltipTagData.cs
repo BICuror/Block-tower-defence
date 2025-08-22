@@ -8,7 +8,8 @@ public abstract class TooltipTagData : ScriptableObject
     [SerializeField] private Color _textColor;
     [SerializeField] private Sprite _iconSprite;
     [TextArea] [SerializeField] private string _description;
-    
+    [SerializeField] private bool _onlyText;
+    public bool OnlyText => _onlyText;
     public string Tag => _tag;
     public string TagText => _tagText;
     [CustomAssetIcon] public Sprite IconSprite => _iconSprite;

@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public sealed class EntityModificatorTooltip : BaseTooltip
 {
     [Header("UI Elements")] 
     [SerializeField] private TextMeshProUGUI _modificatorNameText;
     [SerializeField] private TextMeshProUGUI _modificatorDescriptionText;
+    [SerializeField] private Image _iconImage;
+    [SerializeField] private string _additionalFrontText;
     [Header("Links")] 
     [SerializeField] private TooltipDataParser _tooltipDataParser;
     [SerializeField] private TooltipTextParser _tooltipTextParser;
@@ -20,8 +23,9 @@ public sealed class EntityModificatorTooltip : BaseTooltip
     {
         _negativeCanvasGroups.ForEach(group => group.gameObject.SetActive(entityModificatorData.EffectType == EffectType.Negative));
         
+        _iconImage.sprite = entityModificatorData.Icon;
         _modificatorNameText.text = entityModificatorData.ModificatorName;
-        _modificatorDescriptionText.text = _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorDescription, false);
+        _modificatorDescriptionText.text = _additionalFrontText + _tooltipTextParser.ParseTooltipText(entityModificatorData.ModificatorDescription, false);
         
         _tagDataContainer = _tooltipDataParser.GetTooltipTagDataFromText(entityModificatorData.ModificatorDescription);
 

@@ -727,7 +727,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -735,6 +735,27 @@ TextureImporter:
       bones: []
       spriteID: 1cbbd31037729ef4db7eb43db6f5ba5a
       internalID: -164964044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SpeedUpEffectTooltip
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c744b29f1c0872349b6055a2adac9373
+      internalID: -1544455670
       vertices: []
       indices: 
       edges: []
@@ -777,6 +798,7 @@ TextureImporter:
       RechargeTooltip: -792330246
       SlowdownEffectTooltipIcon: -1379777271
       SpeedTooltip: -875806093
+      SpeedUpEffectTooltip: -1544455670
       StackTooltipData: 741723918
       StunTooltipIcon: -589584921
       TravelTimeTooltip: -255249925

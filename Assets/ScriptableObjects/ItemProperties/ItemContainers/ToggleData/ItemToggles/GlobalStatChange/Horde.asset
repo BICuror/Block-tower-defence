@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7e36d4158907f74088b84bbd4ad37d8, type: 3}
-  m_Name: MoreEnemiesLessHealth
+  m_Name: Horde
   m_EditorClassIdentifier: 
-  _quality: 1
-  _effectType: 1
-  _isUnique: 0
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalStatChangeToggleEffect
     AllEffectTypeNames:
@@ -23,6 +20,7 @@ MonoBehaviour:
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   - _itemTypeName: GlobalEnemyModificatorToggleEffect
@@ -32,6 +30,7 @@ MonoBehaviour:
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
@@ -43,13 +42,30 @@ MonoBehaviour:
       _floatArgument: 0
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: d4060e4162d8f624e8b2a639f0ebafc7, type: 2}
+      _entityModificatorData: {fileID: 11400000, guid: ac696a6058760aa499cb7b4f455a9348, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
+  _quality: 1
+  _effectType: 1
+  _isUnique: 1
+  _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
-  _effectName: Armored
-  _effectDescription: '#bad +50% bad# #bad enemies bad# #good -50% good# #bad enemy
-    bad# #MaxHealth'
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: -617606169, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _effectName: Horde
+  _effectDescription: '#bad +50% enemies bad#, but #good -50% good# #bad enemy bad#
+    #MaxHealth'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 6e5fae9541dd9ca4785dd9fcbb8f9465, type: 2}
     FlatChange: 0

@@ -53,17 +53,30 @@ public sealed class TooltipTextParser : MonoBehaviour
 
         while (tooltipText.Contains(initialParseText))
         {
-            if (fullTag)
+            if (TextEndsOnTag(tooltipText, initialParseText) || tooltipText.Contains(initialParseText + ' '))
             {
-                tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
+                if (tagData.OnlyText)
+                {
+                    tooltipText = tooltipText.Replace(initialParseText, GetTagHeaderWithoutIcon(tagData));
+                }
+                else if (fullTag)
+                {
+                    tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
+                }
+                else
+                {
+                    tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
+                }
             }
-            else
-            {
-                tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
-            }
+            else break;
         }
         
         return tooltipText;
+    }
+
+    private bool TextEndsOnTag(string parseText, string tagText)
+    {
+        return parseText.IndexOf(tagText) + tagText.Length == parseText.Length;
     }
     
     private string GetStringSpriteFromData(TooltipTagData tagData)

@@ -257,7 +257,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ReachTooltip
+      name: LastStandingTooltip
       rect:
         serializedVersion: 2
         x: 708
@@ -299,7 +299,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OnFire
+      name: StunningHit
       rect:
         serializedVersion: 2
         x: 910
@@ -488,7 +488,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ProjectileSpeedTooltip
+      name: Start
       rect:
         serializedVersion: 2
         x: 809
@@ -509,7 +509,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TravelTimeTooltip
+      name: Armored
       rect:
         serializedVersion: 2
         x: 910
@@ -530,7 +530,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MaxEntitiesTooltip
+      name: Horde
       rect:
         serializedVersion: 2
         x: 1
@@ -551,7 +551,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PropogationRangeTooltip
+      name: UnrelentingWaters
       rect:
         serializedVersion: 2
         x: 102
@@ -572,7 +572,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PropogationDamageMultiplierTooltip
+      name: PoisonDarts
       rect:
         serializedVersion: 2
         x: 203
@@ -634,6 +634,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: SpeedUpEffectTooltip
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 591
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2301eb9228708b84599f0a1aede130cc
+      internalID: 684236167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RipostTooltip
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50415077f70622749b3d545c353fa3cd
+      internalID: -333591232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -645,31 +687,33 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Armored: -255249925
       CrystalDamage: 473409037
       Early shift: -1537043687
       FieldMedic: -368388063
       FireHook: -875806093
       Firefly: -439191689
       Frag arrows: -1408547033
+      Horde: -617606169
       Insparation: 1546871838
+      LastStandingTooltip: -1860937847
       Marker: 775677324
-      MaxEntitiesTooltip: -617606169
       Multishot: 1968931674
-      OnFire: 1002134821
       OrbitalSpeedTooltipIcon: -1412815817
       Oversight: -686756865
       PiercingArrows: -792330246
       PiercingTooltip: 1683251753
+      PoisonDarts: 672983621
       Preproduction: 1125429245
-      ProjectileSpeedTooltip: -53656890
-      PropogationDamageMultiplierTooltip: 672983621
-      PropogationRangeTooltip: -98197151
-      ReachTooltip: -1860937847
       Reaper: 741723918
+      RipostTooltip: -333591232
       Sadist: 371838837
       Slowmo: -836971711
+      SpeedUpEffectTooltip: 684236167
       Stacker: -1379777271
-      TravelTimeTooltip: -255249925
+      Start: -53656890
+      StunningHit: 1002134821
+      UnrelentingWaters: -98197151
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

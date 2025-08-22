@@ -72,6 +72,5 @@ public enum EffectType
 
 public enum GlobalEffectTag
 {
-    IncreaseWaveSize,
-    DecreaseWaveSize,
+    ChangeWaveSize
 }

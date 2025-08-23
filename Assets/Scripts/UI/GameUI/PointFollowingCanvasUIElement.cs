@@ -40,7 +40,7 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         _isActive = true;
         gameObject.SetActive(true);
         _mainGroup.interactable = true;
-        await _mainGroup.DOFade(1f, _fadeDuration).AsyncWaitForCompletion();
+        await _mainGroup.DOFade(1f, _fadeDuration).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
     }
     
     public async UniTask Disable()
@@ -50,10 +50,8 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
          
         _isActive = false;
         _mainGroup.interactable = false;
-        await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => gameObject.SetActive(false)).AsyncWaitForCompletion();
+        await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => gameObject.SetActive(false)).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
     }
-
-    public void EndTransition() => _mainGroup.DOKill();
 
     protected async UniTask RebuildLayoutAndCalculateOffsets()
     {
@@ -98,11 +96,6 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         transform.GetComponent<RectTransform>().localPosition = finalPosition;
 
         _targetElementDirection = finalPosition - targetScreenPosition;
-    }
-
-    private void OnDestroy()
-    {
-        _mainGroup.DOKill();
     }
 
     public record PointFollowingElementOffsetContainer

@@ -8,8 +8,6 @@ public sealed class EntryPoint : MonoBehaviour
 
     private void Start()
     {
-        Application.targetFrameRate = 60;
-        
         _islandGenerator.GenerateIsland();
 
         _waveManager.TransitionIntoIdle();

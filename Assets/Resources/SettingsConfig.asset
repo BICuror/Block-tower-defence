@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32717e7cda7380340a65e2e6e4025c3c, type: 3}
+  m_Name: SettingsConfig
+  m_EditorClassIdentifier: 
+  _settingConfigs:
+  - _saveKey: FrameRate
+    _type: 2
+    _defaultFloatValue: 0
+    _defaultEnumValueIndex: 0
+    _defaultIntValue: 2
+    _defaultBoolValue: 0
+  - _saveKey: VSync
+    _type: 3
+    _defaultFloatValue: 0
+    _defaultEnumValueIndex: 0
+    _defaultIntValue: 0
+    _defaultBoolValue: 1

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188794c15f6d21d45a8474f64cfc28f7, type: 3}
+  m_Name: MusicSector
+  m_EditorClassIdentifier: 
+  _generatedEnumName: Music
+  _sectorName: music
+  _subSectors:
+  - _subSectorName: ui
+    _audioReferenceEntries:
+    - _audioReference: {fileID: 11400000, guid: 5ba539ad9bd4a0540a995d3f06d986af, type: 2}
+      _soundID: main_menu
+      EnumValue: 1
+  - _subSectorName: game
+    _audioReferenceEntries:
+    - _audioReference: {fileID: 11400000, guid: 0a686e5ddb2942143bf5cc0f2adba853, type: 2}
+      _soundID: wave
+      EnumValue: 2

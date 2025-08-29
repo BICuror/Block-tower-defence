@@ -16,17 +16,20 @@ AudioMixerController:
   m_EnableSuspend: 1
   m_UpdateMode: 0
   m_ExposedParameters:
-  - guid: 6f51e0d187c9bec4cb31f7417ce970d8
-    name: EffectsVolume
-  - guid: 270fb41de125ce542acdcb62a56a64eb
+  - guid: 8ef598cc91df7c541a27d44c12a71595
+    name: MyExposedParam
+  - guid: 81ec4699385668c4ebff17a319205f7b
     name: MasterVolume
-  - guid: d4c19493878084641a8702f3f3687f3c
+  - guid: 095f96130e646a64da0b2008ccaee360
     name: MusicVolume
+  - guid: 2ed29d66b4b9c4b4cbdd73c22997e035
+    name: SFXVolume
   m_AudioMixerGroupViews:
   - guids:
-    - 4d0f34e2265f0b846be3965dd85e80e1
-    - 2ddaa4641e9accc479c194592fa8dbb9
-    - 770abc7fa8fd8b44e99d4b422e3afcc4
+    - f18c8d7f5d143c343bf6f1ec5b800402
+    - fe82005af4c7a7544bc61d68b6e57c07
+    - 0c6dd9f9cc975054b9badce23daa13c6
+    - f235f6c22feb41e41bc31a38ee304f28
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -38,16 +41,17 @@ AudioMixerGroupController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Master
   m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 4d0f34e2265f0b846be3965dd85e80e1
+  m_GroupID: f18c8d7f5d143c343bf6f1ec5b800402
   m_Children:
-  - {fileID: 7131358868849296675}
-  - {fileID: 1275029252051910176}
-  m_Volume: 270fb41de125ce542acdcb62a56a64eb
-  m_Pitch: 2119bba45c4613a4dbc5be4cd5f737d2
+  - {fileID: 2537942256579029935}
+  - {fileID: 5353320175233137078}
+  - {fileID: 6176267361847321604}
+  m_Volume: 81ec4699385668c4ebff17a319205f7b
+  m_Pitch: e38285c016426d24abfe368ec7aa7d0f
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 1
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -58,9 +62,9 @@ AudioMixerEffectController:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: e020a1625928e4b4aa7f318852fd3045
+  m_EffectID: 1105b1f454fb09245a7478d1a02e24b7
   m_EffectName: Attenuation
-  m_MixLevel: 7993435a0f1972b47a0f2881865d4e9c
+  m_MixLevel: 3f02bd16ed7b5824887396ba41b5894c
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
@@ -73,11 +77,24 @@ AudioMixerSnapshotController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Snapshot
   m_AudioMixer: {fileID: 24100000}
-  m_SnapshotID: 7effe8c7e511b2f4e830162aa0ee54dc
-  m_FloatValues:
-    6f51e0d187c9bec4cb31f7417ce970d8: 0.10800299
+  m_SnapshotID: b9aa0b8506bfe134dbecaf89a95bd062
+  m_FloatValues: {}
   m_TransitionOverrides: {}
---- !u!243 &1275029252051910176
+--- !u!244 &1940851157306158366
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: b5eb663888d3ace4bb73f54f96c8ada7
+  m_EffectName: Attenuation
+  m_MixLevel: c7b70bfe756ad0f489a53827efd10af1
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!243 &2537942256579029935
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,60 +102,79 @@ AudioMixerGroupController:
   m_PrefabAsset: {fileID: 0}
   m_Name: Music
   m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 770abc7fa8fd8b44e99d4b422e3afcc4
+  m_GroupID: fe82005af4c7a7544bc61d68b6e57c07
   m_Children: []
-  m_Volume: d4c19493878084641a8702f3f3687f3c
-  m_Pitch: 887e37e197f30e3498a9ddb4ed06a39d
+  m_Volume: 095f96130e646a64da0b2008ccaee360
+  m_Pitch: 0090d17128e2e1c4c9ac35d2538a159c
   m_Send: 00000000000000000000000000000000
   m_Effects:
-  - {fileID: 1338500827727623854}
-  m_UserColorIndex: 0
+  - {fileID: 4257279932973626658}
+  m_UserColorIndex: 6
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &1338500827727623854
+--- !u!244 &4257279932973626658
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 43119de1d7cb0114eb4c61aed6285d30
+  m_EffectID: 45265c662dfbfa44ba0fa8f359ae6e64
   m_EffectName: Attenuation
-  m_MixLevel: 6ed8f09a268ce384d80b23dab5d94c11
+  m_MixLevel: f63dc48d60b8410489c9d79ec4126434
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
---- !u!243 &7131358868849296675
+--- !u!243 &5353320175233137078
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Effects
+  m_Name: Ambience
   m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 2ddaa4641e9accc479c194592fa8dbb9
+  m_GroupID: 0c6dd9f9cc975054b9badce23daa13c6
   m_Children: []
-  m_Volume: 6f51e0d187c9bec4cb31f7417ce970d8
-  m_Pitch: 35799b797535bb04381914ea714dec8b
+  m_Volume: 8ef598cc91df7c541a27d44c12a71595
+  m_Pitch: fed33883fb3d74c43bded36794bc3ee7
   m_Send: 00000000000000000000000000000000
   m_Effects:
-  - {fileID: 8217836570840628146}
-  m_UserColorIndex: 0
+  - {fileID: 1940851157306158366}
+  m_UserColorIndex: 7
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &8217836570840628146
+--- !u!243 &6176267361847321604
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SFX
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: f235f6c22feb41e41bc31a38ee304f28
+  m_Children: []
+  m_Volume: 2ed29d66b4b9c4b4cbdd73c22997e035
+  m_Pitch: 9c14a121b9be8f3439e5dd16ba6c759d
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: 8750708712636148515}
+  m_UserColorIndex: 3
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &8750708712636148515
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 
-  m_EffectID: 27868e288704ff54b88ae5de0fc9928a
+  m_EffectID: ac99e93470ee2c346b7bf8831c14577f
   m_EffectName: Attenuation
-  m_MixLevel: c02cd5329ea805e479a0a53013c163e5
+  m_MixLevel: 82a8a5ebb77b2f543a49aef8980a76d7
   m_Parameters: []
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0

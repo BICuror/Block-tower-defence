@@ -11,6 +11,13 @@ namespace CuroAudio
 {
     public static class AudioAssetProvider
     {
+        private static readonly Dictionary<AudioAssetLifetimeDuration, int> _lifetimeDurations = new Dictionary<AudioAssetLifetimeDuration, int>
+        {
+            {AudioAssetLifetimeDuration.Short, 15},
+            {AudioAssetLifetimeDuration.Medium, 30},
+            {AudioAssetLifetimeDuration.Long, 120}
+        };
+        
         private static readonly Dictionary<AudioReference, AudioAssetUnloadTimer> _unloadTimers = new();
 
         public static async UniTask<AudioClip> LoadAudioClipsFromReference(AudioReference audioReference)
@@ -53,7 +60,7 @@ namespace CuroAudio
                 await newUnloadTimer.LoadAssets(audioReference.AudioFileReference);
             }
             
-            newUnloadTimer.StartTimer().Forget();
+            if (audioReference.LifetimeDuration != AudioAssetLifetimeDuration.NoLifetime) newUnloadTimer.StartTimer().Forget();
             
             return newUnloadTimer;
         }
@@ -68,7 +75,6 @@ namespace CuroAudio
             private readonly AudioReference _associatedAudioReference;
             private readonly CancellationTokenSource _unloadCancellationTokenSource = new();
             private readonly List<AudioClip> _clips = new();
-            private readonly AudioAssetLifetimeDuration _lifetimeDuration;
             private bool _assetsAreLoaded;
             private int _leftDuration;
             
@@ -80,7 +86,6 @@ namespace CuroAudio
             public AudioAssetUnloadTimer(AudioReference audioReference)
             {
                 _associatedAudioReference = audioReference;
-                _lifetimeDuration = audioReference.LifetimeDuration;
             }
 
             public UniTask LoadAssets(AssetReference reference) => LoadAssets(new List<AssetReference> { reference });
@@ -105,13 +110,11 @@ namespace CuroAudio
             
             public void ResetTimerDuration()
             {
-                _leftDuration = 15;
+                _leftDuration = _lifetimeDurations[_associatedAudioReference.LifetimeDuration];
             }
 
             public async UniTask StartTimer()
             {
-                if (_lifetimeDuration == AudioAssetLifetimeDuration.NoLifetime) return;
-                
                 ResetTimerDuration();
 
                 while (_leftDuration > 0)

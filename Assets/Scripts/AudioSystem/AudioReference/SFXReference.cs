@@ -1,5 +1,6 @@
 using UnityEngine.AddressableAssets;
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace CuroAudio
@@ -9,11 +10,11 @@ namespace CuroAudio
     {
         [Header("RandomSFX")]
         [SerializeField] private bool _useRandomSFX;
-        [SerializeField] private List<AssetReference> _randomSFXReferences;
+        [ShowIf("_useRandomSFX")] [SerializeField] private List<AssetReference> _randomSFXReferences;
         
         [Space] [Header("Pitch")]
         [SerializeField] private bool _useRandomPitch;
-        [SerializeField] private float _pitchMagnitude = 0.05f;
+        [ShowIf("_useRandomPitch")] [SerializeField] private float _pitchMagnitude = 0.05f;
         
         [Space] [Header("LifetimeDuration")]
         [SerializeField] private AudioAssetLifetimeDuration _lifetimeDuration = AudioAssetLifetimeDuration.Short;

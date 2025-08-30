@@ -9,7 +9,7 @@ namespace CuroSettings
         
         protected static T Setting;
         
-        protected static void FetchSetting(string key, Action applySetting)
+        protected static void FetchSetting(SettingsEnum key, Action applySetting)
         {
             if (SettingsContainer.Instance.SettingsExists(key))
             {

@@ -8,7 +8,7 @@ namespace CuroSettings.CustomSettingAppliers.Audio
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting("MusicVolume", ApplyNewSettingValue);
+            FetchSetting(SettingsEnum.MusicVolume, ApplyNewSettingValue);
         }
         
         private static void ApplyNewSettingValue()

@@ -7,7 +7,7 @@ namespace CuroSettings.CustomSettingAppliers
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting("VSync", ApplyNewSettingValue);
+            FetchSetting(SettingsEnum.VSync, ApplyNewSettingValue);
         }
         
         private static void ApplyNewSettingValue()

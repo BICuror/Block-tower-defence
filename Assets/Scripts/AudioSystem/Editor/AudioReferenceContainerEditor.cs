@@ -1,6 +1,5 @@
 using CuroCodeGen;
 using UnityEngine;
-using System;
 
 #if UNITY_EDITOR
 using System.Threading.Tasks;
@@ -31,10 +30,6 @@ namespace CuroAudio
                 ScriptFileGenerator.Generate(typeof(AudioEnumGenerator));
                 
                 Debug.Log("Enum generated successfully");
-                
-                audioContainer.ApplyEnumValues();
-                
-                Debug.Log("Enum values applied correctly");
             }
 
             if (GUILayout.Button("ApplyEnumValues"))
@@ -45,21 +40,6 @@ namespace CuroAudio
             }
             
             DrawDefaultInspector();
-        }
-
-        private async Task WaitForCompilationToEnd()
-        {
-            while (!EditorApplication.isCompiling)
-            {
-                Debug.Log("Waiting for compilation to start");
-
-                await Task.Yield();
-            }
-            
-            while (!EditorApplication.isCompiling)
-            {
-                Debug.Log("Waiting for compilation to start");
-            }
         }
     }
     

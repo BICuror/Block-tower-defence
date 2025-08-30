@@ -10,7 +10,7 @@ namespace CuroSettings
         public static SettingsContainer Instance => _instance;
         
         private readonly ISettingsSaveLoader _settingsSaveLoader;
-        private Dictionary<string, Setting> _settings;
+        private Dictionary<SettingsEnum, Setting> _settings;
 
         public SettingsContainer(ISettingsSaveLoader settingsSaveLoader, List<SettingConfig> settingConfigs)
         {
@@ -23,9 +23,9 @@ namespace CuroSettings
             InitializeSettings(settingConfigs);
         }
         
-        public bool SettingsExists(string key) => _settings.ContainsKey(key);
+        public bool SettingsExists(SettingsEnum key) => _settings.ContainsKey(key);
         
-        public T GetSetting<T>(string key) where T : Setting
+        public T GetSetting<T>(SettingsEnum key) where T : Setting
         {
             return (T)_settings[key];
         }
@@ -52,7 +52,7 @@ namespace CuroSettings
 
             settingConfigs.ForEach(config =>
             {
-                _settings.Add(config.SaveKey, CreateSetting(config));
+                _settings.Add(config.SettingEnum, CreateSetting(config));
             });
         }
 

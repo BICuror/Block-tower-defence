@@ -4,7 +4,7 @@ namespace CuroSettings.UI
 {
     public abstract class SettingUI<T> : MonoBehaviour where T : Setting
     {
-        [SerializeField] private string _settingKey;
+        [SerializeField] private SettingsEnum _settingKey;
         protected T Setting;
         
         protected void Awake()

@@ -7,7 +7,7 @@ namespace CuroSettings.CustomSettingAppliers
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting("FrameRate", ApplyNewSettingValue);
+            FetchSetting(SettingsEnum.FrameRate, ApplyNewSettingValue);
         }
         
         private static void ApplyNewSettingValue()

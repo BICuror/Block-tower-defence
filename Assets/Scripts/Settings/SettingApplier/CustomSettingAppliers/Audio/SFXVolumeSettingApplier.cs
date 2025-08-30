@@ -8,7 +8,7 @@ namespace CuroSettings.CustomSettingAppliers.Audio
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting("SFXVolume", ApplyNewSettingValue);
+            FetchSetting(SettingsEnum.SFXVolume, ApplyNewSettingValue);
         }
 
         private static void ApplyNewSettingValue()

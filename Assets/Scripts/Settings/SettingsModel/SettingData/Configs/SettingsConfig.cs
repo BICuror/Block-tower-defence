@@ -49,8 +49,9 @@ namespace CuroSettings
                     Debug.LogError($"Could not parse {_settingConfigs[i].SaveKey} to AudioEnum, try regenerating AudioEnum");
                 }
             }
-            
-            AssetDatabase.SaveAssets();
+
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssetIfDirty(this);
         }
     }
 }

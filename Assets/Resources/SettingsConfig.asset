@@ -14,36 +14,42 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _settingConfigs:
   - _saveKey: FrameRate
+    _settingEnum: 1
     _type: 2
     _defaultFloatValue: 0
     _defaultEnumValueIndex: 0
     _defaultIntValue: 60
     _defaultBoolValue: 0
   - _saveKey: VSync
+    _settingEnum: 2
     _type: 3
     _defaultFloatValue: 0
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 1
   - _saveKey: MasterVolume
+    _settingEnum: 3
     _type: 0
     _defaultFloatValue: 0.8
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
   - _saveKey: AmbienceVolume
+    _settingEnum: 4
     _type: 0
     _defaultFloatValue: 0.2
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
   - _saveKey: SFXVolume
+    _settingEnum: 5
     _type: 0
     _defaultFloatValue: 1.1
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
   - _saveKey: MusicVolume
+    _settingEnum: 6
     _type: 0
     _defaultFloatValue: 0.55
     _defaultEnumValueIndex: 0

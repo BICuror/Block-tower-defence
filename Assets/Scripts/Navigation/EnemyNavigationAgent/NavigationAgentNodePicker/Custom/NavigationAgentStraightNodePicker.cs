@@ -20,12 +20,7 @@ public sealed class NavigationAgentStraightNodePicker : NavigationAgentNodePicke
     public override NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)
     {
         List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position);
-        int minimalWeight = int.MaxValue;
-        
-        nearbyNodes.ForEach(node => minimalWeight = Math.Min(layer.GetNodeWeight(node), minimalWeight));
 
-        List<NavigationNode> bestNodes = nearbyNodes.FindAll(node => layer.GetNodeWeight(node) == minimalWeight).ToList();
-        
-        return bestNodes[Random.Range(0, bestNodes.Count)];
+        return PickNavigationNode(layer, nearbyNodes);
     }
 }

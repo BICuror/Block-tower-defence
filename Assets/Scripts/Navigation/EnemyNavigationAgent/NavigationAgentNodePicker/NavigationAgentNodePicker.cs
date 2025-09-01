@@ -1,10 +1,26 @@
 using System.Collections.Generic;
-using Navigation;
+using System.Linq;
 using UnityEngine;
+using Navigation;
+using System;
+
+using Random = UnityEngine.Random;
 
 public abstract class NavigationAgentNodePicker
 {
+    private PickBestNodeWeightDelegate _pickBestNodeWeightDelegate;
+    
+    protected delegate int PickBestNodeWeightDelegate(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes);
     protected abstract List<Vector2Int> CheckDirections { get; }
+    
+    public void SetWeightPickLogic(WeightPickType weightPickType)
+    {
+        switch (weightPickType)
+        {
+            case WeightPickType.Minimal: _pickBestNodeWeightDelegate = PickMinimalNodeWeight; break;
+            case WeightPickType.Maximal: _pickBestNodeWeightDelegate = PickMaximalNodeWeight; break;
+        }
+    }
     
     public abstract NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position);
     
@@ -21,5 +37,38 @@ public abstract class NavigationAgentNodePicker
         });
 
         return nearbyNodes;
+    }
+
+    protected NavigationNode PickNavigationNode(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes)
+    {
+        int minimalWeight = _pickBestNodeWeightDelegate(layer, validNavigationNodes);
+
+        List<NavigationNode> bestNodes = validNavigationNodes.FindAll(node => layer.GetNodeWeight(node) == minimalWeight).ToList();
+        
+        return bestNodes[Random.Range(0, bestNodes.Count)];
+    }
+
+    private int PickMinimalNodeWeight(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes)
+    {
+        int minimalWeight = int.MaxValue;
+        
+        validNavigationNodes.ForEach(node => minimalWeight = Math.Min(layer.GetNodeWeight(node), minimalWeight));
+
+        return minimalWeight;
+    }
+    
+    private int PickMaximalNodeWeight(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes)
+    {
+        int maximalWeight = int.MinValue;
+        
+        validNavigationNodes.ForEach(node => maximalWeight = Math.Max(layer.GetNodeWeight(node), maximalWeight));
+
+        return maximalWeight;
+    }
+
+    public enum WeightPickType
+    {
+        Minimal,
+        Maximal
     }
 }

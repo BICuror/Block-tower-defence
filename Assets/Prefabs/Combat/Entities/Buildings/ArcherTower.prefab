@@ -5418,7 +5418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas:
-  - {fileID: 11400000, guid: b14d8dbf518396c4cb532db5ab7c1970, type: 2}
+  - {fileID: 11400000, guid: 543466a77b922e74f912ae8a4c78c6fd, type: 2}
   _allAvailableModificators:
   - {fileID: 11400000, guid: 6cce0aa5c95bbc043abcdec995f8f3d2, type: 2}
   - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
@@ -5468,6 +5468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canBeIdleInspected: 0
   _inspectableObjectName: Archer tower
   _inspectableObjectDescription: Shoots rapidly, targets one enemy
 --- !u!114 &4851645258994465015

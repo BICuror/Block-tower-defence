@@ -22,9 +22,11 @@ namespace Navigation
         private RotationNavigationModule _rotationModule;
         private NavigationAgentNodePicker _navigationAgentNodePicker;
         private NavigationMapLayer _currentNavigationMapLayer;
+        
         private NavigationNode _startNode;
         private NavigationNode _endNode;
         private NavigationNode _nextNode;
+        
         private bool _isEnabled;
 
         private List<Vector2Int> _checkDirection = new List<Vector2Int>()
@@ -48,7 +50,13 @@ namespace Navigation
         {
             _agentData = agentData;
             _navigationAgentNodePicker = (NavigationAgentNodePicker)Activator.CreateInstance(Type.GetType(agentData.NavgationNodePickerType));
-        } 
+            _navigationAgentNodePicker.SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType.Minimal);
+        }
+
+        public void SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType weightPickType)
+        {
+            _navigationAgentNodePicker.SetWeightPickLogic(weightPickType);
+        }
         
         public void Initialize()
         {

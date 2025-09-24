@@ -56,6 +56,10 @@ namespace Navigation
         public void SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType weightPickType)
         {
             _navigationAgentNodePicker.SetWeightPickLogic(weightPickType);
+            StopMovement();
+            _nextNode = _startNode;
+            AdaptToNavigationLayer();
+            TravelToEndNode();
         }
         
         public void Initialize()
@@ -77,18 +81,11 @@ namespace Navigation
             Enable();
             TravelToEndNode();
         }
-
-        private void IterateToNextNode()
-        {
-            _startNode = _endNode;
-            _endNode = _nextNode;   
-            _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
-        }
-
+        
         private void TravelToEndNode()
         {
-            _movementModule.SetDestanation(_startNode.Position, _endNode.Position);
-            _rotationModule.SetPositions(_endNode.Position, _nextNode.Position);
+            _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position);
+            _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _nextNode.Position);
 
             TravelToNode();
         }
@@ -96,13 +93,13 @@ namespace Navigation
         private async void TravelToNode()
         {
             float elapsedTime = 0f;
-            float distance = Vector2Int.Distance(_startNode.RoundedPosition, _endNode.RoundedPosition);
+            float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) / _speed.Value;
             
             if (!_currentNavigationMapLayer.IsEnabled) FindSuitableLayer();
             
-            while (elapsedTime < 1f)
+            while (elapsedTime < duration)
             {
-                elapsedTime += Time.fixedDeltaTime / _speed.Value / distance;
+                elapsedTime += Time.fixedDeltaTime;
 
                 _movementModule.MoveTowardsNextPosition(elapsedTime);
                 _rotationModule.RotateTowardsNode(elapsedTime);
@@ -111,7 +108,7 @@ namespace Navigation
                 {
                     await UniTask.WaitForFixedUpdate(_movementCancellationTokenSource.Token);
 
-                    if (!_isEnabled) await UniTask.WaitUntil(() => _isEnabled);
+                    if (!_isEnabled) return;
                 }
                 catch (Exception e)
                 {
@@ -125,6 +122,14 @@ namespace Navigation
             IterateToNextNode();
             TravelToEndNode();
         }
+        
+        private void IterateToNextNode()
+        {
+            _startNode = _endNode;
+            _endNode = _nextNode;   
+            _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
+        }
+
 
         private void StopMovement()
         {

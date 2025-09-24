@@ -1,6 +1,6 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Combat;
-using Cysharp.Threading.Tasks;
 using TMPro;
 
 public sealed class EntityTooltip : PointFollowingCanvasUIElement

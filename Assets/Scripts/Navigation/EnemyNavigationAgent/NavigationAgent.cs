@@ -93,7 +93,7 @@ namespace Navigation
         private async void TravelToNode()
         {
             float elapsedTime = 0f;
-            float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) / _speed.Value;
+            float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) * _speed.Value;
             
             if (!_currentNavigationMapLayer.IsEnabled) FindSuitableLayer();
             
@@ -101,8 +101,10 @@ namespace Navigation
             {
                 elapsedTime += Time.fixedDeltaTime;
 
-                _movementModule.MoveTowardsNextPosition(elapsedTime);
-                _rotationModule.RotateTowardsNode(elapsedTime);
+                float lerpValue = elapsedTime / duration;
+
+                _movementModule.MoveTowardsNextPosition(lerpValue);
+                _rotationModule.RotateTowardsNode(lerpValue);
 
                 try
                 {

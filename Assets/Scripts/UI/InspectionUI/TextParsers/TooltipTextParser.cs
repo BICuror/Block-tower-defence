@@ -3,10 +3,11 @@ using UnityEngine;
 
 public sealed class TooltipTextParser : MonoBehaviour
 {
+    private readonly char[] ALLOWED_END_TAG_CHARACTERS = new[] { ',', ' ', '.' };
     private const char TOOLTIP_TAG_START_CHAR = '#';
-    private string TAG_START = "<#>";
-    private string TAG_END = "</#>";
-
+    private const string TAG_START = "<#>";
+    private const string TAG_END = "</#>";
+    
     [SerializeField] private TooltipTextParseDataContainer _tooltipTextParseDataContainer;
     [SerializeField] private TooltipAllTagDataContainer _allTagDataContainer;
 
@@ -53,20 +54,11 @@ public sealed class TooltipTextParser : MonoBehaviour
 
         while (tooltipText.Contains(initialParseText))
         {
-            if (TextEndsOnTag(tooltipText, initialParseText) || tooltipText.Contains(initialParseText + ' '))
+            if (ContainsFullTag(tooltipText, initialParseText))
             {
-                if (tagData.OnlyText)
-                {
-                    tooltipText = tooltipText.Replace(initialParseText, GetTagHeaderWithoutIcon(tagData));
-                }
-                else if (fullTag)
-                {
-                    tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
-                }
-                else
-                {
-                    tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
-                }
+                if (tagData.OnlyText) tooltipText = tooltipText.Replace(initialParseText, GetTagHeaderWithoutIcon(tagData));
+                else if (fullTag) tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
+                else tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
             }
             else break;
         }
@@ -74,14 +66,26 @@ public sealed class TooltipTextParser : MonoBehaviour
         return tooltipText;
     }
 
-    private bool TextEndsOnTag(string parseText, string tagText)
-    {
-        return parseText.IndexOf(tagText) + tagText.Length == parseText.Length;
-    }
-    
     private string GetStringSpriteFromData(TooltipTagData tagData)
     {
         return $"<sprite name={tagData.IconSprite.name}>";
+    }
+
+    private bool ContainsFullTag(string parseText, string tagText)
+    {
+        if (TextEndsOnTag(parseText, tagText)) return true;
+
+        for (int i = 0; i < ALLOWED_END_TAG_CHARACTERS.Length; i++)
+        {
+            if (parseText.Contains(tagText + ALLOWED_END_TAG_CHARACTERS[i])) return true;
+        }
+
+        return false;
+    }
+    
+    private bool TextEndsOnTag(string parseText, string tagText)
+    {
+        return parseText.IndexOf(tagText) + tagText.Length == parseText.Length;
     }
 
     #endregion

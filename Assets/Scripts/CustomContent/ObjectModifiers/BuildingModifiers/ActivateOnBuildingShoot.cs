@@ -4,7 +4,7 @@ using Combat;
 
 using Random = UnityEngine.Random;
 
-public sealed class ActivateOnBuildingShoot : MonoBehaviour
+public sealed class ActivateOnBuildingShoot : EntityObjectModifier
 {
     [Range(0, 100)] [SerializeField] private float _chance;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;

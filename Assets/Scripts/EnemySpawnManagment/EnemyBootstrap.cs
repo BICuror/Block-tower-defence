@@ -64,7 +64,7 @@ namespace Combat
             {
                 _enemyData.ObjectModificators.ForEach(additionalObjectPrefab =>
                 {
-                    _entityObjectModificatorContainer.InstantiateAndAddModificator<GameObject>(additionalObjectPrefab);
+                    _entityObjectModificatorContainer.InstantiateAndAddModificator(additionalObjectPrefab);
                 });
             }
         }

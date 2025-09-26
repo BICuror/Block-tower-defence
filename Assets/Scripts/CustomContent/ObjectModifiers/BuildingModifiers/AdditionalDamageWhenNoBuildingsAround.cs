@@ -2,7 +2,7 @@ using UnityEngine;
 using Cashing;
 using Combat;
 
-public sealed class AdditionalDamageWhenNoBuildingsAround : MonoBehaviour
+public sealed class AdditionalDamageWhenNoBuildingsAround : EntityObjectModifier
 {
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [Cached] private Damage _damage;

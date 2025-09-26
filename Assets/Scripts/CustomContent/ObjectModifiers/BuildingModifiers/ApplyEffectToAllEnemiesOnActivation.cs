@@ -6,7 +6,7 @@ using Zenject;
 using Combat;
 using System;
 
-public sealed class ApplyEffectToAllEnemiesOnActivation : MonoBehaviour
+public sealed class ApplyEffectToAllEnemiesOnActivation : EntityObjectModifier
 {
     [Cached] private CombatEntity _ownerEntity;
     [Inject] private WaveStateMachine _waveStateMachine;

@@ -9,44 +9,70 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
     [Inject] private DiContainer _diContainer;
     [Cached] private EntityComponentCacher _ownerComponentCacher;
     [Cached] private EntityHealth _entityHealth;
+    [Cached] private CombatEntity _ownerEntity;
     
-    private List<GameObject> _modificators = new();
+    private List<EntityObjectModifier> _modificators = new();
+    private List<GameObject> _gameObjectModificators = new();
 
     private void Start()
     {
         _entityHealth.EntityDied += _ => DestroyAllModificators();
     }
 
-    public T InstantiateAndAddModificator<T>(GameObject prefab)
+    public bool CanBeAppliedToEntity(EntityObjectModifier modificatorPrefab)
     {
-        GameObject modificator = _diContainer.InstantiatePrefab(prefab, transform);
-        
-        AddModificator(modificator);
-        
-        return modificator.GetComponent<T>();
+        return modificatorPrefab.CanBeAppliedToEntity(_ownerEntity);
     }
     
-    public void AddModificator(GameObject additionalObject)
+    public EntityObjectModifier InstantiateAndAddModificator(EntityObjectModifier modificatorPrefab)
     {
-        additionalObject.transform.SetParent(transform);
-        additionalObject.transform.localPosition = Vector3.zero;
-        additionalObject.transform.localRotation = Quaternion.identity;
+        EntityObjectModifier modificator = _diContainer.InstantiatePrefab(modificatorPrefab, transform).GetComponent<EntityObjectModifier>();
         
-        _ownerComponentCacher.InjectCachedToObjectAndChildren(additionalObject);
-        
-        _modificators.Add(additionalObject);
+        AdaptObjectModifier(modificator.gameObject);
+        _modificators.Add(modificator);
+
+        return modificator;
     }
 
-    public void DestroyModificator(GameObject additionalObject)
+    public GameObject InstantiateAndAddModificator(GameObject modificatorPrefab)
     {
-        _modificators.Remove(additionalObject);
+        GameObject modificator = _diContainer.InstantiatePrefab(modificatorPrefab, transform);
+        
+        AdaptObjectModifier(modificator.gameObject);
+        _gameObjectModificators.Add(modificator);
 
-        Destroy(additionalObject);
+        return modificator;
+    }
+    
+    public void RemoveAndDestroyModificator(EntityObjectModifier modificator)
+    {
+        _modificators.Remove(modificator);
+
+        Destroy(modificator);
+    }
+    
+    public void RemoveAndDestroyModificator(GameObject modificator)
+    {
+        _gameObjectModificators.Remove(modificator);
+
+        Destroy(modificator);
+    }
+    
+    private void AdaptObjectModifier(GameObject objectModifier)
+    {
+        objectModifier.transform.SetParent(transform);
+        objectModifier.transform.localPosition = Vector3.zero;
+        objectModifier.transform.localRotation = Quaternion.identity;
+        
+        _ownerComponentCacher.InjectCachedToObjectAndChildren(objectModifier.gameObject);
     }
 
     private void DestroyAllModificators()
     {
         _modificators.ForEach(modificator => Destroy(modificator.gameObject));
         _modificators.Clear();
+        
+        _gameObjectModificators.ForEach(Destroy);
+        _gameObjectModificators.Clear();
     }
 }

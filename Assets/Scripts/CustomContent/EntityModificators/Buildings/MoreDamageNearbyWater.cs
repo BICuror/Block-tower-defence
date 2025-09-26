@@ -15,7 +15,7 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         _statModifier = new();
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
         Entity.Draggable.Placed += CalculateBonusDamage;
-        _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator<Transform>(Args.GetArgument<GameObject>("AreaPrefab")).gameObject;
+        _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(Args.GetArgument<GameObject>("AreaPrefab"));
         _areaDisplay.transform.localScale = new Vector3(2.9f, 100f, 2.9f);
     }
 
@@ -51,7 +51,7 @@ public sealed class MoreDamageNearbyWater : EntityModificator
 
     public override void Disable()
     {
-        Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().DestroyModificator(_areaDisplay);
+        Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().RemoveAndDestroyModificator(_areaDisplay);
         Entity.StatContainer.Get<Damage>().RemoveStatModifier(_statModifier);
         Entity.Draggable.Placed -= CalculateBonusDamage;
     }

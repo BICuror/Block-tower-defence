@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 using Combat;
 
-public sealed class ApplyEffectInArea : MonoBehaviour
+public sealed class ApplyEffectInArea : EntityObjectModifier
 {
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
     [SerializeField] private string _effectTypeName;
@@ -25,5 +25,10 @@ public sealed class ApplyEffectInArea : MonoBehaviour
     {
         _areaEntityDetector.AddedItem -= ApplyEffect;
         _areaEntityDetector.RemovedItem -= RemoveEffect;
+    }
+
+    public override bool CanBeAppliedToEntity(CombatEntity entity)
+    {
+        return entity.ComponentsContainer.Has<AreaManager>() && entity.StatContainer.Has<ReachAreaScale>();
     }
 }

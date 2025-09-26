@@ -2,7 +2,7 @@ using UnityEngine;
 using Cashing;
 using Combat;
 
-public sealed class HealBuildingOnShootInArea : MonoBehaviour
+public sealed class HealBuildingOnShootInArea : EntityObjectModifier
 {
     [Range(0f, 1f)] [SerializeField] private float _healPercent;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;

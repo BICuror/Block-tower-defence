@@ -33,6 +33,7 @@ using System;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.GameObject)] [SerializeField] private GameObject _gameObjectArgument;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityModificatorData)] [SerializeField] private EntityModificatorData _entityModificatorData;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityEffectParticleHandler)] [SerializeField] private EntityEffectParticleHandler _entityEffectParticleHandler;
+    [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityObjectModifier)] [SerializeField] private EntityObjectModifier _entityObjectModifierPrefab;
     
     public string ArgumentName => _argumentName;
 
@@ -47,6 +48,7 @@ using System;
             case ArgumentType.GameObject: return _gameObjectArgument;
             case ArgumentType.EntityModificatorData: return _entityModificatorData;
             case ArgumentType.EntityEffectParticleHandler: return _entityEffectParticleHandler;
+            case ArgumentType.EntityObjectModifier: return _entityObjectModifierPrefab;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }
@@ -60,5 +62,6 @@ public enum ArgumentType
     EntityModificatorData,
     String,
     Bool,
-    EntityEffectParticleHandler
+    EntityEffectParticleHandler,
+    EntityObjectModifier,
 }

@@ -1,5 +1,8 @@
+using UnityEngine;
+
 public sealed class EntityHealthBar : HealthBar
 {
+    [SerializeField] private bool _alwaysShow = false;
     private bool _isInitialized;
     
     private void Start()
@@ -13,13 +16,15 @@ public sealed class EntityHealthBar : HealthBar
         
         OwnerHealth.Damaged += ShowBar;
         
-        gameObject.SetActive(false);
+        if (!_alwaysShow) gameObject.SetActive(false);
 
         _isInitialized = true;
     }
 
     private void TryHideBar()
     {
+        if (_alwaysShow) return;
+        
         if (OwnerHealth.IsFullHp())
         {
             gameObject.SetActive(false);

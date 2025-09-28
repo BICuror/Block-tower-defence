@@ -31,7 +31,7 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
     public void AddModificator(EntityModificatorData modificatorData)
     {
         List<EntityModificator> modificators = _entityModificatorFactory.CreateEntityModificators(modificatorData);
-
+        
         for (int i = 0; i < modificators.Count; i++)
         {
             modificators[i].SetEntity(_ownerEntity);
@@ -46,8 +46,7 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
             modificators[i].Enable();
         }
         
-
-        _appliedModificators.Add(modificatorData, modificators);
+        if (modificators.Count > 0) _appliedModificators.Add(modificatorData, modificators);
     }
 
     public bool Has(EntityModificatorData modificatorData)

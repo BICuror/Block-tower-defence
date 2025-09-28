@@ -16,6 +16,8 @@ MonoBehaviour:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
@@ -24,7 +26,6 @@ MonoBehaviour:
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
     - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
     - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -32,10 +33,13 @@ MonoBehaviour:
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   - _itemTypeName: EntityEffectEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
@@ -44,7 +48,6 @@ MonoBehaviour:
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
     - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
     - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -52,46 +55,7 @@ MonoBehaviour:
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
-    - TakeDamageUponPlacement
-  - _itemTypeName: EntityEffectEntityModificator
-    AllEffectTypeNames:
-    - ActivateWhenBuilt
-    - CreateBombsAtWaveStart
-    - CustomParticleEntityModifier
-    - DamageModifierEntityModificator
-    - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
-    - EntityModificatorStatChange
-    - FasterRechargeOnActivation
-    - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
-    - InvincibleWhileBuidlging
-    - ModificatorObjectApplyerEntityModificator
-    - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
-    - MultishotEntityModificator
-    - PiercingArrows
-    - ScaleDamageWithHeight
-    - TakeDamageUponPlacement
-  - _itemTypeName: EntityEffectEntityModificator
-    AllEffectTypeNames:
-    - ActivateWhenBuilt
-    - CreateBombsAtWaveStart
-    - CustomParticleEntityModifier
-    - DamageModifierEntityModificator
-    - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
-    - EntityModificatorStatChange
-    - FasterRechargeOnActivation
-    - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
-    - InvincibleWhileBuidlging
-    - ModificatorObjectApplyerEntityModificator
-    - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
-    - MultishotEntityModificator
-    - PiercingArrows
-    - ScaleDamageWithHeight
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
@@ -104,15 +68,17 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStrength
-      _intArgument: 1
+      _intArgument: 3
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
     - _argumentType: 1
       _argumentName: EffectDuration
       _intArgument: 1
@@ -122,11 +88,13 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
   _rarity: 0
   _tags: 
   _effectType: 0
   _isUnique: 0
   _hasRequiredTags: 0
+  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:

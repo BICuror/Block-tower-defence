@@ -29,6 +29,6 @@ public sealed class ApplyEffectInArea : EntityObjectModifier
 
     public override bool CanBeAppliedToEntity(CombatEntity entity)
     {
-        return entity.ComponentsContainer.Has<AreaManager>() && entity.StatContainer.Has<ReachAreaScale>();
+        return entity.StatContainer.Has<ReachAreaScale>();
     }
 }

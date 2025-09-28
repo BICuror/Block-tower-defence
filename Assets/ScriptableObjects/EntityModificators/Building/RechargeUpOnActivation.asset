@@ -16,6 +16,8 @@ MonoBehaviour:
   - _itemTypeName: FasterRechargeOnActivation
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
@@ -24,7 +26,6 @@ MonoBehaviour:
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
     - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
     - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -32,6 +33,7 @@ MonoBehaviour:
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
@@ -39,20 +41,22 @@ MonoBehaviour:
       _argumentName: Multiplier
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.4
+      _floatArgument: 0.45
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
     - _argumentType: 1
       _argumentName: Duration
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 5
+      _floatArgument: 10
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
     - _argumentType: 6
       _argumentName: EntityEffectParticleHandler
       _intArgument: 0
@@ -62,11 +66,13 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 848744844543777820, guid: 6720f4f1703cef941a05e2948a90a811, type: 3}
+      _entityObjectModifierPrefab: {fileID: 0}
   _rarity: 0
   _tags: 
   _effectType: 0
   _isUnique: 0
   _hasRequiredTags: 0
+  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
@@ -76,6 +82,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _icon: {fileID: 0}
-  _modificatorName: Activate when built
-  _modificatorDescription: '#good -40% good# #Recharge for 5 seconds on #Activation'
+  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _modificatorName: Recharge activaton
+  _modificatorDescription: '#good -45% good# #Recharge for 10 seconds on #Activation'

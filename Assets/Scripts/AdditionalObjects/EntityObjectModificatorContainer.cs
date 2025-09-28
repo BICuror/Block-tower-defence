@@ -6,8 +6,8 @@ using Combat;
 
 public sealed class EntityObjectModificatorContainer : MonoBehaviour
 {
-    [Inject] private DiContainer _diContainer;
     [Cached] private EntityComponentCacher _ownerComponentCacher;
+    [Inject] private DiContainer _diContainer;
     [Cached] private EntityHealth _entityHealth;
     [Cached] private CombatEntity _ownerEntity;
     

@@ -16,6 +16,8 @@ MonoBehaviour:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
@@ -24,7 +26,6 @@ MonoBehaviour:
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
     - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
     - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -32,10 +33,11 @@ MonoBehaviour:
     - MultishotEntityModificator
     - PiercingArrows
     - ScaleDamageWithHeight
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 2
+    - _argumentType: 7
       _argumentName: ObjectModificator
       _intArgument: 0
       _boolArgument: 0
@@ -44,11 +46,13 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 1727960946741506579, guid: 75f0864389e45e94c91c1c17096e9432, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8480778119339635851, guid: 75f0864389e45e94c91c1c17096e9432, type: 3}
   _rarity: 1
   _tags: 
   _effectType: 0
   _isUnique: 0
   _hasRequiredTags: 0
+  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:

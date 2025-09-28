@@ -46,6 +46,7 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsDealerDamageModifier
       _intArgument: 0
@@ -55,6 +56,7 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsBuildingModificator
       _intArgument: 0
@@ -64,6 +66,7 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -79,6 +82,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _icon: {fileID: 0}
+  _icon: {fileID: -333591232, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Ripost
   _modificatorDescription: Upon reciving #OnHit, attack all enemies in #Area

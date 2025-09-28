@@ -769,7 +769,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -777,6 +777,27 @@ TextureImporter:
       bones: []
       spriteID: bb0d2da6c9dc14e4ab1cabf4301b51ee
       internalID: 1599308698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: OnKillTooltip
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f59dff6d7a01c334daf869d4a2ecdf25
+      internalID: -1791193441
       vertices: []
       indices: 
       edges: []
@@ -811,6 +832,7 @@ TextureImporter:
       MaxStacksTooltip: -1537043687
       OnFire: 1002134821
       OnHitTooltipIcon: -1882775376
+      OnKillTooltip: -1791193441
       OrbitalSpeedTooltipIcon: -1412815817
       PiercingTooltip: 1683251753
       ProjectileSpeedTooltip: -53656890

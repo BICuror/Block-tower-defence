@@ -13,13 +13,13 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     [Cached] private BuildingEntity _ownerEntity;
     [Cached] private TaskCycle _taskCycle;
     private List<Bomb> _createdBombs = new();
-    private WeaponBasePool<Explotion> _bombPool;
+    private WeaponPool<Explotion> _bombPool;
 
     public int ActiveBombs => _createdBombs.Count;
     
     private void Start()
     {
-        _bombPool = new WeaponBasePool<Explotion>(_bombPrefab, 5, _ownerEntity);
+        _bombPool = new WeaponPool<Explotion>(_bombPrefab, 5, _ownerEntity);
         _taskCycle.TaskPerformed += CreateBomb;
         _waveStateMachine.StateStarted += HandleWaveStateChange;
     }

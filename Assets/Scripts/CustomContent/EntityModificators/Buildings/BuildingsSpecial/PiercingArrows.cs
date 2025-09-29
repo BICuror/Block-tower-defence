@@ -2,30 +2,18 @@ using Combat;
 
 public sealed class PiercingArrows : EntityModificator
 {
-    private PiercingArrowsWeaponPoolModifier _poolModifier;
-    
     public override void Enable()
     {
-        _poolModifier = new PiercingArrowsWeaponPoolModifier();
-        
-        Entity.ComponentsContainer.Get<ArcherTower>().WeaponPool.AddWeaponModifier(_poolModifier);
+        Entity.ComponentsContainer.Get<ArcherTower>().ArrowHitBehaviour.AddBehaviour(new IgnoreArrowCollision(), BehaviourType.Override);
     }
 
     public override void Disable()
     {
-        Entity.ComponentsContainer.Get<ArcherTower>().WeaponPool.AddWeaponModifier(_poolModifier);
+        Entity.ComponentsContainer.Get<ArcherTower>().ArrowHitBehaviour.RemoveOverrideBehaviour();
     }
-    
-    protected sealed class PiercingArrowsWeaponPoolModifier : WeaponPoolModifier
-    {
-        public override void AddWeaponModification(WeaponBase weapon)
-        {
-            ((Arrow)weapon).SetPiercingState(true);
-        }
 
-        public override void RemoveWeaponModification(WeaponBase weapon)
-        {
-            ((Arrow)weapon).SetPiercingState(false);
-        }
+    private sealed class IgnoreArrowCollision : CombatBehaviour<Arrow>
+    {
+        public override void Execute(Arrow dynamicArg) {}
     }
 }

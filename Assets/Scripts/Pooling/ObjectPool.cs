@@ -1,9 +1,9 @@
-using System.Runtime.InteropServices;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System.Linq;
 using Zenject;
+using System;
 
 public sealed class ObjectPool<T> where T: Component
 {
@@ -12,19 +12,18 @@ public sealed class ObjectPool<T> where T: Component
     private T _prefab;
     private Transform _container;
     
-    private OnObjectInitialized _onObjectInitialized;
     private DiContainer _diContainer;
+    
+    public Action<T> ObjectCreated;
 
     public IReadOnlyList<T> Pool => _pool;
     
     private int ActiveCount => _pool.Count(pooledObject => pooledObject && pooledObject.gameObject.activeSelf);
     
-    public ObjectPool(T prefab, int poolSize, [Optional]DiContainer diContainer, [Optional]OnObjectInitialized onObjectInitialized)
+    public ObjectPool(T prefab, int poolSize, DiContainer diContainer = null)
     {
         _prefab = prefab;
         _diContainer = diContainer;
-        _onObjectInitialized = onObjectInitialized;
-        
         _container = new GameObject().transform;
         
         _container.gameObject.name = GetType().ToString();
@@ -110,7 +109,8 @@ public sealed class ObjectPool<T> where T: Component
         _pool.Add(pooledObject);
         
         if (_diContainer != null) _diContainer.Inject(pooledObject);
-        if (_onObjectInitialized != null) _onObjectInitialized.Invoke(pooledObject);
+        
+        ObjectCreated?.Invoke(pooledObject);
         
         return pooledObject;
     }

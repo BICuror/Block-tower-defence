@@ -28,6 +28,9 @@ public abstract class CustomTypeDropdownEditor<T> : Editor
         serializedObject.ApplyModifiedProperties();
         
         serializedObject.Update();
+        
+        EditorUtility.SetDirty(serializedObject.targetObject);
+        AssetDatabase.SaveAssets();
     }
 
     protected abstract void ApplyDropdownItems(List<string> items);

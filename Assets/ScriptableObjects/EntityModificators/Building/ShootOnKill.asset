@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShootOnKill
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: ScaleDamageWithHeight
+  - _itemTypeName: HeavyMortarCore
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - ApplyModificatorOnWaveStartRemoveUponPickup
@@ -25,6 +25,7 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - FasterRechargeOnActivation
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
     - ModificatorObjectApplyerEntityModificator

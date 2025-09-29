@@ -47,7 +47,7 @@ public sealed class ApplyEffectToAllEnemiesOnActivation : EntityObjectModifier
             entitiesInArea[i].ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_effectType, _effectStaks);
         }
 
-        _visualEffectHandler.Play();
+        _visualEffectHandler.PlayAndStop();
         
         _charges--;
     } 

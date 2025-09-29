@@ -15,23 +15,38 @@ public sealed class VisualEffectHandler : MonoBehaviour
         _disableTime = _visualEffect.GetFloat("MaxLifeTime"); 
     }
     
-    public void PlayAndForget() => Play().Forget();
+    public void PlayAndForget() => PlayAndStop().Forget();
 
-    public async UniTask Play()
+    public async UniTask PlayAndStop()
+    {
+        Play();
+
+        await StopAsync();
+    }
+    
+    public void Play()
     {
         SetNullParent();
         
         _visualEffect.gameObject.SetActive(true);
+    }
 
-        await UniTask.WaitForSeconds(_disableTime);
-        
+    public async UniTask StopAsync()
+    {
+        await UniTask.WaitForSeconds(_disableTime, cancellationToken: destroyCancellationToken).SuppressCancellationThrow();
+
+        Stop();
+    }
+    
+    public void Stop()
+    {
         switch(_stopAction)
         {
             case StopActionType.DisableSelfAndEffect: Disable(); break;
             case StopActionType.Destroy: Destroy(); break;
             case StopActionType.DisableEffect: Disable(); break;
             case StopActionType.None: break;
-        }    
+        } 
     }
 
     public void DisableEffect()

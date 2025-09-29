@@ -5,29 +5,42 @@ using Combat;
 
 public sealed class MortarTower : DefaultCombatTaskConditionProvider
 {
-    [SerializeField] private MortarProjectile projectilePrefab;
+    [SerializeField] private MortarProjectile _projectilePrefab;
+    [SerializeField] private ArgumentsContainer _defaultBehaviourArguments;
     [Cached] private AreaEntityDetector _enemyAreaScaner;
     [Cached] private CombatEntity _ownerEntity;
-    private TravelTime _travelTime;
     
-    private WeaponPool<MortarProjectile> _grenadeObjectPool; 
+    private WeaponPool<MortarProjectile> _grenadeObjectPool;
+
+    public readonly OverridableBehaviour<Vector3> CoreLanded = new OverridableBehaviour<Vector3>();
+    public readonly OverridableBehaviour<Transform> CoreLaunched = new OverridableBehaviour<Transform>();
 
     private void Start()
     {   
         base.Start();
-        _grenadeObjectPool = new WeaponPool<MortarProjectile>(projectilePrefab, 2, _ownerEntity, 10);
 
-        _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Shoot;
-        _travelTime = _ownerEntity.StatContainer.Get<TravelTime>();
+        CombatBehaviour<Vector3> defaultBehaviour = new ExplosionBehaviour();
+        defaultBehaviour.SetArgumentsContainer(_defaultBehaviourArguments);
+        CoreLanded.Initialize(_ownerEntity, defaultBehaviour);
+        
+        CoreLaunched.Initialize(_ownerEntity);
+        
+        _grenadeObjectPool = new WeaponPool<MortarProjectile>(_projectilePrefab, 2, _ownerEntity, 10);
+
+        _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += () => Shoot().Forget();
     }
 
-    private void Shoot()
+    private async UniTask Shoot()
     {
         MortarProjectile currentProjectile = _grenadeObjectPool.GetPooledWeapon();
         
         currentProjectile.transform.position = transform.position - new Vector3(0, 0.5f, 0);
 
-        currentProjectile.TravelToPoint(_enemyAreaScaner.RandomItem.transform.position, _travelTime.Value).Forget();
+        CoreLaunched.Execute(currentProjectile.transform);
+        
+        await currentProjectile.TravelToPoint(_enemyAreaScaner.RandomItem.transform.position);
+        
+        CoreLanded.Execute(currentProjectile.transform.position);
     }
 
     private void OnDestroy() => _grenadeObjectPool.DestroyPool();

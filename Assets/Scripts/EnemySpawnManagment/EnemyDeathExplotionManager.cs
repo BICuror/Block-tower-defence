@@ -18,6 +18,6 @@ public sealed class EnemyDeathExplotionManager : MonoBehaviour
 
         _visualEffectHandler.transform.position = enemyObject.transform.position;
 
-        _visualEffectHandler.Play();
+        _visualEffectHandler.PlayAndStop();
     }
 }

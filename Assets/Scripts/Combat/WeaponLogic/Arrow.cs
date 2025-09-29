@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System;
 
 namespace Combat
 {
@@ -7,29 +9,32 @@ namespace Combat
         [SerializeField] private TrailRenderer _trailRenderer;
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
         private Damage _damage;
-        private bool _isPiercing;
+
+        public Action<Arrow> OnArrowHit;
         
         protected override void OnInitialized()
         {
             _damage = OwnerEntity.StatContainer.Get<Damage>();
         }
 
-        private async void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out EnemyEntity enemyEntity))
             {
                 DamageEntity(_damage.Value, enemyEntity);
-
-                if (_isPiercing) return;
                 
-                Collider.enabled = false;
-                Rigidbody.velocity = Vector3.zero;
-                await _visualEffectHandler.Play();
-                Disable();
-                _trailRenderer.Clear();
+                OnArrowHit.Invoke(this);
             }
         }
 
-        public void SetPiercingState(bool state) => _isPiercing = state;
+        public async UniTask DisableArrow()
+        {
+            Collider.enabled = false;
+            Rigidbody.velocity = Vector3.zero;
+            
+            await _visualEffectHandler.PlayAndStop();
+            
+            Disable();
+        }
     }
 }

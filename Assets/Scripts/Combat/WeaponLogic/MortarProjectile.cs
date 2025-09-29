@@ -5,28 +5,28 @@ namespace Combat
 {
     public sealed class MortarProjectile : Weapon
     {
-        [SerializeField] Explotion _explotion; 
         [SerializeField] private LayerSetting _enemyLayerSettings; 
         [SerializeField] private AnimationCurve _heightCurve; 
         [SerializeField] private float _maxHeight;
         
         private Damage _damage;
+        private TravelTime _travelTime;
 
         protected override void OnInitialized()
         {
             _damage = OwnerEntity.StatContainer.Get<Damage>();
-            _explotion.Initialize(OwnerEntity);
+            _travelTime = OwnerEntity.StatContainer.Get<TravelTime>();
         }
 
-        public async UniTask TravelToPoint(Vector3 finalPosition, float travelTime)
-        {   
+        public async UniTask TravelToPoint(Vector3 finalPosition)
+        {
             Vector3 startPosition = transform.position;
     
             float time = 0f;
     
-            while (time < travelTime)
+            while (time < _travelTime.Value)
             {
-                float evaluatedTime = time / travelTime;
+                float evaluatedTime = time / _travelTime.Value;
     
                 Vector3 currentPosition = Vector3.Lerp(startPosition, finalPosition, evaluatedTime);
     
@@ -40,7 +40,6 @@ namespace Combat
             }
 
             Collider.enabled = false;
-            await _explotion.Explode();
             Disable();
         }
 

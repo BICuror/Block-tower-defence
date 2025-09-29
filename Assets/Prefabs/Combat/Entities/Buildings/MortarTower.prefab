@@ -5267,7 +5267,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 977c51036bc90a3418ca2d85f1fad551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3694798262115348637, guid: 179ba00b142fe6043afb704b77b14607, type: 3}
+  _projectilePrefab: {fileID: 3694798262115348637, guid: 179ba00b142fe6043afb704b77b14607, type: 3}
+  _defaultBehaviourArguments:
+    _argumentItems:
+    - _argumentType: 2
+      _argumentName: ExplosionPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2173425947725659244, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
 --- !u!114 &183681894154958883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5377,6 +5389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canBeIdleInspected: 0
   _inspectableObjectName: Mortar tower
   _inspectableObjectDescription: Shots an arching projectile, that explodes on collision
 --- !u!1 &4972928926287705394

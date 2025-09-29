@@ -29,7 +29,7 @@ namespace Combat
                 DamageEntity(_explotionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
             }
 
-            await _explotionEffect.Play();
+            await _explotionEffect.PlayAndStop();
             
             _explotionEffect.DisableEffect();
         }

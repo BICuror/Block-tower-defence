@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: SpawnCrystalsForKills
+  m_Name: HeavyCore
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: SpawnCrystalForKills
+  - _itemTypeName: HeavyMortarCore
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - ApplyModificatorOnWaveStartRemoveUponPickup
@@ -39,17 +39,27 @@ MonoBehaviour:
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 0
-      _argumentName: KillPerCrystal
-      _intArgument: 7
+    - _argumentType: 1
+      _argumentName: InitialScale
+      _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 15
+      _floatArgument: 1
+      _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
-  _rarity: 2
+    - _argumentType: 1
+      _argumentName: FinalScale
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+  _rarity: 1
   _tags: 
   _effectType: 0
   _isUnique: 0
@@ -64,6 +74,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _icon: {fileID: 0}
-  _modificatorName: Resoursfull
-  _modificatorDescription: Create #Crystal for each 7 #Kills
+  _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _modificatorName: Heavy core
+  _modificatorDescription: Core scale #good +500% good#, but it #bad doesn't explode
+    bad#

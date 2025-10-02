@@ -6,18 +6,17 @@ using System.Linq;
 
 namespace Combat
 {
-    public abstract class AreaDetector <T> : MonoBehaviour where T: Component 
+    public abstract class AreaDetector <T> : MonoBehaviour where T : Component 
     {
         protected List<T> List = new();
-    
-        public Action<T> AddedItem;
-        public Action<T> RemovedItem;
-        
         public bool IsEmpty => List.Count == 0;
         public T RandomItem => List[Random.Range(0, List.Count)];
         public T FirstItem => List[0];
         public int Count => List.Count;
         
+        public Action<T> AddedItem;
+        public Action<T> RemovedItem;
+
         public IReadOnlyList<T> GetList() => List;
         
         protected void AddItem(T component)

@@ -5,8 +5,19 @@ using Combat;
 
 public sealed class ExplosionBehaviour : CombatBehaviour<Vector3>, IDisposable
 {
-    private Explotion _explosionPrefab;
-    private WeaponPool<Explotion> _explosionPool;
+    private Explosion _explosionPrefab;
+    private WeaponPool<Explosion> _explosionPool;
+
+    public ExplosionBehaviour(ArgumentsContainer args)
+    {
+        Args = args;
+    }
+
+    protected override void OnOwnerEntitySet()
+    {
+        Entity.StatContainer.AddStatIfDoesntExist<ExplosionRadius>(Args, "ExplosionRadius");
+        Entity.StatContainer.AddStatIfDoesntExist<ExplosionDamage>(Args, "ExplosionDamage");
+    }
         
     public override void Execute(Vector3 explotionPosition)
     {
@@ -17,16 +28,16 @@ public sealed class ExplosionBehaviour : CombatBehaviour<Vector3>, IDisposable
     {
         if (_explosionPool == null) CreateNewPool();
         
-        Explotion explotion = _explosionPool.GetPooledWeapon();
+        Explosion explosion = _explosionPool.GetPooledWeapon();
         
-        explotion.transform.position = explotionPosition;
-        await explotion.Explode();
-        explotion.gameObject.SetActive(false);
+        explosion.transform.position = explotionPosition;
+        await explosion.Explode();
+        explosion.gameObject.SetActive(false);
     }
 
     private void CreateNewPool()
     {
-        _explosionPool = new WeaponPool<Explotion>(Args.GetArgument<GameObject>("ExplosionPrefab").GetComponent<Explotion>(), 2, Entity);
+        _explosionPool = new WeaponPool<Explosion>(Args.GetArgument<GameObject>("ExplosionPrefab").GetComponent<Explosion>(), 2, Entity);
     }
     
     public void Dispose()

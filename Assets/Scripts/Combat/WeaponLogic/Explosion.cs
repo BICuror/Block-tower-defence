@@ -3,30 +3,30 @@ using UnityEngine;
 
 namespace Combat
 {
-    public sealed class Explotion : WeaponBase
+    public sealed class Explosion : WeaponBase
     {
         [SerializeField] private LayerSetting _enemyLayerSettings;
         [SerializeField] private VisualEffectHandler _explotionEffect;
         [SerializeField] private float _defaultRadius = 1f;
         
-        private ExplotionDamage _explotionDamage;
-        private ExplotionRadius _explotionRadius;
+        private ExplosionDamage _explosionDamage;
+        private ExplosionRadius _explosionRadius;
 
         protected override void OnInitialized()
         {
-            _explotionRadius = OwnerEntity.StatContainer.Get<ExplotionRadius>();
-            _explotionDamage = OwnerEntity.StatContainer.Get<ExplotionDamage>();
+            _explosionRadius = OwnerEntity.StatContainer.Get<ExplosionRadius>();
+            _explosionDamage = OwnerEntity.StatContainer.Get<ExplosionDamage>();
         }
 
         public async UniTask Explode()
         {
-            UpdateExplotionRadius(_explotionRadius.Value);
+            UpdateExplotionRadius(_explosionRadius.Value);
             
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _explotionRadius.Value, _enemyLayerSettings.GetLayerMask());
+            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _explosionRadius.Value * _defaultRadius, _enemyLayerSettings.GetLayerMask());
 
             for (int i = 0; i < hitEnemies.Length; i++)
             {
-                DamageEntity(_explotionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
+                DamageEntity(_explosionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
             }
 
             await _explotionEffect.PlayAndStop();
@@ -36,7 +36,7 @@ namespace Combat
 
         private void UpdateExplotionRadius(float explotionRaduis)
         {
-            float scale = _defaultRadius * explotionRaduis;
+            float scale = explotionRaduis;
             
             _explotionEffect.transform.localScale = new Vector3(scale, scale, scale);
         }

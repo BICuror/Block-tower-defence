@@ -13,18 +13,20 @@ MonoBehaviour:
   m_Name: ShootOnKill
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: HeavyMortarCore
+  - _itemTypeName: ShootOnKill
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
@@ -32,6 +34,7 @@ MonoBehaviour:
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
     - ShootOnKill

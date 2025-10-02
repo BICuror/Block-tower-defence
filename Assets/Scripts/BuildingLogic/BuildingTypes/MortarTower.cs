@@ -19,7 +19,7 @@ public sealed class MortarTower : DefaultCombatTaskConditionProvider
     {   
         base.Start();
 
-        CombatBehaviour<Vector3> defaultBehaviour = new ExplosionBehaviour();
+        CombatBehaviour<Vector3> defaultBehaviour = new ExplosionBehaviour(_defaultBehaviourArguments);
         defaultBehaviour.SetArgumentsContainer(_defaultBehaviourArguments);
         CoreLanded.Initialize(_ownerEntity, defaultBehaviour);
         

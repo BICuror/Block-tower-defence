@@ -66,6 +66,28 @@ public class StatContainer
         }
         else throw new DuplicateNameException($"Stat with type {statType.ToString()} already exists.");
     }
+
+    public void AddStatIfDoesntExist<T>(float value) where T : Stat
+    {
+        if (!Has<T>())
+        {
+            T stat = Activator.CreateInstance<T>();
+            stat.SetDefault(value);
+            
+            AddStat(stat);
+        }
+    }
+    
+    public void AddStatIfDoesntExist<T>(ArgumentsContainer args, string argumentName) where T : Stat
+    {
+        if (!Has<T>())
+        {
+            T stat = Activator.CreateInstance<T>();
+            stat.SetDefault(args.GetArgument<float>(argumentName));
+            
+            AddStat(stat);
+        }
+    }
 }
 
 [Serializable] public struct StatInitializer

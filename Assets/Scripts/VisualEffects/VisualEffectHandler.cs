@@ -20,8 +20,10 @@ public sealed class VisualEffectHandler : MonoBehaviour
     public async UniTask PlayAndStop()
     {
         Play();
-
-        await StopAsync();
+        
+        await UniTask.WaitForSeconds(_disableTime, cancellationToken: destroyCancellationToken).SuppressCancellationThrow();
+        
+        Stop();
     }
     
     public void Play()
@@ -33,8 +35,9 @@ public sealed class VisualEffectHandler : MonoBehaviour
 
     public async UniTask StopAsync()
     {
+        _visualEffect.Stop();
         await UniTask.WaitForSeconds(_disableTime, cancellationToken: destroyCancellationToken).SuppressCancellationThrow();
-
+        
         Stop();
     }
     

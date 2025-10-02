@@ -3,10 +3,11 @@ using System.Threading;
 using UnityEngine;
 using Combat;
 using System;
+using UnityEngine.Serialization;
 
 public sealed class Bomb : DraggableObject
 {  
-    [SerializeField] private Explotion _explotion;
+    [FormerlySerializedAs("_explotion")] [SerializeField] private Explosion _explosion;
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _canBeExploded;
 
@@ -28,7 +29,7 @@ public sealed class Bomb : DraggableObject
         
         try
         {
-            await UniTask.WaitForSeconds(_explotion.GetOwnerEntity().StatContainer.Get<ExplotionDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
+            await UniTask.WaitForSeconds(_explosion.GetOwnerEntity().StatContainer.Get<ExplotionDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
             Explode();
         }
         catch (Exception e) { e.LogAsync(); } 
@@ -44,7 +45,7 @@ public sealed class Bomb : DraggableObject
     {
         gameObject.SetActive(false);
         _canBeExploded = false;
-        await _explotion.Explode();
+        await _explosion.Explode();
         Exploded.Invoke(this);
     }
 }

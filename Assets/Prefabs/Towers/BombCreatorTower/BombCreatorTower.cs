@@ -8,18 +8,18 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 {
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private DraggableCreator _draggableCreator;
-    [SerializeField] private Explotion _bombPrefab;
+    [SerializeField] private Explosion _bombPrefab;
     [Cached] private MaxEntities _maxEntities;
     [Cached] private BuildingEntity _ownerEntity;
     [Cached] private TaskCycle _taskCycle;
     private List<Bomb> _createdBombs = new();
-    private WeaponPool<Explotion> _bombPool;
+    private WeaponPool<Explosion> _bombPool;
 
     public int ActiveBombs => _createdBombs.Count;
     
     private void Start()
     {
-        _bombPool = new WeaponPool<Explotion>(_bombPrefab, 5, _ownerEntity);
+        _bombPool = new WeaponPool<Explosion>(_bombPrefab, 5, _ownerEntity);
         _taskCycle.TaskPerformed += CreateBomb;
         _waveStateMachine.StateStarted += HandleWaveStateChange;
     }
@@ -32,7 +32,7 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         }
         else
         {
-            IReadOnlyList<Explotion> bombs = _bombPool.Pool.Pool;
+            IReadOnlyList<Explosion> bombs = _bombPool.Pool.Pool;
 
             for (int i = 0; i < bombs.Count; i++)
             {
@@ -48,8 +48,8 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 
     public async void CreateBomb()
     {
-        Explotion explotion = _bombPool.GetPooledWeapon();
-        Bomb bomb = explotion.GetComponent<Bomb>();
+        Explosion explosion = _bombPool.GetPooledWeapon();
+        Bomb bomb = explosion.GetComponent<Bomb>();
         bomb.Exploded += RemoveDisabledBomb;
         _createdBombs.Add(bomb);
         

@@ -13,6 +13,7 @@ namespace Combat
         public Action Damaged;
         public Action Healed;
         public Action Died;
+        public Action<CombatEntity> EntityDamaged;
         public Action<CombatEntity> EntityDied; 
         
         public void Initialize()
@@ -56,12 +57,16 @@ namespace Combat
         public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage);
         private void ReceiveDamage(float damage)
         {
-            if (damage == 0 || !IsAlive()) return;
+            if (damage <= 0 || !IsAlive()) return;
             
             _currentHp -= damage;
     
-            if (_currentHp <= 0) Die();
-            else Damaged?.Invoke();
+            if (_currentHp <= 0f) Die();
+            else
+            {
+                EntityDamaged?.Invoke(_entity);
+                Damaged?.Invoke();
+            }
         }
         #endregion
         

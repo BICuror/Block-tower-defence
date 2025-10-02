@@ -16,7 +16,14 @@ public sealed class ApplyEffectDamageModifier : DamageModifier
     
     public override float Modify(CombatEntity otherEntity, float value)
     {
-        otherEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(_entityEffectType, _appliedStrength, _effectDuration);
+        if (_effectDuration != 0)
+        {
+            otherEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(_entityEffectType, _appliedStrength, _effectDuration);
+        }
+        else
+        {
+            otherEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_entityEffectType, _appliedStrength);
+        }
         
         return value;
     }

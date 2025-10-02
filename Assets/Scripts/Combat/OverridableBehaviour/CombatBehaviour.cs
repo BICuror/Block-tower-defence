@@ -13,7 +13,11 @@ public abstract class CombatBehaviourCore
     public void SetOwnerEntity(CombatEntity ownerEntity)
     {
         Entity = ownerEntity;
+
+        OnOwnerEntitySet();
     }
+
+    protected virtual void OnOwnerEntitySet() {}
 }
 
 public abstract class CombatBehaviour : CombatBehaviourCore

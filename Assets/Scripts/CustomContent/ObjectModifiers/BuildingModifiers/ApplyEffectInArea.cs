@@ -12,6 +12,11 @@ public sealed class ApplyEffectInArea : EntityObjectModifier
     private void Start()
     {
         _effectType = Type.GetType(_effectTypeName);
+        
+        foreach (CombatEntity combatEntity in _areaEntityDetector.GetList())
+        {
+            ApplyEffect(combatEntity);
+        }
 
         _areaEntityDetector.AddedItem += ApplyEffect;
         _areaEntityDetector.RemovedItem += RemoveEffect;
@@ -25,6 +30,11 @@ public sealed class ApplyEffectInArea : EntityObjectModifier
     {
         _areaEntityDetector.AddedItem -= ApplyEffect;
         _areaEntityDetector.RemovedItem -= RemoveEffect;
+        
+        foreach (CombatEntity combatEntity in _areaEntityDetector.GetList())
+        {
+            RemoveEffect(combatEntity);
+        }
     }
 
     public override bool CanBeAppliedToEntity(CombatEntity entity)

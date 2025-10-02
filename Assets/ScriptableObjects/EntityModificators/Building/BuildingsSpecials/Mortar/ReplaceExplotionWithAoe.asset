@@ -10,21 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: HeavyCore
+  m_Name: ReplaceExplotionWithAoe
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: HeavyMortarCore
+  - _itemTypeName: AOEMortarExplotion
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
@@ -32,6 +35,7 @@ MonoBehaviour:
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
     - ShootOnKill
@@ -39,23 +43,43 @@ MonoBehaviour:
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 1
-      _argumentName: InitialScale
+    - _argumentType: 5
+      _argumentName: ReplaceMainBehavior
       _intArgument: 0
-      _boolArgument: 0
+      _boolArgument: 1
       _floatArgument: 1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: FinalScale
+    - _argumentType: 2
+      _argumentName: AOEPrefab
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 5
+      _floatArgument: 4
       _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: AOERadius
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 2
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: AOEDamageMultiplier
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
@@ -75,6 +99,5 @@ MonoBehaviour:
   _blockOtherEntityTags:
     Requirements: []
   _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Heavy core
-  _modificatorDescription: Core scale #good +500% good#, but it #bad doesn't explode
-    bad#
+  _modificatorName: Lighter core
+  _modificatorDescription: Core doesn't explode, but leaves aoe area

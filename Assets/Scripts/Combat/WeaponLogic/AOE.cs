@@ -29,7 +29,7 @@ public sealed class AOE : WeaponBase
 
         while (elapsedTime <= _duration)
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _radius.Value, _enemyLayerSettings.GetLayerMask());
+            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _radius.Value * _defaultRadius, _enemyLayerSettings.GetLayerMask());
     
             for (int i = 0; i < hitEnemies.Length; i++)
             {
@@ -50,7 +50,7 @@ public sealed class AOE : WeaponBase
 
     private void UpdateAOERadius(float explotionRaduis)
     {
-        float scale = _defaultRadius * explotionRaduis;
+        float scale = explotionRaduis;
 
         _explotionEffect.transform.localScale = new Vector3(scale, scale, scale);
     }
@@ -59,7 +59,7 @@ public sealed class AOE : WeaponBase
     {
         if (OwnerEntity.StatContainer.Has<Damage>()) return OwnerEntity.StatContainer.Get<Damage>().Value;
         
-        return OwnerEntity.StatContainer.Get<ExplotionDamage>().Value;
+        return OwnerEntity.StatContainer.Get<ExplosionDamage>().Value;
     }
 
 #if UNITY_EDITOR        

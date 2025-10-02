@@ -2,7 +2,7 @@ public sealed class OnFireEffect : EntityTickEffect
 {
     private float _damagePerStack;
 
-    public override EntityEffectType EffectType => EntityEffectType.Positive;
+    public override EntityEffectType EffectType => EntityEffectType.Negative;
 
     protected override void OnInitialized()
     {

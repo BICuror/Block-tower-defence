@@ -279,6 +279,30 @@ MonoBehaviour:
     m_Scale: 1
     m_Name: OnKillTooltip
     m_HashCode: 1675404854
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 33
+    m_Scale: 1
+    m_Name: PoisonEffectTooltip
+    m_HashCode: 1288261734
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 34
+    m_Scale: 1
+    m_Name: RechargeUpTooltip
+    m_HashCode: -57251491
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 35
+    m_Scale: 1
+    m_Name: AOEDamageMultiplierTooltip
+    m_HashCode: 2108415678
+  - m_ElementType: 2
+    m_Unicode: 65534
+    m_GlyphIndex: 36
+    m_Scale: 1
+    m_Name: AOERadiusTooltip
+    m_HashCode: 450542918
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:
@@ -808,5 +832,69 @@ MonoBehaviour:
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
     sprite: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  - m_Index: 33
+    m_Metrics:
+      m_Width: 100
+      m_Height: 100
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 100
+    m_GlyphRect:
+      m_X: 304
+      m_Y: 596
+      m_Width: 100
+      m_Height: 100
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -1439210628, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  - m_Index: 34
+    m_Metrics:
+      m_Width: 100
+      m_Height: 100
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 100
+    m_GlyphRect:
+      m_X: 405
+      m_Y: 596
+      m_Width: 100
+      m_Height: 100
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: -132545439, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  - m_Index: 35
+    m_Metrics:
+      m_Width: 100
+      m_Height: 100
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 100
+    m_GlyphRect:
+      m_X: 607
+      m_Y: 596
+      m_Width: 100
+      m_Height: 100
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 1427845749, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  - m_Index: 36
+    m_Metrics:
+      m_Width: 100
+      m_Height: 100
+      m_HorizontalBearingX: 0
+      m_HorizontalBearingY: 80
+      m_HorizontalAdvance: 100
+    m_GlyphRect:
+      m_X: 506
+      m_Y: 596
+      m_Width: 100
+      m_Height: 100
+    m_Scale: 1
+    m_AtlasIndex: 0
+    m_ClassDefinitionType: 0
+    sprite: {fileID: 260667796, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []

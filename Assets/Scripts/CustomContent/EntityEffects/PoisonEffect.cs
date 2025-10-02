@@ -1,11 +1,30 @@
 public sealed class PoisonEffect : EntityTickEffect
 {
-    private const float DAMAGE_PER_STACK = 1.5f;
+    private float _damagePerStack;
+    private float _healthThreshold;
 
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        _damagePerStack = ArgumentsContainer.GetArgument<float>("DamagePerStack");
+        _healthThreshold = ArgumentsContainer.GetArgument<float>("HealthThreshold");
+    }
+    
     protected override void Tick()
     {
-        Entity.Health.ReceiveEffectDamage(DAMAGE_PER_STACK * Stack);
+        if (Entity.Health.GetHp() <= _healthThreshold) return;
+        
+        float tickDamage = _damagePerStack * Stack;
+        
+        if (Entity.Health.GetHp() <= tickDamage)
+        {
+            Entity.Health.ReceiveEffectDamage(Entity.Health.GetHp() - _healthThreshold);
+        }
+        else
+        {
+            Entity.Health.ReceiveEffectDamage(tickDamage);
+        }
     }
 
-    public override EntityEffectType EffectType => EntityEffectType.Positive;
+    public override EntityEffectType EffectType => EntityEffectType.Negative;
 }

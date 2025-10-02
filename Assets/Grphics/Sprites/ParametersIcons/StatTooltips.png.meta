@@ -790,7 +790,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -798,6 +798,90 @@ TextureImporter:
       bones: []
       spriteID: f59dff6d7a01c334daf869d4a2ecdf25
       internalID: -1791193441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PoisonEffectTooltip
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c42e77649b136240b1ae9add403bf61
+      internalID: -1439210628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RechargeUpTooltip
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e251e8e0324682d48bc57fe04d4be1ff
+      internalID: -132545439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AOERadiusTooltip
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 506c8f3ffeffa734895fa58d2e219e83
+      internalID: 260667796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AOEDamageMultiplierTooltip
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 596
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57aa5927d80aea145b1e7e120d951790
+      internalID: 1427845749
       vertices: []
       indices: 
       edges: []
@@ -813,6 +897,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      AOEDamageMultiplierTooltip: 1427845749
+      AOERadiusTooltip: 260667796
       ActionStatTooltip: 1859461284
       ActivationStatTooltip: -164964044
       AreaStatTooltip: -913185330
@@ -835,11 +921,13 @@ TextureImporter:
       OnKillTooltip: -1791193441
       OrbitalSpeedTooltipIcon: -1412815817
       PiercingTooltip: 1683251753
+      PoisonEffectTooltip: -1439210628
       ProjectileSpeedTooltip: -53656890
       PropogationDamageMultiplierTooltip: 672983621
       PropogationRangeTooltip: -98197151
       ReachTooltip: -1860937847
       RechargeTooltip: -792330246
+      RechargeUpTooltip: -132545439
       SlowdownEffectTooltipIcon: -1379777271
       SpeedTooltip: -875806093
       SpeedUpEffectTooltip: -1544455670

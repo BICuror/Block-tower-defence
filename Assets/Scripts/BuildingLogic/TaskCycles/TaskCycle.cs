@@ -33,9 +33,7 @@ public class TaskCycle : MonoBehaviour
     
     public void TryCycle()
     {
-        if (!CanWork()) return; 
-        
-        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return;
+        if (!IsPossibleToPerformTask()) return; 
         
         if (_taskCycleIsActive) return;
 
@@ -44,11 +42,18 @@ public class TaskCycle : MonoBehaviour
     
     public void PerformTask()
     {
-        if (!CanWork()) return;
-        
-        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return; 
+        if (!IsPossibleToPerformTask()) return;
         
         TaskPerformed?.Invoke();
+    }
+
+    public bool IsPossibleToPerformTask()
+    {
+        if (!CanWork()) return false;
+        
+        if (!_taskConditionProvider.GetTaskCondition().Invoke()) return false; 
+        
+        return true;
     }
     
     protected virtual bool CanWork() => true;

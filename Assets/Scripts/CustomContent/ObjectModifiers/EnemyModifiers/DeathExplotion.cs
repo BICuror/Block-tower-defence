@@ -1,11 +1,12 @@
 using UnityEngine;
 using Cashing;
 using Combat;
+using UnityEngine.Serialization;
 
 public sealed class DeathExplotion : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
-    [SerializeField] private Explotion _explotion;
+    [FormerlySerializedAs("_explotion")] [SerializeField] private Explosion _explosion;
     [SerializeField] private float _explotionRadius;
     [SerializeField] private float _explotionDamage;
     
@@ -15,28 +16,28 @@ public sealed class DeathExplotion : MonoBehaviour
         
         _ownerEntity.Health.Died += Explode;
         
-        ExplotionDamage explotionDamage = new ExplotionDamage();
-        ExplotionRadius explotionRadius = new ExplotionRadius();
+        ExplosionDamage explosionDamage = new ExplosionDamage();
+        ExplosionRadius explosionRadius = new ExplosionRadius();
         
-        explotionDamage.SetDefault(_explotionDamage);
-        explotionRadius.SetDefault(_explotionRadius);
+        explosionDamage.SetDefault(_explotionDamage);
+        explosionRadius.SetDefault(_explotionRadius);
         
-        _ownerEntity.StatContainer.AddStat(explotionDamage);
-        _ownerEntity.StatContainer.AddStat(explotionRadius);
+        _ownerEntity.StatContainer.AddStat(explosionDamage);
+        _ownerEntity.StatContainer.AddStat(explosionRadius);
         
-        _explotion.Initialize(_ownerEntity);
+        _explosion.Initialize(_ownerEntity);
     }
 
     private async void Explode()
     {
         transform.position = _ownerEntity.transform.position;
-        _explotion.transform.SetParent(null);
+        _explosion.transform.SetParent(null);
         
         _ownerEntity.Health.Died -= Explode;
         
-        _ownerEntity.StatContainer.Remove<ExplotionDamage>();
-        _ownerEntity.StatContainer.Remove<ExplotionRadius>();
+        _ownerEntity.StatContainer.Remove<ExplosionDamage>();
+        _ownerEntity.StatContainer.Remove<ExplosionRadius>();
         
-        await _explotion.Explode();
+        await _explosion.Explode();
     }
 }

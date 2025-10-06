@@ -1,21 +1,27 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
+using UnityEngine.InputSystem;
+using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
 
 public sealed class GameController : MonoBehaviour
 {
-    [SerializeField] private DragController _dragController;
     [SerializeField] private CameraRotationController _cameraRotationController;
+    [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private CameraZoomController _cameraZoomController;
     [SerializeField] private InspectorController _inspectorController;
+    [SerializeField] private DragController _dragController;
 
     private GameControls _controls;
 
     private ControllerState _currentControllerState;
 
     public ControllerState State => _currentControllerState;
+
+    private void Awake()
+    {
+        _cameraPositionController.CameraPositionUpdated += () => _cameraRotationController.UpdateCameraRotation();
+    }
 
     private void FixedUpdate()
     {
@@ -76,8 +82,17 @@ public sealed class GameController : MonoBehaviour
 
     #region Enable\Disable
 
-    public void Enable() => _controls.Enable();
-    public void Disable() => _controls.Disable();
+    public void Enable()
+    {
+        _controls.Enable();
+        _cameraPositionController.Enable();
+    }
+
+    public void Disable()
+    {
+        _controls.Disable();
+        _cameraPositionController.Disable();
+    } 
 
     private void Start()
     {   
@@ -95,6 +110,8 @@ public sealed class GameController : MonoBehaviour
         _controls.TouchInput.LMB.canceled += _ => ReturnToIdleState();
         
         _controls.TouchInput.RMB.performed += TryActivateOrStartInspecting;
+        
+        _controls.TouchInput.ReturnDefaultCameraPosition.performed += _ => _cameraPositionController.SetDefaultPosition();
 
         _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
         _controls.TouchInput.ScrolledDown.started += _ => _cameraZoomController.ZoomOut();

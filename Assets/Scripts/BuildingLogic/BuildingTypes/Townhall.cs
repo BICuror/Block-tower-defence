@@ -31,7 +31,6 @@ namespace Combat
         public void SetPosition(Vector3 newPosition)
         {
             transform.position = newPosition + Vector3.up;
-            FindObjectOfType<CameraRotationController>().SetTarget(transform);
         }
     }
 }

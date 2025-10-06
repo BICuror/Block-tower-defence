@@ -71,6 +71,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ReturnDefaultCameraPosition"",
+                    ""type"": ""Button"",
+                    ""id"": ""739e6511-4277-4978-b23c-6231c2e1c614"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +192,28 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""LMB"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""29dd6a51-fcb2-45e7-ae51-68406b120fa5"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnDefaultCameraPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8a72e7cf-cd5a-45ff-a157-d39bde3a5326"",
+                    ""path"": ""<Mouse>/middleButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ReturnDefaultCameraPosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -196,6 +227,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_TouchInput_ScrolledDown = m_TouchInput.FindAction("ScrolledDown", throwIfNotFound: true);
         m_TouchInput_LMB = m_TouchInput.FindAction("LMB", throwIfNotFound: true);
         m_TouchInput_RMB = m_TouchInput.FindAction("RMB", throwIfNotFound: true);
+        m_TouchInput_ReturnDefaultCameraPosition = m_TouchInput.FindAction("ReturnDefaultCameraPosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +294,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_TouchInput_ScrolledDown;
     private readonly InputAction m_TouchInput_LMB;
     private readonly InputAction m_TouchInput_RMB;
+    private readonly InputAction m_TouchInput_ReturnDefaultCameraPosition;
     public struct TouchInputActions
     {
         private @GameControls m_Wrapper;
@@ -271,6 +304,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @ScrolledDown => m_Wrapper.m_TouchInput_ScrolledDown;
         public InputAction @LMB => m_Wrapper.m_TouchInput_LMB;
         public InputAction @RMB => m_Wrapper.m_TouchInput_RMB;
+        public InputAction @ReturnDefaultCameraPosition => m_Wrapper.m_TouchInput_ReturnDefaultCameraPosition;
         public InputActionMap Get() { return m_Wrapper.m_TouchInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -295,6 +329,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @RMB.started += instance.OnRMB;
             @RMB.performed += instance.OnRMB;
             @RMB.canceled += instance.OnRMB;
+            @ReturnDefaultCameraPosition.started += instance.OnReturnDefaultCameraPosition;
+            @ReturnDefaultCameraPosition.performed += instance.OnReturnDefaultCameraPosition;
+            @ReturnDefaultCameraPosition.canceled += instance.OnReturnDefaultCameraPosition;
         }
 
         private void UnregisterCallbacks(ITouchInputActions instance)
@@ -314,6 +351,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @RMB.started -= instance.OnRMB;
             @RMB.performed -= instance.OnRMB;
             @RMB.canceled -= instance.OnRMB;
+            @ReturnDefaultCameraPosition.started -= instance.OnReturnDefaultCameraPosition;
+            @ReturnDefaultCameraPosition.performed -= instance.OnReturnDefaultCameraPosition;
+            @ReturnDefaultCameraPosition.canceled -= instance.OnReturnDefaultCameraPosition;
         }
 
         public void RemoveCallbacks(ITouchInputActions instance)
@@ -338,5 +378,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnScrolledDown(InputAction.CallbackContext context);
         void OnLMB(InputAction.CallbackContext context);
         void OnRMB(InputAction.CallbackContext context);
+        void OnReturnDefaultCameraPosition(InputAction.CallbackContext context);
     }
 }

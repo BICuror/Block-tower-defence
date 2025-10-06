@@ -5,6 +5,8 @@ using UnityEngine.Events;
 
 public sealed class CameraRotationController : MonoBehaviour
 {       
+    [SerializeField] private Transform _target;
+    
     [SerializeField] private float _distanceToTarget;
     [Range(0f, 85f)] [SerializeField] private float _maxYRotation;
     [Range(0f, 85f)] [SerializeField] private float _minYRotation;
@@ -12,7 +14,6 @@ public sealed class CameraRotationController : MonoBehaviour
     [Range(1f, 1000f)] [SerializeField] private float _sensetivity;
 
     private Camera _camera;
-    private Transform _target;
 
     private Vector3 _previousPosition;
     private Vector2 _previousTouchPosition = Vector2.zero;
@@ -20,13 +21,9 @@ public sealed class CameraRotationController : MonoBehaviour
     public UnityEvent CameraRotated;
 
     private void OnEnable() => _camera = GetComponent<Camera>();
-    
-    public void SetTarget(Transform newTarget) 
-    {
-        _target = newTarget; 
-    
-        Rotate(_previousTouchPosition);
-    }
+    private void Start() => UpdateCameraRotation();
+
+    public void UpdateCameraRotation() => Rotate(_previousTouchPosition);
 
     public void SetPreviousMousePosition(Vector2 mousePosition) => _previousPosition = _camera.ScreenToViewportPoint(mousePosition);
 

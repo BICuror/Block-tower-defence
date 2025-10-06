@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: EnemiesTakeLessDamageWhenEffect
   m_EditorClassIdentifier: 
-  _quality: 1
-  _effectType: 1
-  _isUnique: 0
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalEnemyModificatorToggleEffect
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
-    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
@@ -38,10 +34,26 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: 1d00593fdf6e4484ea59648ec6d5a50d, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+  _quality: 1
+  _effectType: 1
+  _isUnique: 0
+  _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
   _effectAppearanceConditionArgumentsContainer:
     _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: 0}
   _effectName: Resistance
   _effectDescription: '#bad Enemies bad# take #bad -50% bad# #Damage when #bad negative
     bad# effect applied to them'

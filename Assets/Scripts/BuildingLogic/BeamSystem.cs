@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
 using System;
+using JetBrains.Annotations;
 
 public sealed class BeamSystem : MonoBehaviour
 {
@@ -38,16 +39,15 @@ public sealed class BeamSystem : MonoBehaviour
     {
         DisableBeam();
  
-        _lineRenderer.positionCount = 2;
         _targets[1] = target;
 
         if (_beamType == BeamType.Dynamic)
         {
-            KeepUpBeamToTarget();
+            KeepUpBeamToTarget().Forget();
         }
         else
         {
-            UpdateLinePositions();
+            UpdateLinePositions(_targets[0].position, _targets[1].position);
         }
     }
 
@@ -55,7 +55,7 @@ public sealed class BeamSystem : MonoBehaviour
     {
         while (_targets[0] && _targets[1])
         {   
-            UpdateLinePositions();
+            UpdateLinePositions(_targets[0].position, _targets[1].position);
 
             try
             {
@@ -76,10 +76,59 @@ public sealed class BeamSystem : MonoBehaviour
         _cancellationTokenSource = new();
     }
 
-    private void UpdateLinePositions()
+    private void UpdateLinePositions(Vector3 startPosition, Vector3 endPosition)
     {
-        _lineRenderer.SetPosition(0, _targets[0].position);
-        _lineRenderer.SetPosition(1, _targets[1].position);
+        _lineRenderer.positionCount = 2;
+        _lineRenderer.SetPosition(0, startPosition);
+        _lineRenderer.SetPosition(1, endPosition);
+    }
+
+    public async UniTask ReachTargetAndSetIt([CanBeNull] Transform target, Vector3 startPosition, float reachDuration)
+    {
+        DisableBeam();
+        
+        float elapsedTime = 0f; 
+        
+        while (reachDuration > elapsedTime)
+        {
+            try
+            {
+                await UniTask.WaitForFixedUpdate(_cancellationTokenSource.Token);
+            }
+            catch { return; }
+            
+            elapsedTime += Time.fixedDeltaTime;
+            
+            if (!target) return;
+
+            Vector3 currentPosition = Vector3.Lerp(startPosition, target.position, elapsedTime / reachDuration);
+            
+            UpdateLinePositions(_targets[0].position, currentPosition);
+        }
+        
+        SetTarget(target);
+    }
+    
+    public async UniTask ReachPosition(Vector3 position, Vector3 startPosition, float reachDuration)
+    {
+        DisableBeam();   
+        
+        float elapsedTime = 0f; 
+        
+        while (reachDuration > elapsedTime)
+        {
+            try
+            {
+                await UniTask.WaitForFixedUpdate(_cancellationTokenSource.Token);
+            }
+            catch { return; }
+            
+            elapsedTime += Time.fixedDeltaTime;
+
+            Vector3 currentPosition = Vector3.Lerp(position, startPosition, elapsedTime / reachDuration);
+            
+            UpdateLinePositions(_targets[0].position, currentPosition);
+        }
     }
 
     private void OnDestroy()

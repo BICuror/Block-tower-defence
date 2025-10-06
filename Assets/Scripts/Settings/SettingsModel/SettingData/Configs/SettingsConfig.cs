@@ -13,6 +13,7 @@ namespace CuroSettings
 
         public List<SettingConfig> SettingConfigs => new(_settingConfigs);
         
+#if UNITY_EDITOR
         public bool CheckForDuplicateSaveKeys()
         {
             bool containsDuplicateIDs = false;
@@ -53,5 +54,6 @@ namespace CuroSettings
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssetIfDirty(this);
         }
+#endif
     }
 }

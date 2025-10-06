@@ -16,7 +16,8 @@ namespace CuroAudio
         
         public List<AudioReferenceSector> Sectors => _audioReferenceSectors;
         public AudioSourceAudioPlayerObject AudioSourceAudioPlayerPrefab => _audioSourceAudioPlayerPrefab;
-
+        
+#if UNITY_EDITOR
         public bool CheckForDuplicateIDs()
         {
             bool containsDuplicateIDs = false;
@@ -73,5 +74,6 @@ namespace CuroAudio
                 AssetDatabase.SaveAssetIfDirty(sector);
             });
         }
+#endif
     }
 }

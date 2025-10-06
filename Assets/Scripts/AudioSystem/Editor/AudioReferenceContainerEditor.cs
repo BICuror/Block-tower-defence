@@ -1,8 +1,7 @@
-using CuroCodeGen;
 using UnityEngine;
 
 #if UNITY_EDITOR
-using System.Threading.Tasks;
+using CuroCodeGen;
 using UnityEditor;
 #endif
 
@@ -54,10 +53,10 @@ namespace CuroAudio
     public enum AudioEnum
     { 
         Undefined,
-        #
+        %
     }
 }";
-        private const string GeneratedEnumEntryBlueprint = @"        #,
+        private const string GeneratedEnumEntryBlueprint = @"        %,
 ";
         
         public void Execute(GeneratorContext context)
@@ -74,12 +73,12 @@ namespace CuroAudio
                     {
                         string enumStringValue = AudioUtility.GetAudioReferenceFullID(sector.Name, subSector.Name, subSector.AudioReferenceEntries[i].SoundID);
 
-                        generatedFileCode += GeneratedEnumEntryBlueprint.Replace("#", enumStringValue);
+                        generatedFileCode += GeneratedEnumEntryBlueprint.Replace("%", enumStringValue);
                     }
                 });
             });
 
-            string resultFileCode = GeneratedFileBlueprint.Replace("#", generatedFileCode);
+            string resultFileCode = GeneratedFileBlueprint.Replace("%", generatedFileCode);
             
             context.SetFolderPath(AudioUtility.GENERATED_CODE_PATH);
             context.AddCode("AudioEnum.Generated.cs", resultFileCode);

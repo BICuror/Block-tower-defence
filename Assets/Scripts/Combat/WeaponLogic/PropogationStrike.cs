@@ -28,11 +28,12 @@ public sealed class PropogationStrike : WeaponBase
         if (initialTransform)
         {   
             _beamSystem.SetSource(initialTransform);
-            _beamSystem.SetTarget(initialEntity.transform);
+            _beamSystem.ReachTargetAndSetIt(initialEntity.transform, initialTransform.position, _stepDuration).Forget();
         }
         else
         {
             _beamSystem.DisableBeam();
+            initialTransform = initialEntity.transform;
         }
         
         await UniTask.WaitForSeconds(_stepDuration);
@@ -53,14 +54,22 @@ public sealed class PropogationStrike : WeaponBase
             
             if (!newTargetEntity) break;
 
-            _beamSystem.SetSource(currentEntity.transform);
-            _beamSystem.SetTarget(newTargetEntity.transform);
-
+            MoveBeamToNewPosition(initialTransform.position, currentEntity.transform, newTargetEntity.transform, _stepDuration).Forget();
+            
+            initialTransform = currentEntity.transform;
+            
             currentEntity = newTargetEntity;
         }
 
         gameObject.SetActive(false);
         _beamSystem.DisableBeam();
+    }
+
+    private async UniTask MoveBeamToNewPosition(Vector3 previousPosition, Transform currentTransform, Transform desiredTransform, float duration)
+    {
+        _beamSystem.SetSource(currentTransform.transform);
+        await _beamSystem.ReachTargetAndSetIt(currentTransform.transform, previousPosition, _stepDuration / 2f);
+        await _beamSystem.ReachTargetAndSetIt(desiredTransform, currentTransform .transform.position, _stepDuration / 2f);
     }
 
     private CombatEntity GetEnemiesInRadius(Vector3 centerPosition)

@@ -1,8 +1,7 @@
-using CuroCodeGen;
 using UnityEngine;
 
 #if UNITY_EDITOR
-using System.Threading.Tasks;
+using CuroCodeGen;
 using UnityEditor;
 #endif
 
@@ -54,10 +53,10 @@ namespace CuroSettings
     public enum SettingsEnum
     { 
         Undefined,
-        #
+        %
     }
 }";
-        private const string GeneratedEnumEntryBlueprint = @"        #,
+        private const string GeneratedEnumEntryBlueprint = @"        %,
 ";
         
         public void Execute(GeneratorContext context)
@@ -68,10 +67,10 @@ namespace CuroSettings
             
             settingsConfig.SettingConfigs.ForEach(config =>
             {
-                generatedFileCode += GeneratedEnumEntryBlueprint.Replace("#", config.SaveKey);
+                generatedFileCode += GeneratedEnumEntryBlueprint.Replace("%", config.SaveKey);
             });
 
-            string resultFileCode = GeneratedFileBlueprint.Replace("#", generatedFileCode);
+            string resultFileCode = GeneratedFileBlueprint.Replace("%", generatedFileCode);
             
             context.SetFolderPath("Assets/Scripts/Settings");
             context.AddCode("SettingEnum.Generated.cs", resultFileCode);

@@ -5289,15 +5289,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
   _allAvailableModificators:
-  - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
-  - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
-  - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
-  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
+  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
+  - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
   - {fileID: 11400000, guid: 5b1f0399001e3da499f9eda44aad3d6c, type: 2}
   - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
+  - {fileID: 11400000, guid: 90aa638f7f19938459a12f3220d87a52, type: 2}
+  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
   - {fileID: 11400000, guid: baf101d91b46e2b4a97b9b1a0b46e6a0, type: 2}
   - {fileID: 11400000, guid: 351be86ab5475164394a85c2f95d9a81, type: 2}
+  - {fileID: 11400000, guid: a467cbbfebadabf4a81108c2383170bb, type: 2}
+  - {fileID: 11400000, guid: b14d8dbf518396c4cb532db5ab7c1970, type: 2}
   - {fileID: 11400000, guid: 4724c287469796c4c9cbb5bbea681100, type: 2}
+  - {fileID: 11400000, guid: e4911ca152b6a1d4ea5d49f48a35dd67, type: 2}
+  - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
 --- !u!114 &5220538212850705305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5322,6 +5326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canBeIdleInspected: 0
   _inspectableObjectName: Orbital tower
   _inspectableObjectDescription: Has orbitals, which deal damage on border of reach
     area

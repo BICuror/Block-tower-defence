@@ -6,6 +6,7 @@ using Zenject;
 
 public sealed class SelectionManager : MonoBehaviour
 {
+    [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     private Queue<SelectionSettings> _enqeuedSelections = new();
     private SelectionSettings _currentSelectionSettings;
@@ -40,7 +41,7 @@ public sealed class SelectionManager : MonoBehaviour
         {
             case SelectionType.Building:
             {
-                if (_globalBuildingContainer.Entities.Count > 3)
+                if (_globalBuildingContainer.Entities.Count >= _globalStatContainer.Get<MaxBuildings>().Value)
                 {
                     _currentSelectionSettings.Type = SelectionType.BuildingUpgrade;
                     await _buildingUpgradeSelector.StartUpgradeSelection(selectionSettings);

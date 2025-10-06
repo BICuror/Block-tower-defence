@@ -12,15 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3771ed1197c0bd48a93217341181528, type: 3}
   m_Name: AdditionalEnemyGroupToggleEffectData
   m_EditorClassIdentifier: 
-  _quality: 1
-  _effectType: 1
-  _isUnique: 0
   _instanceItemTypeContainers:
   - _itemTypeName: AdditionalEnemyGroupToggleEffect
     AllEffectTypeNames:
     - AdditionalEnemyGroupFromWaterToggleEffect
     - AdditionalEnemyGroupToggleEffect
-    - ChanceToDropCrystalsFromEnemies
     - GlobalBuildingModificatorToggleEffect
     - GlobalEnemyModificatorToggleEffect
     - GlobalStatChangeToggleEffect
@@ -29,10 +25,25 @@ MonoBehaviour:
     - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
     _argumentItems: []
+  _quality: 1
+  _effectType: 1
+  _isUnique: 0
+  _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
   _effectAppearanceConditionArgumentsContainer:
     _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: 0}
   _effectName: Invasion
   _effectDescription: Adds 4 #bad healer units bad# to random spawner
   _enemyGroup:

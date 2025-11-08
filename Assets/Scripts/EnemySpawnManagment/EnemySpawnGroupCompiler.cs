@@ -58,9 +58,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         {
             EnemySpawner randomEnemySpawner = _enemyBiomeContainer.EnemyBiomeList[_random.Next(0, _enemyBiomeContainer.EnemyBiomeList.Count)].EnemySpawner;
             
-            float groupHealth = group.GroupHealth;
-            
-            _enemySpawnDatas[randomEnemySpawner].AddRange(GetEnemyGroupPart(group.GroupParts, ref groupHealth));
+            _enemySpawnDatas[randomEnemySpawner].AddRange(GetEnemyGroupPartAmountModified(group.GroupParts));
         });
     }
 
@@ -86,48 +84,30 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         {
             EnemyBiome currentBiome = _enemyBiomeContainer.EnemyBiomeList[i];
             
-            float waveHealth = _islandData.WavesData.WaveHealth * _waveManager.GetCurrentWave() * _globalStatContainer.Get<EnemyAmountMultiplier>().Value;
-            
-            List<EnemyData> waveGroup = GenerateEnemyGroup(waveHealth, FindSuitableRandomGroup());
+            List<EnemyData> waveGroup = GetEnemyGroupPartAmountModified(FindSuitableRandomGroup().GroupParts);
             
             _enemySpawnDatas.Add(currentBiome.EnemySpawner, waveGroup);
         }
     }
-
-    private List<EnemyData> GenerateEnemyGroup(float waveHealth, EnemyWaveGroup waveGroup)
-    {   
-        List<EnemyData> enemiesToSpawn = new List<EnemyData>();
-        
-        while (waveHealth > 0)
-        {
-            enemiesToSpawn.AddRange(GetEnemyGroupPart(waveGroup.GroupParts, ref waveHealth));
-        }
-        
-        return enemiesToSpawn;
+    
+    public List<EnemyData> GetEnemyGroupPartAmountModified(List<EnemyWaveGroup.GroupPart> groupParts)
+    {
+        return GetEnemyGroupPart(groupParts, _globalStatContainer.Get<EnemyAmountMultiplier>().Value);
     }
 
-    public List<EnemyData> GetEnemyGroupPart(List<EnemyWaveGroup.GroupPart> groupParts, ref float leftHealth)
+    public List<EnemyData> GetEnemyGroupPart(List<EnemyWaveGroup.GroupPart> groupParts, float amountMultiplier)
     {
         List<EnemyData> groupEnemies = new List<EnemyData>();
         
         for (int enemyGroupPartIndex = 0; enemyGroupPartIndex < groupParts.Count; enemyGroupPartIndex++)
         {
             EnemyWaveGroup.GroupPart currentPart = groupParts[enemyGroupPartIndex];
-            
-            int enemyAmount = _random.Next(currentPart.MinAmount, currentPart.MaxAmount);
+
+            int enemyAmount = Mathf.RoundToInt(currentPart.GetAmount(_waveManager.GetCurrentWave()) * amountMultiplier);
 
             for (int enemyIndex = 0; enemyIndex < enemyAmount; enemyIndex++)
             {
-                if (leftHealth - currentPart.Data.MaxHealth >= 0 || groupEnemies.Count == 0)
-                {
-                    leftHealth -= currentPart.Data.MaxHealth;
-
-                    groupEnemies.Add(currentPart.Data);
-                }
-                else
-                {
-                    return groupEnemies;
-                }
+                groupEnemies.Add(currentPart.Data);
             }
         }
 

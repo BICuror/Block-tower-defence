@@ -23,7 +23,7 @@ public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifi
         RecalculateDamageBoost();
     }
     
-    public override bool CanBeAppliedToEntity(CombatEntity entity) => entity.StatContainer.Has(GetStatType()) && entity.StatContainer.Has<ReachAreaScale>(); 
+    public override bool CanBeAppliedToEntity(CombatEntity entity) => entity.StatContainer.Has<ReachAreaScale>() && entity.StatContainer.Has(GetStatType()); 
 
     private void RecalculateDamageBoost(CombatEntity _) => RecalculateDamageBoost();
     

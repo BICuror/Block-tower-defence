@@ -19,10 +19,10 @@ public sealed class AdditionalEnemyGroupToggleEffectData : ToggleGlobalEffectDat
     
     [Serializable] public sealed class AdditionalEnemyGroup
     {
-        [SerializeField] private float _groupHealth;
+        [Range(0f, 1f)] [SerializeField] private float _amountMultiplier;
         [SerializeField] private List<EnemyWaveGroup.GroupPart> _groupParts;
-        
-        public float GroupHealth => _groupHealth;
+    
+        public float AmountMultiplier => _amountMultiplier;
         public List<EnemyWaveGroup.GroupPart> GroupParts => _groupParts;
     }
 }

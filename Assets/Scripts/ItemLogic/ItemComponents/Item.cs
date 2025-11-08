@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using NaughtyAttributes;
 using Zenject;
 
 public class Item : DraggableObject
@@ -15,6 +16,22 @@ public class Item : DraggableObject
     private int _duration;
     private int _quality;
     private int _strength;
+    
+#if UNITY_EDITOR
+    [Header("Debug")]
+    [SerializeField] private ToggleGlobalEffectData _toggleGlobalEffectData;
+    
+    [Button]
+    public void ApplyEffect()
+    {
+        if (_toggleEffectDatas.Contains(_toggleGlobalEffectData)) return;
+        
+        _toggleEffectDatas.Add(_toggleGlobalEffectData);
+        
+        _globalEffectContainer.AddEffect(_toggleGlobalEffectData);
+    }
+    
+#endif 
 
     public List<RewardGlobalEffectData> RewardDatas => _rewardDatas;
     public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
@@ -31,7 +48,7 @@ public class Item : DraggableObject
         base.Awake();
         PickedUp += () => ItemPickedUp?.Invoke(this);
     }
-
+    
     public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
     public void AddRewardEffectDatas(List<RewardGlobalEffectData> rewardDatas) => _rewardDatas.AddRange(rewardDatas);
 

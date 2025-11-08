@@ -5280,6 +5280,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
 --- !u!114 &183681894154958883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5332,25 +5333,25 @@ MonoBehaviour:
     _defaultValue: 30
   - StructName: BuildTime
     _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    _defaultValue: 2
+    _defaultValue: 3
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    _defaultValue: 6
+    _defaultValue: 4
   - StructName: TaskRechargeDuration
     _statData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    _defaultValue: 4
+    _defaultValue: 3
   - StructName: Damage
     _statData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
-    _defaultValue: 5
+    _defaultValue: 0
   - StructName: TravelTime
     _statData: {fileID: 11400000, guid: 5e8b85fba4737254599072092f655308, type: 2}
-    _defaultValue: 1
+    _defaultValue: 0.75
   - StructName: ExplosionDamage
     _statData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    _defaultValue: 4
+    _defaultValue: 7
   - StructName: ExplosionRadius
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    _defaultValue: 4
+    _defaultValue: 2.5
 --- !u!114 &7114909489339946991
 MonoBehaviour:
   m_ObjectHideFlags: 0

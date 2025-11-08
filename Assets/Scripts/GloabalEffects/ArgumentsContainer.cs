@@ -34,6 +34,7 @@ using System;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityModificatorData)] [SerializeField] private EntityModificatorData _entityModificatorData;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityEffectParticleHandler)] [SerializeField] private EntityEffectParticleHandler _entityEffectParticleHandler;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityObjectModifier)] [SerializeField] private EntityObjectModifier _entityObjectModifierPrefab;
+    [AllowNesting] [ShowIf("_argumentType", ArgumentType.LayerSetting)] [SerializeField] private LayerSetting _layerSetting;
     
     public string ArgumentName => _argumentName;
 
@@ -49,6 +50,7 @@ using System;
             case ArgumentType.EntityModificatorData: return _entityModificatorData;
             case ArgumentType.EntityEffectParticleHandler: return _entityEffectParticleHandler;
             case ArgumentType.EntityObjectModifier: return _entityObjectModifierPrefab;
+            case ArgumentType.LayerSetting: return _layerSetting;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }
@@ -56,12 +58,13 @@ using System;
 
 public enum ArgumentType
 {
-    Int,
-    Float,
-    GameObject,
-    EntityModificatorData,
-    String,
-    Bool,
-    EntityEffectParticleHandler,
-    EntityObjectModifier,
+    Int = 0,
+    Float = 1,
+    GameObject = 2,
+    EntityModificatorData = 3,
+    String = 4,
+    Bool = 5,
+    EntityEffectParticleHandler = 6,
+    EntityObjectModifier = 7,
+    LayerSetting = 8,
 }

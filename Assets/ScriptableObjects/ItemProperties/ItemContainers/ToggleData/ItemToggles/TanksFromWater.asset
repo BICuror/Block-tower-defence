@@ -35,6 +35,40 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 8
+      _argumentName: BuildingLayer
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 4.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 11400000, guid: 25d98ad61e78fb343afe7186a087b200, type: 2}
+    - _argumentType: 0
+      _argumentName: MinimalBuildingRadius
+      _intArgument: 2
+      _boolArgument: 0
+      _floatArgument: 4.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: SpawnDelay
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _quality: 1
   _effectType: 1
   _isUnique: 0
@@ -55,11 +89,11 @@ MonoBehaviour:
     Requirements: []
   _icon: {fileID: -98197151, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _effectName: Unrelenting waters
-  _effectDescription: Spawns #bad 8 enemies bad# from <color=blue>water</color> nearby
-    roads
+  _effectDescription: Spawns #bad tank enemies bad# from <color=blue>water</color>
+    nearby roads
   _enemyGroup:
-    _groupHealth: 150
+    _amountMultiplier: 0
     _groupParts:
-    - _enemyData: {fileID: 11400000, guid: c1de2e8fa0e57cb4daf570d39ee50590, type: 2}
-      _minAmount: 8
-      _maxAmount: 8
+    - _amountPerWave: 03000000040000000400000005000000060000000700000007000000080000000a0000000b0000000d0000000f000000110000001200000014000000
+      _enemyData: {fileID: 11400000, guid: d083d5000a95b9343b087e9fa8a37138, type: 2}
+      _parseString: 

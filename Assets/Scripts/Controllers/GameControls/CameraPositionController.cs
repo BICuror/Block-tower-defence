@@ -22,6 +22,8 @@ public sealed class CameraPositionController : MonoBehaviour
     
     private void Awake()
     {
+        CreateControls();
+        
         _islandRadius = (_islandDataContainer.Data.IslandSize - 1) / 2f;
         
         _camera = Camera.main;
@@ -67,13 +69,6 @@ public sealed class CameraPositionController : MonoBehaviour
     public void Enable() => _controls.Enable();
     public void Disable() => _controls.Disable();
     
-    private void Start()
-    {   
-        CreateControls();
-    
-        Enable();
-    }
-        
     private void CreateControls()
     {
         _controls = new CameraPositionControls();

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: DamageDownWhenBuildingsNearbu
+  m_Name: DamageDownWhenBuildingsNearby
   m_EditorClassIdentifier: 
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
@@ -53,6 +53,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: e4798188f725c2c4b9dff9063784bc5f, type: 3}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 1

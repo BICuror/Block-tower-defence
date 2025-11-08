@@ -3,6 +3,7 @@ using WorldGeneration;
 using UnityEngine;
 using Zenject;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffect
 {
@@ -12,7 +13,10 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private RoadMapHolder _roadMapHolder;
     private AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup _additionalEnemyGroup;
-
+    private LayerSetting _buildingLayerSetting;
+    private int _minimalBuildingRadius;
+    private float _spawnDelay;
+    
     private List<Vector2Int> _checkDirections = new List<Vector2Int>()
     {
         Vector2Int.down,
@@ -20,6 +24,7 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
         Vector2Int.up,
         Vector2Int.right
     };
+
     
     public void SetAdditionalEnemyGroup(AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup additionalEnemyGroup)
     {
@@ -28,6 +33,10 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
     
     public override void Enable()
     {
+        _buildingLayerSetting = Args.GetArgument<LayerSetting>("BuildingLayer");
+        _minimalBuildingRadius = Args.GetArgument<int>("MinimalBuildingRadius");
+        _spawnDelay = Args.GetArgument<float>("SpawnDelay");
+        
         _waveStateMachine.StateStarted += TrySpawn;
     }
 
@@ -35,23 +44,28 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
     {
         if (waveState != WaveState.Attack) return;
 
-        float waveHealth = _additionalEnemyGroup.GroupHealth;
+        SpawnEnemiesIfPossible().Forget();
+    }
+
+    private async UniTask SpawnEnemiesIfPossible()
+    {
+        List<Vector3> validSpawnPositions = GetValidSpawnPositions();
+
+        if (validSpawnPositions.Count == 0) return;
         
-        List<Vector3> validSpawnPositions = GetLessThanZeroPositions();
-
-        List<EnemyData> enemyDatas = _enemySpawnGroupCompiler.GetEnemyGroupPart(_additionalEnemyGroup.GroupParts, ref waveHealth);
-
-        for (int i = 0; i < enemyDatas.Count && validSpawnPositions.Count > 0; i++)
+        List<EnemyData> enemyDatas = _enemySpawnGroupCompiler.GetEnemyGroupPart(_additionalEnemyGroup.GroupParts, _additionalEnemyGroup.AmountMultiplier);
+        
+        for (int i = 0; i < enemyDatas.Count; i++)
         {
             int randomPositionIndex = Random.Range(0, validSpawnPositions.Count);
 
             EnemyFactory.Instance.CreateEnemy(enemyDatas[i], validSpawnPositions[randomPositionIndex]);
 
-            validSpawnPositions.RemoveAt(randomPositionIndex);
+            await UniTask.WaitForSeconds(_spawnDelay);
         }
     }
 
-    private List<Vector3> GetLessThanZeroPositions()
+    private List<Vector3> GetValidSpawnPositions()
     {
         List<Vector3> spawnPositions = new List<Vector3>();
         
@@ -81,6 +95,8 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
     {
         if (_islandHeightMapHolder.Map[x, z] <= 0 && _roadMapHolder.Map[x, z] == false)
         {
+            if (!IsValidPosition(x, z)) return false; 
+            
             for (int i = 0; i < _checkDirections.Count; i++)
             {
                 int checkX = x + _checkDirections[i].x;
@@ -90,14 +106,14 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
                 
                 if (_roadMapHolder.Map[checkX, checkZ])
                 {
-                    return true;
+                    if (!TileMap.HasTileNearby(new Vector2Int(x, z), _minimalBuildingRadius, _buildingLayerSetting)) return true;
                 }
             }
         }
 
         return false;
         
-        bool IsValidPosition(int x, int z) => x >= 0 && x < _islandDataContainer.Data.IslandSize && z >= 0 && z < _islandDataContainer.Data.IslandSize;
+        bool IsValidPosition(int x, int z) => x > 0 && x < _islandDataContainer.Data.IslandSize - 1 && z > 0 && z < _islandDataContainer.Data.IslandSize - 1;
     }
     
     public override void Disable()

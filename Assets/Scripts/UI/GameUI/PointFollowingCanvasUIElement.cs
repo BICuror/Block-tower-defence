@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -85,6 +84,8 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     
     private void UpdatePosition()
     {
+        if (!_target) return;
+        
         Vector2 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(_mainCamera, _target.position);
         
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent as RectTransform, targetScreenPosition, null, out Vector2 resultPoint);

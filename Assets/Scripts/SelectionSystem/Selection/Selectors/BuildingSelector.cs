@@ -8,7 +8,7 @@ public sealed class BuildingSelector : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataHolder;
     [Inject] private GlobalStatContainer _globalStatContainer;
-
+    
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private BuildingSelectionOptionObject _selectionObject;
     

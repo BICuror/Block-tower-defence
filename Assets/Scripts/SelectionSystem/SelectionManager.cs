@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
+using DG.Tweening;
+using TMPro;
+using UnityEngine.Rendering;
 using Zenject;
 
 public sealed class SelectionManager : MonoBehaviour
@@ -13,6 +16,9 @@ public sealed class SelectionManager : MonoBehaviour
 
     [SerializeField] private SelectionOptionObjectAreaDetector _selectionOptionObjectAreaDetector;
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
+    
+    [Header("Indicators")]
+    [SerializeField] private List<SelectionIndicatorContainers> _selectionIndicatorContainers;
     
     [Header("Selectors")]
     [SerializeField] private BuildingSelector _buildingSelector;
@@ -53,6 +59,8 @@ public sealed class SelectionManager : MonoBehaviour
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }
 
+        EnableSelectionIndicator(selectionSettings.Type);
+        
         _selectionIsActive = true;
     }
 
@@ -76,6 +84,8 @@ public sealed class SelectionManager : MonoBehaviour
     
     private async UniTask EndSelection(SelectionSettings selectionSettings)
     {
+        DisableSelectionIndicator(selectionSettings.Type).Forget();
+        
         _selectionIsActive = false;
         
         switch (_currentSelectionSettings.Type)
@@ -89,5 +99,28 @@ public sealed class SelectionManager : MonoBehaviour
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
         return _selectionIsActive && type == _currentSelectionSettings.Type;
+    }
+
+    private async UniTask DisableSelectionIndicator(SelectionType type)
+    {
+        TextMeshPro indicator = _selectionIndicatorContainers.Find(container => container.Type == type).Indicator;
+        await indicator.DOFade(0f, 1f).From(1f).AsyncWaitForCompletion();
+        indicator.gameObject.SetActive(false);
+    }
+
+    private void EnableSelectionIndicator(SelectionType type)
+    {
+        TextMeshPro indicator = _selectionIndicatorContainers.Find(container => container.Type == type).Indicator;
+        indicator.gameObject.SetActive(true);
+        indicator.DOFade(1f, 1f).From(0f);
+    }
+
+    [Serializable] private sealed class SelectionIndicatorContainers
+    {
+        [SerializeField] private SelectionType _selectionType;
+        [SerializeField] private TextMeshPro _selectionIndicator;
+        
+        public SelectionType Type => _selectionType;
+        public TextMeshPro Indicator => _selectionIndicator;
     }
 }

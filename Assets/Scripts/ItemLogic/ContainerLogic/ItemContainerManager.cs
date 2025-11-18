@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -30,14 +31,14 @@ public class ItemContainerManager : MonoBehaviour
         _itemsContainerAnimator.TransitionToNewPositions();
     }
 
-    public void UpdateContainedItems()
+    public async UniTask UpdateContainedItems()
     {
         List<Item> items = new List<Item>(_itemContainer.ContainedItems);
-        
-        items.ForEach(item =>
+
+        for (int i = 0; i < items.Count; i++)
         {
-            item.DecreaseDuration();
-        });
+            await items[i].DecreaseDuration();
+        }
     }
     
     public void LockContainer()

@@ -45,10 +45,10 @@ MonoBehaviour:
     Requirements: []
   _icon: {fileID: 0}
   _effectName: Invasion
-  _effectDescription: Adds 4 #bad healer units bad# to random spawner
+  _effectDescription: Adds #bad healer units bad# to random spawner
   _enemyGroup:
-    _groupHealth: 100
+    _amountMultiplier: 0
     _groupParts:
-    - _enemyData: {fileID: 11400000, guid: b790f7537f5e81947aad532a8b726f5a, type: 2}
-      _minAmount: 4
-      _maxAmount: 4
+    - _amountPerWave: 0100000002000000020000000200000002000000020000000200000004000000040000000400000004000000
+      _enemyData: {fileID: 11400000, guid: b790f7537f5e81947aad532a8b726f5a, type: 2}
+      _parseString: 

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
 using System;
-using NaughtyAttributes;
 using Zenject;
 
 public class Item : DraggableObject
 {
+    [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
     [Inject] private GlobalEffectContainer _globalEffectContainer;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
     
@@ -63,13 +65,19 @@ public class Item : DraggableObject
         _duration = duration;
     }
 
-    public void DecreaseDuration()
+    public async UniTask DecreaseDuration()
     {
         _duration--;
 
         if (_duration <= 0)
         {
-            GrantRewardEffect();
+            //GrantRewardEffect();
+
+            int charges = 0;
+            
+            _toggleEffectDatas.ForEach(effectData => charges += effectData.Quality);
+
+            await _upgradeChargeContainer.AddChargesWithAnimation(charges, transform);
             DurationEnded?.Invoke(this);
             DestroyItem();
         }

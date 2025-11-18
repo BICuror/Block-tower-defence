@@ -3,6 +3,7 @@ using UnityEngine;
 using Navigation;
 using Zenject;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class IdleStateController : WaveStateController
 {
@@ -44,7 +45,7 @@ public sealed class IdleStateController : WaveStateController
     {
         RandomExstentions.ReInitializeUnityRandom();
         
-        _itemContainerManager.UpdateContainedItems();
+        _itemContainerManager.UpdateContainedItems().Forget();
         _selectionManager.TryStartQueuedSelection();
         _itemContainerManager.UnlockContainer();
     }

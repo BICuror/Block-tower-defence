@@ -42,8 +42,6 @@ public sealed class IslandTileTerrainGenerator : TileTerrainGenerator
     protected override List<Vector2Int> GetNeighborPositions(int x, int y, int z)
     {
         List<Vector2Int> neighborPositions = new();
-
-        int mainHeight = _heightMap.Map[x, z];
         
         foreach (var checkDirection in CheckDirections)
         {
@@ -54,7 +52,7 @@ public sealed class IslandTileTerrainGenerator : TileTerrainGenerator
             { 
                 int checkHeight = _heightMap.Map[x + xCheck, z + zCheck];
                 
-                if (checkHeight >= mainHeight) 
+                if (checkHeight >= y) 
                 { 
                     neighborPositions.Add(new Vector2Int(xCheck, zCheck));
                 }

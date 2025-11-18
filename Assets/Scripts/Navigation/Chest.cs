@@ -4,9 +4,10 @@ using Cashing;
 using Zenject;
 using Combat;
 
-public sealed class Chest : MonoBehaviour
+public sealed class Chest : MonoBehaviour, IActivatable
 {
     [Cached] private CombatEntity _ownerEntity;
+    [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
     [Inject] private EnemySpawnSystem _waveStateController;
     [Inject] private ItemFactory _itemFactory;
     [Inject] private SpawnerRotator _spawnerRotator;
@@ -18,10 +19,13 @@ public sealed class Chest : MonoBehaviour
         _ownerEntity.Health.Died += Unsubscribe;
     }
 
-    private void CreateItem()
+    private async void CreateItem()
     {
-        _itemFactory.CreateItem(1, 1, transform.position);
+        //_itemFactory.CreateItem(1, 1, transform.position);
         Unsubscribe();
+
+        await _upgradeChargeContainer.AddChargesWithAnimation(Random.Range(3, 5), transform);
+        
         _ownerEntity.Health.Die();
     }
 
@@ -29,5 +33,10 @@ public sealed class Chest : MonoBehaviour
     {
         _waveStateController.LastWaveEnemyDied -= CreateItem;
         _ownerEntity.Health.Died -= Unsubscribe;
+    }
+
+    public void Activate()
+    {
+        _upgradeChargeContainer.AddChargesWithAnimation(Random.Range(3, 5), transform);
     }
 }

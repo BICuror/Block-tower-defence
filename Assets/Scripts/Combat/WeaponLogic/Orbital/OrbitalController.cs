@@ -3,11 +3,15 @@ using UnityEngine;
 using Cashing;
 using System;
 using Combat;
+using WorldGeneration;
+using Zenject;
 
 public sealed class OrbitalController : MonoBehaviour
 {
+    [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [SerializeField] private Transform _orbitalsParent;
     [SerializeField] private List<Transform> _orbitalPositions;
+    [SerializeField] private bool _followTerrain;
     [Cached] private ReachAreaScale _reachAreaScale;
     [Cached] private BuildingDraggable _buildingDraggable;
     [Cached] private CombatEntity _ownerEntity;
@@ -35,9 +39,13 @@ public sealed class OrbitalController : MonoBehaviour
     public void InstantiateAndAddOrbital(Orbital orbitalPrefab)
     {
         Orbital orbital = Instantiate(orbitalPrefab);
+        
+        orbital.SetIslandHeightMapHolder(_islandHeightMapHolder);
+        orbital.SetFollowTerrainState(_followTerrain);
         orbital.transform.SetParent(_orbitalsParent);
         orbital.SetTravelPoints(_orbitalPositions);
         orbital.Initialize(_ownerEntity);
+        
         _instantiatedOrbitals.Add(orbital);
         
         PositionAllOrbitals();
@@ -49,7 +57,9 @@ public sealed class OrbitalController : MonoBehaviour
         
         PositionAllOrbitals();
     }
-    
+
+    #region OrbitalInitialPositioning
+
     private void PositionAllOrbitals()
     {
         _instantiatedOrbitals.ForEach(orbital => orbital.CancelMovement());
@@ -59,8 +69,7 @@ public sealed class OrbitalController : MonoBehaviour
         
         for (int i = 0; i < _instantiatedOrbitals.Count; i++)
         {
-            _instantiatedOrbitals[i].transform.position = _orbitalsParent.transform.position + localOrbitalPositions[i];
-            _instantiatedOrbitals[i].SetNextTarget(targetTransforms[i]);
+            _instantiatedOrbitals[i].SetNextTarget(targetTransforms[i], localOrbitalPositions[i] + _orbitalsParent.transform.position);
         }
     }
     
@@ -78,30 +87,10 @@ public sealed class OrbitalController : MonoBehaviour
 
             float radius = _reachAreaScale.RoundedValue;
             
-            /*if (Math.Abs(cos) > Math.Abs(sin))
-            {
-                sin = GetNormalizedValue(sin);
-            }
-            else if (Math.Abs(cos) < Math.Abs(sin))
-            {
-                cos = GetNormalizedValue(cos);
-            }
-            else
-            {
-                sin = GetNormalizedValue(sin);
-                cos = GetNormalizedValue(cos);
-            }*/
-            
             newPositions.Add(new Vector3(cos * radius, 0f, sin * radius));
         }
 
         return newPositions;
-
-        float GetNormalizedValue(float value)
-        {
-            if (value > 0) return 1f;
-            return -1f;
-        }
     }
     
     private List<Transform> GetTargetTransforms()
@@ -124,4 +113,7 @@ public sealed class OrbitalController : MonoBehaviour
 
         return targets;
     }
+
+    #endregion
+
 }

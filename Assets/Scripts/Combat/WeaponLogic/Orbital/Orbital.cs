@@ -37,6 +37,7 @@ public sealed class Orbital : WeaponBase
         _trailRenderer.Clear();
      
         CancelMovement();
+        transform.position = startPosition;
         TravelToNextTarget(new Vector2(startPosition.x, startPosition.z)).Forget();
         _trailRenderer.Clear();
     }

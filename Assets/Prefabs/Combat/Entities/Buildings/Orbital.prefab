@@ -190,6 +190,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _trailRenderer: {fileID: 3015339598011620304}
   _rigidbody: {fileID: 5705806797472689379}
+  _upHeightChangeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.8237863
+      outSlope: 4.8237863
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.2541978
+    - serializedVersion: 3
+      time: 0.14671479
+      value: 0.5666072
+      inSlope: 1.811695
+      outSlope: 1.811695
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.30371904
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _downHeightChangeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.7137396
+      value: 0.339385
+      inSlope: 1.3670306
+      outSlope: 1.3670306
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.07662267
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.3208656
+      outSlope: 3.3208656
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12892748
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!135 &413286758143381639
 SphereCollider:
   m_ObjectHideFlags: 0

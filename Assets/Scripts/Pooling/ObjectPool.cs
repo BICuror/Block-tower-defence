@@ -5,7 +5,7 @@ using System.Linq;
 using Zenject;
 using System;
 
-public sealed class ObjectPool<T> where T: Component
+public sealed class ObjectPool<T> where T : Component
 {
     private List<T> _pool;
     private int _pointer;
@@ -13,6 +13,7 @@ public sealed class ObjectPool<T> where T: Component
     private Transform _container;
     
     private DiContainer _diContainer;
+    private Predicate<T> _isFreeElement;
     
     public Action<T> ObjectCreated;
 
@@ -20,11 +21,13 @@ public sealed class ObjectPool<T> where T: Component
     
     private int ActiveCount => _pool.Count(pooledObject => pooledObject && pooledObject.gameObject.activeSelf);
     
-    public ObjectPool(T prefab, int poolSize, DiContainer diContainer = null)
+    public ObjectPool(T prefab, int poolSize, DiContainer diContainer = null, Predicate<T> isFreeElement = null)
     {
         _prefab = prefab;
-        _diContainer = diContainer;
         _container = new GameObject().transform;
+        
+        _diContainer = diContainer;
+        _isFreeElement = isFreeElement;
         
         _container.gameObject.name = GetType().ToString();
         
@@ -71,9 +74,12 @@ public sealed class ObjectPool<T> where T: Component
             
             if (!_pool[_pointer].gameObject.activeSelf)
             {
-                element = _pool[_pointer];
+                if (_isFreeElement == null || _isFreeElement.Invoke(_pool[_pointer]))
+                {
+                    element = _pool[_pointer];
 
-                return true;
+                    return true;
+                }
             }
         }
 
@@ -114,6 +120,4 @@ public sealed class ObjectPool<T> where T: Component
         
         return pooledObject;
     }
-    
-    public delegate void OnObjectInitialized(T pooledObject);
 }

@@ -6,6 +6,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
 {
     [SerializeField] private StopActionType _stopAction;
     [SerializeField] private VisualEffect _visualEffect;
+    [SerializeField] private bool _keepInitialParent;
 
     private Transform _initialParent;
     private float _disableTime;
@@ -28,7 +29,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
     
     public void Play()
     {
-        SetNullParent();
+        if (!_keepInitialParent) SetNullParent();
         
         _visualEffect.gameObject.SetActive(true);
     }

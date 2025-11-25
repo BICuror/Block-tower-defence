@@ -23,10 +23,10 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
     private void Start()
     {
         base.Start();
-        _arrowObjectPool = new WeaponPool<Arrow>(_arrowPrefab, 3, _ownerEntity, _arrowLifetime);
+        _arrowObjectPool = new WeaponPool<Arrow>(_arrowPrefab, 3, _ownerEntity,  _arrowLifetime);
         
-        foreach (Arrow arrow in _arrowObjectPool.Pool.Pool) { SubscribeToArrow(arrow); }
-        _arrowObjectPool.Pool.ObjectCreated += SubscribeToArrow;
+        foreach (Arrow arrow in _arrowObjectPool.Pool) { SubscribeToArrow(arrow); }
+        _arrowObjectPool.PoolObject.ObjectCreated += SubscribeToArrow;
         
         ArrowHitBehaviour.Initialize(_ownerEntity, new DisableArrow());
 

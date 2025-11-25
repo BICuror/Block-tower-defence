@@ -1,8 +1,5 @@
 using UnityEngine;
-using UnityEngine.Events;
 using System;
-using Cashing;
-using Combat;
 
 [RequireComponent(typeof(Collider))]
 

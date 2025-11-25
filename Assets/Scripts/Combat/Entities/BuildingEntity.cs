@@ -1,7 +1,11 @@
+using Cysharp.Threading.Tasks;
+using Zenject;
+
 namespace Combat
 {
     public sealed class BuildingEntity : CombatEntity
     {
+        [Inject] private WaveStateMachine _waveStateMachine;
         private BuildingHealth _health;
 
         public BuildingHealth BuildingHealth => _health;
@@ -22,6 +26,15 @@ namespace Combat
 
         private void HandleDeathEvent()
         {
+            gameObject.SetActive(false);
+            
+            DestroyOnWaveEnd().Forget();
+        }
+
+        private async UniTask DestroyOnWaveEnd()
+        {
+            await UniTask.WaitUntil(() => _waveStateMachine.CurrentState == WaveState.Idle);
+            
             Destroy(gameObject);
         }
     }

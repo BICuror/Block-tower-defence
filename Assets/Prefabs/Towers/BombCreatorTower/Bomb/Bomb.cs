@@ -3,25 +3,34 @@ using System.Threading;
 using UnityEngine;
 using Combat;
 using System;
-using UnityEngine.Serialization;
 
-public sealed class Bomb : DraggableObject
+public sealed class Bomb : WeaponBase
 {  
-    [FormerlySerializedAs("_explotion")] [SerializeField] private Explosion _explosion;
+    [SerializeField] private DraggableObject _draggableObject;
+    [SerializeField] private Explosion _explosion;
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _canBeExploded;
+    private bool _isFree = true;
 
+    public bool IsFree => _isFree;
+    public DraggableObject DraggableObject => _draggableObject;
+    
     public Action<Bomb> Exploded;
     
-    public void Awake()
+    protected override void OnInitialized()
     {
-        base.Awake();
+        _explosion.Initialize(OwnerEntity);
         
-        Placed += StartExplotion;
-        PickedUp += StopExplotion;
+        _draggableObject.Placed += StartExplotion;
+        _draggableObject.PickedUp += StopExplosion;
     }
     
     public void EnableExplotion() => _canBeExploded = true;
+
+    private void OnEnable()
+    {
+        _isFree = false;
+    }
     
     private async void StartExplotion()
     {
@@ -35,7 +44,7 @@ public sealed class Bomb : DraggableObject
         catch (Exception e) { e.LogAsync(); } 
     }
     
-    private void StopExplotion()
+    private void StopExplosion()
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource = new();
@@ -47,5 +56,7 @@ public sealed class Bomb : DraggableObject
         _canBeExploded = false;
         await _explosion.Explode();
         Exploded.Invoke(this);
+        
+        _isFree = true;
     }
 }

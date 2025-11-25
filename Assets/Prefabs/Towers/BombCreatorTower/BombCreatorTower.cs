@@ -8,18 +8,18 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 {
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private DraggableCreator _draggableCreator;
-    [SerializeField] private Explosion _bombPrefab;
+    [SerializeField] private Bomb _bombPrefab;
     [Cached] private MaxEntities _maxEntities;
     [Cached] private BuildingEntity _ownerEntity;
     [Cached] private TaskCycle _taskCycle;
     private List<Bomb> _createdBombs = new();
-    private WeaponPool<Explosion> _bombPool;
+    private WeaponPool<Bomb> _bombPool;
 
     public int ActiveBombs => _createdBombs.Count;
     
     private void Start()
     {
-        _bombPool = new WeaponPool<Explosion>(_bombPrefab, 5, _ownerEntity);
+        _bombPool = new WeaponPool<Bomb>(_bombPrefab, 5, _ownerEntity, isFreeElement: IsFreeBomb);
         _taskCycle.TaskPerformed += CreateBomb;
         _waveStateMachine.StateStarted += HandleWaveStateChange;
     }
@@ -32,13 +32,11 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         }
         else
         {
-            IReadOnlyList<Explosion> bombs = _bombPool.Pool.Pool;
-
-            for (int i = 0; i < bombs.Count; i++)
+            for (int i = 0; i < _bombPool.Pool.Count; i++)
             {
-                if (bombs[i].GetComponent<DraggableObject>().IsPlaced)
+                if (_bombPool.Pool[i].DraggableObject.IsPlaced)
                 {
-                    bombs[i].gameObject.SetActive(false);
+                    _bombPool.Pool[i].gameObject.SetActive(false);
                 }
             }
         }
@@ -48,14 +46,13 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 
     public async void CreateBomb()
     {
-        Explosion explosion = _bombPool.GetPooledWeapon();
-        Bomb bomb = explosion.GetComponent<Bomb>();
+        Bomb bomb = _bombPool.GetPooledWeapon();
         bomb.Exploded += RemoveDisabledBomb;
         _createdBombs.Add(bomb);
         
         bomb.gameObject.SetActive(false);
         
-        await _draggableCreator.ActivateDraggableOnRandomPosition(bomb, transform.position, 2);
+        await _draggableCreator.ActivateDraggableOnRandomPosition(bomb.DraggableObject, transform.position, 2);
         
         bomb.EnableExplotion();
     }
@@ -66,8 +63,10 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         _createdBombs.Remove(bomb);
         _taskCycle.TryCycle();
     }
+
+    private bool IsFreeBomb(Bomb bomb) => bomb.IsFree;
     
-    private bool LessThanMaxBombs() => _createdBombs.Count <= _maxEntities.RoundedValue && _waveStateMachine.CurrentState == WaveState.Attack;
+    private bool LessThanMaxBombs() => _createdBombs.Count < _maxEntities.RoundedValue && _waveStateMachine.CurrentState == WaveState.Attack;
 
     private void OnDestroy()
     {

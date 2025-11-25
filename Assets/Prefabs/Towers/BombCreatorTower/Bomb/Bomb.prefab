@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 2994228055703266452}
   - component: {fileID: 7045380263619432697}
   - component: {fileID: 2365301761590774438}
+  - component: {fileID: 3354604315405458024}
   m_Layer: 13
   m_Name: Bomb
   m_TagString: Draggable
@@ -217,10 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17a67e84871bb91429ccb164071ceb3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dragAnimationObject: {fileID: 5617128095792407976}
-  _placementRequirements: {fileID: 11400000, guid: fa58316b082bdb044883e4755b1b2816, type: 2}
-  _isDraggable: 1
-  _explotion: {fileID: 2365301761590774438}
+  _draggableObject: {fileID: 3354604315405458024}
+  _explosion: {fileID: 2365301761590774438}
 --- !u!114 &2365301761590774438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,6 +235,21 @@ MonoBehaviour:
   _enemyLayerSettings: {fileID: 11400000, guid: 06d08c6367264cc44a27bffbfedcbae9, type: 2}
   _explotionEffect: {fileID: 8701174123604489967}
   _defaultRadius: 1
+--- !u!114 &3354604315405458024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4855757104867912901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3691398b0f0a91c43ad6e3003d098869, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dragAnimationObject: {fileID: 5617128095792407976}
+  _placementRequirements: {fileID: 11400000, guid: fa58316b082bdb044883e4755b1b2816, type: 2}
+  _isDraggable: 1
 --- !u!1 &6879252739597245584
 GameObject:
   m_ObjectHideFlags: 0

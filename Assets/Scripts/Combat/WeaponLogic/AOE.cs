@@ -1,4 +1,6 @@
 using Cysharp.Threading.Tasks;
+using System.Threading;
+using NaughtyAttributes;
 using UnityEngine;
 using Combat;
 
@@ -8,9 +10,11 @@ public sealed class AOE : WeaponBase
     [SerializeField] private LayerSetting _enemyLayerSettings;
     [SerializeField] private float _defaultRadius = 1f;
 
-    [SerializeField] private float _duration = 5f;
+    [SerializeField] private bool _infiniteDuration;
+    [HideIf("_infiniteDuration")] [SerializeField] private float _duration = 5f;
     [SerializeField] private float _secondsPerHit = 1f;
-    
+
+    private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     private AOEDamageMultiplier _aoeDamageMultiplier;
     private AOERadius _radius;
 
@@ -27,7 +31,7 @@ public sealed class AOE : WeaponBase
 
         float elapsedTime = 0f;
 
-        while (elapsedTime <= _duration)
+        while (elapsedTime <= _duration || _infiniteDuration)
         {
             Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _radius.Value * _defaultRadius, _enemyLayerSettings.GetLayerMask());
     
@@ -38,7 +42,7 @@ public sealed class AOE : WeaponBase
             
             try
             {
-                await UniTask.WaitForSeconds(_secondsPerHit, cancellationToken: destroyCancellationToken);
+                await UniTask.WaitForSeconds(_secondsPerHit, cancellationToken: _cancellationTokenSource.Token);
             }
             catch { return; }
             
@@ -48,6 +52,13 @@ public sealed class AOE : WeaponBase
         await _explotionEffect.StopAsync();
     }
 
+    public void DeactiveAOE()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new();
+    }
+    
     private void UpdateAOERadius(float explotionRaduis)
     {
         float scale = explotionRaduis;

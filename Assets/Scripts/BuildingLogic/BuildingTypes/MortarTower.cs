@@ -38,7 +38,7 @@ public sealed class MortarTower : DefaultCombatTaskConditionProvider
 
         CoreLaunched.Execute(currentProjectile.transform);
         
-        await currentProjectile.TravelToPoint(_enemyAreaScaner.FirstItem.transform.position);
+        await currentProjectile.TravelToPoint(_enemyAreaScaner.GetPrioritizedEntity().transform.position);
         
         CoreLanded.Execute(currentProjectile.transform.position);
     }

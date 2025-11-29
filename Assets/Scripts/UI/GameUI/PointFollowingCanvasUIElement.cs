@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
 {
-    [SerializeField] private bool _layoutControllers = true;
+    [SerializeField] private RectTransform _rectTransform;
     
     [Header("Positioning")]
     [SerializeField] private RectTransform _inspectablePosition;
@@ -15,12 +15,10 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     [SerializeField] private float _fadeDuration = 0.2f;
     
     private PointFollowingElementOffsetContainer _pointFollowingElementOffsetContainer;
-    private Vector2 _targetElementDirection;
     private Camera _mainCamera;
     private Transform _target;
     private bool _isActive;
-
-    public Vector2 TargetElementDirection => _targetElementDirection;
+    
     public bool IsActive => _isActive;
     
     private void Awake()
@@ -46,7 +44,7 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     {
         if (!_isActive) return;
         _mainGroup.DOKill();
-         
+        
         _isActive = false;
         _mainGroup.interactable = false;
         await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => gameObject.SetActive(false)).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
@@ -94,9 +92,7 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         
         Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(_pointFollowingElementOffsetContainer, preferredUIPosition);
         
-        transform.GetComponent<RectTransform>().localPosition = finalPosition;
-
-        _targetElementDirection = finalPosition - targetScreenPosition;
+        _rectTransform.localPosition = finalPosition;
     }
 
     public record PointFollowingElementOffsetContainer

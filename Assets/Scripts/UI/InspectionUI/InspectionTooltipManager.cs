@@ -42,8 +42,6 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     
     public async UniTask SetActiveLayer(UILayer layer)
     {
-        Debug.Log("SetLayer " + layer);
-        
         _currentActiveLayer = layer;
 
         if (layer == UILayer.Single)
@@ -175,7 +173,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
 
                 distance = Vector2.Distance(initialPosition, currentPosition);
 
-                isValid = hasBeenEntered || (Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance);
+                isValid = hasBeenEntered || Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance;
             } 
             while (isValid);
         }

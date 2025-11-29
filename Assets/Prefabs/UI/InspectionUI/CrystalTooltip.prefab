@@ -125,14 +125,14 @@ MonoBehaviour:
   _contentSizeFitters:
   - {fileID: 8686663593294039458}
   - {fileID: 612609853589768455}
-  _layoutControllers: 1
+  _rectTransform: {fileID: 1581158546983494758}
   _inspectablePosition: {fileID: 4143902417288304505}
   _yOffset: 0
   _mainGroup: {fileID: 8257513214410736894}
   _fadeDuration: 0.2
   _rewardsAmountTextField: {fileID: 5394468545300387969}
-  _durationTextField: {fileID: 5394468545300387969}
-  _startWaveCanvasGroup: {fileID: 6023732871413341965}
+  _durationTextField: {fileID: 2403547478508259333}
+  _topCanvasGroup: {fileID: 9040480935850354839}
   _inspectionSubpanelsController: {fileID: 2953025072565230696}
   _entityModificatorTooltipPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
   _tooltipDataParser: {fileID: 3961331482114920432}
@@ -385,81 +385,6 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!1 &3505358796337735753
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4083225832721999927}
-  - component: {fileID: 5576745913435553561}
-  - component: {fileID: 7524282830781908020}
-  m_Layer: 0
-  m_Name: WaveStartIcon
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &4083225832721999927
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3505358796337735753}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3593688049734414989}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 18, y: 18}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &5576745913435553561
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3505358796337735753}
-  m_CullTransparentMesh: 1
---- !u!114 &7524282830781908020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3505358796337735753}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: -53656890, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3567096337027250790
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +472,7 @@ GameObject:
   - component: {fileID: 2382176701313861639}
   - component: {fileID: 5327561830127803136}
   - component: {fileID: 4375325103076009804}
+  - component: {fileID: 9040480935850354839}
   m_Layer: 0
   m_Name: Header
   m_TagString: Untagged
@@ -567,7 +493,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 432179777645355402}
-  - {fileID: 3593688049734414989}
   - {fileID: 4488305049550847281}
   m_Father: {fileID: 8686663593294039458}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -610,6 +535,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!225 &9040480935850354839
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3754561865788846263}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &5764794900472754891
 GameObject:
   m_ObjectHideFlags: 0
@@ -946,64 +883,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
---- !u!1 &7186611173489840811
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3593688049734414989}
-  - component: {fileID: 701903256645914781}
-  - component: {fileID: 6023732871413341965}
-  m_Layer: 0
-  m_Name: WaveStartParameter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3593688049734414989
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186611173489840811}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 4083225832721999927}
-  m_Father: {fileID: 2382176701313861639}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 12, y: 0}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &701903256645914781
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186611173489840811}
-  m_CullTransparentMesh: 1
---- !u!225 &6023732871413341965
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7186611173489840811}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!1 &7374008408354686508
 GameObject:
   m_ObjectHideFlags: 0

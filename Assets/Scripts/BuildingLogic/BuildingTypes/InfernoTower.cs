@@ -34,10 +34,10 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     {
         IncreaseElapsedTime();
         
-        if (_enemyAreaScaner.FirstItem != _currentEnemy)
+        if (_currentEnemy == null || _currentEnemy.Health.IsAlive() == false)
         {
             _elapsedTime = 0;
-            _currentEnemy = _enemyAreaScaner.FirstItem;
+            _currentEnemy = _enemyAreaScaner.GetPrioritizedEntity();
             _beamSystem.SetTarget(_currentEnemy.transform);
         }
 

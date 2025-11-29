@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.Events;
 using UnityEngine;
 using Cashing;
+using Cysharp.Threading.Tasks;
 
 namespace Combat.Animation
 {
@@ -38,12 +39,12 @@ namespace Combat.Animation
     
             Highlited.Invoke();
     
-            StartCoroutine(UnhighlightEntity());
+            UnhighlightEntity().Forget();
         }
     
-        private IEnumerator UnhighlightEntity()
+        private async UniTask UnhighlightEntity()
         {
-            yield return _yieldInstruction;
+            await UniTask.WaitForSeconds(_highlightDuration);
     
             _meshRenderer.sharedMaterial = _defaultMaterial;
     

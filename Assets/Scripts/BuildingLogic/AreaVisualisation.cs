@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
@@ -22,8 +23,11 @@ public sealed class AreaVisualisation : MonoBehaviour
 
     private Tween _currentTween;
 
-    public void ActivateVisualisation(GameObject draggable)
+    public void ActivateVisualisationAsync(GameObject draggable) => ActivateVisualisation(draggable).Forget();
+    private async UniTask ActivateVisualisation(GameObject draggable)
     {
+        await UniTask.DelayFrame(2, delayTiming: PlayerLoopTiming.FixedUpdate);
+        
         AreaScanerController[] areaScanerControllers = draggable.GetComponentsInChildren<AreaScanerController>();
 
         for (int i = 0; i < areaScanerControllers.Length; i++)

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Combat;
@@ -13,10 +16,15 @@ public sealed class EntityTooltip : PointFollowingCanvasUIElement
     [SerializeField] private TooltipTextParser _tooltipTextParser;
     [SerializeField] private TooltipDataParser _tooltipDataParser;
 
+    [Header("Priority")] 
+    [SerializeField] private CanvasGroup _priorityDropdownGroup;
+    [SerializeField] private CustomDropdown _priorityDropdown;
+
     [Header("Links")] 
     [SerializeField] private TooltipEntityModificatorContainer _tooltipEntityModificatorContainer;
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
     [SerializeField] private TooltipStatContainer _tooltipStatContainer;
+    [SerializeField] private List<ScrollMaxHeightController> _scrollMaxHeightControllers;
     
     private Inspectable _inspectable;
 
@@ -27,6 +35,8 @@ public sealed class EntityTooltip : PointFollowingCanvasUIElement
         
         _tooltipEntityModificatorContainer.TooltipOpened += _inspectionSubpanelsController.SetTooltipParser;
         _tooltipEntityModificatorContainer.TooltipClosed += ReturnToDefaultInspectionState;
+        
+        _priorityDropdown.SelectedValueUpdated += OnPriorityDropdownValueChanged;
     }
 
     public async UniTask Initialize(CombatEntity entity)
@@ -38,12 +48,43 @@ public sealed class EntityTooltip : PointFollowingCanvasUIElement
         _inspectionSubpanelsController.SetInspectedEntity(entity);
         
         _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(_inspectable.Description));
-
+        
         _tooltipStatContainer.SetInspectedEntity(entity);
         _tooltipEntityModificatorContainer.SetInspectedEntity(entity);
         
         SetTarget(entity.transform);
+
+        InitializePriorityDropdown();
+        
         await RebuildLayoutAndCalculateOffsets();
+        
+        _scrollMaxHeightControllers.ForEach(controller => controller.UpdateHeight());
+    }
+
+    private void InitializePriorityDropdown()
+    {
+        if (_inspectable.TryGetComponent<AreaManager>(out AreaManager areaManager))
+        {
+            _priorityDropdownGroup.gameObject.SetActive(true);
+
+            List<AreaEntityDetectorPriorityType> priorityTypes = Enum.GetValues(typeof(AreaEntityDetectorPriorityType)).Cast<AreaEntityDetectorPriorityType>().ToList();
+            
+            List<CustomDropdownItemData> options = new List<CustomDropdownItemData>();
+            
+            priorityTypes.ForEach(priorityType => options.Add(new CustomDropdownItemData((int)priorityType, priorityType.ToString())));
+
+            _priorityDropdown.SetItemDatas(options);
+            _priorityDropdown.SelectItem((int)areaManager.CurrentPriorityType);
+        }
+        else
+        {
+            _priorityDropdownGroup.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnPriorityDropdownValueChanged(int dropDownValue)
+    {
+        _inspectable.GetComponent<AreaManager>().SetPriorityType((AreaEntityDetectorPriorityType)dropDownValue);
     }
 
     private void ReturnToDefaultInspectionState()

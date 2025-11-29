@@ -14,8 +14,6 @@ namespace Combat
         private float _lifetime;
         private bool _lifetimeTrackActive;
         
-        public Rigidbody RB => Rigidbody;
-        
         public void Initialize(CombatEntity ownerEntity, float lifetime)
         {
             OwnerEntity = ownerEntity;

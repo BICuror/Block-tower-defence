@@ -30,14 +30,17 @@ public sealed class DragController : MonoBehaviour
 
     private void OnEnable() => _camera = GetComponent<Camera>();
     
-    public bool PickedUpDraggable(Vector2 mousePosition)
+    public bool PickedUpDraggable(Vector2 mousePosition, out GameObject draggableObject)
     {
+        draggableObject = null;
+        
         Ray ray = _camera.ScreenPointToRay(mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _draggableObjectLayerSettings.GetLayerMask()))
         {
             if (rayInfo.collider.gameObject.TryGetComponent(out IDraggable draggable))
             {
+                draggableObject = rayInfo.collider.gameObject;
                 return draggable.IsDraggable();
             }
         }

@@ -17,13 +17,24 @@ namespace Combat
             _damage = OwnerEntity.StatContainer.Get<Damage>();
         }
 
+        public void Launch(float speed, Vector3 targetPosition, Vector3 shootingPosition)
+        {
+            Rigidbody.velocity = Vector3.zero;
+            transform.position = shootingPosition;
+            _trailRenderer.Clear();
+
+            transform.LookAt(targetPosition);
+
+            Rigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out EnemyEntity enemyEntity))
             {
                 DamageEntity(_damage.Value, enemyEntity);
                 
-                OnArrowHit.Invoke(this);
+                OnArrowHit?.Invoke(this);
             }
         }
 

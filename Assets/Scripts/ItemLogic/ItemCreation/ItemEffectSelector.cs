@@ -130,7 +130,6 @@ public sealed class ItemEffectSelector : MonoBehaviour
     private bool CheckToKeepUniqueEffect<T>(T effectData) where T : GlobalEffectData
     {
         return _itemFactory.CreatedItems.Exists(item =>
-            item.RewardDatas.Exists(data => data == effectData) ||
             item.ToggleEffectDatas.Exists(data => data == effectData));
     }
 
@@ -144,7 +143,6 @@ public sealed class ItemEffectSelector : MonoBehaviour
         _itemFactory.CreatedItems.ForEach(item =>
         {
             createdGlobalEffectDatas.AddRange(item.ToggleEffectDatas);
-            createdGlobalEffectDatas.AddRange(item.RewardDatas);
         });
         
         if (effectData.HasRequiredTags) 

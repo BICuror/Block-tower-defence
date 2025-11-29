@@ -1,4 +1,6 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System;
 using Combat;
 
 [RequireComponent(typeof(Camera))]
@@ -11,7 +13,11 @@ public class InspectorController : MonoBehaviour
     
     private Inspectable _inspectable;
     
-    public void TryToStartInspecting(Vector2 mousePosition)
+    public Inspectable CurrentInspectable => _inspectable;
+
+    public Action InspectionStopped;
+    
+    public bool TryToStartInspecting(Vector2 mousePosition)
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
@@ -21,16 +27,18 @@ public class InspectorController : MonoBehaviour
             { 
                 StartInspecting(hoveredInspectable);
                 
-                return;
+                return true;
             }
         }
         
         _inspectionTooltipManager.SetActiveLayer(UILayer.Group);
+
+        return false;
     }
     
-    public void TryToStartIdleInspecting(Vector2 mousePosition)
+    public bool TryToStartIdleInspecting(Vector2 mousePosition)
     {
-        if (_inspectionTooltipManager.NonIdleTooltipsOpened) return;
+        if (_inspectionTooltipManager.NonIdleTooltipsOpened) return false;
         
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
@@ -41,21 +49,29 @@ public class InspectorController : MonoBehaviour
                 if (hoveredInspectable.CanBeIdleInspected)
                 {
                     StartInspecting(hoveredInspectable);
+
+                    return true;
                 }
             }
         }
+        
+        return false;
+    }
+
+    public void StopInspecting()
+    {
+        _inspectionTooltipManager.DisableActiveSinglePopup();
     }
     
-    
-    private async void StartInspecting(Inspectable inspectable)
+    private async UniTask StartInspecting(Inspectable inspectable)
     {
         if (_inspectable && _inspectable == inspectable) return;
         if (inspectable.IsInspected) return;
         
         _inspectable = inspectable;
         _inspectable.SetInspectedState(true);
-        
-        _areaVisualisation.ActivateVisualisation(_inspectable.gameObject);
+
+        _areaVisualisation.ActivateVisualisationAsync(_inspectable.gameObject);
         
         _inspectionTooltipManager.DisableActiveSinglePopup();
         
@@ -83,5 +99,6 @@ public class InspectorController : MonoBehaviour
         }
         
         _inspectable = null;
+        InspectionStopped?.Invoke();
     }
 }

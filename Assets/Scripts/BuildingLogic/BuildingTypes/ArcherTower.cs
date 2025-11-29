@@ -17,7 +17,6 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
 
     private WeaponPool<Arrow> _arrowObjectPool;
 
-    public WeaponPool<Arrow> WeaponPool => _arrowObjectPool;
     public readonly OverridableBehaviour<Arrow> ArrowHitBehaviour = new OverridableBehaviour<Arrow>();
 
     private void Start()
@@ -40,12 +39,7 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
     {
         Arrow currentArrow = _arrowObjectPool.GetPooledWeapon();
 
-        currentArrow.RB.velocity = Vector3.zero;
-        currentArrow.transform.position = _shootingPoint.position;
-
-        currentArrow.transform.LookAt(_enemyAreaScaner.FirstItem.transform.position);
-
-        currentArrow.RB.AddForce(currentArrow.transform.forward * _projectileSpeed.Value, ForceMode.Impulse);
+        currentArrow.Launch(_projectileSpeed.Value, _enemyAreaScaner.GetPrioritizedEntity().transform.position, _shootingPoint.position);
     }
 
     private void OnDestroy() => _arrowObjectPool.DestroyPool();

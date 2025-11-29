@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
-using System;
 using Zenject;
+using System;
 
 public class Item : DraggableObject
 {
@@ -12,12 +12,10 @@ public class Item : DraggableObject
     [Inject] private GlobalEffectFactory _globalEffectFactory;
     
     [SerializeField] private ItemColor _itemColor;
-    [SerializeField] private GameObject _destroyEffectPrefab;
+    [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
     private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
-    private List<RewardGlobalEffectData> _rewardDatas = new();
     private int _duration;
-    private int _quality;
-    private int _strength;
+    private int _charges;
     
 #if UNITY_EDITOR
     [Header("Debug")]
@@ -34,12 +32,9 @@ public class Item : DraggableObject
     }
     
 #endif 
-
-    public List<RewardGlobalEffectData> RewardDatas => _rewardDatas;
     public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
     public int Duration => _duration;
-    public int Quality => _quality;
-    public int Strength => _strength;
+    public int Charges => _charges;
     public ItemColor ItemColor => _itemColor;
     
     public Action<Item> ItemPickedUp;
@@ -52,13 +47,7 @@ public class Item : DraggableObject
     }
     
     public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
-    public void AddRewardEffectDatas(List<RewardGlobalEffectData> rewardDatas) => _rewardDatas.AddRange(rewardDatas);
-
-    public void SetItemData(int quality, int strength)
-    {
-        _quality = quality;
-        _strength = strength;
-    }
+    public void SetChargesAmount(int charges) => _charges = charges;
     
     public void SetDuration(int duration)
     {
@@ -71,13 +60,7 @@ public class Item : DraggableObject
 
         if (_duration <= 0)
         {
-            //GrantRewardEffect();
-
-            int charges = 0;
-            
-            _toggleEffectDatas.ForEach(effectData => charges += effectData.Quality);
-
-            await _upgradeChargeContainer.AddChargesWithAnimation(charges, transform);
+            await _upgradeChargeContainer.AddChargesWithAnimation(_charges, transform);
             DurationEnded?.Invoke(this);
             DestroyItem();
         }
@@ -92,18 +75,10 @@ public class Item : DraggableObject
     {
         _globalEffectContainer.RemoveEffects(_toggleEffectDatas);
     }
-
-    public void GrantRewardEffect()
-    {
-        _rewardDatas.ForEach(rewardEffectData =>
-        {
-            _globalEffectFactory.CreateRewardEffects(rewardEffectData).ForEach(rewardEffect => rewardEffect.GrantReward());
-        });
-    }
-
+    
     public void DestroyItem()
     {
-        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity);
+        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity).PlayAndForget();
         Destroy(gameObject);
     }
 }

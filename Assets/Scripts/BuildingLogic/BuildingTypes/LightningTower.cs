@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cashing;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class LightningTower : DefaultCombatTaskConditionProvider
 {
@@ -25,7 +26,7 @@ public sealed class LightningTower : DefaultCombatTaskConditionProvider
     {
         PropogationStrike ligning = _lightningStrikeObjectPool.GetPooledWeapon();
 
-        ligning.StartPropogationStrike(_enemyAreaScaner.FirstItem, _shootingPoint);
+        ligning.StartPropogationStrike(_enemyAreaScaner.GetPrioritizedEntity(), _shootingPoint).Forget();
     }
 
     private void OnDestroy() => _lightningStrikeObjectPool.DestroyPool();

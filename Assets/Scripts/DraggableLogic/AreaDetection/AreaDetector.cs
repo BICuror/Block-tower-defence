@@ -2,7 +2,6 @@ using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Linq;
 
 namespace Combat
 {
@@ -11,7 +10,6 @@ namespace Combat
         protected List<T> List = new();
         public bool IsEmpty => List.Count == 0;
         public T RandomItem => List[Random.Range(0, List.Count)];
-        public T FirstItem => List[0];
         public int Count => List.Count;
         
         public Action<T> AddedItem;

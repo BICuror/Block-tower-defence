@@ -10,7 +10,6 @@ public sealed class ItemFactory : MonoBehaviour
     [Inject] private ItemsContainer _itemsContainer;
     [Inject] private DraggableCreator _draggableCreator;
 
-    [SerializeField] private RewardGlobalEffectData _buildingEffectData;
     [SerializeField] private ToggleGlobalEffectData _startWaveEffectData; 
     [SerializeField] private ItemEffectSelector _effectSelector;
     [SerializeField] private List<Item> _itemsPrefabs;
@@ -29,14 +28,17 @@ public sealed class ItemFactory : MonoBehaviour
         Item item = itemDraggable.GetComponent<Item>();
         
         int duration = 1;
+        if (Random.Range(0, 100) > 75) duration = 2;
+         
         item.SetDuration(duration);
-        item.SetItemData(quality, strength);
         
         List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(quality, strength);
         item.AddToggleEffectDatas(toggleEfectDatas);
         
-        List<RewardGlobalEffectData> rewardDatas = _effectSelector.GetRandomRewardEffectDatas(quality, strength);
-        item.AddRewardEffectDatas(rewardDatas);
+        int charges = 0;
+        toggleEfectDatas.ForEach(effectData => charges += effectData.Quality);
+        
+        item.SetChargesAmount(duration * charges);
         
         _usedItemColors.Add(item.ItemColor, item);
         _createdItems.Add(item);
@@ -49,18 +51,13 @@ public sealed class ItemFactory : MonoBehaviour
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(_waveItemPrefab, centerPosition);
         Item item = itemDraggable.GetComponent<Item>();
         
-        item.SetItemData(0, 1);
         item.SetDuration(1);
         
-        List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(0, 1);
-        toggleEfectDatas.Add(_startWaveEffectData);
-        item.AddToggleEffectDatas(toggleEfectDatas);
-
-        List<RewardGlobalEffectData> rewardDatas = new List<RewardGlobalEffectData>() {_buildingEffectData};
-        item.AddRewardEffectDatas(rewardDatas);
+        List<ToggleGlobalEffectData> toggleEffectDatas = new List<ToggleGlobalEffectData>() {_startWaveEffectData};
+        item.AddToggleEffectDatas(toggleEffectDatas);
     }
 
-    public void DestoyAllUnusedItems()
+    public void DestroyAllUnusedItems()
     {
         List<Item> nonUsedItems = _createdItems.Except(_itemsContainer.ContainedItems).ToList();
 

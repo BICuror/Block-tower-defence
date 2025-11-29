@@ -16,28 +16,50 @@ MonoBehaviour:
   - _itemTypeName: PiercingArrows
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
-    - InvincibilityUntilPickUpEntityModifier
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
   _rarity: 1
   _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
   _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Piercing arrows
   _modificatorDescription: Arrows become #Piercing

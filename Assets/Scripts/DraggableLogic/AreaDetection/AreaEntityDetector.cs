@@ -4,6 +4,17 @@ namespace Combat
 {
     public class AreaEntityDetector : AreaDetector<CombatEntity>
     {
+        private EntityDetectorPriorityAlgorithm _priorityAlgorithm;
+        
+        public void SetPriorityAlgorithm(EntityDetectorPriorityAlgorithm priorityAlgorithm) => _priorityAlgorithm = priorityAlgorithm;
+        
+        public CombatEntity GetPrioritizedEntity()
+        {
+            if (_priorityAlgorithm == null) return List[0];
+
+            return _priorityAlgorithm.GetPrioritizedEntity(List);
+        }
+        
         private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.TryGetComponent(out CombatEntity entity))

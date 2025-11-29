@@ -53,7 +53,7 @@ public sealed class IdleStateController : WaveStateController
     protected override void OnQuitStateStarted()
     {
         _itemContainerManager.LockContainer();
-        _itemFactory.DestoyAllUnusedItems();
+        _itemFactory.DestroyAllUnusedItems();
     }
 
     private void TryGenerateNewEnemyBiome()

@@ -16,19 +16,23 @@ MonoBehaviour:
   - _itemTypeName: OnActivationInvokeTaskAndHurt
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
-    - FasterRechargeOnActivation
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
@@ -51,6 +55,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 0

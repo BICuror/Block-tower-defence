@@ -21,28 +21,50 @@ public sealed class GameController : MonoBehaviour
     private void Awake()
     {
         _cameraPositionController.CameraPositionUpdated += () => _cameraRotationController.UpdateCameraRotation();
+        _inspectorController.InspectionStopped += () =>
+        {
+            if (_currentControllerState != ControllerState.Dragging)
+                _currentControllerState = ControllerState.Idle;
+        };
     }
+
+    #region StateManagement
 
     private void FixedUpdate()
     {
         switch(_currentControllerState)
         {
-            case ControllerState.Idle: TryToInspect(); return; 
+            case ControllerState.Idle: TryIdleToInspect(); return; 
             case ControllerState.Dragging: _dragController.TryDragTo(GetPointerPosition()); break;
             case ControllerState.Rotating: _cameraRotationController.Rotate(GetPointerPosition()); break;
+            case ControllerState.Inspecting: return;
         }
     }
+    
+    private void TryIdleToInspect()
+    {
+        if (_inspectorController.TryToStartIdleInspecting(GetPointerPosition())) _currentControllerState = ControllerState.Inspecting;
+    } 
 
+    #endregion
+    
     private void TryPickUpOrRotateCamera()
     {
-        if (_dragController.PickedUpDraggable(GetPointerPosition()))
+        if (_dragController.PickedUpDraggable(GetPointerPosition(), out GameObject draggedObject))
         {
+            if (_currentControllerState == ControllerState.Inspecting)
+            {
+                if (draggedObject != _inspectorController.CurrentInspectable.gameObject) return;
+            }
+            
             _currentControllerState = ControllerState.Dragging;
 
             _dragController.PickUpDraggable(GetPointerPosition());
         }
         else
         {
+            if (_currentControllerState == ControllerState.Inspecting) return;
+            
             _cameraRotationController.SetPreviousMousePosition(GetPointerPosition());
             
             _currentControllerState = ControllerState.Rotating;   
@@ -55,25 +77,24 @@ public sealed class GameController : MonoBehaviour
         
         if (context.interaction is TapInteraction)
         {
+            if (_currentControllerState == ControllerState.Inspecting) _inspectorController.StopInspecting();
+            
             _dragController.ActivatedSomething(GetPointerPosition());
         }
         else if (context.interaction is HoldInteraction)
         {
-            _inspectorController.TryToStartInspecting(GetPointerPosition());
+            if (_inspectorController.TryToStartInspecting(GetPointerPosition())) _currentControllerState = ControllerState.Inspecting;
+            else _currentControllerState = ControllerState.Idle;
         }
     }
 
-    private void ReturnToIdleState()
+    private void ReturnFromDragToIdleState()
     {
-        if (_currentControllerState == ControllerState.Dragging)
-        {
-            _dragController.DropDraggable(GetPointerPosition());
-        }
-
+        if (_currentControllerState == ControllerState.Inspecting) return;
+        if (_currentControllerState == ControllerState.Dragging) _dragController.DropDraggable(GetPointerPosition());
+        
         _currentControllerState = ControllerState.Idle;
     }
-
-    private void TryToInspect() => _inspectorController.TryToStartIdleInspecting(GetPointerPosition());
     
     private Vector2 GetPointerPosition()
     {
@@ -107,7 +128,7 @@ public sealed class GameController : MonoBehaviour
 
         _controls.TouchInput.LMB.started += _ => TryPickUpOrRotateCamera();
 
-        _controls.TouchInput.LMB.canceled += _ => ReturnToIdleState();
+        _controls.TouchInput.LMB.canceled += _ => ReturnFromDragToIdleState();
         
         _controls.TouchInput.RMB.performed += TryActivateOrStartInspecting;
         
@@ -131,5 +152,6 @@ public sealed class GameController : MonoBehaviour
         Idle,
         Dragging,
         Rotating,
+        Inspecting,
     }   
 }

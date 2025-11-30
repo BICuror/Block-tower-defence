@@ -13,8 +13,6 @@ public class InspectorController : MonoBehaviour
     
     private Inspectable _inspectable;
     
-    public Inspectable CurrentInspectable => _inspectable;
-
     public Action InspectionStopped;
     
     public bool TryToStartInspecting(Vector2 mousePosition)
@@ -58,6 +56,16 @@ public class InspectorController : MonoBehaviour
         return false;
     }
 
+    public bool IsPossibleToDragInspectedItem(GameObject draggedObject)
+    {
+        if (draggedObject != null && draggedObject == _inspectable.gameObject)
+        {
+            return true;
+        }
+        
+        return !_inspectionTooltipManager.HoveredOverNonIdleTooltip;
+    }
+    
     public void StopInspecting()
     {
         _inspectionTooltipManager.DisableActiveSinglePopup();
@@ -71,7 +79,7 @@ public class InspectorController : MonoBehaviour
         _inspectable = inspectable;
         _inspectable.SetInspectedState(true);
 
-        _areaVisualisation.ActivateVisualisationAsync(_inspectable.gameObject);
+        _areaVisualisation.ActivateVisualisation(_inspectable.gameObject);
         
         _inspectionTooltipManager.DisableActiveSinglePopup();
         

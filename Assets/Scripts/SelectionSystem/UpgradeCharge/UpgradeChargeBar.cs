@@ -1,10 +1,9 @@
-using TMPEffects.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public sealed class UpgradeChargeBar : ProgressBarBase
 {
-    [SerializeField] private SerializedDictionary<int, float> _barFillValues;
+    [SerializeField] private int _chargesPerUpgrade;
     private float _previousValue;
     
     protected override string ProgressFieldName => "BuildProgress";
@@ -20,8 +19,9 @@ public sealed class UpgradeChargeBar : ProgressBarBase
 
     public async UniTask SetCharges(int charges, float duration)
     {
-        float barValue = _barFillValues[charges];
+        float barValue = charges * (1f/ _chargesPerUpgrade);
         StopBarFill();
+        
         await FillBar(_previousValue, barValue, duration);
         _previousValue = barValue;
     }

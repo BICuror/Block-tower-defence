@@ -10,7 +10,10 @@ using System;
 public abstract class CanvasGameUIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private List<RectTransform> _contentSizeFitters;
-
+    private bool _pointerHoveredOver;
+    
+    public bool PointerHoveredOver => _pointerHoveredOver;
+    
     public Action PointerEntered;
     public Action PointerExited;
     
@@ -22,7 +25,15 @@ public abstract class CanvasGameUIElement : MonoBehaviour, IPointerEnterHandler,
         await UniTask.WaitForFixedUpdate();
     }
 
-    void IPointerEnterHandler.OnPointerEnter(PointerEventData _) => PointerEntered?.Invoke();
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData _)
+    {
+        _pointerHoveredOver = true;
+        PointerEntered?.Invoke();
+    }
 
-    void IPointerExitHandler.OnPointerExit(PointerEventData _) => PointerExited?.Invoke();
+    void IPointerExitHandler.OnPointerExit(PointerEventData _)
+    {
+        _pointerHoveredOver = false;
+        PointerExited?.Invoke();
+    }
 }

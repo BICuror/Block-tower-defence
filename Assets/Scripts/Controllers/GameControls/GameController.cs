@@ -54,7 +54,9 @@ public sealed class GameController : MonoBehaviour
         {
             if (_currentControllerState == ControllerState.Inspecting)
             {
-                if (draggedObject != _inspectorController.CurrentInspectable.gameObject) return;
+                if (!_inspectorController.IsPossibleToDragInspectedItem(draggedObject)) return;
+                
+                _inspectorController.StopInspecting();
             }
             
             _currentControllerState = ControllerState.Dragging;

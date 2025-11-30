@@ -38,7 +38,7 @@ public sealed class AreaScanerController : MonoBehaviour
     {
         if (!_hasVisualisation) return;
         
-        _visualisationTransform.DOComplete();
+        _visualisationTransform.DOKill();
         _visualisationTransform.gameObject.SetActive(true);
         
         _visualisationTransform.DOScale(EnabledScale, duration).SetEase(curve);
@@ -48,7 +48,7 @@ public sealed class AreaScanerController : MonoBehaviour
     {
         if (!_hasVisualisation) return;
         
-        _visualisationTransform.DOComplete();
+        _visualisationTransform.DOKill();
         
         _visualisationTransform.DOScale(DisabledScale, duration).SetEase(curve).OnComplete(() => _visualisationTransform.gameObject.SetActive(false));
     }

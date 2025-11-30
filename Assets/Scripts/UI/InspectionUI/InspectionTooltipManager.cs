@@ -4,7 +4,6 @@ using System.Threading;
 using UnityEngine;
 using Combat;
 using System;
-using System.Threading.Tasks;
 
 public sealed class InspectionTooltipManager : MonoBehaviour
 {
@@ -14,7 +13,9 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     [Header("ActivityCondition")]
     [SerializeField] [Range(-1f, 1f)] private float _directionDotProductThreshold = -0.2f;
     [SerializeField] private float _wrongDirectionMaxDistance = 100;
+    [SerializeField] private float _maxAlwaysValidPopupDistance;
     
+    [Header("Links")]
     [SerializeField] private Transform _uiRoot;
     [SerializeField] private DragController _dragController;
     [SerializeField] private EntityTooltip _entityTooltipPrefab;
@@ -24,9 +25,11 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     
     private CancellationTokenSource _activeSinglePopupCancelationTokenSource = new();
     private readonly ListDictionary<UILayer, PointFollowingCanvasUIElement> _layers = new(); 
+    private bool _hoveredOverNonIdleTooltip;
     private UILayer _currentActiveLayer;
     
     public bool NonIdleTooltipsOpened => _layers.Contains(UILayer.Single);
+    public bool HoveredOverNonIdleTooltip => _hoveredOverNonIdleTooltip;
     
     private void Awake()
     {
@@ -131,6 +134,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     {
         _activeSinglePopupCancelationTokenSource.Cancel();
         _activeSinglePopupCancelationTokenSource = new();
+        _hoveredOverNonIdleTooltip = false;
     }
     
     private async UniTask UpdateTooltipStates(UILayer layer)
@@ -153,49 +157,53 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     
     private async UniTask KeepElementActiveWhileNeeded(PointFollowingCanvasUIElement element)
     {
+        Vector2 initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y); 
+        Vector2 currentPosition = initialPosition;
+        float distance = 0f;
+        bool isValid;
+        
+        _hoveredOverNonIdleTooltip = element.PointerHoveredOver;
+        bool hasHoveredOverNonIdleTooltip = false;
+        
         DisableActiveSinglePopup();
-        element.PointerEntered += OnEnteringElement;
-        element.PointerExited += OnExitingElement;
-        bool hasBeenEntered = false;
         
-        try
+        do
         {
-            Vector2 initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            Vector2 currentPosition;
-            float distance;
-            bool isValid;
-
-            do
+            try
             {
-                await UniTask.WaitForFixedUpdate(cancellationToken: _activeSinglePopupCancelationTokenSource.Token);
+                await UniTask.WaitForFixedUpdate(cancellationToken: _activeSinglePopupCancelationTokenSource.Token, cancelImmediately: true);
+            }
+            catch (Exception e)
+            {
+                e.LogAsync();
+                break;
+            }
+         
+            currentPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
 
-                currentPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            distance = Vector2.Distance(initialPosition, currentPosition);
+            
+            _hoveredOverNonIdleTooltip = element.PointerHoveredOver;
 
-                distance = Vector2.Distance(initialPosition, currentPosition);
+            isValid = IsValidPopup();
+            
+            if (ShouldDisableOnExitingPopup()) break;
+        } 
+        while (isValid);
 
-                isValid = hasBeenEntered || Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance;
-            } 
-            while (isValid);
-        }
-        catch (Exception e)
-        {
-            e.LogAsync();
-        }
-
-        SetActiveLayer(UILayer.Group);
+        SetActiveLayer(UILayer.Group).Forget();
         
-        return;
-        
-        void OnEnteringElement()
+        bool IsValidPopup()
         {
-            element.PointerExited -= OnEnteringElement;
-            hasBeenEntered = true;
+            return _hoveredOverNonIdleTooltip ||
+                   (Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance);
         }
-        
-        void OnExitingElement()
+
+        bool ShouldDisableOnExitingPopup()
         {
-            element.PointerExited -= OnExitingElement;
-            DisableActiveSinglePopup();
+            if (_hoveredOverNonIdleTooltip) hasHoveredOverNonIdleTooltip = true;
+
+            return hasHoveredOverNonIdleTooltip && !_hoveredOverNonIdleTooltip && distance > _maxAlwaysValidPopupDistance;
         }
     }
 }

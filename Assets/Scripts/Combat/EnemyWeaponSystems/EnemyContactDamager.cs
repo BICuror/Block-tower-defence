@@ -12,8 +12,13 @@ public sealed class EnemyContactDamager : MonoBehaviour
         if (other.gameObject.TryGetComponent<BuildingEntity>(out BuildingEntity buildingEntity))
         {
             buildingEntity.Health.ReceiveEnemyDamage(_contactDamage.Value, _ownerEntity);
+
+            if (buildingEntity.StatContainer.Has<ContactDamage>())
+            {
+                _ownerEntity.Health.ReceiveEnemyDamage(buildingEntity.StatContainer.Get<ContactDamage>().Value, buildingEntity);
+            }
             
-            _ownerEntity.Health.Die();
+            _ownerEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(typeof(FearEffect), 1, 5f);
         }
     }
 }

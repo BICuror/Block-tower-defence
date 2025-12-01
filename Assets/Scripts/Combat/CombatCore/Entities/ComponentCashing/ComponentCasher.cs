@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using UnityEngine;
-using ModestTree;
 using System;
 
 namespace Cashing
@@ -80,7 +79,7 @@ namespace Cashing
         {
             List<Type> subTypes = new();
             
-            Type baseType = injectReciverObject.GetType().BaseType();
+            Type baseType = injectReciverObject.GetType().BaseType;
             
             while (baseType != null && baseType != typeof(Component))
             {
@@ -89,7 +88,7 @@ namespace Cashing
                     subTypes.Add(baseType);
                 }
                     
-                baseType = baseType.BaseType();
+                baseType = baseType.BaseType;
             }
             
             return subTypes;

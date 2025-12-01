@@ -15,6 +15,8 @@ namespace Combat
         [Inject] private WaveManager _waveManager;
         private List<EnemySpawner> _spawners = new();
         
+        public List<EnemySpawner> Spawners => _spawners; 
+        
         public Action LastWaveEnemyDied;
 
         private void Awake()

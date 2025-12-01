@@ -10,7 +10,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private GlobalStatContainer _globalStatContainer;
-    [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
+    [Inject] private EnemySpawnSystem _enemySpawnSystem;
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private WaveManager _waveManager;
     private Dictionary<EnemySpawner, List<EnemyData>> _enemySpawnDatas = new();
@@ -53,10 +53,12 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     private void GenerateAdditionalEnemyGroups()
     {
         _random = new Random(_currentGroupSeed);
+
+        List<EnemySpawner> spawners = _enemySpawnSystem.Spawners;
         
         _additionalGroups.ForEach(group =>
         {
-            EnemySpawner randomEnemySpawner = _enemyBiomeContainer.EnemyBiomeList[_random.Next(0, _enemyBiomeContainer.EnemyBiomeList.Count)].EnemySpawner;
+            EnemySpawner randomEnemySpawner = spawners[_random.Next(0, spawners.Count)];
             
             _enemySpawnDatas[randomEnemySpawner].AddRange(GetEnemyGroupPartAmountModified(group.GroupParts));
         });
@@ -80,19 +82,14 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         
         _random = new Random(_currentWaveSeed);
         
-        for (int i = 0; i < _enemyBiomeContainer.EnemyBiomeList.Count; i++)
+        List<EnemySpawner> spawners = _enemySpawnSystem.Spawners;
+        
+        for (int i = 0; i < spawners.Count; i++)
         {
-            EnemyBiome currentBiome = _enemyBiomeContainer.EnemyBiomeList[i];
-            
             List<EnemyData> waveGroup = GetEnemyGroupPartAmountModified(FindSuitableRandomGroup().GroupParts);
             
-            _enemySpawnDatas.Add(currentBiome.EnemySpawner, waveGroup);
+            _enemySpawnDatas.Add(spawners[i], waveGroup);
         }
-    }
-    
-    public List<EnemyData> GetEnemyGroupPartAmountModified(List<EnemyWaveGroup.GroupPart> groupParts)
-    {
-        return GetEnemyGroupPart(groupParts, _globalStatContainer.Get<EnemyAmountMultiplier>().Value);
     }
 
     public List<EnemyData> GetEnemyGroupPart(List<EnemyWaveGroup.GroupPart> groupParts, float amountMultiplier)
@@ -112,6 +109,11 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         }
 
         return groupEnemies;
+    }
+    
+    private List<EnemyData> GetEnemyGroupPartAmountModified(List<EnemyWaveGroup.GroupPart> groupParts)
+    {
+        return GetEnemyGroupPart(groupParts, _globalStatContainer.Get<EnemyAmountMultiplier>().Value);
     }
 
     private EnemyWaveGroup FindSuitableRandomGroup()
@@ -135,11 +137,11 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 
     private void ApplyEnemyWaveDatas()
     {
-        for (int i = 0; i < _enemyBiomeContainer.EnemyBiomeList.Count; i++)
+        List<EnemySpawner> spawners = _enemySpawnSystem.Spawners;
+        
+        for (int i = 0; i < spawners.Count; i++)
         {
-            EnemySpawner spanwer = _enemyBiomeContainer.EnemyBiomeList[i].EnemySpawner;
-            
-            spanwer.SetEnemiesToSpawn(_enemySpawnDatas[spanwer]);
+            spawners[i].SetEnemiesToSpawn(_enemySpawnDatas[spawners[i]]);
         }
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using Navigation;
 
 namespace WorldGeneration
 {
@@ -12,6 +11,7 @@ namespace WorldGeneration
         [Inject] private IslandGridHolder _islandGridHolder;
         [Inject] private RoadMapHolder _roadMapHolder;
         [Inject] private IslandDataContainer _islandDataContainer;
+        
         [SerializeField] private RoadTileTerrainGenerator _terrainGenerator;
         [SerializeField] private TerrainSetter _roadTerrainSetter;
         private BlockGrid _roadGrid;

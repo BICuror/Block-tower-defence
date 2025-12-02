@@ -162,14 +162,11 @@ public static class TileMap
 
     #region GetNearestPlacePosition
 
-    public static Vector3 GetNearestPlacePosition(DraggableObject draggableObject, Vector3 desiredPosition,
-        Predicate<Vector2Int> positionValidator = null)
+    public static Vector3 GetNearestPlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null)
     {
-        Vector2Int roundedDesiredPosition =
-            new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
+        Vector2Int roundedDesiredPosition = new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
 
-        List<Vector2Int> possiblePositions =
-            ForceGetSuitablePositionsInRadius(IsValidPosition, roundedDesiredPosition, 0);
+        List<Vector2Int> possiblePositions = ForceGetSuitablePositionsInRadius(IsValidPosition, roundedDesiredPosition, 0);
 
         Vector2Int finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
 

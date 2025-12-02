@@ -15,8 +15,8 @@ public sealed class ExplosionBehaviour : CombatBehaviour<Vector3>, IDisposable
 
     protected override void OnOwnerEntitySet()
     {
-        Entity.StatContainer.AddStatIfDoesntExist<ExplosionRadius>(Args, "ExplosionRadius");
-        Entity.StatContainer.AddStatIfDoesntExist<ExplosionDamage>(Args, "ExplosionDamage");
+        Entity.StatContainer.AddStatIfDoesntExist<ExplosionRadius>(Args.GetArgument<float>("ExplosionRadius"));
+        Entity.StatContainer.AddStatIfDoesntExist<ExplosionDamage>(Args.GetArgument<float>("ExplosionDamage"));
     }
         
     public override void Execute(Vector3 explotionPosition)

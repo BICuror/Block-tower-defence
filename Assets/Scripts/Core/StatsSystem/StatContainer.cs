@@ -77,17 +77,6 @@ public class StatContainer
             AddStat(stat);
         }
     }
-    
-    public void AddStatIfDoesntExist<T>(ArgumentsContainer args, string argumentName) where T : Stat
-    {
-        if (!Has<T>())
-        {
-            T stat = Activator.CreateInstance<T>();
-            stat.SetDefault(args.GetArgument<float>(argumentName));
-            
-            AddStat(stat);
-        }
-    }
 }
 
 [Serializable] public struct StatInitializer

@@ -58,7 +58,7 @@ public class InspectorController : MonoBehaviour
 
     public bool IsPossibleToDragInspectedItem(GameObject draggedObject)
     {
-        if (draggedObject != null && draggedObject == _inspectable.gameObject)
+        if (_inspectable != null && draggedObject == _inspectable.gameObject)
         {
             return true;
         }

@@ -15,6 +15,8 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
     [SerializeField] private UpgradeChargeBar _chargeBar;
     [SerializeField] private float _timeBetweenCharges;
     private int _currentCharge;
+
+    private bool _chargeAddProcessIsActive;
     
     private async UniTask AddChargeWithAnimation(Vector3 sourcePosition, float barFillDuration)
     {
@@ -41,11 +43,17 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
 
     public async UniTask AddChargesWithAnimation(int charges, Transform source)
     {
+        await UniTask.WaitUntil(() => _chargeAddProcessIsActive == false);
+        
+        _chargeAddProcessIsActive = true;
+        
         while (charges > 0)
         {
             AddChargeWithAnimation(source.position, _timeBetweenCharges).Forget();
             await UniTask.WaitForSeconds(_timeBetweenCharges);
             charges--;
         }
+        
+        _chargeAddProcessIsActive = false;
     }
 }

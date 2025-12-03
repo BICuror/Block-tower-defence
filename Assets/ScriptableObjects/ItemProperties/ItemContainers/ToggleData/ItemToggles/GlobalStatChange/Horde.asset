@@ -45,6 +45,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 11400000, guid: ac696a6058760aa499cb7b4f455a9348, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _quality: 1
   _effectType: 1
   _isUnique: 1
@@ -58,11 +59,13 @@ MonoBehaviour:
     Requirements: []
   _requiredGlobalEffectsTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockBuildingsTags:
     Requirements: []
   _blockGlobalEffectTags:
-    Requirements: []
+    Requirements:
+    - Tag: 0
+      Amount: 1
   _icon: {fileID: -617606169, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _effectName: Horde
   _effectDescription: '#bad +50% enemies bad#, but #good -50% good# #bad enemy bad#

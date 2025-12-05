@@ -50,7 +50,29 @@ namespace Navigation
         {
             Dictionary<Vector2Int, int> nodeWeights = _navigationMapper.GenerateNavigationLayerWeights(position);
 
-            return _navigationMapHolder.Map.CreateLayerAndAdd(nodeWeights, layerType);
+            NavigationMapLayer navigationMapLayer = _navigationMapHolder.Map.CreateLayerAndAdd(nodeWeights, layerType);
+
+            if (_islandDataContainer.Data.CenterShouldBeFlat)
+            {
+                SetCenterNodeWeightToAllCenter(navigationMapLayer);
+            }
+            
+            return navigationMapLayer;
+        }
+
+        private void SetCenterNodeWeightToAllCenter(NavigationMapLayer navigationMapLayer)
+        {
+            int centerPositionIndex = _islandDataContainer.Data.CenterPositionIndex;
+            int centerFlatRadius = 1;
+
+            for (int x = centerPositionIndex - centerFlatRadius; x <= centerPositionIndex + centerFlatRadius; x++)
+            {
+                for (int z = centerPositionIndex - centerFlatRadius; z <= centerPositionIndex + centerFlatRadius; z++)
+                {
+                    Debug.Log(new Vector2(x, z));
+                    navigationMapLayer.SetNodeWeight(new Vector2Int(x, z), 0);
+                }
+            }
         }
     }
 }

@@ -30,7 +30,7 @@ namespace WorldGeneration
         {
             bool[,] roadMap = _roadMapHolder.Map;
 
-            int centerIndex = Mathf.RoundToInt((_islandData.IslandSize - 1) / 2);
+            int centerIndex = _islandData.CenterPositionIndex;
 
             for (int x = centerIndex - 1; x <= centerIndex + 1; x++)
             {

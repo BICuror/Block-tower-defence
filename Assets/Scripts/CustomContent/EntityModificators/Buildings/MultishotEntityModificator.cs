@@ -2,6 +2,8 @@ using Cysharp.Threading.Tasks;
 
 public sealed class MultishotEntityModificator : EntityModificator
 {
+    public override bool CanBeApplied() => Entity.ComponentsContainer.Has<TaskCycle>();
+    
     public override void Enable()
     {
         Entity.ComponentsContainer.Get<TaskCycle>().TaskCycled += ActivateMultishot;
@@ -25,7 +27,6 @@ public sealed class MultishotEntityModificator : EntityModificator
 
     public override void Disable()
     {
-
         Entity.ComponentsContainer.Get<TaskCycle>().TaskCycled -= ActivateMultishot;
     }
 }

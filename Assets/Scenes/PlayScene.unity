@@ -27017,6 +27017,14 @@ PrefabInstance:
     - target: {fileID: 3181022158901963416, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: CenterSet.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
+      objectReference: {fileID: 1248231610}
+    - target: {fileID: 3181022158901963416, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: CenterSet.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: SetCenter
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181022158901963416, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: CenterSet.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: WorldGeneration.TerrainAnimator, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3303651933773129337, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _roadAnimator

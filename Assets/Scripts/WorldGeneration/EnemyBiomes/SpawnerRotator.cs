@@ -43,7 +43,7 @@ namespace WorldGeneration
             {
                 Debug.LogError("Multiple road positions found nerby spawner");
 
-                Vector2Int direction = spawnerPosition - new Vector2Int(_islandData.MiddleIndex, _islandData.MiddleIndex);
+                Vector2Int direction = spawnerPosition - new Vector2Int(_islandData.CenterPositionIndex, _islandData.CenterPositionIndex);
 
                 if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y)) RotateSpawnerToward(spawner, new Vector2Int(GetNormalizedInt(direction.x), 0));
                 else RotateSpawnerToward(spawner, new Vector2Int(0, GetNormalizedInt(direction.y)));

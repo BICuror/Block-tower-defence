@@ -67,9 +67,9 @@ namespace WorldGeneration
      
         private void CreateEnviroment()
         {
-            int _centerPoint = Mathf.RoundToInt(_islandData.IslandSize / 2);
+            int centerPoint = _islandData.CenterPositionIndex;
 
-            _enviromentCreator.CreateEnviroment(new Vector3(_centerPoint, _islandGridHolder.Grid.GetMaxHeight(_centerPoint, _centerPoint), _centerPoint));
+            _enviromentCreator.CreateEnviroment(new Vector3(centerPoint, _islandGridHolder.Grid.GetMaxHeight(centerPoint, centerPoint), centerPoint));
         }
     }
 }

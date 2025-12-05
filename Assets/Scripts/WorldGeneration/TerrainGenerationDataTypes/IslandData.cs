@@ -64,8 +64,8 @@ namespace WorldGeneration
         [Header("GeneralIslandSettings")][Space] 
         [SerializeField] private int _islandRadius;
         public int IslandSize => _islandRadius * 2 + 1;
-
-        public int MiddleIndex => _islandRadius;
+        public int IslandRadius => _islandRadius;
+        public int CenterPositionIndex => _islandRadius;
 
         [SerializeField] private int _islandMaxHeight;
         public int IslandMaxHeight => _islandMaxHeight;

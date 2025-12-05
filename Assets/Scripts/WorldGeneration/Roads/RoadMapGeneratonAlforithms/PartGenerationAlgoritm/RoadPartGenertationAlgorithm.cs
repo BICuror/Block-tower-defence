@@ -14,7 +14,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
     [SerializeField] private int _minLength;
     [SerializeField] private float _snapToTownhallDistance = 5;
     [SerializeField] private List<RoadPartData> _roadPartDatas;
-    Vector2Int[] _checkDirections = new Vector2Int[4]
+    private Vector2Int[] _checkDirections = new Vector2Int[4]
     {
         Vector2Int.up,
         Vector2Int.down,
@@ -31,7 +31,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         _islandData = islandData;
         _roadMap = new bool[_islandData.IslandSize, _islandData.IslandSize];
 
-        _centerIndex = (islandData.IslandSize - 1) / 2;
+        _centerIndex = islandData.CenterPositionIndex;
 
         for (int i = 0; i < spawnerNodes.Count; i++)
         {  
@@ -43,7 +43,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         return _roadMap;
     }
 
-    public void GenerateRoad(Vector2Int initialPosition, Vector2Int finalPosition)
+    private void GenerateRoad(Vector2Int initialPosition, Vector2Int finalPosition)
     {
         _tempRoadmap = new bool[_islandData.IslandSize, _islandData.IslandSize];
         _currentStartPosition = initialPosition;

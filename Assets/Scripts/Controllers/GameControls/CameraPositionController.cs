@@ -24,7 +24,7 @@ public sealed class CameraPositionController : MonoBehaviour
     {
         CreateControls();
         
-        _islandRadius = (_islandDataContainer.Data.IslandSize - 1) / 2f;
+        _islandRadius = _islandDataContainer.Data.IslandRadius;
         
         _camera = Camera.main;
         
@@ -34,7 +34,7 @@ public sealed class CameraPositionController : MonoBehaviour
 
     public void SetDefaultPosition()
     {
-        _currentPosition = new Vector2(_islandRadius, _islandRadius);
+        _currentPosition = new Vector2(_islandDataContainer.Data.CenterPositionIndex, _islandDataContainer.Data.CenterPositionIndex);
     }
     
     private void FixedUpdate()

@@ -22,7 +22,7 @@ public abstract class EntityModificator
         Entity.ComponentsContainer.Get<EntityCanvas>().RemoveIcon(icon);
     }
     
-    protected EntityCanvasBar AddBar(int value)
+    protected EntityCanvasBar AddBar(float value)
     {
         return Entity.ComponentsContainer.Get<EntityCanvas>().AddBar(_entityModificatorData.Icon, value);
     }

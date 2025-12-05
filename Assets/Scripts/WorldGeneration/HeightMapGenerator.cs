@@ -94,16 +94,16 @@ namespace WorldGeneration
 
         private void ApplyEdgeReductionMap(float[,] heightMap)
         {
-            int half = (int)(_islandData.IslandSize / 2);
+            int centerPositionIndex = _islandData.CenterPositionIndex;
 
-            float highBorder = half * _islandData.EdgePrecantageCutout;
-            float range = half - highBorder;
+            float highBorder = centerPositionIndex * _islandData.EdgePrecantageCutout;
+            float range = centerPositionIndex - highBorder;
 
             for (int x = 0; x < _islandData.IslandSize; x++)
             {
                 for (int z = 0; z < _islandData.IslandSize; z++)
                 {
-                    float distance = Vector2Int.Distance(new Vector2Int(half, half), new Vector2Int(x, z)) - highBorder;
+                    float distance = Vector2Int.Distance(new Vector2Int(centerPositionIndex, centerPositionIndex), new Vector2Int(x, z)) - highBorder;
 
                     heightMap[x, z] *= _islandData.BorderCurve.Evaluate(1 - distance / range);
                 }
@@ -252,7 +252,7 @@ namespace WorldGeneration
         {
             List<Vector2Int> indexesOfCenter = new List<Vector2Int>();
 
-            int middleIndex = _islandData.MiddleIndex;
+            int middleIndex = _islandData.CenterPositionIndex;
 
             float heightSumm = 0f;
 

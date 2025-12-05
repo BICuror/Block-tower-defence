@@ -24,7 +24,13 @@ public sealed class EntityCanvas : IngameUIElement
     [SerializeField] private EntityCanvasIcon _entityCanvasIconPrefab;
     [SerializeField] private Transform _canvasIconParent;
     private List<EntityCanvasIcon> _icons = new();
-    
+
+    private void Start()
+    {
+        _healthBar.HealthBarStateUpdated += UpdateCanvasLayout;
+        UpdateCanvasLayout();
+    }
+
     public EntityCanvasBar AddBar(Sprite barIconSprite, float value)
     {
         EntityCanvasBar bar = Instantiate(_entityCanvasBarPrefab, _customContentParent);

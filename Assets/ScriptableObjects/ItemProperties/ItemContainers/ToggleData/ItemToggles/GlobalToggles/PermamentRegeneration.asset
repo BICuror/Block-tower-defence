@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
-  m_Name: IncreaseEnemySpeedToggleEffect 1
+  m_Name: PermamentRegeneration
   m_EditorClassIdentifier: 
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalEnemyModificatorToggleEffect
@@ -64,6 +64,6 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: 0}
+  _icon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _effectName: Divine blessing
   _effectDescription: '#good Buildings good# and #bad enemies bad# recive 1 #Regeneration'

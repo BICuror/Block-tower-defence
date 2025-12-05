@@ -53,15 +53,17 @@ namespace Navigation
             _layerType = layerType;
         }
         
-        public void SetNavigationCondition(INavigationCondition condition) => _navigationCondition = condition;
-
-        private Dictionary<Vector2Int, int> _nodeWeights;
-        private NavigationMapLayerType _layerType;
+        private readonly Dictionary<Vector2Int, int> _nodeWeights;
+        private readonly NavigationMapLayerType _layerType;
         private INavigationCondition _navigationCondition;
-        public int GetNodeWeight(Vector2Int nodePositon) => _nodeWeights[nodePositon];
-        public int GetNodeWeight(NavigationNode node) => _nodeWeights[node.RoundedPosition];
+        
         public NavigationMapLayerType LayerType => _layerType;
         public bool IsEnabled => _navigationCondition == null || _navigationCondition.GetValue();
+        
+        public void SetNavigationCondition(INavigationCondition condition) => _navigationCondition = condition;
+        public int GetNodeWeight(Vector2Int nodePosition) => _nodeWeights[nodePosition];
+        public int GetNodeWeight(NavigationNode node) => _nodeWeights[node.RoundedPosition];
+        public void SetNodeWeight(Vector2Int nodePosition, int weight) => _nodeWeights[nodePosition] = weight;
     }
 
     public enum NavigationMapLayerType 

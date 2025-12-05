@@ -13,8 +13,10 @@ public abstract class ProgressBarBase : Shaker
     
     protected abstract string ProgressFieldName { get; }
     
-    protected void Start()
+    protected void Awake()
     {
+        base.Awake();
+        
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _meshRenderer.sharedMaterial = _barMaterial;
@@ -43,5 +45,12 @@ public abstract class ProgressBarBase : Shaker
     {
         _materialPropertyBlock.SetFloat(ProgressFieldName, progressValue);
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
+    }
+
+    protected void OnDestroy()
+    {
+        base.OnDestroy();
+        
+        StopBarFill();
     }
 }

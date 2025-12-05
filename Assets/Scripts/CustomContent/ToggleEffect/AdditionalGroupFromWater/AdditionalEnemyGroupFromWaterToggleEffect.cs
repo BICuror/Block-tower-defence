@@ -73,7 +73,7 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
 
         int islandSize = _islandDataContainer.Data.IslandSize;
 
-        int centerIndex = islandSize / 2 - 1;
+        int centerIndex = _islandDataContainer.Data.CenterPositionIndex;
         
         for (int x = 0; x < islandSize; x++)
         {

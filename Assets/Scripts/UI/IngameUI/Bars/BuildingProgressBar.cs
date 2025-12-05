@@ -1,5 +1,6 @@
 using UnityEngine;
 using Cashing;
+using Cysharp.Threading.Tasks;
 
 [RequireComponent(typeof(MeshRenderer))]
 
@@ -13,8 +14,6 @@ public class BuildingProgressBar : ProgressBarBase
 
     protected void Start()
     {
-        base.Start();
-
         _buildingDraggable.BuildProgressStarted += ResetFillingBar;
         _buildingDraggable.BuildProcessUpdated += StartFillingBar;
         _buildingDraggable.PickedUp += StopFillingBar;
@@ -31,7 +30,7 @@ public class BuildingProgressBar : ProgressBarBase
     
     private void StartFillingBar(float newValue)
     {
-        FillBar(_previousValue, newValue, Time.fixedDeltaTime);
+        FillBar(_previousValue, newValue, Time.fixedDeltaTime).Forget();
         _previousValue = newValue;
     }
 

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public sealed class EntityHealthBar : HealthBar
 {
@@ -7,43 +8,42 @@ public sealed class EntityHealthBar : HealthBar
 
     public bool IsActive => !OwnerHealth.IsFullHp() || _alwaysShow;
     
+    public event Action HealthBarStateUpdated;
+    
     private void Start()
     {
         Initialize();
         
-        OwnerHealth.Healed += TryHideBar;
+        OwnerHealth.Healed += UpdateHealthBarState;
+        OwnerHealth.Damaged += UpdateHealthBarState;
         
         OwnerHealth.Damaged += UpdateBar;
         OwnerHealth.Healed += UpdateBar;
         
-        OwnerHealth.Damaged += ShowBar;
         
         if (!_alwaysShow) gameObject.SetActive(false);
 
         _isInitialized = true;
     }
 
-    private void TryHideBar()
+    private void UpdateHealthBarState()
     {
-        if (IsActive) return;
+        bool healthBarState = IsActive;
         
-        gameObject.SetActive(false);
-    }
-
-    private void ShowBar()
-    {
-        gameObject.SetActive(true);
+        gameObject.SetActive(healthBarState);
+        
+        if (gameObject.activeSelf != healthBarState) HealthBarStateUpdated?.Invoke();
     }
 
     private void OnDestroy()
     {
         base.OnDestroy();
         
-        OwnerHealth.Healed -= TryHideBar;
+        OwnerHealth.Healed -= UpdateHealthBarState;
+        OwnerHealth.Damaged -= UpdateHealthBarState;
         
         OwnerHealth.Damaged -= UpdateBar;
         OwnerHealth.Healed -= UpdateBar;
         
-        OwnerHealth.Damaged -= ShowBar;
     }
 }

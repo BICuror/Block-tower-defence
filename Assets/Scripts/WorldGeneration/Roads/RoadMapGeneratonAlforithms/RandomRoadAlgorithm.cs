@@ -52,7 +52,7 @@ namespace WorldGeneration
         {
             currentPosition = roadNodes[currentPosition.x, currentPosition.y];
 
-            int middleIndex = (_islandData.IslandSize - 1) / 2;
+            int middleIndex = _islandData.CenterPositionIndex;
 
             Vector2Int centerPosition = new Vector2Int(middleIndex, middleIndex);
 

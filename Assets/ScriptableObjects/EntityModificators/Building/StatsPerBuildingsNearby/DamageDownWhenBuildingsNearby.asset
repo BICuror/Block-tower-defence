@@ -16,6 +16,7 @@ MonoBehaviour:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
@@ -28,9 +29,11 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
@@ -69,6 +72,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Hysteria
   _modificatorDescription: '#bad -40% bad# #Damage when other buildings are in #Area'

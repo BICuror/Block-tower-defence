@@ -16,6 +16,7 @@ MonoBehaviour:
   - _itemTypeName: DealMoreDamageWhenMoreCrystalsSelected
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
@@ -28,9 +29,11 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
@@ -53,6 +56,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 0
       _argumentName: Threshold
       _intArgument: 2
@@ -63,6 +67,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 
   _effectType: 0
@@ -78,6 +83,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 473409037, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Crystal enthusiast
   _modificatorDescription: '#good +100% good# #Damage when active #Crystal > 2'

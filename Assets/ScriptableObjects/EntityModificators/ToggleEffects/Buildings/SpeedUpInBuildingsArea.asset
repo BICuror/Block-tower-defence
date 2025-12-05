@@ -16,23 +16,33 @@ MonoBehaviour:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -47,6 +57,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 1
@@ -62,6 +73,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Speed up in area
   _modificatorDescription: '#bad Enemies get 1 bad# #SpeedUp in #Area'

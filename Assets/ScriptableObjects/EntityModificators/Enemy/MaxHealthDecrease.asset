@@ -16,6 +16,7 @@ MonoBehaviour:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
@@ -60,6 +61,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Hp down
   _modificatorDescription: '#bad -20% bad# #MaxHealth'

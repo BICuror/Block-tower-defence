@@ -16,44 +16,64 @@ MonoBehaviour:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  - _itemTypeName: ApplyModificatorOnWaveStartRemoveUponPickup
+  - _itemTypeName: ApplyModificatorOnIdleStartRemoveUponPickup
     AllEffectTypeNames:
     - ActivateWhenBuilt
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
@@ -66,6 +86,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 11400000, guid: 45e151d14096c5040a3e3107f50b3f57, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 
   _effectType: 0
@@ -81,6 +103,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Strong foundation
   _modificatorDescription: At wave start  #good +50% good# #Damage, #good +1 good#

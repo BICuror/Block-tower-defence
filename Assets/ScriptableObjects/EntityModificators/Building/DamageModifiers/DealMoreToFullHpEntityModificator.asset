@@ -16,19 +16,34 @@ MonoBehaviour:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
-    - InvincibilityUntilPickUpEntityModifier
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
@@ -41,6 +56,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsDealerDamageModifier
       _intArgument: 0
@@ -50,6 +67,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: DamageMultiplier
       _intArgument: 0
@@ -59,8 +78,24 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _createIcon: 0
+  _icon: {fileID: 0}
   _modificatorName: Sniper
   _modificatorDescription: '#good +300% good# #Damage to entities with full #MaxHealth'

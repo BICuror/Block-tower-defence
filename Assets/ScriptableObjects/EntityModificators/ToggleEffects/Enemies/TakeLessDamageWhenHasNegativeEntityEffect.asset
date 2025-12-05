@@ -16,23 +16,32 @@ MonoBehaviour:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateIconEntityModificator
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -46,6 +55,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsDealerDamageModifier
       _intArgument: 0
@@ -55,6 +66,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: DamageModifier
       _intArgument: 0
@@ -64,6 +77,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -79,6 +94,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Vampire
   _modificatorDescription: If has #bad negative bad# effect, take #good -25% good#

@@ -1,9 +1,9 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cashing;
 using Zenject;
 using Combat;
-using Cysharp.Threading.Tasks;
 
 public sealed class EntityModificatorsContainer : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
     [SerializeField] private List<EntityModificatorData> _allAvailableModificators;
     [Inject] private EntityModificatorFactory _entityModificatorFactory;
     [Cached] private CombatEntity _ownerEntity;
-
+        
     public List<EntityModificatorData> AvailableModificators => new List<EntityModificatorData>(_allAvailableModificators);
     public List<EntityModificatorData> AppliedModificators => _appliedModificators.GetAllKeys();
 
@@ -35,6 +35,7 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
         for (int i = 0; i < modificators.Count; i++)
         {
             modificators[i].SetEntity(_ownerEntity);
+            modificators[i].SetEntityModificatorData(modificatorData);
 
             if (!modificators[i].CanBeApplied())
             {
@@ -45,7 +46,7 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
                     
             modificators[i].Enable();
         }
-        
+
         if (modificators.Count > 0) _appliedModificators.Add(modificatorData, modificators);
     }
 

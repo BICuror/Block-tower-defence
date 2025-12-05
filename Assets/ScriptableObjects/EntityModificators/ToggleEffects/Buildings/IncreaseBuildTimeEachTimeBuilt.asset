@@ -16,6 +16,7 @@ MonoBehaviour:
   - _itemTypeName: IncreaseBuildTimeEachBuilt
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
@@ -28,9 +29,11 @@ MonoBehaviour:
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
@@ -53,6 +56,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 1
@@ -68,6 +72,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Regress
   _modificatorDescription: '#bad +25% bad# #BuildTime each time built completed'

@@ -13,26 +13,36 @@ MonoBehaviour:
   m_Name: ApplyFearEffect
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: EntityEffectEntityModificator
+  - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
     - ActivateWhenBuilt
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -46,6 +56,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStrength
       _intArgument: 1
@@ -55,6 +67,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: EffectDuration
       _intArgument: 1
@@ -64,6 +78,8 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 01000000
   _effectType: 0
@@ -79,6 +95,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 684236167, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Scary face
   _modificatorDescription: '#OnHit apply 1 #Fear'

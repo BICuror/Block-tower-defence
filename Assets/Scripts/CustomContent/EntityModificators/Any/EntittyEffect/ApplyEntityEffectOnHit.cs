@@ -1,6 +1,6 @@
 using System;
 
-public sealed class EntityEffectEntityModificator : EntityModificator
+public sealed class ApplyEntityEffectOnHit : EntityModificator
 { 
     private ApplyEffectDamageModifier _createdModifier;
     

@@ -16,23 +16,32 @@ MonoBehaviour:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
@@ -47,6 +56,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 6018946194359616491, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 00000000
   _effectType: 0
@@ -62,6 +72,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: -368388063, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Field medic
   _modificatorDescription: On #Action <color=green>heal 5%</color> another building

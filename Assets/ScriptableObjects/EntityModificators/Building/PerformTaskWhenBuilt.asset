@@ -16,19 +16,24 @@ MonoBehaviour:
   - _itemTypeName: ActivateWhenBuilt
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
     - ApplyModificatorOnWaveStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
-    - FasterRechargeOnActivation
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
@@ -56,6 +61,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 1968931674, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Activate when built
   _modificatorDescription: Invoke #Action upon build completion

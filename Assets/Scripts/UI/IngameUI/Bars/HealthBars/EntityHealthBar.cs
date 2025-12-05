@@ -4,6 +4,8 @@ public sealed class EntityHealthBar : HealthBar
 {
     [SerializeField] private bool _alwaysShow = false;
     private bool _isInitialized;
+
+    public bool IsActive => !OwnerHealth.IsFullHp() || _alwaysShow;
     
     private void Start()
     {
@@ -23,12 +25,9 @@ public sealed class EntityHealthBar : HealthBar
 
     private void TryHideBar()
     {
-        if (_alwaysShow) return;
+        if (IsActive) return;
         
-        if (OwnerHealth.IsFullHp())
-        {
-            gameObject.SetActive(false);
-        }
+        gameObject.SetActive(false);
     }
 
     private void ShowBar()

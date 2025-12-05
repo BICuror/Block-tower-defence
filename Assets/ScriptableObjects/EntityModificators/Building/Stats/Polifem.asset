@@ -12,39 +12,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: Polifem
   m_EditorClassIdentifier: 
-  _effectTypeName: EntityModificatorStatChange
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
-    - InvincibilityUntilPickUpEntityModifier
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
+  _rarity: 0
+  _tags: 
   _effectType: 0
+  _isUnique: 0
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _createIcon: 0
+  _icon: {fileID: 0}
   _modificatorName: Shalowminded
   _modificatorDescription: '#good +150% good# #Damage, #bad +70% bad# #Recharge,
     #bad +50% bad# #BuildTime'
-  AllEffectTypeNames:
-  - ActivateWhenBuilt
-  - DamageModifierEntityModificator
-  - DealMoreDamageWhenMoreCrystalsSelected
-  - EntityEffectEntityModificator
-  - EntityModificatorStatChange
-  - FasterRechargeOnActivation
-  - InvincibilityUntilPickUpEntityModifier
-  - ModificatorObjectApplyerEntityModificator
-  - MoreDamageNearbyWater
-  - ScaleDamageWithHeight
-  - TakeDamageUponPlacement
   _statChanges:
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: 0

@@ -13,23 +13,28 @@ MonoBehaviour:
   m_Name: ApplyPoisonEffect
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: EntityEffectEntityModificator
+  - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
@@ -52,6 +57,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStrength
       _intArgument: 1
@@ -62,6 +68,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: EffectDuration
       _intArgument: 1
@@ -72,6 +79,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 01000000
   _effectType: 0
@@ -87,6 +95,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _icon: {fileID: 1002134821, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _createIcon: 0
+  _icon: {fileID: 672983621, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Poisoner
   _modificatorDescription: '#OnHit apply 1 #Poison'

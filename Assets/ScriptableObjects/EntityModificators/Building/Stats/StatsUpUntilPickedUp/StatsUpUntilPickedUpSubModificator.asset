@@ -16,23 +16,64 @@ MonoBehaviour:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - CreateBombsAtWaveStart
+    - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityEffectEntityModificator
     - EntityModificatorStatChange
-    - FasterRechargeOnActivation
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+  - _itemTypeName: AddIconEntityModificator
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityEffectEntityModificator
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - ScaleDamageWithHeight
+    - ShootOnKill
+    - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
@@ -51,7 +92,8 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _icon: {fileID: 0}
+  _createIcon: 0
+  _icon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Strong foundation active
   _modificatorDescription: '#good +50% good# #Damage, #good +1 good# #Reach, #good
     -30% good# #Recharge'

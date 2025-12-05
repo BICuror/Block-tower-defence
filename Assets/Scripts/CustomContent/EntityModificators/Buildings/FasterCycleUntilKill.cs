@@ -2,6 +2,7 @@ using Combat;
 
 public sealed class FasterCycleUntilKill : EntityModificator
 {
+    private EntityCanvasBar _bar;
     private StatModifier _statModifier; 
     private float _taskMultiplierReducePerAction;
     private int _maxReduceStacks;
@@ -17,6 +18,8 @@ public sealed class FasterCycleUntilKill : EntityModificator
         Entity.StatContainer.Get<TaskRechargeDuration>().AddStatModifier(_statModifier);
         Entity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += ReduceTaskRechargeDuration;
         Entity.DamageModifierContainer.EntityKilled += ResetStatModifier;
+
+        _bar = AddBar(0);
     }
 
     private void ReduceTaskRechargeDuration()
@@ -25,12 +28,14 @@ public sealed class FasterCycleUntilKill : EntityModificator
         
         _currentStacks++;
         _statModifier.SetMultiplier(_currentStacks * _taskMultiplierReducePerAction);
+        _bar.SetValue(_currentStacks / (float)_maxReduceStacks);
     }
 
     private void ResetStatModifier(CombatEntity _)
     {
         _currentStacks = 0;
         _statModifier.SetMultiplier(0f);
+        _bar.SetValue(0f);
     }
 
     public override void Disable()
@@ -38,5 +43,7 @@ public sealed class FasterCycleUntilKill : EntityModificator
         Entity.StatContainer.Get<TaskRechargeDuration>().RemoveStatModifier(_statModifier);
         Entity.ComponentsContainer.Get<TaskCycle>().TaskPerformed -= ReduceTaskRechargeDuration;
         Entity.DamageModifierContainer.EntityKilled -= ResetStatModifier;
+        
+        RemoveBar(_bar);
     }
 }

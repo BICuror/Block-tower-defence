@@ -6,8 +6,8 @@ public class WeaponBase : MonoBehaviour
 {
     protected CombatEntity OwnerEntity;
     
-    public Action<CombatEntity> HitEntity;
-    public Action<CombatEntity> KilledEntity;
+    public event Action<CombatEntity> HitEntity;
+    public event Action<CombatEntity> KilledEntity;
     
     public CombatEntity GetOwnerEntity() => OwnerEntity;
     

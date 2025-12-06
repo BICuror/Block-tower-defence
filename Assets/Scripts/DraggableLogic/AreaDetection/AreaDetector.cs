@@ -12,8 +12,8 @@ namespace Combat
         public T RandomItem => List[Random.Range(0, List.Count)];
         public int Count => List.Count;
         
-        public Action<T> AddedItem;
-        public Action<T> RemovedItem;
+        public event Action<T> AddedItem;
+        public event Action<T> RemovedItem;
 
         public IReadOnlyList<T> GetList() => List;
         

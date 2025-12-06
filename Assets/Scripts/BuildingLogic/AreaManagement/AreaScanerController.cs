@@ -9,7 +9,10 @@ public sealed class AreaScanerController : MonoBehaviour
 {
     [Cached] private AreaManager _areaManager;
     [SerializeField] private bool _autoScale;
+    
+    [Header("AreaScale")]
     [SerializeField] private float _additionalScaleValue = 0.95f;
+    [SerializeField] private float _areaScaleValue = 2f;
     
     [Header("Visualisation")]
     [SerializeField] private bool _hasVisualisation = true;
@@ -55,7 +58,7 @@ public sealed class AreaScanerController : MonoBehaviour
     
     private Vector3 GetScale()
     {
-        float scale = _currentRadius * 2f + _additionalScaleValue;
+        float scale = _currentRadius * _areaScaleValue + _additionalScaleValue;
 
         return new Vector3(scale, _height, scale);
     }

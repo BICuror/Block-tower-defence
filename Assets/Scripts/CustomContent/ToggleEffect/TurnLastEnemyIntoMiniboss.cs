@@ -13,7 +13,7 @@ public sealed class TurnLastEnemyIntoMiniboss : GlobalToggleEffect
 
     private void TryApplyModificator(EnemyEntity _)
     {
-        if (_globalEnemyContainer.Entities.Count == 1 && _enemySpawnSystem.IsAllEnemiesSpawned())
+        if (_globalEnemyContainer.Entities.Count == 1 && _enemySpawnSystem.AllEnemiesSpawned)
         {
             EnemyEntity lastEnemy = _globalEnemyContainer.Entities[0];
 

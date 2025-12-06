@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.VFX;
 using UnityEngine;
@@ -8,7 +10,9 @@ public sealed class VisualEffectHandler : MonoBehaviour
     [SerializeField] private VisualEffect _visualEffect;
     [SerializeField] private bool _keepInitialParent;
 
+    private CancellationTokenSource _cancellationTokenSource = new();
     private Transform _initialParent;
+    private Vector3 _initialLocalPosition;
     private float _disableTime;
 
     private void Awake()
@@ -21,23 +25,50 @@ public sealed class VisualEffectHandler : MonoBehaviour
     public async UniTask PlayAndStop()
     {
         Play();
+        Cancel();
         
-        await UniTask.WaitForSeconds(_disableTime, cancellationToken: destroyCancellationToken).SuppressCancellationThrow();
+        try
+        {
+            await UniTask.WaitForSeconds(_disableTime, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e)
+        {
+            e.LogAsync();
+            return;
+        }
         
         Stop();
     }
     
     public void Play()
     {
-        if (!_keepInitialParent) SetNullParent();
+        if (!_keepInitialParent)
+        {
+            _initialParent = transform.parent;
+            _initialLocalPosition = transform.localPosition;
+        
+            transform.SetParent(null);
+        }
         
         _visualEffect.gameObject.SetActive(true);
+        _visualEffect.Play();
     }
 
     public async UniTask StopAsync()
     {
+        Cancel();
+        
         _visualEffect.Stop();
-        await UniTask.WaitForSeconds(_disableTime, cancellationToken: destroyCancellationToken).SuppressCancellationThrow();
+        
+        try
+        {
+            await UniTask.WaitForSeconds(_disableTime, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e)
+        {
+            e.LogAsync();
+            return;
+        }
         
         Stop();
     }
@@ -56,8 +87,8 @@ public sealed class VisualEffectHandler : MonoBehaviour
     public void DisableEffect()
     {
         _visualEffect.gameObject.SetActive(false);
-        
-        transform.SetParent(_initialParent);
+
+        TryReturnToDefaultParent();
     }
 
     private void Disable()
@@ -65,21 +96,31 @@ public sealed class VisualEffectHandler : MonoBehaviour
         _visualEffect.gameObject.SetActive(false);
 
         gameObject.SetActive(false);
-        
-        transform.SetParent(_initialParent);
+
+        TryReturnToDefaultParent();
     }
 
     private void Destroy()
     {
         Destroy(gameObject);
     }
-
-    private void SetNullParent()
+    
+    private void TryReturnToDefaultParent()
     {
-        if (_initialParent == null) _initialParent = transform.parent;
+        if (_keepInitialParent) return;
         
-        transform.SetParent(null);
+        transform.SetParent(_initialParent);
+        transform.localPosition = _initialLocalPosition;
     }
+
+    private void Cancel()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+        _cancellationTokenSource = new();
+    }
+
+    private void OnDestroy() => Cancel();
     
     private enum StopActionType
     {

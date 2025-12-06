@@ -20,7 +20,6 @@ public sealed class EntityHealthBar : HealthBar
         OwnerHealth.Damaged += UpdateBar;
         OwnerHealth.Healed += UpdateBar;
         
-        
         if (!_alwaysShow) gameObject.SetActive(false);
 
         _isInitialized = true;
@@ -28,11 +27,11 @@ public sealed class EntityHealthBar : HealthBar
 
     private void UpdateHealthBarState()
     {
-        bool healthBarState = IsActive;
+        bool healthBarState = gameObject.activeSelf;
         
-        gameObject.SetActive(healthBarState);
+        gameObject.SetActive(IsActive);
         
-        if (gameObject.activeSelf != healthBarState) HealthBarStateUpdated?.Invoke();
+        if (IsActive != healthBarState) HealthBarStateUpdated?.Invoke();
     }
 
     private void OnDestroy()
@@ -44,6 +43,5 @@ public sealed class EntityHealthBar : HealthBar
         
         OwnerHealth.Damaged -= UpdateBar;
         OwnerHealth.Healed -= UpdateBar;
-        
     }
 }

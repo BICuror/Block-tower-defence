@@ -111,6 +111,9 @@ VisualEffect:
       - m_Value: 1
         m_Name: SmallSpherePower
         m_Overridden: 1
+      - m_Value: 0.001
+        m_Name: SparcksSpawnRadius
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -123,16 +126,16 @@ VisualEffect:
       - m_Value: {x: 0, y: 0, z: 0, w: 1}
         m_Name: New Color
         m_Overridden: 1
-      - m_Value: {x: 24.804785, y: 8.88752, z: 1.0296315, w: 1}
+      - m_Value: {x: 8.574187, y: 4.9342017, z: 3.1142092, w: 1}
         m_Name: SmallSphereColor
         m_Overridden: 1
-      - m_Value: {x: 16.94838, y: 3.4995904, z: 0, w: 1}
+      - m_Value: {x: 6.4222345, y: 1.3260967, z: 0, w: 1}
         m_Name: MedumSphereColor
         m_Overridden: 1
-      - m_Value: {x: 62.332146, y: 24.195398, z: 0, w: 1}
+      - m_Value: {x: 0.7924528, y: 0.3047895, z: 0, w: 1}
         m_Name: BigSphereColor
         m_Overridden: 1
-      - m_Value: {x: 26.76051, y: 7.2910852, z: 2.8780153, w: 1}
+      - m_Value: {x: 0.74901956, y: 0.20407553, z: 0.08055488, w: 1}
         m_Name: SparksColor
         m_Overridden: 1
       - m_Value: {x: 2.570235, y: 1.2683212, z: 0.1883941, w: 1}
@@ -175,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 0
   _visualEffect: {fileID: 6439033841242425703}
+  _keepInitialParent: 0
 --- !u!114 &-8461037858149362788
 MonoBehaviour:
   m_ObjectHideFlags: 0

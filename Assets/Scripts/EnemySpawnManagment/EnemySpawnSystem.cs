@@ -15,7 +15,9 @@ namespace Combat
         [Inject] private WaveManager _waveManager;
         private List<EnemySpawner> _spawners = new();
         
-        public Action LastWaveEnemyDied;
+        public event Action LastWaveEnemyDied;
+
+        public bool AllEnemiesSpawned => !_spawners.Exists(spawner => !spawner.SpawnedAllEnemies);
 
         private void Awake()
         {
@@ -39,21 +41,11 @@ namespace Combat
         {
             _spawners.Remove(spawner);
         }
-
-        public bool IsAllEnemiesSpawned()
-        {
-            for (int i = 0; i < _spawners.Count; i++)
-            {
-                if (_spawners[i].SpawnedAllEnemies() == false) return false;
-            }
-
-            return true;
-        }
     
         private void CheckIfAllEnemiesDied()
         {
-            if (_globalEnemyContainer.Entities.Count > 0) return;
-    
+            if (_globalEnemyContainer.Entities.Count > 0 || !AllEnemiesSpawned) return;
+            
             LastWaveEnemyDied.Invoke();
         }
     }

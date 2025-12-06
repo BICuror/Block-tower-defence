@@ -6,6 +6,7 @@ using System;
 
 public sealed class Bomb : WeaponBase
 {  
+    [SerializeField] private VisualEffectHandler _fuseVisualEffect;
     [SerializeField] private DraggableObject _draggableObject;
     [SerializeField] private Explosion _explosion;
     private CancellationTokenSource _cancellationTokenSource = new();
@@ -21,20 +22,20 @@ public sealed class Bomb : WeaponBase
     {
         _explosion.Initialize(OwnerEntity);
         
-        _draggableObject.Placed += StartExplotion;
+        _draggableObject.Placed += StartExplosionAsync;
         _draggableObject.PickedUp += StopExplosion;
     }
     
-    public void EnableExplotion() => _canBeExploded = true;
+    public void EnableExplosion() => _canBeExploded = true;
 
-    private void OnEnable()
-    {
-        _isFree = false;
-    }
-    
-    private async void StartExplotion()
+    private void OnEnable() => _isFree = false;
+
+    public void StartExplosionAsync() => StartExplosion().Forget();
+    private async UniTask StartExplosion()
     {
         if (!_canBeExploded) return;
+        
+        _fuseVisualEffect.Play();
         
         try
         {
@@ -42,6 +43,9 @@ public sealed class Bomb : WeaponBase
             Explode();
         }
         catch (Exception e) { e.LogAsync(); } 
+        
+        
+        _fuseVisualEffect.StopAsync().Forget();
     }
     
     private void StopExplosion()
@@ -55,7 +59,7 @@ public sealed class Bomb : WeaponBase
         gameObject.SetActive(false);
         _canBeExploded = false;
         await _explosion.Explode();
-        Exploded.Invoke(this);
+        Exploded?.Invoke(this);
         
         _isFree = true;
     }

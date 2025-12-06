@@ -1,16 +1,14 @@
 using UnityEngine;
 using Navigation;
 using Cashing;
-using UnityEngine.Serialization;
 
 namespace Combat
 {
     public sealed class EnemyBootstrap : MonoBehaviour
     {
-        [FormerlySerializedAs("_GPUInstancerEnabler")] [SerializeField] private GPUInstanceEnabler gpuInstanceEnabler;
-        [SerializeField] private MeshFilter _meshFilter;
+        [SerializeField] private GPUInstanceEnabler gpuInstanceEnabler;
         [SerializeField] private MeshRenderer _meshRenderer;   
-        [SerializeField] private Animator _animator;
+        [SerializeField] private MeshFilter _meshFilter;
 
         [Cached] private CombatEntity _combatEntity;
         [Cached] private NavigationAgent _navMeshAgent;
@@ -22,18 +20,23 @@ namespace Combat
         
         private EnemyData _enemyData;
     
-        public void SetEnemyData(EnemyData enemyDataToSet)
+        public void SetEnemyData(EnemyData enemyDataToSet, bool initializeNavigation = true, bool initializeSpecialObjects = true)
         {
             _enemyData = enemyDataToSet;
 
             SetStats();
             SetVisualData();
-            CreateSpecialObject();
             
-            _navMeshAgent.SetAgentData(enemyDataToSet.NavigationData);
             _enemyHealth.RefilHP();
-            _navMeshAgent.Initialize();
             _collider.enabled = true;
+
+            if (initializeSpecialObjects) CreateSpecialObject();
+            
+            if (initializeNavigation)
+            {
+                _navMeshAgent.SetAgentData(enemyDataToSet.NavigationData);
+                _navMeshAgent.Initialize();
+            }
         }
 
         private void SetStats()

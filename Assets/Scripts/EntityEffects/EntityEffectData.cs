@@ -4,7 +4,6 @@ using UnityEngine;
 
 public sealed class EntityEffectData : ScriptableObject
 {
-    
     [SerializeField] private int _maxStacks = 1;
     [SerializeField] private ArgumentsContainer _argumentsContainer;
     [SerializeField] private EntityEffectParticleHandler _particlePrefab;

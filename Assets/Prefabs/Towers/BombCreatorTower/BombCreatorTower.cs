@@ -36,15 +36,8 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
             {
                 if (_bombPool.Pool[i].DraggableObject.IsPlaced)
                 {
-                    _bombPool.Pool[i].gameObject.SetActive(false);
+                    _bombPool.Pool[i].StartExplosionAsync();
                 }
-            }
-            
-            Bomb[] bombs = _createdBombs.ToArray();
-
-            foreach (Bomb bomb in bombs)
-            {
-                RemoveDisabledBomb(bomb);
             }
         }
     }
@@ -61,7 +54,7 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         
         await _draggableCreator.ActivateDraggableOnRandomPosition(bomb.DraggableObject, transform.position, 2);
         
-        bomb.EnableExplotion();
+        bomb.EnableExplosion();
     }
 
     private void RemoveDisabledBomb(Bomb bomb)

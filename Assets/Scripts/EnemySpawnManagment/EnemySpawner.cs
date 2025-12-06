@@ -11,6 +11,8 @@ namespace Combat
         [SerializeField] private EnemySpawnerInfoDisplayer _enemySpawnerInfoDisplayer;
         private List<EnemyData> _enemiesToSpawn;
         
+        public bool SpawnedAllEnemies => _enemiesToSpawn.Count == 0;
+        
         public void SetEnemiesToSpawn(List<EnemyData> enemiesToSpawn)
         {
             _enemiesToSpawn = enemiesToSpawn;
@@ -20,13 +22,11 @@ namespace Combat
     
         private void TryToSpawnEnemy() 
         {
-            if (SpawnedAllEnemies() == false) 
+            if (SpawnedAllEnemies == false) 
             {
                 SpawnEnemy();
             }
         }
-    
-        public bool SpawnedAllEnemies() => _enemiesToSpawn.Count == 0;
 
         public async UniTask SpawnGroup()
         {

@@ -1,10 +1,11 @@
 using UnityEngine;
 using DG.Tweening;
+using Combat;
 using TMPro;
 
 public sealed class SpawnInfoObject : MonoBehaviour
 {
-    [SerializeField] private MeshFilter _meshFilter;
+    [SerializeField] private EnemyBootstrap _enemyBootstrap;
     
     [SerializeField] private TextMeshPro _amountText;
 
@@ -25,7 +26,7 @@ public sealed class SpawnInfoObject : MonoBehaviour
 
     public void SetEnemiyData(EnemyData enemyData)
     {
-        _meshFilter.sharedMesh = enemyData.Mesh;
+        _enemyBootstrap.SetEnemyData(enemyData, false, false);
     }
 
     public void SetAmount(int amount)

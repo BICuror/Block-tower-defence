@@ -56,8 +56,9 @@ namespace Navigation
         public void SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType weightPickType)
         {
             _navigationAgentNodePicker.SetWeightPickLogic(weightPickType);
-            StopMovement();
             _nextNode = _startNode;
+            StopMovement();
+            FindSuitableLayer();
             AdaptToNavigationLayer();
             TravelToEndNode();
         }
@@ -131,7 +132,6 @@ namespace Navigation
             _endNode = _nextNode;   
             _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
         }
-
 
         private void StopMovement()
         {

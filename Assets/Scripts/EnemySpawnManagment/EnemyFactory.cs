@@ -8,7 +8,6 @@ namespace Combat
         private static EnemyFactory _instance;
         
         [Inject] private GlobalEnemyContainer _globalEnemyContainer;
-        [Inject] private DiContainer _container;
         [SerializeField] private EnemyEntity _blankEnemy; 
     
         private ObjectPool<EnemyEntity> _enemyPool;
@@ -19,8 +18,7 @@ namespace Combat
         {
             _instance = this;
     
-            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10, _container);
-            _container.Inject(_enemyPool);
+            _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10);
         }
     
         public EnemyEntity CreateEnemy(EnemyData enemyDataToCreate, Vector3 spawnPosition)

@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 8701364025746998132}
   - component: {fileID: 3961331482114920432}
   - component: {fileID: 8257513214410736894}
-  - component: {fileID: 2843232672469811050}
   m_Layer: 0
   m_Name: CrystalTooltip
   m_TagString: Untagged
@@ -216,18 +215,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &2843232672469811050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777958129399263962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b1dd01d03aa620488a41b6a1e8040d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1940541286815373205
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,8 +327,8 @@ RectTransform:
   - {fileID: 6156070538785157371}
   m_Father: {fileID: 1581158546983494758}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 125, y: 0}
   m_SizeDelta: {x: 250, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

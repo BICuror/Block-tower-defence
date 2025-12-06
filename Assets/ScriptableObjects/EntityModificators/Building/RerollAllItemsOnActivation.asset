@@ -10,28 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: FasterFingers
+  m_Name: RerollAllItemsOnActivation
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: FasterCycleUntilKill
+  - _itemTypeName: RerollAllUnusedItems
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -40,35 +42,15 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 1
-      _argumentName: TaskMultiplierReducePerAction
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: -0.1
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 0
-      _argumentName: MaxReduceStacks
-      _intArgument: 5
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-  _rarity: 1
+    _argumentItems: []
+  _rarity: 0
   _tags: 
   _effectType: 0
   _isUnique: 0
@@ -84,7 +66,6 @@ MonoBehaviour:
   _blockOtherEntityTags:
     Requirements: []
   _createIcon: 0
-  _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: FasterFingers
-  _modificatorDescription: -0.1 #RechargeTaskDuration each time #Action is invoked
-    up to 5 times. #OnKill reset effect
+  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _modificatorName: REROLLL
+  _modificatorDescription: Reroll all unused items on #Activation. Once per wave

@@ -37,7 +37,7 @@ public sealed class ArtilleryTower : MonoBehaviour, ITaskConditionProvider
         }
         else if (_createdTargets.Count > _maxEntities.RoundedValue)
         {
-            int difference = _createdTargets.Count - _maxEntities.RoundedValue ;
+            int difference = _createdTargets.Count - _maxEntities.RoundedValue;
 
             for (int i = 0; i < difference; i++) RemoveTarget();
         }

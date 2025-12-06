@@ -47,9 +47,8 @@ public sealed class CrystalScheduler : MonoBehaviour
     private void SpawnItem(Vector3 position)
     {
         int itemStrength = Mathf.RoundToInt(_islandData.ItemGenerationConfig.MaxStrengthCurve.Evaluate(_currentWave));
-        int itemQualty = Mathf.RoundToInt(_islandData.ItemGenerationConfig.QualityCurve.Evaluate(_currentWave));
         
-        _itemFactory.CreateItem(itemQualty, itemStrength, position);
+        _itemFactory.CreateItem(itemStrength, position);
         
         _itemsToSpawn--;
     }

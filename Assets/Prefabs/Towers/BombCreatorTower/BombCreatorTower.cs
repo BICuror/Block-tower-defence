@@ -39,6 +39,13 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
                     _bombPool.Pool[i].gameObject.SetActive(false);
                 }
             }
+            
+            Bomb[] bombs = _createdBombs.ToArray();
+
+            foreach (Bomb bomb in bombs)
+            {
+                RemoveDisabledBomb(bomb);
+            }
         }
     }
     
@@ -67,7 +74,7 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     private bool IsFreeBomb(Bomb bomb) => bomb.IsFree;
     
     private bool LessThanMaxBombs() => _createdBombs.Count < _maxEntities.RoundedValue && _waveStateMachine.CurrentState == WaveState.Attack;
-
+    
     private void OnDestroy()
     {
         _bombPool.DestroyPool();

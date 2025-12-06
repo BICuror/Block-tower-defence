@@ -16,8 +16,8 @@ public sealed class WaveStateMachine : MonoBehaviour
 
     public WaveState CurrentState => _currentState;
     
-    public Action<WaveState> StateStarted;
-    public Action<WaveState> StateEnded;
+    public event Action<WaveState> StateStarted;
+    public event Action<WaveState> StateEnded;
 
     private void Awake() => Initialize();
     private void Initialize()

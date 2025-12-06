@@ -10,27 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: HurtfullLabor
+  m_Name: ExplodeOnFullCharge
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: OnActivationInvokeTaskAndHurt
+  - _itemTypeName: InfernoExplodeOnFullCharge
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -40,18 +43,41 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
-      _argumentName: ActivationDamage
+      _argumentName: DefaultExplosionDamage
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 3
+      _floatArgument: 15
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: DefaultExplosionRadius
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 1
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 2
+      _argumentName: ExplosionPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2173425947725659244, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
@@ -71,6 +97,8 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: HurtfullLabor
-  _modificatorDescription: On #Activation invoke #Action and recive 3 #Damage
+  _createIcon: 0
+  _icon: {fileID: -875806093, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _modificatorName: Overheat
+  _modificatorDescription: Upon reaching #MaxChargedDamage, reset #ChargeDuration
+    and explode targeted #bad enemy bad#

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -6,9 +7,10 @@ using Random = UnityEngine.Random;
 public sealed class ItemEffectSelector : MonoBehaviour
 {
     [SerializeField] private ItemFactory _itemFactory;
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
-    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
+    [Inject] private ItemsContainer _itemsContainer;
     private ItemModifiersSelectionContainer _itemModifiersSelectionContainer;
 
     private void Awake()
@@ -18,7 +20,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
     #region ModifiersSelection
     
-    public List<ToggleGlobalEffectData> GetRandomToggleEffectDatas(int quality, int strength)
+    public List<ToggleGlobalEffectData> GetRandomToggleEffectDatas(int strength)
     {
         List<ToggleGlobalEffectData> result = new();
 
@@ -129,8 +131,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
     private bool CheckToKeepUniqueEffect<T>(T effectData) where T : GlobalEffectData
     {
-        return _itemFactory.CreatedItems.Exists(item =>
-            item.ToggleEffectDatas.Exists(data => data == effectData));
+        return _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().Exists(item => item.ToggleEffectDatas.Exists(data => data == effectData));
     }
 
     private bool CheckIfEffectTagRequirementsAreMet<T>(T effectData) where T : GlobalEffectData
@@ -140,7 +141,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
         List<GlobalEffectData> createdGlobalEffectDatas = new();
         List<EntityModifcatorTag> buildingsTags = _globalBuildingContainer.GetBuildingTags();
         
-        _itemFactory.CreatedItems.ForEach(item =>
+        _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().ForEach(item =>
         {
             createdGlobalEffectDatas.AddRange(item.ToggleEffectDatas);
         });

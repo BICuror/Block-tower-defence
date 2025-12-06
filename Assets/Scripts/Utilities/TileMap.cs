@@ -101,8 +101,7 @@ public static class TileMap
 
     #region FindSuitablePositionsInRaduis
 
-    public static List<Vector2Int> ForceGetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator,
-        Vector2Int position, int radius = 3)
+    public static List<Vector2Int> ForceGetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
     {
         List<Vector2Int> foundPositions = GetSuitablePositionsInRadius(positionValidator, position, radius);
 

@@ -24,7 +24,7 @@ public sealed class SpawnCrystalForKills : EntityModificator
         {
             _killedEntities = 0;
             
-            _itemFactory.CreateItem(1, 1, Entity.transform.position);
+            _itemFactory.CreateItem(1, Entity.transform.position);
         }
     }
 }

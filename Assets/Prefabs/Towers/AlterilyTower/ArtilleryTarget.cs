@@ -12,10 +12,8 @@ public sealed class ArtilleryTarget : WeaponBase
     
     public event Action AreaEntityAdded;
     
-    public void Initialize(CombatEntity ownerEntity)
+    protected override void OnInitialized()
     {
-        base.Initialize(ownerEntity);
-
         _areaEntityDetector.AddedItem += InvokeOnAreaEntityAdded;
         
         OwnerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += TryDamageAllEnemiesInArea;

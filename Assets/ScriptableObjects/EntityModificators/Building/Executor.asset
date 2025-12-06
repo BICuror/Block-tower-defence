@@ -10,27 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: DeadEnd
+  m_Name: Executor
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: LaunchArrowsOnKill
+  - _itemTypeName: ExecuteEntitiesInArea
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -40,49 +43,17 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 2
-      _argumentName: ArrowPrefab
+    - _argumentType: 1
+      _argumentName: Threshold
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: -0.1
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 1306646994892462151, guid: c68c16af92ce0c94aadf43f1a0bba243, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 0
-      _argumentName: ArrowsPerKill
-      _intArgument: 5
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: ProjectileSpeed
-      _intArgument: 5
-      _boolArgument: 0
-      _floatArgument: 20
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: DelayBetweenShots
-      _intArgument: 5
-      _boolArgument: 0
-      _floatArgument: 0.25
+      _floatArgument: 0.1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -104,7 +75,8 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: DeadEnd
-  _modificatorDescription: '#OnKill launch 5 arrows at random #bad enemy bad# in
-    #Area'
+  _modificatorName: Executor
+  _modificatorDescription: When enemy's in #Area health drops below 10% from #MaxHealth,
+    deal #Damage equal to enemy #MaxHealth

@@ -5315,7 +5315,7 @@ MonoBehaviour:
   - {fileID: 3994676480505275712}
   - {fileID: 619195631037584018}
   - {fileID: 2134015691683264084}
-  _followTerrain: 0
+  _followTerrain: 1
 --- !u!114 &1261345440318068905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5401,6 +5401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoScale: 0
   _additionalScaleValue: 0
+  _areaScaleValue: 2
   _hasVisualisation: 1
   _visualisationTransform: {fileID: 8505234571119142794}
   _height: 100

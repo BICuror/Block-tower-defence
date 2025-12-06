@@ -14,6 +14,7 @@ public class Item : DraggableObject
     [SerializeField] private ItemColor _itemColor;
     [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
     private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
+    private int _strength;
     private int _duration;
     private int _charges;
     
@@ -35,6 +36,7 @@ public class Item : DraggableObject
     public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
     public int Duration => _duration;
     public int Charges => _charges;
+    public int Strength => _strength;
     public ItemColor ItemColor => _itemColor;
     
     public Action<Item> ItemPickedUp;
@@ -52,6 +54,11 @@ public class Item : DraggableObject
     public void SetDuration(int duration)
     {
         _duration = duration;
+    }    
+    
+    public void SetStrength(int strength)
+    {
+        _strength = strength;
     }
 
     public async UniTask DecreaseDuration()

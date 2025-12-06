@@ -20,7 +20,7 @@ public sealed class ItemFactory : MonoBehaviour
     
     public List<Item> CreatedItems => _createdItems;
     
-    public async void CreateItem(int quality, int strength, Vector3 centerPosition)
+    public async void CreateItem(int strength, Vector3 centerPosition)
     {
         Item itemPrefab = GetItemPrefab();
         
@@ -28,11 +28,11 @@ public sealed class ItemFactory : MonoBehaviour
         Item item = itemDraggable.GetComponent<Item>();
         
         int duration = 1;
-        if (Random.Range(0, 100) > 75) duration = 2;
          
         item.SetDuration(duration);
+        item.SetStrength(strength);
         
-        List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(quality, strength);
+        List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(strength);
         item.AddToggleEffectDatas(toggleEfectDatas);
         
         int charges = 0;
@@ -68,6 +68,12 @@ public sealed class ItemFactory : MonoBehaviour
         }
     }
 
+    public void RemoveAndDestroyItem(Item item)
+    {
+        RemoveItem(item);
+        item.DestroyItem();
+    }
+    
     private Item GetItemPrefab()
     {
         List<ItemColor> allItemColors = Enum.GetValues(typeof(ItemColor)).Cast<ItemColor>().ToList();

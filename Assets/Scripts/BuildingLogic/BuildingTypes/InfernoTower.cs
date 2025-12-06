@@ -18,6 +18,9 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     
     private CombatEntity _currentEnemy;
     
+    public CombatEntity CurrentTarget => _currentEnemy;
+    public OverridableBehaviour OnMaxChargeReached = new();
+    
     private void Start()
     {
         base.Start();
@@ -28,20 +31,34 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         _ownerEntity.Draggable.PickedUp += ClearEnemy;
         _enemyAreaScaner.RemovedItem += TryClearEnemy; 
         _beamSystem.SetSource(_sourceTransform);
+        
+        OnMaxChargeReached.Initialize(_ownerEntity);
     }  
+    
+    public void ResetChargeAndTarget()
+    {
+        _elapsedTime = 0f;
+        
+        if (_enemyAreaScaner.IsEmpty) return;
+            
+        _currentEnemy = _enemyAreaScaner.GetPrioritizedEntity();
+        _beamSystem.SetTarget(_currentEnemy.transform);
+    }
     
     private void Beam()
     {
-        IncreaseElapsedTime();
-        
-        if (_currentEnemy == null || _currentEnemy.Health.IsAlive() == false)
+        if (_currentEnemy == null || !_currentEnemy.Health.IsAlive())
         {
-            _elapsedTime = 0;
-            _currentEnemy = _enemyAreaScaner.GetPrioritizedEntity();
-            _beamSystem.SetTarget(_currentEnemy.transform);
-        }
+            ResetChargeAndTarget();
 
-        float charge = Mathf.Lerp(0, 1, _elapsedTime / _chargeDuration.Value);
+            if (_currentEnemy == null || !_currentEnemy.Health.IsAlive()) return;
+        }
+        else
+        { 
+            IncreaseElapsedTime();
+        }
+        
+        float charge = _elapsedTime / _chargeDuration.Value;
         float damage = _damage.Value * Mathf.Lerp(1, _maxDamage.Value, charge);
         
         _beamSystem.SetAlpha(charge);
@@ -54,10 +71,15 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         if (_elapsedTime >= _chargeDuration.Value) return;
         
         _elapsedTime += _taskCycleRechargeDuration.Value;
-        
-        if (_elapsedTime > _chargeDuration.Value) _elapsedTime = _chargeDuration.Value;
-    }
 
+        if (_elapsedTime >= _chargeDuration.Value)
+        {
+            _elapsedTime = _chargeDuration.Value;
+            
+            OnMaxChargeReached.Execute();
+        }
+    }
+    
     private void TryClearEnemy(CombatEntity removedEnemy)
     {
         if (removedEnemy == _currentEnemy)

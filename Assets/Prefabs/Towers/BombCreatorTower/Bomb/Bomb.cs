@@ -35,7 +35,7 @@ public sealed class Bomb : WeaponBase
     {
         if (!_canBeExploded) return;
         
-        _fuseVisualEffect.Play();
+        _fuseVisualEffect.PlayEffect();
         
         try
         {
@@ -45,7 +45,7 @@ public sealed class Bomb : WeaponBase
         catch (Exception e) { e.LogAsync(); } 
         
         
-        _fuseVisualEffect.StopAsync().Forget();
+        _fuseVisualEffect.StopPermamentEffect().Forget();
     }
     
     private void StopExplosion()

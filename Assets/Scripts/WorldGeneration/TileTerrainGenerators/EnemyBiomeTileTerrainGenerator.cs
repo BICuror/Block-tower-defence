@@ -16,7 +16,6 @@ public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
         ClearAllTiles();
         
         Vector2Int biomePosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
-        int islandSize = _islandDataContainer.Data.IslandSize;
         
         _enemyBiomeLength = (int)Mathf.Sqrt(enemyBiomeMap.Length);
         _enemyBiomeMap = enemyBiomeMap;

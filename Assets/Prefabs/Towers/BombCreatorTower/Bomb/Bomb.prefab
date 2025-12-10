@@ -141,7 +141,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 2
   _visualEffect: {fileID: 6674060068691357771}
-  _keepInitialParent: 1
+  _detachFromParentWhilePlaying: 0
 --- !u!1 &4855757104867912901
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,6 +387,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Explotion
       objectReference: {fileID: 0}
+    - target: {fileID: 2173425947725659244, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3185672895172276758, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -425,6 +429,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3185672895172276758, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841955945673366280, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
+      propertyPath: _stopAction
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4841955945673366280, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
+      propertyPath: _detachFromParentWhilePlaying
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7432770154856735158, guid: fca041fbd40396c47bfb5e86b32aa952, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:

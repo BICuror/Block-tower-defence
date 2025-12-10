@@ -12,6 +12,8 @@ public sealed class EnemyData : ScriptableObject
     [SerializeField] private float _maxHealth = 25f;
     [SerializeField] private float _speed = 2f;
 
+    [SerializeField] private List<StatInitializer> _statInitializer;
+    
     [Header("NavigationData")]
     [SerializeField] private NavigationAgentData _navigationData;
     
@@ -26,6 +28,7 @@ public sealed class EnemyData : ScriptableObject
     public float ContactDamage => _contactDamage;
     public float MaxHealth => _maxHealth;
     public float Speed => _speed;
+    public List<StatInitializer> StatInitializers => _statInitializer;
     public NavigationAgentData NavigationData => _navigationData;
     public bool HasObjectModificators => _hasObjectModificators;
     public List<GameObject> ObjectModificators => _objectModificators;

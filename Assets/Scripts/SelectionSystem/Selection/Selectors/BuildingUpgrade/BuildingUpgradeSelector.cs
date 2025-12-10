@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Combat;
-using UnityEngine.Serialization;
 
 public sealed class BuildingUpgradeSelector : MonoBehaviour
 {
@@ -26,7 +25,10 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
     {
         if (settings.SelectionArgument != null)
         {
-            _buildingEntityToUpgrade = (BuildingEntity)settings.SelectionArgument;
+            if ((bool)settings.SelectionArgument)
+            {
+                _buildingEntityToUpgrade = FindBuildingsWithLeastModificators();
+            }
         }
         else
         {
@@ -83,5 +85,22 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         await _draggableConnector.PlaceDraggable(_buildingEntityToUpgrade.gameObject, _buildingEntityToUpgrade.ComponentsContainer.Get<BuildingDraggable>(), placementPosition);
 
         _draggableConnector.gameObject.SetActive(false);
+    }
+
+    private BuildingEntity FindBuildingsWithLeastModificators()
+    {
+        int minimalModificators = int.MaxValue;
+        BuildingEntity foundEntity = null;
+        
+        foreach (BuildingEntity buildingEntity in _globalBuildingContainer.Entities)
+        {
+            if (buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count < minimalModificators)
+            {
+                minimalModificators = buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count;
+                foundEntity = buildingEntity;
+            }
+        }
+        
+        return foundEntity;
     }
 }

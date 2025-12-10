@@ -7,7 +7,7 @@ namespace Combat
     {
         [Cached] private EnemyEntity _enemyEntity;
     
-        public Action<EnemyEntity> EnemyDied; 
+        public event Action<EnemyEntity> EnemyDied; 
         
         public override void Die()
         {

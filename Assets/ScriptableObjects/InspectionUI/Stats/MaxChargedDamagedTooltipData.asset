@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c804f5fb63bc1fe4197d7e091f47e777, type: 3}
   m_Name: MaxChargedDamagedTooltipData
   m_EditorClassIdentifier: 
-  _tag: MaxChargedDamage
+  _tag: MaxChargedDamageMultiplier
   _tagText: Max charged damage multiplier
   _textColor: {r: 1, g: 0.66177595, b: 0, a: 1}
   _iconSprite: {fileID: 775677324, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _description: Multiplier applied to damage as entity charges
-  _associatedStatTypeName: MaxDamage
+  _onlyText: 0
+  _associatedStatTypeName: MaxDamageMultiplier

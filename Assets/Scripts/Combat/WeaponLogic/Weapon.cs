@@ -63,6 +63,8 @@ namespace Combat
         
         private void SetState(bool state)
         {
+            if (!gameObject) return;
+            
             Collider.enabled = state;
             gameObject.SetActive(state);
         }

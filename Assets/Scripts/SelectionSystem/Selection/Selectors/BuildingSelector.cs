@@ -12,7 +12,7 @@ public sealed class BuildingSelector : MonoBehaviour
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private BuildingSelectionOptionObject _selectionObject;
     
-    public async UniTask StartBuildingsSelection()
+    public async UniTask StartBuildingsSelection(SelectionSettings currentSelectionSettings)
     {
         BuildingSelectionOptionDataContainer datasContainer = _islandDataHolder.Data.SelectionContainer.BuildingSelectionOptionDataContainer;
         

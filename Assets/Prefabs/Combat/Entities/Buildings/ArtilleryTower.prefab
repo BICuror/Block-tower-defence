@@ -137,7 +137,7 @@ MonoBehaviour:
     _defaultValue: 30
   - StructName: BuildTime
     _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    _defaultValue: 0.5
+    _defaultValue: 5
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 1
@@ -146,10 +146,11 @@ MonoBehaviour:
     _defaultValue: 0.8
   - StructName: Damage
     _statData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
-    _defaultValue: 12
+    _defaultValue: 6
   - StructName: MaxEntities
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
-    _defaultValue: 2
+    _defaultValue: 1
+  _destroyOnDeath: 0
 --- !u!114 &6744749896849936341
 MonoBehaviour:
   m_ObjectHideFlags: 0

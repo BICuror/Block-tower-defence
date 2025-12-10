@@ -5297,16 +5297,17 @@ MonoBehaviour:
     _defaultValue: 3
   - StructName: Damage
     _statData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
-    _defaultValue: 0
+    _defaultValue: 5
   - StructName: TravelTime
     _statData: {fileID: 11400000, guid: 5e8b85fba4737254599072092f655308, type: 2}
     _defaultValue: 0.75
   - StructName: ExplosionDamage
     _statData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    _defaultValue: 7
+    _defaultValue: 10
   - StructName: ExplosionRadius
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
     _defaultValue: 2.5
+  _destroyOnDeath: 0
 --- !u!114 &7114909489339946991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5416,6 +5417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoScale: 0
   _additionalScaleValue: 0.95
+  _areaScaleValue: 2
   _hasVisualisation: 1
   _visualisationTransform: {fileID: 5364188672156161428}
   _height: 100

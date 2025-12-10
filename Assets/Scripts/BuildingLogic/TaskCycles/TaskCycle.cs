@@ -49,6 +49,8 @@ public class TaskCycle : MonoBehaviour
 
     public bool IsPossibleToPerformTask()
     {
+        if (!_ownerEntityHealth.IsAlive()) return false;
+        
         if (!CanWork()) return false;
         
         if (!_taskConditionProvider.GetTaskCondition().Invoke()) return false; 
@@ -67,7 +69,7 @@ public class TaskCycle : MonoBehaviour
     
     protected void OnDestroy()
     {
-        _ownerEntityHealth.Died += StopRechargeProcess;
+        _ownerEntityHealth.Died -= StopRechargeProcess;
     }
     
     private async void StartRechargeProcess()

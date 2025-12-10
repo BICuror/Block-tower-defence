@@ -20,6 +20,7 @@ public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifi
         
         _buildingAreaScaner.AddedItem += RecalculateDamageBoost;
         _buildingAreaScaner.RemovedItem += RecalculateDamageBoost;
+        
         RecalculateDamageBoost();
     }
     

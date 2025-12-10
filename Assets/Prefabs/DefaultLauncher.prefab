@@ -140,7 +140,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5670341234798761384}
         m_TargetAssemblyTypeName: VisualEffectHandler, Assembly-CSharp
-        m_MethodName: PlayAndForget
+        m_MethodName: PlayBurstEffectAndForget
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 1
   _visualEffect: {fileID: 2129431750140528835}
-  _keepInitialParent: 0
+  _keepInitialParent: 1
 --- !u!1001 &7587518800355939385
 PrefabInstance:
   m_ObjectHideFlags: 0

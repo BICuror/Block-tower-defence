@@ -70,6 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoScale: 0
   _additionalScaleValue: 0.95
+  _areaScaleValue: 2
   _hasVisualisation: 1
   _visualisationTransform: {fileID: 5685913978622280730}
   _height: 100
@@ -5542,22 +5543,23 @@ MonoBehaviour:
     _defaultValue: 30
   - StructName: BuildTime
     _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    _defaultValue: 1
+    _defaultValue: 1.3
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    _defaultValue: 4
+    _defaultValue: 3
   - StructName: TaskRechargeDuration
     _statData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    _defaultValue: 3
+    _defaultValue: 2.5
   - StructName: Damage
     _statData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
-    _defaultValue: 10
+    _defaultValue: 11
   - StructName: PropogationDamageMiultiplier
     _statData: {fileID: 11400000, guid: 69fcb066e4b92a74a83da456ea07ea7f, type: 2}
-    _defaultValue: 0.75
+    _defaultValue: 0.8
   - StructName: PropogationRadius
     _statData: {fileID: 11400000, guid: 6fc83b23e4ce9c845a86c3f2c4687422, type: 2}
-    _defaultValue: 2
+    _defaultValue: 1
+  _destroyOnDeath: 0
 --- !u!114 &6026486521535129250
 MonoBehaviour:
   m_ObjectHideFlags: 0

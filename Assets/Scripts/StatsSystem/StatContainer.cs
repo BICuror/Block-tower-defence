@@ -21,6 +21,16 @@ public class StatContainer
         }
     }
 
+    public void RemoveStats(StatInitializer[] statInitializers)
+    {
+        foreach (StatInitializer statInitializer in statInitializers)
+        {
+            Type statType = statInitializer.StatData.GetStatType();
+
+            Remove(statType);
+        }
+    }
+
     public List<Stat> GetAllStats()
     {
         return _stats.Values.ToList();

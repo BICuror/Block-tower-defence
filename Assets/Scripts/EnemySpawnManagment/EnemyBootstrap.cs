@@ -10,16 +10,21 @@ namespace Combat
         [SerializeField] private MeshRenderer _meshRenderer;   
         [SerializeField] private MeshFilter _meshFilter;
 
-        [Cached] private CombatEntity _combatEntity;
-        [Cached] private NavigationAgent _navMeshAgent;
-        [Cached] private EnemyHealth _enemyHealth;
-        [Cached] private StatContainer _statContainer;
-        [Cached] private HealthBar _healthBar;
         [Cached] private EntityObjectModificatorContainer _entityObjectModificatorContainer;
+        [Cached] private NavigationAgent _navMeshAgent;
+        [Cached] private StatContainer _statContainer;
+        [Cached] private CombatEntity _combatEntity;
+        [Cached] private EnemyHealth _enemyHealth;
+        [Cached] private HealthBar _healthBar;
         [Cached] private Collider _collider;
         
         private EnemyData _enemyData;
-    
+
+        private void Start()
+        {
+            _enemyHealth.Died += OnEnemyDeath;
+        }
+        
         public void SetEnemyData(EnemyData enemyDataToSet, bool initializeNavigation = true, bool initializeSpecialObjects = true)
         {
             _enemyData = enemyDataToSet;
@@ -52,6 +57,8 @@ namespace Combat
             ContactDamage contactDamageStat = _statContainer.Get<ContactDamage>();
             contactDamageStat.Reset();
             contactDamageStat.SetDefault(_enemyData.ContactDamage);
+            
+            _statContainer.AddStats(_enemyData.StatInitializers.ToArray());
         }
     
         private void SetVisualData()
@@ -70,6 +77,12 @@ namespace Combat
                     _entityObjectModificatorContainer.InstantiateAndAddModificator(additionalObjectPrefab);
                 });
             }
+        }
+
+        private void OnEnemyDeath()
+        {
+            _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
+            _entityObjectModificatorContainer.DestroyAllModificators();
         }
 
         private void OnDisable()

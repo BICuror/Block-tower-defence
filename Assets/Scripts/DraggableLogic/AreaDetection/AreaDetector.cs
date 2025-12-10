@@ -29,7 +29,7 @@ namespace Combat
             RemovedItem?.Invoke(component);
         }
         
-        private void RemoveAll()
+        protected void RemoveAll()
         {
             for (int i = 0; i < List.Count; i++)
             {
@@ -38,7 +38,5 @@ namespace Combat
 
             List.Clear();
         }
-        
-        private void OnDestroy() => RemoveAll();
     }
 }

@@ -13,13 +13,13 @@ public sealed class ApplyEffectInArea : EntityObjectModifier
     {
         _effectType = Type.GetType(_effectTypeName);
         
+        _areaEntityDetector.AddedItem += ApplyEffect;
+        _areaEntityDetector.RemovedItem += RemoveEffect;
+                
         foreach (CombatEntity combatEntity in _areaEntityDetector.GetList())
         {
             ApplyEffect(combatEntity);
         }
-
-        _areaEntityDetector.AddedItem += ApplyEffect;
-        _areaEntityDetector.RemovedItem += RemoveEffect;
     }
 
     private void ApplyEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_effectType, _effectStaks);

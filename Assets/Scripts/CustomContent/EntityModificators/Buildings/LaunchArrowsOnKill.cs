@@ -53,7 +53,7 @@ public sealed class LaunchArrowsOnKill : EntityModificator
     }
     
     private void SubscribeToArrow(Arrow arrow) => arrow.OnArrowHit += OnArrowHit;
-    private void OnArrowHit(Arrow arrow) => arrow.DisableArrow().Forget();
+    private void OnArrowHit(Arrow arrow) => arrow.DisableArrow();
     
     public override void Disable()
     {

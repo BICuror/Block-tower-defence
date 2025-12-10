@@ -1,31 +1,36 @@
-using System;
-using System.Threading;
 using Cysharp.Threading.Tasks;
+using System.Threading;
 using UnityEngine.VFX;
 using UnityEngine;
+using System;
 
 public sealed class VisualEffectHandler : MonoBehaviour
 {
     [SerializeField] private StopActionType _stopAction;
     [SerializeField] private VisualEffect _visualEffect;
-    [SerializeField] private bool _keepInitialParent;
-
+    [SerializeField] private bool _detachFromParentWhilePlaying = false;
+    
     private CancellationTokenSource _cancellationTokenSource = new();
     private Transform _initialParent;
     private Vector3 _initialLocalPosition;
+    private Quaternion _initialLocalRotation;
+    private bool _initialParentCaptured;
     private float _disableTime;
 
     private void Awake()
     {
-        _disableTime = _visualEffect.GetFloat("MaxLifeTime"); 
+        _disableTime = _visualEffect.GetFloat("MaxLifeTime");
+        TryCaptureInitialParent();
     }
-    
-    public void PlayAndForget() => PlayAndStop().Forget();
 
-    public async UniTask PlayAndStop()
+    #region BurstEffects
+
+    public void PlayBurstEffectAndForget() => PlayBurstEffect().Forget();
+
+    public async UniTask PlayBurstEffect()
     {
-        Play();
-        Cancel();
+        CancelStopAction();
+        PlayEffect();
         
         try
         {
@@ -39,25 +44,25 @@ public sealed class VisualEffectHandler : MonoBehaviour
         
         Stop();
     }
-    
-    public void Play()
+
+    #endregion
+
+    public void PlayEffect()
     {
-        if (!_keepInitialParent)
-        {
-            _initialParent = transform.parent;
-            _initialLocalPosition = transform.localPosition;
-        
-            transform.SetParent(null);
-        }
+        CancelStopAction();
+        TryCaptureInitialParent();
+        TryReturnToDefaultParent();
+        TrySetNullParent();
         
         _visualEffect.gameObject.SetActive(true);
+        _visualEffect.Stop();
         _visualEffect.Play();
     }
-
-    public async UniTask StopAsync()
+    
+    #region PlayPermamentRegion
+    
+    public async UniTask StopPermamentEffect()
     {
-        Cancel();
-        
         _visualEffect.Stop();
         
         try
@@ -73,31 +78,36 @@ public sealed class VisualEffectHandler : MonoBehaviour
         Stop();
     }
     
+
+    #endregion
+
+    #region StopAction
+    
     public void Stop()
     {
+        _visualEffect.Stop();
+        
         switch(_stopAction)
         {
-            case StopActionType.DisableSelfAndEffect: Disable(); break;
-            case StopActionType.Destroy: Destroy(); break;
-            case StopActionType.DisableEffect: Disable(); break;
+            case StopActionType.DisableEffectObjectAndScriptEffect: DisableEffectObjectAndScriptObjects(); break;
+            case StopActionType.DisableEffectObject: DisableEffectObject(); break;
             case StopActionType.None: break;
-        } 
-    }
-
-    public void DisableEffect()
-    {
-        _visualEffect.gameObject.SetActive(false);
+            case StopActionType.DestroyObject: Destroy(); return;
+        }
 
         TryReturnToDefaultParent();
     }
 
-    private void Disable()
+    private void DisableEffectObject()
+    {
+        _visualEffect.gameObject.SetActive(false);
+    }
+
+    private void DisableEffectObjectAndScriptObjects()
     {
         _visualEffect.gameObject.SetActive(false);
 
         gameObject.SetActive(false);
-
-        TryReturnToDefaultParent();
     }
 
     private void Destroy()
@@ -105,28 +115,53 @@ public sealed class VisualEffectHandler : MonoBehaviour
         Destroy(gameObject);
     }
     
+    #endregion
+
+    #region KeepIniitalParent
+
+    private void TrySetNullParent()
+    {
+        if (!_detachFromParentWhilePlaying) return;    
+        
+        transform.SetParent(null);
+    }
+
+    private void TryCaptureInitialParent()
+    {
+        if (_initialParentCaptured || !_detachFromParentWhilePlaying) return;
+            
+        _initialParent = transform.parent;
+        _initialLocalPosition = transform.localPosition;
+        _initialLocalRotation = transform.localRotation;
+
+        _initialParentCaptured = true;
+    }
+    
     private void TryReturnToDefaultParent()
     {
-        if (_keepInitialParent) return;
+        if (!_detachFromParentWhilePlaying) return;
         
         transform.SetParent(_initialParent);
         transform.localPosition = _initialLocalPosition;
+        transform.localRotation = _initialLocalRotation;
     }
 
-    private void Cancel()
+    #endregion
+    
+    private void CancelStopAction()
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
         _cancellationTokenSource = new();
     }
 
-    private void OnDestroy() => Cancel();
+    private void OnDestroy() => CancelStopAction();
     
     private enum StopActionType
     {
-        DisableSelfAndEffect, 
-        Destroy,
-        DisableEffect,
+        DisableEffectObjectAndScriptEffect, 
+        DestroyObject,
+        DisableEffectObject,
         None
     }
 }

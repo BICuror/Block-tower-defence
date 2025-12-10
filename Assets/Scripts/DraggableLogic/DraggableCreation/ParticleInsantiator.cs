@@ -19,6 +19,6 @@ public sealed class ParticleInsantiator : MonoBehaviour
 
         visualEffect.transform.rotation = placedObject.transform.rotation;
     
-        visualEffect.PlayAndStop();
+        visualEffect.PlayBurstEffectAndForget();
     }
 }

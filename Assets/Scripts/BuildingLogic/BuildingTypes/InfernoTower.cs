@@ -9,10 +9,10 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     [SerializeField] private Transform _sourceTransform;
     
     [Cached] private TaskRechargeDuration _taskCycleRechargeDuration;
+    [Cached] private MaxDamageMultiplier _maxDamageMultiplier;
     [Cached] private AreaEntityDetector _enemyAreaScaner;
     [Cached] private ChargeDuration _chargeDuration;
     [Cached] private CombatEntity _ownerEntity;
-    [Cached] private MaxDamage _maxDamage;
     [Cached] private Damage _damage;
     private float _elapsedTime;
     
@@ -24,42 +24,48 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     private void Start()
     {
         base.Start();
+        _beamSystem.SetSource(_sourceTransform);
         
         _weaponBase.Initialize(_ownerEntity);
 
-        _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Beam;
+        _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += TryToBeam;
+        
         _ownerEntity.Draggable.PickedUp += ClearEnemy;
         _enemyAreaScaner.RemovedItem += TryClearEnemy; 
-        _beamSystem.SetSource(_sourceTransform);
         
         OnMaxChargeReached.Initialize(_ownerEntity);
     }  
     
-    public void ResetChargeAndTarget()
+    public bool ResetChargeAndTryFindTarget()
     {
         _elapsedTime = 0f;
         
-        if (_enemyAreaScaner.IsEmpty) return;
+        if (_enemyAreaScaner.IsEmpty) return false;
             
         _currentEnemy = _enemyAreaScaner.GetPrioritizedEntity();
         _beamSystem.SetTarget(_currentEnemy.transform);
+
+        return true;
     }
     
-    private void Beam()
+    private void TryToBeam()
     {
-        if (_currentEnemy == null || !_currentEnemy.Health.IsAlive())
+        if (_currentEnemy == null)
         {
-            ResetChargeAndTarget();
-
-            if (_currentEnemy == null || !_currentEnemy.Health.IsAlive()) return;
+            if (!ResetChargeAndTryFindTarget()) return;
         }
         else
         { 
             IncreaseElapsedTime();
+
+            if (_currentEnemy == null)
+            {
+                if (!ResetChargeAndTryFindTarget()) return;
+            }
         }
         
         float charge = _elapsedTime / _chargeDuration.Value;
-        float damage = _damage.Value * Mathf.Lerp(1, _maxDamage.Value, charge);
+        float damage = _damage.Value * Mathf.Lerp(1, _maxDamageMultiplier.Value, charge);
         
         _beamSystem.SetAlpha(charge);
         
@@ -82,10 +88,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     
     private void TryClearEnemy(CombatEntity removedEnemy)
     {
-        if (removedEnemy == _currentEnemy)
-        {
-            ClearEnemy();
-        }
+        if (removedEnemy == _currentEnemy) ClearEnemy();
     }
  
     private void ClearEnemy()

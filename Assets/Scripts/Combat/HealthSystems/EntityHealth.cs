@@ -10,11 +10,11 @@ namespace Combat
         private float _maxHealth;
         private float _currentHp;
         
-        public Action Damaged;
-        public Action Healed;
-        public Action Died;
-        public Action<CombatEntity> EntityDamaged;
-        public Action<CombatEntity> EntityDied; 
+        public event Action Damaged;
+        public event Action Healed;
+        public event Action Died;
+        public event Action<CombatEntity> EntityDamaged;
+        public event Action<CombatEntity> EntityDied; 
         
         public void Initialize()
         {

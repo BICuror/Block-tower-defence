@@ -11,7 +11,7 @@ public sealed class ShieldEntityModificator : EntityModificator
     
     public override void Enable()
     {
-        _shieldDamageModificator = new(Args.GetArgument<float>("MaxShieldHealth"));
+        InitializeShieldDamageModificator();
         _shieldDamageModificator.ShieldHealthUpdated += OnShieldHealthUpdated;
         
         Entity.DamageModifierContainer.ReciverContainer.Add(_shieldDamageModificator);
@@ -19,6 +19,24 @@ public sealed class ShieldEntityModificator : EntityModificator
         Initalize();
 
         _waveStateMachine.StateStarted += TryReinitializeShield;
+    }
+
+    private void InitializeShieldDamageModificator()
+    {
+        float shieldHealth = 0f;
+
+        if (Args.HasArgument("MaxShieldHealth"))
+        {
+            shieldHealth += Args.GetArgument<float>("MaxShieldHealth");
+        }
+
+        if (Args.HasArgument("ShieldHealthScale"))
+        {
+            shieldHealth += Args.GetArgument<float>("ShieldHealthScale") * Entity.Health.GetMaxHp();
+        }
+        
+        
+        _shieldDamageModificator = new(shieldHealth);
     }
 
     private void TryReinitializeShield(WaveState waveState)

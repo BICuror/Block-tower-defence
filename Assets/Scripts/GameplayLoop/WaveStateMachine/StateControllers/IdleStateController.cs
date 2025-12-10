@@ -46,6 +46,7 @@ public sealed class IdleStateController : WaveStateController
         RandomExstentions.ReInitializeUnityRandom();
         
         _itemContainerManager.UpdateContainedItems().Forget();
+        _selectionManager.TryEnqueueNewBuildingSelection();
         _selectionManager.TryStartQueuedSelection();
         _itemContainerManager.UnlockContainer();
     }

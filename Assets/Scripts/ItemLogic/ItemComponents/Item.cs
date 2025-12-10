@@ -85,7 +85,7 @@ public class Item : DraggableObject
     
     public void DestroyItem()
     {
-        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity).PlayAndForget();
+        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity).PlayBurstEffectAndForget();
         Destroy(gameObject);
     }
 }

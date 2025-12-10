@@ -27,7 +27,7 @@ public sealed class AOE : WeaponBase
     public async UniTask ActiveAOE()
     {
         UpdateAOERadius(_radius.Value);
-        _explotionEffect.Play();
+        _explotionEffect.PlayBurstEffectAndForget();
 
         float elapsedTime = 0f;
 
@@ -49,7 +49,7 @@ public sealed class AOE : WeaponBase
             elapsedTime += _secondsPerHit;
         }
 
-        await _explotionEffect.StopAsync();
+        await _explotionEffect.StopPermamentEffect();
     }
 
     public void DeactiveAOE()

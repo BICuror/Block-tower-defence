@@ -48,7 +48,7 @@ public sealed class InfernoExplodeOnFullCharge : EntityModificator
             explosion.transform.position = Entity.ComponentsContainer.Get<InfernoTower>().CurrentTarget.transform.position;
             explosion.Explode().Forget();
             
-            Entity.ComponentsContainer.Get<InfernoTower>().ResetChargeAndTarget();
+            Entity.ComponentsContainer.Get<InfernoTower>().ResetChargeAndTryFindTarget();
         }
     }
 }

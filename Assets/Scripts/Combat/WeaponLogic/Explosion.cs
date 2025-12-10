@@ -29,9 +29,7 @@ namespace Combat
                 DamageEntity(_explosionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
             }
 
-            await _explotionEffect.PlayAndStop();
-            
-            _explotionEffect.DisableEffect();
+            await _explotionEffect.PlayBurstEffect();
         }
 
         private void UpdateExplotionRadius(float explotionRaduis)

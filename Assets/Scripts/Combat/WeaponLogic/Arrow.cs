@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
 
@@ -10,7 +9,7 @@ namespace Combat
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
         private Damage _damage;
 
-        public Action<Arrow> OnArrowHit;
+        public event Action<Arrow> OnArrowHit;
         
         protected override void OnInitialized()
         {
@@ -30,7 +29,7 @@ namespace Combat
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out EnemyEntity enemyEntity))
+            if (other.TryGetComponent(out CombatEntity enemyEntity))
             {
                 DamageEntity(_damage.Value, enemyEntity);
                 
@@ -38,12 +37,9 @@ namespace Combat
             }
         }
 
-        public async UniTask DisableArrow()
+        public void DisableArrow()
         {
-            Collider.enabled = false;
-            Rigidbody.velocity = Vector3.zero;
-            
-            await _visualEffectHandler.PlayAndStop();
+            _visualEffectHandler.PlayBurstEffectAndForget();
             
             Disable();
         }

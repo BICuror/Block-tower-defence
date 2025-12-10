@@ -48,7 +48,7 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
     {
         public override void Execute(Arrow arrow)
         {
-            arrow.DisableArrow().Forget();
+            arrow.DisableArrow();
         }
     }
 }

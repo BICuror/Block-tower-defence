@@ -20,12 +20,16 @@ public abstract class HealthBar : Shaker
     private float _healthDifference = 1f;
     private float _displayedHealth = 1f;
 
+    private bool _initialized;
+
     protected void Initialize()
     {
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _materialPropertyBlock = new MaterialPropertyBlock();
         _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
+
+        _initialized = true;
         
         UpdatePropertyBlock();
     }
@@ -102,6 +106,11 @@ public abstract class HealthBar : Shaker
         base.OnDisable();
         
         _cancellationTokenSource.Cancel();
+        
+        if (!_initialized) return;
+        
+        UpdateDisplayedHealth(OwnerHealth.GetHpPercent());
+        UpdateHealthDifference(OwnerHealth.GetHpPercent());
     }
 
     protected void OnDestroy()

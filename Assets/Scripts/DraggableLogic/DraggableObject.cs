@@ -14,11 +14,11 @@ public class DraggableObject : MonoBehaviour, IDraggable
     
     public bool IsPlaced => DraggableState == DraggableState.Placed;
 
-    public Action PickedUp;
-    public Action Placed;
+    public event Action PickedUp;
+    public event Action Placed;
     
-    public Action<DraggableObject> DraggablePickedUp; 
-    public Action<DraggableObject> DraggablePlaced;
+    public event Action<DraggableObject> DraggablePickedUp; 
+    public event Action<DraggableObject> DraggablePlaced;
 
     protected void Awake()
     {

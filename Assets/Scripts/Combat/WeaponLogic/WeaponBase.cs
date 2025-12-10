@@ -20,7 +20,7 @@ public class WeaponBase : MonoBehaviour
 
     public void DamageEntity(float damageAmount, CombatEntity receivingEntity)
     {
-        if (!receivingEntity || !receivingEntity.Health.IsAlive()) return;
+        if (!receivingEntity.Health.IsAlive()) return;
             
         receivingEntity.Health.ReceiveEnemyDamage(damageAmount, OwnerEntity);
             

@@ -8,16 +8,11 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
 {
     [Cached] private EntityComponentCacher _ownerComponentCacher;
     [Inject] private DiContainer _diContainer;
-    [Cached] private EntityHealth _entityHealth;
     [Cached] private CombatEntity _ownerEntity;
     
     private List<EntityObjectModifier> _modificators = new();
     private List<GameObject> _gameObjectModificators = new();
-
-    private void Start()
-    {
-        _entityHealth.EntityDied += _ => DestroyAllModificators();
-    }
+    
 
     public bool CanBeAppliedToEntity(EntityObjectModifier modificatorPrefab)
     {
@@ -28,6 +23,7 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
     {
         EntityObjectModifier modificator = _diContainer.InstantiatePrefab(modificatorPrefab, transform).GetComponent<EntityObjectModifier>();
         
+        _ownerEntity.InjectCachedToObjectAndChildren(modificator.gameObject);
         AdaptObjectModifier(modificator.gameObject);
         _modificators.Add(modificator);
 
@@ -38,6 +34,7 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
     {
         GameObject modificator = _diContainer.InstantiatePrefab(modificatorPrefab, transform);
         
+        _ownerEntity.InjectCachedToObjectAndChildren(modificator);
         AdaptObjectModifier(modificator.gameObject);
         _gameObjectModificators.Add(modificator);
 
@@ -58,21 +55,19 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
         Destroy(modificator);
     }
     
-    private void AdaptObjectModifier(GameObject objectModifier)
-    {
-        objectModifier.transform.SetParent(transform);
-        objectModifier.transform.localPosition = Vector3.zero;
-        objectModifier.transform.localRotation = Quaternion.identity;
-        
-        _ownerComponentCacher.InjectCachedToObjectAndChildren(objectModifier.gameObject);
-    }
-
-    private void DestroyAllModificators()
+    public void DestroyAllModificators()
     {
         _modificators.ForEach(modificator => Destroy(modificator.gameObject));
         _modificators.Clear();
         
         _gameObjectModificators.ForEach(Destroy);
         _gameObjectModificators.Clear();
+    }
+    
+    private void AdaptObjectModifier(GameObject objectModifier)
+    {
+        objectModifier.transform.SetParent(transform);
+        objectModifier.transform.localPosition = Vector3.zero;
+        objectModifier.transform.localRotation = Quaternion.identity;
     }
 }

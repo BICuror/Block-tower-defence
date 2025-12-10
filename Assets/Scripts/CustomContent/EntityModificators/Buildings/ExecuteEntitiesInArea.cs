@@ -9,13 +9,24 @@ public sealed class ExecuteEntitiesInArea : EntityModificator
         _executeThreshold = Args.GetArgument<float>("Threshold");
         
         AreaEntityDetector areaEntityDetector = Entity.ComponentsContainer.Get<AreaEntityDetector>();
-        
         areaEntityDetector.AddedItem += SubscribeToEntity;
         areaEntityDetector.RemovedItem += UnsubscribeFromEntity;
         
         foreach (CombatEntity combatEntity in areaEntityDetector.GetList())
         {
             SubscribeToEntity(combatEntity);
+        }
+    }
+    
+    public override void Disable()
+    {
+        AreaEntityDetector areaEntityDetector = Entity.ComponentsContainer.Get<AreaEntityDetector>();
+        areaEntityDetector.AddedItem -= TryExecuteEntity;
+        areaEntityDetector.RemovedItem -= UnsubscribeFromEntity;
+        
+        foreach (CombatEntity combatEntity in areaEntityDetector.GetList())
+        {
+            UnsubscribeFromEntity(combatEntity);
         }
     }
 
@@ -39,11 +50,5 @@ public sealed class ExecuteEntitiesInArea : EntityModificator
         {
             combatEntity.Health.ReceiveEnemyDamage(combatEntity.StatContainer.Get<MaxHealth>().Value, Entity);
         }
-    }
-
-    public override void Disable()
-    {
-        AreaEntityDetector areaEntityDetector = Entity.ComponentsContainer.Get<AreaEntityDetector>();
-        areaEntityDetector.AddedItem -= TryExecuteEntity;
     }
 }

@@ -5088,13 +5088,14 @@ MonoBehaviour:
   _statInitializers:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
-    _defaultValue: 5
+    _defaultValue: 15
   - StructName: BuildTime
     _statData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
     _defaultValue: 1
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    _defaultValue: 3
+    _defaultValue: 2
+  _destroyOnDeath: 1
 --- !u!114 &5457603145016709662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5408,6 +5409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoScale: 1
   _additionalScaleValue: 0.95
+  _areaScaleValue: 2
   _hasVisualisation: 1
   _visualisationTransform: {fileID: 7716149748217318842}
   _height: 100

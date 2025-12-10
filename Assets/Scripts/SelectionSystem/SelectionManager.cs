@@ -30,9 +30,6 @@ public sealed class SelectionManager : MonoBehaviour
     private async void Start()
     {
         _selectionOptionObjectAreaDetector.AddedItem += (optionObject) => ResolveCurrentSelection(optionObject).Forget();
-        
-        EnqueueSelection(new SelectionSettings(SelectionType.Building));
-        EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
 
         await UniTask.WaitForSeconds(5);
     }
@@ -41,7 +38,17 @@ public sealed class SelectionManager : MonoBehaviour
     {
         return _selectionIsActive && type == _currentSelectionSettings.Type;
     }
-    
+
+    public bool TryEnqueueNewBuildingSelection()
+    {
+        if (_globalBuildingContainer.Entities.Count < _globalStatContainer.Get<MaxBuildings>().Value)
+        {
+            EnqueueSelection(new SelectionSettings(SelectionType.Building));
+            EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade, true));
+        }
+
+        return false;
+    }
     public void EnqueueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
     
     public void TryStartQueuedSelection()
@@ -60,12 +67,11 @@ public sealed class SelectionManager : MonoBehaviour
         {
             case SelectionType.Building:
             {
-                if (_globalBuildingContainer.Entities.Count >= _globalStatContainer.Get<MaxBuildings>().Value)
+                if (_globalBuildingContainer.Entities.Count < _globalStatContainer.Get<MaxBuildings>().Value)
                 {
-                    _currentSelectionSettings.Type = SelectionType.BuildingUpgrade;
-                    await _buildingUpgradeSelector.StartUpgradeSelection(_currentSelectionSettings);
+                    await _buildingSelector.StartBuildingsSelection(_currentSelectionSettings);
                 }
-                else await _buildingSelector.StartBuildingsSelection(); break;
+                break;
             }
             case SelectionType.GlobalEffect: await _globalEffectSelector.StartGlobalEffectSelection(); break;
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(_currentSelectionSettings); break;

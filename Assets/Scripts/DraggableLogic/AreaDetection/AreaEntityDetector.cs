@@ -1,10 +1,17 @@
 using UnityEngine;
+using Cashing;
 
 namespace Combat
 {
     public class AreaEntityDetector : AreaDetector<CombatEntity>
     {
+        [Cached] private CombatEntity _ownerEntity;
         private EntityDetectorPriorityAlgorithm _priorityAlgorithm;
+
+        private void Start()
+        {
+            if (_ownerEntity) _ownerEntity.Health.Died += RemoveAll;
+        }
         
         public void SetPriorityAlgorithm(EntityDetectorPriorityAlgorithm priorityAlgorithm) => _priorityAlgorithm = priorityAlgorithm;
         
@@ -77,6 +84,11 @@ namespace Combat
         private void RemovePickedUpEntity(CombatEntity entity)
         {
             RemoveItem(entity);
+        }
+
+        private void OnDestroy()
+        {
+            if (_ownerEntity) _ownerEntity.Health.Died -= RemoveAll;
         }
     }
 }

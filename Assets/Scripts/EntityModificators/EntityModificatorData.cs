@@ -73,4 +73,5 @@ public enum EntityModifcatorTag
     AppliesNegativeEffect,
     RemovesRecharge,
     ChangesRecharge,
+    ItemReroll,
 }

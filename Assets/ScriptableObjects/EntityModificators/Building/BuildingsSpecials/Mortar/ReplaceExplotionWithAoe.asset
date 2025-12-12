@@ -16,28 +16,35 @@ MonoBehaviour:
   - _itemTypeName: AOEMortarExplotion
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -53,6 +60,7 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 2
       _argumentName: AOEPrefab
       _intArgument: 0
@@ -63,26 +71,29 @@ MonoBehaviour:
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: AOERadius
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 2
+      _floatArgument: 4
       _stringArgument: 
       _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: AOEDamageMultiplier
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 1
       _stringArgument: 
       _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 0
@@ -98,6 +109,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Lighter core
   _modificatorDescription: Core doesn't explode, but leaves aoe area

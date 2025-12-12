@@ -24,7 +24,7 @@ namespace Combat
                 _draggableCreator.CreateDraggableOnRandomPosition(_draggablesToCreateOnStart[i], transform.position, 4);
             }
             
-            _itemFactory.CreateItem(1, transform.position);
+            _itemFactory.CreateItem(3, transform.position);
             
         }
         

@@ -33,6 +33,7 @@ MonoBehaviour:
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -41,7 +42,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -73,7 +76,7 @@ MonoBehaviour:
       _argumentName: DamageMultiplier
       _intArgument: 0
       _boolArgument: 1
-      _floatArgument: 3
+      _floatArgument: 5
       _stringArgument: DealMoreToFullHpDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -98,4 +101,4 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Sniper
-  _modificatorDescription: '#good +300% good# #Damage to entities with full #MaxHealth'
+  _modificatorDescription: '#good +500% good# #Damage to entities with full #MaxHealth'

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ShieldConvertModificator
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: DamageModifierEntityModificator
+  - _itemTypeName: ShieldEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
@@ -85,28 +85,6 @@ MonoBehaviour:
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 4
-      _argumentName: DamageModifierTypeName
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: ShieldEntityModificator
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 5
-      _argumentName: IsDealerDamageModifier
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: HealDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
     - _argumentType: 1
       _argumentName: ShieldHealthScale
       _intArgument: 0
@@ -122,9 +100,20 @@ MonoBehaviour:
       _argumentName: MaxShieldHealth
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 50
+      _floatArgument: 25
       _stringArgument: HealDamageModifier
       _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 2
+      _argumentName: CanvasBarPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 50
+      _stringArgument: HealDamageModifier
+      _gameObjectArgument: {fileID: 6005996875765172791, guid: a5a55c2865d1b3d4088a33e21ca34a9d, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}

@@ -67,9 +67,9 @@ MonoBehaviour:
     Requirements: []
   _createIcon: 0
   _icon: {fileID: 0}
-  _modificatorName: Hp down
-  _modificatorDescription: '#bad -20% bad# #MaxHealth'
+  _modificatorName: Armored
+  _modificatorDescription: '#bad +50% bad# #MaxHealth'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     FlatChange: 0
-    MultiplierChange: 0.2
+    MultiplierChange: 0.5

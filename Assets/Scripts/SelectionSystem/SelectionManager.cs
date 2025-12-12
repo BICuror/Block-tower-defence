@@ -23,6 +23,7 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private GlobalEffectSelector _globalEffectSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
+    private bool _selectionOptionsCanBePlaced;
     private bool _selectionIsActive;
     
     public bool SelectionPhaseIsActive => _selectionIsActive;
@@ -36,7 +37,7 @@ public sealed class SelectionManager : MonoBehaviour
     
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
-        return _selectionIsActive && type == _currentSelectionSettings.Type;
+        return _selectionOptionsCanBePlaced && type == _currentSelectionSettings.Type;
     }
 
     public bool TryEnqueueNewBuildingSelection()
@@ -80,13 +81,16 @@ public sealed class SelectionManager : MonoBehaviour
 
         EnableSelectionIndicator(_currentSelectionSettings.Type);
         
-        _selectionIsActive = true;
+        _selectionOptionsCanBePlaced = true;
     }
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
     {
         optionObject.ApplyEffect();
+        
         _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
+        _selectionOptionsCanBePlaced = false;
+        
         await EndSelection(_currentSelectionSettings);
 
         if (_enqeuedSelections.Count > 0) StartQueuedSelection().Forget();

@@ -16,21 +16,24 @@ MonoBehaviour:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -39,28 +42,33 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   - _itemTypeName: CreateBombsAtWaveStart
     AllEffectTypeNames:
     - ActivateWhenBuilt
+    - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -69,7 +77,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -92,6 +102,7 @@ MonoBehaviour:
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []
+  _createIcon: 0
   _icon: {fileID: 1125429245, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Preproduction
   _modificatorDescription: Create all bombs at wave start, cannot create bombs over

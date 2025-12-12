@@ -29,6 +29,7 @@ public sealed class StunEffect : EntityEffect
         if (Entity.ComponentsContainer.Has<NavigationAgent>())
         {
             Entity.ComponentsContainer.Get<NavigationAgent>().Enable();
+            Entity.ComponentsContainer.Get<NavigationAgent>().Initialize();
         }
     }
 }

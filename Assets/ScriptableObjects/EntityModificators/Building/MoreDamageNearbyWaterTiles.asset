@@ -19,19 +19,21 @@ MonoBehaviour:
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -40,7 +42,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -50,7 +54,7 @@ MonoBehaviour:
       _argumentName: MultiplierPerTile
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.08
+      _floatArgument: 0.2
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -86,5 +90,5 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Waterpower
-  _modificatorDescription: '#good +8% good# #Damage for each <color=blue>water</color>
+  _modificatorDescription: '#good +20% good# #Damage for each <color=blue>water</color>
     tile in 1 #Area'

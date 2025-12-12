@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 1
   _visualEffect: {fileID: 2129431750140528835}
-  _keepInitialParent: 1
+  _detachFromParentWhilePlaying: 0
 --- !u!1001 &7587518800355939385
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -797,7 +797,8 @@ PrefabInstance:
       propertyPath: InitialModule.startColor.maxGradient.m_NumColorKeys
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7300541093807280400, guid: e6b3da8b241ff6b4dba2164aceb6ca52, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8603497756331310635, guid: e6b3da8b241ff6b4dba2164aceb6ca52, type: 3}
     - {fileID: 7744880099949661581, guid: e6b3da8b241ff6b4dba2164aceb6ca52, type: 3}

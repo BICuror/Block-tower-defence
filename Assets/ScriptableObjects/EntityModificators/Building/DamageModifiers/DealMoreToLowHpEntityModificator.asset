@@ -33,6 +33,7 @@ MonoBehaviour:
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -41,7 +42,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -73,7 +76,7 @@ MonoBehaviour:
       _argumentName: Multiplier
       _intArgument: 0
       _boolArgument: 1
-      _floatArgument: 2
+      _floatArgument: 1.5
       _stringArgument: DealMoreToLowHpDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -109,5 +112,5 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 741723918, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Reaper
-  _modificatorDescription: '#good +200% good# #Damage to entities with #MaxHealth
+  _modificatorDescription: '#good +150% good# #Damage to entities with #MaxHealth
     < 50%'

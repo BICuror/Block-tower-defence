@@ -1,6 +1,7 @@
 using Zenject;
 using System;
 using Combat;
+using UnityEngine;
 
 public sealed class ShieldEntityModificator : EntityModificator
 {
@@ -16,7 +17,7 @@ public sealed class ShieldEntityModificator : EntityModificator
         
         Entity.DamageModifierContainer.ReciverContainer.Add(_shieldDamageModificator);
 
-        Initalize();
+        Initialize();
 
         _waveStateMachine.StateStarted += TryReinitializeShield;
     }
@@ -35,21 +36,22 @@ public sealed class ShieldEntityModificator : EntityModificator
             shieldHealth += Args.GetArgument<float>("ShieldHealthScale") * Entity.Health.GetMaxHp();
         }
         
-        
         _shieldDamageModificator = new(shieldHealth);
     }
 
     private void TryReinitializeShield(WaveState waveState)
     {
-        if (waveState == WaveState.Idle) Initalize();
+        if (waveState == WaveState.Idle) Initialize();
     }
 
-    private void Initalize()
+    private void Initialize()
     {
         if (!_shieldIcon) _shieldIcon = AddIcon(false);
         
         _shieldDamageModificator.ResetShieldHealth();
     }
+
+    #region UI
 
     private void OnShieldHealthUpdated(float shieldHealthPercent)
     {
@@ -77,7 +79,7 @@ public sealed class ShieldEntityModificator : EntityModificator
     {
         if (_shieldBar || shieldHealthPercent == 1f) return;
 
-        _shieldBar = AddBar(shieldHealthPercent);
+        _shieldBar = AddBar(shieldHealthPercent, Args.GetArgument<GameObject>("CanvasBarPrefab").GetComponent<EntityCanvasBar>());
     }
 
     private void UpdateShieldBar(float shieldHealthPercent)
@@ -87,8 +89,12 @@ public sealed class ShieldEntityModificator : EntityModificator
         _shieldBar.SetValue(shieldHealthPercent);
     }
 
+    #endregion
+    
     public override void Disable()
     {
+        TryRemoveIcon(0f);
+        TryRemoveBar(0f);
         Entity.DamageModifierContainer.ReciverContainer.Remove(_shieldDamageModificator);
         _shieldDamageModificator.ShieldHealthUpdated -= OnShieldHealthUpdated;
         _waveStateMachine.StateStarted -= TryReinitializeShield;

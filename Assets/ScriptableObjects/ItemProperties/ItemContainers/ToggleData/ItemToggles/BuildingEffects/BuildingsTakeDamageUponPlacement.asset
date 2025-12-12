@@ -36,7 +36,7 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-  _quality: 1
+  _quality: 2
   _effectType: 1
   _isUnique: 0
   _tags: 
@@ -56,5 +56,5 @@ MonoBehaviour:
     Requirements: []
   _icon: {fileID: 0}
   _effectName: Shady buildings
-  _effectDescription: Buildings take #bad 10% bad# of #MaxHealth as #Damage when
-    placed, if #MaxHealth > 25%
+  _effectDescription: Buildings take #bad 5% bad# of #MaxHealth as #NonLethalDamage
+    when placed

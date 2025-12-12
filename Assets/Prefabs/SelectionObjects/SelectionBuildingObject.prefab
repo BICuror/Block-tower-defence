@@ -224,6 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canBeIdleInspected: 0
   _inspectableObjectName: 
   _inspectableObjectDescription: 
 --- !u!1001 &6678050492469982003
@@ -292,7 +293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8873249026989576143, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[2].m_Value
-      value: 0.75
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8873249026989576143, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
@@ -300,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8873249026989576143, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
-      value: 0.5526268
+      value: 0.34586877
       objectReference: {fileID: 0}
     - target: {fileID: 8873249026989576143, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
@@ -309,7 +310,7 @@ PrefabInstance:
     - target: {fileID: 8873249026989576143, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_PropertySheet.m_NamedObject.m_Array.Array.data[0].m_Value
       value: 
-      objectReference: {fileID: 2800000, guid: a44b3803aa895714c8d716c5396d06bf, type: 3}
+      objectReference: {fileID: 2800000, guid: 03808b113f484ef47a514d7fc24b75da, type: 3}
     m_RemovedComponents:
     - {fileID: 1819960465081490870, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
     m_RemovedGameObjects: []

@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using Combat;
 
 public sealed class CreateBoosterTower : EntityModificator
 {
@@ -28,11 +29,12 @@ public sealed class CreateBoosterTower : EntityModificator
 
     public override void Disable()
     {
+        _waveStateMachine.StateEnded -= OnStateQuitStarted;
         TryDestroyTower();
     }
 
     private void TryDestroyTower()
     {
-        if (_createdTower) Object.Destroy(_createdTower.gameObject);
+        if (_createdTower) _createdTower.GetComponent<BuildingEntity>().Health.Die();
     }
 }

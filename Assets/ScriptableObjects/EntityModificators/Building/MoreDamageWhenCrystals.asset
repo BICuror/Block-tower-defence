@@ -19,19 +19,21 @@ MonoBehaviour:
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -40,7 +42,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -50,7 +54,7 @@ MonoBehaviour:
       _argumentName: Multiplier
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 1
+      _floatArgument: 0.75
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -86,4 +90,4 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 473409037, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Crystal enthusiast
-  _modificatorDescription: '#good +100% good# #Damage when active #Crystal > 2'
+  _modificatorDescription: '#good +75% good# #Damage when active #Crystal > 2'

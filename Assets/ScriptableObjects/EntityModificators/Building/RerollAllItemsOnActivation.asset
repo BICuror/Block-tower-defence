@@ -51,7 +51,7 @@ MonoBehaviour:
   _argumentsContainer:
     _argumentItems: []
   _rarity: 0
-  _tags: 
+  _tags: 04000000
   _effectType: 0
   _isUnique: 0
   _hasRequiredTags: 0
@@ -60,11 +60,15 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 4
+      Amount: 1
   _blockOtherEntityTags:
-    Requirements: []
+    Requirements:
+    - Tag: 4
+      Amount: 1
   _createIcon: 0
   _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: REROLLL

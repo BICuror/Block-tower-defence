@@ -12,24 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7404a308a810fca409de14f38f174bff, type: 3}
   m_Name: ItemGenerationConfig
   m_EditorClassIdentifier: 
-  _maxWave: 5
+  _maxWave: 15
   _amountCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: -0.01757431
-      value: 2.03656
-      inSlope: 0.19200084
-      outSlope: 0.19200084
+      time: 0.01044631
+      value: 4
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 5.026367
-      value: 3.005001
-      inSlope: 0.19200084
-      outSlope: 0.19200084
+      time: 5.0366573
+      value: 4
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -42,42 +42,18 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: -0.05254364
-      value: 1.5010071
-      inSlope: 0.10031316
-      outSlope: 0.10031316
+      value: 3
+      inSlope: 0.06643395
+      outSlope: 0.06643395
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 5.0003357
-      value: 2.0078773
-      inSlope: 0.10031316
-      outSlope: 0.10031316
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _qualityCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 1.6891313
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 2.6891313
-      value: 0
-      inSlope: 0
-      outSlope: 0
+      time: 15
+      value: 4
+      inSlope: 0.06643395
+      outSlope: 0.06643395
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334

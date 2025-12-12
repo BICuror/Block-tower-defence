@@ -42,6 +42,7 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -76,7 +77,7 @@ MonoBehaviour:
   _blockOtherEntityTags:
     Requirements: []
   _createIcon: 0
-  _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _icon: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Executor
   _modificatorDescription: When enemy's in #Area health drops below 10% from #MaxHealth,
     deal #Damage equal to enemy #MaxHealth

@@ -31,9 +31,11 @@ public sealed class EntityCanvas : IngameUIElement
         UpdateCanvasLayout();
     }
 
-    public EntityCanvasBar AddBar(Sprite barIconSprite, float value)
+    public EntityCanvasBar AddBar(Sprite barIconSprite, float value, EntityCanvasBar customBarPrefab = null)
     {
-        EntityCanvasBar bar = Instantiate(_entityCanvasBarPrefab, _customContentParent);
+        EntityCanvasBar barPrefab = customBarPrefab ?? _entityCanvasBarPrefab; 
+        
+        EntityCanvasBar bar = Instantiate(barPrefab, _customContentParent);
         bar.Initialize(barIconSprite, value);
         
         _bars.Add(bar);
@@ -50,9 +52,11 @@ public sealed class EntityCanvas : IngameUIElement
         UpdateCanvasLayout();
     }
 
-    public EntityCanvasIcon AddIcon(Sprite iconSprite, bool hasValue = false, int value = 0)
+    public EntityCanvasIcon AddIcon(Sprite iconSprite, bool hasValue = false, int value = 0, EntityCanvasIcon customIconPrefab = null)
     {
-        EntityCanvasIcon icon = Instantiate(_entityCanvasIconPrefab, _canvasIconParent);
+        EntityCanvasIcon iconPrefab = customIconPrefab ?? _entityCanvasIconPrefab; 
+
+        EntityCanvasIcon icon = Instantiate(iconPrefab, _canvasIconParent);
         icon.Initialize(iconSprite, hasValue, value);
         
         _icons.Add(icon);

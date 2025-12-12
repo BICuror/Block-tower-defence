@@ -12,10 +12,9 @@ public sealed class OnActivationInvokeTaskAndHurt : EntityModificator
     {
         TaskCycle taskCycle = Entity.ComponentsContainer.Get<TaskCycle>();
 
-        if (taskCycle.IsPossibleToPerformTask())
+        if (taskCycle.IsPossibleToPerformTask() && CombatUtilities.TryTakeNonLethalDamage(Entity, _activationDamage))
         {
             taskCycle.PerformTask();
-            Entity.Health.ReceiveEffectDamage(_activationDamage);
         }
     }
 

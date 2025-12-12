@@ -58,9 +58,7 @@ namespace Navigation
             _navigationAgentNodePicker.SetWeightPickLogic(weightPickType);
             _nextNode = _startNode;
             StopMovement();
-            FindSuitableLayer();
-            AdaptToNavigationLayer();
-            TravelToEndNode();
+            Initialize();
         }
         
         public void Initialize()

@@ -33,6 +33,7 @@ MonoBehaviour:
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -41,7 +42,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -62,7 +65,7 @@ MonoBehaviour:
       _argumentName: DamagePercent
       _intArgument: 1
       _boolArgument: 0
-      _floatArgument: 0.1
+      _floatArgument: 0.05
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -87,5 +90,5 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Damage upon placement
-  _modificatorDescription: Takes #bad 10% bad# of #MaxHealth as #Damage when placed,
-    if #MaxHealth > 25%
+  _modificatorDescription: Takes #bad 5% bad# of #MaxHealth as #NonLethalDamage when
+    placed

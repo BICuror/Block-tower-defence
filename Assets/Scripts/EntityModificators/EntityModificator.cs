@@ -12,9 +12,9 @@ public abstract class EntityModificator
 
     public virtual bool CanBeApplied() => true;
 
-    protected EntityCanvasIcon AddIcon(bool hasValue, int value = 0)
+    protected EntityCanvasIcon AddIcon(bool hasValue, int value = 0, EntityCanvasIcon customIconPrefab = null)
     {
-        return Entity.ComponentsContainer.Get<EntityCanvas>().AddIcon(_entityModificatorData.Icon, hasValue, value);
+        return Entity.ComponentsContainer.Get<EntityCanvas>().AddIcon(_entityModificatorData.Icon, hasValue, value, customIconPrefab);
     }
 
     protected void RemoveIcon(EntityCanvasIcon icon)
@@ -22,9 +22,9 @@ public abstract class EntityModificator
         Entity.ComponentsContainer.Get<EntityCanvas>().RemoveIcon(icon);
     }
     
-    protected EntityCanvasBar AddBar(float value)
+    protected EntityCanvasBar AddBar(float value, EntityCanvasBar customBarPrefab = null)
     {
-        return Entity.ComponentsContainer.Get<EntityCanvas>().AddBar(_entityModificatorData.Icon, value);
+        return Entity.ComponentsContainer.Get<EntityCanvas>().AddBar(_entityModificatorData.Icon, value, customBarPrefab);
     }
 
     protected void RemoveBar(EntityCanvasBar bar)

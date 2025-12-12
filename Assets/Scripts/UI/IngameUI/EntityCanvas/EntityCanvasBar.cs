@@ -3,6 +3,7 @@ using UnityEngine;
 
 public sealed class EntityCanvasBar : ProgressBarBase
 {
+    [SerializeField] private bool _shakeOnValueChange;
     [SerializeField] private SpriteRenderer _iconRenderer;
     [SerializeField] private float _tweenDuration = 0.2f;
     private float _lastAssignedValue;
@@ -17,6 +18,8 @@ public sealed class EntityCanvasBar : ProgressBarBase
 
     public void SetValue(float value)
     {
+        if (_shakeOnValueChange) Shake();
+        
         FillBar(_lastAssignedValue, value, _tweenDuration).Forget();
         
         _lastAssignedValue = value;

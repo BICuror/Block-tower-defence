@@ -42,6 +42,7 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -100,5 +101,5 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: -875806093, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Overheat
-  _modificatorDescription: Upon reaching #MaxChargedDamage, reset #ChargeDuration
+  _modificatorDescription: Upon reaching #MaxChargedDamageMultiplier, reset #ChargeDuration
     and explode targeted #bad enemy bad#

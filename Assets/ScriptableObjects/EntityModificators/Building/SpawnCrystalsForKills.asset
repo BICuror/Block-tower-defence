@@ -19,19 +19,21 @@ MonoBehaviour:
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
-    - ApplyModificatorOnWaveStartRemoveUponPickup
+    - ApplyEntityEffectOnHit
+    - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityEffectEntityModificator
     - EntityModificatorStatChange
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
@@ -40,7 +42,9 @@ MonoBehaviour:
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
+    - RerollAllUnusedItems
     - ScaleDamageWithHeight
+    - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
@@ -48,7 +52,7 @@ MonoBehaviour:
     _argumentItems:
     - _argumentType: 0
       _argumentName: KillPerCrystal
-      _intArgument: 7
+      _intArgument: 30
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 15
@@ -75,4 +79,4 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Resoursfull
-  _modificatorDescription: Create #Crystal for each 7 #Kills
+  _modificatorDescription: Create #Crystal for each 30 kills

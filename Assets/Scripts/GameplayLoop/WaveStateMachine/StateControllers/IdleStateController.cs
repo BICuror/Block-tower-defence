@@ -4,6 +4,7 @@ using Navigation;
 using Zenject;
 using Combat;
 using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 
 public sealed class IdleStateController : WaveStateController
 {
@@ -81,4 +82,7 @@ public sealed class IdleStateController : WaveStateController
         _navigationMapGenerator.GenerateMap();
         _roadGenerator.GenerateRoads();
     }
+
+    [Button("RegenerateRoads")]
+    public void RegenerateRoadsButton() => RegenerateRoads();
 }

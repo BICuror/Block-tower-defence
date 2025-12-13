@@ -182,7 +182,19 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         if (OverlapsWithExistingMap(roadPartGrid, offset)) return false;
         
         int gridSize = roadPartGrid.GetLength(0);
-        
+        Vector2 centerPosition = new Vector2(_islandData.CenterPositionIndex, _islandData.CenterPositionIndex);
+
+        for (int x = 0; x < gridSize; x++)
+        {
+            for (int z = 0; z < gridSize; z++)
+            {
+                int xCheck = x + offset.x;
+                int zCheck = z + offset.y;
+
+                if (Vector2.Distance(centerPosition, new Vector2(xCheck, zCheck)) < 2f) return false;
+            }
+        }
+
         for (int x = 0; x < gridSize; x++)
         {
             for (int z = 0; z < gridSize; z++)

@@ -9,7 +9,6 @@ using Random = UnityEngine.Random;
 
 public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 {
-    [SerializeField] private bool _exstensiedOverlappingSearch = true;
     [SerializeField] private int _maxLength;
     [SerializeField] private int _minLength;
     [SerializeField] private float _snapToTownhallDistance = 5;

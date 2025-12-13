@@ -69,7 +69,6 @@ namespace Navigation
             {
                 for (int z = centerPositionIndex - centerFlatRadius; z <= centerPositionIndex + centerFlatRadius; z++)
                 {
-                    Debug.Log(new Vector2(x, z));
                     navigationMapLayer.SetNodeWeight(new Vector2Int(x, z), 0);
                 }
             }

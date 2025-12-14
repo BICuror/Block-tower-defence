@@ -20,6 +20,10 @@ public sealed class EnemyData : ScriptableObject
     [Header("VisualSettings")]
     [SerializeField] private Mesh _mesh;
     [SerializeField] private Material _material;
+
+    [Header("UI")] 
+    [SerializeField] private string _name;
+    [SerializeField] private string _description;
     
     [Header("Modificators")]
     [SerializeField] private bool _hasObjectModificators;
@@ -32,6 +36,8 @@ public sealed class EnemyData : ScriptableObject
     public NavigationAgentData NavigationData => _navigationData;
     public bool HasObjectModificators => _hasObjectModificators;
     public List<GameObject> ObjectModificators => _objectModificators;
+    public string Name => _name;
+    public string Description => _description;
     
     public Mesh Mesh => _mesh;
     public Material Material => _material;

@@ -10,6 +10,8 @@ public sealed class EntityCanvasBar : ProgressBarBase
     
     public void Initialize(Sprite iconSprite, float value)
     {
+        base.Initialize();
+        
         _iconRenderer.sprite = iconSprite;
         _lastAssignedValue = value;
 

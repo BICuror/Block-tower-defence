@@ -24,6 +24,7 @@ public abstract class HealthBar : Shaker
 
     protected void Initialize()
     {
+        base.Initialize();
         _meshRenderer = GetComponent<MeshRenderer>();
 
         _materialPropertyBlock = new MaterialPropertyBlock();

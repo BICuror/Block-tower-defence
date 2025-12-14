@@ -19,7 +19,7 @@ public abstract class Shaker : MonoBehaviour
         public float Strength;
     }
 
-    protected void Awake()
+    protected void Initialize()
     {
         if (_mesh == null) _mesh = transform;
         GetDefaultValues();

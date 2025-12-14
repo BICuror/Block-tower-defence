@@ -13,9 +13,9 @@ public abstract class ProgressBarBase : Shaker
     
     protected abstract string ProgressFieldName { get; }
     
-    protected void Awake()
+    protected void Initialize()
     {
-        base.Awake();
+        base.Initialize();
         
         _meshRenderer = GetComponent<MeshRenderer>();
 

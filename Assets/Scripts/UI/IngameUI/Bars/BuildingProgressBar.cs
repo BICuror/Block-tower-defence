@@ -14,6 +14,8 @@ public class BuildingProgressBar : ProgressBarBase
 
     protected void Start()
     {
+        Initialize();
+        
         _buildingDraggable.BuildProgressStarted += ResetFillingBar;
         _buildingDraggable.BuildProcessUpdated += StartFillingBar;
         _buildingDraggable.PickedUp += StopFillingBar;

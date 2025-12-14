@@ -23,4 +23,10 @@ public sealed class Inspectable : MonoBehaviour
         if (_isInspected) InspectionStarted?.Invoke();
         else InspectionEnded?.Invoke();
     }
+
+    public void SetInspectableData(string name, string description)
+    {
+        _inspectableObjectName = name;
+        _inspectableObjectDescription = description;
+    }
 }

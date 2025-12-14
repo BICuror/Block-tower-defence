@@ -18,13 +18,27 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
 
     private bool _chargeAddProcessIsActive;
     
+    public async UniTask AddChargesWithAnimation(int charges, Transform source)
+    {
+        await UniTask.WaitUntil(() => _chargeAddProcessIsActive == false);
+        
+        _chargeAddProcessIsActive = true;
+        
+        while (charges > 0)
+        {
+            AddChargeWithAnimation(source.position, _timeBetweenCharges).Forget();
+            await UniTask.WaitForSeconds(_timeBetweenCharges);
+            charges--;
+        }
+        
+        _chargeAddProcessIsActive = false;
+    }
+    
     private async UniTask AddChargeWithAnimation(Vector3 sourcePosition, float barFillDuration)
     {
         GameObject charge = Instantiate(_chargePrefab, sourcePosition, Quaternion.identity);
 
-        charge.transform.DOMoveX(_finalPosition.position.x, _animationDuration, false).SetEase(_horizontalAnimationCurve);
-        charge.transform.DOMoveZ(_finalPosition.position.z, _animationDuration, false).SetEase(_horizontalAnimationCurve);
-        await charge.transform.DOMoveY(_finalPosition.position.y, _animationDuration, false).SetEase(_verticalAnimationCurve).AsyncWaitForCompletion();
+        await MoveChargeObjectToFinalPosition(charge, _finalPosition.position);
         
         Destroy(charge);
         
@@ -41,19 +55,19 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
         }
     }
 
-    public async UniTask AddChargesWithAnimation(int charges, Transform source)
+    private async UniTask MoveChargeObjectToFinalPosition(GameObject chargeObject, Vector3 finalPosition)
     {
-        await UniTask.WaitUntil(() => _chargeAddProcessIsActive == false);
+        Vector3 startPosition = chargeObject.transform.position;
         
-        _chargeAddProcessIsActive = true;
+        await DOVirtual.Float(0f, 1f, _animationDuration, MoveCharge).AsyncWaitForCompletion();
         
-        while (charges > 0)
+        void MoveCharge(float progress)
         {
-            AddChargeWithAnimation(source.position, _timeBetweenCharges).Forget();
-            await UniTask.WaitForSeconds(_timeBetweenCharges);
-            charges--;
+            Vector3 lerpedPosition = Vector3.LerpUnclamped(startPosition, finalPosition, _horizontalAnimationCurve.Evaluate(progress));
+
+            lerpedPosition.y += _verticalAnimationCurve.Evaluate(progress);
+            
+            chargeObject.transform.position = lerpedPosition;
         }
-        
-        _chargeAddProcessIsActive = false;
     }
 }

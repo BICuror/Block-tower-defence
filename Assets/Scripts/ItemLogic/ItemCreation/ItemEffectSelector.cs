@@ -54,6 +54,8 @@ public sealed class ItemEffectSelector : MonoBehaviour
     private List<T> GetItemEffectDatas<T>(int strength, List<T> itemEffectDats) where T : GlobalEffectData
     {
         if (strength < 1) strength = 1;
+
+        List<T> effectDatas = new List<T>(itemEffectDats);
         
         List<T> result = new();
         Debug.Log($"Trying to find item effect data for {strength}");
@@ -64,9 +66,9 @@ public sealed class ItemEffectSelector : MonoBehaviour
         {
             int currentStrength = nonEmptyQualities[Random.Range(0, nonEmptyQualities.Count)];
 
-            if (TryGetRandomEffectData(currentStrength, new List<T>(itemEffectDats), out T effectData))
+            if (TryGetRandomEffectData(currentStrength, new List<T>(effectDatas), out T effectData))
             {
-                if (effectData.IsUnique) itemEffectDats.Remove(effectData);
+                effectDatas.Remove(effectData);
                 result.Add(effectData);
 
                 leftStrength -= currentStrength;

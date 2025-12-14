@@ -9,6 +9,8 @@ public sealed class UpgradeChargeBar : ProgressBarBase
     protected override string ProgressFieldName => "BuildProgress";
     protected override void OnFillComplete() {}
 
+    private void Awake() => Initialize();
+    
     public void ResetBar()
     {
         _previousValue = 0;

@@ -8,6 +8,7 @@ namespace Combat.Animation
         
         private void Start()
         {
+            Initialize();
             _health.Damaged += Shake;
         }
     }

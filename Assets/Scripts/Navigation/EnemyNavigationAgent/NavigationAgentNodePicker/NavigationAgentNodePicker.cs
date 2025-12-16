@@ -9,14 +9,16 @@ using Random = UnityEngine.Random;
 public abstract class NavigationAgentNodePicker
 {
     private PickBestNodeWeightDelegate _pickBestNodeWeightDelegate;
-    protected WeightPickType CurrentWieghtPickType;
-    
-    public WeightPickType PickType => CurrentWieghtPickType;
+    private WeightPickType _currentWieghtPickType;
     
     protected delegate int PickBestNodeWeightDelegate(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes);
     
+    public WeightPickType PickType => _currentWieghtPickType;
+    
     public void SetWeightPickLogic(WeightPickType weightPickType)
     {
+        _currentWieghtPickType = weightPickType;
+        
         switch (weightPickType)
         {
             case WeightPickType.Minimal: _pickBestNodeWeightDelegate = PickMinimalNodeWeight; break;
@@ -43,9 +45,9 @@ public abstract class NavigationAgentNodePicker
 
     protected NavigationNode PickNavigationNode(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes)
     {
-        int minimalWeight = _pickBestNodeWeightDelegate(layer, validNavigationNodes);
+        int bestWeight = _pickBestNodeWeightDelegate(layer, validNavigationNodes);
 
-        List<NavigationNode> bestNodes = validNavigationNodes.FindAll(node => layer.GetNodeWeight(node) == minimalWeight).ToList();
+        List<NavigationNode> bestNodes = validNavigationNodes.FindAll(node => layer.GetNodeWeight(node) == bestWeight).ToList();
         
         return bestNodes[Random.Range(0, bestNodes.Count)];
     }

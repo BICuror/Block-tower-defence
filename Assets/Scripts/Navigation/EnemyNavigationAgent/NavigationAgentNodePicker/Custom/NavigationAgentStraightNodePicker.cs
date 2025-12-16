@@ -12,7 +12,6 @@ public sealed class NavigationAgentStraightNodePicker : NavigationAgentNodePicke
         Vector2Int.left
     };
     
-
     public override NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)
     {
         List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position, _checkDirections);

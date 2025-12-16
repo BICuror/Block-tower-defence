@@ -43,23 +43,18 @@ namespace Navigation
 
             Vector2 interpolatedPosition = Vector2.Lerp(_previousRotation, _newRotation, elapsedTime);
 
-            interpolatedPosition += (_additionalRotationVector * (-elapsedTime * elapsedTime + elapsedTime) * 2f);
+            interpolatedPosition += _additionalRotationVector * elapsedTime * 2f;
 
             _agentObject.LookAt(new Vector3(_agentObject.position.x + interpolatedPosition.x, _agentObject.position.y, _agentObject.position.z + interpolatedPosition.y));
         }
 
         private void GetAdditionalRotationVector()
         {
-            if (_newRotation.x != 0)
-            {
-                if (Random.Range(0, 100) > 50) _additionalRotationVector = new Vector2(0, 1f);
-                else _additionalRotationVector = new Vector2(0, -1f);
-            }
-            else
-            {
-                if (Random.Range(0, 100) > 50) _additionalRotationVector = new Vector2(-1f, 0);
-                else _additionalRotationVector = new Vector2(1f, 0);
-            }
+            Vector2 movementVector = _previousRotation - _newRotation;
+
+            _additionalRotationVector = Vector2.Perpendicular(movementVector);
+            
+            if (Random.Range(0, 100) > 50) _additionalRotationVector *= -1;
         }
     }
 }

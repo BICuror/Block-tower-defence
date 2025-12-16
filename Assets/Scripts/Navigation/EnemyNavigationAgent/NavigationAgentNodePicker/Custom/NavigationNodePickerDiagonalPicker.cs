@@ -56,7 +56,7 @@ public sealed class NavigationNodePickerDiagonalPicker : NavigationAgentNodePick
                 
                     if (futureNodeWeight > 0 && 
                         ((PickType == WeightPickType.Minimal && futureNodeWeight < bestNearbyFutureNodeWeight - 2) ||
-                         (PickType == WeightPickType.Maximal && futureNodeWeight > bestNearbyFutureNodeWeight + 2)))
+                         (PickType == WeightPickType.Maximal && futureNodeWeight > bestNearbyFutureNodeWeight + 1)))
                     {
                         bestNearbyFutureNodeWeight = futureNodeWeight;
                         bestNearbyNode = node;
@@ -66,13 +66,10 @@ public sealed class NavigationNodePickerDiagonalPicker : NavigationAgentNodePick
         });
         
         if (bestNearbyNode != null) return bestNearbyNode;
-
-        if (Random.Range(0, 100) > CHANCE_TO_GO_DIRECTIONALY)
-        {
-            NavigationNode bestDiagonalNode = PickNavigationNode(layer, nearbyNodes);
+        
+        NavigationNode bestDiagonalNode = PickNavigationNode(layer, nearbyNodes);
             
-            if (layer.GetNodeWeight(bestDiagonalNode) > 0) return bestDiagonalNode;
-        }
+        if (layer.GetNodeWeight(bestDiagonalNode) > 0) return bestDiagonalNode;
         
         return bestStraightNode;
     }

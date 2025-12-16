@@ -43,8 +43,8 @@ namespace Navigation
         
         private void Start()
         {
-            _draggableEntity.PickedUp += StopMovement;
-            _draggableEntity.Placed += Initialize;
+            _draggableEntity.PickedUp += Disable;
+            _draggableEntity.Placed += Enable;
         }
 
         public void Disable()
@@ -59,6 +59,7 @@ namespace Navigation
             
             _isEnabled = true;
             Initialize();
+            TravelToEndNode().Forget(); 
         }
 
         public void SetAgentData(NavigationAgentData agentData)
@@ -89,18 +90,18 @@ namespace Navigation
                 (_startNode, _endNode) = (_endNode, _startNode);
                 _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
             }
-            
+        }
+
+        public void ReinitializeMovement()
+        {
             StopMovement();
             TravelToEndNode().Forget();
         }
         
         private void Initialize()
         {
-            if (!_entityHealth.IsAlive()) return;
-            
             _navigationMapHolder = NavigationMapHolder.Instance;
             
-            StopMovement();
             FindSuitableLayer();
             AdaptToNavigationLayer();
             
@@ -111,9 +112,6 @@ namespace Navigation
             
             _movementModule = new MovementNavigationModule(transform, _agentData);
             _rotationModule = new RotationNavigationModule(_rotationTarget, previousRotation);
-
-            _isEnabled = true;
-            TravelToEndNode().Forget();
         }
         
         private void AdaptToNavigationLayer()
@@ -205,5 +203,7 @@ namespace Navigation
                 return _navigationMapHolder.Map.NodeExists(position) && Vector2.Distance(currentRoundedPosition, position) <= 1f;
             }
         }
+
+        private void OnDisable() => Disable();
     }
 }

@@ -15,7 +15,6 @@ public class Item : DraggableObject
     [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
     private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
     private int _strength;
-    private int _duration;
     private int _charges;
     
 #if UNITY_EDITOR
@@ -34,13 +33,12 @@ public class Item : DraggableObject
     
 #endif 
     public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
-    public int Duration => _duration;
     public int Charges => _charges;
     public int Strength => _strength;
     public ItemColor ItemColor => _itemColor;
     
-    public Action<Item> ItemPickedUp;
-    public Action<Item> DurationEnded;
+    public event Action<Item> ItemPickedUp;
+    public event Action<Item> ItemDestroyed;
     
     private void Awake()
     {
@@ -50,27 +48,13 @@ public class Item : DraggableObject
     
     public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
     public void SetChargesAmount(int charges) => _charges = charges;
-    
-    public void SetDuration(int duration)
-    {
-        _duration = duration;
-    }    
-    
-    public void SetStrength(int strength)
-    {
-        _strength = strength;
-    }
+    public void SetStrength(int strength) => _strength = strength;
 
     public async UniTask DecreaseDuration()
     {
-        _duration--;
-
-        if (_duration <= 0)
-        {
-            await _upgradeChargeContainer.AddChargesWithAnimation(_charges, transform);
-            DurationEnded?.Invoke(this);
-            DestroyItem();
-        }
+        await _upgradeChargeContainer.AddChargesWithAnimation(_charges, transform);
+        
+        DestroyItem();
     }
     
     public void EnableToggleEffects()
@@ -86,6 +70,7 @@ public class Item : DraggableObject
     public void DestroyItem()
     {
         Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity).PlayBurstEffectAndForget();
+        ItemDestroyed?.Invoke(this);
         Destroy(gameObject);
     }
 }

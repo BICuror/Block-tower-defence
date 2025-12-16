@@ -27,9 +27,6 @@ public sealed class ItemFactory : MonoBehaviour
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(itemPrefab, centerPosition);
         Item item = itemDraggable.GetComponent<Item>();
         
-        int duration = 1;
-         
-        item.SetDuration(duration);
         item.SetStrength(strength);
         
         List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(strength);
@@ -38,21 +35,19 @@ public sealed class ItemFactory : MonoBehaviour
         int charges = 0;
         toggleEfectDatas.ForEach(effectData => charges += effectData.Quality);
         
-        item.SetChargesAmount(duration * charges);
+        item.SetChargesAmount(charges);
         
         _usedItemColors.Add(item.ItemColor, item);
         _createdItems.Add(item);
 
-        item.DurationEnded += RemoveItem;
+        item.ItemDestroyed += RemoveItem;
     }
 
     public async void CreateStartWaveItem(Vector3 centerPosition)
     {
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(_waveItemPrefab, centerPosition);
         Item item = itemDraggable.GetComponent<Item>();
-        
-        item.SetDuration(1);
-        
+
         List<ToggleGlobalEffectData> toggleEffectDatas = new List<ToggleGlobalEffectData>() {_startWaveEffectData};
         item.AddToggleEffectDatas(toggleEffectDatas);
     }
@@ -94,7 +89,7 @@ public sealed class ItemFactory : MonoBehaviour
     
     private void RemoveItem(Item removedItem)
     {
-        removedItem.DurationEnded -= RemoveItem;
+        removedItem.ItemDestroyed -= RemoveItem;
         _usedItemColors.Remove(removedItem.ItemColor);
         _createdItems.Remove(removedItem);
     }

@@ -8,7 +8,6 @@ public sealed class CrystalInspectionTooltip : PointFollowingCanvasUIElement
 {
     [Header("HeaderParameters")] 
     [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
-    [SerializeField] private TextMeshProUGUI _durationTextField;
     [SerializeField] private CanvasGroup _topCanvasGroup;
     
     [Header("Links")] 
@@ -24,7 +23,6 @@ public sealed class CrystalInspectionTooltip : PointFollowingCanvasUIElement
         CreateTooltips(item);
 
         _rewardsAmountTextField.text = item.Charges.ToString();
-        _durationTextField.text = item.Duration.ToString();
         _topCanvasGroup.gameObject.SetActive(!item.ToggleEffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
         
         SetTarget(item.transform);

@@ -3298,7 +3298,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1034691475}
   - component: {fileID: 1034691481}
-  - component: {fileID: 1034691485}
   - component: {fileID: 1034691483}
   m_Layer: 7
   m_Name: SelectionManager
@@ -3340,10 +3339,9 @@ MonoBehaviour:
   _selectionIndicatorContainers:
   - _selectionType: 0
     _selectionIndicator: {fileID: 15877441}
-  - _selectionType: 2
+  - _selectionType: 1
     _selectionIndicator: {fileID: 1688957460}
   _buildingSelector: {fileID: 1034691483}
-  _globalEffectSelector: {fileID: 1034691485}
   _buildingUpgradeSelector: {fileID: 946631405}
 --- !u!114 &1034691483
 MonoBehaviour:
@@ -3359,21 +3357,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selectionOptionObjectController: {fileID: 209377834}
   _selectionObject: {fileID: 4838049607833077331, guid: 7ae7dfa30d49c494b954d0173595a93f, type: 3}
---- !u!114 &1034691485
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1034691474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331801c7cda00ba4cae12bd03013b0a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _toggleEffectDataSelectionContainer: {fileID: 11400000, guid: 9a15d347404936540b17d0eb7f724f54, type: 2}
-  _selectionOptionObjectController: {fileID: 209377834}
-  _selectionObject: {fileID: -8859770004929897270, guid: 824af044e046744499bbfed0004bacd8, type: 3}
 --- !u!1 &1048195748
 GameObject:
   m_ObjectHideFlags: 0
@@ -15551,7 +15534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e82f5ec9f4413449503eb6059356f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _draggablesToCreateOnStart: []
 --- !u!54 &7574322964461965371
 Rigidbody:
   m_ObjectHideFlags: 0

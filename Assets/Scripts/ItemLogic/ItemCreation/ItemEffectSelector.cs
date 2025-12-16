@@ -37,20 +37,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
         return result;   
     }
-
-    public List<RewardGlobalEffectData> GetRandomRewardEffectDatas(int quality, int strength)
-    {
-        List<RewardGlobalEffectData> result = new();
-
-        List<RewardGlobalEffectData> rewardEffectDatas = _itemModifiersSelectionContainer.ItemRewardEffectCotainer.EffectDatas;
-
-       // int positiveStrength = strength + quality;
-        
-        result.AddRange(GetItemEffectDatas(1, rewardEffectDatas));
-
-        return result;
-    }
-
+    
     private List<T> GetItemEffectDatas<T>(int strength, List<T> itemEffectDats) where T : GlobalEffectData
     {
         if (strength < 1) strength = 1;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
+using UnityEngine;
 using Zenject;
 using System;
-using UnityEngine;
 
 public sealed class GlobalEffectFactory
 {
@@ -36,18 +36,6 @@ public sealed class GlobalEffectFactory
         
         return toggleEffects;
     } 
-
-    public List<GlobalRewardEffect> CreateRewardEffects(RewardGlobalEffectData globalEffectData)
-    {
-        List<GlobalRewardEffect> rewardEffects = new();
-
-        globalEffectData.InstanceItemTypeContainers.ForEach(instanceItemTypeContainer =>
-        {
-            rewardEffects.Add(CreateEffectInstance<GlobalRewardEffect>(globalEffectData, instanceItemTypeContainer.InstanceType));
-        });
-        
-        return rewardEffects;
-    } 
     
     private T CreateEffectInstance<T>(GlobalEffectData effectData, Type type) where T : GlobalEffect
     {
@@ -67,15 +55,6 @@ public sealed class GlobalEffectFactory
         List<GlobalToggleEffect> resultEffectList = new();
         
         effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateToggleEffects(effectData)));
-
-        return resultEffectList;
-    }
-    
-    public List<GlobalRewardEffect> CreateRewardEffects(List<RewardGlobalEffectData> effectDatas)
-    {
-        List<GlobalRewardEffect> resultEffectList = new();
-        
-        effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateRewardEffects(effectData)));
 
         return resultEffectList;
     }

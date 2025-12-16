@@ -28,7 +28,7 @@ public sealed class ItemsContainer : MonoBehaviour
         _items.Add(item);
     
         item.ItemPickedUp += RemoveItem;
-        item.DurationEnded += RemoveItem;
+        item.ItemDestroyed += RemoveItem;
         
         item.transform.SetParent(_parent);
 
@@ -48,7 +48,7 @@ public sealed class ItemsContainer : MonoBehaviour
         _items.Remove(item); 
         
         item.ItemPickedUp -= RemoveItem;
-        item.DurationEnded -= RemoveItem;
+        item.ItemDestroyed -= RemoveItem;
 
         item.transform.SetParent(null);
 

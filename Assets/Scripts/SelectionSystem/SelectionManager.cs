@@ -21,7 +21,6 @@ public sealed class SelectionManager : MonoBehaviour
     
     [Header("Selectors")]
     [SerializeField] private BuildingSelector _buildingSelector;
-    [SerializeField] private GlobalEffectSelector _globalEffectSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
     private bool _selectionOptionsCanBePlaced;
     private bool _selectionIsActive;
@@ -74,7 +73,6 @@ public sealed class SelectionManager : MonoBehaviour
                 }
                 break;
             }
-            case SelectionType.GlobalEffect: await _globalEffectSelector.StartGlobalEffectSelection(); break;
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(_currentSelectionSettings); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }

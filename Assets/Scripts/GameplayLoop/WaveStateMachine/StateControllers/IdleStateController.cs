@@ -38,8 +38,6 @@ public sealed class IdleStateController : WaveStateController
         
         _enemyBiomesContainer.EnableBiomesTerrain(TransitionInDuration);
         _roadAnimator.StartAppearing(TransitionInDuration);
-        
-        _itemFactory.CreateStartWaveItem(_itemContainerManager.transform.position);
     }
 
     protected override void OnEnterStateCompleted()

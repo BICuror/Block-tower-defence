@@ -15551,7 +15551,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5e82f5ec9f4413449503eb6059356f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _registeredBuildings: []
   _draggablesToCreateOnStart: []
 --- !u!54 &7574322964461965371
 Rigidbody:
@@ -16000,7 +15999,7 @@ PrefabInstance:
     - target: {fileID: 4075102056428717221, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _crystalScheduler
       value: 
-      objectReference: {fileID: 8679370445069788118}
+      objectReference: {fileID: 0}
     - target: {fileID: 4094456387636780349, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _navigationMapper
       value: 
@@ -16086,9 +16085,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8679370445069788118}
-    - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 8679370445069788122}
     - targetCorrespondingSourceObject: {fileID: 1238328245262806678, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
@@ -16113,18 +16109,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
   m_PrefabInstance: {fileID: 8679370445069788115}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8679370445069788118
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8679370445069788117}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 687e0b0216b9c7245a4bfdb815fdc5c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8679370445069788122
 MonoBehaviour:
   m_ObjectHideFlags: 0

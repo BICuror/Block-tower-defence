@@ -7,6 +7,8 @@ using Zenject;
 using Combat;
 using System;
 
+using Random = UnityEngine.Random;
+
 namespace Navigation
 {
     public sealed class NavigationAgent : MonoBehaviour
@@ -14,6 +16,7 @@ namespace Navigation
         [Inject] private NavigationMapHolder _navigationMapHolder;
         [SerializeField] private Transform _rotationTarget;
         [Cached] private DraggableEntity _draggableEntity;
+        [Cached] private EntityHealth _entityHealth;
         [Cached] private Speed _speed;
         
         private CancellationTokenSource _movementCancellationTokenSource = new();
@@ -22,6 +25,7 @@ namespace Navigation
         private RotationNavigationModule _rotationModule;
         private NavigationAgentNodePicker _navigationAgentNodePicker;
         private NavigationMapLayer _currentNavigationMapLayer;
+        private NavigationAgentNodePicker.WeightPickType _weightPickType;
         
         private NavigationNode _startNode;
         private NavigationNode _endNode;
@@ -43,26 +47,45 @@ namespace Navigation
             _draggableEntity.Placed += Initialize;
         }
 
-        public void Disable() => _isEnabled = false;
-        public void Enable() => _isEnabled = true;
+        public void Disable()
+        {
+            _isEnabled = false;
+            StopMovement();
+        }
+
+        public void Enable()
+        {
+            if (!_entityHealth.IsAlive()) return;
+            
+            _isEnabled = true;
+            Initialize();
+        }
 
         public void SetAgentData(NavigationAgentData agentData)
         {
             _agentData = agentData;
-            _navigationAgentNodePicker = (NavigationAgentNodePicker)Activator.CreateInstance(Type.GetType(agentData.NavgationNodePickerType));
-            _navigationAgentNodePicker.SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType.Minimal);
+            _weightPickType = NavigationAgentNodePicker.WeightPickType.Minimal;
+            SetNavigationAgentNodePicker(Type.GetType(agentData.NavgationNodePickerType));
+        }
+        
+        public void SetNavigationAgentNodePicker(Type navigationAgentNodePickerType)
+        {
+            _navigationAgentNodePicker = (NavigationAgentNodePicker)Activator.CreateInstance(navigationAgentNodePickerType);
+            SetWeightPickLogic(_weightPickType);
         }
 
         public void SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType weightPickType)
         {
+            _weightPickType = weightPickType;
             _navigationAgentNodePicker.SetWeightPickLogic(weightPickType);
-            _nextNode = _startNode;
-            StopMovement();
+            
             Initialize();
         }
         
-        public void Initialize()
+        private void Initialize()
         {
+            if (!_entityHealth.IsAlive()) return;
+            
             _navigationMapHolder = NavigationMapHolder.Instance;
             
             StopMovement();
@@ -77,24 +100,26 @@ namespace Navigation
             _movementModule = new MovementNavigationModule(transform, _agentData);
             _rotationModule = new RotationNavigationModule(_rotationTarget, previousRotation);
 
-            Enable();
-            TravelToEndNode();
+            _isEnabled = true;
+            TravelToEndNode().Forget();
         }
         
-        private void TravelToEndNode()
+        private void AdaptToNavigationLayer()
         {
-            _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position);
+            Vector2Int currentRoundedPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
+
+            _startNode = new NavigationNode(currentRoundedPosition, Mathf.RoundToInt(transform.position.y));
+            _endNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, currentRoundedPosition);
+            _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
+        }
+        
+        private async UniTask TravelToEndNode()
+        {
+            _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position); 
             _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _nextNode.Position);
 
-            TravelToNode();
-        }
-
-        private async void TravelToNode()
-        {
             float elapsedTime = 0f;
             float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) * _speed.Value;
-            
-            if (!_currentNavigationMapLayer.IsEnabled) FindSuitableLayer();
             
             while (elapsedTime < duration)
             {
@@ -121,7 +146,7 @@ namespace Navigation
             if (!_currentNavigationMapLayer.IsEnabled) FindSuitableLayer();
 
             IterateToNextNode();
-            TravelToEndNode();
+            TravelToEndNode().Forget();
         }
         
         private void IterateToNextNode()
@@ -143,14 +168,9 @@ namespace Navigation
 
             if (!_navigationMapHolder.Map.NodeExists(currentRoundedPosition))
             {
-                for (int i = 0; i < _checkDirection.Count; i++)
-                {
-                    if (_navigationMapHolder.Map.NodeExists(currentRoundedPosition + _checkDirection[i]))
-                    {
-                        currentRoundedPosition += _checkDirection[i];
-                        break;
-                    }
-                }
+                List<Vector2Int> suitablePositions = TileMap.ForceGetSuitablePositionsInRadius(PositionValidator, currentRoundedPosition, 1);
+                
+                currentRoundedPosition = suitablePositions[Random.Range(0, suitablePositions.Count)];
             }
                 
             if (_agentData.PrefferedNavigationLayer == NavigationMapLayerType.AdditionalTask)
@@ -163,17 +183,13 @@ namespace Navigation
             }
             
             _currentNavigationMapLayer = _navigationMapHolder.Map.GetLayer(currentRoundedPosition, NavigationMapLayerType.Main);
+
+            return;
+            
+            bool PositionValidator(Vector2Int position)
+            {
+                return _navigationMapHolder.Map.NodeExists(position) && Vector2.Distance(currentRoundedPosition, position) <= 1f;
+            }
         }
-
-        private void AdaptToNavigationLayer()
-        {
-            Vector2Int currentRoundedPosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));
-
-            _startNode = new NavigationNode(currentRoundedPosition, Mathf.RoundToInt(transform.position.y));
-            _endNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, currentRoundedPosition);
-            _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
-        }
-
-        private void OnDisable() => StopMovement();
     }
 }

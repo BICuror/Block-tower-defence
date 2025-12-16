@@ -1,14 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Navigation;
-using System.Linq;
-using System;
-
-using Random = UnityEngine.Random;
 
 public sealed class NavigationAgentStraightNodePicker : NavigationAgentNodePicker
 {
-    protected override List<Vector2Int> CheckDirections => new List<Vector2Int>
+    private List<Vector2Int> _checkDirections = new()
     { 
         Vector2Int.up, 
         Vector2Int.down, 
@@ -19,7 +15,7 @@ public sealed class NavigationAgentStraightNodePicker : NavigationAgentNodePicke
 
     public override NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)
     {
-        List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position);
+        List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position, _checkDirections);
 
         return PickNavigationNode(layer, nearbyNodes);
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -10,8 +11,11 @@ namespace Navigation
         private Dictionary<Vector2Int, NavigationNode> _nodeMap = new();
         
         public void SetNode(Vector2Int position, NavigationNode node) => _nodeMap.Add(position, node);
+       
         public bool NodeExists(Vector2Int position) => _nodeMap.ContainsKey(position);
+        
         public NavigationNode GetNode(Vector2Int position) => _nodeMap[position];
+        
         public void ResetNodeMap() => _nodeMap.Clear();
         
         public void ClearAllLayers() => _navigationLayers.Clear();
@@ -59,6 +63,8 @@ namespace Navigation
         
         public NavigationMapLayerType LayerType => _layerType;
         public bool IsEnabled => _navigationCondition == null || _navigationCondition.GetValue();
+        
+        public event Action LayerDisabeled;
         
         public void SetNavigationCondition(INavigationCondition condition) => _navigationCondition = condition;
         public int GetNodeWeight(Vector2Int nodePosition) => _nodeWeights[nodePosition];

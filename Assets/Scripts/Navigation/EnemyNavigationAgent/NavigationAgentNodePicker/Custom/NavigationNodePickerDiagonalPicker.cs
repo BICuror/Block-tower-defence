@@ -1,14 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Navigation;
-using System.Linq;
-using System;
-
-using Random = UnityEngine.Random;
 
 public sealed class NavigationNodePickerDiagonalPicker : NavigationAgentNodePicker
 {
-    protected override List<Vector2Int> CheckDirections => new List<Vector2Int>
+    private const int CHANCE_TO_GO_DIRECTIONALY = 50;
+    
+    private List<Vector2Int> _checkDirections = new()
     { 
         Vector2Int.up, 
         Vector2Int.down, 
@@ -20,16 +18,69 @@ public sealed class NavigationNodePickerDiagonalPicker : NavigationAgentNodePick
         new Vector2Int(-1, -1)
     };
     
-
+    private readonly List<Vector2Int> _straightCheckDirections = new()
+    { 
+        Vector2Int.up, 
+        Vector2Int.down, 
+        Vector2Int.right, 
+        Vector2Int.left,
+    };
+    
+    private readonly List<Vector2Int> _cornerCheckDirections = new()
+    { 
+        new Vector2Int(1, 1),
+        new Vector2Int(1, -1),
+        new Vector2Int(-1, 1),
+        new Vector2Int(-1, -1)
+    };
+    
     public override NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)
     {
-        List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position);
-        int minimalWeight = int.MaxValue;
+        List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position, _checkDirections);
+        NavigationNode bestStraightNode = PickStraightNavigationNode(navigationMap, layer, position);
         
-        nearbyNodes.ForEach(node => minimalWeight = Math.Min(layer.GetNodeWeight(node), minimalWeight));
+        NavigationNode bestNearbyNode = null;
+        int bestNearbyFutureNodeWeight = layer.GetNodeWeight(bestStraightNode);
+        
+        nearbyNodes.ForEach(node =>
+        {
+            if (layer.GetNodeWeight(node) > 0)
+            {
+                List<NavigationNode> futureNodes = GetNodesAroundPosition(navigationMap, node.RoundedPosition, _cornerCheckDirections);
+    
+                if (futureNodes.Count > 0)
+                {
+                    NavigationNode bestFutureNode = PickNavigationNode(layer, futureNodes); 
+                
+                    int futureNodeWeight = layer.GetNodeWeight(bestFutureNode);
+                
+                    if (futureNodeWeight > 0 && 
+                        ((PickType == WeightPickType.Minimal && futureNodeWeight < bestNearbyFutureNodeWeight - 2) ||
+                         (PickType == WeightPickType.Maximal && futureNodeWeight > bestNearbyFutureNodeWeight + 2)))
+                    {
+                        bestNearbyFutureNodeWeight = futureNodeWeight;
+                        bestNearbyNode = node;
+                    }
+                }
+            }
+        });
+        
+        if (bestNearbyNode != null) return bestNearbyNode;
 
-        List<NavigationNode> bestNodes = nearbyNodes.FindAll(node => layer.GetNodeWeight(node) == minimalWeight).ToList();
+        if (Random.Range(0, 100) > CHANCE_TO_GO_DIRECTIONALY)
+        {
+            NavigationNode bestDiagonalNode = PickNavigationNode(layer, nearbyNodes);
+            
+            if (layer.GetNodeWeight(bestDiagonalNode) > 0) return bestDiagonalNode;
+        }
         
-        return bestNodes[Random.Range(0, bestNodes.Count)];
+        return bestStraightNode;
+    }
+
+    private NavigationNode PickStraightNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)
+    {
+        List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position, _straightCheckDirections);
+
+        return PickNavigationNode(layer, nearbyNodes);
     }
 }

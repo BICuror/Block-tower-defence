@@ -21,6 +21,8 @@ namespace Combat
         
         private EnemyData _enemyData;
 
+        public EnemyData EnemyData => _enemyData;
+
         private void Start()
         {
             _enemyHealth.Died += OnEnemyDeath;
@@ -43,7 +45,7 @@ namespace Combat
             if (initializeNavigation)
             {
                 _navMeshAgent.SetAgentData(enemyDataToSet.NavigationData);
-                _navMeshAgent.Initialize();
+                _navMeshAgent.Enable();
             }
         }
 
@@ -86,6 +88,7 @@ namespace Combat
         {
             _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
             _entityObjectModificatorContainer.DestroyAllModificators();
+            _navMeshAgent.Disable();
         }
 
         private void OnDisable()

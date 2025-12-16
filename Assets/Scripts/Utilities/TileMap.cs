@@ -100,7 +100,7 @@ public static class TileMap
     #endregion GetTileCount
 
     #region FindSuitablePositionsInRaduis
-
+    
     public static List<Vector2Int> ForceGetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
     {
         List<Vector2Int> foundPositions = GetSuitablePositionsInRadius(positionValidator, position, radius);
@@ -109,7 +109,7 @@ public static class TileMap
         {
             int modifiedRadius = radius;
 
-            while (radius <= 13 && foundPositions.Count == 0)
+            while (modifiedRadius <= 13 && foundPositions.Count == 0)
             {
                 modifiedRadius++;
 

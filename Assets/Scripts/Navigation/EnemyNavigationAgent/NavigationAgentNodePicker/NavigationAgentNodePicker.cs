@@ -3,15 +3,17 @@ using System.Linq;
 using UnityEngine;
 using Navigation;
 using System;
-
+using Unity.VisualScripting;
 using Random = UnityEngine.Random;
 
 public abstract class NavigationAgentNodePicker
 {
     private PickBestNodeWeightDelegate _pickBestNodeWeightDelegate;
+    protected WeightPickType CurrentWieghtPickType;
+    
+    public WeightPickType PickType => CurrentWieghtPickType;
     
     protected delegate int PickBestNodeWeightDelegate(NavigationMapLayer layer, List<NavigationNode> validNavigationNodes);
-    protected abstract List<Vector2Int> CheckDirections { get; }
     
     public void SetWeightPickLogic(WeightPickType weightPickType)
     {
@@ -23,12 +25,12 @@ public abstract class NavigationAgentNodePicker
     }
     
     public abstract NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position);
-    
-    protected List<NavigationNode> GetNodesAroundPosition(NavigationMap navigationMap, Vector2Int position)
+
+    protected List<NavigationNode> GetNodesAroundPosition(NavigationMap navigationMap, Vector2Int position, List<Vector2Int> directions)
     {
         List<NavigationNode> nearbyNodes = new();
             
-        CheckDirections.ForEach(direction =>
+        directions.ForEach(direction =>
         {
             if (navigationMap.NodeExists(position + direction))
             {

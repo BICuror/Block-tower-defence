@@ -30,7 +30,7 @@ namespace Navigation
         private NavigationNode _startNode;
         private NavigationNode _endNode;
         private NavigationNode _nextNode;
-        
+        private float _movementProgress;
         private bool _isEnabled;
 
         private List<Vector2Int> _checkDirection = new List<Vector2Int>()
@@ -66,6 +66,7 @@ namespace Navigation
             _agentData = agentData;
             _weightPickType = NavigationAgentNodePicker.WeightPickType.Minimal;
             SetNavigationAgentNodePicker(Type.GetType(agentData.NavgationNodePickerType));
+            _movementProgress = 0f;
         }
         
         public void SetNavigationAgentNodePicker(Type navigationAgentNodePickerType)
@@ -76,10 +77,21 @@ namespace Navigation
 
         public void SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType weightPickType)
         {
+            NavigationAgentNodePicker.WeightPickType initialWeightPickType = _weightPickType;
+            
             _weightPickType = weightPickType;
             _navigationAgentNodePicker.SetWeightPickLogic(weightPickType);
             
-            Initialize();
+            if (_weightPickType != initialWeightPickType)
+            {
+                _movementProgress = 1f - _movementProgress;
+
+                (_startNode, _endNode) = (_endNode, _startNode);
+                _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
+            }
+            
+            StopMovement();
+            TravelToEndNode().Forget();
         }
         
         private void Initialize()
@@ -117,18 +129,18 @@ namespace Navigation
         {
             _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position); 
             _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _nextNode.Position);
-
-            float elapsedTime = 0f;
+            
             float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) * _speed.Value;
+            float elapsedTime = duration * _movementProgress;
             
             while (elapsedTime < duration)
             {
                 elapsedTime += Time.fixedDeltaTime;
 
-                float lerpValue = elapsedTime / duration;
+                _movementProgress = elapsedTime / duration;
 
-                _movementModule.MoveTowardsNextPosition(lerpValue);
-                _rotationModule.RotateTowardsNode(lerpValue);
+                _movementModule.MoveTowardsNextPosition(_movementProgress);
+                _rotationModule.RotateTowardsNode(_movementProgress);
 
                 try
                 {
@@ -154,6 +166,8 @@ namespace Navigation
             _startNode = _endNode;
             _endNode = _nextNode;   
             _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
+
+            _movementProgress = 0f;
         }
 
         private void StopMovement()

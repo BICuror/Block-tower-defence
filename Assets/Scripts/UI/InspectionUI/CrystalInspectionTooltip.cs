@@ -26,7 +26,6 @@ public sealed class CrystalInspectionTooltip : PointFollowingCanvasUIElement
         _topCanvasGroup.gameObject.SetActive(!item.ToggleEffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
         
         SetTarget(item.transform);
-        await RebuildLayoutAndCalculateOffsets();
     }
 
     private void CreateTooltips(Item item)

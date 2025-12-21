@@ -18,13 +18,13 @@ public sealed class InspectionTooltipPositioner : MonoBehaviour
     
     public Vector3 GetPosition(PointFollowingCanvasUIElement.PointFollowingElementOffsetContainer offsetsContainer, Vector2 preferredPosition)
     {
-        if (preferredPosition.y + offsetsContainer.TopOffset > _upCorner.transform.localPosition.y)
+        if (preferredPosition.y > _upCorner.transform.localPosition.y)
         {
-            preferredPosition.y = _upCorner.transform.localPosition.y - offsetsContainer.TopOffset;
+            preferredPosition.y = _upCorner.transform.localPosition.y;
         }
-        else if (preferredPosition.y - offsetsContainer.BottomOffset < _downCorner.transform.localPosition.y)
+        else if (preferredPosition.y - offsetsContainer.BottomOffset - offsetsContainer.TopOffset < _downCorner.transform.localPosition.y)
         {
-            preferredPosition.y = _downCorner.transform.localPosition.y + offsetsContainer.BottomOffset;
+            preferredPosition.y = _downCorner.transform.localPosition.y + offsetsContainer.BottomOffset + offsetsContainer.TopOffset;
         }
         
         if (preferredPosition.x - offsetsContainer.LeftOffset < _leftCorner.transform.localPosition.x)

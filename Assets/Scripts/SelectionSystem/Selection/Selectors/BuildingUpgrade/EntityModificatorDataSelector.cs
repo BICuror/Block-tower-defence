@@ -53,6 +53,8 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
         List<EntityModifcatorTag> ownerTags = entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags();
         List<EntityModifcatorTag> otherTags = _globalBuildingContainer.GetBuildingTags(entity);
 
+        Debug.Log($"Checking requirements for {modificatorData.name}");
+        
         if (modificatorData.HasRequiredTags)
         {
             if (!EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.ReqiredOwnerTags)) return false;
@@ -64,6 +66,8 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
             if (EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.BlockOwnerTags)) return false;
             if (EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.BlockOtherEntityTags)) return false;
         }
+        
+        Debug.Log($"Suckseful Checking requirements for {modificatorData.name}");
         
         return true;
     }

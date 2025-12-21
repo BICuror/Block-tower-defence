@@ -23,6 +23,5 @@ public sealed class EffectInspectionTooltip : PointFollowingCanvasUIElement
         
         _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(selectionOptionObject.OptionDescription));
         SetTarget(selectionOptionObject.transform);
-        await RebuildLayoutAndCalculateOffsets();
     }
 }

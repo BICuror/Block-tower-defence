@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public sealed class TooltipDataParser : MonoBehaviour
@@ -9,43 +11,26 @@ public sealed class TooltipDataParser : MonoBehaviour
     public TooltipParseTagDataContainer GetTooltipTagDataFromText(string tooltipText)
     {
         TooltipParseTagDataContainer parseDataContainer = new();
+     
+        List<string> tooltipTextParts = tooltipText.Split(TOOLTIP_TAG_START_CHAR).ToList();
         
-        ParseByStatTags(tooltipText, parseDataContainer);   
-        ParseByEffectsTags(tooltipText, parseDataContainer);   
-        ParseByKeywordTags(tooltipText, parseDataContainer);   
+        tooltipTextParts.ForEach(tooltipTextPart =>
+        {
+            ParseTags(TOOLTIP_TAG_START_CHAR + tooltipTextPart, parseDataContainer, _allTagDataContainer.EffectTagDatas);   
+            ParseTags(TOOLTIP_TAG_START_CHAR + tooltipTextPart, parseDataContainer, _allTagDataContainer.StatTagDatas);   
+            ParseTags(TOOLTIP_TAG_START_CHAR + tooltipTextPart, parseDataContainer, _allTagDataContainer.KeywordTagDatas);   
+        });
         
         return parseDataContainer;
     }
-
-    private void ParseByStatTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer)
-    {
-        foreach (StatTooltipTagData tagData in _allTagDataContainer.StatTagDatas)
-        {
-            if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR + tagData.Tag))
-            {
-                parseDataContainer.StatTagDatas.Add(tagData);
-            }
-        }
-    }
     
-    private void ParseByEffectsTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer)
+    private void ParseTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer, IReadOnlyList<TooltipTagData> tagDataList)
     {
-        foreach (EffectTooltipTagData tagData in _allTagDataContainer.EffectTagDatas)
+        foreach (TooltipTagData tagData in tagDataList)
         {
             if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR + tagData.Tag))
             {
-                parseDataContainer.EffectTagDatas.Add(tagData);
-            }
-        }
-    }
-    
-    private void ParseByKeywordTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer)
-    {
-        foreach (KeywordTooltipTagData tagData in _allTagDataContainer.KeywordTagDatas)
-        {
-            if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR + tagData.Tag))
-            {
-                parseDataContainer.KeywordTagDatas.Add(tagData);
+                parseDataContainer.TagDatas.Add(tagData);
             }
         }
     }

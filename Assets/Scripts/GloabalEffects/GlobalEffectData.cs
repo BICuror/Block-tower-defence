@@ -11,7 +11,7 @@ public abstract class GlobalEffectData : ScriptableObject
     [SerializeField] private ArgumentsContainer _argumentsContainer;
     
     [Header("SelectionData")]
-    [Range(1, 5)] [SerializeField] private int _quality = 3;
+    [Range(1, 15)] [SerializeField] private int _quality = 3;
     [SerializeField] private EffectType _effectType;
     [SerializeField] private bool _isUnique;
     [SerializeField] private List<GlobalEffectTag> _tags;

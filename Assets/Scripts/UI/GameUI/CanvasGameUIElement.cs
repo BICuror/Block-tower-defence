@@ -9,7 +9,6 @@ using System;
 
 public abstract class CanvasGameUIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private List<RectTransform> _contentSizeFitters;
     private bool _pointerHoveredOver;
     
     public bool PointerHoveredOver => _pointerHoveredOver;
@@ -17,14 +16,6 @@ public abstract class CanvasGameUIElement : MonoBehaviour, IPointerEnterHandler,
     public Action PointerEntered;
     public Action PointerExited;
     
-    protected async UniTask RebuildLayout()
-    {
-        _contentSizeFitters.ForEach(LayoutRebuilder.ForceRebuildLayoutImmediate);
-        //_contentSizeFitters.ForEach(LayoutRebuilder.MarkLayoutForRebuild);
-        await UniTask.WaitForFixedUpdate();
-        await UniTask.WaitForFixedUpdate();
-    }
-
     void IPointerEnterHandler.OnPointerEnter(PointerEventData _)
     {
         _pointerHoveredOver = true;

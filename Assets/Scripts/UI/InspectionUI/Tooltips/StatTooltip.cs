@@ -38,7 +38,7 @@ public sealed class StatTooltip : BaseTooltip
         if (tagData == null) return;
 
         _tagDataContainer = new();
-        _tagDataContainer.StatTagDatas.Add(tagData);
+        _tagDataContainer.TagDatas.Add(tagData);
 
         _statIconImage.sprite = tagData.IconSprite;
         _statNameText.text = _tooltipTextParser.GetTagHeaderWithoutIcon(tagData);

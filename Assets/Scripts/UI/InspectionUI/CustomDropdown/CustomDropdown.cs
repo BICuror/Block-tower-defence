@@ -29,7 +29,7 @@ public sealed class CustomDropdown : MonoBehaviour
     {
         _dropdownGroup.gameObject.SetActive(true);
         await UniTask.WaitForFixedUpdate();
-        _scrollMaxHeightController.UpdateHeight();
+        _scrollMaxHeightController.UpdateHeight().Forget();
     }
 
     private void DisableDropdown()

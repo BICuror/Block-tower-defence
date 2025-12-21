@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BuildingsExsistApperanceCondition
   m_EditorClassIdentifier: 
   _apperanceConditionTypeName: BuildingsAmountApperanceCondition
-  _argumentsContainer:
-    _argumentItems: []
   AllConditioinTypeNames:
-  - BuildingsAmountApperanceCondition
+  - BuildingsExsistEffectApperanceCondition
+  - HasNonFullHealthBuildings
+  - MaxBuildingsAmountApperanceCondition

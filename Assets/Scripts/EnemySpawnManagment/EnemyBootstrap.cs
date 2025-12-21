@@ -70,6 +70,9 @@ namespace Combat
         {
             _meshFilter.sharedMesh = _enemyData.Mesh;
             _meshRenderer.sharedMaterial = _enemyData.Material;
+
+            _meshRenderer.transform.localScale = new Vector3(_enemyData.Scale, _enemyData.Scale, _enemyData.Scale);
+            
             gpuInstanceEnabler.EnableGPUInstancing();
         }
     

@@ -39,6 +39,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -87,15 +88,19 @@ MonoBehaviour:
   _tags: 
   _effectType: 0
   _isUnique: 0
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
-    Requirements: []
-  _hasBlockTags: 0
+    Requirements:
+    - Tag: 1
+      Amount: 1
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 1
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _createIcon: 0

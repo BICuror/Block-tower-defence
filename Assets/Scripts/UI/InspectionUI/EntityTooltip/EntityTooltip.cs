@@ -1,9 +1,10 @@
-using System;
+
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
+using System.Linq;
 using UnityEngine;
 using Combat;
+using System;
 using TMPro;
 
 public sealed class EntityTooltip : PointFollowingCanvasUIElement
@@ -56,11 +57,9 @@ public sealed class EntityTooltip : PointFollowingCanvasUIElement
 
         InitializePriorityDropdown();
         
-        await RebuildLayoutAndCalculateOffsets();
-        
-        _scrollMaxHeightControllers.ForEach(controller => controller.UpdateHeight());
+        _scrollMaxHeightControllers.ForEach(controller => controller.UpdateHeight().Forget());
     }
-
+    
     private void InitializePriorityDropdown()
     {
         if (_inspectable.TryGetComponent<AreaManager>(out AreaManager areaManager))

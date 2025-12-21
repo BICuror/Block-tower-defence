@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
@@ -7,8 +9,8 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     [SerializeField] private RectTransform _rectTransform;
     
     [Header("Positioning")]
-    [SerializeField] private RectTransform _inspectablePosition;
-    [SerializeField] private float _yOffset;
+    [SerializeField] private List<RectTransform> _subPanels;
+    [SerializeField] private Vector2 _offset;
     
     [Header("FadeAnimation")]
     [SerializeField] private CanvasGroup _mainGroup;
@@ -49,14 +51,7 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         _mainGroup.interactable = false;
         await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => gameObject.SetActive(false)).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
     }
-
-    protected async UniTask RebuildLayoutAndCalculateOffsets()
-    {
-        await RebuildLayout();
-
-        CalculateOffsets();
-    }
-
+    
     protected void SetTarget(Transform target) => _target = target;
     
     private void CalculateOffsets()
@@ -64,8 +59,8 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         RectTransform rect = transform as RectTransform;
 
         float xSize = rect.sizeDelta.x / 2;
-        float ySize = rect.sizeDelta.y / 2;
-
+        float ySize = _subPanels.Max(panel => panel.sizeDelta.y) / 2;
+        
         _pointFollowingElementOffsetContainer = new()
         {
             RightOffset = xSize,
@@ -84,11 +79,13 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     {
         if (!_target) return;
         
+        CalculateOffsets();
+        
         Vector2 targetScreenPosition = RectTransformUtility.WorldToScreenPoint(_mainCamera, _target.position);
         
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent as RectTransform, targetScreenPosition, null, out Vector2 resultPoint);
-        
-        Vector2 preferredUIPosition = resultPoint - new Vector2(_inspectablePosition.anchoredPosition.x, - (_yOffset + _pointFollowingElementOffsetContainer.BottomOffset));
+
+        Vector2 preferredUIPosition = resultPoint + _offset;
         
         Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(_pointFollowingElementOffsetContainer, preferredUIPosition);
         

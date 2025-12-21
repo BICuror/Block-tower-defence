@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Zenject;
 using System;
+using NaughtyAttributes;
 using Random = UnityEngine.Random;
 
 public sealed class ItemFactory : MonoBehaviour
@@ -19,6 +20,16 @@ public sealed class ItemFactory : MonoBehaviour
     private ListDictionary<ItemColor, Item> _usedItemColors = new();
     
     public List<Item> CreatedItems => _createdItems;
+    
+#if UNITY_EDITOR
+    [Button]
+    public void CreateItems()
+    {
+        CreateItem(9, new Vector3(12f, 0f, 12));
+        CreateItem(6, new Vector3(12f, 0f, 12));
+    } 
+    
+#endif
     
     public async void CreateItem(int strength, Vector3 centerPosition)
     {

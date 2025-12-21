@@ -13,6 +13,5 @@ public sealed class EffectInspectionTooltipPreview : PointFollowingCanvasUIEleme
         _previewName.text = selectionOptionObject.OptionName;
         _previewImage.sprite = selectionOptionObject.Icon;
         SetTarget(selectionOptionObject.transform);
-        await RebuildLayoutAndCalculateOffsets();
     }
 }

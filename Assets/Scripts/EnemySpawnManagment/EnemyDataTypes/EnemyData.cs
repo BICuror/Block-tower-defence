@@ -20,6 +20,7 @@ public sealed class EnemyData : ScriptableObject
     [Header("VisualSettings")]
     [SerializeField] private Mesh _mesh;
     [SerializeField] private Material _material;
+    [SerializeField] private float _scale = 1f;
 
     [Header("UI")] 
     [SerializeField] private string _name;
@@ -41,4 +42,5 @@ public sealed class EnemyData : ScriptableObject
     
     public Mesh Mesh => _mesh;
     public Material Material => _material;
+    public float Scale => _scale;
 }

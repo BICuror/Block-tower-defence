@@ -23,6 +23,26 @@ MonoBehaviour:
     - HealEachBuildingPerCrystal
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
+  - _itemTypeName: GlobalEnemyModificatorToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  - _itemTypeName: GlobalEnemyModificatorToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -32,13 +52,13 @@ MonoBehaviour:
       _floatArgument: 0
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: 34ee5eeef5e5ccb4da60466d7f3663b2, type: 2}
+      _entityModificatorData: {fileID: 11400000, guid: 85157afeea140e544a11613f910f4af8, type: 2}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-  _quality: 2
+  _quality: 4
   _effectType: 1
-  _isUnique: 0
+  _isUnique: 1
   _tags: 
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
@@ -56,4 +76,4 @@ MonoBehaviour:
     Requirements: []
   _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _effectName: Shielded enemies
-  _effectDescription: Enemies recive 15 #Shield
+  _effectDescription: Enemies recive 3 separate #Shield that breaks from any attack

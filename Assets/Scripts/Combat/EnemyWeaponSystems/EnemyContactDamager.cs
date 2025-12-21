@@ -1,11 +1,14 @@
 using UnityEngine;
 using Cashing;
 using Combat;
+using System;
 
 public sealed class EnemyContactDamager : MonoBehaviour
 {
     [Cached] private ContactDamage _contactDamage;
     [Cached] private CombatEntity _ownerEntity;
+    
+    public event Action OnDealingContactDamage;    
         
     private void OnCollisionEnter(Collision other)
     {
@@ -19,6 +22,8 @@ public sealed class EnemyContactDamager : MonoBehaviour
             }
             
             _ownerEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(typeof(FearEffect), 1, 5f);
+            
+            OnDealingContactDamage?.Invoke();
         }
     }
 }

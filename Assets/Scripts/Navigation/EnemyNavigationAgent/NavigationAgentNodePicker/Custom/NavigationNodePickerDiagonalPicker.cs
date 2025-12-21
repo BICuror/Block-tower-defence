@@ -37,10 +37,10 @@ public sealed class NavigationNodePickerDiagonalPicker : NavigationAgentNodePick
     public override NavigationNode PickNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)
     {
         List<NavigationNode> nearbyNodes = GetNodesAroundPosition(navigationMap, position, _checkDirections);
-        NavigationNode bestStraightNode = PickStraightNavigationNode(navigationMap, layer, position);
-        
+        NavigationNode bestDiagonalNode = PickNavigationNode(layer, nearbyNodes);
+
         NavigationNode bestNearbyNode = null;
-        int bestNearbyFutureNodeWeight = layer.GetNodeWeight(bestStraightNode);
+        int bestNearbyFutureNodeWeight = layer.GetNodeWeight(bestDiagonalNode);
         
         nearbyNodes.ForEach(node =>
         {
@@ -66,12 +66,10 @@ public sealed class NavigationNodePickerDiagonalPicker : NavigationAgentNodePick
         });
         
         if (bestNearbyNode != null) return bestNearbyNode;
-        
-        NavigationNode bestDiagonalNode = PickNavigationNode(layer, nearbyNodes);
             
         if (layer.GetNodeWeight(bestDiagonalNode) > 0) return bestDiagonalNode;
         
-        return bestStraightNode;
+        return PickStraightNavigationNode(navigationMap, layer, position);;
     }
 
     private NavigationNode PickStraightNavigationNode(NavigationMap navigationMap, NavigationMapLayer layer, Vector2Int position)

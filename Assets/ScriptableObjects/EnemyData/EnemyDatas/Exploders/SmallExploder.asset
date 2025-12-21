@@ -21,10 +21,13 @@ MonoBehaviour:
     _defaultValue: 2
   - StructName: 
     _statData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    _defaultValue: 10
+    _defaultValue: 15
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: 4300000, guid: b795d1f342e4beb4c96c843702fbfb70, type: 3}
   _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}
+  _scale: 0.85
+  _name: Exploder
+  _description: Explodes on contact or death dealing damage to everyone around
   _hasObjectModificators: 1
   _objectModificators:
   - {fileID: 889794001841637397, guid: 8cc1f73793467364f812d7bf785cee7e, type: 3}

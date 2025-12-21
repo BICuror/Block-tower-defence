@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public sealed class GlobalEffectTagRequirementsChecker
 {
@@ -14,7 +15,11 @@ public sealed class GlobalEffectTagRequirementsChecker
         
         for (int i = 0; i < requirements.Count; i++)
         {
-            if (appliedTags.Count(tag => tag == requirements[i].Tag) < requirements[i].Amount) return false;
+            if (appliedTags.Count(tag => tag == requirements[i].Tag) < requirements[i].Amount)
+            {
+                Debug.Log(requirements[i].Tag + appliedTags.Count(tag => tag == requirements[i].Tag).ToString());
+                return false;
+            }
         }
 
         return true;

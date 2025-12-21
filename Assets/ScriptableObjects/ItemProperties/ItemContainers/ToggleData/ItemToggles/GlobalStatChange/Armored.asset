@@ -68,8 +68,7 @@ MonoBehaviour:
       Amount: 1
   _icon: {fileID: -255249925, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _effectName: Armored
-  _effectDescription: '#good -50% good# #bad enemies bad#, but #bad +50% enemy bad#
-    #MaxHealth'
+  _effectDescription: '#good -50% good# enemies, #bad +50% enemy bad# #MaxHealth'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 6e5fae9541dd9ca4785dd9fcbb8f9465, type: 2}
     FlatChange: 0

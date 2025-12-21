@@ -57,14 +57,14 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
         
         if (modificatorData.HasRequiredTags)
         {
-            if (!EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.ReqiredOwnerTags)) return false;
-            if (!EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.ReqiredOtherEntityTags)) return false;
+            if (modificatorData.ReqiredOwnerTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.ReqiredOwnerTags)) return false;
+            if (modificatorData.ReqiredOtherEntityTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.ReqiredOtherEntityTags)) return false;
         }
 
         if (modificatorData.HasBlockTags)
         {
-            if (EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.BlockOwnerTags)) return false;
-            if (EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.BlockOtherEntityTags)) return false;
+            if (modificatorData.BlockOwnerTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.BlockOwnerTags)) return false;
+            if (modificatorData.BlockOtherEntityTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.BlockOtherEntityTags)) return false;
         }
         
         Debug.Log($"Suckseful Checking requirements for {modificatorData.name}");

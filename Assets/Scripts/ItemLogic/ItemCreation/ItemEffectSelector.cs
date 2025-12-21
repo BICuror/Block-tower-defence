@@ -139,15 +139,14 @@ public sealed class ItemEffectSelector : MonoBehaviour
         
         if (effectData.HasRequiredTags) 
         {
-            if (!EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.RequiredBuildingTags)) return false;
-            if (!GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.RequiredGlobalEffectsTags)) return false;
+            if (effectData.RequiredBuildingTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.RequiredBuildingTags)) return false;
+            if (effectData.RequiredGlobalEffectsTags.Count > 0 && !GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.RequiredGlobalEffectsTags)) return false;
         }
         if (effectData.HasBlockTags)
         {
-            if (EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.BlockBuildingsTags)) return false;
-            if (GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.BlockGlobalEffectTags)) return false;
+            if (effectData.BlockBuildingsTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.BlockBuildingsTags)) return false;
+            if (effectData.BlockGlobalEffectTags.Count > 0 && GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.BlockGlobalEffectTags)) return false;
         }
-
         
         Debug.Log($"Suckseful Checking requirements for {effectData.name}");
         

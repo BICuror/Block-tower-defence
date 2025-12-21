@@ -24,6 +24,16 @@ namespace Combat
             _health.Initialize();
             _health.RefilHP();
             _health.Died += HandleDeathEvent;
+
+            if (!_destroyOnDeath) _waveStateMachine.StateStarted += RefillHealthOrRevive;
+        }
+
+        private void RefillHealthOrRevive(WaveState waveState)
+        {
+            if (waveState == WaveState.Idle)
+            {
+                if (_health.IsAlive()) _health.RefilHP();
+            }
         }
 
         private void HandleDeathEvent()

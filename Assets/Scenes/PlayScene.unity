@@ -15171,7 +15171,7 @@ Transform:
   m_GameObject: {fileID: 2113528651}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.16, z: 0}
+  m_LocalPosition: {x: 0, y: -0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -15192,7 +15192,7 @@ MonoBehaviour:
   _chargePrefab: {fileID: 4862923620167081645, guid: c4fee9cbcf9a79849ac6e5e1cf3e705a, type: 3}
   _chargesPerUpgrade: 5
   _finalPosition: {fileID: 2113528652}
-  _animationDuration: 2
+  _animationDuration: 1.2
   _verticalAnimationCurve:
     serializedVersion: 2
     m_Curve:
@@ -15260,7 +15260,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _chargeBar: {fileID: 7746933228960258803}
-  _timeBetweenCharges: 0.7
+  _timeBetweenCharges: 0.5
 --- !u!114 &2140959525 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3214955101713624846, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}

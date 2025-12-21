@@ -50,7 +50,8 @@ MonoBehaviour:
   _explotionEffect: {fileID: 2126849784621830354}
   _enemyLayerSettings: {fileID: 11400000, guid: 06d08c6367264cc44a27bffbfedcbae9, type: 2}
   _defaultRadius: 0.5
-  _duration: 5
+  _infiniteDuration: 0
+  _duration: 2
   _secondsPerHit: 0.3
 --- !u!2083052967 &4827754881912384445
 VisualEffect:
@@ -180,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 0
   _visualEffect: {fileID: 4827754881912384445}
+  _detachFromParentWhilePlaying: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -32,7 +33,9 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         }
         else
         {
-            _buildingEntityToUpgrade = _globalBuildingContainer.Entities[Random.Range(0, _globalBuildingContainer.Entities.Count)];
+            int minimalUpgradeAmount = _globalBuildingContainer.Entities.Min(building => building.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count);
+            
+            _buildingEntityToUpgrade = _globalBuildingContainer.Entities.First(building => building.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count == minimalUpgradeAmount);
         }
             
         _initialPosition = Vector3Int.RoundToInt(_buildingEntityToUpgrade.transform.position);

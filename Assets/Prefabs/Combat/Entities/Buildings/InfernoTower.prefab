@@ -406,6 +406,8 @@ MonoBehaviour:
   _weaponBase: {fileID: 6512528250351581515}
   _beamSystem: {fileID: 3628266454779129155}
   _sourceTransform: {fileID: 3327264118850545295}
+  _chargeBarPrefab: {fileID: 5354278446947390222, guid: 8f99e33429f88b845921b562ae73e906, type: 3}
+  _canvasBarIcon: {fileID: -686756865, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
 --- !u!114 &3628266454779129155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -486,8 +488,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
   _inspectableObjectName: Inferno tower
-  _inspectableObjectDescription: Deals more damage over time, when locked on one
-    target
+  _inspectableObjectDescription: Deals more damage depending on #Charge, gain #Charge
+    when attacking, reset #Charge when attacking new entity
 --- !u!114 &9095846125503527913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -502,29 +504,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
   _allAvailableModificators:
-  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
-  - {fileID: 11400000, guid: a441dd39244b43447b33348da2d43aa8, type: 2}
-  - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
-  - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
+  - {fileID: 11400000, guid: d7f77dac8227438419183d36db74a12e, type: 2}
+  - {fileID: 11400000, guid: 695d394a9c45b83488ee9ab397fa3479, type: 2}
+  - {fileID: 11400000, guid: 89c84744ff874a841947df076b7432a5, type: 2}
+  - {fileID: 11400000, guid: f5f752a8eef390042ba8ad3c8c3400a9, type: 2}
+  - {fileID: 11400000, guid: ec25e51f05afab049b0fa74eb359bc70, type: 2}
+  - {fileID: 11400000, guid: e4faeaf16c7b3b141bdf28bf30ffa480, type: 2}
   - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
   - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
   - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
   - {fileID: 11400000, guid: 965d8a0600408424b9cb12f910cb1a27, type: 2}
   - {fileID: 11400000, guid: 00c8f01bdea31cb449bc1f5cd613087d, type: 2}
-  - {fileID: 11400000, guid: 986a970c79823d7478b41f108f3862c3, type: 2}
+  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
   - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
   - {fileID: 11400000, guid: 90aa638f7f19938459a12f3220d87a52, type: 2}
-  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
-  - {fileID: 11400000, guid: df1567796476f5440a2117c7945561f0, type: 2}
+  - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
+  - {fileID: 11400000, guid: a441dd39244b43447b33348da2d43aa8, type: 2}
+  - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
   - {fileID: 11400000, guid: 4724c287469796c4c9cbb5bbea681100, type: 2}
-  - {fileID: 11400000, guid: 3fc8e09c6fe0ecf468721b29f275aa73, type: 2}
+  - {fileID: 11400000, guid: df1567796476f5440a2117c7945561f0, type: 2}
+  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
+  - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
+  - {fileID: 11400000, guid: 1bcc25796c97ab14fbf1aabc73fe9a44, type: 2}
   - {fileID: 11400000, guid: c77b913b34675ee43843bbaa471650b6, type: 2}
   - {fileID: 11400000, guid: e5f8125c956370a4d9f9810c7db4aeeb, type: 2}
-  - {fileID: 11400000, guid: b8be7177f2e670c43a8ade144eb529c1, type: 2}
-  - {fileID: 11400000, guid: c483b9c7249d1794d9baf5059ca955b3, type: 2}
-  - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
-  - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
-  - {fileID: 11400000, guid: 695d394a9c45b83488ee9ab397fa3479, type: 2}
+  - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
 --- !u!114 &6512528250351581515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -717,6 +721,7 @@ GameObject:
   - component: {fileID: 7125606567110644291}
   - component: {fileID: 5110275832658802773}
   - component: {fileID: 6595281209798793444}
+  - component: {fileID: 1484560054770547324}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -815,6 +820,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &1484560054770547324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6781283994251876637}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &7256141206763698391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1081,7 +1104,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3958333850256313247, guid: cc19ccc06fe5bb74a8ea6ebf73f25cce, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.182
       objectReference: {fileID: 0}
     - target: {fileID: 3958333850256313247, guid: cc19ccc06fe5bb74a8ea6ebf73f25cce, type: 3}
       propertyPath: m_LocalPosition.z

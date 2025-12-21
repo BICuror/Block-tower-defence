@@ -179,12 +179,9 @@ MonoBehaviour:
   _allAvailableModificators:
   - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
   - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
-  - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
-  - {fileID: 11400000, guid: 7186276ae6f62df4dbd8f8a85c146e7e, type: 2}
   - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
   - {fileID: 11400000, guid: 965d8a0600408424b9cb12f910cb1a27, type: 2}
   - {fileID: 11400000, guid: 00c8f01bdea31cb449bc1f5cd613087d, type: 2}
-  - {fileID: 11400000, guid: 986a970c79823d7478b41f108f3862c3, type: 2}
   - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
   - {fileID: 11400000, guid: 90aa638f7f19938459a12f3220d87a52, type: 2}
   - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
@@ -221,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: Alterily tower
+  _inspectableObjectName: Artillery tower
   _inspectableObjectDescription: Damages all enemies in targets, which can be dragged
 --- !u!114 &8647487456333441946
 MonoBehaviour:
@@ -343,6 +340,7 @@ GameObject:
   - component: {fileID: 6409489551614489396}
   - component: {fileID: 7146768643875308146}
   - component: {fileID: 358193629617948874}
+  - component: {fileID: 7878827702635586972}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -429,6 +427,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &7878827702635586972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880469819708588832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &4186025159791728923
 PrefabInstance:
   m_ObjectHideFlags: 0

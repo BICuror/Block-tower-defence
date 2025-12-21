@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b250d2f357a3eb4c8e5066f4aef388d, type: 3}
   m_Name: PoisonEffectData
   m_EditorClassIdentifier: 
-  _maxStacks: 50
+  _maxStacks: 10
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
       _argumentName: DamagePerStack
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 0.01
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -30,7 +30,7 @@ MonoBehaviour:
       _argumentName: SecondsPerTick
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}

@@ -39,6 +39,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -65,15 +66,16 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Polifem
-  _modificatorDescription: '#good +150% good# #Damage, #bad +70% bad# #Recharge,
+  _modificatorDescription: '#good +140% good# #Damage, #bad +70% bad# #Recharge,
     #bad +50% bad# #BuildTime'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: 0
-    MultiplierChange: 1.5
+    MultiplierChange: 1.4
   - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
     FlatChange: 0
     MultiplierChange: 0.5

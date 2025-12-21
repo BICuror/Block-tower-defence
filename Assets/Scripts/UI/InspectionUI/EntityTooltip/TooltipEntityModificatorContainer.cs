@@ -24,15 +24,18 @@ public sealed class TooltipEntityModificatorContainer : MonoBehaviour
         
         entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.OrderBy(data => data.EffectType == EffectType.Positive).ToList().ForEach(modificatorData => 
         {
-            EntityModificatorTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
-
-            tooltip.SetEntityModificator(modificatorData);
-            tooltip.TooltipOpened += (value) => TooltipOpened?.Invoke(value);
-            tooltip.TooltipClosed += () => TooltipClosed?.Invoke();
-            
-            tooltip.SetAmount(entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetModificatorsAmount(modificatorData));
-            
-            _entityModificatorTooltips.Add(tooltip);
+            if (modificatorData.ShowInInspector)
+            {
+                EntityModificatorTooltip tooltip = Instantiate(_entityModificatorTooltipPrefab, _entityModificatorTooltipParent);
+    
+                tooltip.SetEntityModificator(modificatorData);
+                tooltip.TooltipOpened += (value) => TooltipOpened?.Invoke(value);
+                tooltip.TooltipClosed += () => TooltipClosed?.Invoke();
+                
+                tooltip.SetAmount(entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetModificatorsAmount(modificatorData));
+                
+                _entityModificatorTooltips.Add(tooltip);
+            }
         });
     }
 }

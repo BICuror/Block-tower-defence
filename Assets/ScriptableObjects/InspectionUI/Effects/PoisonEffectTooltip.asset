@@ -16,7 +16,7 @@ MonoBehaviour:
   _tagText: Poison
   _textColor: {r: 0.57254905, g: 0.0627451, b: 0.6, a: 1}
   _iconSprite: {fileID: -1439210628, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: Deals 0.5 #NonLethalDamage per #Stack each second, cannot expire.
-    #MaxStack = 50
+  _description: Deals 1% of #MaxHealth as #NonLethalDamage per #Stack each second,
+    cannot expire. #MaxStack = 10
   _onlyText: 0
   _associatedEffectTypeName: PoisonEffect

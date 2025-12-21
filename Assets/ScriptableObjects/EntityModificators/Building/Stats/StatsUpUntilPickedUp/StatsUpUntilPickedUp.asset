@@ -39,6 +39,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -74,6 +75,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -111,12 +113,13 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Strong foundation
-  _modificatorDescription: At wave start  #good +50% good# #Damage, #good +1 good#
-    #Reach, #good -30% good# #Recharge until picked up,  #bad +0.5 bad# #BuildTime
+  _modificatorDescription: At wave start  #good +50% good# #Damage, #good -30% good#
+    #Recharge until picked up,  #bad +1 bad# #BuildTime
   _statChanges:
   - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    FlatChange: 0
-    MultiplierChange: 0.5
+    FlatChange: 1
+    MultiplierChange: 0

@@ -7,6 +7,8 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     [SerializeField] private WeaponBase _weaponBase;
     [SerializeField] private BeamSystem _beamSystem;
     [SerializeField] private Transform _sourceTransform;
+    [SerializeField] private EntityCanvasBar _chargeBarPrefab;
+    [SerializeField] private Sprite _canvasBarIcon;
     
     [Cached] private TaskRechargeDuration _taskCycleRechargeDuration;
     [Cached] private MaxDamageMultiplier _maxDamageMultiplier;
@@ -16,6 +18,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     [Cached] private Damage _damage;
     private float _elapsedTime;
     
+    private EntityCanvasBar _chargeBar;
     private CombatEntity _currentEnemy;
     
     public CombatEntity CurrentTarget => _currentEnemy;
@@ -24,6 +27,8 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     private void Start()
     {
         base.Start();
+        _chargeBar = _ownerEntity.ComponentsContainer.Get<EntityCanvas>().AddBar(_canvasBarIcon, 0f, _chargeBarPrefab);
+        
         _beamSystem.SetSource(_sourceTransform);
         
         _weaponBase.Initialize(_ownerEntity);
@@ -39,6 +44,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     public bool ResetChargeAndTryFindTarget()
     {
         _elapsedTime = 0f;
+        AddCharge(0f);
         
         if (_enemyAreaScaner.IsEmpty) return false;
             
@@ -46,6 +52,26 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         _beamSystem.SetTarget(_currentEnemy.transform);
 
         return true;
+    }
+
+    public void AddCharge(float addedChargeValue)
+    {
+        if (_elapsedTime >= _chargeDuration.Value) return;
+        
+        _elapsedTime += addedChargeValue;
+        
+        if (_elapsedTime >= _chargeDuration.Value)
+        {
+            _elapsedTime = _chargeDuration.Value;
+            
+            OnMaxChargeReached.Execute();
+        }
+        
+        float charge = _elapsedTime / _chargeDuration.Value;
+        
+        _beamSystem.SetAlpha(charge);
+        
+        _chargeBar.SetValue(charge);
     }
     
     private void TryToBeam()
@@ -56,7 +82,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         }
         else
         { 
-            IncreaseElapsedTime();
+            AddCharge(_taskCycleRechargeDuration.Value);
 
             if (_currentEnemy == null)
             {
@@ -71,20 +97,6 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         
         _weaponBase.DamageEntity(damage, _currentEnemy);
     }
-
-    private void IncreaseElapsedTime()
-    {
-        if (_elapsedTime >= _chargeDuration.Value) return;
-        
-        _elapsedTime += _taskCycleRechargeDuration.Value;
-
-        if (_elapsedTime >= _chargeDuration.Value)
-        {
-            _elapsedTime = _chargeDuration.Value;
-            
-            OnMaxChargeReached.Execute();
-        }
-    }
     
     private void TryClearEnemy(CombatEntity removedEnemy)
     {
@@ -93,6 +105,8 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
  
     private void ClearEnemy()
     {
+        _elapsedTime = 0f;
+        AddCharge(0f);
         _beamSystem.DisableBeam();
         _currentEnemy = null;
     }

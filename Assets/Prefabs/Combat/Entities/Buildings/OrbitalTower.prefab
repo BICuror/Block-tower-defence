@@ -5261,7 +5261,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
   - {fileID: 11400000, guid: 3fc8e09c6fe0ecf468721b29f275aa73, type: 2}
   - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
-  - {fileID: 11400000, guid: c483b9c7249d1794d9baf5059ca955b3, type: 2}
 --- !u!114 &5220538212850705305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5288,8 +5287,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
   _inspectableObjectName: Orbital tower
-  _inspectableObjectDescription: "Has orbitals, which deal damage on border of reach
-    area\u0431 can be placed everywhere"
+  _inspectableObjectDescription: Has orbitals, which deal damage on border of reach
+    area, can be placed everywhere
 --- !u!114 &1179167039576349397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5435,6 +5434,7 @@ GameObject:
   - component: {fileID: 2520302813171976300}
   - component: {fileID: 3296884587869577671}
   - component: {fileID: 5199694933800725631}
+  - component: {fileID: 7654696624307757846}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -5533,6 +5533,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &7654696624307757846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575311875090513263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &5798855339313037459
 GameObject:
   m_ObjectHideFlags: 0

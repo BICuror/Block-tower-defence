@@ -14,7 +14,7 @@ public sealed class PoisonEffect : EntityTickEffect
     {
         if (Entity.Health.GetHp() <= _healthThreshold) return;
         
-        float tickDamage = _damagePerStack * Stack;
+        float tickDamage = _damagePerStack * Entity.Health.GetMaxHp() * Stack;
         
         if (Entity.Health.GetHp() <= tickDamage)
         {

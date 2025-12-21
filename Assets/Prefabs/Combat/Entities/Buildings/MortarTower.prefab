@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 6248337254439099030}
   - component: {fileID: 8880652755410953163}
   - component: {fileID: 3620392266764355938}
+  - component: {fileID: 5290177001915760236}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -207,6 +208,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &5290177001915760236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181085558654695473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &2413717840672412973
 GameObject:
   m_ObjectHideFlags: 0
@@ -5250,37 +5269,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
   _allAvailableModificators:
-  - {fileID: 11400000, guid: 6cce0aa5c95bbc043abcdec995f8f3d2, type: 2}
-  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
-  - {fileID: 11400000, guid: a441dd39244b43447b33348da2d43aa8, type: 2}
-  - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
-  - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
+  - {fileID: 11400000, guid: 9a75cdf9ce9c5984da1f688ac1060e8a, type: 2}
+  - {fileID: 11400000, guid: a5f39669154709d408254db83c834ee5, type: 2}
+  - {fileID: 11400000, guid: 0ef87c26893c1f2468d69f4729d54feb, type: 2}
+  - {fileID: 11400000, guid: ba637edcccb8b344081923e31a273039, type: 2}
+  - {fileID: 11400000, guid: 06c8bf0bd8c58344391e14e9923286db, type: 2}
+  - {fileID: 11400000, guid: 70c30db9520aeeb4bbbc0dbc9eb8c430, type: 2}
+  - {fileID: 11400000, guid: 63767eae02ad765429d5a07f0e0b4d59, type: 2}
+  - {fileID: 11400000, guid: fb813c93d8803d34c8b308fa212ab675, type: 2}
+  - {fileID: 11400000, guid: 011fd08ea79a7a248990f2c4297f7b86, type: 2}
+  - {fileID: 11400000, guid: ccee1462ecae6e34bb3888b3c8c57d1e, type: 2}
+  - {fileID: 11400000, guid: 7fb0c364993f5114ea7cf535f2122bde, type: 2}
+  - {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
   - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
   - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
   - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
   - {fileID: 11400000, guid: 965d8a0600408424b9cb12f910cb1a27, type: 2}
-  - {fileID: 11400000, guid: 00c8f01bdea31cb449bc1f5cd613087d, type: 2}
   - {fileID: 11400000, guid: 986a970c79823d7478b41f108f3862c3, type: 2}
+  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
   - {fileID: 11400000, guid: 5b1f0399001e3da499f9eda44aad3d6c, type: 2}
   - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
   - {fileID: 11400000, guid: 90aa638f7f19938459a12f3220d87a52, type: 2}
-  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
-  - {fileID: 11400000, guid: baf101d91b46e2b4a97b9b1a0b46e6a0, type: 2}
-  - {fileID: 11400000, guid: a467cbbfebadabf4a81108c2383170bb, type: 2}
   - {fileID: 11400000, guid: 8cf92eda629c2ec48a329a815d75a504, type: 2}
-  - {fileID: 11400000, guid: df1567796476f5440a2117c7945561f0, type: 2}
-  - {fileID: 11400000, guid: 4724c287469796c4c9cbb5bbea681100, type: 2}
-  - {fileID: 11400000, guid: 3fc8e09c6fe0ecf468721b29f275aa73, type: 2}
-  - {fileID: 11400000, guid: c77b913b34675ee43843bbaa471650b6, type: 2}
-  - {fileID: 11400000, guid: e5f8125c956370a4d9f9810c7db4aeeb, type: 2}
-  - {fileID: 11400000, guid: b8be7177f2e670c43a8ade144eb529c1, type: 2}
-  - {fileID: 11400000, guid: c483b9c7249d1794d9baf5059ca955b3, type: 2}
   - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
+  - {fileID: 11400000, guid: a441dd39244b43447b33348da2d43aa8, type: 2}
+  - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
+  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
   - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
-  - {fileID: 11400000, guid: de8462756b44e814099f8bc77a6016a8, type: 2}
-  - {fileID: 11400000, guid: 7f6fff04f9b185c40b9926e9ce3b3331, type: 2}
-  - {fileID: 11400000, guid: ccee1462ecae6e34bb3888b3c8c57d1e, type: 2}
-  - {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
+  - {fileID: 11400000, guid: 1bcc25796c97ab14fbf1aabc73fe9a44, type: 2}
+  - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
 --- !u!114 &8048016232359269500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5357,7 +5374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
   _inspectableObjectName: Mortar tower
-  _inspectableObjectDescription: Shots an arching projectile, that explodes on collision
+  _inspectableObjectDescription: Shots an arching projectile, explodes on collision
 --- !u!1 &4972928926287705394
 GameObject:
   m_ObjectHideFlags: 0

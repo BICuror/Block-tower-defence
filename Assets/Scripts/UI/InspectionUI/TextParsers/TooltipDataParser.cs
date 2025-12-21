@@ -11,21 +11,28 @@ public sealed class TooltipDataParser : MonoBehaviour
     public TooltipParseTagDataContainer GetTooltipTagDataFromText(string tooltipText)
     {
         TooltipParseTagDataContainer parseDataContainer = new();
-     
-        List<string> tooltipTextParts = tooltipText.Split(TOOLTIP_TAG_START_CHAR).ToList();
-        
-        tooltipTextParts.ForEach(tooltipTextPart =>
+
+        if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR))
         {
-            ParseTags(TOOLTIP_TAG_START_CHAR + tooltipTextPart, parseDataContainer, _allTagDataContainer.EffectTagDatas);   
-            ParseTags(TOOLTIP_TAG_START_CHAR + tooltipTextPart, parseDataContainer, _allTagDataContainer.StatTagDatas);   
-            ParseTags(TOOLTIP_TAG_START_CHAR + tooltipTextPart, parseDataContainer, _allTagDataContainer.KeywordTagDatas);   
-        });
+            List<string> tooltipTextParts = tooltipText.Split(TOOLTIP_TAG_START_CHAR).ToList();
+            
+            tooltipTextParts.ForEach(tooltipTextPart =>
+            {
+                ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.EffectTagDatas);   
+                ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.StatTagDatas);   
+                ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.KeywordTagDatas);   
+            });
+            
+            parseDataContainer.TagDatas = parseDataContainer.TagDatas.Distinct().ToList();
+        }
         
         return parseDataContainer;
     }
     
     private void ParseTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer, IReadOnlyList<TooltipTagData> tagDataList)
     {
+        tooltipText = TOOLTIP_TAG_START_CHAR + tooltipText;
+        
         foreach (TooltipTagData tagData in tagDataList)
         {
             if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR + tagData.Tag))

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _statType: Damage
   _useStackableNearbyModifier: 0
-  _aloneModifier: 0.6
+  _aloneModifier: 1.2
   _nearbyModifier: 0
   _buildingAreaScaner: {fileID: 4910447815113604971}
 --- !u!1 &4451044171943003910
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _autoScale: 0
   _additionalScaleValue: 0.95
+  _areaScaleValue: 2
   _hasVisualisation: 1
   _visualisationTransform: {fileID: 601470342404091515}
   _height: 100

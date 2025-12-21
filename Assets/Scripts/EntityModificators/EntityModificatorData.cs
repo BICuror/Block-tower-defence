@@ -30,6 +30,7 @@ public class EntityModificatorData : ScriptableObject
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOtherEntityTags;
 
     [Header("UI Data")] 
+    [SerializeField] private bool _showInInspector = true;
     [SerializeField] private bool _createIcon;
     [SerializeField] private Sprite _icon;
     [SerializeField] private string _modificatorName;
@@ -41,6 +42,7 @@ public class EntityModificatorData : ScriptableObject
     public EntityModifcationRarity Rarity => _rarity;
     public List<EntityModifcatorTag> Tags => _tags;
     public bool IsUnique => _isUnique;
+    public bool ShowInInspector => _showInInspector;
     public bool CreateIcon => _createIcon;
     [CustomAssetIcon] public Sprite Icon => _icon;
     public string ModificatorName => _modificatorName;
@@ -74,4 +76,8 @@ public enum EntityModifcatorTag
     RemovesRecharge,
     ChangesRecharge,
     ItemReroll,
+    OverridesMainBehaviour,
+    AOE,
+    RechargeDownDamageDown,
+    RechargeUpDamageUp,
 }

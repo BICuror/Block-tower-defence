@@ -18,6 +18,7 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
     private WeaponPool<Arrow> _arrowObjectPool;
 
     public readonly OverridableBehaviour<Arrow> ArrowHitBehaviour = new OverridableBehaviour<Arrow>();
+    public readonly OverridableBehaviour<Arrow> ArrowHitPositionBehaviour = new OverridableBehaviour<Arrow>();
 
     private void Start()
     {

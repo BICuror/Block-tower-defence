@@ -5241,6 +5241,7 @@ GameObject:
   - component: {fileID: 1128923985784067508}
   - component: {fileID: 5180159151510655477}
   - component: {fileID: 2543382600829122216}
+  - component: {fileID: 7580155630028627261}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -5339,6 +5340,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &7580155630028627261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7300458605841521785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &9049865345819857258
 GameObject:
   m_ObjectHideFlags: 0

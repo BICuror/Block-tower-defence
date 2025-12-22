@@ -118,62 +118,20 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
         return false;
     }
-
+    
     private bool HasAValidRoadFromStartToEnd(Vector2Int startingPosition, Vector2Int endPosition, int minWeight, int maxWeight, out int resultLength)
     {
-        int[,] weightMap = new int[_islandData.IslandSize, _islandData.IslandSize];
-        
-        bool result = GetMinLength(startingPosition, 0, out int length);
+        bool[,] combinedMap = new bool[_roadMap.GetLength(0), _roadMap.GetLength(1)];
 
-        resultLength = length;
-
-        return result;
-        
-        bool GetMinLength(Vector2Int position, int weight, out int finalWeight)
+        for (int x = 0; x < combinedMap.GetLength(0); x++)
         {
-            finalWeight = 0;
-            
-            weight++;
-            weightMap[position.x, position.y] = weight;
-
-            if (position == endPosition && weight <= maxWeight && weight >= minWeight)
+            for (int z = 0; z < combinedMap.GetLength(1); z++)
             {
-                finalWeight = weight;
-                return true;
+                combinedMap[x, z] = _roadMap[x, z] || _tempRoadmap[x, z];
             }
-
-            List<int> weights = new List<int>();
-
-            for (int i = 0; i < _checkDirections.Length; i++)
-            {
-                Vector2Int checkPosition = _checkDirections[i] + position;
-                
-                if (!IsInBorders(checkPosition)) continue;
-                
-                if (_roadMap[checkPosition.x, checkPosition.y] || _tempRoadmap[checkPosition.x, checkPosition.y])
-                {
-                    if (weightMap[checkPosition.x, checkPosition.y] == 0 || weightMap[checkPosition.x, checkPosition.y] > weight + 1) 
-                    {
-                        if (GetMinLength(checkPosition, weight, out int foundWeight))
-                        {
-                            weights.Add(foundWeight);
-                        }
-                    }   
-                }
-            }
-
-            if (weights.Count == 0) return false;
-
-            int minFoundWeight = weights.Min();
-
-            if (minFoundWeight < maxWeight && minFoundWeight > minWeight)
-            {
-                finalWeight = minFoundWeight;
-                return true;
-            }
-
-            return false;
         }
+        
+        return TileMap.HasAValidRoadFromStartToEnd(combinedMap, startingPosition, endPosition, minWeight, maxWeight, out resultLength);
     }
     
     private bool TryApplyGrid(RoadPartTileState[,] roadPartGrid, Vector2Int offset)

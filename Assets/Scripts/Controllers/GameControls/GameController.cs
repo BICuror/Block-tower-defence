@@ -6,6 +6,7 @@ using UnityEngine;
 
 public sealed class GameController : MonoBehaviour
 {
+    [SerializeField] private float _modifiedTimeScale = 2f;
     [SerializeField] private CameraRotationController _cameraRotationController;
     [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private CameraZoomController _cameraZoomController;
@@ -23,8 +24,7 @@ public sealed class GameController : MonoBehaviour
         _cameraPositionController.CameraPositionUpdated += () => _cameraRotationController.UpdateCameraRotation();
         _inspectorController.InspectionStopped += () =>
         {
-            if (_currentControllerState != ControllerState.Dragging)
-                _currentControllerState = ControllerState.Idle;
+            if (_currentControllerState != ControllerState.Dragging) _currentControllerState = ControllerState.Idle;
         };
     }
 
@@ -97,6 +97,12 @@ public sealed class GameController : MonoBehaviour
         
         _currentControllerState = ControllerState.Idle;
     }
+
+    private void ToggleTimeScale()
+    {
+        if (Time.timeScale == 1) Time.timeScale = _modifiedTimeScale;
+        else Time.timeScale = 1;
+    }
     
     private Vector2 GetPointerPosition()
     {
@@ -138,6 +144,8 @@ public sealed class GameController : MonoBehaviour
 
         _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
         _controls.TouchInput.ScrolledDown.started += _ => _cameraZoomController.ZoomOut();
+        
+        _controls.TouchInput.TimeToggle.performed += _ => ToggleTimeScale();
     }
 
     private void OnDestroy() 

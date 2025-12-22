@@ -81,7 +81,7 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
     {
         _draggableConnector.transform.position = _centerPosition.position;
 
-        Vector3 placementPosition = TileMap.GetNearestPlacePosition(_buildingEntityToUpgrade.ComponentsContainer.Get<BuildingDraggable>(), _initialPosition);
+        Vector3 placementPosition = TileMap.GetNearestDraggablePlacePosition(_buildingEntityToUpgrade.ComponentsContainer.Get<BuildingDraggable>(), _initialPosition);
 
         await _draggableConnector.MoveTo(placementPosition, 0.2f);
 

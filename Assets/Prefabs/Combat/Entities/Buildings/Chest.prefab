@@ -10070,6 +10070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc21b5c84dbd70c48be280b79a8cc69a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _chargesToSpawn: 1
 --- !u!114 &9082483487705635966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10128,8 +10129,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
   _inspectableObjectName: Chest
-  _inspectableObjectDescription: Grants rewards if not destroyed at the end of the
-    wave
+  _inspectableObjectDescription: Grants 1 #UpgradeCharge  if not destroyed
 --- !u!114 &642792427098173389
 MonoBehaviour:
   m_ObjectHideFlags: 0

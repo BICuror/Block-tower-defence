@@ -52,7 +52,8 @@ public sealed class ItemEffectSelector : MonoBehaviour
         while (leftStrength > 0 && nonEmptyQualities.Count > 0)
         {
             int currentStrength = nonEmptyQualities[Random.Range(0, nonEmptyQualities.Count)];
-
+            if (Random.Range(0, 100) < 50) currentStrength = nonEmptyQualities[0];
+            
             if (TryGetRandomEffectData(currentStrength, new List<ToggleGlobalEffectData>(effectDatas), out ToggleGlobalEffectData effectData))
             {
                 effectDatas.Remove(effectData);

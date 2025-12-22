@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-
+using System.Linq;
 using Random = UnityEngine.Random;
 
 public static class TileMap
@@ -101,34 +101,23 @@ public static class TileMap
 
     #region FindSuitablePositionsInRaduis
     
-    public static List<Vector2Int> ForceGetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
+    public static List<Vector2Int> FindClosestValidPositionsPerRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
     {
-        List<Vector2Int> foundPositions = GetSuitablePositionsInRadius(positionValidator, position, radius);
-
-        if (foundPositions.Count == 0)
+        List<Vector2Int> foundPositions = new();
+        
+        for (int currentRadius = radius; currentRadius <= maxRadius; currentRadius++)
         {
-            int modifiedRadius = radius;
-
-            while (modifiedRadius <= 13 && foundPositions.Count == 0)
-            {
-                modifiedRadius++;
-
-                foundPositions = GetSuitablePositionsInRadius(positionValidator, position, modifiedRadius);
-
-                if (foundPositions.Count > 0)
-                {
-                    return foundPositions;
-                }
-            }
-
-            return GetSuitablePositionsInRadius((Vector2Int _) => true, position, radius);
+            foundPositions = GetSuitablePositionsInRadius(positionValidator, position, currentRadius);
+            
+            if (foundPositions.Count > 0) break;
         }
+        
+        if (foundPositions.Count == 0) return GetSuitablePositionsInRadius((_) => true, position, radius);
 
         return foundPositions;
     }
 
-    public static List<Vector2Int> GetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator,
-        Vector2Int position, int radius = 3)
+    public static List<Vector2Int> GetSuitablePositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius = 3)
     {
         List<Vector2Int> suitablePositions = new List<Vector2Int>();
 
@@ -159,16 +148,13 @@ public static class TileMap
 
     #endregion
 
-    #region GetNearestPlacePosition
+    #region GetNearestDraggablePlacePosition
 
-    public static Vector3 GetNearestPlacePosition(DraggableObject draggableObject, Vector3 desiredPosition,
-        Predicate<Vector2Int> positionValidator = null)
+    public static Vector3 GetNearestDraggablePlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50)
     {
-        Vector2Int roundedDesiredPosition =
-            new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
+        Vector2Int roundedDesiredPosition = new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
 
-        List<Vector2Int> possiblePositions =
-            ForceGetSuitablePositionsInRadius(IsValidPosition, roundedDesiredPosition, 0);
+        List<Vector2Int> possiblePositions = FindClosestValidPositionsPerRadius(IsValidPosition, roundedDesiredPosition, 0, maxRadius);
 
         Vector2Int finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
 
@@ -186,6 +172,82 @@ public static class TileMap
 
     #endregion
 
+    #region HasAValidRoadFromStartToEnd    
+    
+    private static readonly Vector2Int[] _checkDirections = new Vector2Int[4]
+    {
+        Vector2Int.up,
+        Vector2Int.down,
+        Vector2Int.left, 
+        Vector2Int.right
+    };
+    
+    public static bool HasAValidRoadFromStartToEnd(bool[,] roadMap, Vector2Int startingPosition, Vector2Int endPosition, int minWeight, int maxWeight, out int resultLength)
+    {
+        int mapSize = roadMap.GetLength(0);
+        
+        int[,] weightMap = new int[mapSize, mapSize];
+        
+        bool result = GetMinLength(startingPosition, 0, out int length);
+
+        resultLength = length;
+
+        return result;
+        
+        bool GetMinLength(Vector2Int position, int weight, out int finalWeight)
+        {
+            finalWeight = 0;
+            
+            weight++;
+            weightMap[position.x, position.y] = weight;
+
+            if (position == endPosition && weight <= maxWeight && weight >= minWeight)
+            {
+                finalWeight = weight;
+                return true;
+            }
+
+            List<int> weights = new List<int>();
+
+            for (int i = 0; i < _checkDirections.Length; i++)
+            {
+                Vector2Int checkPosition = _checkDirections[i] + position;
+                
+                if (!IsInBorders(checkPosition)) continue;
+                
+                if (roadMap[checkPosition.x, checkPosition.y])
+                {
+                    if (weightMap[checkPosition.x, checkPosition.y] == 0 || weightMap[checkPosition.x, checkPosition.y] > weight + 1) 
+                    {
+                        if (GetMinLength(checkPosition, weight, out int foundWeight))
+                        {
+                            weights.Add(foundWeight);
+                        }
+                    }   
+                }
+            }
+
+            if (weights.Count == 0) return false;
+
+            int minFoundWeight = weights.Min();
+
+            if (minFoundWeight < maxWeight && minFoundWeight > minWeight)
+            {
+                finalWeight = minFoundWeight;
+                return true;
+            }
+
+            return false;
+        }
+        
+        bool IsInBorders(Vector2Int position) 
+        {
+            return (position.x < mapSize && position.x >= 0 && position.y < mapSize && position.y >= 0);
+        }
+    }
+    
+    #endregion
+    
     #region HasTileNearby
 
     public static bool HasTileNearby(Vector2Int position, int radius, LayerSetting layerSetting, bool squareRadius = false)

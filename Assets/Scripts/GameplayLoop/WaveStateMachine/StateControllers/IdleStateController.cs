@@ -1,3 +1,4 @@
+using System.Linq;
 using WorldGeneration;
 using UnityEngine;
 using Navigation;
@@ -9,9 +10,10 @@ using NaughtyAttributes;
 public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
+    [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     [Inject] private IslandDecorationContainer _decorationContainer;
     [Inject] private NavigationMapGenerator _navigationMapGenerator;
-    [Inject] private OptionalTaskGenerator _optionalTaskGenerator; 
+    [Inject] private OptionalTaskManager _optionalTaskManager; 
     [Inject] private ItemContainerManager _itemContainerManager;
     [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
     [Inject] private EnemyBiomeGenerator _enemyBiomeGenerator;
@@ -32,6 +34,8 @@ public sealed class IdleStateController : WaveStateController
 
         TryGenerateNewEnemyBiome();
 
+        _enemySpawnGroupCompiler.GenerateWaveSeed();
+        
         RegenerateRoads();
         
         RegenerateEnemyBiomes();
@@ -76,11 +80,15 @@ public sealed class IdleStateController : WaveStateController
         RandomExstentions.ReInitializeUnityRandom();
         
         _roadMapGenerator.GenerateRoads();
-        _optionalTaskGenerator.GenerateTasksAndModifyRoadMap();
+        _optionalTaskManager.GenerateTasksAndModifyRoadMap();
         _navigationMapGenerator.GenerateMap();
         _roadGenerator.GenerateRoads();
     }
 
     [Button("RegenerateRoads")]
-    public void RegenerateRoadsButton() => RegenerateRoads();
+    public void RegenerateRoadsButton()
+    {
+        FindObjectsByType<Chest>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(chest => Destroy(chest.gameObject));
+        RegenerateRoads();
+    }
 }

@@ -2573,6 +2573,59 @@ Transform:
   - {fileID: 558123313}
   m_Father: {fileID: 703253489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &811119859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 811119860}
+  - component: {fileID: 811119861}
+  m_Layer: 0
+  m_Name: BloodCollectorOptionalTaskGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &811119860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811119859}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1415006998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &811119861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 811119859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: feffaca03058bb246a0738b53c6faa08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
+  _bloodTowerPrefab: {fileID: 2108226235141063515, guid: 31e636404eacdae42842dd3318d6299a, type: 3}
+  _bloodTowerRadius: 3
+  _requiredPercentFromSpawner: 0.33
+  _maxRoadTilesInRadius: 12
+  _minRoadTilesInRadius: 7
+  _minimalAverageRoadWeight: 20
+  _maximalAverageRoadWeight: 40
+  _maximalRadius: 10
 --- !u!1 &815295891
 GameObject:
   m_ObjectHideFlags: 0
@@ -3011,6 +3064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d1cd2f79c6f03a4f965c42bab9c95ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _modifiedTimeScale: 2
   _cameraRotationController: {fileID: 963194231}
   _cameraPositionController: {fileID: 963194237}
   _cameraZoomController: {fileID: 963194232}
@@ -8859,6 +8913,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 101925be0964deb439a347ea89d4ac59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1415006998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+  m_PrefabInstance: {fileID: 8679370445069788115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1437670500
 GameObject:
   m_ObjectHideFlags: 0
@@ -15338,6 +15397,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ece043b83d1c33a4e81f167d73375923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2144705362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2144705363}
+  - component: {fileID: 2144705364}
+  m_Layer: 0
+  m_Name: ChestOptionalTaskGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2144705363
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144705362}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1415006998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144705364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144705362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3c2ae8c2c8a75544847f4b6fb47c581, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chestPrefab: {fileID: 2314991022373557598, guid: f6b23c447fd11a64f8384967271ea5c9, type: 3}
+  _minimalWeightFromSpawner: 18
+  _maximalWeightFromSpawner: 23
+  _minimalAdditionalRoad: 1
+  _maximalAdditionalRoad: 5
+  _solidObjectsLayer: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
+  _maximalRaduis: 12
 --- !u!1 &209517632318105050
 GameObject:
   m_ObjectHideFlags: 0
@@ -15905,6 +16015,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8638852144968080011}
     - target: {fileID: 8556930716537343154, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: optionalTaskManager
+      value: 
+      objectReference: {fileID: 1415006997}
+    - target: {fileID: 8556930716537343154, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _optionalTaskGenerator
       value: 
       objectReference: {fileID: 1415006997}
@@ -15956,6 +16070,18 @@ PrefabInstance:
       propertyPath: _townhall
       value: 
       objectReference: {fileID: 4001142585134908024}
+    - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _optionalTaskGenerators.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _optionalTaskGenerators.Array.data[0]
+      value: 
+      objectReference: {fileID: 811119861}
+    - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _optionalTaskGenerators.Array.data[1]
+      value: 
+      objectReference: {fileID: 2144705364}
     - target: {fileID: 1808359881713834393, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: m_Name
       value: IslandGeneration
@@ -16007,6 +16133,18 @@ PrefabInstance:
     - target: {fileID: 5185668123502323944, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _initialRaduis
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185668123502323944, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _roadObjectsLayer
+      value: 
+      objectReference: {fileID: 11400000, guid: aee0fa32245326240beeee71c24afffb, type: 2}
+    - target: {fileID: 5185668123502323944, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _maximalWeightFromSpawner
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 5185668123502323944, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _minimalWeightFromSpawner
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 6126036976011004260, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16072,12 +16210,20 @@ PrefabInstance:
     - {fileID: 709818284486297811, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
     - {fileID: 1489220325805887589, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
     - {fileID: 4094456387636780349, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+    - {fileID: 5185668123502323944, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+    - {fileID: 1287827210338004419, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
     m_RemovedGameObjects:
     - {fileID: 8828563223046855527, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 6126036976011004260, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 578137902}
+    - targetCorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2144705363}
+    - targetCorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 811119860}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2150762221108610719, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1

@@ -70,11 +70,11 @@ public sealed class BuildingFetch : MonoBehaviour
             _currentTargetEntity.Draggable.PickedUp -= StopChase;
             _draggableConnector.PickUpDraggable(_currentTargetEntity.gameObject);
        
-            Vector3 travelDestination = TileMap.GetNearestPlacePosition(_currentTargetEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
+            Vector3 travelDestination = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
                
             await _draggableConnector.MoveToPerTile(travelDestination, _timePerTile);
             
-            Vector3 placementPosition = TileMap.GetNearestPlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
+            Vector3 placementPosition = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
        
             await _draggableConnector.PlaceDraggable(_currentTargetEntity.gameObject, _currentTargetEntity.Draggable, placementPosition);
         }

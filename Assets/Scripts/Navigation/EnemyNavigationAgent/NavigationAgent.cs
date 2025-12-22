@@ -180,7 +180,7 @@ namespace Navigation
 
             if (!_navigationMapHolder.Map.NodeExists(currentRoundedPosition))
             {
-                List<Vector2Int> suitablePositions = TileMap.ForceGetSuitablePositionsInRadius(PositionValidator, currentRoundedPosition, 1);
+                List<Vector2Int> suitablePositions = TileMap.FindClosestValidPositionsPerRadius(PositionValidator, currentRoundedPosition, 0, 2);
                 
                 currentRoundedPosition = suitablePositions[Random.Range(0, suitablePositions.Count)];
             }

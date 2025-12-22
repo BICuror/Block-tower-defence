@@ -80,6 +80,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TimeToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""129a129b-33bb-46e2-b9f9-47294dff7e4e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -206,12 +215,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""8a72e7cf-cd5a-45ff-a157-d39bde3a5326"",
+                    ""id"": ""78b27bce-9e57-45d4-956c-08eddfe2b3c2"",
                     ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ReturnDefaultCameraPosition"",
+                    ""action"": ""TimeToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -228,6 +237,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_TouchInput_LMB = m_TouchInput.FindAction("LMB", throwIfNotFound: true);
         m_TouchInput_RMB = m_TouchInput.FindAction("RMB", throwIfNotFound: true);
         m_TouchInput_ReturnDefaultCameraPosition = m_TouchInput.FindAction("ReturnDefaultCameraPosition", throwIfNotFound: true);
+        m_TouchInput_TimeToggle = m_TouchInput.FindAction("TimeToggle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +305,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_TouchInput_LMB;
     private readonly InputAction m_TouchInput_RMB;
     private readonly InputAction m_TouchInput_ReturnDefaultCameraPosition;
+    private readonly InputAction m_TouchInput_TimeToggle;
     public struct TouchInputActions
     {
         private @GameControls m_Wrapper;
@@ -305,6 +316,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @LMB => m_Wrapper.m_TouchInput_LMB;
         public InputAction @RMB => m_Wrapper.m_TouchInput_RMB;
         public InputAction @ReturnDefaultCameraPosition => m_Wrapper.m_TouchInput_ReturnDefaultCameraPosition;
+        public InputAction @TimeToggle => m_Wrapper.m_TouchInput_TimeToggle;
         public InputActionMap Get() { return m_Wrapper.m_TouchInput; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -332,6 +344,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @ReturnDefaultCameraPosition.started += instance.OnReturnDefaultCameraPosition;
             @ReturnDefaultCameraPosition.performed += instance.OnReturnDefaultCameraPosition;
             @ReturnDefaultCameraPosition.canceled += instance.OnReturnDefaultCameraPosition;
+            @TimeToggle.started += instance.OnTimeToggle;
+            @TimeToggle.performed += instance.OnTimeToggle;
+            @TimeToggle.canceled += instance.OnTimeToggle;
         }
 
         private void UnregisterCallbacks(ITouchInputActions instance)
@@ -354,6 +369,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @ReturnDefaultCameraPosition.started -= instance.OnReturnDefaultCameraPosition;
             @ReturnDefaultCameraPosition.performed -= instance.OnReturnDefaultCameraPosition;
             @ReturnDefaultCameraPosition.canceled -= instance.OnReturnDefaultCameraPosition;
+            @TimeToggle.started -= instance.OnTimeToggle;
+            @TimeToggle.performed -= instance.OnTimeToggle;
+            @TimeToggle.canceled -= instance.OnTimeToggle;
         }
 
         public void RemoveCallbacks(ITouchInputActions instance)
@@ -379,5 +397,6 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnLMB(InputAction.CallbackContext context);
         void OnRMB(InputAction.CallbackContext context);
         void OnReturnDefaultCameraPosition(InputAction.CallbackContext context);
+        void OnTimeToggle(InputAction.CallbackContext context);
     }
 }

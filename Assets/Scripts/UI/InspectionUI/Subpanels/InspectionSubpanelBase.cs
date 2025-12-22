@@ -13,11 +13,14 @@ public abstract class InspectionSubpanelBase : MonoBehaviour
     [SerializeField] protected TooltipTextParser _tooltipTextParser;
     private float _fadeDuration = 0.1f;
     private CanvasGroup _mainGroup;
-
+    private bool _initialized;
+    
     private void Awake()
     {
         _mainGroup = GetComponent<CanvasGroup>();
+        _initialized = true;
         Enable();
+        
     }
         
     protected void SetTagData(TooltipTagData tagData)
@@ -28,20 +31,27 @@ public abstract class InspectionSubpanelBase : MonoBehaviour
     
     private void Enable()
     {
+        if (!_initialized) return;
+        
+        _mainGroup.DOKill();
         _mainGroup.alpha = 0f;
         _mainGroup.DOFade(1f, _fadeDuration);
     }
 
     public void Disable()
     {
+        if (!_initialized) return;
+        
         transform.position = transform.position;
         GetComponent<LayoutElement>().ignoreLayout = true;
+        
         _mainGroup.DOKill();
         _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => Destroy(gameObject));
     }
 
     private void OnDestroy()
     {
+        _initialized = false;
         _mainGroup.DOKill();
     }
 }

@@ -58,6 +58,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "TimeToggle",
+                    "type": "Button",
+                    "id": "129a129b-33bb-46e2-b9f9-47294dff7e4e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -184,12 +193,12 @@
                 },
                 {
                     "name": "",
-                    "id": "8a72e7cf-cd5a-45ff-a157-d39bde3a5326",
+                    "id": "78b27bce-9e57-45d4-956c-08eddfe2b3c2",
                     "path": "<Mouse>/middleButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "ReturnDefaultCameraPosition",
+                    "action": "TimeToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

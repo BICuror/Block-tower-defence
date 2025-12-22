@@ -24,18 +24,10 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 
     private void Start()
     {
-        _waveStateMachine.StateStarted += TryGenerateWaveSeed;
         _globalStatContainer.Get<EnemyAmountMultiplier>().ValueChanged += _ => GenerateEnemyGroups();
-
-        GenerateWaveSeed();
     }
 
-    private void TryGenerateWaveSeed(WaveState waveState)
-    {
-        if (waveState == WaveState.Idle) GenerateWaveSeed();
-    }
-
-    private void GenerateWaveSeed()
+    public void GenerateWaveSeed()
     {
         _additionalGroups.Clear();
         _currentWaveSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue); 

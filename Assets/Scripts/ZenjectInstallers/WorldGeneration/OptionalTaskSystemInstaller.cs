@@ -1,12 +1,13 @@
 using Zenject;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class OptionalTaskSystemInstaller : MonoInstaller
 {
-    [SerializeField] private OptionalTaskGenerator _optionalTaskGenerator;
+    [FormerlySerializedAs("_optionalTaskGenerator")] [SerializeField] private OptionalTaskManager optionalTaskManager;
 
     public override void InstallBindings()
     {
-        Container.Bind<OptionalTaskGenerator>().FromInstance(_optionalTaskGenerator).AsSingle().NonLazy();
+        Container.Bind<OptionalTaskManager>().FromInstance(optionalTaskManager).AsSingle().NonLazy();
     }
 }

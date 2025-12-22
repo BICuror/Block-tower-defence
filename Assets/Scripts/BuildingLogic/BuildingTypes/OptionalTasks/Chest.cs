@@ -11,7 +11,9 @@ public sealed class Chest : MonoBehaviour
     [Inject] private EnemySpawnSystem _waveStateController;
     [Inject] private ItemFactory _itemFactory;
     [Inject] private SpawnerRotator _spawnerRotator;
-
+    
+    [SerializeField] private int _chargesToSpawn = 2;
+    
     private void Start()
     {
         _waveStateController.LastWaveEnemyDied += CreateItem;
@@ -23,7 +25,7 @@ public sealed class Chest : MonoBehaviour
     {
         Unsubscribe();
 
-        await _upgradeChargeContainer.AddChargesWithAnimation(Random.Range(3, 5), transform);
+        await _upgradeChargeContainer.AddChargesWithAnimation(_chargesToSpawn, transform);
         
         _ownerEntity.Health.Die();
     }

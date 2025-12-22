@@ -51,10 +51,10 @@ MonoBehaviour:
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems: []
-  _rarity: 0
+  _rarity: 2
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _isUnique: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -71,7 +71,7 @@ MonoBehaviour:
   _icon: {fileID: 0}
   _modificatorName: Mega reacher
   _modificatorDescription: '#good +2 good# #Reach, #bad +100% bad# #BuildTime, #bad
-    +15% bad# #Recharge'
+    +25% bad# #Recharge'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: 2
@@ -81,4 +81,4 @@ MonoBehaviour:
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
     FlatChange: 0
-    MultiplierChange: 0.15
+    MultiplierChange: 0.25

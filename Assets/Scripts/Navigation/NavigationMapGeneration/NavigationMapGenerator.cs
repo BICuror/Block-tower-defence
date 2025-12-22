@@ -7,7 +7,7 @@ namespace Navigation
     public class NavigationMapGenerator : MonoBehaviour
     {
         [Inject] private NavigationNodeMapGenerator _navigationNodeMapGenerator;
-        [Inject] private OptionalTaskGenerator _optionalTaskGenerator;
+        [Inject] private OptionalTaskManager _optionalTaskManager;
         [Inject] private NavigationMapHolder _navigationMapHolder;
         [Inject] private IslandDataContainer _islandDataContainer;
         [Inject] private NavigationMapper _navigationMapper;
@@ -37,12 +37,9 @@ namespace Navigation
         
         private void GenerateOptionalNavigationLayer()
         {
-            List<INavigationCondition> conditions = _optionalTaskGenerator.Conditions;
-            List<Vector2Int> startingPositions = _optionalTaskGenerator.TaskPositions;
-
-            for (int i = 0; i < conditions.Count; i++)
+            for (int i = 0; i < _optionalTaskManager.LayerPrebuildDatas.Count; i++)
             {
-                CreateLayer(startingPositions[i], NavigationMapLayerType.AdditionalTask).SetNavigationCondition(conditions[i]);
+                CreateLayer(_optionalTaskManager.LayerPrebuildDatas[i].Position, NavigationMapLayerType.AdditionalTask).SetNavigationCondition(_optionalTaskManager.LayerPrebuildDatas[i].NavigationCondition);
             }
         }
 
@@ -73,5 +70,20 @@ namespace Navigation
                 }
             }
         }
+    }
+
+    public sealed class AdditionalTaskLayerPrebuildData
+    {
+        private INavigationCondition _navigationCondition;
+        private Vector2Int _position;
+        
+        public AdditionalTaskLayerPrebuildData(INavigationCondition navigationCondition, Vector2Int position)
+        {
+            _navigationCondition = navigationCondition;
+            _position = position;
+        }
+        
+        public INavigationCondition NavigationCondition => _navigationCondition;
+        public Vector2Int Position => _position;
     }
 }

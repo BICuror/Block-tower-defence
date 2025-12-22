@@ -33,10 +33,12 @@ namespace WorldGeneration
             Vector2Int spawnerPosition = _roadNodeGenerator.GetNodePosition(spawnerNodeIndex);
 
             EnemyBiome biome = _diContainer.InstantiatePrefab(_enemyBiomePrefab.gameObject, new Vector3(spawnerPosition.x, 0f, spawnerPosition.y), Quaternion.identity, null).GetComponent<EnemyBiome>();
-
+            
             biome.SetCenterPosition(spawnerPosition);    
 
-            biome.SetSpawnerNodeIndex(spawnerNodeIndex);      
+            biome.SetSpawnerNodeIndex(spawnerNodeIndex);    
+
+            biome.Initialize();
 
             _enemyBiomeContainer.AddBiome(biome);
         }

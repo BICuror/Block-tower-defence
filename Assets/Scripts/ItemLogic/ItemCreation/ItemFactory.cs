@@ -25,8 +25,8 @@ public sealed class ItemFactory : MonoBehaviour
     [Button]
     public void CreateItems()
     {
-        CreateItem(9, new Vector3(12f, 0f, 12));
-        CreateItem(6, new Vector3(12f, 0f, 12));
+        CreateItem(7, new Vector3(12f, 0f, 12));
+        CreateItem(4, new Vector3(12f, 0f, 12));
     } 
     
 #endif

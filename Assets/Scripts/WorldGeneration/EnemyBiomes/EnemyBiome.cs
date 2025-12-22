@@ -35,7 +35,7 @@ namespace WorldGeneration
         public int CurrentStage => _currentStage;
         public EnemySpawner EnemySpawner => _enemySpawner;
         
-        private void Awake()
+        public void Initialize()
         {
             _enemySpawnSystem.AddSpawner(_enemySpawner);
         }

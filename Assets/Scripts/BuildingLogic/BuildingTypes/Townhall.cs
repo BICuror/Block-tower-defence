@@ -28,8 +28,8 @@ namespace Combat
         {
             _itemFactory.CreateStartWaveItem(transform.position);
             
-            _itemFactory.CreateItem(6, transform.position);
-            if (_waveManager.GetCurrentWave() > 1) _itemFactory.CreateItem(9, transform.position);
+            _itemFactory.CreateItem(4, transform.position);
+            if (_waveManager.GetCurrentWave() > 1) _itemFactory.CreateItem(7, transform.position);
         }
     }
 }

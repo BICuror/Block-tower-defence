@@ -52,7 +52,7 @@ MonoBehaviour:
   _argumentsContainer:
     _argumentItems: []
   _rarity: 2
-  _tags: 
+  _tags: 09000000
   _effectType: 0
   _isUnique: 1
   _hasRequiredTags: 0
@@ -63,7 +63,9 @@ MonoBehaviour:
     Requirements: []
   _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 9
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _showInInspector: 1
@@ -71,7 +73,7 @@ MonoBehaviour:
   _icon: {fileID: -913185330, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: MEGA REACH
   _modificatorDescription: '#good +3 good# #Reach, #bad +2.5 bad# #BuildTime, #bad
-    -4 bad# #ProjectileSpeed'
+    -6 bad# #ProjectileSpeed'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: 3
@@ -80,5 +82,5 @@ MonoBehaviour:
     FlatChange: 2.5
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: caad7db37dd41034db8f53d421cb2add, type: 2}
-    FlatChange: -4
+    FlatChange: -6
     MultiplierChange: 0

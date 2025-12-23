@@ -77,7 +77,7 @@ MonoBehaviour:
       _argumentName: DamageModifier
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.75
+      _floatArgument: 1
       _stringArgument: HealDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -91,21 +91,21 @@ MonoBehaviour:
   _hasRequiredTags: 1
   _anyRequired: 0
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 1
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements:
     - Tag: 1
       Amount: 1
   _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements:
-    - Tag: 1
-      Amount: 1
+    Requirements: []
   _blockOtherEntityTags:
     Requirements: []
   _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 371838837, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Sadist
-  _modificatorDescription: '#good +75% good# #Damage  for each #bad negative bad#
+  _modificatorDescription: '#good +100% good# #Damage  for each #bad negative bad#
     effect #bad enemy bad# has'

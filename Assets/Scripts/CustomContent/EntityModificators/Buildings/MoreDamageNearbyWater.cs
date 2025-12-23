@@ -1,53 +1,36 @@
-using WorldGeneration;
 using UnityEngine;
 using Zenject;
 
 public sealed class MoreDamageNearbyWater : EntityModificator
 {
     [Inject] private IslandDataContainer _islandDataContainer;
-    [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
-    [Inject] private RoadMapHolder _roadMapHolder;
+    private LayerSetting _anyTerrainLayerSetting;
     private StatModifier _statModifier;
     private GameObject _areaDisplay;
+    private int _radius;
     
     public override void Enable()
     {
         _statModifier = new();
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
+        
         Entity.Draggable.Placed += CalculateBonusDamage;
+
+        _radius = Args.GetArgument<int>("AreaRadius");
+        _anyTerrainLayerSetting = Args.GetArgument<LayerSetting>("AnyTerrainLayer");
+        
         _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(Args.GetArgument<GameObject>("AreaPrefab"));
-        _areaDisplay.transform.localScale = new Vector3(2.9f, 100f, 2.9f);
+        _areaDisplay.transform.localScale = new Vector3(1 + 2 * _radius, 100f, 1 + 2 * _radius);
     }
 
     private void CalculateBonusDamage()
     {
-        int emptyTilesNearby = 0;
-
-        int roundedX = (int)Entity.transform.position.x;
-        int roundedZ = (int)Entity.transform.position.z;
-        
-        for (int x = -1; x <= 1; x++)
-        {
-            for (int z = -1; z <= 1; z++)
-            {
-                if (IsEmptyTile(roundedX + x, roundedZ + z))
-                {
-                    emptyTilesNearby++;
-                }
-            }
-        }
+        int emptyTilesNearby = TileMap.CountValidPositionsInRadius(IsEmptyTile, new Vector2Int(Mathf.RoundToInt(Entity.transform.position.x), Mathf.RoundToInt(Entity.transform.position.z)), _radius);
         
         _statModifier.SetMultiplier(emptyTilesNearby * Args.GetArgument<float>("MultiplierPerTile"));
     }
 
-    private bool IsEmptyTile(int x, int z)
-    {
-        if (x < 0 || x >= _islandDataContainer.Data.IslandSize || z < 0 || z >= _islandDataContainer.Data.IslandSize) return true;
-
-        if (_roadMapHolder.Map[x, z] || _islandHeightMapHolder.Map[x, z] > 0) return false;
-
-        return true;
-    }
+    private bool IsEmptyTile(Vector2Int position) => !TileMap.HasTile(position, _anyTerrainLayerSetting);
 
     public override void Disable()
     {

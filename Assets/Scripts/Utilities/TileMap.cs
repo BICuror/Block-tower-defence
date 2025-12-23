@@ -100,6 +100,18 @@ public static class TileMap
     #endregion GetTileCount
 
     #region FindSuitablePositionsInRaduis
+
+    public static int CountValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius)
+    {
+        int result = 0;
+        
+        for (int currentRadius = 1; currentRadius <= radius; currentRadius++)
+        { 
+            result += GetSuitablePositionsInRadius(positionValidator, position, currentRadius).Count;
+        }
+
+        return result;
+    }
     
     public static List<Vector2Int> FindClosestValidPositionsPerRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
     {

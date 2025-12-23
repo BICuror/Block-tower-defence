@@ -64,7 +64,7 @@ MonoBehaviour:
       _layerSetting: {fileID: 0}
     - _argumentType: 0
       _argumentName: ArrowsPerKill
-      _intArgument: 3
+      _intArgument: 5
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 
@@ -88,7 +88,7 @@ MonoBehaviour:
       _argumentName: DelayBetweenShots
       _intArgument: 5
       _boolArgument: 0
-      _floatArgument: 0.25
+      _floatArgument: 0.15
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -114,5 +114,5 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: DeadEnd
-  _modificatorDescription: '#OnKill launch 3 arrows at random #bad enemy bad# in
+  _modificatorDescription: '#OnKill launch 5 arrows at random #bad enemy bad# in
     #Area'

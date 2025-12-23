@@ -52,7 +52,7 @@ MonoBehaviour:
   _argumentsContainer:
     _argumentItems: []
   _rarity: 2
-  _tags: 
+  _tags: 09000000
   _effectType: 0
   _isUnique: 0
   _hasRequiredTags: 0
@@ -61,9 +61,11 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 9
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _showInInspector: 1

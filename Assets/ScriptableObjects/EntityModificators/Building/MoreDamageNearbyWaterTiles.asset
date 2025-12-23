@@ -55,7 +55,7 @@ MonoBehaviour:
       _argumentName: MultiplierPerTile
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.2
+      _floatArgument: 0.25
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -73,6 +73,28 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+    - _argumentType: 0
+      _argumentName: AreaRadius
+      _intArgument: 2
+      _boolArgument: 0
+      _floatArgument: 5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 8
+      _argumentName: AnyTerrainLayer
+      _intArgument: 2
+      _boolArgument: 0
+      _floatArgument: 5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -92,5 +114,5 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Waterpower
-  _modificatorDescription: '#good +20% good# #Damage for each <color=blue>water</color>
-    tile in 1 #Area'
+  _modificatorDescription: '#good +25% good# #Damage for each <color=blue>water</color>
+    tile in 2 #Area'

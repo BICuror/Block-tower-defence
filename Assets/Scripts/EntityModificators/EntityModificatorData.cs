@@ -80,4 +80,5 @@ public enum EntityModifcatorTag
     AOE,
     RechargeDownDamageDown,
     RechargeUpDamageUp,
+    AreaUp
 }

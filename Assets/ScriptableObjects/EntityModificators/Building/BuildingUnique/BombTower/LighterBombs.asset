@@ -72,11 +72,11 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: -792330246, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Lighter booms
-  _modificatorDescription: '#good -1 good# #Recharge, #good +1 good# #MaxEntities,
+  _modificatorDescription: '#good -1.3 good# #Recharge, #good +1 good# #MaxEntities,
     #bad -1 bad# #ExplosionRadius'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    FlatChange: -1
+    FlatChange: -1.3
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     FlatChange: 1

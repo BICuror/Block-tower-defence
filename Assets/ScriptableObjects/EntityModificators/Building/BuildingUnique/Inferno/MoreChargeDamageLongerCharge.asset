@@ -70,12 +70,12 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 775677324, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: ORBLORG
-  _modificatorDescription: '#good +30 good# #MaxChargedDamageMultiplier, #bad +1.5
+  _modificatorDescription: '#good +40 good# #MaxChargedDamageMultiplier, #bad +1
     bad# #ChargeDuration'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 6cf77be47666ffb4ca59e4bb4fd601cf, type: 2}
-    FlatChange: 30
+    FlatChange: 40
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: a5c43ab830c832c49b0b26cc9674533e, type: 2}
-    FlatChange: 1.5
+    FlatChange: 1
     MultiplierChange: 0

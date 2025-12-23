@@ -128,8 +128,8 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: -589584921, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Stun beam
-  _modificatorDescription: '#OnHit apply 1 #Stun,  #bad +100% bad# #ChargeDuration '
+  _modificatorDescription: '#OnHit apply 1 #Stun,  #bad +75% bad# #ChargeDuration '
   _statChanges:
   - StatData: {fileID: 11400000, guid: a5c43ab830c832c49b0b26cc9674533e, type: 2}
     FlatChange: 0
-    MultiplierChange: 1
+    MultiplierChange: 0.75

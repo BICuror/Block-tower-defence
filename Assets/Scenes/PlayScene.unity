@@ -2620,9 +2620,9 @@ MonoBehaviour:
   _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _bloodTowerPrefab: {fileID: 2108226235141063515, guid: 31e636404eacdae42842dd3318d6299a, type: 3}
   _bloodTowerRadius: 3
-  _requiredPercentFromSpawner: 0.33
-  _maxRoadTilesInRadius: 12
-  _minRoadTilesInRadius: 7
+  _requiredPercentFromSpawner: 0.25
+  _maxRoadTilesInRadius: 18
+  _minRoadTilesInRadius: 10
   _minimalAverageRoadWeight: 20
   _maximalAverageRoadWeight: 40
   _maximalRadius: 10
@@ -3696,6 +3696,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1759891987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1077876894
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 183681894154958883, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: _initialModificatorDatas.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 183681894154958883, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: _initialModificatorDatas.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 8.231391
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.009018
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200380609656421698, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4325617312332438261, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
+      propertyPath: m_Name
+      value: MortarTower
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1889fa76676e8954b93485491e72ee41, type: 3}
 --- !u!1 &1153383120
 GameObject:
   m_ObjectHideFlags: 0
@@ -16278,3 +16343,4 @@ SceneRoots:
   - {fileID: 8679370445069788115}
   - {fileID: 291135183}
   - {fileID: 1944573492}
+  - {fileID: 1077876894}

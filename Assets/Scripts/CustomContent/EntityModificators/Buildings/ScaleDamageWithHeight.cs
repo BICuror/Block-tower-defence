@@ -15,7 +15,7 @@ public sealed class ScaleDamageWithHeight : EntityModificator
 
     private void UpdateScale()
     {
-        _statModifier.SetMultiplier((Mathf.Round(Entity.transform.position.y) - 2) * 0.25f);
+        _statModifier.SetMultiplier((Mathf.Round(Entity.transform.position.y) - 2) * 0.5f);
     }
 
     public override void Disable()

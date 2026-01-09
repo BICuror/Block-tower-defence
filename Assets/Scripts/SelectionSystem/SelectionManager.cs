@@ -1,31 +1,33 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using System;
-using TMPro;
 
 public sealed class SelectionManager : MonoBehaviour
 {
     [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
-    private Queue<SelectionSettings> _enqeuedSelections = new();
-    private SelectionSettings _currentSelectionSettings;
 
     [SerializeField] private SelectionOptionObjectAreaDetector _selectionOptionObjectAreaDetector;
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     
-    [Header("Indicators")]
-    [SerializeField] private List<SelectionIndicatorContainers> _selectionIndicatorContainers;
-    
     [Header("Selectors")]
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
+    
+    private Queue<SelectionSettings> _enqeuedSelections = new();
+    private SelectionSettings _currentSelectionSettings;
     private bool _selectionOptionsCanBePlaced;
     private bool _selectionIsActive;
     
     public bool SelectionPhaseIsActive => _selectionIsActive;
+    public SelectionType SelectionType => _currentSelectionSettings.Type;
+
+    public event Action SelectionStarted; 
+    public event Action SelectionEnded;
+    public event Action SelectionStepStarted;
+    public event Action SelectionStepEnded;
     
     private async void Start()
     {
@@ -55,14 +57,20 @@ public sealed class SelectionManager : MonoBehaviour
     {
         if (_enqeuedSelections.Count > 0 && !_selectionIsActive)
         {
+            _selectionIsActive = true;
+            
             StartQueuedSelection().Forget();
+            
+            SelectionStarted?.Invoke();
         }
     }
     
     private async UniTask StartQueuedSelection()
     {
-        _selectionIsActive = true;
         _currentSelectionSettings = _enqeuedSelections.Dequeue();
+        
+        SelectionStepStarted?.Invoke(); 
+        
         switch (_currentSelectionSettings.Type)
         {
             case SelectionType.Building:
@@ -76,8 +84,6 @@ public sealed class SelectionManager : MonoBehaviour
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(_currentSelectionSettings); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
         }
-
-        EnableSelectionIndicator(_currentSelectionSettings.Type);
         
         _selectionOptionsCanBePlaced = true;
     }
@@ -89,45 +95,25 @@ public sealed class SelectionManager : MonoBehaviour
         _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
         _selectionOptionsCanBePlaced = false;
         
+        SelectionStepEnded?.Invoke(); 
+        
         await EndSelection(_currentSelectionSettings);
 
         if (_enqeuedSelections.Count > 0) StartQueuedSelection().Forget();
-        else _selectionIsActive = false;
+        else
+        {
+            _selectionIsActive = false;
+            
+            SelectionEnded?.Invoke();
+        }
     }
     
     private async UniTask EndSelection(SelectionSettings selectionSettings)
     {
-        DisableSelectionIndicator(selectionSettings.Type).Forget();
-        
-        _selectionIsActive = false;
-        
         switch (_currentSelectionSettings.Type)
         {
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
             case SelectionType.Building: await UniTask.WaitForSeconds(1f); break;
         }
-    }
-
-    private async UniTask DisableSelectionIndicator(SelectionType type)
-    {
-        TextMeshPro indicator = _selectionIndicatorContainers.Find(container => container.Type == type).Indicator;
-        await indicator.DOFade(0f, 1f).From(1f).AsyncWaitForCompletion();
-        indicator.gameObject.SetActive(false);
-    }
-
-    private void EnableSelectionIndicator(SelectionType type)
-    {
-        TextMeshPro indicator = _selectionIndicatorContainers.Find(container => container.Type == type).Indicator;
-        indicator.gameObject.SetActive(true);
-        indicator.DOFade(1f, 1f).From(0f);
-    }
-
-    [Serializable] private sealed class SelectionIndicatorContainers
-    {
-        [SerializeField] private SelectionType _selectionType;
-        [SerializeField] private TextMeshPro _selectionIndicator;
-        
-        public SelectionType Type => _selectionType;
-        public TextMeshPro Indicator => _selectionIndicator;
     }
 }

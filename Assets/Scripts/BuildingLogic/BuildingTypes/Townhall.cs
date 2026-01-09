@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -5,6 +6,7 @@ namespace Combat
 {
     public sealed class Townhall : MonoBehaviour
     {
+        [Inject] private SelectionManager _selectionManager;
         [Inject] private WaveStateMachine _waveStateMachine;
         [Inject] private ItemFactory _itemFactory;
         [Inject] private WaveManager _waveManager;
@@ -21,11 +23,13 @@ namespace Combat
 
         private void TryToSpawnCrystals(WaveState currentWaveState)
         {
-            if (currentWaveState == WaveState.Idle) CreateCrystals();
+            if (currentWaveState == WaveState.Idle) CreateCrystals().Forget();
         }
         
-        private void CreateCrystals()
+        private async UniTask CreateCrystals()
         {
+            await UniTask.WaitWhile(() => _selectionManager.SelectionPhaseIsActive);
+            
             _itemFactory.CreateStartWaveItem(transform.position);
             
             _itemFactory.CreateItem(4, transform.position);

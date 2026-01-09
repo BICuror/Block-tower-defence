@@ -1,13 +1,15 @@
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using System;
-
+using Cysharp.Threading.Tasks;
 using Random = UnityEngine.Random;
 
 public sealed class EnviromentController : MonoBehaviour
 {
+    [Inject] private PostProcessingController _postProcessingController;
     [Inject] private WaveStateMachine _waveStateMachine;
 
     [SerializeField] private AnimationCurve _changeCurve;
@@ -46,6 +48,8 @@ public sealed class EnviromentController : MonoBehaviour
                 materialChange.MeshRenderer.sharedMaterial.SetColor(propertyName, materialChange.Color);
             });
         });
+
+        _postProcessingController.SetProfile(state.VolumeProfile);
         
         UpdateRainState();
     }
@@ -61,6 +65,8 @@ public sealed class EnviromentController : MonoBehaviour
         });
 
         _enviromentStates[_currentEnviromentStateIndex].EnviromentMaterialChanges.ForEach(DoMaterialPropertyTween);
+        
+        _postProcessingController.ChangeCustomVolume(_enviromentStates[_currentEnviromentStateIndex].VolumeProfile, _changeDuration).Forget();
 
         UpdateRainState();
     }
@@ -90,16 +96,17 @@ public sealed class EnviromentController : MonoBehaviour
                     materialChange.MeshRenderer.sharedMaterial.SetColor(propertyName, Color.Lerp(initialColor, materialChange.Color, value));
                 });
             });
-
     }
 
     [Serializable] private sealed class EnviromentState
     {
         [SerializeField] private List<EnviromentMaterialChange> _enviromentMaterialChanges;
         [SerializeField] private List<EnviromentLightChange> _enviromentLightChanges;
+        [SerializeField] private VolumeProfile _volumeProfile;
         
         public List<EnviromentMaterialChange> EnviromentMaterialChanges => _enviromentMaterialChanges;
         public List<EnviromentLightChange> EnviromentLightChanges => _enviromentLightChanges;
+        public VolumeProfile VolumeProfile => _volumeProfile;
     }
 
     [Serializable] private sealed class EnviromentMaterialChange

@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public static class TileMap
 {
-    private const float RAY_HEIGHT = 10000f;
-    private const float RAY_LENGTH = 10000f;
+    public const float RAY_HEIGHT = 10000f;
+    public const float RAY_LENGTH = 10000f;
 
     #region HasTile
 

@@ -22,6 +22,8 @@ public sealed class PostProcessingController : MonoBehaviour
         
         newVolume.profile = profile;
         
+        await UniTask.WaitUntil(() => newVolume.HasInstantiatedProfile());
+        
         await DOVirtual.Float(0f, 1f, changeDuration, UpdateProfilesWeight).AsyncWaitForCompletion();
         
         Destroy(_currentVolume.gameObject);

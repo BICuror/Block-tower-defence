@@ -12,7 +12,10 @@ GameObject:
   - component: {fileID: 1608743419968755464}
   - component: {fileID: 4012497875285439993}
   - component: {fileID: 8901095452444858120}
-  m_Layer: 22
+  - component: {fileID: 1057248146913978592}
+  - component: {fileID: -7798621249281302496}
+  - component: {fileID: 6481615964173920632}
+  m_Layer: 19
   m_Name: EnemyBiomeGrass c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +99,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e623cf358ac834d91feb24509c8111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1057248146913978592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232206481868132965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb88e6cc76662ae4791e25854a930811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.5
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.5
+    Strength: 0.05
+  _mesh: {fileID: 1583716639093191083}
+--- !u!114 &-7798621249281302496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232206481868132965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1057248146913978592}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &6481615964173920632
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4232206481868132965}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.17006803, y: 0.55688184, z: 0.15681891}
+  m_Center: {x: 0.015089612, y: 0.27844092, z: -0.09120982}

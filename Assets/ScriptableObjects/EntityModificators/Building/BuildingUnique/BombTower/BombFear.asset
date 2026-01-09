@@ -140,11 +140,11 @@ MonoBehaviour:
   _icon: {fileID: 1599308698, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Fear bombs
   _modificatorDescription: '#OnHit apply #Fear for 1.5 seconds, #bad +100% bad# #Recharge,
-    #bad +4 bad# #ExplotionDelay'
+    #bad +4 bad# #ExplosionDelay'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
     FlatChange: 0
     MultiplierChange: 1
   - StatData: {fileID: 11400000, guid: 3cc872057f40f7542b58245ed6a75b0b, type: 2}
-    FlatChange: 0
-    MultiplierChange: 1
+    FlatChange: 4
+    MultiplierChange: 0

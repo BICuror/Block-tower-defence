@@ -20,6 +20,7 @@ public sealed class WaveStateMachine : MonoBehaviour
     public event Action<WaveState> StateEnded;
 
     private void Awake() => Initialize();
+    
     private void Initialize()
     {
         _enemySpawnSystem.LastWaveEnemyDied += TransitionIntoIdle;
@@ -40,7 +41,7 @@ public sealed class WaveStateMachine : MonoBehaviour
         TransitionOutToState(waveState);
     }
     
-    public async void TransitionOutToState(WaveState stateToTransitionTo)
+    private async void TransitionOutToState(WaveState stateToTransitionTo)
     {
         if (_currentState != WaveState.None) await TransitionOutOfCurrentState();
 

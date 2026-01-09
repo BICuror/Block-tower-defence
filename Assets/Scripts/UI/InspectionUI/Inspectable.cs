@@ -16,6 +16,8 @@ public sealed class Inspectable : MonoBehaviour
     public Action InspectionStarted;
     public Action InspectionEnded;
     
+    public bool SetCanBeIdleInspected(bool state) => _canBeIdleInspected = state;
+    
     public void SetInspectedState(bool state)
     {
         _isInspected = state;

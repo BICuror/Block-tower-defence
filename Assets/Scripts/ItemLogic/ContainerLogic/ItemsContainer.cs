@@ -39,6 +39,8 @@ public sealed class ItemsContainer : MonoBehaviour
         inspectable.InspectionStarted += OnItemInspectionStarted;
         inspectable.InspectionEnded += OnItemInspectionEnded;
 
+        inspectable.SetCanBeIdleInspected(false);
+
         ItemAdded?.Invoke(item);
         ContainerUpdated?.Invoke();
     }
@@ -58,6 +60,8 @@ public sealed class ItemsContainer : MonoBehaviour
         
         inspectable.InspectionStarted -= OnItemInspectionStarted;
         inspectable.InspectionEnded -= OnItemInspectionEnded;
+        
+        inspectable.SetCanBeIdleInspected(true);
         
         ItemRemoved?.Invoke(item);
         ContainerUpdated?.Invoke();

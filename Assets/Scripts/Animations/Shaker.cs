@@ -3,14 +3,14 @@ using DG.Tweening;
 using UnityEngine;
 using System;
 
-public abstract class Shaker : MonoBehaviour
+public class Shaker : MonoBehaviour
 {
     [Header("ShakeSettings")] 
     [SerializeField] private List<ShakeData> _shakeDatas;
 
     [Header("Links")]
     [SerializeField] protected Transform _mesh;
-    private Vector3 _defaultScale;
+    private Vector3 _defaultScale = -Vector3.one;
     
     [Serializable] private struct ShakeData
     {
@@ -32,10 +32,12 @@ public abstract class Shaker : MonoBehaviour
     
     private void SetDefaultValues()
     { 
+        if (_defaultScale == -Vector3.one) GetDefaultValues();
+        
         _mesh.localScale = _defaultScale;
     }
     
-    protected void Shake()
+    public void Shake()
     {
         SetDefaultValues();
 

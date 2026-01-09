@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c804f5fb63bc1fe4197d7e091f47e777, type: 3}
   m_Name: ExplotionDelayTooltipData
   m_EditorClassIdentifier: 
-  _tag: ExplotionDelay
-  _tagText: Explotion delay
+  _tag: ExplosionDelay
+  _tagText: Explosion delay
   _textColor: {r: 0, g: 0.9556165, b: 1, a: 1}
   _iconSprite: {fileID: -836971711, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _description: Time in seconds since last placement to explode
-  _associatedStatTypeName: ExplotionDelay
+  _onlyText: 0
+  _associatedStatTypeName: ExplosionDelay

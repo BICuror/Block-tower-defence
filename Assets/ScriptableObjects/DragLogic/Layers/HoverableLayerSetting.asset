@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dab4db3ba396ce34782e40ac5c8ea830, type: 3}
-  m_Name: ExplotionDelay
+  m_Script: {fileID: 11500000, guid: ccddf2880d2e8e140a7fa13e52296be4, type: 3}
+  m_Name: HoverableLayerSetting
   m_EditorClassIdentifier: 
-  _icon: {fileID: -836971711, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _statType: ExplosionDelay
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 655360

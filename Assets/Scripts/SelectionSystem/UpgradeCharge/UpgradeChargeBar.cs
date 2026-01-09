@@ -3,6 +3,7 @@ using UnityEngine;
 
 public sealed class UpgradeChargeBar : ProgressBarBase
 {
+    [SerializeField] private VisualEffectHandler _visualEffectHandler;
     [SerializeField] private int _chargesPerUpgrade;
     private float _previousValue;
     
@@ -17,11 +18,13 @@ public sealed class UpgradeChargeBar : ProgressBarBase
         gameObject.SetActive(true);
         StopBarFill();
         Shake();
+        FillBar(0f, 0f, 0f).Forget();
+        _visualEffectHandler.PlayBurstEffectAndForget();
     }
 
     public async UniTask SetCharges(int charges, float duration)
     {
-        float barValue = charges * (1f/ _chargesPerUpgrade);
+        float barValue = charges * (1f / _chargesPerUpgrade);
         StopBarFill();
         
         await FillBar(_previousValue, barValue, duration);

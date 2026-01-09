@@ -1,15 +1,17 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 using System.Linq;
 using UnityEngine;
 using Zenject;
 using System;
-using NaughtyAttributes;
+
 using Random = UnityEngine.Random;
 
 public sealed class ItemFactory : MonoBehaviour
 {
-    [Inject] private ItemsContainer _itemsContainer;
     [Inject] private DraggableCreator _draggableCreator;
+    [Inject] private ItemsContainer _itemsContainer;
 
     [SerializeField] private ToggleGlobalEffectData _startWaveEffectData; 
     [SerializeField] private ItemEffectSelector _effectSelector;
@@ -25,13 +27,21 @@ public sealed class ItemFactory : MonoBehaviour
     [Button]
     public void CreateItems()
     {
-        CreateItem(7, new Vector3(12f, 0f, 12));
-        CreateItem(4, new Vector3(12f, 0f, 12));
+        CreateItem(7, new Vector3(12f, 0f, 12)).Forget();
+        CreateItem(4, new Vector3(12f, 0f, 12)).Forget();
     } 
     
 #endif
     
-    public async void CreateItem(int strength, Vector3 centerPosition)
+    public async UniTask CreateWaveItems(Vector3 position, bool createHardItem)
+    {
+        await CreateStartWaveItem(position);
+            
+        await CreateItem(4, position);
+        if (createHardItem) await CreateItem(7, position);
+    }
+    
+    public async UniTask CreateItem(int strength, Vector3 centerPosition)
     {
         Item itemPrefab = GetItemPrefab();
         
@@ -54,7 +64,7 @@ public sealed class ItemFactory : MonoBehaviour
         item.ItemDestroyed += RemoveItem;
     }
 
-    public async void CreateStartWaveItem(Vector3 centerPosition)
+    public async UniTask CreateStartWaveItem(Vector3 centerPosition)
     {
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(_waveItemPrefab, centerPosition);
         Item item = itemDraggable.GetComponent<Item>();

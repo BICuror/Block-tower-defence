@@ -52,6 +52,8 @@ public class Item : DraggableObject
 
     public async UniTask DecreaseDuration()
     {
+        if (_charges == 0) await UniTask.WaitForSeconds(1f);
+        
         await _upgradeChargeContainer.AddChargesWithAnimation(_charges, transform);
         
         DestroyItem();

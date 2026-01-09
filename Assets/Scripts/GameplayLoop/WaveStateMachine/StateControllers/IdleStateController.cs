@@ -10,6 +10,7 @@ using NaughtyAttributes;
 public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
+    [SerializeField] private Transform _townhallTransform;
     [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     [Inject] private IslandDecorationContainer _decorationContainer;
     [Inject] private NavigationMapGenerator _navigationMapGenerator;
@@ -25,7 +26,7 @@ public sealed class IdleStateController : WaveStateController
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
-    protected override void OnEnterStateStarted()
+    protected override async UniTask OnEnterStateStarted()
     {
         _waveManager.IncreaseWaveCounter();
 
@@ -44,17 +45,23 @@ public sealed class IdleStateController : WaveStateController
         _roadAnimator.StartAppearing(TransitionInDuration);
     }
 
-    protected override void OnEnterStateCompleted()
+    protected override async UniTask OnEnterStateCompleted()
     {
         RandomExstentions.ReInitializeUnityRandom();
         
+        await _itemContainerManager.UpdateContainedItems();
+        
         _selectionManager.TryEnqueueNewBuildingSelection();
         _selectionManager.TryStartQueuedSelection();
-        _itemContainerManager.UpdateContainedItems().Forget();
+        
+        await UniTask.WaitWhile(() => _selectionManager.SelectionPhaseIsActive);
+        
         _itemContainerManager.UnlockContainer();
+        
+        _itemFactory.CreateWaveItems(_townhallTransform.position, _waveManager.GetCurrentWave() > 1).Forget();
     }
 
-    protected override void OnQuitStateStarted()
+    protected override async UniTask OnQuitStateStarted()
     {
         _itemContainerManager.LockContainer();
         _itemFactory.DestroyAllUnusedItems();

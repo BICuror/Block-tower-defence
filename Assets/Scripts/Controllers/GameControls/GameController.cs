@@ -11,6 +11,7 @@ public sealed class GameController : MonoBehaviour
     [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private CameraZoomController _cameraZoomController;
     [SerializeField] private InspectorController _inspectorController;
+    [SerializeField] private HoverableController _hoverableController;
     [SerializeField] private DragController _dragController;
 
     private GameControls _controls;
@@ -32,12 +33,14 @@ public sealed class GameController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        _hoverableController.CheckHover(GetPointerPosition()); 
+        
         switch(_currentControllerState)
         {
-            case ControllerState.Idle: TryIdleToInspect(); return; 
+            case ControllerState.Idle: TryIdleToInspect(); break;
             case ControllerState.Dragging: _dragController.TryDragTo(GetPointerPosition()); break;
             case ControllerState.Rotating: _cameraRotationController.Rotate(GetPointerPosition()); break;
-            case ControllerState.Inspecting: return;
+            case ControllerState.Inspecting: break;
         }
     }
     

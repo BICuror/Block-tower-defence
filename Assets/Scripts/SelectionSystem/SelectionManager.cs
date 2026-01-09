@@ -51,6 +51,7 @@ public sealed class SelectionManager : MonoBehaviour
 
         return false;
     }
+    
     public void EnqueueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
     
     public void TryStartQueuedSelection()

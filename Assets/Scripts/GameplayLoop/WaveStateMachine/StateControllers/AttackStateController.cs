@@ -1,6 +1,7 @@
 using WorldGeneration;
 using UnityEngine;
 using Combat;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 public sealed class AttackStateController : WaveStateController
@@ -13,7 +14,7 @@ public sealed class AttackStateController : WaveStateController
     public override WaveState GetControlledState() => WaveState.Attack;
     
     private void Awake() => _roadNodeGenerator.SetupNodes();
-    protected override void OnQuitStateStarted()
+    protected override async UniTask OnQuitStateStarted()
     {
         _enemyBiomesContainer.IncreaseBiomesStages();
 
@@ -21,7 +22,7 @@ public sealed class AttackStateController : WaveStateController
         _enemyBiomesContainer.DisableBiomesTerrain(TransitionOutDuration);
     }
 
-    protected override void OnEnterStateCompleted()
+    protected override async UniTask OnEnterStateCompleted()
     {
         _enemySpawnSystem.StartWave();
     }

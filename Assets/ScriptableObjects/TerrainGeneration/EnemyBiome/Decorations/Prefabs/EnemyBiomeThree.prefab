@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7745868917988759672}
   - component: {fileID: 6712733476553678820}
   - component: {fileID: 1759859415200279549}
+  - component: {fileID: 8145038454920280664}
+  - component: {fileID: 1554382806933786858}
   m_Layer: 17
   m_Name: EnemyBiomeThree
   m_TagString: Untagged
@@ -116,5 +118,55 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.9326262, y: 1.9288898, z: 3.083546}
+  m_Size: {x: 2.084255, y: 1.3708851, z: 2.191513}
   m_Center: {x: 0.1548028, y: 0.9644449, z: 0.00000014901161}
+--- !u!114 &8145038454920280664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590956070851394210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb88e6cc76662ae4791e25854a930811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.5
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.5
+    Strength: 0.05
+  _mesh: {fileID: 8168604275189181120}
+--- !u!114 &1554382806933786858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590956070851394210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8145038454920280664}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []

@@ -24,11 +24,10 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
         
         _chargeAddProcessIsActive = true;
         
-        while (charges > 0)
+        for (int i = 0; i < charges; i++)
         {
             AddChargeWithAnimation(source.position, _timeBetweenCharges).Forget();
             await UniTask.WaitForSeconds(_timeBetweenCharges);
-            charges--;
         }
         
         _chargeAddProcessIsActive = false;
@@ -49,9 +48,8 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
         if (_currentCharge >= _chargesPerUpgrade)
         {
             _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
-            _selectionManager.TryStartQueuedSelection();
             _chargeBar.ResetBar();
-            _currentCharge -= 5;
+            _currentCharge = 0;
         }
     }
 

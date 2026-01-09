@@ -12,7 +12,10 @@ GameObject:
   - component: {fileID: 959182920613518068}
   - component: {fileID: 271236150456536182}
   - component: {fileID: 1014965278520579911}
-  m_Layer: 22
+  - component: {fileID: -1303517527770005118}
+  - component: {fileID: 8458183172936532484}
+  - component: {fileID: 3658047984790308463}
+  m_Layer: 19
   m_Name: RockG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,3 +99,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54e623cf358ac834d91feb24509c8111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1303517527770005118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4048679011298859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb88e6cc76662ae4791e25854a930811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.5
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.5
+    Strength: 0.05
+  _mesh: {fileID: 4035145576416201104}
+--- !u!114 &8458183172936532484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4048679011298859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -1303517527770005118}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!65 &3658047984790308463
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4048679011298859436}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2755423, y: 0.83327633, z: 1.876091}
+  m_Center: {x: -0.0000002682209, y: 0.41663817, z: 0}

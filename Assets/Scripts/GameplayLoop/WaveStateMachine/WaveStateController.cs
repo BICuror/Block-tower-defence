@@ -18,29 +18,29 @@ public class WaveStateController : MonoBehaviour
     
     public async UniTask TransitionIntoState()
     {
-        OnEnterStateStarted();
+        await OnEnterStateStarted();
         EnteredStateStarted?.Invoke();
         
         await UniTask.WaitForSeconds(TransitionInDuration, cancellationToken: this.GetCancellationTokenOnDestroy());
         
-        OnEnterStateCompleted();
+        await OnEnterStateCompleted();
         EnteredStateCompleted?.Invoke();
     }
 
     public async UniTask TransitionOutOfState()
     {
-        OnQuitStateStarted();
+        await OnQuitStateStarted();
         QuitStateStarted?.Invoke();
         
         await UniTask.WaitForSeconds(TransitionOutDuration, cancellationToken: this.GetCancellationTokenOnDestroy());
         
-        OnQuitStateCompleted();
+        await OnQuitStateCompleted();
         QuitStateCompleted?.Invoke();
     }
     
-    protected virtual void OnEnterStateStarted() {}
-    protected virtual void OnEnterStateCompleted() {}
+    protected virtual async UniTask OnEnterStateStarted() {}
+    protected virtual async UniTask OnEnterStateCompleted() {}
 
-    protected virtual void OnQuitStateStarted() {}
-    protected virtual void OnQuitStateCompleted() {}
+    protected virtual async UniTask OnQuitStateStarted() {}
+    protected virtual async UniTask OnQuitStateCompleted() {}
 }

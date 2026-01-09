@@ -39,7 +39,7 @@ public sealed class Bomb : WeaponBase
         
         try
         {
-            await UniTask.WaitForSeconds(_explosion.GetOwnerEntity().StatContainer.Get<ExplotionDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
+            await UniTask.WaitForSeconds(_explosion.GetOwnerEntity().StatContainer.Get<ExplosionDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
             Explode();
         }
         catch (Exception e) { e.LogAsync(); } 

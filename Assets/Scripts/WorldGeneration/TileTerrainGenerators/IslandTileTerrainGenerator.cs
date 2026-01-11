@@ -62,6 +62,11 @@ public sealed class IslandTileTerrainGenerator : TileTerrainGenerator
         return neighborPositions;
     }
 
+    protected override bool HasTile(int x, int y, int z)
+    {
+        return _heightMap.Map[x, z] >= y;
+    }
+
     protected override TilemapData GetTilemapData(int x, int z)
     {
         return _biomeMapGenerator.GetBiomeAt(new Vector2Int(x, z)).TilemapData;

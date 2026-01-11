@@ -66,6 +66,11 @@ public sealed class RoadTileTerrainGenerator : TileTerrainGenerator
         return neighborPositions;
     }
 
+    protected override bool HasTile(int x, int y, int z)
+    {
+        return _heightMap.Map[x, z] == y && _roadMap.Map[x, z];
+    }
+
     protected override TilemapData GetTilemapData(int x, int z)
     {
         return IslandDataContainer.Data.RoadTilemap;

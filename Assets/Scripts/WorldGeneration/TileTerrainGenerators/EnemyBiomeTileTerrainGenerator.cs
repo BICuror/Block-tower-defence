@@ -64,6 +64,14 @@ public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
         return neighborPositions;
     }
 
+    protected override bool HasTile(int x, int y, int z)
+    {
+        int xWorldPos = x;
+        int zWorldPos = z;
+
+        return _enemyBiomeMap[x, z] && GetHeight(xWorldPos, zWorldPos) >= y;
+    }
+
     protected override TilemapData GetTilemapData(int x, int z)
     {
         return IslandDataContainer.Data.EnemyBiomeTilemap;

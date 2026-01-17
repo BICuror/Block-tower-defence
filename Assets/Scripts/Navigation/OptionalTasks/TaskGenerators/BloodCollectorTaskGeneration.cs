@@ -12,6 +12,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     [Inject] private RoadMapHolder _roadMapHolder;
     [Inject] private DiContainer _diContainer;
     
+    [SerializeField] private LayerSetting _terrainLayerSetting;
     [SerializeField] private LayerSetting _solidLayerSetting;
     [SerializeField] private BloodCollector _bloodTowerPrefab;
     [SerializeField] private int _bloodTowerRadius;
@@ -80,6 +81,8 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     
     private bool CheckBloodCollectorPositionValidity(Vector2Int position, Vector2Int spawnerPosition)
     {
+        if (!TileMap.HasTile(position, _terrainLayerSetting)) return false;
+         
         List<Vector2Int> possiblePositions = TileMap.FindClosestValidPositionsPerRadius(IsARoadTile, position, _bloodTowerRadius, _bloodTowerRadius);
 
         if (possiblePositions.Count >= _minRoadTilesInRadius && possiblePositions.Count <= _maxRoadTilesInRadius)

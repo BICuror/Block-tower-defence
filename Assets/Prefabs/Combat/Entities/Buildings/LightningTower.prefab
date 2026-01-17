@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 0
+  _overrideAdditionalScaleValue: 0
   _additionalScaleValue: 0.95
   _areaScaleValue: 2
   _hasVisualisation: 1
@@ -209,6 +210,7 @@ GameObject:
   - component: {fileID: 1503849096285096914}
   - component: {fileID: 8168392144352928642}
   - component: {fileID: 1283660923688659617}
+  - component: {fileID: 6760639002959971948}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -316,6 +318,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &6760639002959971948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092245443807038022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 7055807638973543339}
+  _hoverableObject: {fileID: 5494015683619608005}
 --- !u!1 &1816327157505940942
 GameObject:
   m_ObjectHideFlags: 0
@@ -5514,6 +5537,7 @@ GameObject:
   - component: {fileID: 8012806623526688947}
   - component: {fileID: 6499896294953490330}
   - component: {fileID: 9185199116908273586}
+  - component: {fileID: 5494015683619608005}
   m_Layer: 7
   m_Name: LightningTower
   m_TagString: Draggable
@@ -5771,6 +5795,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ligningPrefab: {fileID: 3759759770627323237, guid: 50fba3f6d96875b4786dc34adea074d1, type: 3}
   _shootingPoint: {fileID: 2051464476266731372}
+--- !u!114 &5494015683619608005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141121563948167434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8041683409796376865
 PrefabInstance:
   m_ObjectHideFlags: 0

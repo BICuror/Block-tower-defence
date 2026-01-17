@@ -1,7 +1,7 @@
 using UnityEngine;
 using Combat;
 
-[CreateAssetMenu(fileName = "SelectionObjectPlacementCondition", menuName = "PlacementConditions/SelectionObjectPlacementCondition")]
+[CreateAssetMenu(fileName = "SelectionObjectPlacementCondition", menuName = "DraggableSystem/PlacementConditions/SelectionObjectPlacementCondition")]
 
 public sealed class SelectionObjectPlacementCondition : PlacementModule
 {

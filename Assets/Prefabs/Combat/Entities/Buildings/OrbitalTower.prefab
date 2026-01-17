@@ -5084,6 +5084,7 @@ GameObject:
   - component: {fileID: 1179167039576349397}
   - component: {fileID: 2933314417688108438}
   - component: {fileID: 1261345440318068905}
+  - component: {fileID: -2284182736992024983}
   m_Layer: 7
   m_Name: OrbitalTower
   m_TagString: Draggable
@@ -5334,6 +5335,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _orbitalPrefab: {fileID: 9216696173574010111, guid: 9b70736798ad37843b0d24f6557794e4, type: 3}
   _defaultOrbiralsAmount: 3
+--- !u!114 &-2284182736992024983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784759462281575648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4381039838401054439
 GameObject:
   m_ObjectHideFlags: 0
@@ -5404,6 +5435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 0
+  _overrideAdditionalScaleValue: 1
   _additionalScaleValue: 0
   _areaScaleValue: 2
   _hasVisualisation: 1
@@ -5435,6 +5467,7 @@ GameObject:
   - component: {fileID: 3296884587869577671}
   - component: {fileID: 5199694933800725631}
   - component: {fileID: 7654696624307757846}
+  - component: {fileID: 2958165164669308338}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -5551,6 +5584,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &2958165164669308338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4575311875090513263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 7619517668336585785}
+  _hoverableObject: {fileID: -2284182736992024983}
 --- !u!1 &5798855339313037459
 GameObject:
   m_ObjectHideFlags: 0

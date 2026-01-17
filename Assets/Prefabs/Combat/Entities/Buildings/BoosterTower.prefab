@@ -4958,6 +4958,7 @@ GameObject:
   - component: {fileID: 561810178927590438}
   - component: {fileID: 3699952435439463732}
   - component: {fileID: 5781856286329589189}
+  - component: {fileID: -2813065794598741715}
   m_Layer: 7
   m_Name: BoosterTower
   m_TagString: Draggable
@@ -5149,6 +5150,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59554cdbae90ade4cbbc1fead608a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2813065794598741715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785648769302265666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6419556192949382454
 GameObject:
   m_ObjectHideFlags: 0
@@ -5242,6 +5273,7 @@ GameObject:
   - component: {fileID: 5180159151510655477}
   - component: {fileID: 2543382600829122216}
   - component: {fileID: 7580155630028627261}
+  - component: {fileID: 384233322738830774}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -5358,6 +5390,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &384233322738830774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7300458605841521785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 1697840344304186192}
+  _hoverableObject: {fileID: -2813065794598741715}
 --- !u!1 &9049865345819857258
 GameObject:
   m_ObjectHideFlags: 0
@@ -5427,6 +5480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 1
+  _overrideAdditionalScaleValue: 0
   _additionalScaleValue: 0.95
   _areaScaleValue: 2
   _hasVisualisation: 1

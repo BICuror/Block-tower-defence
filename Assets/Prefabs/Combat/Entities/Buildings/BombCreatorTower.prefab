@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 4187140400456686761}
   - component: {fileID: 2285048280839984655}
   - component: {fileID: 4483052330896555619}
+  - component: {fileID: 1849793155905878911}
   m_Layer: 7
   m_Name: BombCreatorTower
   m_TagString: Draggable
@@ -233,7 +234,7 @@ MonoBehaviour:
   - StructName: MaxEntities
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     _defaultValue: 3
-  - StructName: ExplotionDelay
+  - StructName: ExplosionDelay
     _statData: {fileID: 11400000, guid: 3cc872057f40f7542b58245ed6a75b0b, type: 2}
     _defaultValue: 1.5
   _destroyOnDeath: 0
@@ -335,6 +336,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59554cdbae90ade4cbbc1fead608a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1849793155905878911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6915819752885703918}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8186412615647765344
 GameObject:
   m_ObjectHideFlags: 0
@@ -349,6 +368,7 @@ GameObject:
   - component: {fileID: 9164764011074384513}
   - component: {fileID: 7090808902236057751}
   - component: {fileID: 8495381875847753269}
+  - component: {fileID: 6922618724315231155}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -467,6 +487,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &6922618724315231155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8186412615647765344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 6045495578011782544}
+  _hoverableObject: {fileID: 1849793155905878911}
 --- !u!1 &8787392011084482491
 GameObject:
   m_ObjectHideFlags: 0

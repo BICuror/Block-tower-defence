@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 5846504086487598331}
   - component: {fileID: 8647487456333441946}
   - component: {fileID: 3756345925330576276}
+  - component: {fileID: 8453782725496141231}
   m_Layer: 7
   m_Name: ArtilleryTower
   m_TagString: Draggable
@@ -245,6 +246,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _artilleryTarget: {fileID: 4158685904401622926, guid: 8036e384571b2b7428a18492b0944a34, type: 3}
+--- !u!114 &8453782725496141231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131155814804274169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2009600825240663061
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +360,7 @@ GameObject:
   - component: {fileID: 7146768643875308146}
   - component: {fileID: 358193629617948874}
   - component: {fileID: 7878827702635586972}
+  - component: {fileID: 360003579966801391}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -445,6 +465,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &360003579966801391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880469819708588832}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 699227537871877999}
+  _hoverableObject: {fileID: 8453782725496141231}
 --- !u!1001 &4186025159791728923
 PrefabInstance:
   m_ObjectHideFlags: 0

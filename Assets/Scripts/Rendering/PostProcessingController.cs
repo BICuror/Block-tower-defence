@@ -11,9 +11,10 @@ public sealed class PostProcessingController : MonoBehaviour
 
     public void SetProfile(VolumeProfile profile)
     {
-        _currentVolume = Instantiate(_volumeControllerPrefab);
+        _currentVolume = Instantiate(_volumeControllerPrefab, transform);
         
         _currentVolume.profile = profile;
+        _currentVolume.weight = 1f;
     }
 
     public async UniTask ChangeCustomVolume(VolumeProfile profile, float changeDuration)

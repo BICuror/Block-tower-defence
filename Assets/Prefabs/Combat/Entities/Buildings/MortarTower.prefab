@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 8880652755410953163}
   - component: {fileID: 3620392266764355938}
   - component: {fileID: 5290177001915760236}
+  - component: {fileID: 6112972651827626473}
   m_Layer: 7
   m_Name: Mesh
   m_TagString: Untagged
@@ -226,6 +227,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &6112972651827626473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2181085558654695473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 6467274848067245204}
+  _hoverableObject: {fileID: -8513229045828187900}
 --- !u!1 &2413717840672412973
 GameObject:
   m_ObjectHideFlags: 0
@@ -5102,6 +5124,7 @@ GameObject:
   - component: {fileID: 7114909489339946991}
   - component: {fileID: 2059461565097816955}
   - component: {fileID: 4894305466429284830}
+  - component: {fileID: -8513229045828187900}
   m_Layer: 7
   m_Name: MortarTower
   m_TagString: Draggable
@@ -5375,6 +5398,36 @@ MonoBehaviour:
   _canBeIdleInspected: 0
   _inspectableObjectName: Mortar tower
   _inspectableObjectDescription: Shots an arching projectile, explodes on collision
+--- !u!114 &-8513229045828187900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4325617312332438261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4972928926287705394
 GameObject:
   m_ObjectHideFlags: 0
@@ -5444,6 +5497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 0
+  _overrideAdditionalScaleValue: 0
   _additionalScaleValue: 0.95
   _areaScaleValue: 2
   _hasVisualisation: 1

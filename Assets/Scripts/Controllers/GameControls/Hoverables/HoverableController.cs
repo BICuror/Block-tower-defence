@@ -6,7 +6,7 @@ using UnityEngine;
 public sealed class HoverableController : MonoBehaviour
 {
     [SerializeField] private LayerSetting _hoverableLayerSetting;
-    private List<HoverableObject> _hoveredOverObjects = new();
+    private List<HoverableObject> _lastHoveredOverObjects = new();
     private Camera _camera;
 
     private void Awake()
@@ -16,39 +16,35 @@ public sealed class HoverableController : MonoBehaviour
     
     public void CheckHover(Vector2 pointerPosition)
     {
-        Debug.Log("Hover tried");
         Ray cameraRay = _camera.ScreenPointToRay(pointerPosition);
         
         RaycastHit[] hits = Physics.RaycastAll(cameraRay, TileMap.RAY_LENGTH, _hoverableLayerSetting.GetLayerMask());
 
-        List<HoverableObject> hoveredObjects = new();
+        List<HoverableObject> hoveredOverObjects = new();
         
         foreach (RaycastHit raycastHit in hits)
         {
             if (raycastHit.collider.gameObject.TryGetComponent(out HoverableObject hoverableObject))
             {
-                hoveredObjects.Add(hoverableObject);
+                hoveredOverObjects.Add(hoverableObject);
+            }
+        }
+
+        for (int i = 0; i < _lastHoveredOverObjects.Count;)
+        {
+            if (hoveredOverObjects.Contains(_lastHoveredOverObjects[i])) i++;
+            else
+            {
+                _lastHoveredOverObjects[i].ExitHover();
+                _lastHoveredOverObjects.RemoveAt(i);
             }
         }
         
-        if (hits.Length > 0)
+        foreach (HoverableObject hoverableObject in hoveredOverObjects)
         {
-            for (int i = 0; i < _hoveredOverObjects.Count;)
+            if (!_lastHoveredOverObjects.Contains(hoverableObject))
             {
-                if (hoveredObjects.Contains(_hoveredOverObjects[i])) i++;
-                else
-                {
-                    _hoveredOverObjects[i].ExitHover();
-                    _hoveredOverObjects.RemoveAt(i);
-                }
-            }
-        }
-        
-        foreach (HoverableObject hoverableObject in hoveredObjects)
-        {
-            if (!_hoveredOverObjects.Contains(hoverableObject))
-            {
-                _hoveredOverObjects.Add(hoverableObject);
+                _lastHoveredOverObjects.Add(hoverableObject);
                 hoverableObject.EnterHover();
             }
         }

@@ -91,7 +91,9 @@ public abstract class TileTerrainGenerator : MonoBehaviour
 
     protected void TryGenerateFillerTile(int x, int y, int z)
     {
-        GenerateTile(x, y, z);
+        List<Vector2Int> tileNeighborPositions = GetNeighborPositions(x, y, z);
+        
+        if (tileNeighborPositions.Count < 4) GenerateTile(x, y, z);
     }
 
     protected void ClearAllTiles()

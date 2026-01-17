@@ -10,7 +10,7 @@ public sealed class StunEffect : EntityEffect
     {
         if (Entity.ComponentsContainer.Has<TaskCycle>())
         {
-            Entity.ComponentsContainer.Get<TaskCycle>().AddBlockStack();
+            Entity.ComponentsContainer.Get<TaskCycle>().CycleBlockTokenContainer.AddToken();
         }
         
         if (Entity.ComponentsContainer.Has<NavigationAgent>())
@@ -23,7 +23,7 @@ public sealed class StunEffect : EntityEffect
     {
         if (Entity.ComponentsContainer.Has<TaskCycle>())
         {
-            Entity.ComponentsContainer.Get<TaskCycle>().RemoveBlockStack();
+            Entity.ComponentsContainer.Get<TaskCycle>().CycleBlockTokenContainer.RemoveToken();
         }
         
         if (Entity.ComponentsContainer.Has<NavigationAgent>())

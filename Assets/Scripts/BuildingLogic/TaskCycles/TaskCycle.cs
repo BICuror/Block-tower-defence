@@ -11,8 +11,10 @@ public class TaskCycle : MonoBehaviour
     [Cached] private TaskRechargeDuration _taskRechargeDuration;
     [Cached] private EntityHealth _ownerEntityHealth;
     private CancellationTokenSource _cancellationTokenSource = new();
+    private TokenContainer _cycleBlockTokenContainer = new();
     private bool _taskCycleIsActive;
-    private int _taskBlockStack;
+    
+    public TokenContainer CycleBlockTokenContainer => _cycleBlockTokenContainer;
     
     public Action TaskPerformed;
     public Action TaskCycled;
@@ -20,15 +22,6 @@ public class TaskCycle : MonoBehaviour
     private void Start()
     {
         _ownerEntityHealth.Died += StopRechargeProcess;
-    }
-
-    public void AddBlockStack() => _taskBlockStack++;
-
-    public void RemoveBlockStack()
-    {
-        if (_taskBlockStack <= 0) Debug.LogError("Trying to remove block stack, while block stack is empty");
-
-        _taskBlockStack--;
     }
     
     public void TryCycle()
@@ -84,7 +77,7 @@ public class TaskCycle : MonoBehaviour
             {
                 await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
                   
-                if (_taskBlockStack <= 0) elapsedTime += Time.fixedDeltaTime;
+                if (_cycleBlockTokenContainer.IsEmpty) elapsedTime += Time.fixedDeltaTime;
             }
         }
         catch (Exception e)

@@ -168,8 +168,8 @@ GameObject:
   - component: {fileID: 1796149009562982541}
   - component: {fileID: 2965325360236812804}
   - component: {fileID: 1305424881754724633}
-  - component: {fileID: 4408472262627033674}
   - component: {fileID: -1740854102193638907}
+  - component: {fileID: 6676585006974006265}
   m_Layer: 13
   m_Name: YellowCrystal
   m_TagString: Draggable
@@ -259,18 +259,6 @@ MonoBehaviour:
   _itemColor: 1
   _destroyEffectPrefab: {fileID: 8324663063960217067, guid: d4bf980fa678b6a42b986a29033f81c6, type: 3}
   _toggleGlobalEffectData: {fileID: 0}
---- !u!114 &4408472262627033674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1944490093618053086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b746f208c7515e140aff6b3ab4bd7d89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &-1740854102193638907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +274,24 @@ MonoBehaviour:
   _canBeIdleInspected: 1
   _inspectableObjectName: 
   _inspectableObjectDescription: 
+--- !u!114 &6676585006974006265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944490093618053086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2385686431294199378
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +422,7 @@ GameObject:
   - component: {fileID: 3317625323264587365}
   - component: {fileID: 21295871323419421}
   - component: {fileID: 8110531671198179174}
+  - component: {fileID: 5673830095161958512}
   m_Layer: 13
   m_Name: Crystal
   m_TagString: Untagged
@@ -502,6 +509,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &5673830095161958512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2403032933835088123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 3227090590318790440}
+  _hoverableObject: {fileID: 6676585006974006265}
 --- !u!1 &4472407851492265832
 GameObject:
   m_ObjectHideFlags: 0

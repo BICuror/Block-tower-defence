@@ -10,7 +10,10 @@ public sealed class DragAnimationObject : MonoBehaviour
     private Transform _initialParent;
     private Vector3 _initialLocalPosition;
     private float _initialLocalYRotation;
+    private bool _isConnected;
+    
     public Vector3 InitialLocalPosition => _initialLocalPosition;
+    public bool IsConnected => _isConnected;
     public float MeshHeight => _meshHegiht;
     
     private void Awake()
@@ -21,10 +24,7 @@ public sealed class DragAnimationObject : MonoBehaviour
         _initialLocalYRotation = transform.localRotation.eulerAngles.y;
     }
 
-    private void OnEnable()
-    {
-        SetInitialParent();
-    }
+    private void OnEnable() => SetInitialParent();
 
     public void ConnectToJoint(Joint joint)
     {
@@ -32,13 +32,14 @@ public sealed class DragAnimationObject : MonoBehaviour
         
         transform.position = joint.transform.position - new Vector3(0f, _meshHegiht, 0f);
 
-        rigidbody.mass = 5f;
         transform.parent = null;
+        rigidbody.mass = 5f;
         rigidbody.useGravity = true;
-
         rigidbody.constraints = RigidbodyConstraints.None; 
 
         joint.connectedBody = rigidbody;
+
+        _isConnected = true;
     } 
 
     public void DisconnectFromJoint(Joint joint)
@@ -52,5 +53,7 @@ public sealed class DragAnimationObject : MonoBehaviour
         transform.parent = _initialParent;
         transform.localPosition = _initialLocalPosition;
         if (_returnToDefaultYRotation) transform.localRotation = Quaternion.Euler(0f, _initialLocalYRotation, 0f);
+        
+        _isConnected = false;
     }
 }

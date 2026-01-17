@@ -2876,6 +2876,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feffaca03058bb246a0738b53c6faa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _terrainLayerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
   _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _bloodTowerPrefab: {fileID: 2108226235141063515, guid: 31e636404eacdae42842dd3318d6299a, type: 3}
   _bloodTowerRadius: 3
@@ -3189,13 +3190,13 @@ Transform:
   m_GameObject: {fileID: 952797635}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.483, z: 0}
+  m_LocalPosition: {x: 0, y: 1.3130001, z: 0}
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 15877437}
   - {fileID: 1688957464}
-  m_Father: {fileID: 7639062467750908543}
+  m_Father: {fileID: 4001142585134908024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &952797637
 MonoBehaviour:
@@ -3714,110 +3715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82f2d85dc59b7544d850b259c7642c54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _draggableConnector: {fileID: 1056926169}
-  _visualisationAppearCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.5511856
-      outSlope: 3.5511856
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.89962476
-    - serializedVersion: 3
-      time: 0.13157843
-      value: 0.51162165
-      inSlope: 1.6349356
-      outSlope: 1.6349356
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.42424014
-      outWeight: 0.07202765
-    - serializedVersion: 3
-      time: 0.2905854
-      value: 0.7861923
-      inSlope: 0.9833824
-      outSlope: 0.9833824
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0.019364256
-      outSlope: 0.019364256
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1401227
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _visualisationDisappearCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.5706982
-      value: 0.3630659
-      inSlope: 1.1366892
-      outSlope: 1.1366892
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _inspectionDissapearCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  _inspectionDissapearDuraion: 0.1
-  _visualisationDuration: 0.1
-  _reachAreaVisualisation: {fileID: 105885317}
-  _defaultMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!114 &1056926169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15899,6 +15796,7 @@ GameObject:
   - component: {fileID: 8464262724155894551}
   - component: {fileID: 8464262724155894552}
   - component: {fileID: 8464262724155894553}
+  - component: {fileID: 8464262724155894554}
   m_Layer: 7
   m_Name: TownHall
   m_TagString: Untagged
@@ -15918,6 +15816,7 @@ GameObject:
   - component: {fileID: 3787642218923190665}
   - component: {fileID: 4889281572624174274}
   - component: {fileID: 7639062467750908544}
+  - component: {fileID: 7639062467750908545}
   m_Layer: 7
   m_Name: MainTower
   m_TagString: Untagged
@@ -15947,10 +15846,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 243079080}
+  - {fileID: 952797636}
   - {fileID: 7639062467750908543}
   - {fileID: 33326516}
   - {fileID: 551356290}
-  - {fileID: 4794912591376651810}
   - {fileID: 1218002477}
   - {fileID: 499732298}
   - {fileID: 209377833}
@@ -15982,13 +15881,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209517632318105050}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5194, z: -0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.6894, z: 0}
   m_LocalScale: {x: 0.0282, y: 0.0282, z: 0.0282}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 410011302}
-  m_Father: {fileID: 4001142585134908024}
+  m_Father: {fileID: 7639062467750908543}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &4889281572624174274
 MeshRenderer:
@@ -16109,7 +16008,7 @@ Transform:
   - {fileID: 1324580660}
   - {fileID: 1884406863}
   - {fileID: 49214754}
-  - {fileID: 952797636}
+  - {fileID: 4794912591376651810}
   m_Father: {fileID: 4001142585134908024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7639062467750908544
@@ -16125,6 +16024,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &7639062467750908545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1446442956285341616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb88e6cc76662ae4791e25854a930811, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.025
+  _mesh: {fileID: 7639062467750908543}
 --- !u!23 &7746933228960258802
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -16274,6 +16190,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
   _allAvailableModificators: []
+--- !u!114 &8464262724155894554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356044629221714169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7639062467750908545}
+        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
+        m_MethodName: Shake
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &8638852144968080010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16402,6 +16348,10 @@ PrefabInstance:
       propertyPath: _draggableCreator
       value: 
       objectReference: {fileID: 20957093}
+    - target: {fileID: 3759074774464913372, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _draggableSystemConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
     - target: {fileID: 4041385971382558544, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: m_Name
       value: ZenjectSceneContext

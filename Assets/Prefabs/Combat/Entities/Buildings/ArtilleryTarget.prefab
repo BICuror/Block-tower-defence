@@ -5106,6 +5106,7 @@ GameObject:
   - component: {fileID: 5986966518354803286}
   - component: {fileID: 6043043370937296133}
   - component: {fileID: 7444604681278474849}
+  - component: {fileID: 1278709420875641837}
   m_Layer: 13
   m_Name: DragAnimationObject
   m_TagString: Untagged
@@ -5192,6 +5193,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+--- !u!114 &1278709420875641837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7532709337657709981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 2218496549086909376}
+  _hoverableObject: {fileID: 7257904360634281605}
 --- !u!1 &8060863342760187947
 GameObject:
   m_ObjectHideFlags: 0
@@ -5261,6 +5283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 0
+  _overrideAdditionalScaleValue: 1
   _additionalScaleValue: -1
   _areaScaleValue: 2
   _hasVisualisation: 1
@@ -5291,6 +5314,8 @@ GameObject:
   - component: {fileID: 2023325934075677098}
   - component: {fileID: 4473800208102006775}
   - component: {fileID: 4158685904401622926}
+  - component: {fileID: 7257904360634281605}
+  - component: {fileID: 8785968926715520325}
   m_Layer: 13
   m_Name: ArtilleryTarget
   m_TagString: Draggable
@@ -5392,3 +5417,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _areaEntityDetector: {fileID: 152723263151632942}
   _areaScanerController: {fileID: 5723973044492201055}
+--- !u!114 &7257904360634281605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8547913235151431246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &8785968926715520325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8547913235151431246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []

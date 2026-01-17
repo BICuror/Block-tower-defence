@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultAndWaterPlacemenntModule", menuName = "PlacementConditions/DefaultAndWaterPlacemenntModule")]
+[CreateAssetMenu(fileName = "DefaultAndWaterPlacemenntModule", menuName = "DraggableSystem/PlacementConditions/DefaultAndWaterPlacemenntModule")]
 
 public sealed class DefaultAndWaterPlacemenntModule : PlacementModule
 {

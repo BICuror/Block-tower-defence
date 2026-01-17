@@ -8,6 +8,9 @@ public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
 {
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private IslandDataContainer _islandDataContainer;
+
+    [SerializeField] private LayerSetting _layerSetting;
+
     private int _enemyBiomeLength;
     private bool[,] _enemyBiomeMap;
     
@@ -28,8 +31,13 @@ public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
                 {
                     int xWorldPos = biomePosition.x + x;
                     int zWorldPos = biomePosition.y + z;
+
+                    Vector2Int tilePosition = new Vector2Int(xWorldPos, zWorldPos);
                     
-                    GenerateTile(x, GetHeight(xWorldPos, zWorldPos), z);
+                    if (TileMap.HasTile(tilePosition, _layerSetting) && TileMap.GetHitInfo(tilePosition, _layerSetting).collider.gameObject == gameObject)
+                    {
+                        GenerateTile(x, GetHeight(xWorldPos, zWorldPos), z);
+                    }
                 }
             }
         }

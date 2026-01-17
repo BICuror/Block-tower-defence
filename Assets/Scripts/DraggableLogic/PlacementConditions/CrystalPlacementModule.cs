@@ -1,7 +1,7 @@
 using Combat;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CrystalPlacementModule", menuName = "PlacementConditions/CrystalPlacementModule")]
+[CreateAssetMenu(fileName = "CrystalPlacementModule", menuName = "DraggableSystem/PlacementConditions/CrystalPlacementModule")]
 
 public sealed class CrystalPlacementModule : PlacementModule
 {

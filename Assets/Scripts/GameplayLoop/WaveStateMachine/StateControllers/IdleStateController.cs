@@ -1,14 +1,14 @@
-using System.Linq;
-using WorldGeneration;
-using UnityEngine;
-using Navigation;
-using Zenject;
-using Combat;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
+using WorldGeneration;
+using UnityEngine;
+using System.Linq;
+using Navigation;
+using Zenject;
 
 public sealed class IdleStateController : WaveStateController
 {
+    [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private TerrainAnimator _roadAnimator;
     [SerializeField] private Transform _townhallTransform;
     [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
@@ -50,6 +50,8 @@ public sealed class IdleStateController : WaveStateController
         RandomExstentions.ReInitializeUnityRandom();
         
         await _itemContainerManager.UpdateContainedItems();
+        
+        _cameraPositionController.SetDefaultPosition();
         
         _selectionManager.TryEnqueueNewBuildingSelection();
         _selectionManager.TryStartQueuedSelection();

@@ -32,12 +32,8 @@ public sealed class AreaScanerController : MonoBehaviour
         if (_hasVisualisation)
         {
             _visualisationTransform.localScale = DisabledScale;
-            
-            if (transform.parent.TryGetComponent(out HoverableObject hoverableObject))
-            {
-                hoverableObject.HoverEntered.AddListener(EnableVisualisation);
-                hoverableObject.HoverExited.AddListener(DisableVisualisation);
-            }
+
+            if (transform.parent.TryGetComponent(out HoverableObject hoverableObject)) SubscribeToHoverable(hoverableObject);
         }
 
         if (_autoScale)
@@ -54,6 +50,30 @@ public sealed class AreaScanerController : MonoBehaviour
         transform.localScale = GetScale();
     }
 
+    private Vector3 GetScale()
+    {
+        float scale = _currentRadius * _areaScaleValue;
+
+        if (_overrideAdditionalScaleValue) scale += _additionalScaleValue;
+        else scale += _draggableSystemConfig.AdditionalAreaVisualisationSize;
+
+        return new Vector3(scale, _height, scale);
+    }
+    
+    #region Visualisation
+
+    public void SubscribeToHoverable(HoverableObject hoverableObject)
+    {
+        hoverableObject.HoverEntered.AddListener(EnableVisualisation);
+        hoverableObject.HoverExited.AddListener(DisableVisualisation);
+    }
+
+    public void UnsubscribeFromHoverable(HoverableObject hoverableObject)
+    {
+        hoverableObject.HoverEntered.RemoveListener(EnableVisualisation);
+        hoverableObject.HoverExited.RemoveListener(DisableVisualisation);
+    }
+    
     public void EnableVisualisation()
     {
         if (!_hasVisualisation) return;
@@ -84,18 +104,12 @@ public sealed class AreaScanerController : MonoBehaviour
         });
     }
     
-    private Vector3 GetScale()
-    {
-        float scale = _currentRadius * _areaScaleValue;
-
-        if (_overrideAdditionalScaleValue) scale += _additionalScaleValue;
-        else scale += _draggableSystemConfig.AdditionalAreaVisualisationSize;
-
-        return new Vector3(scale, _height, scale);
-    }
-
+    #endregion
+    
     private void OnDestroy()
     {
         if (_autoScale) _areaManager.RemoveAreaScanerController(this);
+        
+        if (transform.parent.TryGetComponent(out HoverableObject hoverableObject)) UnsubscribeFromHoverable(hoverableObject);
     }
 }

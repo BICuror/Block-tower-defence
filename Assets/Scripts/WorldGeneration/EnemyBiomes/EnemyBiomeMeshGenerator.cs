@@ -9,7 +9,9 @@ namespace WorldGeneration
         [Inject] private RoadGenerator _roadGenerator;
 
         private Vector3Int _position;
-
+        
+        protected override float BottomWallHeight => Random.Range(0.5f, 3f);
+        
         public void SetPosition(Vector3Int position) => _position = position;
 
         protected override bool ShouldCheckBlock(Vector3Int positionToCheck) 

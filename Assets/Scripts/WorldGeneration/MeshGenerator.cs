@@ -100,6 +100,8 @@ namespace WorldGeneration
         private List<int> _indices = new List<int>();
         protected List<Vector2> UVs = new List<Vector2>();
 
+        protected virtual float BottomWallHeight => 100;
+
         public void SetupGenerator(BlockGrid blockGrid, TextureManager textureManager)
         {
             _blockGrid = blockGrid;
@@ -179,7 +181,7 @@ namespace WorldGeneration
             {
                 Vector3Int blockPositionToCheck = position + _wallCheckDirections[i];
 
-                if (_blockGrid.IsInBounds(blockPositionToCheck) == true)
+                if (_blockGrid.IsInBounds(blockPositionToCheck))
                 {
                     if (ShouldCheckBlock(blockPositionToCheck) && _blockGrid.GridSpaceIsEmpty(blockPositionToCheck) && _blockGrid.GridSpaceIsEmpty(position) == false)
                     {   
@@ -210,7 +212,7 @@ namespace WorldGeneration
             {
                 Vector3 verticy = faceToApply.Verticies[verticyIndex];
 
-                verticy.y = (verticy.y - 0.5f) * 20f - 0.5f;
+                verticy.y = (verticy.y - 0.5f) * BottomWallHeight - 0.5f;
 
                 _vertices.Add(new Vector3(position.x, position.y, position.z) + verticy); 
             }

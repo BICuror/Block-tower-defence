@@ -63,6 +63,11 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     NoiseScale: {x: 6, y: 6}
+  WaterDecorationsModule:
+    DecorationAppearRate: 0.04
+    Decorations:
+    - _appearRate: 1
+      DecorationData: {fileID: 11400000, guid: 14449d3910c32814aa66a47622bfa87d, type: 2}
   _maxAmountOfEnemyBiomes: 3
   _begginingAmountOfEnemyBiomes: 1
   _enemyBiomeStages:

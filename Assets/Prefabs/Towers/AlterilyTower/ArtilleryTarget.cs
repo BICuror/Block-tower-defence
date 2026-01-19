@@ -17,9 +17,9 @@ public sealed class ArtilleryTarget : WeaponBase
         _areaEntityDetector.AddedItem += InvokeOnAreaEntityAdded;
         
         OwnerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += TryDamageAllEnemiesInArea;
-        OwnerEntity.StatContainer.Get<ReachAreaScale>().ValueChanged += UpdateAreaScanerScale;
+        OwnerEntity.ComponentsContainer.Get<AreaManager>().AddAreaScanerController(_areaScanerController);
         
-        UpdateAreaScanerScale(0f);
+        _areaScanerController.SubscribeToHoverable(OwnerEntity.ComponentsContainer.Get<HoverableObject>());
     }
 
     private void TryDamageAllEnemiesInArea()
@@ -33,18 +33,15 @@ public sealed class ArtilleryTarget : WeaponBase
             DamageEntity(damage, enemiesInArea[i]);
         }
     }
-
-    private void UpdateAreaScanerScale(float value)
-    {
-        _areaScanerController.SetScale(OwnerEntity.StatContainer.Get<ReachAreaScale>().RoundedValue);
-    }
     
     private void InvokeOnAreaEntityAdded(CombatEntity _) => AreaEntityAdded?.Invoke();
 
     private void OnDestroy()
     {
         _areaEntityDetector.AddedItem -= InvokeOnAreaEntityAdded;
-        OwnerEntity.StatContainer.Get<ReachAreaScale>().ValueChanged -= UpdateAreaScanerScale;
+        
+        OwnerEntity.ComponentsContainer.Get<AreaManager>().RemoveAreaScanerController(_areaScanerController);
         OwnerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed -= TryDamageAllEnemiesInArea;
+        _areaScanerController.UnsubscribeFromHoverable(OwnerEntity.ComponentsContainer.Get<HoverableObject>());
     }
 }

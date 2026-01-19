@@ -24,7 +24,7 @@ public sealed class EnviromentController : MonoBehaviour
 
     private void Awake()
     {
-        _waveStateMachine.StateStarted += _ => TryEnterNextState();
+        _waveStateMachine.StateEnded += _ => TryEnterNextState();
         
         _currentEnviromentStateIndex = Random.Range(0, _enviromentStates.Count);
 

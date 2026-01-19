@@ -1,11 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace WorldGeneration
 {
-    public class DecorationGenerator : MonoBehaviour
+    public abstract class DecorationGenerator : MonoBehaviour
     {
+        [Inject] private IslandDataContainer _islandDataContainer;
+        
+        [SerializeField] private bool _generateWaterDecorations;
         [SerializeField] private DecorationContainer _decorationContainer;
 
         public void GenerateDecorations(BlockGrid blockGrid, Vector2 offset)
@@ -18,17 +20,29 @@ namespace WorldGeneration
             {
                 for (int z = 0; z < areaSize; z++)
                 {
-                    DecorationModule decorationModule = GetDecorationModule(x, z);
-
-                    if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f) && blockGrid.GetMaxHeight(x, z) > 0)
-                    {         
-                        CreateDecorations(GetRandomDecoration(decorationModule.Decorations), new Vector3Int(x, blockGrid.GetMaxHeight(x, z), z), offset);
+                    if (blockGrid.GetMaxHeight(x, z) > 0)
+                    {
+                        DecorationModule decorationModule = GetDecorationModule(x, z);
+    
+                        if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f))
+                        {         
+                            CreateDecorations(GetRandomDecoration(decorationModule.Decorations), new Vector3Int(x, blockGrid.GetMaxHeight(x, z), z), offset);
+                        }
+                    }
+                    else if (_generateWaterDecorations)
+                    {
+                        DecorationModule decorationModule = _islandDataContainer.Data.WaterDecorationsModule;
+                        
+                        if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f))
+                        {         
+                            CreateDecorations(GetRandomDecoration(decorationModule.Decorations), new Vector3Int(x, blockGrid.GetMaxHeight(x, z), z), offset);
+                        }
                     }
                 }
             }
         }
 
-        protected virtual DecorationModule GetDecorationModule(int x, int z) => new DecorationModule();
+        protected abstract DecorationModule GetDecorationModule(int x, int z);
 
         private void CreateDecorations(DecorationData decoration, Vector3Int position, Vector2 offset)
         {

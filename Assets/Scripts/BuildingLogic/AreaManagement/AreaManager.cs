@@ -10,6 +10,7 @@ public class AreaManager : MonoBehaviour
     [Cached] protected ReachAreaScale _reachAreaScale;
     
     public AreaEntityDetectorPriorityType CurrentPriorityType => _priorityType;
+    public List<AreaScanerController> ControlledScanerControllers => _mainScanerControllers;
     
     private void Start()
     {

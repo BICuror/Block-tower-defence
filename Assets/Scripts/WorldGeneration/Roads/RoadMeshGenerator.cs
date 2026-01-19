@@ -1,16 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace WorldGeneration
 {
     public class RoadMeshGenerator : MeshGenerator
     {
-        private BlockGrid _islandGrid;
+        protected override float BottomWallHeight => Random.Range(0.25f, 2f);
 
-        public void SetIslandGrid(BlockGrid grid) => _islandGrid = grid;
-
-        protected override bool ShouldCheckBlock(Vector3Int positionToCheck) => true; //_islandGrid.GridSpaceIsEmpty(positionToCheck);
+        protected override bool ShouldCheckBlock(Vector3Int positionToCheck) => true;
         
         protected override bool ShouldCheckThisBlockType(BlockType type)
         {

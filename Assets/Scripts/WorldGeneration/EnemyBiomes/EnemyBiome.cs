@@ -21,6 +21,7 @@ namespace WorldGeneration
 
         [SerializeField] private EnemyBiomeTileTerrainGenerator _enemyBiomeTileTerrainGenerator;
         [SerializeField] private TerrainSetter _terrainSetter;
+        [SerializeField] private TerrainSetter _bottomTerrainSetter;
         [SerializeField] private EnemySpawner _enemySpawner;
         [SerializeField] private EnemyBiomeDecorationGenerator _enemyBiomeDecorationGenerator;
         [SerializeField] private TerrainAnimator _terrainAnimator;
@@ -109,6 +110,7 @@ namespace WorldGeneration
             Mesh mesh = _terrainMeshGenerator.GetDefaultMesh();
 
             _terrainSetter.SetMesh(mesh);
+            _bottomTerrainSetter.SetMesh(_terrainMeshGenerator.GetBottomMesh());
         }
 
         public void Destroy()

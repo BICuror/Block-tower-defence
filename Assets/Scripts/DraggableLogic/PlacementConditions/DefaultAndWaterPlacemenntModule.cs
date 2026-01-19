@@ -9,25 +9,21 @@ public sealed class DefaultAndWaterPlacemenntModule : PlacementModule
 
     public override bool CanBePlaced(Vector2Int position)
     {
-        if (TileMap.HasTile(position, _sutableTerrainLayerSetting))
+        int nonStackableTiels = TileMap.GetTileCount(position, _nonStackableLayerSetting);
+    
+        if (nonStackableTiels == 0) return true;
+        
+        if (nonStackableTiels == 1)
         {
-            int nonStackableTiels = TileMap.GetTileCount(position, _nonStackableLayerSetting);
-    
-            if (nonStackableTiels == 0) return true;
-            if (nonStackableTiels == 1)
+            GameObject nonStackableTile = TileMap.GetHitObject(position, _nonStackableLayerSetting);
+
+            if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
             {
-                GameObject nonStackableTile = TileMap.GetHitObject(position, _nonStackableLayerSetting);
-    
-                if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
-                {
-                    return !draggableObject.IsPlaced;
-                }
+                return !draggableObject.IsPlaced;
             }
-
-            return false;
         }
-
-        return true;
+        
+        return false;
     }
 
     public override float GetHeight(Vector2Int position)

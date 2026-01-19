@@ -1,6 +1,5 @@
 using UnityEngine;
 using Zenject;
-using Navigation;
 
 namespace WorldGeneration
 {
@@ -13,6 +12,7 @@ namespace WorldGeneration
         [Inject] private RoadMapHolder _roadMapHolder;
         [Inject] private IslandDataContainer _islandDataContainer;
         [SerializeField] private RoadTileTerrainGenerator _terrainGenerator;
+        [SerializeField] private TerrainSetter _roadBottomTerrainSetter;
         [SerializeField] private TerrainSetter _roadTerrainSetter;
         private BlockGrid _roadGrid;
         
@@ -35,11 +35,10 @@ namespace WorldGeneration
             RoadMeshGenerator roadMeshGenerator = new RoadMeshGenerator();
 
             roadMeshGenerator.SetupGenerator(roadBlockGrid, _textureManager);
-            roadMeshGenerator.SetIslandGrid(_islandGridHolder.Grid);
             
-            Mesh roadMesh = roadMeshGenerator.GetDefaultMesh();
+            _roadTerrainSetter.SetMesh(roadMeshGenerator.GetDefaultMesh()); 
             
-            _roadTerrainSetter.SetMesh(roadMesh); 
+            _roadBottomTerrainSetter.SetMesh(roadMeshGenerator.GetBottomMesh());
         }
 
         private BlockGrid ConvertRoadBlockGrid(bool[,] roadMap, int[,] heightMap)

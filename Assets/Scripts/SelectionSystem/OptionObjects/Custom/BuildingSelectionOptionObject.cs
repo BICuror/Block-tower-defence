@@ -7,6 +7,7 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
     [Inject] private DiContainer _diContainer;
     [Inject] private DraggableCreator _draggableCreator;
     [SerializeField] private Transform _buildingParent;
+    [SerializeField] private Transform _visualEffect;
     [SerializeField] private DraggableObject _draggableObject;
     
     private BuildingEntity _draggablePrefab;
@@ -28,11 +29,14 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
     {
         _draggablePrefab = building;
         _instantiatedBuilding = _diContainer.InstantiatePrefab(building, transform.position, transform.rotation, _buildingParent).GetComponent<BuildingEntity>();
-        Destroy(_instantiatedBuilding.GetComponent<Rigidbody>());
+        Destroy(_instantiatedBuilding.ComponentsContainer.Get<Rigidbody>());
         
-        _instantiatedBuilding.GetComponent<BuildingDraggable>().SetDraggableState(false);
+        _instantiatedBuilding.ComponentsContainer.Get<BuildingDraggable>().SetDraggableState(false);
         GetComponent<DraggableObject>().SetNewDragAnimationObject(_instantiatedBuilding.ComponentsContainer.Get<DragAnimationObject>());
-
+        
+        _visualEffect.SetParent(_instantiatedBuilding.ComponentsContainer.Get<DragAnimationObject>().transform);
+        _visualEffect.localPosition = Vector3.zero;
+        
         _draggableObject.DraggablePickedUp += _ => ((IDraggable)_instantiatedBuilding.Draggable).PickUp();
         _draggableObject.DraggablePlaced += _ => ((IDraggable)_instantiatedBuilding.Draggable).Place();
     }

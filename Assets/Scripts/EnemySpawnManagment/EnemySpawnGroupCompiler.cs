@@ -21,6 +21,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     private Random _random = new();
     
     private IslandData _islandData => _islandDataContainer.Data;
+    public int CurrentWaveSeed => _currentWaveSeed;
 
     private void Start()
     {

@@ -33,6 +33,8 @@ public sealed class WaveStateMachine : MonoBehaviour
         });
     }
 
+    public WaveStateController GetWaveStateController(WaveState waveState) => _stateControllers[waveState];
+    
     public void TransitionIntoIdle() => TransitionOutToState(WaveState.Idle); 
     public void TransitionIntoAttack() => TransitionOutToState(WaveState.Attack); 
 

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 8647487456333441946}
   - component: {fileID: 3756345925330576276}
   - component: {fileID: 8453782725496141231}
+  - component: {fileID: -6051162938306634913}
   m_Layer: 7
   m_Name: ArtilleryTower
   m_TagString: Draggable
@@ -264,6 +265,20 @@ MonoBehaviour:
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-6051162938306634913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131155814804274169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _priorityType: 0
+  _mainScanerControllers: []
 --- !u!1 &2009600825240663061
 GameObject:
   m_ObjectHideFlags: 0

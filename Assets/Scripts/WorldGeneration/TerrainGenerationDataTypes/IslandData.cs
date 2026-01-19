@@ -79,6 +79,7 @@ namespace WorldGeneration
         public BiomeSetting[] Biomes => _biomes;
 
         public NoiseSetting[] BiomeGenerationNoises;
+        public DecorationModule WaterDecorationsModule;
 
         [Header("EnemyBiomeStagesSettings")][Space] 
 

@@ -47,7 +47,7 @@ namespace WorldGeneration
             {
                 for (int i = 0; i < _decorations[x, z].Length; i++)
                 {
-                    _decorations[x, z][i].gameObject.SetActive(false);
+                    _decorations[x, z][i].gameObject.SetActive(state);
                 }
             }
         }

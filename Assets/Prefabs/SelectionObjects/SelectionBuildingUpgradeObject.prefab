@@ -27,12 +27,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2357386049461955097}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.47709823, y: 0.009781325, z: 0.1340213, w: 0.8685159}
+  m_LocalRotation: {x: -0.6815699, y: 0.1712135, z: 0.07841261, w: 0.70710677}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2607478090207919632}
+  m_Father: {fileID: 8273601428931309997}
   m_LocalEulerAnglesHint: {x: -56.238, y: -11.51, z: 23.71}
 --- !u!33 &6491850776430682715
 MeshFilter:
@@ -132,10 +132,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8273601428931309997}
-  - {fileID: 8059113350854350418}
-  - {fileID: 3392022031205691675}
   - {fileID: 3319316725525726976}
-  - {fileID: 8112443710704483663}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &5130176217259767657
@@ -255,12 +252,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4447459917491252351}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.43212575, y: -0.6072171, z: -0.24259205, w: 0.6210506}
+  m_LocalRotation: {x: -0.66611135, y: -0.5464059, z: -0.08795078, w: 0.50000083}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2607478090207919632}
+  m_Father: {fileID: 8273601428931309997}
   m_LocalEulerAnglesHint: {x: -56.238, y: -101.51, z: 23.71}
 --- !u!33 &2988401684891436923
 MeshFilter:
@@ -401,7 +398,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8059113350854350418}
+  - {fileID: 3392022031205691675}
+  - {fileID: 8112443710704483663}
   m_Father: {fileID: 2607478090207919632}
   m_LocalEulerAnglesHint: {x: 32.995, y: -7.598, z: 9.947}
 --- !u!33 &1694758204965478445
@@ -473,8 +473,20 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2607478090207919632}
+    m_TransformParent: {fileID: 8273601428931309997}
     m_Modifications:
+    - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.6666664
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.6666666
+      objectReference: {fileID: 0}
+    - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.6666666
+      objectReference: {fileID: 0}
     - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -489,19 +501,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9514929
       objectReference: {fileID: 0}
     - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: -0.27677414
       objectReference: {fileID: 0}
     - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.08785085
       objectReference: {fileID: 0}
     - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.10168376
       objectReference: {fileID: 0}
     - target: {fileID: 4183727970809195514, guid: e9f4e06d52105e2499dba2e243a9790a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

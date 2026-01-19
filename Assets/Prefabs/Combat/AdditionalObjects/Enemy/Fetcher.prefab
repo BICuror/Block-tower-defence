@@ -11,7 +11,9 @@ GameObject:
   - component: {fileID: 8600448821511227275}
   - component: {fileID: 654536325772575667}
   - component: {fileID: 2759670999689310138}
-  m_Layer: 12
+  - component: {fileID: 2299595949855471740}
+  - component: {fileID: 1020300642330053642}
+  m_Layer: 13
   m_Name: Fetcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,6 +86,54 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2299595949855471740
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682571182274671225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.8412483, z: 1}
+  m_Center: {x: 0, y: 0.14651321, z: 0}
+--- !u!114 &1020300642330053642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1682571182274671225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a793fafa2851d94f947291f35324149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnActivation:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 138710280716226583}
+        m_TargetAssemblyTypeName: BuildingFetch, Assembly-CSharp
+        m_MethodName: StopChase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2789158291352921826
 GameObject:
   m_ObjectHideFlags: 0
@@ -5143,7 +5193,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5610602154595883985}
   - component: {fileID: 138710280716226583}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: Fetcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5183,8 +5233,9 @@ MonoBehaviour:
   _buildingAreaScaner: {fileID: 5639661037102452828}
   _draggableConnector: {fileID: 1844838674522657510}
   _animator: {fileID: 338228426991660645}
-  _timePerTile: 0.35
-  _fetchDistance: 6
+  _timePerTileChase: 0.7
+  _timePerTileDrag: 0.2
+  _fetchDistance: 4
   _fetchType: 1
 --- !u!1 &8242663123296051119
 GameObject:
@@ -5324,7 +5375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7029948723529949830, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: -2639638324218457063, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5344,11 +5395,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1790183945725220954, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2854563699051640978, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5364,11 +5415,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6905609870639353253, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7036213049465896255, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Layer
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 7205140776170859923, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       propertyPath: m_Materials.Array.data[0]

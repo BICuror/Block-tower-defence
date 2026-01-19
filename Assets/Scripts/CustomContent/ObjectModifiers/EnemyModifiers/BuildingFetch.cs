@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using DG.Tweening;
 using Cashing;
 using Combat;
 
@@ -10,8 +9,8 @@ public sealed class BuildingFetch : MonoBehaviour
     [SerializeField] private LayerSetting _roadLayerSetting;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private DraggableConnector _draggableConnector;
-    [SerializeField] private Animator _animator;
-    [SerializeField] private float _timePerTile = 1f;
+    [SerializeField] private float _chasingTimePerTile = 0.65f;
+    [SerializeField] private float _draggingTimePerTile = 0.2f;
     [SerializeField] private float _fetchDistance = 3f;
     [SerializeField] private FetchType _fetchType;
     private CombatEntity _currentTargetEntity;
@@ -46,12 +45,14 @@ public sealed class BuildingFetch : MonoBehaviour
             _currentTargetEntity = entity;
             _currentTargetEntity.Draggable.PickedUp += StopChase;
 
-            FetchEntity();
+            FetchEntity().Forget();
         }
     }
 
     private void StopChase()
     {
+        if (_currentState != FetchState.Chase) return;
+        
         _currentTargetEntity.Draggable.PickedUp -= StopChase;
         _currentTargetEntity = null;
         
@@ -61,7 +62,7 @@ public sealed class BuildingFetch : MonoBehaviour
     
     private async UniTask FetchEntity()
     {
-        await _draggableConnector.MoveToPerTile(_currentTargetEntity.transform.position, _timePerTile);
+        await _draggableConnector.MoveToPerTile(_currentTargetEntity.transform.position, _chasingTimePerTile);
 
         if (_currentState == FetchState.Chase && _currentTargetEntity)
         {
@@ -70,16 +71,20 @@ public sealed class BuildingFetch : MonoBehaviour
             _currentTargetEntity.Draggable.PickedUp -= StopChase;
             _draggableConnector.PickUpDraggable(_currentTargetEntity.gameObject);
        
-            Vector3 travelDestination = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, GetDesiredPlacementPosition(), position => !TileMap.HasTile(position, _roadLayerSetting));
+            Vector3 travelDestination = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, GetDesiredPlacementPosition(), IsValidPlacementPosition);
                
-            await _draggableConnector.MoveToPerTile(travelDestination, _timePerTile);
+            await _draggableConnector.MoveToPerTile(travelDestination, _draggingTimePerTile);
             
-            Vector3 placementPosition = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, position => !TileMap.HasTile(position, _roadLayerSetting));
+            Vector3 placementPosition = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, IsValidPlacementPosition);
        
             await _draggableConnector.PlaceDraggable(_currentTargetEntity.gameObject, _currentTargetEntity.Draggable, placementPosition);
         }
         
         SetState(FetchState.Idle);
+        
+        return;
+
+        bool IsValidPlacementPosition(Vector2Int position) => !TileMap.HasTile(position, _roadLayerSetting);
     }
     
     private Vector3 GetDesiredPlacementPosition()

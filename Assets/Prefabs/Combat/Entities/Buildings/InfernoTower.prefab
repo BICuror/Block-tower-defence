@@ -489,8 +489,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
   _inspectableObjectName: Inferno tower
-  _inspectableObjectDescription: Deals more damage depending on #Charge, gain #Charge
-    when attacking, reset #Charge when attacking new entity
+  _inspectableObjectDescription: '#Action : damage enemy #com and gain com# #Charge,
+    #com deals more com# damage as it gains #Charge. Reset #Charge #com when damaging
+    new entity com#'
 --- !u!114 &9095846125503527913
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -851,12 +851,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 216911922}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1944573492}
+  m_Father: {fileID: 2063007869}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -10532,7 +10532,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2063007869}
-  - {fileID: 216911923}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -15641,6 +15640,7 @@ RectTransform:
   - {fileID: 1898937329}
   - {fileID: 604882580}
   - {fileID: 1245666823}
+  - {fileID: 216911923}
   m_Father: {fileID: 1944573492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -16720,6 +16720,10 @@ PrefabInstance:
       propertyPath: _navigationMapper
       value: 
       objectReference: {fileID: 474860759}
+    - target: {fileID: 4922954836459062117, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _generateWaterDecorations
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4978693612674667804, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _terrainGenerator
       value: 

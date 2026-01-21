@@ -3495,6 +3495,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TooltipBackgroundBorder
       objectReference: {fileID: 0}
+    - target: {fileID: 3506530089468481344, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 30.6362
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506530089468481344, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 29.0742
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476146511538722913, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7351416873936767910, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3593,6 +3605,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4277484573218830577}
     m_Modifications:
+    - target: {fileID: 997317272469305340, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5761243005574786204, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
       propertyPath: m_Name
       value: CustomStatTooltip (4)
@@ -4155,6 +4171,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TooltipBackgroundBorder
       objectReference: {fileID: 0}
+    - target: {fileID: 3506530089468481344, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 31.432
+      objectReference: {fileID: 0}
+    - target: {fileID: 3506530089468481344, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 29.0048
+      objectReference: {fileID: 0}
+    - target: {fileID: 5476146511538722913, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
+      propertyPath: m_PixelsPerUnitMultiplier
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7351416873936767910, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4366,6 +4394,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4277484573218830577}
     m_Modifications:
+    - target: {fileID: 997317272469305340, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
+      propertyPath: m_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 997317272469305340, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 997317272469305340, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 997317272469305340, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5761243005574786204, guid: 1839d9c29f9043344897164b5b4ce6a0, type: 3}
       propertyPath: m_Name
       value: CustomStatTooltip (1)

@@ -18,7 +18,7 @@ namespace Combat
 
         public void Launch(float speed, Vector3 targetPosition, Vector3 shootingPosition)
         {
-            Rigidbody.velocity = Vector3.zero;
+            Rigidbody.linearVelocity = Vector3.zero;
             transform.position = shootingPosition;
             _trailRenderer.Clear();
 

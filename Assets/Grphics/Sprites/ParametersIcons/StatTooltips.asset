@@ -41,6 +41,7 @@ Material:
     - _ClipRect: {r: -32767, g: -32767, b: 32767, a: 32767}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,9 +54,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
   m_Name: StatTooltips
   m_EditorClassIdentifier: 
-  hashCode: -2039574988
-  material: {fileID: -8587594427616908381}
-  materialHashCode: 0
   m_Version: 1.1.0
   m_FaceInfo:
     m_FaceIndex: 0
@@ -79,6 +77,7 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
+  m_Material: {fileID: -8587594427616908381}
   spriteSheet: {fileID: 2800000, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
@@ -86,236 +85,197 @@ MonoBehaviour:
     m_GlyphIndex: 0
     m_Scale: 1
     m_Name: DamageTooltip
-    m_HashCode: 1159954910
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 1
     m_Scale: 1
     m_Name: MaxHealthTooltip
-    m_HashCode: 709086269
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 2
     m_Scale: 1
     m_Name: BuildTimeTooltip
-    m_HashCode: 1312342358
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 3
     m_Scale: 1
     m_Name: RechargeTooltip
-    m_HashCode: -763806472
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 4
     m_Scale: 1
     m_Name: SpeedTooltip
-    m_HashCode: 1936211026
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 5
     m_Scale: 1
     m_Name: ExplotionRadiusTooltip
-    m_HashCode: 134158399
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 6
     m_Scale: 1
     m_Name: ExplotionDamageTooltip
-    m_HashCode: 756110188
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 7
     m_Scale: 1
     m_Name: ReachTooltip
-    m_HashCode: -217596376
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 8
     m_Scale: 1
     m_Name: MaxStacksTooltip
-    m_HashCode: -984464548
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 9
     m_Scale: 1
     m_Name: OnFire
-    m_HashCode: -1183895367
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 10
     m_Scale: 1
     m_Name: ExplotionDelay
-    m_HashCode: 1276955303
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 11
     m_Scale: 1
     m_Name: Charge
-    m_HashCode: -1624228326
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 12
     m_Scale: 1
     m_Name: MaxDamage
-    m_HashCode: 766405855
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 13
     m_Scale: 1
     m_Name: Invinsibility
-    m_HashCode: 1618584719
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 14
     m_Scale: 1
     m_Name: Crystal
-    m_HashCode: -1986164926
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 15
     m_Scale: 1
     m_Name: MarkIcon
-    m_HashCode: -261512386
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 16
     m_Scale: 1
     m_Name: SlowdownEffectTooltipIcon
-    m_HashCode: -1355534180
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 17
     m_Scale: 1
     m_Name: StackTooltipData
-    m_HashCode: -1081103349
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 18
     m_Scale: 1
     m_Name: MaxEntitiesTooltip
-    m_HashCode: 1728950588
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 19
     m_Scale: 1
     m_Name: ProjectileSpeedTooltip
-    m_HashCode: -2021466265
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 20
     m_Scale: 1
     m_Name: TravelTimeTooltip
-    m_HashCode: 518473112
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 21
     m_Scale: 1
     m_Name: PropogationRangeTooltip
-    m_HashCode: -1985372382
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 22
     m_Scale: 1
     m_Name: PropogationDamageMultiplierTooltip
-    m_HashCode: -505084547
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 23
     m_Scale: 1
     m_Name: PiercingTooltip
-    m_HashCode: -189539944
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 24
     m_Scale: 1
     m_Name: OrbitalSpeedTooltipIcon
-    m_HashCode: 138477302
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 25
     m_Scale: 1
     m_Name: StunTooltipIcon
-    m_HashCode: -1302470334
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 26
     m_Scale: 1
     m_Name: OnHitTooltipIcon
-    m_HashCode: -365534998
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 27
     m_Scale: 1
     m_Name: ActionStatTooltip
-    m_HashCode: -392056103
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 28
     m_Scale: 1
     m_Name: AreaStatTooltip
-    m_HashCode: -150597136
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 29
     m_Scale: 1
     m_Name: ActivationStatTooltip
-    m_HashCode: -654733869
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 30
     m_Scale: 1
     m_Name: SpeedUpEffectTooltip
-    m_HashCode: 1602339552
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 31
     m_Scale: 1
     m_Name: FearEffectTooltip
-    m_HashCode: -1736833646
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 32
     m_Scale: 1
     m_Name: OnKillTooltip
-    m_HashCode: 1675404854
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 33
     m_Scale: 1
     m_Name: PoisonEffectTooltip
-    m_HashCode: 1288261734
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 34
     m_Scale: 1
     m_Name: RechargeUpTooltip
-    m_HashCode: -57251491
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 35
     m_Scale: 1
     m_Name: AOEDamageMultiplierTooltip
-    m_HashCode: 2108415678
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 36
     m_Scale: 1
     m_Name: AOERadiusTooltip
-    m_HashCode: 450542918
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 37
     m_Scale: 1
     m_Name: NonLethalDamageTooltip
-    m_HashCode: 776362953
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 38
     m_Scale: 1
     m_Name: ShieldTooltip
-    m_HashCode: 1447534730
-  m_SpriteGlyphTable:
+  m_GlyphTable:
   - m_Index: 0
     m_Metrics:
       m_Width: 100

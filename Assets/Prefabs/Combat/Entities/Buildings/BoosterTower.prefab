@@ -4785,7 +4785,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &4368075911346124783
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4801,6 +4801,11 @@ ParticleSystemRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
@@ -4822,9 +4827,11 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
+  m_MaskInteraction: 0
   m_RenderMode: 1
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4839,13 +4846,15 @@ ParticleSystemRenderer:
   m_RenderAlignment: 0
   m_Pivot: {x: 0, y: 0.25, z: 0}
   m_Flip: {x: 0, y: 0, z: 0}
-  m_UseCustomVertexStreams: 1
   m_EnableGPUInstancing: 1
   m_ApplyActiveColorSpace: 1
   m_AllowRoll: 1
   m_FreeformStretching: 0
   m_RotateWithStretchDirection: 1
+  m_UseCustomVertexStreams: 1
   m_VertexStreams: 0001030422
+  m_UseCustomTrailVertexStreams: 0
+  m_TrailVertexStreams: 00010304
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
   m_Mesh1: {fileID: 0}
   m_Mesh2: {fileID: 0}
@@ -4854,7 +4863,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0
 --- !u!1 &2538454651727661421
 GameObject:
   m_ObjectHideFlags: 0
@@ -4914,6 +4922,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4935,9 +4948,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &2785648769302265666
 GameObject:
@@ -4959,6 +4974,7 @@ GameObject:
   - component: {fileID: 3699952435439463732}
   - component: {fileID: 5781856286329589189}
   - component: {fileID: -2813065794598741715}
+  - component: {fileID: 292439785402927277}
   m_Layer: 7
   m_Name: BoosterTower
   m_TagString: Draggable
@@ -4979,7 +4995,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4692113273998554922}
+  - {fileID: 7829750370903597977}
   - {fileID: 4358617850810617279}
   - {fileID: 1697840344304186192}
   m_Father: {fileID: 0}
@@ -5012,10 +5028,10 @@ Rigidbody:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2785648769302265666}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Mass: 5
-  m_Drag: 0
-  m_AngularDrag: 0
+  m_LinearDamping: 0
+  m_AngularDamping: 0
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -5181,6 +5197,21 @@ MonoBehaviour:
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &292439785402927277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785648769302265666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5deac325b90aa54eaa65fc7b6904668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _areaEntityDetector: {fileID: 7466747641916913374}
+  _effectTypeName: HasteEffect
+  _effectStaks: 1
 --- !u!1 &6419556192949382454
 GameObject:
   m_ObjectHideFlags: 0
@@ -5212,54 +5243,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1697840344304186192}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6655403260778095858
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4692113273998554922}
-  - component: {fileID: 1693688015593375344}
-  m_Layer: 10
-  m_Name: RechargeUpInArea
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4692113273998554922
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6655403260778095858}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 7829750370903597977}
-  m_Father: {fileID: 8292749062748140239}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1693688015593375344
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6655403260778095858}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5deac325b90aa54eaa65fc7b6904668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _areaEntityDetector: {fileID: 7466747641916913374}
-  _effectTypeName: HasteEffect
-  _effectStaks: 1
 --- !u!1 &7300458605841521785
 GameObject:
   m_ObjectHideFlags: 0
@@ -5315,6 +5298,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5336,9 +5324,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &1128923985784067508
 MeshFilter:
@@ -5424,6 +5414,7 @@ GameObject:
   - component: {fileID: 4630610840962304997}
   - component: {fileID: 3945398497928646573}
   - component: {fileID: 7466747641916913374}
+  - component: {fileID: 197313973711853841}
   m_Layer: 8
   m_Name: AreaController
   m_TagString: Untagged
@@ -5445,7 +5436,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7716149748217318842}
-  m_Father: {fileID: 4692113273998554922}
+  m_Father: {fileID: 8292749062748140239}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4630610840962304997
 BoxCollider:
@@ -5480,13 +5471,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c649f4cda4f6041ae9f368578bdc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoScale: 1
+  _autoScale: 0
+  _height: 100
+  _areaScaleValue: 2
   _overrideAdditionalScaleValue: 0
   _additionalScaleValue: 0.95
-  _areaScaleValue: 2
   _hasVisualisation: 1
-  _visualisationTransform: {fileID: 7716149748217318842}
-  _height: 100
+  _areaVisualisation: {fileID: 197313973711853841}
 --- !u!114 &7466747641916913374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5499,6 +5490,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &197313973711853841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9049865345819857258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
+  _visualisationTransform: {fileID: 7716149748217318842}
+  _height: 100
 --- !u!1001 &761733398712600096
 PrefabInstance:
   m_ObjectHideFlags: 0

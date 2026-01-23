@@ -12,19 +12,31 @@ public sealed class Bomb : WeaponBase
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _canBeExploded;
     private bool _isFree = true;
-
+    
+    [Header("Visualisation")] 
+    [SerializeField] private AreaVisualisation _areaVisualisation;
+    private ExplosionRadius _explosionRadius;
+    
     public bool IsFree => _isFree;
     public DraggableObject DraggableObject => _draggableObject;
     
-    public Action<Bomb> Exploded;
+    public event Action<Bomb> ExplosionStarted;
+    public event Action<Bomb> ExplosionFinished;
     
     protected override void OnInitialized()
     {
         _explosion.Initialize(OwnerEntity);
+
+        _explosionRadius = OwnerEntity.StatContainer.Get<ExplosionRadius>();
+
+        _explosionRadius.ValueChanged += UpdateVisualisationScale;
+        UpdateVisualisationScale(_explosionRadius.Value);
         
         _draggableObject.Placed += StartExplosionAsync;
         _draggableObject.PickedUp += StopExplosion;
     }
+
+    private void UpdateVisualisationScale(float scale) => _areaVisualisation.SetDefaultScale(scale);
     
     public void EnableExplosion() => _canBeExploded = true;
 
@@ -56,11 +68,22 @@ public sealed class Bomb : WeaponBase
     
     private async void Explode()
     {
+        ExplosionStarted?.Invoke(this);
+        
         gameObject.SetActive(false);
         _canBeExploded = false;
         await _explosion.Explode();
-        Exploded?.Invoke(this);
+        
+        ExplosionFinished?.Invoke(this);
         
         _isFree = true;
+    }
+
+    private void OnDestroy()
+    {
+        _explosionRadius.ValueChanged -= UpdateVisualisationScale;
+        
+        _draggableObject.Placed -= StartExplosionAsync;
+        _draggableObject.PickedUp -= StopExplosion;
     }
 }

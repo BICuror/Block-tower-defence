@@ -12,8 +12,8 @@ public sealed class MortarTower : DefaultCombatTaskConditionProvider
     
     private WeaponPool<MortarProjectile> _grenadeObjectPool;
 
-    public readonly OverridableBehaviour<Vector3> CoreLanded = new OverridableBehaviour<Vector3>();
-    public readonly OverridableBehaviour<Transform> CoreLaunched = new OverridableBehaviour<Transform>();
+    public readonly OverridableBehaviour<Vector3> CoreLanded = new();
+    public readonly OverridableBehaviour<Transform> CoreLaunched = new();
 
     private void Start()
     {   

@@ -57,9 +57,9 @@ Material:
     - _Cull: 2
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _FireScale: 10
-    - _FireThreshold: 0.48
-    - _MaskThreshold: 0.83
+    - _FireScale: 8
+    - _FireThreshold: 0.6
+    - _MaskThreshold: 0.84
     - _QueueControl: 0
     - _QueueOffset: 7
     - _SrcBlend: 1
@@ -77,8 +77,8 @@ Material:
     - _ZWriteControl: 0
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _FireColor: {r: 0, g: 0, b: 0, a: 1}
-    - _FireMovementSpeed: {r: 0.1, g: 0.1, b: 0, a: 0}
+    - _FireColor: {r: 1, g: 1, b: 1, a: 1}
+    - _FireMovementSpeed: {r: 0.1, g: 0.06, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7777855418925939922

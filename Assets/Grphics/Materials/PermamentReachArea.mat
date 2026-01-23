@@ -37,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _Texture2DAsset_46a63c8f3e544e55897a00c70b02be65_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: d7c93000b88ca984e9578fd660de1259, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,15 +55,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AlphaCutoffMultiplier: 1
     - _AnimationStrength: 1
     - _EmmisionStrength: 0
-    - _EmmissionStrength: 2
+    - _EmmissionStrength: 1.5
+    - _EmmissionThreshold: 0.92
+    - _FireScale: 1.25
+    - _FireSpeed: -1
+    - _FireThreshold: 0.5
+    - _HeightMultiplier: 1500
     - _NoiseScale: 100
     - _QueueControl: 0
     - _QueueOffset: -2
     - _se: 1.3
     m_Colors:
     - _Color: {r: 1.9072728, g: 0.05235651, b: 0, a: 1}
+    - _PostionMultiplier: {r: 1, g: 9000, b: 0, a: 0}
     - _Speed: {r: 0.025, g: 0.025, b: 0, a: 0}
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

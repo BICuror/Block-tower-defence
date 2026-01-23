@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using Navigation;
 using System;
-using Unity.VisualScripting;
+
 using Random = UnityEngine.Random;
 
 public abstract class NavigationAgentNodePicker

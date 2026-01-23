@@ -29,8 +29,8 @@ public class WaveStateController : MonoBehaviour
 
     public async UniTask TransitionOutOfState()
     {
-        await OnQuitStateStarted();
         QuitStateStarted?.Invoke();
+        await OnQuitStateStarted();
         
         await UniTask.WaitForSeconds(TransitionOutDuration, cancellationToken: this.GetCancellationTokenOnDestroy());
         

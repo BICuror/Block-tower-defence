@@ -2,13 +2,14 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
 using Combat;
+using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
     [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
-    [SerializeField] private AreaVisualisation _areaVisualisation;
+    [FormerlySerializedAs("_areaVisualisation")] [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
     
     private Inspectable _inspectable;
@@ -79,7 +80,7 @@ public class InspectorController : MonoBehaviour
         _inspectable = inspectable;
         _inspectable.SetInspectedState(true);
 
-        _areaVisualisation.ActivateVisualisation(_inspectable.gameObject);
+        _areaVisualisationInspector.ActivateVisualisation(_inspectable.gameObject);
         
         _inspectionTooltipManager.DisableActiveSinglePopup();
         
@@ -102,7 +103,7 @@ public class InspectorController : MonoBehaviour
 
         if (inspectable)
         {
-            _areaVisualisation.DeactivateVisualisation(inspectable.gameObject);
+            _areaVisualisationInspector.DeactivateVisualisation(inspectable.gameObject);
             inspectable.SetInspectedState(false);
         }
         

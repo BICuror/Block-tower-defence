@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DamageArea
+  m_Name: BombExplosionArea
   m_Shader: {fileID: -6465566751694194690, guid: 2e18052e4de14be499b03490ee1587ef, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,6 +37,18 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BackgroundTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HealthBarShape:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
+        m_Texture: {fileID: 2800000, guid: acb8e66ff311bb64688833246013f115, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -51,12 +63,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - Health: 0.48
+    - HealthDifference: 0.78
+    - _EdgeRadius: 1
     - _EmmisionStrength: 0
     - _QueueControl: 0
     - _QueueOffset: -2
-    - _se: 0.52
+    - _se: 0.1
     m_Colors:
-    - _Color: {r: 3.9999995, g: 0, b: 0.042139046, a: 1}
+    - _BackgroundColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}
+    - _Color: {r: 0, g: 3.2421184, b: 3.9999995, a: 1}
+    - _HealthDifferenceColor: {r: 1, g: 1, b: 1, a: 0}
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

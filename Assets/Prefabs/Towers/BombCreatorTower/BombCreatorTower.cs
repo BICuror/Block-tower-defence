@@ -6,14 +6,16 @@ using Combat;
 
 public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
 {
+    [SerializeField] private Bomb _bombPrefab;
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private DraggableCreator _draggableCreator;
-    [SerializeField] private Bomb _bombPrefab;
     [Cached] private MaxEntities _maxEntities;
     [Cached] private BuildingEntity _ownerEntity;
     [Cached] private TaskCycle _taskCycle;
     private List<Bomb> _createdBombs = new();
     private WeaponPool<Bomb> _bombPool;
+    
+    public readonly OverridableBehaviour<Vector3> BombExploded = new();
 
     public int ActiveBombs => _createdBombs.Count;
     
@@ -22,6 +24,8 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         _bombPool = new WeaponPool<Bomb>(_bombPrefab, 5, _ownerEntity, isFreeElement: IsFreeBomb);
         _taskCycle.TaskPerformed += CreateBomb;
         _waveStateMachine.StateStarted += HandleWaveStateChange;
+        
+        BombExploded.Initialize(_ownerEntity);
     }
 
     private void HandleWaveStateChange(WaveState waveState)
@@ -47,7 +51,10 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     public async void CreateBomb()
     {
         Bomb bomb = _bombPool.GetPooledWeapon();
-        bomb.Exploded += RemoveDisabledBomb;
+        
+        bomb.ExplosionStarted += InvokeBombExploded;
+        bomb.ExplosionFinished += RemoveDisabledBomb;
+        
         _createdBombs.Add(bomb);
         
         bomb.gameObject.SetActive(false);
@@ -57,9 +64,13 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         bomb.EnableExplosion();
     }
 
+    private void InvokeBombExploded(Bomb bomb) => BombExploded.Execute(bomb.transform.position);
+
     private void RemoveDisabledBomb(Bomb bomb)
     {
-        bomb.Exploded -= RemoveDisabledBomb;
+        bomb.ExplosionStarted -= InvokeBombExploded;
+        bomb.ExplosionFinished -= RemoveDisabledBomb;
+        
         _createdBombs.Remove(bomb);
         _taskCycle.TryCycle();
     }

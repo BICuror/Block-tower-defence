@@ -25,7 +25,7 @@ namespace Combat
         public float GetMaxHp() => _maxHealth;
         public float GetHp() => _currentHp;
         public float GetHpPercent() => _currentHp / _maxHealth;
-        public bool IsAlive() => _currentHp > 0;
+        public bool IsAlive() => _currentHp > 0f;
         public bool IsFullHp() => _currentHp == _maxHealth;
 
         private void ClampCurrentHpByMax()

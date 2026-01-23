@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using System.Data;
+using System;
 
 public class Stat
 {
@@ -21,8 +21,8 @@ public class Stat
     public int RoundedValue => _roundedValue;
     public bool IsModified => _statModifiers.Count > 0 || _flat != 0 || _multiplier != 1f;
 
-    public Action<float> ValueChanged;
-    public Action<int> RoundedValueChanged;
+    public event Action<float> ValueChanged;
+    public event Action<int> RoundedValueChanged;
 
     public void Reset()
     {

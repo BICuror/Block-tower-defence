@@ -19,7 +19,7 @@ public sealed class ArtilleryTarget : WeaponBase
         OwnerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += TryDamageAllEnemiesInArea;
         OwnerEntity.ComponentsContainer.Get<AreaManager>().AddAreaScanerController(_areaScanerController);
         
-        _areaScanerController.SubscribeToHoverable(OwnerEntity.ComponentsContainer.Get<HoverableObject>());
+        _areaScanerController.AreaVisualisation.SubscribeToHoverable(OwnerEntity.ComponentsContainer.Get<HoverableObject>());
     }
 
     private void TryDamageAllEnemiesInArea()
@@ -42,6 +42,6 @@ public sealed class ArtilleryTarget : WeaponBase
         
         OwnerEntity.ComponentsContainer.Get<AreaManager>().RemoveAreaScanerController(_areaScanerController);
         OwnerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed -= TryDamageAllEnemiesInArea;
-        _areaScanerController.UnsubscribeFromHoverable(OwnerEntity.ComponentsContainer.Get<HoverableObject>());
+        _areaScanerController.AreaVisualisation.UnsubscribeFromHoverable(OwnerEntity.ComponentsContainer.Get<HoverableObject>());
     }
 }

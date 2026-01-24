@@ -8,6 +8,8 @@ public sealed class EntryPoint : MonoBehaviour
 
     private void Start()
     {
+        Application.runInBackground = true;
+        
         _islandGenerator.GenerateIsland();
 
         _waveManager.TransitionIntoIdle();

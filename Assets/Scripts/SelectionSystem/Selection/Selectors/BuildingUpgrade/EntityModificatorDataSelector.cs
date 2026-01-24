@@ -1,9 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Zenject;
 using Combat;
 using System;
-using Zenject;
+
 using Random = UnityEngine.Random;
 
 public sealed class EntityModificatorDataSelector : MonoBehaviour
@@ -16,7 +17,12 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     public List<EntityModificatorData> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
     {
         List<EntityModificatorData> resultEffectDatas = new();
-        List<EntityModificatorData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificatorsContainer>().AvailableModificators.FindAll(modificator => CheckTagRequirements(modificator, entity));
+        
+        List<EntityModificatorData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificatorsContainer>().AvailableModificators.FindAll(modificator =>
+        {
+            return CheckStacksRequirements(modificator, entity) && CheckTagRequirements(modificator, entity);
+        });
+        
         List<EntityModifcationRarity> droppedRarities = new();
 
         for (int i = 0; i < amount; i++)
@@ -43,6 +49,20 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
 
         return resultEffectDatas;
     }
+
+    #region UniquieTagCheck
+
+    private bool CheckStacksRequirements(EntityModificatorData modificatorData, BuildingEntity entity)
+    {
+        if (modificatorData.HasStacks)
+        {
+            return entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count(appliedModificatorData => appliedModificatorData == modificatorData) <= modificatorData.MaxStacks;
+        }
+
+        return true;
+    }
+
+    #endregion
 
     #region TagRequirementsCheck
 

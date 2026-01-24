@@ -31,7 +31,7 @@ namespace Navigation
         private NavigationNode _endNode;
         private NavigationNode _nextNode;
         private float _movementProgress;
-        private bool _isEnabled;
+        private bool _canMove;
 
         private List<Vector2Int> _checkDirection = new List<Vector2Int>()
         {
@@ -49,7 +49,7 @@ namespace Navigation
 
         public void Disable()
         {
-            _isEnabled = false;
+            SetMovementAbilityState(false);
             StopMovement();
         }
 
@@ -57,10 +57,12 @@ namespace Navigation
         {
             if (!_entityHealth.IsAlive()) return;
             
-            _isEnabled = true;
+            SetMovementAbilityState(true);
             Initialize();
             TravelToEndNode().Forget(); 
         }
+
+        public void SetMovementAbilityState(bool state) => _canMove = state;
 
         public void SetAgentData(NavigationAgentData agentData)
         {
@@ -122,15 +124,19 @@ namespace Navigation
             _endNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, currentRoundedPosition);
             _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
         }
-        
+
         private async UniTask TravelToEndNode()
         {
-            _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position); 
-            _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _nextNode.Position);
-            
-            float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) * _speed.Value;
+            _movementModule.SetDestanation(
+                new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position);
+            _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z),
+                _nextNode.Position);
+
+            float duration =
+                Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) *
+                _speed.Value;
             float elapsedTime = duration * _movementProgress;
-            
+
             while (elapsedTime < duration)
             {
                 elapsedTime += Time.fixedDeltaTime;
@@ -144,7 +150,7 @@ namespace Navigation
                 {
                     await UniTask.WaitForFixedUpdate(_movementCancellationTokenSource.Token);
 
-                    if (!_isEnabled) return;
+                    if (!_canMove) await UniTask.WaitUntil(() => _canMove, cancellationToken: _movementCancellationTokenSource.Token);
                 }
                 catch (Exception e)
                 {
@@ -158,7 +164,7 @@ namespace Navigation
             IterateToNextNode();
             TravelToEndNode().Forget();
         }
-        
+
         private void IterateToNextNode()
         {
             _startNode = _endNode;

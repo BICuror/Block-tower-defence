@@ -12,6 +12,8 @@ namespace Combat
         private ExplosionDamage _explosionDamage;
         private ExplosionRadius _explosionRadius;
 
+        public float ExplosionRadius => _explosionRadius.Value * _defaultRadius + 0.5f;
+        
         protected override void OnInitialized()
         {
             _explosionRadius = OwnerEntity.StatContainer.Get<ExplosionRadius>();
@@ -22,7 +24,7 @@ namespace Combat
         {
             UpdateExplotionRadius(_explosionRadius.Value);
             
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _explosionRadius.Value * _defaultRadius + 0.5f, _enemyLayerSettings.GetLayerMask());
+            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, ExplosionRadius, _enemyLayerSettings.GetLayerMask());
 
             for (int i = 0; i < hitEnemies.Length; i++)
             {
@@ -43,7 +45,7 @@ namespace Combat
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(transform.position, _defaultRadius);
+            Gizmos.DrawSphere(transform.position, ExplosionRadius);
         }
 #endif
     }

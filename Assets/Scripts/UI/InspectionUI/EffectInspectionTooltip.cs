@@ -12,13 +12,10 @@ public sealed class EffectInspectionTooltip : PointFollowingCanvasUIElement
     [SerializeField] private TooltipDataParser _tooltipDataParser;
     [SerializeField] private InspectionSubpanelsController _inspectionSubpanelsController;
 
-    [Header("TooltipDataParsing")] 
-    [SerializeField] private string _additionalFrontText;
-
     public async UniTask SetSelectionOptionObject(SelectionOptionObject selectionOptionObject)
     {
         _nameTextField.text = selectionOptionObject.OptionName;
-        _descriptionTextField.text = _additionalFrontText + _tooltipTextParser.ParseTooltipText(selectionOptionObject.OptionDescription, false);
+        _descriptionTextField.text = _tooltipTextParser.ParseTooltipText(selectionOptionObject.OptionDescription, false);
         _effectIcon.sprite = selectionOptionObject.Icon;
         
         _inspectionSubpanelsController.SetTooltipParser(_tooltipDataParser.GetTooltipTagDataFromText(selectionOptionObject.OptionDescription));

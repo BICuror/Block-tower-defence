@@ -37,8 +37,12 @@ namespace Combat
         }
 
         private void HandleDeathEvent()
-        { 
-            if (_destroyOnDeath) Destroy(gameObject);
+        {
+            if (_destroyOnDeath)
+            {
+                _health.Died -= HandleDeathEvent;
+                Destroy(gameObject);
+            }
             else gameObject.SetActive(false);
         }
     }

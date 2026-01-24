@@ -255,6 +255,7 @@ GameObject:
   - component: {fileID: 3354604315405458024}
   - component: {fileID: 4251695319219893265}
   - component: {fileID: 387947996207613839}
+  - component: {fileID: 7036865070818702045}
   m_Layer: 13
   m_Name: Bomb
   m_TagString: Draggable
@@ -344,6 +345,7 @@ MonoBehaviour:
   _draggableObject: {fileID: 3354604315405458024}
   _explosion: {fileID: 4251695319219893265}
   _areaVisualisation: {fileID: 387947996207613839}
+  _hoverableObject: {fileID: 7036865070818702045}
 --- !u!114 &3354604315405458024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -388,6 +390,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SphereAreaVisualisation
   _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
   _visualisationTransform: {fileID: 1291620564571830285}
+--- !u!114 &7036865070818702045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4855757104867912901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2506de17630a8ce46839a011abf7cc15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableObject
+  HoverEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6879252739597245584
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +421,7 @@ GameObject:
   - component: {fileID: 8918537037705862874}
   - component: {fileID: 5617128095792407976}
   - component: {fileID: 9108805637636712074}
+  - component: {fileID: 8398281275179816001}
   m_Layer: 13
   m_Name: BombVisuals
   m_TagString: Untagged
@@ -512,6 +533,27 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &8398281275179816001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6879252739597245584}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakeDatas:
+  - ShakeType: 1
+    Duration: 0.2
+    Strength: 3.5
+  - ShakeType: 0
+    Duration: 0.2
+    Strength: 0.05
+  _mesh: {fileID: 8341539101824377502}
+  _hoverableObject: {fileID: 7036865070818702045}
 --- !u!1 &7924824049615522155
 GameObject:
   m_ObjectHideFlags: 0

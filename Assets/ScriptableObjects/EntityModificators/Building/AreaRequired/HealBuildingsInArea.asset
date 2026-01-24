@@ -23,6 +23,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
@@ -62,10 +63,11 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 6018946194359616491, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
       _layerSetting: {fileID: 0}
-  _rarity: 1
+  _rarity: 2
   _tags: 00000000
   _effectType: 0
-  _isUnique: 1
+  _hasStacks: 0
+  _maxStacks: 0
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

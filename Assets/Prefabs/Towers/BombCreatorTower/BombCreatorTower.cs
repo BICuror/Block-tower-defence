@@ -22,27 +22,19 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     private void Start()
     {
         _bombPool = new WeaponPool<Bomb>(_bombPrefab, 5, _ownerEntity, isFreeElement: IsFreeBomb);
+        
         _taskCycle.TaskPerformed += CreateBomb;
-        _waveStateMachine.StateStarted += HandleWaveStateChange;
+        _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted += ExplodeAllBombs;
+        _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted += _taskCycle.TryCycle;
         
         BombExploded.Initialize(_ownerEntity);
     }
-
-    private void HandleWaveStateChange(WaveState waveState)
+    
+    private void ExplodeAllBombs()
     {
-        if (waveState == WaveState.Attack)
+        foreach (Bomb bomb in _bombPool.Pool)
         {
-            _taskCycle.TryCycle();
-        }
-        else
-        {
-            for (int i = 0; i < _bombPool.Pool.Count; i++)
-            {
-                if (_bombPool.Pool[i].DraggableObject.IsPlaced)
-                {
-                    _bombPool.Pool[i].StartExplosionAsync();
-                }
-            }
+            if (bomb.DraggableObject.IsPlaced) bomb.StartExplosionAsync();
         }
     }
     
@@ -82,6 +74,8 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
     private void OnDestroy()
     {
         _bombPool.DestroyPool();
-        _waveStateMachine.StateStarted -= HandleWaveStateChange;
+        
+        _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted -= ExplodeAllBombs;
+        _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted -= _taskCycle.TryCycle;
     } 
 }

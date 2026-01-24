@@ -15,7 +15,8 @@ public class EntityModificatorData : ScriptableObject
     [SerializeField] private EntityModifcationRarity _rarity;
     [SerializeField] private List<EntityModifcatorTag> _tags;
     [SerializeField] private EffectType _effectType;
-    [SerializeField] private bool _isUnique;
+    [SerializeField] private bool _hasStacks;
+    [AllowNesting] [ShowIf("_hasStacks")] [SerializeField] private int _maxStacks = 1;
 
     [Header("RequiredTags")]
     [SerializeField] private bool _hasRequiredTags;
@@ -41,7 +42,8 @@ public class EntityModificatorData : ScriptableObject
     public EffectType EffectType => _effectType;
     public EntityModifcationRarity Rarity => _rarity;
     public List<EntityModifcatorTag> Tags => _tags;
-    public bool IsUnique => _isUnique;
+    public bool HasStacks => _hasStacks;
+    public int MaxStacks => _maxStacks;
     public bool ShowInInspector => _showInInspector;
     public bool CreateIcon => _createIcon;
     [CustomAssetIcon] public Sprite Icon => _icon;

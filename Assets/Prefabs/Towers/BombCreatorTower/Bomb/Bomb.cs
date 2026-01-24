@@ -15,6 +15,7 @@ public sealed class Bomb : WeaponBase
     
     [Header("Visualisation")] 
     [SerializeField] private AreaVisualisation _areaVisualisation;
+    [SerializeField] private HoverableObject _hoverableObject;
     private ExplosionRadius _explosionRadius;
     
     public bool IsFree => _isFree;
@@ -27,16 +28,16 @@ public sealed class Bomb : WeaponBase
     {
         _explosion.Initialize(OwnerEntity);
 
-        _explosionRadius = OwnerEntity.StatContainer.Get<ExplosionRadius>();
-
-        _explosionRadius.ValueChanged += UpdateVisualisationScale;
-        UpdateVisualisationScale(_explosionRadius.Value);
+        OwnerEntity.StatContainer.Get<ExplosionRadius>().ValueChanged += UpdateVisualisationScale;
+        UpdateVisualisationScale(_explosion.ExplosionRadius);
+        
+        _areaVisualisation.SubscribeToHoverable(_hoverableObject);
         
         _draggableObject.Placed += StartExplosionAsync;
         _draggableObject.PickedUp += StopExplosion;
     }
 
-    private void UpdateVisualisationScale(float scale) => _areaVisualisation.SetDefaultScale(scale);
+    private void UpdateVisualisationScale(float _) => _areaVisualisation.SetDefaultScale(_explosion.ExplosionRadius * 2f);
     
     public void EnableExplosion() => _canBeExploded = true;
 

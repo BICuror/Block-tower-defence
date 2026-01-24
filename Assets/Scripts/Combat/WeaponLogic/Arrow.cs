@@ -5,7 +5,6 @@ namespace Combat
 {
     public sealed class Arrow : Weapon
     {
-        [SerializeField] private TrailRenderer _trailRenderer;
         [SerializeField] private VisualEffectHandler _visualEffectHandler;
         private Damage _damage;
 
@@ -20,7 +19,6 @@ namespace Combat
         {
             Rigidbody.linearVelocity = Vector3.zero;
             transform.position = shootingPosition;
-            _trailRenderer.Clear();
 
             transform.LookAt(targetPosition);
 
@@ -40,8 +38,7 @@ namespace Combat
         public void DisableArrow()
         {
             _visualEffectHandler.PlayBurstEffectAndForget();
-            
-            Disable();
+            SetState(false);
         }
     }
 }

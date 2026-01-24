@@ -7,6 +7,7 @@ using UnityEngine;
 public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
 {
     [SerializeField] private RectTransform _rectTransform;
+    [SerializeField] private RectTransform _mainPanelRectTransform;
     
     [Header("Positioning")]
     [SerializeField] private List<RectTransform> _subPanels;
@@ -86,6 +87,8 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent as RectTransform, targetScreenPosition, null, out Vector2 resultPoint);
 
         Vector2 preferredUIPosition = resultPoint + _offset;
+
+        if (_mainPanelRectTransform) preferredUIPosition.x += _mainPanelRectTransform.sizeDelta.x / 2f - (_rectTransform.sizeDelta.x / 2f);
         
         Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(_pointFollowingElementOffsetContainer, preferredUIPosition);
         

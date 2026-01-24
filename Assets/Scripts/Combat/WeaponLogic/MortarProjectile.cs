@@ -40,7 +40,7 @@ namespace Combat
             }
 
             Collider.enabled = false;
-            Disable();
+            SetState(false);
         }
 
         private void OnTriggerEnter(Collider other)

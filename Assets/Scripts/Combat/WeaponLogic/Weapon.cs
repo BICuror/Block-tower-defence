@@ -23,30 +23,21 @@ namespace Combat
         
         #region StateManagements
 
-        protected void OnEnable() => Enable();
-        protected void OnDisable() => StopLifetimeTrack();
+        protected void OnEnable() => SetState(true);
         
-        public void Enable()
-        {
-            StopLifetimeTrack();
-            StartLifetimeTrack();
-            SetState(true);
-        }
-        
-        public void Disable()
-        {
-            SetState(false);
-        }
+        protected void OnDisable() => SetState(false);
         
         private async UniTask StartLifetimeTrack()
         {
+            StopLifetimeTrack();
+            
             _cancellationTokenSource = new();
             _lifetimeTrackActive = true;
             
             try
             { 
                 await UniTask.WaitForSeconds(_lifetime, cancellationToken: _cancellationTokenSource.Token); 
-                Disable();
+                SetState(false);
             }
             catch (Exception e) { e.LogAsync(); }
 
@@ -61,12 +52,17 @@ namespace Combat
             _lifetimeTrackActive = false;
         }
         
-        private void SetState(bool state)
+        protected void SetState(bool state)
         {
             if (!gameObject) return;
             
             Collider.enabled = state;
             gameObject.SetActive(state);
+            
+            if (state == gameObject.activeSelf) return;
+            
+            if (state) StartLifetimeTrack().Forget();
+            else StopLifetimeTrack();
         }
 
         private void OnDestroy() => StopLifetimeTrack();

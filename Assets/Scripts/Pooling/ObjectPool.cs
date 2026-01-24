@@ -47,11 +47,11 @@ public sealed class ObjectPool<T> where T : Component
         }
     }
 
-    public T GetNextPooledObject()
+    public T GetNextPooledObject(bool enableObject = true)
     {
         if (HasFreeElement(out T element))
         {
-            element.gameObject.SetActive(true);
+            element.gameObject.SetActive(enableObject);
 
             return element;
         }

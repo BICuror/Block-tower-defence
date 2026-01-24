@@ -1,3 +1,5 @@
+using System;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 
@@ -17,11 +19,10 @@ namespace WorldGeneration
         
         private IslandData _islandData => _islandDataContainer.Data;
 
+        [Button] 
         public void GenerateIsland()
         {
-            GenerateNewSeeds();
-
-            GetHeightMap();
+            GenerateNewSeedsAndHeightMap();
 
             ConvertHeightMapToBlockGrid();
 
@@ -32,18 +33,25 @@ namespace WorldGeneration
             CreateEnviroment();
         }
 
-        private void GenerateNewSeeds()
+        private void GenerateNewSeedsAndHeightMap()
         {
-            RandomExstentions.ReInitializeUnityRandom();
+            for (int i = 0; i < 1000; i++)
+            {
+                RandomExstentions.ReInitializeUnityRandom();
+                
+                _heightMapGenerator.GenerateNewSeed();
+    
+                _biomeMapGenerator.GenerateNewSeed();
+
+                if (_heightMapGenerator.TryGenerateHeightMap(_biomeMapGenerator, out int[,] heightMap))
+                {
+                    _islandHeightMapHolder.SetMap(heightMap);
+                    
+                    return;
+                }
+            }
             
-            _heightMapGenerator.GenerateNewSeed();
-
-            _biomeMapGenerator.GenerateNewSeed();
-        }
-
-        private void GetHeightMap()
-        {
-            _islandHeightMapHolder.SetMap(_heightMapGenerator.GenerateHeightMap(_biomeMapGenerator));
+            throw new Exception("Failed to generate heightmap due to min and max solid tiles setting");
         }
         
         private void ConvertHeightMapToBlockGrid()

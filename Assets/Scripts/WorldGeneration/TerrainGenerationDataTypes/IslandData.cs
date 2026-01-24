@@ -61,7 +61,11 @@ namespace WorldGeneration
         public int AmountOfRoadNodes => _amountOfRoadNodesBetweenCenterAndEdge * 2 + 3;
         public int CenterRoadNode => _amountOfRoadNodesBetweenCenterAndEdge + 2;
 
-        [Header("GeneralIslandSettings")][Space] 
+        [Header("GeneralIslandSettings")] [Space] 
+        [Range(0f, 1f)] [SerializeField] private float _minimalSolidTilesPercent;
+        public float MinimalSolidTilesPercent => _minimalSolidTilesPercent;
+        [Range(0f, 1f)] [SerializeField] private float _maxSolidTilesPercent;
+        public float MaxSolidTilesPercent => _maxSolidTilesPercent;
         [SerializeField] private int _islandRadius;
         public int IslandSize => _islandRadius * 2 + 1;
         public int IslandRadius => _islandRadius;

@@ -29,7 +29,7 @@ namespace WorldGeneration
             _heightSeed = new Vector2(Random.Range(-100000f, 100000f), Random.Range(-100000f, 100000f));
         }
 
-        public int[,] GenerateHeightMap(BiomeMapGenerator biomeMapGenerator)
+        public bool TryGenerateHeightMap(BiomeMapGenerator biomeMapGenerator, out int[,] roundedHeightMap)
         {
             _biomeMapGenerator = biomeMapGenerator;
 
@@ -51,13 +51,13 @@ namespace WorldGeneration
 
             if (_islandData.IslandSmoothingType != IslandData.SmoothingType.None) heightMap = SmoothHeightMap(heightMap);
 
-            int[,] roundedHeightMap = TransformHeightMapToInt(heightMap);
+            roundedHeightMap = TransformHeightMapToInt(heightMap);
 
             ClearSingleBlocks(roundedHeightMap);
 
             _heightMap = roundedHeightMap;
 
-            return roundedHeightMap;
+            return IsValidHeightMap(roundedHeightMap);
         }
 
         private float GetHeight(Vector2Int position)
@@ -277,6 +277,25 @@ namespace WorldGeneration
             }
 
             return heightMap;
+        }
+
+        private bool IsValidHeightMap(int[,] heightMap)
+        {
+            int size = heightMap.GetLength(0);
+
+            float solidTilesCount = 0;
+            
+            for (int x = 0; x < size; x++)
+            {
+                for (int z = 0; z < size; z++)
+                {
+                    if (heightMap[x, z] > 0) solidTilesCount++;
+                }
+            }
+            
+            float solidTilesPercent = solidTilesCount / (size * size);
+            
+            return solidTilesPercent >= _islandData.MinimalSolidTilesPercent && solidTilesPercent <= _islandData.MaxSolidTilesPercent;
         }
     }
 }

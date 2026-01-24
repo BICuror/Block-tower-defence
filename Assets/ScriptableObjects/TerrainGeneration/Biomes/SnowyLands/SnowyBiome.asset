@@ -27,6 +27,8 @@ MonoBehaviour:
   _spawnerPositionValidator: {fileID: 11400000, guid: 17cc441cdf3207f4884e2a5ca7538876, type: 2}
   _roadMapGenerationAlgorithm: {fileID: 11400000, guid: 9dfc053a9ae51354c961d7e7e507b6a6, type: 2}
   _amountOfRoadNodesBetweenCenterAndEdge: 1
+  _minimalSolidTilesPercent: 0.45
+  _maxSolidTilesPercent: 0.65
   _islandRadius: 14
   _islandMaxHeight: 40
   _islandHeightOffset: 5

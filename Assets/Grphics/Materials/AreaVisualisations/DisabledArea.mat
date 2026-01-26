@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: InvisibilityArea
+  m_Name: DisabledArea
   m_Shader: {fileID: -6465566751694194690, guid: 2e18052e4de14be499b03490ee1587ef, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -66,13 +66,13 @@ Material:
     - Health: 0.48
     - HealthDifference: 0.78
     - _EdgeRadius: 1
-    - _EmmisionStrength: 0.54
+    - _EmmisionStrength: 0
     - _QueueControl: 0
     - _QueueOffset: -2
-    - _se: 0.52
+    - _se: 0.1
     m_Colors:
     - _BackgroundColor: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 0}
-    - _Color: {r: 3.9999995, g: 3.9357493, b: 0, a: 1}
+    - _Color: {r: 3.9999995, g: 0.037256245, b: 0, a: 1}
     - _HealthDifferenceColor: {r: 1, g: 1, b: 1, a: 0}
     - _Vector2: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []

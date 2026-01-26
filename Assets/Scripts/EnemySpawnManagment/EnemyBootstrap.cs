@@ -28,7 +28,7 @@ namespace Combat
             _enemyHealth.Died += OnEnemyDeath;
         }
         
-        public void SetEnemyData(EnemyData enemyDataToSet, bool initializeNavigation = true, bool initializeSpecialObjects = true)
+        public void SetEnemyData(EnemyData enemyDataToSet, bool initializeNavigation = true, bool initializeModificators = true)
         {
             _enemyData = enemyDataToSet;
 
@@ -40,7 +40,11 @@ namespace Combat
             
             _inspectable.SetInspectableData(enemyDataToSet.Name, enemyDataToSet.Description);
 
-            if (initializeSpecialObjects) CreateSpecialObject();
+            if (initializeModificators)
+            {
+                TryCreateSpecialObjects();
+                TryApplyEntityModificators();
+            }
             
             if (initializeNavigation)
             {
@@ -76,21 +80,42 @@ namespace Combat
             gpuInstanceEnabler.EnableGPUInstancing();
         }
     
-        private void CreateSpecialObject()
+        private void TryCreateSpecialObjects()
         {
-            if (_enemyData.HasObjectModificators)
+            if (!_enemyData.HasObjectModificators) return;
+            
+            _enemyData.ObjectModificators.ForEach(additionalObjectPrefab =>
             {
-                _enemyData.ObjectModificators.ForEach(additionalObjectPrefab =>
-                {
-                    _entityObjectModificatorContainer.InstantiateAndAddModificator(additionalObjectPrefab);
-                });
-            }
+                _entityObjectModificatorContainer.InstantiateAndAddModificator(additionalObjectPrefab);
+            });
+        }
+
+        private void TryApplyEntityModificators()
+        {
+            if (!_enemyData.HasEntityModificators) return;
+            
+            _enemyData.EntityModificatorDatas.ForEach(entityModificatorData =>
+            {
+                _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(entityModificatorData);
+            });
+        }
+
+        private void TryRemoveEntityModificators()
+        {
+            if (!_enemyData.HasEntityModificators) return;
+            
+            _enemyData.EntityModificatorDatas.ForEach(entityModificatorData =>
+            {
+                _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(entityModificatorData);
+            });
         }
 
         private void OnEnemyDeath()
         {
             _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
             _entityObjectModificatorContainer.DestroyAllModificators();
+            TryRemoveEntityModificators();
+            
             _navMeshAgent.Disable();
         }
 

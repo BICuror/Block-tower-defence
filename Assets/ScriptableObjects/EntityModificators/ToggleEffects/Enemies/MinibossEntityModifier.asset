@@ -20,11 +20,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -39,6 +42,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -55,11 +59,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -74,6 +81,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -90,11 +98,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -109,6 +120,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -134,7 +146,8 @@ MonoBehaviour:
   _rarity: 0
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -146,6 +159,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _showInInspector: 1
   _createIcon: 1
   _icon: {fileID: -1860937847, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _modificatorName: Last standing

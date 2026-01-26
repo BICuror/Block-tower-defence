@@ -10,22 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: MaxHealthDecrease
+  m_Name: SpawnEggOnDeath
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: EntityModificatorStatChange
+  - _itemTypeName: CreateEggOnDeath
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -51,12 +53,23 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
-    _argumentItems: []
+    _argumentItems:
+    - _argumentType: 2
+      _argumentName: EnemyEggPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2935730226360874662, guid: 84a386ac490950542b0f98e5fa5c2cfd, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 
-  _effectType: 1
+  _effectType: 0
   _hasStacks: 0
-  _maxStacks: 1
+  _maxStacks: 0
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -68,12 +81,10 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
+  _showInInspector: 0
   _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Hp down
-  _modificatorDescription: '#bad -20% bad# #MaxHealth'
-  _statChanges:
-  - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
-    FlatChange: 0
-    MultiplierChange: 0.2
+  _icon: {fileID: 473409037, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _modificatorName: Repentance
+  _modificatorDescription: On death #com create com# egg that spawns same enemy after
+    #SpawnDelay unless #bad killed bad#
+  _statChanges: []

@@ -37,10 +37,11 @@ public sealed class EntityModificatorStatChange : EntityModificator
                 StatModifier modifier = new StatModifier();
                 
                 _modifiers.Add(statType, modifier);
-                Entity.StatContainer.Get(statType).AddStatModifier(modifier);
                 
                 modifier.SetFlat(statChange.FlatChange);
                 modifier.SetMultiplier(statChange.MultiplierChange);
+                
+                Entity.StatContainer.Get(statType).AddStatModifier(modifier);
             }
         });
     }

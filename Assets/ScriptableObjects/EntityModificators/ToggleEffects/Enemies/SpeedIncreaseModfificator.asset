@@ -9,22 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: SpeedIncreaseWhenFullHp
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: SpeedIncreaseModfificator
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: MoreSpeedWhenFullHp
+  - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -39,6 +42,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -49,22 +53,12 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 1
-      _argumentName: SpeedMultiplier
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0.25
-      _stringArgument: InvincibilityEffect
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-  _rarity: 1
+    _argumentItems: []
+  _rarity: 0
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 0
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -76,7 +70,12 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 0}
-  _modificatorName: Additional legs
-  _modificatorDescription: '#bad +20% bad# #Speed when full #MaxHealth'
+  _modificatorName: Speed up
+  _modificatorDescription: '#bad +20% bad# #Speed'
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 88a57a3c7a16ca241abdc99cfc33c832, type: 2}
+    FlatChange: 0
+    MultiplierChange: -0.2

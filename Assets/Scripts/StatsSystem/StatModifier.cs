@@ -8,7 +8,7 @@ public sealed class StatModifier
     public float Flat => _flat;
     public float Multiplier => _multiplier;
     
-    public Action ModifierChanged;
+    public event Action ModifierChanged;
 
     public StatModifier(float flat = 0, float multiplier = 0)
     {
@@ -20,13 +20,13 @@ public sealed class StatModifier
     {
         _multiplier = value;
         
-        ModifierChanged.Invoke();
+        ModifierChanged?.Invoke();
     }
 
     public void SetFlat(float value)
     {
         _flat = value;
         
-        ModifierChanged.Invoke();
+        ModifierChanged?.Invoke();
     }
 }

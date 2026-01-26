@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: ContactDamageIncrease
+  m_Name: DamageDownWhenNotFullHP
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: EntityModificatorStatChange
+  - _itemTypeName: ApplyEntityModificatorIfNotFullHP
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
@@ -51,12 +52,23 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
   _argumentsContainer:
-    _argumentItems: []
-  _rarity: 0
+    _argumentItems:
+    - _argumentType: 3
+      _argumentName: EntityModificatorData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 11400000, guid: b811e2ec6b8129043a593f124abef1c3, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+  _rarity: 2
   _tags: 
-  _effectType: 0
+  _effectType: 1
   _hasStacks: 0
-  _maxStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -70,10 +82,8 @@ MonoBehaviour:
     Requirements: []
   _showInInspector: 1
   _createIcon: 0
-  _icon: {fileID: 473409037, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _modificatorName: Bigger guns
-  _modificatorDescription: '#good +100% good# #ContactDamage'
-  _statChanges:
-  - StatData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
-    FlatChange: 0
-    MultiplierChange: 1
+  _icon: {fileID: 0}
+  _modificatorName: Damage decrease
+  _modificatorDescription: '#bad -30% bad# #Damage #com & com# #bad -30% bad# #ExplosionDamage
+    when not full HP'
+  _statChanges: []

@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Navigation;
 
 public sealed class FearEffect : EntityEffect
@@ -9,12 +10,12 @@ public sealed class FearEffect : EntityEffect
     public override void ApplyToEntity()
     {
         Entity.ComponentsContainer.Get<NavigationAgent>().SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType.Maximal);
-        Entity.ComponentsContainer.Get<NavigationAgent>().ReinitializeMovement();
+        Entity.ComponentsContainer.Get<NavigationAgent>().TravelToEndNode().Forget();
     }
 
     public override void RemoveFromEntity()
     {
         Entity.ComponentsContainer.Get<NavigationAgent>().SetWeightPickLogic(NavigationAgentNodePicker.WeightPickType.Minimal);
-        Entity.ComponentsContainer.Get<NavigationAgent>().ReinitializeMovement();
+        Entity.ComponentsContainer.Get<NavigationAgent>().TravelToEndNode().Forget();
     }
 }

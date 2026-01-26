@@ -23,6 +23,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
@@ -39,6 +40,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -58,6 +60,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CustomParticleEntityModifier
@@ -74,6 +77,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -121,7 +125,8 @@ MonoBehaviour:
   _rarity: 0
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -133,6 +138,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _modificatorName: Shielded

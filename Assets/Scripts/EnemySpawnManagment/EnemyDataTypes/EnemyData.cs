@@ -25,8 +25,11 @@ public sealed class EnemyData : ScriptableObject
     [Header("UI")] 
     [SerializeField] private string _name;
     [SerializeField] private string _description;
+
+    [Header("Modificators")] 
+    [SerializeField] private bool _hasEntityModificators;
+    [ShowIf("_hasEntityModificators")] [SerializeField] private List<EntityModificatorData> _entityModificatorDatas;
     
-    [Header("Modificators")]
     [SerializeField] private bool _hasObjectModificators;
     [ShowIf("_hasObjectModificators")] [SerializeField] private List<GameObject> _objectModificators;
     
@@ -35,6 +38,8 @@ public sealed class EnemyData : ScriptableObject
     public float Speed => _speed;
     public List<StatInitializer> StatInitializers => _statInitializer;
     public NavigationAgentData NavigationData => _navigationData;
+    public bool HasEntityModificators => _hasEntityModificators;
+    public List<EntityModificatorData> EntityModificatorDatas => _entityModificatorDatas;
     public bool HasObjectModificators => _hasObjectModificators;
     public List<GameObject> ObjectModificators => _objectModificators;
     public string Name => _name;

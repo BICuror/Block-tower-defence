@@ -3,15 +3,15 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
 {
     [SerializeField] private RectTransform _rectTransform;
-    [SerializeField] private RectTransform _mainPanelRectTransform;
     
     [Header("Positioning")]
     [SerializeField] private List<RectTransform> _subPanels;
-    [SerializeField] private Vector2 _offset;
+    [FormerlySerializedAs("_offset")] [SerializeField] private Vector2 _staicOffset;
     
     [Header("FadeAnimation")]
     [SerializeField] private CanvasGroup _mainGroup;
@@ -21,6 +21,9 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     private Camera _mainCamera;
     private Transform _target;
     private bool _isActive;
+    
+    protected virtual Vector2 DynamicOffset => Vector2.zero;
+    protected RectTransform MainRectTransform => _rectTransform;
     
     public bool IsActive => _isActive;
     
@@ -86,9 +89,7 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         
         RectTransformUtility.ScreenPointToLocalPointInRectangle(transform.parent as RectTransform, targetScreenPosition, null, out Vector2 resultPoint);
 
-        Vector2 preferredUIPosition = resultPoint + _offset;
-
-        if (_mainPanelRectTransform) preferredUIPosition.x += _mainPanelRectTransform.sizeDelta.x / 2f - (_rectTransform.sizeDelta.x / 2f);
+        Vector2 preferredUIPosition = resultPoint + _staicOffset + DynamicOffset;
         
         Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(_pointFollowingElementOffsetContainer, preferredUIPosition);
         

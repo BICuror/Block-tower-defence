@@ -93,12 +93,6 @@ namespace Navigation
                 _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
             }
         }
-
-        public void ReinitializeMovement()
-        {
-            StopMovement();
-            TravelToEndNode().Forget();
-        }
         
         private void Initialize()
         {
@@ -125,16 +119,14 @@ namespace Navigation
             _nextNode = _navigationAgentNodePicker.PickNavigationNode(_navigationMapHolder.Map, _currentNavigationMapLayer, _endNode.RoundedPosition);
         }
 
-        private async UniTask TravelToEndNode()
+        public async UniTask TravelToEndNode()
         {
-            _movementModule.SetDestanation(
-                new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position);
-            _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z),
-                _nextNode.Position);
+            StopMovement();
+            
+            _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position);
+            _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _nextNode.Position);
 
-            float duration =
-                Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) *
-                _speed.Value;
+            float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) * _speed.Value;
             float elapsedTime = duration * _movementProgress;
 
             while (elapsedTime < duration)
@@ -177,6 +169,7 @@ namespace Navigation
         private void StopMovement()
         {
             _movementCancellationTokenSource.Cancel();
+            _movementCancellationTokenSource.Dispose();
             _movementCancellationTokenSource = new();
         }
         

@@ -120,7 +120,7 @@ VisualEffect:
         m_Overridden: 1
     m_NamedObject:
       m_Array:
-      - m_Value: {fileID: 2800000, guid: 30c181de74446724aa001a1bbc2275d8, type: 3}
+      - m_Value: {fileID: 2800000, guid: 5346e158ec9ab1a4cb2f3a3fb9f3a8f8, type: 3}
         m_Name: Texture
         m_Overridden: 1
       - m_Value: {fileID: 2800000, guid: c06c00f2567bcb940bbf68e3f823e20e, type: 3}
@@ -146,6 +146,11 @@ VFXRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -165,9 +170,11 @@ VFXRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
 --- !u!114 &5443568927250334806
 MonoBehaviour:
   m_ObjectHideFlags: 0

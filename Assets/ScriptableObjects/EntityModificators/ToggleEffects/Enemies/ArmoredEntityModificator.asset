@@ -20,11 +20,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -39,6 +42,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -53,7 +57,8 @@ MonoBehaviour:
   _rarity: 0
   _tags: 
   _effectType: 1
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -65,6 +70,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Armored

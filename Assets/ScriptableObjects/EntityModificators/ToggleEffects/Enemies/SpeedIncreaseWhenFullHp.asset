@@ -10,22 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: InvinsibilityUntilPickedUp
+  m_Name: SpeedIncreaseWhenFullHp
   m_EditorClassIdentifier: 
   _itemTypeContainers:
-  - _itemTypeName: ActivateWhenBuilt
+  - _itemTypeName: MoreSpeedWhenFullHp
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -52,29 +54,18 @@ MonoBehaviour:
     - TakeDamageUponPlacement
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 4
-      _argumentName: EffectTypeName
+    - _argumentType: 1
+      _argumentName: SpeedMultiplier
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0
+      _floatArgument: 0.25
       _stringArgument: InvincibilityEffect
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-    - _argumentType: 0
-      _argumentName: EffectStrength
-      _intArgument: 1
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-  _rarity: 0
+  _rarity: 1
   _tags: 
   _effectType: 0
   _hasStacks: 0
@@ -93,5 +84,5 @@ MonoBehaviour:
   _showInInspector: 1
   _createIcon: 0
   _icon: {fileID: 0}
-  _modificatorName: Balls of steel
-  _modificatorDescription: '#Invincibility until picked up'
+  _modificatorName: Additional legs
+  _modificatorDescription: '#bad +20% bad# #Speed when full #MaxHealth'

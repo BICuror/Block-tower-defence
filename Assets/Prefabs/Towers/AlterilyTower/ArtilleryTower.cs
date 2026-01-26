@@ -33,6 +33,8 @@ public sealed class ArtilleryTower : MonoBehaviour, ITaskConditionProvider
         {
             int difference = _maxEntities.RoundedValue - _createdTargets.Count;
 
+            Debug.Log(difference);
+            
             for (int i = 0; i < difference; i++) AddTarget().Forget();
         }
         else if (_createdTargets.Count > _maxEntities.RoundedValue)
@@ -43,7 +45,7 @@ public sealed class ArtilleryTower : MonoBehaviour, ITaskConditionProvider
         }
     }
 
-    public async UniTask AddTarget()
+    private async UniTask AddTarget()
     {
         ArtilleryTarget target = (await _draggableCreator.CreateDraggableOnRandomPosition(_artilleryTarget.GetComponent<DraggableObject>(), transform.position)).GetComponent<ArtilleryTarget>();
         target.AreaEntityAdded += _ownerEntity.ComponentsContainer.Get<TaskCycle>().TryCycle;
@@ -53,7 +55,7 @@ public sealed class ArtilleryTower : MonoBehaviour, ITaskConditionProvider
         _createdTargets.Add(target);
     }
 
-    public void RemoveTarget()
+    private void RemoveTarget()
     {
         ArtilleryTarget target = _createdTargets[^1];
         target.AreaEntityAdded -= _ownerEntity.ComponentsContainer.Get<TaskCycle>().TryCycle;

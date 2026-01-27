@@ -1187,6 +1187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
+  _meshRenderer: {fileID: 4674010348498812853}
+  _draggableSystemConfig: {fileID: 0}
   _visualisationTransform: {fileID: 6021271923918943051}
   _height: 100
 --- !u!1001 &769825694963916503
@@ -1316,6 +1318,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}
+--- !u!23 &4674010348498812853 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6541578126559798811, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}
+  m_PrefabInstance: {fileID: 1879462297090038190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6021271923918943051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5303810901234821861, guid: 358618066f62d3c4aa82f7091c94c8c6, type: 3}

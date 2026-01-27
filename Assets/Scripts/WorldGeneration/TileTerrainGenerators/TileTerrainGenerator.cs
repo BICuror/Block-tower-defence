@@ -13,6 +13,7 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     [SerializeField] private Transform _tileParent;
 
     private List<Tile> _instantiatedTiles = new();
+    private List<Tile> _instantiatedWaterIndicatorTiles = new();
     
     protected Vector2Int[] CheckDirections = new Vector2Int[4]
     {
@@ -24,13 +25,14 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     
     protected Vector2Int[] CornerCheckDirections = new Vector2Int[4]
     {
-        new Vector2Int(-1, 1),
-        new Vector2Int(1, 1),
-        new Vector2Int(1, -1),
-        new Vector2Int(-1, -1),
+        new(-1, 1),
+        new(1, 1),
+        new(1, -1),
+        new(-1, -1),
     };
 
     public List<Tile> InstantiatedTiles => _instantiatedTiles;
+    public List<Tile> InstantiatedWaterIndicatorTiles => _instantiatedWaterIndicatorTiles;
     
     protected void GenerateTile(int x, int y, int z, bool isWaterTile)
     { 
@@ -38,7 +40,7 @@ public abstract class TileTerrainGenerator : MonoBehaviour
             
         List<Vector2Int> tileNeighborPositions = GetNeighborPositions(x, y, z);
         
-        if (isWaterTile) InstantiateTile(TileType.WaterIndicatorTile, position + new Vector3(0, 0.001f, 0), 0f, false);
+        if (isWaterTile) InstantiateWaterIndicatorTile(TileType.WaterIndicatorTile, position + new Vector3(0, 0.001f, 0));
         
         for (int xOffset = -1; xOffset <= 1; xOffset += 2)
         {
@@ -106,6 +108,13 @@ public abstract class TileTerrainGenerator : MonoBehaviour
         }
         
         _instantiatedTiles.Clear();
+        
+        for (int i = 0; i < _instantiatedWaterIndicatorTiles.Count; i++)
+        {
+            Destroy(_instantiatedWaterIndicatorTiles[i].gameObject);
+        }
+        
+        _instantiatedWaterIndicatorTiles.Clear();
     }
     
     protected abstract List<Vector2Int> GetNeighborPositions(int x, int y, int z);
@@ -128,6 +137,21 @@ public abstract class TileTerrainGenerator : MonoBehaviour
         else tile.SetScale(1f, 1);
         
         _instantiatedTiles.Add(tile);
+    }
+    
+    private void InstantiateWaterIndicatorTile(TileType type, Vector3 tilePosition)
+    {
+        Vector3Int position = new Vector3Int(Mathf.RoundToInt(tilePosition.x), Mathf.RoundToInt(tilePosition.y), Mathf.RoundToInt(tilePosition.z));
+        
+        TilemapData tilemapData = GetTilemapData(position.x, position.z);
+        
+        Tile tilePrefab = GetTilePrefab(type, tilemapData);
+
+        Tile tile = Instantiate(tilePrefab, _tileParent.position + tilePosition, Quaternion.identity, _tileParent);
+        
+        tile.SetScale(1f, 1);
+        
+        _instantiatedWaterIndicatorTiles.Add(tile);
     }
 
     private Tile GetTilePrefab(TileType type, TilemapData tilemapData)

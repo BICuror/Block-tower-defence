@@ -17,6 +17,8 @@ namespace Combat
 
         public IReadOnlyList<T> GetList() => List;
         
+        protected bool ContainsItem(T item) => List.Contains(item);
+        
         protected void AddItem(T component)
         {
             List.Add(component);

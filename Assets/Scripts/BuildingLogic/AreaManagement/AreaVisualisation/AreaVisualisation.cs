@@ -5,11 +5,12 @@ using Zenject;
 
 public abstract class AreaVisualisation : MonoBehaviour
 {
+    [SerializeField] private MeshRenderer _meshRenderer;
     [Inject] [SerializeField] private DraggableSystemConfig _draggableSystemConfig;
     
     [Header("Visualisation")]
     [SerializeField] private Transform _visualisationTransform;
-    private TokenContainer _areaActiveVisualisationTokenContainer = new();
+    private TokenContainer _areaActiveVisualisationTokenContainer = new(true);
     private float _defaultScale = 1f;
 
     public float DefaultScale => _defaultScale;
@@ -18,6 +19,7 @@ public abstract class AreaVisualisation : MonoBehaviour
 
     private void Start()
     {
+        _meshRenderer.material = new Material(_meshRenderer.material);
         _visualisationTransform.localScale = DisabledScale;
 
         if (transform.parent.TryGetComponent(out HoverableObject hoverableObject)) SubscribeToHoverable(hoverableObject);

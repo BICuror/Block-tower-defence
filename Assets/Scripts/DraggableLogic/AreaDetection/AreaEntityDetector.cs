@@ -26,7 +26,7 @@ namespace Combat
         {
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
-                RemoveEntity(entity);
+                if (ContainsItem(entity)) RemoveEntity(entity);
             }
         }
         
@@ -52,7 +52,7 @@ namespace Combat
         { 
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
-                OnEntityFound(entity);
+                if (!ContainsItem(entity)) OnEntityFound(entity);
             }
         }
         

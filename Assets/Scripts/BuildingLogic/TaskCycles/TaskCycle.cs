@@ -11,7 +11,7 @@ public class TaskCycle : MonoBehaviour
     [Cached] private TaskRechargeDuration _taskRechargeDuration;
     [Cached] private EntityHealth _ownerEntityHealth;
     private CancellationTokenSource _cancellationTokenSource = new();
-    private TokenContainer _cycleBlockTokenContainer = new();
+    private TokenContainer _cycleBlockTokenContainer = new(false);
     private bool _taskCycleIsActive;
     
     public TokenContainer CycleBlockTokenContainer => _cycleBlockTokenContainer;

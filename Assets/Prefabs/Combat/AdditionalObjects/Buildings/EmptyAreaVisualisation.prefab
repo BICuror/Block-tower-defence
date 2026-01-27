@@ -102,7 +102,6 @@ GameObject:
   - component: {fileID: 7921428759935524928}
   - component: {fileID: 8152252673415192599}
   - component: {fileID: 3987992302997180501}
-  - component: {fileID: 1220815087670121949}
   m_Layer: 8
   m_Name: EmptyAreaVisualisation
   m_TagString: Untagged
@@ -164,22 +163,8 @@ MonoBehaviour:
   _areaScaleValue: 2
   _overrideAdditionalScaleValue: 0
   _additionalScaleValue: 0.95
-  _hasVisualisation: 1
-  _areaVisualisation: {fileID: 1220815087670121949}
---- !u!114 &1220815087670121949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8014568173235323351}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
-  _visualisationTransform: {fileID: 6276755293320577057}
-  _height: 100
+  _hasVisualisation: 0
+  _areaVisualisation: {fileID: 0}
 --- !u!1 &8879340027590346412
 GameObject:
   m_ObjectHideFlags: 0

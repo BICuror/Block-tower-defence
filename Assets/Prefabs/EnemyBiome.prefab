@@ -155,6 +155,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -176,9 +181,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1421012867723487508
 MonoBehaviour:
@@ -337,6 +344,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -358,9 +370,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &4712974523571268848
 MonoBehaviour:
@@ -439,6 +453,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -460,9 +479,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!33 &706525302667871673
 MeshFilter:
@@ -532,6 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3ace5236286654cacd636d31c66887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileTerrainGenerator: {fileID: 7041832723271390134}
   _meshRenderers:
   - {fileID: 4170150809156950838}
   - {fileID: 8175578880814386127}
@@ -562,7 +584,8 @@ MonoBehaviour:
   _radius: 14
   _baseMaterial: {fileID: 2100000, guid: 13239f0670994954486613132c67763a, type: 2}
   _transitionMaterial: {fileID: 2100000, guid: ca6cf7eea82332d41b309fd22cbcb307, type: 2}
-  _tileTerrainGenerator: {fileID: 7041832723271390134}
+  _baseWaterIndicatorMaterial: {fileID: 2100000, guid: 304f56d90931f074fa60490c59b60e0d, type: 2}
+  _transitionWaterIndicatorMaterial: {fileID: 2100000, guid: ffcf5604cae071e44b88f282a6b34f4e, type: 2}
   AnitmationStarted:
     m_PersistentCalls:
       m_Calls: []

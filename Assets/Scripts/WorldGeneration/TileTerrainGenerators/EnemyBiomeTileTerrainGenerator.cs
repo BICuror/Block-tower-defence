@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
 using WorldGeneration;
 using UnityEngine;
 using Zenject;
+using System;
 
 public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
 {
@@ -33,15 +33,17 @@ public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
                     int zWorldPos = biomePosition.y + z;
 
                     Vector2Int tilePosition = new Vector2Int(xWorldPos, zWorldPos);
-                    
-                    if (TileMap.HasTile(tilePosition, _layerSetting) && TileMap.GetHitInfo(tilePosition, _layerSetting).collider.gameObject == gameObject)
+                        
+                    //if (TileMap.HasTile(tilePosition, _layerSetting) && TileMap.GetHitInfo(tilePosition, _layerSetting).collider.gameObject == gameObject)
                     {
-                        GenerateTile(x, GetHeight(xWorldPos, zWorldPos), z);
+                        GenerateTile(x, GetHeight(xWorldPos, zWorldPos), z, _islandHeightMapHolder.GetHeightSafe(xWorldPos, zWorldPos) < 1);
                     }
                 }
             }
         }
     }
+    
+    
     
     protected override List<Vector2Int> GetNeighborPositions(int x, int y, int z)
     {

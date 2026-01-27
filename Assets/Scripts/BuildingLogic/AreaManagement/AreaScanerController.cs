@@ -1,3 +1,4 @@
+using Cashing;
 using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
@@ -7,7 +8,7 @@ using Zenject;
 public sealed class AreaScanerController : MonoBehaviour
 {
     [Inject] private DraggableSystemConfig _draggableSystemConfig;
-    private AreaManager _areaManager;
+    [Cached] private AreaManager _areaManager;
     
     [SerializeField] private bool _autoScale;
 
@@ -30,7 +31,7 @@ public sealed class AreaScanerController : MonoBehaviour
     {
         if (_autoScale)
         {
-            _areaManager = transform.parent.GetComponent<AreaManager>();
+            if (!_areaManager) _areaManager = transform.parent.GetComponent<AreaManager>();
             _areaManager.AddAreaScanerController(this);
         }
     }

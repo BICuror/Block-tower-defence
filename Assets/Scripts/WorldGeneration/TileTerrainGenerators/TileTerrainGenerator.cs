@@ -12,7 +12,7 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     [Inject] protected IslandDataContainer IslandDataContainer;
     [SerializeField] private Transform _tileParent;
 
-    private List<GPUInstanceEnabler> _instantiatedTiles = new();
+    private List<Tile> _instantiatedTiles = new();
     
     protected Vector2Int[] CheckDirections = new Vector2Int[4]
     {
@@ -30,13 +30,15 @@ public abstract class TileTerrainGenerator : MonoBehaviour
         new Vector2Int(-1, -1),
     };
 
-    public List<GPUInstanceEnabler> InstantiatedTiles => _instantiatedTiles;
+    public List<Tile> InstantiatedTiles => _instantiatedTiles;
     
-    protected void GenerateTile(int x, int y, int z)
+    protected void GenerateTile(int x, int y, int z, bool isWaterTile)
     { 
         Vector3 position = new Vector3(x, y, z);
             
         List<Vector2Int> tileNeighborPositions = GetNeighborPositions(x, y, z);
+        
+        if (isWaterTile) InstantiateTile(TileType.WaterIndicatorTile, position + new Vector3(0, 0.001f, 0), 0f, false);
         
         for (int xOffset = -1; xOffset <= 1; xOffset += 2)
         {
@@ -93,7 +95,7 @@ public abstract class TileTerrainGenerator : MonoBehaviour
     {
         List<Vector2Int> tileNeighborPositions = GetNeighborPositions(x, y, z);
         
-        if (tileNeighborPositions.Count < 4) GenerateTile(x, y, z);
+        if (tileNeighborPositions.Count < 4) GenerateTile(x, y, z, false);
     }
 
     protected void ClearAllTiles()
@@ -118,17 +120,17 @@ public abstract class TileTerrainGenerator : MonoBehaviour
         
         TilemapData tilemapData = GetTilemapData(position.x, position.z);
         
-        GPUInstanceEnabler tilePrefab = GetTilePrefab(type, tilemapData);
+        Tile tilePrefab = GetTilePrefab(type, tilemapData);
 
-        GPUInstanceEnabler tile = Instantiate(tilePrefab, _tileParent.position + tilePosition, Quaternion.Euler(0f, rotation, 0), _tileParent);
+        Tile tile = Instantiate(tilePrefab, _tileParent.position + tilePosition, Quaternion.Euler(0f, rotation, 0), _tileParent);
         
-        if (canBeMirroredByZ && Random.Range(0, 100) < 50f) tile.transform.localScale = new Vector3(0.5f, 1f, -0.5f);
-        else tile.transform.localScale = new Vector3(0.5f, 1f, 0.5f);
+        if (canBeMirroredByZ && Random.Range(0, 100) < 50f) tile.SetScale(1f, -1);
+        else tile.SetScale(1f, 1);
         
         _instantiatedTiles.Add(tile);
     }
 
-    private GPUInstanceEnabler GetTilePrefab(TileType type, TilemapData tilemapData)
+    private Tile GetTilePrefab(TileType type, TilemapData tilemapData)
     {
         switch (type)
         {
@@ -136,6 +138,7 @@ public abstract class TileTerrainGenerator : MonoBehaviour
             case TileType.CornerTile: return tilemapData.CornerTile;
             case TileType.OneSideTile: return tilemapData.OneSideTile;
             case TileType.DefaultCornerTile: return tilemapData.DefaultCornerTile;
+            case TileType.WaterIndicatorTile: return tilemapData.WaterIndicatorTile;
         }
         
         throw new NotImplementedException();
@@ -148,4 +151,5 @@ public enum TileType
     DefaultCornerTile,
     CornerTile,
     OneSideTile,
+    WaterIndicatorTile,
 }

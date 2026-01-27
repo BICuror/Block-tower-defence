@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2263039642158649422}
   - component: {fileID: 2259547284304452045}
   - component: {fileID: 4754119654134298042}
-  - component: {fileID: -2232811268802711303}
+  - component: {fileID: -805931472703533314}
   m_Layer: 0
   m_Name: WallTile
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2228262887125687321}
   m_Mesh: {fileID: -6686972915969242016, guid: ad80c30da32d9024d939226c90fb1454, type: 3}
---- !u!114 &-2232811268802711303
+--- !u!114 &-805931472703533314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,6 +100,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2228262887125687321}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e623cf358ac834d91feb24509c8111, type: 3}
+  m_Script: {fileID: 11500000, guid: 968f3e51e7c441b4aaf355f79729a285, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tile
+  _meshRenderer: {fileID: 2259547284304452045}
+  _mainMaterial: {fileID: 2100000, guid: 13239f0670994954486613132c67763a, type: 2}
+  _hasTransition: 1
+  _transitionMaterial: {fileID: 2100000, guid: ca6cf7eea82332d41b309fd22cbcb307, type: 2}

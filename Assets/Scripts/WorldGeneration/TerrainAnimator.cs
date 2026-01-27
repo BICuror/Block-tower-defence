@@ -40,11 +40,7 @@ namespace WorldGeneration
 
         public void StartDisappearing(float duration)
         {
-            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile =>
-            {
-                tile.Renderer.sharedMaterial = _transitionMaterial;
-                tile.EnableGPUInstancing();
-            });
+            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile => tile.SetTransitionMaterial());
             
             _meshRenderers.ForEach(renderer => renderer.sharedMaterial = _transitionMaterial);
             
@@ -55,11 +51,7 @@ namespace WorldGeneration
 
         public void StartAppearing(float duration)
         {
-            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile =>
-            {
-                tile.Renderer.sharedMaterial = _transitionMaterial;
-                tile.EnableGPUInstancing();
-            });
+            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile => tile.SetTransitionMaterial());
             
             _meshRenderers.ForEach(renderer => renderer.sharedMaterial = _transitionMaterial);
 
@@ -68,11 +60,7 @@ namespace WorldGeneration
 
         private void Appear()
         {
-            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile =>
-            {
-                tile.Renderer.sharedMaterial = _baseMaterial;
-                tile.EnableGPUInstancing();
-            });
+            _tileTerrainGenerator.InstantiatedTiles.ForEach(tile => tile.SetMainMaterial());
             
             _meshRenderers.ForEach(renderer => renderer.sharedMaterial = _baseMaterial);
 

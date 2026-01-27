@@ -4,13 +4,15 @@ using UnityEngine;
 
 public sealed class TilemapData : ScriptableObject
 {
-    [SerializeField] private GPUInstanceEnabler _defaultTile;
-    [SerializeField] private GPUInstanceEnabler _cornerTile;
-    [SerializeField] private GPUInstanceEnabler _oneSideTile;
-    [SerializeField] private GPUInstanceEnabler _defaultCornerTile;
+    [SerializeField] private Tile _defaultTile;
+    [SerializeField] private Tile _cornerTile;
+    [SerializeField] private Tile _oneSideTile;
+    [SerializeField] private Tile _defaultCornerTile;
+    [SerializeField] private Tile _waterIndicatorTile;
 
-    public GPUInstanceEnabler DefaultTile => _defaultTile;
-    public GPUInstanceEnabler CornerTile => _cornerTile;
-    public GPUInstanceEnabler OneSideTile => _oneSideTile;
-    public GPUInstanceEnabler DefaultCornerTile => _defaultCornerTile;
+    public Tile DefaultTile => _defaultTile;
+    public Tile CornerTile => _cornerTile;
+    public Tile OneSideTile => _oneSideTile;
+    public Tile DefaultCornerTile => _defaultCornerTile;
+    public Tile WaterIndicatorTile => _waterIndicatorTile;
 }

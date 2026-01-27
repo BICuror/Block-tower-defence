@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3075350483656357607}
   - component: {fileID: 975480159707721362}
   - component: {fileID: 3499275912100117150}
-  - component: {fileID: 8357260061741714159}
+  - component: {fileID: 2637388433188158641}
   m_Layer: 0
   m_Name: Default
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8357260061741714159
+--- !u!114 &2637388433188158641
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,6 +100,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2969790986039244014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e623cf358ac834d91feb24509c8111, type: 3}
+  m_Script: {fileID: 11500000, guid: 968f3e51e7c441b4aaf355f79729a285, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tile
+  _meshRenderer: {fileID: 3499275912100117150}
+  _mainMaterial: {fileID: 2100000, guid: 585a25d225326d7489df3029c91153d2, type: 2}
+  _hasTransition: 1
+  _transitionMaterial: {fileID: 2100000, guid: de06447b1d9a93a4398603d47b481446, type: 2}

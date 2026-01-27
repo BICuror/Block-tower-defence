@@ -127,7 +127,6 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         if (_layers.Contains(UILayer.Single)) _layers.Remove(UILayer.Single, element);
         if (_layers.Contains(UILayer.Group)) _layers.Remove(UILayer.Group, element);
         await element.Disable();
-        Destroy(element.gameObject);
     }
     
     public void DisableActiveSinglePopup()

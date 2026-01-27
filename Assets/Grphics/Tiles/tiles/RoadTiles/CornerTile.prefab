@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3461379864032877137}
   - component: {fileID: 2912661469723296234}
   - component: {fileID: 5149066378503896634}
-  - component: {fileID: -1048488327659006518}
+  - component: {fileID: 7456000140854021341}
   m_Layer: 0
   m_Name: CornerTile
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-1048488327659006518
+--- !u!114 &7456000140854021341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -100,6 +100,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1085776606715458360}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54e623cf358ac834d91feb24509c8111, type: 3}
+  m_Script: {fileID: 11500000, guid: 968f3e51e7c441b4aaf355f79729a285, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Tile
+  _meshRenderer: {fileID: 5149066378503896634}
+  _mainMaterial: {fileID: 2100000, guid: 585a25d225326d7489df3029c91153d2, type: 2}
+  _hasTransition: 1
+  _transitionMaterial: {fileID: 2100000, guid: de06447b1d9a93a4398603d47b481446, type: 2}

@@ -31,7 +31,7 @@ public sealed class IslandTileTerrainGenerator : TileTerrainGenerator
     {
         if (_heightMap.Map[x, z] == y)
         {
-            GenerateTile(x, y, z);
+            GenerateTile(x, y, z, false);
         }
         else if (_heightMap.Map[x, z] > y)
         {

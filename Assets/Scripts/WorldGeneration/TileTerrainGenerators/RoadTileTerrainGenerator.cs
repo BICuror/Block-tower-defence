@@ -33,7 +33,7 @@ public sealed class RoadTileTerrainGenerator : TileTerrainGenerator
         {
             if (y <= 0) y = 1;
             
-            GenerateTile(x, y, z);
+            GenerateTile(x, y, z, _heightMap.GetHeightSafe(x, z) < 1);
         }
     }
 

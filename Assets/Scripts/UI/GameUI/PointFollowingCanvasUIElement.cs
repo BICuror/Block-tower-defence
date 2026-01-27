@@ -53,7 +53,14 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         
         _isActive = false;
         _mainGroup.interactable = false;
-        await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(() => gameObject.SetActive(false)).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
+        await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(DisableGameObject).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
+    }
+
+    private void DisableGameObject()
+    {
+        if (!gameObject) return;
+        
+        gameObject.SetActive(false);
     }
     
     protected void SetTarget(Transform target) => _target = target;
@@ -94,6 +101,11 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(_pointFollowingElementOffsetContainer, preferredUIPosition);
         
         _rectTransform.localPosition = finalPosition;
+    }
+
+    private void OnDestroy()
+    {
+        _mainGroup.DOKill();
     }
 
     public record PointFollowingElementOffsetContainer

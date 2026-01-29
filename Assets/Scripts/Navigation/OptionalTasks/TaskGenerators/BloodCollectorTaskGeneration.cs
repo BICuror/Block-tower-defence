@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using WorldGeneration;
 using System.Linq;
+using Combat;
 using UnityEngine;
 using Navigation;
 using Zenject;
 
 public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
 {
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
     [Inject] private RoadMapHolder _roadMapHolder;
@@ -39,6 +41,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
             height++;
             
             BloodCollector bloodCollector = _diContainer.InstantiatePrefab(_bloodTowerPrefab, new Vector3(position.x, height, position.y), Quaternion.identity, null).GetComponent<BloodCollector>();
+            _globalBuildingContainer.Add(bloodCollector.GetComponent<BuildingEntity>());
 
             int incomingEnemiesAmount = _enemyBiomeContainer.EnemyBiomeList.First(biome => biome.GetCenterPosition() == spawnerPosition).EnemySpawner.EntitiesAmountToSpawn;
             incomingEnemiesAmount = Mathf.RoundToInt(incomingEnemiesAmount * _requiredPercentFromSpawner);

@@ -16,7 +16,6 @@ public sealed class Bomb : WeaponBase
     [Header("Visualisation")] 
     [SerializeField] private AreaVisualisation _areaVisualisation;
     [SerializeField] private HoverableObject _hoverableObject;
-    private ExplosionRadius _explosionRadius;
     
     public bool IsFree => _isFree;
     public DraggableObject DraggableObject => _draggableObject;
@@ -82,7 +81,7 @@ public sealed class Bomb : WeaponBase
 
     private void OnDestroy()
     {
-        _explosionRadius.ValueChanged -= UpdateVisualisationScale;
+        OwnerEntity.StatContainer.Get<ExplosionRadius>().ValueChanged -= UpdateVisualisationScale;
         
         _draggableObject.Placed -= StartExplosionAsync;
         _draggableObject.PickedUp -= StopExplosion;

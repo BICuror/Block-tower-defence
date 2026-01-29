@@ -56,7 +56,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     {
         if (modificatorData.HasStacks)
         {
-            return entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count(appliedModificatorData => appliedModificatorData == modificatorData) <= modificatorData.MaxStacks;
+            return entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count(appliedModificatorData => appliedModificatorData == modificatorData) < modificatorData.MaxStacks;
         }
 
         return true;

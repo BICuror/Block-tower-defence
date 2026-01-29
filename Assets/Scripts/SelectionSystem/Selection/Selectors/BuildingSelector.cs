@@ -6,13 +6,13 @@ using Combat;
 
 public sealed class BuildingSelector : MonoBehaviour
 {
-    [Inject] private IslandDataContainer _islandDataHolder;
     [Inject] private GlobalStatContainer _globalStatContainer;
+    [Inject] private IslandDataContainer _islandDataHolder;
     
     [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private BuildingSelectionOptionObject _selectionObject;
     
-    public async UniTask StartBuildingsSelection(SelectionSettings currentSelectionSettings)
+    public async UniTask StartBuildingsSelection()
     {
         BuildingSelectionOptionDataContainer datasContainer = _islandDataHolder.Data.SelectionContainer.BuildingSelectionOptionDataContainer;
         

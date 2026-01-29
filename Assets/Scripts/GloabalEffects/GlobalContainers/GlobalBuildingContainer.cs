@@ -12,6 +12,11 @@ public sealed class GlobalBuildingContainer
     
     public IReadOnlyList<BuildingEntity> Entities => _globalBuildingEntities;
 
+    public List<BuildingEntity> GetPlayerBuildings()
+    {
+        return _globalBuildingEntities.FindAll(buildingEntity => buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AvailableModificators.Count > 0);
+    }
+    
     public List<EntityModifcatorTag> GetBuildingTags(BuildingEntity excludedEntity = null)
     {
         List<BuildingEntity> includedBuildings = new List<BuildingEntity>(_globalBuildingEntities);

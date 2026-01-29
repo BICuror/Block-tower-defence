@@ -26,7 +26,7 @@ namespace Combat
         {
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
-                if (ContainsItem(entity)) RemoveEntity(entity);
+                RemoveEntity(entity);
             }
         }
         
@@ -45,14 +45,14 @@ namespace Combat
                 draggable.EntityPickedUp -= RemovePickedUpEntity;
             }
             
-            RemoveItem(entity);
+            if (ContainsItem(entity)) RemoveItem(entity);
         }
         
         private void OnTriggerEnter(Collider other)
         { 
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
-                if (!ContainsItem(entity)) OnEntityFound(entity);
+                 OnEntityFound(entity);
             }
         }
         
@@ -73,7 +73,7 @@ namespace Combat
                 if (draggable.IsPlaced == false) return;
             }
             
-            AddItem(entity);
+            if (!ContainsItem(entity)) AddItem(entity);
         }
         
         private void AddPlacedEntity(CombatEntity entity)

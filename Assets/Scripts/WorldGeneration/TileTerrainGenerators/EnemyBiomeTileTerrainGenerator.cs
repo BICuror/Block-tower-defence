@@ -43,8 +43,6 @@ public sealed class EnemyBiomeTileTerrainGenerator : TileTerrainGenerator
         }
     }
     
-    
-    
     protected override List<Vector2Int> GetNeighborPositions(int x, int y, int z)
     {
         Vector2Int biomePosition = new Vector2Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.z));

@@ -2,19 +2,22 @@ using System.Collections.Generic;
 using WorldGeneration;
 using UnityEngine;
 using System.Linq;
+using Combat;
 using Navigation;
 using Zenject;
 
 public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
 {
-     private readonly Vector2Int[] _checkDirections = new Vector2Int[4]
-     {
-         Vector2Int.up,
-         Vector2Int.down,
-         Vector2Int.right,
-         Vector2Int.left
-     };
-     
+    
+    private readonly Vector2Int[] _checkDirections = new Vector2Int[4]
+    {
+        Vector2Int.up,
+        Vector2Int.down,
+        Vector2Int.right,
+        Vector2Int.left
+    };
+
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private RoadMapHolder _roadMapHolder;
     [Inject] private DiContainer _diContainer;
@@ -52,7 +55,9 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
             height++;
     
             GameObject chest = _diContainer.InstantiatePrefab(_chestPrefab, new Vector3(resultPosition.x, height, resultPosition.y), Quaternion.identity, null);
-        
+            
+            _globalBuildingContainer.Add(chest.GetComponent<BuildingEntity>());
+            
             layerPrebuildData = new AdditionalTaskLayerPrebuildData(new ExsistanceNavigationCondition(chest), resultPosition);
         
             return true;

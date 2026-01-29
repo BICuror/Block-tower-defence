@@ -43,14 +43,14 @@ public sealed class CameraPositionController : MonoBehaviour
         
         CameraPositionUpdated?.Invoke();
         
-        _cameraCenter.position = Vector3.Lerp(_cameraCenter.position, new Vector3(_currentPosition.x, _height, _currentPosition.y), _cameraEasingSpeed);
+        _cameraCenter.position = Vector3.Lerp(_cameraCenter.position, new Vector3(_currentPosition.x, _height, _currentPosition.y), _cameraEasingSpeed / Time.timeScale);
              
         Vector2 cameraForward = new Vector2(_camera.transform.forward.x, _camera.transform.forward.z);
         Vector2 cameraRight = new Vector2(_camera.transform.right.x, _camera.transform.right.z);
 
         Vector2 movementDirection = (cameraForward * _movementInput.y) + (cameraRight * _movementInput.x);
 
-        _currentPosition += movementDirection.normalized * _cameraCenterMovementSpeed;
+        _currentPosition += movementDirection.normalized * (_cameraCenterMovementSpeed / Time.timeScale);
 
         float higherBorder = _islandRadius + _islandRadius * _cameraRadiusScale;
         float lowerBorder = _islandRadius - _islandRadius * _cameraRadiusScale;

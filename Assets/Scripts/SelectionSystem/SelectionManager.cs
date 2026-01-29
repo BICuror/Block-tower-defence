@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using System;
+using NaughtyAttributes;
 
 public sealed class SelectionManager : MonoBehaviour
 {
@@ -16,13 +17,13 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
     
-    private Queue<SelectionSettings> _enqeuedSelections = new();
-    private SelectionSettings _currentSelectionSettings;
+    private Queue<SelectionType> _enqeuedSelections = new();
+    private SelectionType _currentSelection;
     private bool _selectionOptionsCanBePlaced;
     private bool _selectionIsActive;
     
     public bool SelectionPhaseIsActive => _selectionIsActive;
-    public SelectionType SelectionType => _currentSelectionSettings.Type;
+    public SelectionType SelectionType => _currentSelection;
 
     public event Action SelectionStarted; 
     public event Action SelectionEnded;
@@ -35,24 +36,24 @@ public sealed class SelectionManager : MonoBehaviour
 
         await UniTask.WaitForSeconds(5);
     }
+
+    [Button] public void EnqueueBuildingUpgradeSelection() => EnqueueSelection(SelectionType.BuildingUpgrade);
     
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
-        return _selectionOptionsCanBePlaced && type == _currentSelectionSettings.Type;
+        return _selectionOptionsCanBePlaced && type == _currentSelection;
     }
 
-    public bool TryEnqueueNewBuildingSelection()
+    public void TryEnqueueNewBuildingSelection()
     {
-        if (_globalBuildingContainer.Entities.Count < _globalStatContainer.Get<MaxBuildings>().Value)
+        if (_globalBuildingContainer.GetPlayerBuildings().Count < _globalStatContainer.Get<MaxBuildings>().Value)
         {
-            EnqueueSelection(new SelectionSettings(SelectionType.Building));
-            EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade, true));
+            EnqueueSelection(SelectionType.Building);
+            EnqueueSelection(SelectionType.BuildingUpgrade);
         }
-
-        return false;
     }
     
-    public void EnqueueSelection(SelectionSettings selectionSettings) => _enqeuedSelections.Enqueue(selectionSettings);
+    public void EnqueueSelection(SelectionType selectionType) => _enqeuedSelections.Enqueue(selectionType);
     
     public void TryStartQueuedSelection()
     {
@@ -68,22 +69,21 @@ public sealed class SelectionManager : MonoBehaviour
     
     private async UniTask StartQueuedSelection()
     {
-        _currentSelectionSettings = _enqeuedSelections.Dequeue();
+        _currentSelection = _enqeuedSelections.Dequeue();
         
         SelectionStepStarted?.Invoke(); 
         
-        switch (_currentSelectionSettings.Type)
+        switch (_currentSelection)
         {
             case SelectionType.Building:
             {
                 if (_globalBuildingContainer.Entities.Count < _globalStatContainer.Get<MaxBuildings>().Value)
                 {
-                    await _buildingSelector.StartBuildingsSelection(_currentSelectionSettings);
-                }
-                break;
+                    await _buildingSelector.StartBuildingsSelection();
+                } break;
             }
-            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(_currentSelectionSettings); break;
-            default: throw new NotImplementedException($"Tried to start selection of type {_currentSelectionSettings.Type}");
+            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(); break;
+            default: throw new NotImplementedException($"Tried to start selection of type {_currentSelection}");
         }
         
         _selectionOptionsCanBePlaced = true;
@@ -98,7 +98,7 @@ public sealed class SelectionManager : MonoBehaviour
         
         SelectionStepEnded?.Invoke(); 
         
-        await EndSelection(_currentSelectionSettings);
+        await EndSelection();
 
         if (_enqeuedSelections.Count > 0) StartQueuedSelection().Forget();
         else
@@ -109,9 +109,9 @@ public sealed class SelectionManager : MonoBehaviour
         }
     }
     
-    private async UniTask EndSelection(SelectionSettings selectionSettings)
+    private async UniTask EndSelection()
     {
-        switch (_currentSelectionSettings.Type)
+        switch (_currentSelection)
         {
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
             case SelectionType.Building: await UniTask.WaitForSeconds(1f); break;

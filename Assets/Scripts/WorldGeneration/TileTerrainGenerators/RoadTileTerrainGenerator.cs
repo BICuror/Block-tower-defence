@@ -68,7 +68,11 @@ public sealed class RoadTileTerrainGenerator : TileTerrainGenerator
 
     protected override bool HasTile(int x, int y, int z)
     {
-        return _heightMap.Map[x, z] == y && _roadMap.Map[x, z];
+        int height = _heightMap.Map[x, z];
+        
+        if (height <= 0) height = 1;
+        
+        return height == y && _roadMap.Map[x, z];
     }
 
     protected override TilemapData GetTilemapData(int x, int z)

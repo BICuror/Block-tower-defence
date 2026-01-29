@@ -5,6 +5,8 @@ public sealed class IncreaseBuildTimeEachBuilt : EntityModificator
     [Inject] private WaveStateMachine _waveStateMachine;
     private StatModifier _statModifier;
     
+    public override bool CanBeApplied() => Entity.StatContainer.Has<BuildTime>();
+    
     public override void Enable()
     {
         _statModifier = new StatModifier();

@@ -27,7 +27,7 @@ namespace Combat
         
         protected void RemoveItem(T component)
         { 
-            List.Remove(component);
+            List.RemoveAll(listComponent => listComponent == component);
             RemovedItem?.Invoke(component);
         }
         

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -22,21 +21,9 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         _draggableConnector.transform.localScale = Vector3.one;
     }
     
-    public async UniTask StartUpgradeSelection(SelectionSettings settings)
+    public async UniTask StartUpgradeSelection()
     {
-        if (settings.SelectionArgument != null)
-        {
-            if ((bool)settings.SelectionArgument)
-            {
-                _buildingEntityToUpgrade = FindBuildingsWithLeastModificators();
-            }
-        }
-        else
-        {
-            int minimalUpgradeAmount = _globalBuildingContainer.Entities.Min(building => building.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count);
-            
-            _buildingEntityToUpgrade = _globalBuildingContainer.Entities.First(building => building.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count == minimalUpgradeAmount);
-        }
+        _buildingEntityToUpgrade = FindBuildingsWithLeastModificators();
             
         _initialPosition = Vector3Int.RoundToInt(_buildingEntityToUpgrade.transform.position);
         
@@ -92,10 +79,12 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
 
     private BuildingEntity FindBuildingsWithLeastModificators()
     {
+        List<BuildingEntity> validBuildings = _globalBuildingContainer.GetPlayerBuildings();
+        
         int minimalModificators = int.MaxValue;
         BuildingEntity foundEntity = null;
         
-        foreach (BuildingEntity buildingEntity in _globalBuildingContainer.Entities)
+        foreach (BuildingEntity buildingEntity in validBuildings)
         {
             if (buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count < minimalModificators)
             {

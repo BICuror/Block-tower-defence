@@ -1,9 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
-using Zenject;
 
 [RequireComponent(typeof(Camera))]
-[RequireComponent(typeof(GameController))]
 
 public sealed class CameraZoomController : MonoBehaviour
 {
@@ -17,14 +15,12 @@ public sealed class CameraZoomController : MonoBehaviour
     [SerializeField] private AnimationCurve _zoomSmoothingCurve;
     
     private Camera _camera;
-    private GameController _gameController;
     
     private float _finalZoom;
     private Tween _zoomTween;
     
     private void OnEnable()
     {
-        _gameController = GetComponent<GameController>();
         _camera = GetComponent<Camera>();
 
         _finalZoom = _camera.orthographicSize;

@@ -2,14 +2,12 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using WorldGeneration;
-using DG.Tweening;
 using UnityEngine;
 using Combat;
 using System;
 
 public sealed class Orbital : WeaponBase
 {
-    [SerializeField] private TrailRenderer _trailRenderer;
     [SerializeField] private Rigidbody _rigidbody;
     
     [Header("TerrainFollowing")]
@@ -30,16 +28,13 @@ public sealed class Orbital : WeaponBase
     
     public void SetFollowTerrainState(bool followTerrain) => _followTerrain = followTerrain;
     
-    
     public void SetNextTarget(Transform targetTransform, Vector3 startPosition)
     {
         _currentTargetIndex = _targetTransforms.IndexOf(targetTransform);
-        _trailRenderer.Clear();
      
         CancelMovement();
         transform.position = startPosition;
         TravelToNextTarget(new Vector2(startPosition.x, startPosition.z)).Forget();
-        _trailRenderer.Clear();
     }
 
     private async UniTask TravelToNextTarget(Vector2 startPosition)
@@ -61,7 +56,6 @@ public sealed class Orbital : WeaponBase
             try
             {
                 await UniTask.WaitForFixedUpdate(cancellationToken: _cancellationTokenSource.Token);
-                transform.DOComplete();
             }
             catch (Exception e)
             {
@@ -139,16 +133,7 @@ public sealed class Orbital : WeaponBase
         if (_currentTargetIndex >= _targetTransforms.Count) _currentTargetIndex = 0;
     }
 
-    private void OnDisable()
-    {
-        _trailRenderer.Clear();
-        CancelMovement();
-    }
-
-    private void OnEnable()
-    {
-        _trailRenderer.Clear();
-    }
+    private void OnDisable() => CancelMovement();
 
     public void CancelMovement()
     {

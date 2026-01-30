@@ -77,7 +77,7 @@ public sealed class SelectionManager : MonoBehaviour
         {
             case SelectionType.Building:
             {
-                if (_globalBuildingContainer.Entities.Count < _globalStatContainer.Get<MaxBuildings>().Value)
+                if (_globalBuildingContainer.GetPlayerBuildings().Count < _globalStatContainer.Get<MaxBuildings>().Value)
                 {
                     await _buildingSelector.StartBuildingsSelection();
                 } break;

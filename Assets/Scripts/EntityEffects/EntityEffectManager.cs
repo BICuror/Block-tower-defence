@@ -143,5 +143,11 @@ namespace Combat
                 }
             }
         }
+
+        private void OnDestroy()
+        {
+            _ownerEntity.Health.Died -= RemoveAllEffects;
+            _draggableObject.PickedUp -= RemoveAllEffects;
+        }
     }
 }

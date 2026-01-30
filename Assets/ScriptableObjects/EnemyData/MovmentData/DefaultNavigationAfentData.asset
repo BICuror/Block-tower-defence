@@ -10,12 +10,36 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 21b5f35f9a377144198f33c822b7f815, type: 3}
-  m_Name: NavigationAgentData
+  m_Name: DefaultNavigationAfentData
   m_EditorClassIdentifier: 
   _prefferedNavigationLayer: 1
   _navigationNodePickerType: NavigationAgentStraightNodePicker
+  _defaultHorizontalMovementCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _verticalCurveMultiplyer: 1.5
-  _verticalMovmentCurve:
+  _JumpVerticalMovementCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
@@ -48,7 +72,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _horizontalMovmentCurve:
+  _JumpHorizontalMovementCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3

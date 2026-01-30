@@ -31,7 +31,6 @@ public sealed class AOEBehaviour : CombatBehaviour<Vector3>, IDisposable
         
         aoe.transform.position = explotionPosition;
         await aoe.ActiveAOE();
-        aoe.gameObject.SetActive(false);
     }
 
     private void CreateNewPool()

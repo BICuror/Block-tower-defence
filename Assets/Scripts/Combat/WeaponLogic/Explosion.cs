@@ -22,7 +22,7 @@ namespace Combat
 
         public async UniTask Explode()
         {
-            UpdateExplotionRadius(_explosionRadius.Value);
+            UpdateExplotionRadius(ExplosionRadius);
             
             Collider[] hitEnemies = Physics.OverlapSphere(transform.position, ExplosionRadius, _enemyLayerSettings.GetLayerMask());
 

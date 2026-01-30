@@ -60,11 +60,6 @@ public class TaskCycle : MonoBehaviour
         _cancellationTokenSource = new();
     }
     
-    protected void OnDestroy()
-    {
-        _ownerEntityHealth.Died -= StopRechargeProcess;
-    }
-    
     private async void StartRechargeProcess()
     {
         _taskCycleIsActive = true;
@@ -95,5 +90,10 @@ public class TaskCycle : MonoBehaviour
             TryCycle();
             PerformTask();
         }
+    }
+    
+    protected void OnDestroy() 
+    { 
+        _ownerEntityHealth.Died -= StopRechargeProcess;
     }
 }

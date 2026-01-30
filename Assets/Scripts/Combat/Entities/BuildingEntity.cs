@@ -10,6 +10,7 @@ namespace Combat
         [Inject] private WaveStateMachine _waveStateMachine;
         private BuildingHealth _health;
 
+        public bool IsDestroyedOnDeath => _destroyOnDeath;
         public BuildingHealth BuildingHealth => _health;
 
         private void Awake()
@@ -25,15 +26,13 @@ namespace Combat
             _health.RefilHP();
             _health.Died += HandleDeathEvent;
 
-            if (!_destroyOnDeath) _waveStateMachine.StateStarted += RefillHealthOrRevive;
+            if (!_destroyOnDeath) _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted += RefillHealthOrRevive;
         }
 
-        private void RefillHealthOrRevive(WaveState waveState)
+        private void RefillHealthOrRevive()
         {
-            if (waveState == WaveState.Idle)
-            {
-                if (_health.IsAlive()) _health.RefilHP();
-            }
+            if (_health.IsAlive()) _health.RefilHP();
+            else _health.ReviveBuilding();
         }
 
         private void HandleDeathEvent()

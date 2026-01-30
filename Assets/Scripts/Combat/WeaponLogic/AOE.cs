@@ -17,6 +17,8 @@ public sealed class AOE : WeaponBase
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     private AOEDamageMultiplier _aoeDamageMultiplier;
     private AOERadius _radius;
+    
+    public float AOERadius => _radius.Value * _defaultRadius + 0.5f;
 
     protected override void OnInitialized()
     {
@@ -24,16 +26,20 @@ public sealed class AOE : WeaponBase
         _radius = OwnerEntity.StatContainer.Get<AOERadius>();
     }
 
+    [Button] public void ActivateAOEDEBUG() => ActiveAOE().Forget();
+
     public async UniTask ActiveAOE()
     {
-        UpdateAOERadius(_radius.Value);
+        UpdateAOERadius(AOERadius * 2);
+        
+        gameObject.SetActive(true);
         _explotionEffect.PlayBurstEffectAndForget();
 
         float elapsedTime = 0f;
 
         while (elapsedTime <= _duration || _infiniteDuration)
         {
-            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, _radius.Value * _defaultRadius, _enemyLayerSettings.GetLayerMask());
+            Collider[] hitEnemies = Physics.OverlapSphere(transform.position, AOERadius, _enemyLayerSettings.GetLayerMask());
     
             for (int i = 0; i < hitEnemies.Length; i++)
             {
@@ -50,6 +56,7 @@ public sealed class AOE : WeaponBase
         }
 
         await _explotionEffect.StopPermamentEffect();
+        gameObject.SetActive(false);
     }
 
     public void DeactiveAOE()
@@ -57,6 +64,7 @@ public sealed class AOE : WeaponBase
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
         _cancellationTokenSource = new();
+        _explotionEffect.StopPermamentEffect().Forget();
     }
     
     private void UpdateAOERadius(float explotionRaduis)
@@ -77,7 +85,7 @@ public sealed class AOE : WeaponBase
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, _defaultRadius);
+        Gizmos.DrawSphere(transform.position, AOERadius);
     }
 #endif
 }

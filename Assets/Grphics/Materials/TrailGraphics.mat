@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Trail 1
+  m_Name: TrailGraphics
   m_Shader: {fileID: -6465566751694194690, guid: 3dfe45bef29ba4f4b946c8f12d47a664, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,7 +29,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3001
+  m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses:
   - MOTIONVECTORS
@@ -55,11 +55,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _QueueControl: 1
+    - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 1.6
+    - _Speed: -4
     m_Colors:
-    - _FirstColor: {r: 5.8338323, g: 0, b: 5.842379, a: 1}
-    - _SecondColor: {r: 0.3773585, g: 0.026343882, b: 0.29846478, a: 1}
+    - _FirstColor: {r: 1.433962, g: 0.1812745, b: 0.1812745, a: 1}
+    - _SecondColor: {r: 5.617397, g: 2.696919, b: 52.93961, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

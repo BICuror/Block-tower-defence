@@ -1,6 +1,6 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cashing;
-using Cysharp.Threading.Tasks;
 
 [RequireComponent(typeof(MeshRenderer))]
 

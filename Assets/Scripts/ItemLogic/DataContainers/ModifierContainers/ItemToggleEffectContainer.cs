@@ -7,5 +7,5 @@ public sealed class ItemToggleEffectContainer : ScriptableObject
 {
     [SerializeField] private List<ToggleGlobalEffectData> _itemToggleEffectDatas;
     
-    public List<ToggleGlobalEffectData> EffectDatas => new List<ToggleGlobalEffectData>(_itemToggleEffectDatas);
+    public List<ToggleGlobalEffectData> EffectDatas => new(_itemToggleEffectDatas);
 }

@@ -19,11 +19,8 @@ namespace WorldGeneration
         public SelectionContainer SelectionContainer => _selectionContainer;
 
         [Header("ItemSpawnSettings")][Space]
-        [SerializeField] private ItemGenerationConfig _itemGenerationConfig;
-        public ItemGenerationConfig ItemGenerationConfig  => _itemGenerationConfig;
-        
-        [SerializeField] private ItemModifiersSelectionContainer _itemModifiersSelectionContainer;
-        public ItemModifiersSelectionContainer ItemModifiersSelectionContainer => _itemModifiersSelectionContainer;
+        [SerializeField] private ItemToggleEffectContainer _itemToggleEffectContainer;
+        public ItemToggleEffectContainer ItemToggleEffectContainer => _itemToggleEffectContainer;
 
         [Header("EnemySpawnSettings")][Space]
         [SerializeField] private EnemyWavesData _enemyWavesData;

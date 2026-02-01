@@ -97,6 +97,7 @@ public sealed class IdleStateController : WaveStateController
     [Button("RegenerateRoads")]
     public void RegenerateRoadsButton()
     {
+        FindObjectsByType<BloodCollector>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(bloodCollector => Destroy(bloodCollector.gameObject));
         FindObjectsByType<Chest>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(chest => Destroy(chest.gameObject));
         RegenerateRoads();
     }

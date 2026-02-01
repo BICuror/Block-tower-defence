@@ -1,6 +1,6 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using System.Linq;
-using UnityEngine;
 using Zenject;
 
 public sealed class RerollAllUnusedItems : EntityModificator
@@ -67,19 +67,17 @@ public sealed class RerollAllUnusedItems : EntityModificator
         
         unusedItems.ForEach(unusedItem =>
         {
-            if (!unusedItem.ToggleEffectDatas.Exists(data =>
-                    data.InstanceItemTypeContainers.Exists(typeContainer =>
-                        typeContainer.InstanceType == typeof(StartWaveGlobalToggleEffect))))
+            if (!unusedItem.ToggleEffectDatas.Exists(data => data.InstanceItemTypeContainers.Exists(typeContainer => typeContainer.InstanceType == typeof(StartWaveGlobalToggleEffect))))
             {
                 destroyedItems++;
-                itemStrengths.Add(unusedItem.Strength);
+                itemStrengths.Add(unusedItem.Charges);
                 _itemFactory.RemoveAndDestroyItem(unusedItem);
             }
         });
 
         for (int i = 0; i < destroyedItems; i++)
         {
-            _itemFactory.CreateItem(itemStrengths[i], Entity.transform.position);
+            _itemFactory.CreateItem(itemStrengths[i], Entity.transform.position).Forget();
         }
     }
 }

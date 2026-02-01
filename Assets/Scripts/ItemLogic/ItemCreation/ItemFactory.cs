@@ -27,35 +27,40 @@ public sealed class ItemFactory : MonoBehaviour
     [Button]
     public void CreateItems()
     {
-        CreateItem(7, new Vector3(12f, 0f, 12)).Forget();
-        CreateItem(4, new Vector3(12f, 0f, 12)).Forget();
+        List<List<ToggleGlobalEffectData>> toggleGlobalEffect = _effectSelector.GetItemEffects(11, 3, 2);
+            
+        CreateItemFromEffects(toggleGlobalEffect[0], new Vector3(12f, 0f, 12)).Forget();
+        CreateItemFromEffects(toggleGlobalEffect[1], new Vector3(12f, 0f, 12)).Forget();
     } 
-    
 #endif
     
     public async UniTask CreateWaveItems(Vector3 position, bool createHardItem)
     {
         await CreateStartWaveItem(position);
+        
+        List<List<ToggleGlobalEffectData>> toggleGlobalEffect = _effectSelector.GetItemEffects(11, 3, 2);
             
-        await CreateItem(4, position);
-        if (createHardItem) await CreateItem(7, position);
+        await CreateItemFromEffects(toggleGlobalEffect[0], position);
+        if (createHardItem) await CreateItemFromEffects(toggleGlobalEffect[1], position);
     }
     
-    public async UniTask CreateItem(int strength, Vector3 centerPosition)
+    public async UniTask CreateItem(int strength, Vector3 position)
+    {
+        _effectSelector.TryGetItemEffectDatas(strength, false, out List<ToggleGlobalEffectData> toggleEfectDatas);
+        
+        await CreateItemFromEffects(toggleEfectDatas, position);
+    }
+
+    private async UniTask CreateItemFromEffects(List<ToggleGlobalEffectData> toggleEfectDatas, Vector3 position)
     {
         Item itemPrefab = GetItemPrefab();
-        
-        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(itemPrefab, centerPosition);
+        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(itemPrefab, position);
         Item item = itemDraggable.GetComponent<Item>();
         
-        item.SetStrength(strength);
-        
-        List<ToggleGlobalEffectData> toggleEfectDatas = _effectSelector.GetRandomToggleEffectDatas(strength);
         item.AddToggleEffectDatas(toggleEfectDatas);
         
         int charges = 0;
         toggleEfectDatas.ForEach(effectData => charges += effectData.Quality);
-        
         item.SetChargesAmount(charges);
         
         _usedItemColors.Add(item.ItemColor, item);

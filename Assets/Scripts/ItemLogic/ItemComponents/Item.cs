@@ -14,7 +14,6 @@ public class Item : DraggableObject
     [SerializeField] private ItemColor _itemColor;
     [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
     private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
-    private int _strength;
     private int _charges;
     
 #if UNITY_EDITOR
@@ -34,7 +33,6 @@ public class Item : DraggableObject
 #endif 
     public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
     public int Charges => _charges;
-    public int Strength => _strength;
     public ItemColor ItemColor => _itemColor;
     
     public event Action<Item> ItemPickedUp;
@@ -48,7 +46,6 @@ public class Item : DraggableObject
     
     public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
     public void SetChargesAmount(int charges) => _charges = charges;
-    public void SetStrength(int strength) => _strength = strength;
 
     public async UniTask DecreaseDuration()
     {

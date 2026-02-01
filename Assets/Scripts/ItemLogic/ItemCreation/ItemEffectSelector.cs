@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
+
 using Random = UnityEngine.Random;
 
 public sealed class ItemEffectSelector : MonoBehaviour
@@ -11,85 +12,139 @@ public sealed class ItemEffectSelector : MonoBehaviour
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
     [Inject] private ItemsContainer _itemsContainer;
-    private ItemModifiersSelectionContainer _itemModifiersSelectionContainer;
-
-    private void Awake()
-    {
-        _itemModifiersSelectionContainer = _islandDataContainer.Data.ItemModifiersSelectionContainer;
-    }
 
     #region ModifiersSelection
-    
-    public List<ToggleGlobalEffectData> GetRandomToggleEffectDatas(int strength)
+
+    public List<List<ToggleGlobalEffectData>> GetItemEffects(int totalStrength, int minStrength, int itemAmount)
     {
-        List<ToggleGlobalEffectData> result = new();
+        List<List<ToggleGlobalEffectData>> resultEffects = new();
+        
+        int iterations = 50;
+        
+        do
+        {
+            iterations--;
 
-        List<ToggleGlobalEffectData> toggleEffectDatas = _itemModifiersSelectionContainer.ItemToggleEffectContainer.EffectDatas;
+            resultEffects.Clear();
+            
+            List<int> itemStrengths = GetRandomItemStrengths(totalStrength, minStrength, itemAmount);
 
-        //List<ToggleGlobalEffectData> positiveEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Positive);
-        List<ToggleGlobalEffectData> negativeEffects = toggleEffectDatas.FindAll(effectData => effectData.EffectType == EffectType.Negative); 
+            for (int i = 0; i < itemAmount; i++)
+            {
+                if (TryGetItemEffectDatas(itemStrengths[i], true, out List<ToggleGlobalEffectData> effects))
+                {
+                    resultEffects.Add(effects);
+                }
+                else break;
+                
+                if (resultEffects.Count != i + 1) break;
+            }
+            
+            if (iterations <= 0) break;
+        } 
+        while (itemAmount != resultEffects.Count);
+        
+        if (itemAmount != resultEffects.Count) Debug.LogError("Incorrect total strength");
+        if (iterations == 0) Debug.LogError("Iterations over 50");
+        
+        return resultEffects;
+    }
 
-        //int positiveStrength = quality + strength;
-        int negativeStrength = strength;
+    private List<int> GetRandomItemStrengths(int totalStrength, int minStrength, int itemAmount)
+    {
+        List<int> result = new();
+        
+        int maxItemStrength = totalStrength - minStrength * (itemAmount - 1);
+        
+        List<int> nonEmptyStrengths = PopulateNonEmptyStrengthList(totalStrength).FindAll(strength => strength >= minStrength && strength <= maxItemStrength);
 
-        //result.AddRange(GetItemEffectDatas(positiveStrength, positiveEffects));
-        result.AddRange(GetItemEffectDatas(negativeStrength, negativeEffects));
-
-        return result;   
+        int leftStrength = totalStrength;
+        
+        for (int i = 0; i < itemAmount; i++)
+        {
+            int currentItemStrength = nonEmptyStrengths[Random.Range(0, nonEmptyStrengths.Count)];
+            
+            if (itemAmount - 1 == i) currentItemStrength = leftStrength;
+            
+            result.Add(currentItemStrength);
+            
+            leftStrength -= currentItemStrength;
+            
+            nonEmptyStrengths.Remove(currentItemStrength);
+        }
+        
+        return result;
     }
     
-    private List<ToggleGlobalEffectData> GetItemEffectDatas(int strength, List<ToggleGlobalEffectData> itemEffectDats)
+    public bool TryGetItemEffectDatas(int strength, bool forceMeetStrength, out List<ToggleGlobalEffectData> result)
     {
-        if (strength < 1) strength = 1;
-
-        List<ToggleGlobalEffectData> effectDatas = new List<ToggleGlobalEffectData>(itemEffectDats);
+        result = new();
         
-        List<ToggleGlobalEffectData> result = new();
+        List<ToggleGlobalEffectData> effectDatas = new(_islandDataContainer.Data.ItemToggleEffectContainer.EffectDatas);
+        
         Debug.Log($"Trying to find item effect data for {strength}");
-        List<int> nonEmptyQualities = PopulateNonEmptyStrengthList(strength);
-        int leftStrength = strength;
+        List<int> nonEmptyStrengths = PopulateNonEmptyStrengthList(strength).Intersect(GetValidEffectStrengthList()).ToList();
         
-        while (leftStrength > 0 && nonEmptyQualities.Count > 0)
+        int leftStrength = strength;
+
+        while (nonEmptyStrengths.Count > 0)
         {
-            int currentStrength = nonEmptyQualities[Random.Range(0, nonEmptyQualities.Count)];
-            if (Random.Range(0, 100) < 50) currentStrength = nonEmptyQualities[0];
-            
-            if (TryGetRandomEffectData(currentStrength, new List<ToggleGlobalEffectData>(effectDatas), out ToggleGlobalEffectData effectData))
+            int currentStrength = nonEmptyStrengths[Random.Range(0, nonEmptyStrengths.Count)];
+
+            if (Random.Range(0, 100) < 50) currentStrength = nonEmptyStrengths.Max();
+
+            if (forceMeetStrength && currentStrength > leftStrength)
+            {
+                nonEmptyStrengths.Remove(currentStrength);
+                continue;
+            }
+
+            if (TryGetRandomEffectDataOfStrength(currentStrength, effectDatas, result.ConvertAll(data => (GlobalEffectData)data), out ToggleGlobalEffectData effectData))
             {
                 effectDatas.Remove(effectData);
                 result.Add(effectData);
 
                 leftStrength -= currentStrength;
             }
-            else
-            {
-                nonEmptyQualities.Remove(currentStrength);
-            }
+            else nonEmptyStrengths.Remove(currentStrength);
+            
+            if (leftStrength <= 0) return leftStrength == 0;
         }
 
+        return leftStrength == 0;
+    }
+
+    private List<int> GetValidEffectStrengthList()
+    {
+        List<int> result = new();
+        
+        _islandDataContainer.Data.ItemToggleEffectContainer.EffectDatas.ForEach(effectData =>
+        {
+            if (!result.Contains(effectData.Quality)) result.Add(effectData.Quality);
+        });
+        
         return result;
     }
     
     private List<int> PopulateNonEmptyStrengthList(int strength)
     {
         List<int> result = new();
-        int leftStrength = strength;
 
-        while (leftStrength > 0)
+        while (strength > 0)
         {
-            result.Add(leftStrength);
-            leftStrength--;
+            result.Add(strength);
+            strength--;
         }
 
         return result;
     }
     
-    private bool TryGetRandomEffectData(int strength, List<ToggleGlobalEffectData> datas, out ToggleGlobalEffectData data)
+    private bool TryGetRandomEffectDataOfStrength(int strength, List<ToggleGlobalEffectData> datas, List<GlobalEffectData> exsistingEffects, out ToggleGlobalEffectData data)
     {
-        List<ToggleGlobalEffectData> selectedDatas = datas.FindAll(data => data.Quality == strength);
+        List<ToggleGlobalEffectData> selectedDatas = datas.FindAll(selectedData => selectedData.Quality == strength);
         data = null;
         
-        while (selectedDatas.Count > 0)
+        for (int i = 0; i < selectedDatas.Count; i++)
         {
             int randomIndex = Random.Range(0, selectedDatas.Count);
             ToggleGlobalEffectData selectedData = selectedDatas[randomIndex];
@@ -97,7 +152,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
          
             if (selectedData.IsUnique && TryToFindExistingEffectData(selectedData)) continue;
 
-            if (!CheckIfEffectTagRequirementsAreMet(selectedData)) continue;
+            if (!CheckIfEffectTagRequirementsAreMet(selectedData, exsistingEffects)) continue;
             
             if (selectedData.HasAppearanceCondition)
             {
@@ -124,16 +179,15 @@ public sealed class ItemEffectSelector : MonoBehaviour
         return _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().Exists(item => item.ToggleEffectDatas.Exists(data => data == effectData));
     }
 
-    private bool CheckIfEffectTagRequirementsAreMet<T>(T effectData) where T : GlobalEffectData
+    private bool CheckIfEffectTagRequirementsAreMet<T>(T effectData, List<GlobalEffectData> globalEffectDatas) where T : GlobalEffectData
     {
         if (!effectData.HasRequiredTags && !effectData.HasBlockTags) return true;
         
-        List<GlobalEffectData> createdGlobalEffectDatas = new();
         List<EntityModifcatorTag> buildingsTags = _globalBuildingContainer.GetBuildingTags();
         
         _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().ForEach(item =>
         {
-            createdGlobalEffectDatas.AddRange(item.ToggleEffectDatas);
+            globalEffectDatas.AddRange(item.ToggleEffectDatas);
         });
         
         Debug.Log($"Checking requirements for {effectData.name}");
@@ -141,12 +195,12 @@ public sealed class ItemEffectSelector : MonoBehaviour
         if (effectData.HasRequiredTags) 
         {
             if (effectData.RequiredBuildingTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.RequiredBuildingTags)) return false;
-            if (effectData.RequiredGlobalEffectsTags.Count > 0 && !GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.RequiredGlobalEffectsTags)) return false;
+            if (effectData.RequiredGlobalEffectsTags.Count > 0 && !GlobalEffectTagRequirementsChecker.RequirementsAreMet(globalEffectDatas, effectData.RequiredGlobalEffectsTags)) return false;
         }
         if (effectData.HasBlockTags)
         {
             if (effectData.BlockBuildingsTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(buildingsTags, effectData.BlockBuildingsTags)) return false;
-            if (effectData.BlockGlobalEffectTags.Count > 0 && GlobalEffectTagRequirementsChecker.RequirementsAreMet(createdGlobalEffectDatas, effectData.BlockGlobalEffectTags)) return false;
+            if (effectData.BlockGlobalEffectTags.Count > 0 && GlobalEffectTagRequirementsChecker.RequirementsAreMet(globalEffectDatas, effectData.BlockGlobalEffectTags)) return false;
         }
         
         Debug.Log($"Suckseful Checking requirements for {effectData.name}");

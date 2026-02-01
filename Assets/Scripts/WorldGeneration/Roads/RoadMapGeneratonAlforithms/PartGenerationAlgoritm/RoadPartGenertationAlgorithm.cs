@@ -48,7 +48,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         _currentStartPosition = initialPosition;
         _currentEndPosition = finalPosition;
         
-        if (!IterateNextRoadStep(initialPosition)) MoveRoadTo(initialPosition, finalPosition);
+        if (!IterateNextRoadStep(initialPosition, null)) MoveRoadTo(initialPosition, finalPosition);
         
         for (int x = 0; x < _islandData.IslandSize; x++)
         {
@@ -59,9 +59,18 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         }
     }
     
-    private bool IterateNextRoadStep(Vector2Int currentPosition)
+    private bool IterateNextRoadStep(Vector2Int currentPosition, RoadPartData lastUsedRoadPartData)
     {
         List<RoadPartData> roadPartDatas = _roadPartDatas.OrderBy(item => Random.Range(0, _roadPartDatas.Count)).ToList();
+
+        if (lastUsedRoadPartData != null)
+        {
+            int indexOfLastUsedRoadPart = roadPartDatas.IndexOf(lastUsedRoadPartData);
+            
+            lastUsedRoadPartData = _roadPartDatas[indexOfLastUsedRoadPart];
+            
+            (roadPartDatas[^1], roadPartDatas[indexOfLastUsedRoadPart]) = (roadPartDatas[indexOfLastUsedRoadPart], roadPartDatas[^1]);
+        }
         
         for (int roadPartIndex = 0; roadPartIndex < roadPartDatas.Count; roadPartIndex++)
         {
@@ -106,7 +115,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
                         continue;
                     }
                     
-                    if (IterateNextRoadStep(endPosition))
+                    if (IterateNextRoadStep(endPosition, lastUsedRoadPartData))
                     {
                         return true;
                     }

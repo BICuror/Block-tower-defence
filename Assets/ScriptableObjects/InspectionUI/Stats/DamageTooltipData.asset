@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: DamageTooltipData
   m_EditorClassIdentifier: 
   _tag: Damage
-  _tagText: Damage
   _textColor: {r: 1, g: 0, b: 0.5372549, a: 1}
   _iconSprite: {fileID: 473409037, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: Damage dealt per hit
+  _onlyText: 0
+  _localizationKey: damage_stat_tooltip
   _associatedStatTypeName: Damage

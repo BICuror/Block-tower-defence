@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: SpeedTooltipData
   m_EditorClassIdentifier: 
   _tag: Speed
-  _tagText: Speed
   _textColor: {r: 0.072806716, g: 1, b: 0, a: 1}
   _iconSprite: {fileID: -875806093, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: Time taken in seconds to travel one tile
+  _onlyText: 0
+  _localizationKey: speed_stat_tooltip
   _associatedStatTypeName: Speed

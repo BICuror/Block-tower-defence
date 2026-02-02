@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MaxEntitiesTooltipData
   m_EditorClassIdentifier: 
   _tag: MaxEntities
-  _tagText: Max entities
   _textColor: {r: 0.0071456432, g: 1, b: 0, a: 1}
   _iconSprite: {fileID: -617606169, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: Max amount of entities created by this entity
+  _onlyText: 0
+  _localizationKey: max_entities_stat_tooltip
   _associatedStatTypeName: MaxEntities

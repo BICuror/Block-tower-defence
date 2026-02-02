@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ContactDamageTooltipData
   m_EditorClassIdentifier: 
   _tag: ContactDamage
-  _tagText: Contact damage
   _textColor: {r: 1, g: 0.060549714, b: 0, a: 1}
   _iconSprite: {fileID: 473409037, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: damage dealt upon collision with building
+  _onlyText: 0
+  _localizationKey: contact_damage_stat_tooltip
   _associatedStatTypeName: ContactDamage

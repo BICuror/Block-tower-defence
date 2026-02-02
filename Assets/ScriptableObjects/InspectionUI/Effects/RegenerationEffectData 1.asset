@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: RegenerationEffectData 1
   m_EditorClassIdentifier: 
   _tag: Regeneration
-  _tagText: Regeneration
   _textColor: {r: 0.18245173, g: 1, b: 0, a: 1}
   _iconSprite: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: Heal 5% of #MaxHealth per second. #MaxStack = 1
   _onlyText: 0
+  _localizationKey: regeneration_effect_tooltip
   _associatedEffectTypeName: Regeneration

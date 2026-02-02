@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ChargeTimeTooltipData
   m_EditorClassIdentifier: 
   _tag: ChargeDuration
-  _tagText: Charge duration
   _textColor: {r: 1, g: 0.88550174, b: 0, a: 1}
   _iconSprite: {fileID: -686756865, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: Time taken in seconds to charge to full
+  _onlyText: 0
+  _localizationKey: charge_duration_stat_tooltip
   _associatedStatTypeName: ChargeDuration

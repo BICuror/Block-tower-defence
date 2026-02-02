@@ -15,4 +15,8 @@ MonoBehaviour:
   _localizationFilesPath: Assets/Resources/Localization/Files
   _tableCellSeparatorSymbol: '#TABLE_CELL_SEPARATOR#'
   _tableLingSeparatorSymbol: '#TABLE_ROW_SEPARATOR#'
-  _supportedLanguages: []
+  _supportedLanguages:
+  - _languageColumnKey: ENGLISH
+    _systemLanguage: 10
+  - _languageColumnKey: RUSSIAN
+    _systemLanguage: 30

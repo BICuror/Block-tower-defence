@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ProjectileSpeedTooltipData
   m_EditorClassIdentifier: 
   _tag: ProjectileSpeed
-  _tagText: Projectile speed
   _textColor: {r: 1, g: 1, b: 1, a: 1}
   _iconSprite: {fileID: -53656890, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: represents tiles traveled per second by projectile
+  _onlyText: 0
+  _localizationKey: projectile_speed_stat_tooltip
   _associatedStatTypeName: ProjectileSpeed

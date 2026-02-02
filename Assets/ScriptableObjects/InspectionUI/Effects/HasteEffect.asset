@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: HasteEffect
   m_EditorClassIdentifier: 
   _tag: Haste
-  _tagText: Haste
   _textColor: {r: 0.19607845, g: 0.6745098, b: 0.78823537, a: 1}
   _iconSprite: {fileID: -132545439, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: '#good -15% good# #Recharge per #Stack. #MaxStack = 3'
   _onlyText: 0
+  _localizationKey: haste_effect_tooltip
   _associatedEffectTypeName: HasteEffect

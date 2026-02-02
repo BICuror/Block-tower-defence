@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: PropogationDamageMultiplierTooltipData
   m_EditorClassIdentifier: 
   _tag: PropogationDamageMiultiplier
-  _tagText: Propogattion damage multiplier
   _textColor: {r: 0.65705454, g: 0.17697577, b: 0.9150943, a: 1}
   _iconSprite: {fileID: 672983621, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _description: damage multiplier applied after each propogation hit
+  _onlyText: 0
+  _localizationKey: propogattion_damage_multiplier_stat_tooltip
   _associatedStatTypeName: PropogationDamageMiultiplier

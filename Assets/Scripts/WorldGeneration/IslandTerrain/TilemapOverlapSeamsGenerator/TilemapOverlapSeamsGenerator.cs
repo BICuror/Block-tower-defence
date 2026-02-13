@@ -37,7 +37,6 @@ namespace WorldGeneration
                 for (int z = 0; z < islandSize; z++)
                 {
                     Vector2Int mainPosition = new Vector2Int(x, z);
-                    BiomeData mainBiomeData = _biomeMapGenerator.GetBiomeAt(mainPosition);
                     
                     int mainHeight = _islandHeightMapHolder.Map[x, z];
                     
@@ -51,29 +50,34 @@ namespace WorldGeneration
                         {
                             if (mainHeight == _islandHeightMapHolder.Map[checkPosition.x, checkPosition.y])
                             {
-                                BiomeData secondaryBiomeData = _biomeMapGenerator.GetBiomeAt(checkPosition);
-                                
-                                if (secondaryBiomeData != mainBiomeData) TryGenerateTileSeam(mainPosition, mainBiomeData, secondaryBiomeData, checkDirection, mainHeight);
+                                 TryGenerateTileSeam(mainPosition, checkDirection);
                             }
                         }
                     });
-                    
                 }
             }
         }
 
         private bool IsValidPosition(int x, int z) => (x >= 0 && z >= 0 && x < _islandData.IslandSize && z < _islandData.IslandSize); 
         
-        private void TryGenerateTileSeam(Vector2Int mainPosition, BiomeData mainBiomeData, BiomeData secondaryBiomeData, Vector2Int direction, int height)
+        private void TryGenerateTileSeam(Vector2Int mainPosition, Vector2Int direction)
         {
+            BiomeData mainBiomeData = _biomeMapGenerator.GetBiomeAt(mainPosition);
+            BiomeData secondaryBiomeData = _biomeMapGenerator.GetBiomeAt(mainPosition + direction);
+            
+            if (secondaryBiomeData == mainBiomeData) return;
+            
             if (mainBiomeData.TilemapData.SeamPriority > secondaryBiomeData.TilemapData.SeamPriority)
             {
                 float rotation = Random.Range(0, 2) * 180;
                 if (direction.x != 0) rotation += 90;
-                
-                Vector3 spawnPosition = new Vector3(mainPosition.x + direction.x * _seamDirectionMultiplier, height + _additionalHeight, mainPosition.y + direction.y * _seamDirectionMultiplier);
 
-                Tile tile = Instantiate(mainBiomeData.TilemapData.SeamTile, spawnPosition, Quaternion.Euler(0f, rotation, 0f), _tileParent);
+                float height = _islandHeightMapHolder.Map[mainPosition.x, mainPosition.y] + _additionalHeight;
+
+                Vector2 spawnPosition = mainPosition + (Vector2)direction * _seamDirectionMultiplier;
+
+                Tile tile = Instantiate(mainBiomeData.TilemapData.SeamTile, new Vector3(spawnPosition.x, height, spawnPosition.y), Quaternion.Euler(0f, rotation, 0f), _tileParent);
+                
                 _instantiatedTiles.Add(tile);
             }
         }

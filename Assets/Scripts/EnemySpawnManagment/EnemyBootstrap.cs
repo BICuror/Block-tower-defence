@@ -38,7 +38,7 @@ namespace Combat
             _enemyHealth.RefilHP();
             _collider.enabled = true;
             
-            _inspectable.SetInspectableData(enemyDataToSet.Name, enemyDataToSet.Description);
+            _inspectable.SetLocalizationKey(enemyDataToSet.LocalizationKey);
 
             if (initializeModificators)
             {

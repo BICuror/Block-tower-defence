@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace WorldGeneration
 {
@@ -73,17 +74,18 @@ namespace WorldGeneration
 
         [SerializeField] private int _islandHeightOffset;
         public int IslandHeightOffset => _islandHeightOffset;
-        
-        [Header("BiomesGenerationSettings")][Space] 
-        
+
+        [Header("BiomesGenerationSettings")] [Space] 
+        [SerializeField] private float _minimalBiomeIndexDistance = 2;
         [SerializeField] private BiomeSetting[] _biomes;
+        
+        public float MinimalBiomeIndexDistance => _minimalBiomeIndexDistance;
         public BiomeSetting[] Biomes => _biomes;
 
         public NoiseSetting[] BiomeGenerationNoises;
         public DecorationModule WaterDecorationsModule;
 
-        [Header("EnemyBiomeStagesSettings")][Space] 
-
+        [Header("EnemyBiomeStagesSettings")] [Space] 
         [SerializeField] private int _maxAmountOfEnemyBiomes;
         public int MaxAmountOfEnemyBiomes => _maxAmountOfEnemyBiomes;
 

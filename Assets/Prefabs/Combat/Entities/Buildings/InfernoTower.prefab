@@ -402,9 +402,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 6089523009492727702}
+  _hasPriority: 1
+  _priorityType: 3
 --- !u!114 &102815598505547777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -501,10 +502,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: Inferno tower
-  _inspectableObjectDescription: '#Action : damage enemy #com and gain com# #Charge,
-    #com deals more com# damage as it gains #Charge. Reset #Charge #com when damaging
-    new entity com#'
+  _localizationKey: inferno_tower_building_entity_tooltip
 --- !u!114 &9095846125503527913
 MonoBehaviour:
   m_ObjectHideFlags: 0

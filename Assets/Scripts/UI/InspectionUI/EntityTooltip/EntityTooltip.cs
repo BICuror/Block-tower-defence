@@ -1,4 +1,3 @@
-
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Linq;
@@ -62,7 +61,7 @@ public sealed class EntityTooltip : PointFollowingCanvasUIElement
     
     private void InitializePriorityDropdown()
     {
-        if (_inspectable.TryGetComponent<AreaManager>(out AreaManager areaManager))
+        if (_inspectable.TryGetComponent(out AreaManager areaManager) && areaManager.HasPriority)
         {
             _priorityDropdownGroup.gameObject.SetActive(true);
 

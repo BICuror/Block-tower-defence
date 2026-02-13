@@ -5385,9 +5385,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 6258508626616133323}
+  _hasPriority: 1
+  _priorityType: 0
 --- !u!114 &82022452722322727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5510,9 +5511,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: Archer tower
-  _inspectableObjectDescription: '#Action : #com shoot com# one enemy #com with arrow
-    com#'
+  _localizationKey: archer_tower_building_entity_tooltip
 --- !u!114 &4851645258994465015
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1165e2371af6f074390831cde16f1b38, type: 3}
+  m_Name: TanksFromWater
+  m_EditorClassIdentifier: 
+  _instanceItemTypeContainers:
+  - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: MinimalDistanceToCenter
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 4.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 8
+      _argumentName: BuildingLayer
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 4.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 11400000, guid: 25d98ad61e78fb343afe7186a087b200, type: 2}
+    - _argumentType: 0
+      _argumentName: MinimalBuildingRadius
+      _intArgument: 2
+      _boolArgument: 0
+      _floatArgument: 4.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: SpawnDelay
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+  _quality: 7
+  _effectType: 1
+  _isUnique: 0
+  _tags: 
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: -98197151, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _effectName: Unrelenting waters
+  _effectDescription: Spawns #bad tank enemies bad# from <color=blue>water</color>
+    nearby roads
+  _enemyGroup:
+    _amountMultiplier: 1
+    _groupParts:
+    - _amountPerWave: 010000000100000001000000010000000200000002000000020000000300000003000000030000000300000003000000030000000300000003000000
+      _enemyData: {fileID: 11400000, guid: d083d5000a95b9343b087e9fa8a37138, type: 2}
+      _parseString: 

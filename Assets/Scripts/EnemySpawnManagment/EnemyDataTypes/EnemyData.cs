@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CuroLocalization;
 using NaughtyAttributes;
 using UnityEngine;
 using Navigation;
@@ -23,8 +24,7 @@ public sealed class EnemyData : ScriptableObject
     [SerializeField] private float _scale = 1f;
 
     [Header("UI")] 
-    [SerializeField] private string _name;
-    [SerializeField] private string _description;
+    [SerializeField] private string _localizationKey;
 
     [Header("Modificators")] 
     [SerializeField] private bool _hasEntityModificators;
@@ -42,8 +42,7 @@ public sealed class EnemyData : ScriptableObject
     public List<EntityModificatorData> EntityModificatorDatas => _entityModificatorDatas;
     public bool HasObjectModificators => _hasObjectModificators;
     public List<GameObject> ObjectModificators => _objectModificators;
-    public string Name => _name;
-    public string Description => _description;
+    public string LocalizationKey => _localizationKey;
     
     public Mesh Mesh => _mesh;
     public Material Material => _material;

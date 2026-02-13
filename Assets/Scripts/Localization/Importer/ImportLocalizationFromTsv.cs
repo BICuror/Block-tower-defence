@@ -8,7 +8,7 @@ namespace CuroLocalization
 {
     public sealed class ImportLocalizationFromTsv
     {
-        [MenuItem("Tools/Localization/ImportCSVToMain")]
+        [MenuItem("Tools/Localization/ImportFromCSV")]
         public static void ImportFromCSV()
         {
             if (!TSVImport.CreateTableFromCSV(out var table))

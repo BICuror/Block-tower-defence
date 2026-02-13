@@ -453,14 +453,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21e6e9ead3c4ae448fb1834d884dcdf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _desrtroyOnDisable: 1
   _rectTransform: {fileID: 6563496282593677064}
-  _mainPanelRectTransform: {fileID: 2076957776734564}
   _subPanels:
   - {fileID: 2076957776734564}
   - {fileID: 8511498523063087370}
-  _offset: {x: 0, y: 15}
+  _staicOffset: {x: 0, y: 15}
   _mainGroup: {fileID: 1123059355074498771}
   _fadeDuration: 0.2
+  _mainPanelRectTransform: {fileID: 2076957776734564}
   _effectIcon: {fileID: 5883403360287159710}
   _descriptionTextField: {fileID: 3062069637111788858}
   _nameTextField: {fileID: 556102165209757992}
@@ -543,6 +544,7 @@ GameObject:
   - component: {fileID: 7265779237958072110}
   - component: {fileID: 4459060015084033976}
   - component: {fileID: 3062069637111788858}
+  - component: {fileID: 7806242616907211815}
   m_Layer: 5
   m_Name: TooltipText
   m_TagString: Untagged
@@ -669,6 +671,50 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &7806242616907211815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122914573572047714}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cc8a40f9848a54c94bf232155b0b4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: TMPEffects::TMPEffects.Components.TMPAnimator
+  database: {fileID: 11400000, guid: f0a33761ff6919d4a9979ee36980a29d, type: 2}
+  context:
+    scaleAnimations: 1
+    scaleUniformly: 1
+    useScaledTime: 1
+    tmpAnimator: {fileID: 7806242616907211815}
+  updateFrom: 0
+  animateOnStart: 1
+  animationsOverride: 0
+  defaultAnimationsStrings: []
+  defaultShowAnimationsStrings: []
+  defaultHideAnimationsStrings: []
+  excludedCharacters: 
+  excludedCharactersShow: 
+  excludedCharactersHide: 
+  excludePunctuation: 0
+  excludePunctuationShow: 0
+  excludePunctuationHide: 0
+  sceneKeywordDatabase: {fileID: 0}
+  keywordDatabase: {fileID: 0}
+  sceneAnimations:
+    _serializedList: []
+  sceneShowAnimations:
+    _serializedList: []
+  sceneHideAnimations:
+    _serializedList: []
+  preview: 0
+  useDefaultDatabase: 1
+  useDefaultKeywordDatabase: 0
+  initDatabase: 1
+  previewUpdatesPerSecond: 60
+  previewTimeScale: 1
 --- !u!1 &8283117060686335417
 GameObject:
   m_ObjectHideFlags: 0

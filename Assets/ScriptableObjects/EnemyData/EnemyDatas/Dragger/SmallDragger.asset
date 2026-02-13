@@ -23,8 +23,9 @@ MonoBehaviour:
   _mesh: {fileID: 4300000, guid: 24abc5cc9ec100d4e9468a7da08d77b8, type: 3}
   _material: {fileID: 2100000, guid: eb25a30c052643a40b42f778673de011, type: 2}
   _scale: 1
-  _name: Dragger
-  _description: Drags towers in area away from itself, stops on #Activation
+  _localizationKey: dragger_enemy_entity_tooltip
+  _hasEntityModificators: 0
+  _entityModificatorDatas: []
   _hasObjectModificators: 1
   _objectModificators:
   - {fileID: 6901511779479771416, guid: dc873c58626de194a9f359c0ea28aa68, type: 3}

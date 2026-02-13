@@ -23,7 +23,7 @@ MonoBehaviour:
   wave:
     upPeriod: 0.4
     downPeriod: 0.6
-    amplitude: 20
+    amplitude: 3
     upwardCurve:
       serializedVersion: 2
       m_Curve:
@@ -109,5 +109,5 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     crestWait: 0
-    troughWait: 3
+    troughWait: 2.5
     velocity: 1

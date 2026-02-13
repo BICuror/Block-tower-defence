@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -22,27 +23,22 @@ namespace WorldGeneration
             {
                 for (int z = 0; z < zNodes.Count; z++)
                 {
-                    if(_islandData.SpawnerPositionValidator.IsValidPosition(x, xNodes.Count, z, zNodes.Count, exsistingBiomesIndexList))
+                    Vector2Int index = new Vector2Int(x, z);
+                    
+                    if(IsFarEnoughFromExsistingBiomes(index, exsistingBiomesIndexList) && 
+                       _islandData.SpawnerPositionValidator.IsValidPosition(x, xNodes.Count, z, zNodes.Count, exsistingBiomesIndexList))
                     {
-                        possibleNodes.Add(new Vector2Int(x, z));   
-                    }
-                }
-            }
-            
-            for (int i = 0; i < exsistingBiomesIndexList.Count; i++)
-            {
-                for (int j = 0; j < possibleNodes.Count; j++)
-                {
-                    if (exsistingBiomesIndexList[i] == possibleNodes[j])
-                    {
-                        possibleNodes.RemoveAt(j);
-
-                        break;
+                        possibleNodes.Add(index);   
                     }
                 }
             }
             
             return possibleNodes[Random.Range(0, possibleNodes.Count)];
+        }
+
+        private bool IsFarEnoughFromExsistingBiomes(Vector2Int index, List<Vector2Int> exsistingBiomesIndexList)
+        {
+            return !exsistingBiomesIndexList.Exists(exsistingIndex => Vector2Int.Distance(exsistingIndex, index) < _islandData.MinimalBiomeIndexDistance);
         }
     }
 }

@@ -34,7 +34,7 @@ namespace CuroLocalization
         private static void InitializeLocalization()
         {
             FetchLocalizationSettings();
-            LoadLanguage(SystemLanguage.Russian);
+            LoadLanguage(SystemLanguage.English);
         }
         
         private static void FetchLocalizationSettings()

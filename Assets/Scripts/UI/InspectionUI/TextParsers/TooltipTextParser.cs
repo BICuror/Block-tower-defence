@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class TooltipTextParser : MonoBehaviour
 {
     private readonly char[] ALLOWED_END_TAG_CHARACTERS = new[] { ',', ' ', '.' };
-    private const char TOOLTIP_TAG_START_CHAR = '#';
+    private const string TOOLTIP_TAG_START_CHAR = "#";
     private const string TAG_START = "<#>";
     private const string TAG_END = "</#>";
     
@@ -13,17 +13,16 @@ public sealed class TooltipTextParser : MonoBehaviour
 
     public string GetTagDescription(TooltipTagData tagData)
     {
-        return WrapInColor(tagData.TagText + ": ", tagData.TextColor) + ParseTooltipText(tagData.Description);
+        string tagText = ParseTooltipText(tagData.TagText);
+        
+        return WrapInColor(tagText + ": ", tagData.TextColor) + ParseTooltipText(tagData.Description);
     }
     
     public string GetTagHeaderWithoutIcon(TooltipTagData tagData)
     {
-        return WrapInColor(tagData.TagText, tagData.TextColor);
-    }
-    
-    public string GetDefaultTagHeader(TooltipTagData tagData)
-    {
-        return GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData);
+        string tagText = ParseTooltipText(tagData.TagText);
+        
+        return WrapInColor(tagText, tagData.TextColor);
     }
     
     public string ParseTooltipText(string tooltipText, bool fullTag = true)
@@ -66,6 +65,11 @@ public sealed class TooltipTextParser : MonoBehaviour
         return tooltipText;
     }
 
+    private string GetDefaultTagHeader(TooltipTagData tagData)
+    {
+        return GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData);
+    }
+    
     private string GetStringSpriteFromData(TooltipTagData tagData)
     {
         return $"<sprite name={tagData.IconSprite.name}>";
@@ -100,12 +104,11 @@ public sealed class TooltipTextParser : MonoBehaviour
             
             while (tooltipText.Contains(initialParseTagStart)) 
             { 
-                string replaceStartValue = TAG_START.Replace(TOOLTIP_TAG_START_CHAR.ToString(), parseData.ReplacedKey); 
-                string replaceEndValue = TAG_END.Replace(TOOLTIP_TAG_START_CHAR.ToString(), parseData.ReplacedKey);
-                
-                string initialParseTagEnd = parseData.InitialKey + TOOLTIP_TAG_START_CHAR;
-                
+                string replaceStartValue = TAG_START.Replace(TOOLTIP_TAG_START_CHAR, parseData.ReplacedKey); 
                 tooltipText = ReplaceFirst(tooltipText, initialParseTagStart, replaceStartValue); 
+                
+                string replaceEndValue = TAG_END.Replace(TOOLTIP_TAG_START_CHAR, parseData.ReplacedKey);
+                string initialParseTagEnd = parseData.InitialKey + TOOLTIP_TAG_START_CHAR;
                 tooltipText = ReplaceFirst(tooltipText, initialParseTagEnd, replaceEndValue);
             }
         });

@@ -15,6 +15,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     [Inject] private WaveManager _waveManager;
     private Dictionary<EnemySpawner, List<EnemyData>> _enemySpawnDatas = new();
     private List<AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup> _additionalGroups = new();
+    private List<AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup> _additionalWaveGroups = new();
     private int _currentWaveSeed;
     private int _currentGroupSeed;
 

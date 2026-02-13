@@ -7,12 +7,11 @@ namespace WorldGeneration
 
     public class CornersSpawnPositionValidator : SpawnerPositionValidator
     {
-        [SerializeField] private int _minimalNodeDistance = 2;
         [SerializeField] private float _maxRangeFromCorners = 1.5f;
 
         public override bool IsValidPosition(int x, int maxX, int z, int maxZ, List<Vector2Int> exsistingBiomesIndexList)
         {
-            return IsInCornder(x, maxX, z, maxZ) && !exsistingBiomesIndexList.Exists(index => Vector2Int.Distance(index, new Vector2Int(x, z)) < _minimalNodeDistance);
+            return IsInCornder(x, maxX, z, maxZ);
         }
 
         private bool IsInCornder(int x, int maxX, int z, int maxZ)

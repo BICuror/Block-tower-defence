@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3771ed1197c0bd48a93217341181528, type: 3}
+  m_Name: RangersAdditionalEnemyGroupToggleEffectData
+  m_EditorClassIdentifier: 
+  _instanceItemTypeContainers:
+  - _itemTypeName: AdditionalEnemyGroupToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  _argumentsContainer:
+    _argumentItems: []
+  _quality: 3
+  _effectType: 1
+  _isUnique: 0
+  _tags: 
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements: []
+  _icon: {fileID: 0}
+  _effectName: Invasion
+  _effectDescription: Adds #bad archer units bad# to random spawner
+  _enemyGroup:
+    _amountMultiplier: 0
+    _groupParts:
+    - _amountPerWave: 0200000003000000040000000500000006000000070000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a0000000a000000
+      _enemyData: {fileID: 11400000, guid: 756c2895dc94be848860a0030138939e, type: 2}
+      _parseString: 

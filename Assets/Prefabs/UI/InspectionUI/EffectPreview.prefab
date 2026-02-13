@@ -103,10 +103,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e49232ac98105574794d9fb753ee517e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _desrtroyOnDisable: 0
   _rectTransform: {fileID: 5693167047386029691}
   _subPanels:
   - {fileID: 5693167047386029691}
-  _offset: {x: 0, y: 15}
+  _staicOffset: {x: 0, y: 15}
   _mainGroup: {fileID: 9009782526213209366}
   _fadeDuration: 0.2
   _previewName: {fileID: 4564997724490142321}

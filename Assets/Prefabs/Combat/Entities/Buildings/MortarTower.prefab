@@ -5259,9 +5259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 2069619986377199839}
+  _hasPriority: 1
+  _priorityType: 4
 --- !u!114 &7770428409484829617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5418,9 +5419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: Mortar tower
-  _inspectableObjectDescription: '#Action : #com shots an arching com# core, #com
-    which com# damages ememies #com on collision and com# explodes'
+  _localizationKey: mortar_tower_building_entity_tooltip
 --- !u!114 &-8513229045828187900
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@ using UnityEngine;
 using Cashing;
 using Zenject;
 using Combat;
+using CuroLocalization;
 
 public sealed class BloodCollector : MonoBehaviour
 {

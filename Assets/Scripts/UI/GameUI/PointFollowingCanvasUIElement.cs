@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
 {
+    [SerializeField] private bool _desrtroyOnDisable = true;
     [SerializeField] private RectTransform _rectTransform;
     
     [Header("Positioning")]
@@ -59,10 +60,13 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     private void DisableGameObject()
     {
         if (!gameObject) return;
-        
+
+        _mainGroup.DOKill();
+
         gameObject.SetActive(false);
     }
-    
+
+
     protected void SetTarget(Transform target) => _target = target;
     
     private void CalculateOffsets()

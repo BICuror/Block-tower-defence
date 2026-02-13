@@ -38,9 +38,9 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         _dragController.PickedObject.AddListener(_ =>
         {
             DisableActiveSinglePopup();
-            SetActiveLayer(UILayer.None);
+            SetActiveLayer(UILayer.None).Forget();
         });
-        _dragController.DroppedObject.AddListener(_ => SetActiveLayer(UILayer.Group));
+        _dragController.DroppedObject.AddListener(_ => SetActiveLayer(UILayer.Group).Forget());
     }
     
     public async UniTask SetActiveLayer(UILayer layer)
@@ -80,7 +80,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         
         _layers.Add(UILayer.Single, entityTooltip);
         
-        SetActiveLayer(UILayer.Single);
+        SetActiveLayer(UILayer.Single).Forget();
         
         await KeepElementActiveWhileNeeded(entityTooltip);
     }
@@ -93,7 +93,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         
         _layers.Add(UILayer.Single, crystalInspectionTooltip);
         
-        SetActiveLayer(UILayer.Single);
+        SetActiveLayer(UILayer.Single).Forget();
         
         await KeepElementActiveWhileNeeded(crystalInspectionTooltip);
     }
@@ -106,7 +106,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         
         _layers.Add(UILayer.Single, effectInspectionTooltip);
         
-        SetActiveLayer(UILayer.Single);
+        SetActiveLayer(UILayer.Single).Forget();
         
         await KeepElementActiveWhileNeeded(effectInspectionTooltip);
     }
@@ -117,7 +117,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         await effectPreviewTooltip.Initialilize(selectionOptionObject);
 
         _layers.Add(UILayer.Group, effectPreviewTooltip);
-        UpdateTooltipStates(UILayer.Group);
+        UpdateTooltipStates(UILayer.Group).Forget();
         
         return effectPreviewTooltip;
     }
@@ -127,6 +127,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         if (_layers.Contains(UILayer.Single)) _layers.Remove(UILayer.Single, element);
         if (_layers.Contains(UILayer.Group)) _layers.Remove(UILayer.Group, element);
         await element.Disable();
+        Destroy(element.gameObject);
     }
     
     public void DisableActiveSinglePopup()

@@ -5698,9 +5698,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 6962649217439341937}
+  _hasPriority: 1
+  _priorityType: 1
 --- !u!114 &3582716686241911845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5827,8 +5828,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: Lightning tower
-  _inspectableObjectDescription: Uses #PropogationKeyword
+  _localizationKey: lightning_tower_building_entity_tooltip
 --- !u!114 &6499896294953490330
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,14 +1,20 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using Cashing;
 using Combat;
 
 public class AreaManager : MonoBehaviour
 {
-    [SerializeField] private AreaEntityDetectorPriorityType _priorityType;
     [SerializeField] private List<AreaScanerController> _mainScanerControllers;
+    
+    [Header("Priority")] 
+    [SerializeField] private bool _hasPriority;
+    [ShowIf("_hasPriority")] [SerializeField] private AreaEntityDetectorPriorityType _priorityType;
+    
     [Cached] protected ReachAreaScale _reachAreaScale;
     
+    public bool HasPriority => _hasPriority;
     public AreaEntityDetectorPriorityType CurrentPriorityType => _priorityType;
     public List<AreaScanerController> ControlledScanerControllers => _mainScanerControllers;
     

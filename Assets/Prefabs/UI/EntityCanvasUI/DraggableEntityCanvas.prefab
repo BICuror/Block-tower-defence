@@ -29,7 +29,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 553685612629688267}
   - {fileID: 1543958672118755204}
   m_Father: {fileID: 3958333850256313247}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -96,6 +95,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5330937324501101719}
+  - {fileID: 553685612629688267}
   - {fileID: 8091797035589061922}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _customContentParent: {fileID: 8091797035589061922}
   _itemsSpacing: 0.1
-  _healthBarHeight: 0.2
+  _healthBarHeight: 0.05
   _includeHealthBarToCustomContent: 1
   _healthBar: {fileID: 944979917984191782}
   _barHeight: 0.2
@@ -158,7 +158,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6447114768740418421, guid: e29c3f767fe9afb48953138485697c0c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000000044703484
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6447114768740418421, guid: e29c3f767fe9afb48953138485697c0c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -204,7 +204,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 8091797035589061922}
+    m_TransformParent: {fileID: 3958333850256313247}
     m_Modifications:
     - target: {fileID: 2120107346048484211, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
       propertyPath: m_LocalPosition.x

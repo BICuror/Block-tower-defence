@@ -1,4 +1,3 @@
-using UnityEngine;
 using Combat;
 
 public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
@@ -7,9 +6,7 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
     private EntityModificatorData _modificatorData;
     private EffectInspectionTooltipPreview _effectPreviewTooltip;
     
-    public override string OptionName => _modificatorData.ModificatorName;
-    public override string OptionDescription => _modificatorData.ModificatorDescription;
-    public override Sprite Icon => _modificatorData.Icon;
+    public EntityModificatorData ModificatorData => _modificatorData;
 
     public void SetTargetBuildingEntity(BuildingEntity buildingEntity) => _targetBuildingEntity = buildingEntity;
 
@@ -17,10 +14,10 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
     {
         _modificatorData = modificatorData;
 
-        _effectPreviewTooltip = await InspectionTooltipManager.Instance.OpenEffectPreviewTooltip(this);
+        _effectPreviewTooltip = await InspectionTooltipManager.Instance.OpenEffectPreviewTooltip(_modificatorData, transform);
     }
     
-    public override void ApplyEffect()
+    public override void ApplySelectedEffect()
     {
         _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_modificatorData);
     }

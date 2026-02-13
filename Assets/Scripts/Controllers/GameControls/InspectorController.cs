@@ -98,7 +98,7 @@ public class InspectorController : MonoBehaviour
         }        
         else if (inspectable.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
         {
-            await _inspectionTooltipManager.OpenEffectTooltip(selectionOptionObject);
+            await _inspectionTooltipManager.OpenEffectTooltip(selectionOptionObject.ModificatorData, selectionOptionObject.transform);
         }
 
         if (inspectable)

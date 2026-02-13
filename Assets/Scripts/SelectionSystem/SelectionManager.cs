@@ -91,7 +91,7 @@ public sealed class SelectionManager : MonoBehaviour
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
     {
-        optionObject.ApplyEffect();
+        optionObject.ApplySelectedEffect();
         
         _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
         _selectionOptionsCanBePlaced = false;

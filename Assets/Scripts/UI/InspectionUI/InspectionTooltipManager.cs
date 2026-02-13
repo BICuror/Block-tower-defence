@@ -98,11 +98,11 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         await KeepElementActiveWhileNeeded(crystalInspectionTooltip);
     }
     
-    public async UniTask OpenEffectTooltip(SelectionOptionObject selectionOptionObject)
+    public async UniTask OpenEffectTooltip(EntityModificatorData entityModificatorData, Transform target)
     {
         EffectInspectionTooltip effectInspectionTooltip = Instantiate(_effectInspectionTooltipPrefab, _uiRoot);
         
-        await effectInspectionTooltip.SetSelectionOptionObject(selectionOptionObject);
+        effectInspectionTooltip.Initialize(entityModificatorData, target);
         
         _layers.Add(UILayer.Single, effectInspectionTooltip);
         
@@ -111,10 +111,10 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         await KeepElementActiveWhileNeeded(effectInspectionTooltip);
     }
 
-    public async UniTask<EffectInspectionTooltipPreview> OpenEffectPreviewTooltip(SelectionOptionObject selectionOptionObject)
+    public async UniTask<EffectInspectionTooltipPreview> OpenEffectPreviewTooltip(EntityModificatorData entityModificatorData, Transform target)
     {
         EffectInspectionTooltipPreview effectPreviewTooltip = Instantiate(_effectPreviewTooltipPrefab, _uiRoot);
-        await effectPreviewTooltip.Initialilize(selectionOptionObject);
+        effectPreviewTooltip.Initialilize(entityModificatorData, target);
 
         _layers.Add(UILayer.Group, effectPreviewTooltip);
         UpdateTooltipStates(UILayer.Group).Forget();

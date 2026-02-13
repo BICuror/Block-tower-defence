@@ -8,10 +8,10 @@ public sealed class EffectInspectionTooltipPreview : PointFollowingCanvasUIEleme
     [SerializeField] private TextMeshProUGUI _previewName;
     [SerializeField] private Image _previewImage;
     
-    public async UniTask Initialilize(SelectionOptionObject selectionOptionObject)
+    public void Initialilize(EntityModificatorData entityModificatorData, Transform target)
     {
-        _previewName.text = selectionOptionObject.OptionName;
-        _previewImage.sprite = selectionOptionObject.Icon;
-        SetTarget(selectionOptionObject.transform);
+        _previewName.text = entityModificatorData.ModificatorName;
+        _previewImage.sprite = entityModificatorData.Icon;
+        SetTarget(target);
     }
 }

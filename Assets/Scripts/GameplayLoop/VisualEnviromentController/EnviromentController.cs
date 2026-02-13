@@ -62,6 +62,7 @@ public sealed class EnviromentController : MonoBehaviour
         {
             lightChange.Light.DOIntensity(lightChange.Intensity, _changeDuration).SetEase(_changeCurve);
             lightChange.Light.DOColor(lightChange.Color, _changeDuration).SetEase(_changeCurve);
+            lightChange.Light.transform.DORotate(new Vector3(Random.Range(20f, 50f), Random.Range(0f, 360f), 0f), _changeDuration);
         });
 
         _enviromentStates[_currentEnviromentStateIndex].EnviromentMaterialChanges.ForEach(DoMaterialPropertyTween);

@@ -115,6 +115,8 @@ MonoBehaviour:
   _buildingParent: {fileID: 7696658143379082585}
   _visualEffect: {fileID: 7395655948900571337}
   _draggableObject: {fileID: 1524489999279150314}
+  _buildingOutlineColor: {r: 0.13679248, g: 0.9338663, b: 1, a: 1}
+  _buildingOutlineThickness: 4
 --- !u!114 &-7153984471201128088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,8 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: 
-  _inspectableObjectDescription: 
+  _localizationKey: 
 --- !u!1001 &6678050492469982003
 PrefabInstance:
   m_ObjectHideFlags: 0

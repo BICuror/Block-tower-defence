@@ -10,6 +10,10 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
     [SerializeField] private Transform _visualEffect;
     [SerializeField] private DraggableObject _draggableObject;
     
+    [Header("BuildingOutline")]
+    [SerializeField] private Color _buildingOutlineColor;
+    [SerializeField] private float _buildingOutlineThickness;
+    
     private BuildingEntity _draggablePrefab;
     private BuildingEntity _instantiatedBuilding;
     
@@ -39,5 +43,9 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
         
         _draggableObject.DraggablePickedUp += _ => ((IDraggable)_instantiatedBuilding.Draggable).PickUp();
         _draggableObject.DraggablePlaced += _ => ((IDraggable)_instantiatedBuilding.Draggable).Place();
+
+        Outline buildingOutline = _instantiatedBuilding.ComponentsContainer.Get<DragAnimationObject>().GetComponent<Outline>();
+        buildingOutline.OutlineColor = _buildingOutlineColor;
+        buildingOutline.OutlineWidth = _buildingOutlineThickness;
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 using Zenject;
 using System;
 using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 using Random = UnityEngine.Random;
 
 public sealed class EnviromentController : MonoBehaviour
@@ -30,6 +31,8 @@ public sealed class EnviromentController : MonoBehaviour
 
         SetEnviromentState(_enviromentStates[_currentEnviromentStateIndex]);
     }
+
+    [Button] public void DebugChangeEnviromentState() => TryEnterNextState();
 
     private void SetEnviromentState(EnviromentState state)
     {

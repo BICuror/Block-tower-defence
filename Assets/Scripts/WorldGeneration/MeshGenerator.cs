@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace WorldGeneration
 {
@@ -175,8 +173,8 @@ namespace WorldGeneration
 
         private void CheckAroundPositionToCreateWall(Vector3Int position)
         {
-            if (ShouldCheckThisBlockType(_blockGrid.GetBlockType(position)) == false) return; 
-
+            if (_blockGrid.GridSpaceIsEmpty(position)) return;
+ 
             for (int i = 0; i < _wallCheckDirections.Length; i++)
             {
                 Vector3Int blockPositionToCheck = position + _wallCheckDirections[i];
@@ -221,7 +219,7 @@ namespace WorldGeneration
 
         private void CheckAroundPosition(Vector3Int position)
         {
-            if (ShouldCheckThisBlockType(_blockGrid.GetBlockType(position)) == false) return; 
+            if (_blockGrid.GridSpaceIsEmpty(position)) return;
 
             for (int i = 0; i < _allCheckDirections.Length; i++)
             {
@@ -240,8 +238,6 @@ namespace WorldGeneration
                 }
             }
         }
-
-        protected virtual bool ShouldCheckThisBlockType(BlockType type) => true;
 
         private void SetFace(Vector3Int position, int index)
         {

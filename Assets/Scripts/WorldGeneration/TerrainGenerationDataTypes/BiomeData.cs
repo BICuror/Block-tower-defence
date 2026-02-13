@@ -14,4 +14,5 @@ public sealed class BiomeData : ScriptableObject
     public NoiseSetting[] Noises => _noiseSetting;
     public DecorationModule DecorationsModule => _decorationModule;
     public TilemapData TilemapData => _tilemapData;
+    
 }

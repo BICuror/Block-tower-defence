@@ -7,18 +7,23 @@ namespace WorldGeneration
     {
         [Inject] private TextureManager _textureManager;
 
-        [SerializeField] private TerrainSetter _islandTerrainSetter;
+        [SerializeField] private TilemapOverlapSeamsGenerator _tilemapOverlapSeamsGenerator;
+        [SerializeField] private IslandTileTerrainGenerator _islandTileTerrainGenerator;
         [SerializeField] private TerrainSetter _islandBottomTerrainSetter;
+        [SerializeField] private TerrainSetter _islandTerrainSetter;
+        [SerializeField] private MeshGenerator _meshGenerator;
 
         public void CreateMesh(BlockGrid blockGrid)
         {
-            IslandTerrainMeshGenerator meshGenerator = new IslandTerrainMeshGenerator();
+            _meshGenerator.SetupGenerator(blockGrid, _textureManager);
 
-            meshGenerator.SetupGenerator(blockGrid, _textureManager);
-
-            _islandBottomTerrainSetter.SetMesh(meshGenerator.GetBottomMesh());
+            _islandBottomTerrainSetter.SetMesh(_meshGenerator.GetBottomMesh());
             
-            _islandTerrainSetter.SetMesh(meshGenerator.GetDefaultMesh());
+            _islandTerrainSetter.SetMesh(_meshGenerator.GetDefaultMesh());
+            
+            _islandTileTerrainGenerator.GenerateTerrain();
+            
+            _tilemapOverlapSeamsGenerator.GenerateTerrain();
         }
     }
 }

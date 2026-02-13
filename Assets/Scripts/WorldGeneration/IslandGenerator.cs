@@ -1,13 +1,12 @@
-using System;
 using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
+using System;
 
-namespace WorldGeneration
+namespace WorldGeneration 
 {
     public sealed class IslandGenerator : MonoBehaviour
     {
-        [SerializeField] private IslandTileTerrainGenerator _islandTileTerrainGenerator;
         [Inject] private IslandDataContainer _islandDataContainer;
         [Inject] private IslandDecorationGenerator _islandDecorationGenerator;
         [Inject] private EnviromentCreator _enviromentCreator;
@@ -23,13 +22,9 @@ namespace WorldGeneration
         public void GenerateIsland()
         {
             GenerateNewSeedsAndHeightMap();
-
             ConvertHeightMapToBlockGrid();
-
             GenerateTerrainMesh();
-                
             GenerateDecorations();
-
             CreateEnviroment();
         }
 
@@ -64,8 +59,6 @@ namespace WorldGeneration
         private void GenerateTerrainMesh()
         {
             _islandTerrainMeshCreator.CreateMesh(_islandGridHolder.Grid);
-            
-            _islandTileTerrainGenerator.GenerateTerrain();
         }
 
         private void GenerateDecorations()

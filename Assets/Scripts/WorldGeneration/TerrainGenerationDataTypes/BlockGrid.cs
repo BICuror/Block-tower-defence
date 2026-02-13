@@ -4,7 +4,7 @@ namespace WorldGeneration
 {
     public class BlockGrid
     {
-        private BlockType[,,] _grid; 
+        private bool[,,] _grid; 
 
         private int _height;
         private int _size;
@@ -17,24 +17,24 @@ namespace WorldGeneration
             _size = size;
             _height = height;
             
-            _grid = new BlockType[_size, _height, _size];
+            _grid = new bool[_size, _height, _size];
         }
 
-        public void SetBlockType(Vector3Int position, BlockType type)
+        public void SetBlock(Vector3Int position)
         {
-            _grid[position.x, position.y, position.z] = type;
+            _grid[position.x, position.y, position.z] = true;
         }
 
         public bool GridSpaceIsEmpty(Vector3Int position)
         {
-            return _grid[position.x, position.y, position.z] == BlockType.Empty;
+            return !_grid[position.x, position.y, position.z];
         }
 
         public int GetMaxHeight(int x, int z)
         {
             for (int height = 1; height < _height; height++)
             {
-                if (_grid[x, height, z] == BlockType.Empty) return height - 1;
+                if (!_grid[x, height, z]) return height - 1;
             }
 
             return 0;
@@ -47,11 +47,6 @@ namespace WorldGeneration
             if (position.z < 0 || position.z > _size - 1) return false;
 
             return true;
-        }
-
-        public BlockType GetBlockType(Vector3Int position)
-        {
-            return _grid[position.x, position.y, position.z];
         }
     }
 }

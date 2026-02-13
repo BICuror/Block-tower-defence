@@ -30,10 +30,5 @@ namespace WorldGeneration
 
             return true;
         }  
-
-        protected override bool ShouldCheckThisBlockType(BlockType type)
-        {
-            return (type == BlockType.Corruption) || (type == BlockType.CorruptionOnWater);
-        }
     }
 }

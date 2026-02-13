@@ -2443,6 +2443,11 @@ Transform:
   - {fileID: 343986110}
   m_Father: {fileID: 482485258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &625939311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1101650385253557965, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+  m_PrefabInstance: {fileID: 8679370445069788115}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &656602873
 GameObject:
   m_ObjectHideFlags: 0
@@ -4154,12 +4159,37 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6745301357520427304, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
   m_PrefabInstance: {fileID: 8679370445069788115}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 625939311}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72cb2fe2618ae90418cf2de525cddc9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1189632685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625939311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 077a7369415e3374ab3f06fefc685436, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldGeneration.MeshGenerator
+--- !u!114 &1189632686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 625939311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc755c3bea0b4264fb8a7bdb5af72f22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WorldGeneration.TilemapOverlapSeamsGenerator
+  _tileParent: {fileID: 1696498464}
 --- !u!1 &1218002476
 GameObject:
   m_ObjectHideFlags: 0
@@ -16905,6 +16935,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6745301357520427304, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _meshGenerator
+      value: 
+      objectReference: {fileID: 1189632685}
+    - target: {fileID: 6745301357520427304, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _islandTerrainSetter
       value: 
       objectReference: {fileID: 1696498465}
@@ -16912,6 +16946,14 @@ PrefabInstance:
       propertyPath: _islandBottomTerrainSetter
       value: 
       objectReference: {fileID: 453540245}
+    - target: {fileID: 6745301357520427304, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _islandTileTerrainGenerator
+      value: 
+      objectReference: {fileID: 1696498469}
+    - target: {fileID: 6745301357520427304, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _tilemapOverlapSeamsGenerator
+      value: 
+      objectReference: {fileID: 1189632686}
     - target: {fileID: 7470602459031743859, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _navigationMapper
       value: 
@@ -16958,6 +17000,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1892278381407435233, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 474860760}
+    - targetCorrespondingSourceObject: {fileID: 1101650385253557965, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1189632685}
+    - targetCorrespondingSourceObject: {fileID: 1101650385253557965, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1189632686}
   m_SourcePrefab: {fileID: 100100000, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
 --- !u!4 &8679370445069788116 stripped
 Transform:

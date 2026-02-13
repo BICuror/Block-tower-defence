@@ -49,18 +49,14 @@ namespace WorldGeneration
             {        
                 for (int z = 0; z < _islandData.IslandSize; z++)
                 {
-                    if (roadMap[x, z]) 
+                    if (roadMap[x, z])
                     {
-                        if (heightMap[x, z] == 0) 
-                        {
-                            roadGrid.SetBlockType(new Vector3Int(x, 1, z), BlockType.RoadOnWater);  
-                        }
-                        else
-                        {
-                            roadGrid.SetBlockType(new Vector3Int(x, heightMap[x, z], z), BlockType.Road);  
-                        }
+                        int height = heightMap[x, z];
                         
+                        if (height == 0) height = 1;
 
+                        roadGrid.SetBlock(new Vector3Int(x, height, z));
+                        
                         _islandDecorationContainer.SetActiveDecorations(x, z, false);
                     }
                 }

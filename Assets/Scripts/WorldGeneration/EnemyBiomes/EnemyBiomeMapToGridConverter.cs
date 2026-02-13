@@ -36,18 +36,11 @@ namespace WorldGeneration
                             height = _islandGridHolder.Grid.GetMaxHeight(currentPosition.x, currentPosition.y);
                         }
 
-                        BlockType blockType = BlockType.Corruption;
-
-                        if (height == 0) 
-                        {
-                            height = _islandData.CorruptionLessZeroHeight;
-
-                            blockType = BlockType.CorruptionOnWater;
-                        }
+                        if (height == 0) height = _islandData.CorruptionLessZeroHeight;
                         
                         for (int y = height; y >= 0; y--)
                         {
-                            enemyBiomeGrid.SetBlockType(new Vector3Int(x, y, z), blockType);  
+                            enemyBiomeGrid.SetBlock(new Vector3Int(x, y, z));  
                         }    
                     }
                 }

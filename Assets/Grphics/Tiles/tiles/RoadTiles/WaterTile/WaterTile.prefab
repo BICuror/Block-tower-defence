@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2969790986039244014}
-  m_Mesh: {fileID: -5495902117074765545, guid: 979929ddc438a0140b8cdda341d8ccc5, type: 3}
+  m_Mesh: {fileID: -8670151273213183110, guid: ad9e5299cd28cbd4ca3bfc68704ca200, type: 3}
 --- !u!23 &3499275912100117150
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -105,6 +105,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Tile
   _scaleMultiplier: 0.3
   _meshRenderer: {fileID: 3499275912100117150}
-  _mainMaterial: {fileID: 2100000, guid: 5c037348824bb914192c967a903f3184, type: 2}
-  _hasTransition: 1
-  _transitionMaterial: {fileID: 2100000, guid: 6e69fa28f2e505b45b4c8b803d68c5f2, type: 2}

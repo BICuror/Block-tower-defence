@@ -90,7 +90,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2228262887125687321}
-  m_Mesh: {fileID: -6686972915969242016, guid: ad80c30da32d9024d939226c90fb1454, type: 3}
+  m_Mesh: {fileID: -8670151273213183110, guid: 704ef0facd0f5e24d9c7785a3e30cfe9, type: 3}
 --- !u!114 &2730932783687056053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +103,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968f3e51e7c441b4aaf355f79729a285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Tile
+  _scaleMultiplier: 0.5
   _meshRenderer: {fileID: 2259547284304452045}
-  _mainMaterial: {fileID: 2100000, guid: 585a25d225326d7489df3029c91153d2, type: 2}
-  _hasTransition: 1
-  _transitionMaterial: {fileID: 2100000, guid: de06447b1d9a93a4398603d47b481446, type: 2}

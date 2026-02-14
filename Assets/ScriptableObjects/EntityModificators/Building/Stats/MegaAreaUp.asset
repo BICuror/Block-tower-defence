@@ -27,6 +27,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -75,7 +76,7 @@ MonoBehaviour:
   _createIcon: 0
   _icon: {fileID: 0}
   _modificatorName: Mega reacher
-  _modificatorDescription: '#good +2 good# #Reach, #bad +100% bad# #BuildTime, #bad
+  _modificatorDescription: '#good +2 good# #Reach, #bad +0.5 bad# #BuildTime, #bad
     +25% bad# #Recharge'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}

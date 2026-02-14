@@ -25,7 +25,7 @@ public sealed class MortarTower : DefaultCombatTaskConditionProvider
         
         CoreLaunched.Initialize(_ownerEntity);
         
-        _grenadeObjectPool = new WeaponPool<MortarProjectile>(_projectilePrefab, 2, _ownerEntity, 10);
+        _grenadeObjectPool = new WeaponPool<MortarProjectile>(_projectilePrefab, 2, _ownerEntity);
 
         _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += () => Shoot().Forget();
     }

@@ -12,7 +12,6 @@ namespace Combat
         
         private CancellationTokenSource _cancellationTokenSource = new();
         private float _lifetime;
-        private bool _lifetimeTrackActive;
         
         public void Initialize(CombatEntity ownerEntity, float lifetime)
         {
@@ -23,50 +22,47 @@ namespace Combat
         
         #region StateManagements
 
-        protected void OnEnable() => SetState(true);
-        
-        protected void OnDisable() => SetState(false);
-        
-        private async UniTask StartLifetimeTrack()
+        protected void OnEnable()
         {
             StopLifetimeTrack();
+            SetState(true);
             
-            _cancellationTokenSource = new();
-            _lifetimeTrackActive = true;
-            
-            try
-            { 
-                await UniTask.WaitForSeconds(_lifetime, cancellationToken: _cancellationTokenSource.Token); 
-                SetState(false);
-            }
-            catch (Exception e) { e.LogAsync(); }
+            if (_lifetime > 0) StartLifetimeTrack().Forget();
+        }
 
-            _lifetimeTrackActive = false;
+        protected void OnDisable() => StopLifetimeTrack();
+        
+        private async UniTask StartLifetimeTrack()
+        {      
+            _cancellationTokenSource = new();
+
+            try
+            {
+                await UniTask.WaitForSeconds(_lifetime, cancellationToken: _cancellationTokenSource.Token, cancelImmediately: true);
+            }
+            catch (Exception e)
+            {
+                e.LogAsync(); 
+                return;
+            }
+            
+            SetState(false);
         }
 
         private void StopLifetimeTrack()
         {
-            if (!_lifetimeTrackActive) return;
+            if (_cancellationTokenSource == null) return;
             
             _cancellationTokenSource.Cancel();
-            _lifetimeTrackActive = false;
+            _cancellationTokenSource.Dispose();
+            _cancellationTokenSource = null;
         }
         
         protected void SetState(bool state)
         {
-            if (!gameObject) return;
-            
             Collider.enabled = state;
             gameObject.SetActive(state);
-            
-            if (state == gameObject.activeSelf) return;
-            
-            if (state) StartLifetimeTrack().Forget();
-            else StopLifetimeTrack();
         }
-
-        private void OnDestroy() => StopLifetimeTrack();
-        
         #endregion
     }
 }

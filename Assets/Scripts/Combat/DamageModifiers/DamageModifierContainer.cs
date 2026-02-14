@@ -21,8 +21,6 @@ public sealed class DamageModifierContainer
         
         _modifiersDictionaryList.Add(modifier.GetType(), modifier);
     }
-    
-    public void Remove(Type modifierType) => _modifiersDictionaryList.Remove(modifierType);
 
     public void Remove(DamageModifier modifier)
     {

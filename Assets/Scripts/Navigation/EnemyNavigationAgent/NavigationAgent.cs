@@ -126,14 +126,11 @@ namespace Navigation
             _movementModule.SetDestanation(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _endNode.Position);
             _rotationModule.SetPositions(new Vector3(transform.position.x, _startNode.Position.y, transform.position.z), _nextNode.Position);
 
-            float duration = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition) * _speed.Value;
-            float elapsedTime = duration * _movementProgress;
+            float distance = Vector2.Distance(new Vector2(transform.position.x, transform.position.z), _endNode.RoundedPosition);
 
-            while (elapsedTime < duration)
+            while (_movementProgress < 1)
             {
-                elapsedTime += Time.fixedDeltaTime;
-
-                _movementProgress = elapsedTime / duration;
+                _movementProgress += Time.fixedDeltaTime / _speed.Value / distance;
 
                 _movementModule.MoveTowardsNextPosition(_movementProgress);
                 _rotationModule.RotateTowardsNode(_movementProgress);
@@ -150,6 +147,9 @@ namespace Navigation
                     return;
                 }
             }
+            
+            _movementModule.MoveTowardsNextPosition(1f);
+            _rotationModule.RotateTowardsNode(1f);
 
             if (!_currentNavigationMapLayer.IsEnabled) FindSuitableLayer();
 

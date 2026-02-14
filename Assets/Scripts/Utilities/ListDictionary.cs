@@ -62,11 +62,6 @@ public sealed class ListDictionary<TKey, TValue>
         return _dictionary[key];
     }
     
-    public bool TryGetValue(TKey key, out List<TValue> value)
-    {
-        return _dictionary.TryGetValue(key, out value);
-    }
-    
     public bool Contains(TKey key)
     {
         return _dictionary.ContainsKey(key);

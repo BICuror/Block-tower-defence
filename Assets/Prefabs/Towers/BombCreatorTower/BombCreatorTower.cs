@@ -55,7 +55,7 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         
         bomb.EnableExplosion();
 
-        if (_waveStateMachine.CurrentState != WaveState.Idle) bomb.StartExplosionAsync();
+        if (_waveStateMachine.CurrentState != WaveState.Attack) bomb.StartExplosionAsync();
     }
 
     private void InvokeBombExploded(Bomb bomb) => BombExploded.Execute(bomb.transform.position);

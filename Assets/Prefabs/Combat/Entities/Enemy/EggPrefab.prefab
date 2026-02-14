@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7937203538748229168}
   - component: {fileID: 8866580482083097337}
-  - component: {fileID: 8962515833399813968}
+  - component: {fileID: 2626360411402433495}
   - component: {fileID: 2871001814068834481}
   - component: {fileID: 4287793710189075246}
   - component: {fileID: 8966701188442631870}
@@ -75,8 +75,8 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!136 &8962515833399813968
-CapsuleCollider:
+--- !u!135 &2626360411402433495
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,11 +92,9 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.32754484
-  m_Height: 1.4491887
-  m_Direction: 1
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 0.38107654
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2871001814068834481
 MonoBehaviour:
@@ -207,6 +205,7 @@ MonoBehaviour:
   - StructName: SpawnDelay
     _statData: {fileID: 11400000, guid: aa9be83ed5e46a74ebc20381ba7a49d0, type: 2}
     _defaultValue: 3
+  _shouldDestoryOnDeath: 1
 --- !u!114 &1473540362893138095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,7 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0600d1eed3e26a848888216c6c715aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEgg
+  _invunrabilityPeriod: 0.2
   _autoAddToGlobalEnemyContainer: 1
+  _ownerEntity: {fileID: 5338315934051013164}
 --- !u!1 &7054756542685745599
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,7 +592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5627537300860954135, guid: a366e615472a3e84bb93f41fe606f686, type: 3}
       propertyPath: _stopAction
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5627537300860954135, guid: a366e615472a3e84bb93f41fe606f686, type: 3}
       propertyPath: _detachFromParentWhilePlaying

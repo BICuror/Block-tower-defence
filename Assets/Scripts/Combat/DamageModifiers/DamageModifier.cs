@@ -16,6 +16,5 @@ public abstract class DamageModifier
 public enum ResolveOrder
 {
     Default,
-    Final,
-    Single
+    Final
 }

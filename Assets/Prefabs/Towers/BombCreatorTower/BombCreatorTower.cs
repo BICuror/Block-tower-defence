@@ -54,6 +54,8 @@ public sealed class BombCreatorTower : MonoBehaviour, ITaskConditionProvider
         await _draggableCreator.ActivateDraggableOnRandomPosition(bomb.DraggableObject, transform.position, 2);
         
         bomb.EnableExplosion();
+
+        if (_waveStateMachine.CurrentState != WaveState.Idle) bomb.StartExplosionAsync();
     }
 
     private void InvokeBombExploded(Bomb bomb) => BombExploded.Execute(bomb.transform.position);

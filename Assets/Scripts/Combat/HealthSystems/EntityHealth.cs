@@ -7,12 +7,17 @@ namespace Combat
     {
         [Cached] private CombatEntity _entity;
         [Cached] private MaxHealth _maxHpStat;
+        
+        private readonly TokenContainer _invulnerabilityTokenContainer = new(false);
         private float _maxHealth;
         private float _currentHp;
+        
+        public TokenContainer InvulnerabilityTokenContainer => _invulnerabilityTokenContainer;
         
         public event Action Damaged;
         public event Action Healed;
         public event Action Died;
+        public event Action HandleDeath;
         public event Action<CombatEntity> EntityDamaged;
         public event Action<CombatEntity> EntityDied; 
         
@@ -38,13 +43,14 @@ namespace Combat
         }
         
         #region DamageRecivement 
-        public void ReceivePercentEffectDamage(float percent) => ReceiveDamage(_maxHealth * percent);
+        public void ReceivePercentEffectDamage(float percent) => ReceiveEffectDamage(_maxHealth * percent);
+        public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage);
 
         public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
         {
-            float outDamage = damageDealer.DamageModifierContainer.DealerContainer.Modify(baseDamage, _entity);
+            float outDamage = damageDealer.DamageModifierContainer.DealerContainer.ModifyByAllModificators(baseDamage, _entity);
             
-            float resultDamage = _entity.DamageModifierContainer.ReciverContainer.Modify(outDamage, damageDealer);
+            float resultDamage = _entity.DamageModifierContainer.ReciverContainer.ModifyByAllModificators(outDamage, damageDealer);
             
             ReceiveDamage(resultDamage);
 
@@ -54,10 +60,10 @@ namespace Combat
                 _entity.DamageModifierContainer.InvokeOnDeathEffects(damageDealer);
             }
         }
-        public void ReceiveEffectDamage(float damage) => ReceiveDamage(damage);
+
         private void ReceiveDamage(float damage)
         {
-            if (damage <= 0 || !IsAlive()) return;
+            if (damage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
             _currentHp -= damage;
     
@@ -88,6 +94,7 @@ namespace Combat
             _currentHp = 0;
             Died?.Invoke();
             EntityDied?.Invoke(_entity);
+            HandleDeath.Invoke();
         }
     }   
 }

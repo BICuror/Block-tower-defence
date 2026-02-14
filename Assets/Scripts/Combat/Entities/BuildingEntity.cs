@@ -24,7 +24,7 @@ namespace Combat
             InjectCached(_health);
             _health.Initialize();
             _health.RefilHP();
-            _health.Died += HandleDeathEvent;
+            _health.HandleDeath += HandleDeathEvent;
 
             if (!_destroyOnDeath) _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted += RefillHealthOrRevive;
         }
@@ -37,12 +37,9 @@ namespace Combat
 
         private void HandleDeathEvent()
         {
-            if (_destroyOnDeath)
-            {
-                _health.Died -= HandleDeathEvent;
-                Destroy(gameObject);
-            }
-            else gameObject.SetActive(false);
+            gameObject.SetActive(false);
+            
+            if (_destroyOnDeath) Destroy(gameObject);
         }
     }
 }

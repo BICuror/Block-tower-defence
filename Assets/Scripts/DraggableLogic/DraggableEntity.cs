@@ -18,13 +18,13 @@ namespace Combat
 
         private void OnEntityPickedUp()
         {
-            OwnerEntity.DamageModifierContainer.ReciverContainer.Add<InvincibilityDamageModifier>();
+            OwnerEntity.Health.InvulnerabilityTokenContainer.AddToken();
             EntityPickedUp?.Invoke(OwnerEntity);
         }
 
         private void OnEntityPlaced()
         {
-            OwnerEntity.DamageModifierContainer.ReciverContainer.Remove<InvincibilityDamageModifier>();
+            OwnerEntity.Health.InvulnerabilityTokenContainer.RemoveToken();
             EntityPlaced?.Invoke(OwnerEntity);
         }
 

@@ -1,40 +1,46 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
-using Cashing;
 using Zenject;
 using System;
 using Combat;
 
 public sealed class EnemyEgg : MonoBehaviour
 {
-    [SerializeField] private bool _autoAddToGlobalEnemyContainer;
-    
     [Inject] private GlobalEnemyContainer _globalEnemyContainer;
-    [Cached] private EnemyEntity _ownerEntity;
-    [Cached] private SpawnDelay _spawnDelay;
+
+    [SerializeField] private float _invunrabilityPeriod = 0.5f;
+    [SerializeField] private bool _autoAddToGlobalEnemyContainer;
+    [SerializeField] private EnemyEntity _ownerEntity;
     
     private CancellationTokenSource _cancellationTokenSource = new();
-
+    
     private void Start()
     {
         if (_globalEnemyContainer.Entities.Count == 0)
         {
             _ownerEntity.Health.Die();
+            return;
         }
-        else
-        {
-            if (_autoAddToGlobalEnemyContainer) _globalEnemyContainer.Add(_ownerEntity);
-            _ownerEntity.Health.Died += CancelSpawn;
-            _ownerEntity.Health.RefilHP();
-        }
+        
+        _ownerEntity.Health.InvulnerabilityTokenContainer.AddToken();
+        _ownerEntity.Health.RefilHP();
+        if (_autoAddToGlobalEnemyContainer) _globalEnemyContainer.Add(_ownerEntity); 
+        
+        if (_ownerEntity.ComponentsContainer.Get<Collider>().enabled) Debug.LogError("Egg collider should be disabled by default in prefab, otherwise it might break entity area detectors and global enemy list");
+        
+        _ownerEntity.ComponentsContainer.Get<Collider>().enabled = true;
     }
 
     public async UniTask TrySpawnEnemy(EnemyData enemyData)
     {
+        await UniTask.WaitForSeconds(_invunrabilityPeriod);
+        
+        _ownerEntity.Health.InvulnerabilityTokenContainer.RemoveToken();
+        
         try
         {
-            await UniTask.WaitForSeconds(3, cancellationToken: _cancellationTokenSource.Token);
+            await UniTask.WaitForSeconds(_ownerEntity.StatContainer.Get<SpawnDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
         }
         catch (Exception e)
         {
@@ -42,10 +48,7 @@ public sealed class EnemyEgg : MonoBehaviour
             return;
         }
 
-        if (_globalEnemyContainer.Entities.Count > 1 || _globalEnemyContainer.Entities[0] != _ownerEntity)
-        {
-            EnemyFactory.Instance.CreateEnemy(enemyData, transform.position);
-        }
+        EnemyFactory.Instance.CreateEnemy(enemyData, transform.position);
         
         _ownerEntity.Health.Die();
     }
@@ -54,11 +57,7 @@ public sealed class EnemyEgg : MonoBehaviour
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose(); 
-        _cancellationTokenSource = new();
     }
 
-    private void OnDestroy()
-    {
-        _ownerEntity.Health.Died -= CancelSpawn;
-    }
+    private void OnDestroy() => CancelSpawn();
 }

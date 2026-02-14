@@ -12,6 +12,9 @@ namespace WorldGeneration
         public GameObject EniviromentObject => _eniviromentObject;
 
         [Header("GlobalStats")] 
+        [SerializeField] private WavesContentConfig _wavesContentConfig;
+        public WavesContentConfig WavesContentConfig => _wavesContentConfig;
+        
         [SerializeField] private GlobalStatInitializerConfig _globalStatInitializerConfig;
         public GlobalStatInitializerConfig GlobalStatInitializerConfig => _globalStatInitializerConfig;
         

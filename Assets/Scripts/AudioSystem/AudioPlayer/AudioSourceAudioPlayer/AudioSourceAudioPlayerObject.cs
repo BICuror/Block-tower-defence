@@ -27,14 +27,8 @@ namespace CuroAudio
         public AudioMixer MainAudioMixer => _mainAudioMixer;
         
         public bool Initialized => _initialized;
-    
-        public Action InitializationComplete;
         
-        private void Start()
-        {
-            _initialized = true;
-            InitializationComplete?.Invoke();
-        }
+        private void Start() => _initialized = true;
 
         public void InitializeSFXAudioSourcePool()
         {

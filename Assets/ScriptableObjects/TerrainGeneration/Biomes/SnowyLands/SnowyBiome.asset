@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: SnowyBiome
   m_EditorClassIdentifier: 
   _eniviromentObject: {fileID: 6457869471833738900, guid: 9798b6e851461204788da6d39ad26980, type: 3}
+  _wavesContentConfig: {fileID: 11400000, guid: 0ded3e210901ed143b62eb0455202830, type: 2}
   _globalStatInitializerConfig: {fileID: 11400000, guid: 432184b27f527dd45b3fc128b864a1a2, type: 2}
   _selectionContainer: {fileID: 11400000, guid: 13dab2e04a7fade4798f540a8342c71c, type: 2}
   _itemToggleEffectContainer: {fileID: 11400000, guid: a6bd5813119610140bcf4600f26ef476, type: 2}
@@ -31,6 +32,7 @@ MonoBehaviour:
   _islandRadius: 14
   _islandMaxHeight: 40
   _islandHeightOffset: 5
+  _minimalBiomeIndexDistance: 2
   _biomes:
   - _appearRate: 0.334
     _biomeData: {fileID: 11400000, guid: 82013b3105bff7743b96b4d58a106de2, type: 2}

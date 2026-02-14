@@ -10,7 +10,6 @@ public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private TerrainAnimator _roadAnimator;
-    [SerializeField] private Transform _townhallTransform;
     [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     [Inject] private IslandDecorationContainer _decorationContainer;
     [Inject] private NavigationMapGenerator _navigationMapGenerator;
@@ -53,14 +52,9 @@ public sealed class IdleStateController : WaveStateController
         
         _cameraPositionController.SetDefaultPosition();
         
-        _selectionManager.TryEnqueueNewBuildingSelection();
         _selectionManager.TryStartQueuedSelection();
         
-        await UniTask.WaitWhile(() => _selectionManager.SelectionPhaseIsActive);
-        
         _itemContainerManager.UnlockContainer();
-        
-        _itemFactory.CreateWaveItems(_townhallTransform.position, _waveManager.GetCurrentWave() > 1).Forget();
     }
 
     protected override async UniTask OnQuitStateStarted()

@@ -8,11 +8,11 @@ public class WaveStateController : MonoBehaviour
     [SerializeField] protected float TransitionOutDuration;
     [SerializeField] protected float TransitionInDuration;
 
-    public Action EnteredStateStarted;
-    public Action EnteredStateCompleted;
+    public event Action EnteredStateStarted;
+    public event Action EnteredStateCompleted;
 
-    public Action QuitStateStarted;
-    public Action QuitStateCompleted;
+    public event Action QuitStateStarted;
+    public event Action QuitStateCompleted;
 
     public virtual WaveState GetControlledState() => WaveState.None;
     

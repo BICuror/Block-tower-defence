@@ -34,14 +34,16 @@ public sealed class ItemFactory : MonoBehaviour
     } 
 #endif
     
-    public async UniTask CreateWaveItems(Vector3 position, bool createHardItem)
+    public async UniTask CreateWaveItems(Vector3 position, int totalStrength, int minimalItemStrength, int itemAmount)
     {
         await CreateStartWaveItem(position);
         
-        List<List<ToggleGlobalEffectData>> toggleGlobalEffect = _effectSelector.GetItemEffects(11, 3, 2);
+        List<List<ToggleGlobalEffectData>> toggleGlobalEffect = _effectSelector.GetItemEffects(totalStrength, minimalItemStrength, itemAmount);
             
-        await CreateItemFromEffects(toggleGlobalEffect[0], position);
-        if (createHardItem) await CreateItemFromEffects(toggleGlobalEffect[1], position);
+        for (int i = 0; i < toggleGlobalEffect.Count; i++)
+        {
+            await CreateItemFromEffects(toggleGlobalEffect[i], position);
+        }
     }
     
     public async UniTask CreateItem(int strength, Vector3 position)

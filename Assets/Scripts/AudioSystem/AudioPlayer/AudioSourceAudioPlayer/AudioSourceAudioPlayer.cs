@@ -28,13 +28,20 @@ namespace CuroAudio
             _ambienceModule = new(_audioSources);
             _musicModule = new(_audioSources);
             _sfxModule = new(_audioSources);
-            
-            _audioSources.InitializationComplete += InitializeAudioMixerGroupsVolume;
+
+            AwaitToInitializeAudioMixerGroupsVolume().Forget();
         }
         
         // https://docs.unity3d.com/6000.0/Documentation/ScriptReference/Audio.AudioMixer.SetFloat.html#:~:text=To%20expose%20a%20parameter%2C%20go%20to%20the%20Audio,Audio%20Mixer%20group%20parameter%20to%20a%20new%20value
         // Unfortunately we cannot use RuntimeInitializeLoadType.AfterSceneLoad to SetFloat on AudioMixers since it will cause an unexpected behaviour
         // :o( sad af
+        private async UniTask AwaitToInitializeAudioMixerGroupsVolume()
+        {
+            await UniTask.WaitUntil(() => _audioSources.Initialized);
+            
+            InitializeAudioMixerGroupsVolume();
+        }
+        
         private void InitializeAudioMixerGroupsVolume()
         {
             SetMasterVolume(_masterVolume);
@@ -45,8 +52,6 @@ namespace CuroAudio
             {
                 SetVolume(channelVolumesKey, _channelVolumes[channelVolumesKey]);
             }
-            
-            _audioSources.InitializationComplete -= InitializeAudioMixerGroupsVolume;
         }
 
         void IAudioPlayer.PlaySFX(SFXReference reference)

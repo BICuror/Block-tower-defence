@@ -37,34 +37,30 @@ public sealed class SelectionManager : MonoBehaviour
         await UniTask.WaitForSeconds(5);
     }
 
-    [Button] public void EnqueueBuildingUpgradeSelection() => EnqueueSelection(SelectionType.BuildingUpgrade);
+    [Button] public void DEBUGEnqueueBuildingUpgradeSelection() => EnqueueSelection(SelectionType.BuildingUpgrade);
     
     public bool SelectionOptionCanBePlaced(SelectionType type)
     {
         return _selectionOptionsCanBePlaced && type == _currentSelection;
-    }
-
-    public void TryEnqueueNewBuildingSelection()
-    {
-        if (_globalBuildingContainer.GetPlayerBuildings().Count < _globalStatContainer.Get<MaxBuildings>().Value)
-        {
-            EnqueueSelection(SelectionType.Building);
-            EnqueueSelection(SelectionType.BuildingUpgrade);
-        }
     }
     
     public void EnqueueSelection(SelectionType selectionType) => _enqeuedSelections.Enqueue(selectionType);
     
     public void TryStartQueuedSelection()
     {
-        if (_enqeuedSelections.Count > 0 && !_selectionIsActive)
-        {
-            _selectionIsActive = true;
-            
-            StartQueuedSelection().Forget();
-            
-            SelectionStarted?.Invoke();
-        }
+        if (_selectionIsActive) return;
+        
+        StartSelectionPhase();
+        
+        if (_enqeuedSelections.Count > 0) StartQueuedSelection().Forget();
+        else EndSelectionPhase();
+    }
+
+    private void StartSelectionPhase()
+    {
+        _selectionIsActive = true;
+
+        SelectionStarted?.Invoke();
     }
     
     private async UniTask StartQueuedSelection()
@@ -101,12 +97,7 @@ public sealed class SelectionManager : MonoBehaviour
         await EndSelection();
 
         if (_enqeuedSelections.Count > 0) StartQueuedSelection().Forget();
-        else
-        {
-            _selectionIsActive = false;
-            
-            SelectionEnded?.Invoke();
-        }
+        else EndSelectionPhase();
     }
     
     private async UniTask EndSelection()
@@ -116,5 +107,12 @@ public sealed class SelectionManager : MonoBehaviour
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
             case SelectionType.Building: await UniTask.WaitForSeconds(1f); break;
         }
+    }
+    
+    private void EndSelectionPhase() 
+    {
+        _selectionIsActive = false;
+        
+        SelectionEnded?.Invoke();
     }
 }

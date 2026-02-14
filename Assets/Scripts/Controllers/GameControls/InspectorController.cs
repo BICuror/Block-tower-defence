@@ -29,8 +29,8 @@ public class InspectorController : MonoBehaviour
                 return true;
             }
         }
-        
-        _inspectionTooltipManager.SetActiveLayer(UILayer.Group);
+
+        StopInspecting();
 
         return false;
     }
@@ -67,20 +67,16 @@ public class InspectorController : MonoBehaviour
         return !_inspectionTooltipManager.HoveredOverNonIdleTooltip;
     }
     
-    public void StopInspecting()
-    {
-        _inspectionTooltipManager.DisableActiveSinglePopup();
-    }
+    public void StopInspecting() => _inspectionTooltipManager.DisableActiveSinglePopup();
     
     private async UniTask StartInspecting(Inspectable inspectable)
     {
-        if (_inspectable && _inspectable == inspectable) return;
         if (inspectable.IsInspected) return;
         
         _inspectable = inspectable;
-        _inspectable.SetInspectedState(true);
+        inspectable.SetInspectedState(true);
 
-        _areaVisualisationInspector.ActivateVisualisation(_inspectable.gameObject);
+        _areaVisualisationInspector.ActivateVisualisation(inspectable.gameObject);
         
         _inspectionTooltipManager.DisableActiveSinglePopup();
         
@@ -100,14 +96,13 @@ public class InspectorController : MonoBehaviour
         {
             await _inspectionTooltipManager.OpenEffectTooltip(selectionOptionObject.ModificatorData, selectionOptionObject.transform);
         }
-
+        
         if (inspectable)
         {
             _areaVisualisationInspector.DeactivateVisualisation(inspectable.gameObject);
             inspectable.SetInspectedState(false);
         }
         
-        _inspectable = null;
         InspectionStopped?.Invoke();
     }
 }

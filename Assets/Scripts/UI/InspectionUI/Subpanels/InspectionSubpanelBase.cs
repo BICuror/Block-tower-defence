@@ -1,26 +1,20 @@
-using DG.Tweening;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine;
 using TMPro;
 
-[RequireComponent(typeof(CanvasGroup))]
-[RequireComponent(typeof(LayoutElement))]
-
 public abstract class InspectionSubpanelBase : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI _descriptionTextField;
+    [SerializeField] private CanvasGroup _mainGroup;
+    [SerializeField] private LayoutElement _layoutElement;
+    
+    [Header("UI Elements")]
     [SerializeField] private Image _iconImage;
+    [SerializeField] private TextMeshProUGUI _descriptionTextField;
     [SerializeField] protected TooltipTextParser _tooltipTextParser;
     private float _fadeDuration = 0.1f;
-    private CanvasGroup _mainGroup;
-    private bool _initialized;
     
-    private void Awake()
-    {
-        _mainGroup = GetComponent<CanvasGroup>();
-        _initialized = true;
-        Enable();
-    }
+    private void Awake() => Enable();
         
     protected void SetTagData(TooltipTagData tagData)
     {
@@ -30,34 +24,21 @@ public abstract class InspectionSubpanelBase : MonoBehaviour
     
     private void Enable()
     {
-        if (!_initialized || !gameObject) return;
-        
         _mainGroup.alpha = 0f;
         _mainGroup.DOKill();
-        _mainGroup.DOFade(1f, _fadeDuration);
+        _mainGroup.DOFade(1f, _fadeDuration).SetLink(_mainGroup.gameObject);
     }
 
     public void Disable()
     {
-        if (!_initialized || !gameObject) return;
-        
         GetComponent<LayoutElement>().ignoreLayout = true;
         
         _mainGroup.DOKill();
-        _mainGroup.DOFade(0f, _fadeDuration).OnComplete(DestroySubpanel);
+        _mainGroup.DOFade(0f, _fadeDuration).SetLink(_mainGroup.gameObject).OnComplete(DestroySubpanel);
     }
 
     private void DestroySubpanel()
     {
-        if (!gameObject) return;
-        
-        _mainGroup.DOKill();
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        _initialized = false;
-        _mainGroup.DOKill();
+        if (gameObject) Destroy(gameObject);
     }
 }

@@ -160,7 +160,6 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         Vector2 initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y); 
         Vector2 currentPosition = initialPosition;
         float distance = 0f;
-        bool isValid;
         
         _hoveredOverNonIdleTooltip = element.PointerHoveredOver;
         bool hasHoveredOverNonIdleTooltip = false;
@@ -185,19 +184,15 @@ public sealed class InspectionTooltipManager : MonoBehaviour
             
             _hoveredOverNonIdleTooltip = element.PointerHoveredOver;
 
-            isValid = IsValidPopup();
-            
             if (ShouldDisableOnExitingPopup()) break;
         } 
-        while (isValid);
+        while (_hoveredOverNonIdleTooltip || IsValidPopup());
 
         SetActiveLayer(UILayer.Group).Forget();
         
-        bool IsValidPopup()
-        {
-            return _hoveredOverNonIdleTooltip ||
-                   (Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance);
-        }
+        return;
+        
+        bool IsValidPopup() => Vector2.Dot(currentPosition - initialPosition, Vector2.up) > _directionDotProductThreshold || distance < _wrongDirectionMaxDistance;
 
         bool ShouldDisableOnExitingPopup()
         {

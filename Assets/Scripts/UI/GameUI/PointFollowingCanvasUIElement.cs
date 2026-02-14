@@ -59,14 +59,9 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
 
     private void DisableGameObject()
     {
-        if (!gameObject) return;
-
-        _mainGroup.DOKill();
-
-        gameObject.SetActive(false);
+        if (gameObject) gameObject.SetActive(false);
     }
-
-
+    
     protected void SetTarget(Transform target) => _target = target;
     
     private void CalculateOffsets()
@@ -105,11 +100,6 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
         Vector2 finalPosition = InspectionTooltipPositioner.Instance.GetPosition(_pointFollowingElementOffsetContainer, preferredUIPosition);
         
         _rectTransform.localPosition = finalPosition;
-    }
-
-    private void OnDestroy()
-    {
-        _mainGroup.DOKill();
     }
 
     public record PointFollowingElementOffsetContainer

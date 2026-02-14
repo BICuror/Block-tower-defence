@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff4d21b0f85950428cb6d1e1f725d67, type: 3}
+  m_Name: SandTilemap
+  m_EditorClassIdentifier: 
+  _defaultTile: {fileID: 6538192692324478569, guid: d0a4299225aae48459d5e5b94c45fcda, type: 3}
+  _cornerTile: {fileID: 2387321215673872356, guid: 80febf2df191b60499c7444bc66fce15, type: 3}
+  _oneSideTile: {fileID: -5145553982148489918, guid: 46ead2b31845a4c40a1d825a2952b791, type: 3}
+  _defaultCornerTile: {fileID: -6013941436474072109, guid: 6b106439201c0494984d1ae77c4b391f, type: 3}
+  _waterIndicatorTile: {fileID: 0}
+  _hasSeams: 1
+  _seamPriority: 2
+  _seamTile: {fileID: 6538192692324478569, guid: 4962ed3e0895f0a478b2adbbe2209e53, type: 3}

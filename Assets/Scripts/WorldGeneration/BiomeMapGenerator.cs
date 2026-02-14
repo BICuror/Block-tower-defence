@@ -42,8 +42,8 @@ namespace WorldGeneration
 
             for (int i = 0; i < _islandData.BiomeGenerationNoises.Length; i++)
             {
-                float perlinNoiseX = _biomeSeed.x + position.x / (float)_islandData.IslandSize * _islandData.BiomeGenerationNoises[i].NoiseScale.x;
-                float perlinNoiseY = _biomeSeed.y + position.y / (float)_islandData.IslandSize * _islandData.BiomeGenerationNoises[i].NoiseScale.y;
+                float perlinNoiseX = (_biomeSeed.x + position.x) / (float)_islandData.IslandSize * _islandData.BiomeGenerationNoises[i].NoiseScale.x;
+                float perlinNoiseY = (_biomeSeed.y + position.y) / (float)_islandData.IslandSize * _islandData.BiomeGenerationNoises[i].NoiseScale.y;
                 
                 float evaluatedValue = _islandData.BiomeGenerationNoises[i].NoiseCurve.Evaluate(Mathf.PerlinNoise(perlinNoiseX, perlinNoiseY));
 

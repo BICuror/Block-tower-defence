@@ -7,7 +7,7 @@ namespace CuroSettings
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void Initialize()
         {
-            SettingsConfig config = Resources.Load<SettingsConfig>("SettingsConfig");
+            SettingsConfig config = Resources.Load<SettingsConfig>("Settings/SettingsConfig");
             
             new SettingsContainer(new PlayerPrefsSettingsSaveLoader(), config.SettingConfigs);
         }

@@ -13,6 +13,9 @@ namespace CuroSettings
         AmbienceVolume,
         SFXVolume,
         MusicVolume,
+        Language,
+        FullscreenMode,
+        UIScale,
 
     }
 }

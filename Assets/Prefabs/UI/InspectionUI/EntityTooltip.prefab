@@ -307,7 +307,7 @@ RectTransform:
   m_Father: {fileID: 2637298358216343910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -751,7 +751,7 @@ RectTransform:
   m_Father: {fileID: 3293435981641018136}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1272,6 +1272,7 @@ GameObject:
   - component: {fileID: 3646298347599478733}
   - component: {fileID: 8476950577482168338}
   - component: {fileID: 5561689112559215736}
+  - component: {fileID: 3114809271005709145}
   m_Layer: 0
   m_Name: EntityTooltip
   m_TagString: Untagged
@@ -1382,6 +1383,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
+--- !u!114 &3114809271005709145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612099640142485213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
 --- !u!1 &4926261830172216813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1561,6 +1574,7 @@ GameObject:
   - component: {fileID: 745898574297470064}
   - component: {fileID: 7232539556732792936}
   - component: {fileID: 8804122597132752634}
+  - component: {fileID: 1367008684262760693}
   m_Layer: 0
   m_Name: Priority
   m_TagString: Untagged
@@ -1584,8 +1598,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 22}
+  m_AnchoredPosition: {x: -91.874, y: 0}
+  m_SizeDelta: {x: -183.75, y: 22}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &7232539556732792936
 CanvasRenderer:
@@ -1615,7 +1629,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Priority: '
+  m_text: 'Target priority:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 267c059e5e5c0db41af2f35258bb0787, type: 2}
   m_sharedMaterial: {fileID: 500612685803309852, guid: 267c059e5e5c0db41af2f35258bb0787, type: 2}
@@ -1687,6 +1701,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1367008684262760693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5233579312359559363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9abec6d29ed7442aa8d5e5972492ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroLocalization::CuroLocalization.StaticTextLocalizer
+  _key: priority_type_label
 --- !u!1 &5270926359857755823
 GameObject:
   m_ObjectHideFlags: 0
@@ -2341,8 +2368,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -115, y: 0}
-  m_SizeDelta: {x: 230, y: 22}
+  m_AnchoredPosition: {x: -91.87445, y: 0}
+  m_SizeDelta: {x: 183.7489, y: 22}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &6251310199631018742
 CanvasRenderer:
@@ -2663,7 +2690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3974740290457439921
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2921,7 +2948,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &349319591255878856
 RectTransform:
   m_ObjectHideFlags: 0

@@ -61,7 +61,7 @@ namespace CuroSettings
         
         public void Execute(GeneratorContext context)
         {
-            SettingsConfig settingsConfig = Resources.Load<SettingsConfig>("SettingsConfig");
+            SettingsConfig settingsConfig = Resources.Load<SettingsConfig>("Settings/SettingsConfig");
 
             string generatedFileCode = string.Empty;
             

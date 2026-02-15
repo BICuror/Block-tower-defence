@@ -5,32 +5,24 @@ namespace CuroSettings
 {
     public sealed class SettingsContainer
     {
-        private static SettingsContainer _instance;
-        
-        public static SettingsContainer Instance => _instance;
-        
-        private readonly ISettingsSaveLoader _settingsSaveLoader;
-        private Dictionary<SettingsEnum, Setting> _settings;
+        private static ISettingsSaveLoader _settingsSaveLoader;
+        private static Dictionary<SettingsEnum, Setting> _settings;
 
         public SettingsContainer(ISettingsSaveLoader settingsSaveLoader, List<SettingConfig> settingConfigs)
         {
-            if (_instance != null) throw new Exception("Multiple settings containers detected");
-
-            _instance = this;
-            
             _settingsSaveLoader = settingsSaveLoader;
             
             InitializeSettings(settingConfigs);
         }
         
-        public bool SettingsExists(SettingsEnum key) => _settings.ContainsKey(key);
+        public static bool SettingsExists(SettingsEnum key) => _settings.ContainsKey(key);
         
-        public T GetSetting<T>(SettingsEnum key) where T : Setting
+        public static T GetSetting<T>(SettingsEnum key) where T : Setting
         {
             return (T)_settings[key];
         }
         
-        public void SaveAll()
+        public static void SaveAll()
         {
             foreach (Setting setting in _settings.Values)
             {
@@ -38,7 +30,7 @@ namespace CuroSettings
             }
         }
 
-        public void LoadAll()
+        public static void LoadAll()
         {
             foreach (Setting setting in _settings.Values)
             {
@@ -66,7 +58,7 @@ namespace CuroSettings
                 case SettingType.Enum: setting = new EnumSetting(_settingsSaveLoader, settingConfig.SaveKey, settingConfig.DefaultEnumValueIndex); break;
                 case SettingType.Int: setting = new IntSetting(_settingsSaveLoader, settingConfig.SaveKey, settingConfig.DefaultIntValue); break;
                 case SettingType.Bool: setting = new BoolSetting(_settingsSaveLoader, settingConfig.SaveKey, settingConfig.DefaultBoolValue); break;
-                default: throw new Exception($"Unknown setting type: " + settingConfig.Type);
+                default: throw new Exception($"Unknown setting type: {settingConfig.Type}");
             }
 
             setting.Load();

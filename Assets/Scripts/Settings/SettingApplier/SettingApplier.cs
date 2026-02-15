@@ -11,9 +11,9 @@ namespace CuroSettings
         
         protected static void FetchSetting(SettingsEnum key, Action applySetting)
         {
-            if (SettingsContainer.Instance.SettingsExists(key))
+            if (SettingsContainer.SettingsExists(key))
             {
-                Setting = SettingsContainer.Instance.GetSetting<T>(key);
+                Setting = SettingsContainer.GetSetting<T>(key);
                 
                 Setting.ValueChanged += applySetting;
                 applySetting.Invoke();

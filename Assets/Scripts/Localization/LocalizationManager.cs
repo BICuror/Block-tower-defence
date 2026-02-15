@@ -28,30 +28,29 @@ namespace CuroLocalization
         
         public static event Action OnLanguageChanged;
         
-        public static string GetLocalization(string key) => _currentLanguageLocalization[key];
-        
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void InitializeLocalization()
         {
             FetchLocalizationSettings();
-            LoadLanguage(SystemLanguage.English);
+        }
+        
+        public static string GetLocalization(string key) => _currentLanguageLocalization[key];
+        
+        public static void SetLanguage(SystemLanguage language)
+        {
+            SupportedLanguageData supportedLanguageData = Settings.SupportedLanguages.Find(data => data.Language == language);
+            
+            string filePath = Path.Combine(Settings.LocalizationFilesPath, supportedLanguageData.LanguageColumnKey + ".json");
+            
+            _currentLanguageLocalization = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(filePath));
+            _currentLanguage = language;
+            
+            OnLanguageChanged?.Invoke();
         }
         
         private static void FetchLocalizationSettings()
         {
             _localizationSettings = Resources.Load<LocalizationSettings>(LOCALIZATION_SETTINGS_PATH);
-        }
-
-        private static void LoadLanguage(SystemLanguage language)
-        {
-            SupportedLanguageData supportedLanguageData = Settings.SupportedLanguages.Find(data => data.Language == language);
-            
-            string filePath = Path.Combine(Settings.LocalizationFilesPath, supportedLanguageData.LanguageColumnKey + ".json");
-
-            _currentLanguageLocalization = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(filePath));
-            _currentLanguage = language;
-            
-            OnLanguageChanged?.Invoke();
         }
     }
 }

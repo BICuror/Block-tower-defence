@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8713793091378861059}
   - component: {fileID: 9009782526213209366}
   - component: {fileID: 2364438044622368734}
+  - component: {fileID: -260329825146774765}
   m_Layer: 0
   m_Name: EffectPreview
   m_TagString: Untagged
@@ -112,6 +113,18 @@ MonoBehaviour:
   _fadeDuration: 0.2
   _previewName: {fileID: 4564997724490142321}
   _previewImage: {fileID: 1666409319470236751}
+--- !u!114 &-260329825146774765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843698938620316056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
 --- !u!1 &2961782866590981547
 GameObject:
   m_ObjectHideFlags: 0

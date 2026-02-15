@@ -17,11 +17,13 @@ namespace CuroLocalization
         
         [Space] [Header("SupportedLanguages")]
         [SerializeField] private List<SupportedLanguageData> _supportedLanguages;
-
+        [SerializeField] private SystemLanguage _defaultLanguage = SystemLanguage.English;
+        
         public string LocalizationFilesPath => _localizationFilesPath;
         public string TableCellSeparatorSymbol => _tableCellSeparatorSymbol;
         public string TableLingSeparatorSymbol => _tableLingSeparatorSymbol;
         public List<SupportedLanguageData> SupportedLanguages => _supportedLanguages;
+        public SystemLanguage DefaultLanguage => _defaultLanguage;
     }
     
     [Serializable] public sealed class SupportedLanguageData

@@ -9,7 +9,7 @@ namespace CuroSettings.UI
         
         protected void Awake()
         {
-            Setting = SettingsContainer.Instance.GetSetting<T>(_settingKey);
+            Setting = SettingsContainer.GetSetting<T>(_settingKey);
             
             Setting.ValueLoaded += OnSettingValueLoaded;
             

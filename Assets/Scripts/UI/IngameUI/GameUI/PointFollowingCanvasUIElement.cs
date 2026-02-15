@@ -68,8 +68,8 @@ public abstract class PointFollowingCanvasUIElement : CanvasGameUIElement
     {
         RectTransform rect = transform as RectTransform;
 
-        float xSize = rect.sizeDelta.x / 2;
-        float ySize = _subPanels.Max(panel => panel.sizeDelta.y) / 2;
+        float xSize = rect.sizeDelta.x / 2 * transform.localScale.x;
+        float ySize = _subPanels.Max(panel => panel.sizeDelta.y) / 2 * transform.localScale.y;
         
         _pointFollowingElementOffsetContainer = new()
         {

@@ -413,6 +413,7 @@ GameObject:
   - component: {fileID: 6965051409588926920}
   - component: {fileID: 1123059355074498771}
   - component: {fileID: 8137954780171062971}
+  - component: {fileID: 8065320470350390549}
   m_Layer: 5
   m_Name: EffectTooltip
   m_TagString: Untagged
@@ -465,9 +466,9 @@ MonoBehaviour:
   _effectIcon: {fileID: 5883403360287159710}
   _descriptionTextField: {fileID: 3062069637111788858}
   _nameTextField: {fileID: 556102165209757992}
+  _inspectionSubpanelsController: {fileID: 831877226779909529}
   _tooltipTextParser: {fileID: 3449264828956304806}
   _tooltipDataParser: {fileID: 6965051409588926920}
-  _inspectionSubpanelsController: {fileID: 831877226779909529}
 --- !u!114 &3449264828956304806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -533,6 +534,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &8065320470350390549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
 --- !u!1 &8122914573572047714
 GameObject:
   m_ObjectHideFlags: 0

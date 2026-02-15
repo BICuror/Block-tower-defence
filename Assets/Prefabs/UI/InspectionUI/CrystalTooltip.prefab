@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8701364025746998132}
   - component: {fileID: 3961331482114920432}
   - component: {fileID: 8257513214410736894}
+  - component: {fileID: -883730541044781460}
   m_Layer: 0
   m_Name: CrystalTooltip
   m_TagString: Untagged
@@ -62,10 +63,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411bc0e54cbb0344aa76bc534bc68389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _desrtroyOnDisable: 1
   _rectTransform: {fileID: 1581158546983494758}
   _subPanels:
   - {fileID: 8686663593294039458}
-  _offset: {x: 175, y: 50}
+  _staicOffset: {x: 175, y: 50}
   _mainGroup: {fileID: 8257513214410736894}
   _fadeDuration: 0.2
   _rewardsAmountTextField: {fileID: 5394468545300387969}
@@ -113,6 +115,18 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &-883730541044781460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
 --- !u!1 &2777538666400376516
 GameObject:
   m_ObjectHideFlags: 0

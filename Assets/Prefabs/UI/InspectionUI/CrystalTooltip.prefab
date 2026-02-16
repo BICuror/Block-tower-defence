@@ -10,11 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 1581158546983494758}
   - component: {fileID: 7133618000469586913}
-  - component: {fileID: 4577728077339426284}
-  - component: {fileID: 8701364025746998132}
-  - component: {fileID: 3961331482114920432}
   - component: {fileID: 8257513214410736894}
+  - component: {fileID: 3961331482114920432}
+  - component: {fileID: 8701364025746998132}
   - component: {fileID: -883730541044781460}
+  - component: {fileID: 4577728077339426284}
+  - component: {fileID: 7537163139057577252}
+  - component: {fileID: 2718510580333981180}
+  - component: {fileID: 4636349720512961496}
   m_Layer: 0
   m_Name: CrystalTooltip
   m_TagString: Untagged
@@ -51,7 +54,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 777958129399263962}
   m_CullTransparentMesh: 1
---- !u!114 &4577728077339426284
+--- !u!225 &8257513214410736894
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!114 &3961331482114920432
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -60,22 +75,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 777958129399263962}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 411bc0e54cbb0344aa76bc534bc68389, type: 3}
+  m_Script: {fileID: 11500000, guid: 15b3d97672b88334586812c8b983a26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _desrtroyOnDisable: 1
-  _rectTransform: {fileID: 1581158546983494758}
-  _subPanels:
-  - {fileID: 8686663593294039458}
-  _staicOffset: {x: 175, y: 50}
-  _mainGroup: {fileID: 8257513214410736894}
-  _fadeDuration: 0.2
-  _rewardsAmountTextField: {fileID: 5394468545300387969}
-  _topCanvasGroup: {fileID: 9040480935850354839}
-  _inspectionSubpanelsController: {fileID: 2953025072565230696}
-  _entityModificatorTooltipPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
-  _tooltipDataParser: {fileID: 3961331482114920432}
-  _tooltipParent: {fileID: 612609853589768455}
+  _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
 --- !u!114 &8701364025746998132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,31 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _tooltipTextParseDataContainer: {fileID: 11400000, guid: 359a39f7e36031346ae08f9bca021430, type: 2}
   _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
---- !u!114 &3961331482114920432
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777958129399263962}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15b3d97672b88334586812c8b983a26c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
---- !u!225 &8257513214410736894
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 777958129399263962}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
 --- !u!114 &-883730541044781460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +105,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
+--- !u!114 &4577728077339426284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 411bc0e54cbb0344aa76bc534bc68389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointFollowingUIElement: {fileID: 4636349720512961496}
+  _uiElementFadeAnimator: {fileID: 7537163139057577252}
+  _hoverableUIElement: {fileID: 2718510580333981180}
+  _rewardsAmountTextField: {fileID: 5394468545300387969}
+  _topCanvasGroup: {fileID: 9040480935850354839}
+  _entityModificatorTooltipInvokingPanelPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
+  _inspectionTooltipController: {fileID: 2953025072565230696}
+  _tooltipParent: {fileID: 612609853589768455}
+--- !u!114 &7537163139057577252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b043e5af7ae1b3b48a19b8f857743023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIElementFadeAnimator
+  _mainGroup: {fileID: 8257513214410736894}
+  _fadeDuration: 0.2
+--- !u!114 &2718510580333981180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e38ffb303637564aa3d1157392c4e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableUIElement
+--- !u!114 &4636349720512961496
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 777958129399263962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381aa989ae2db0442980b7140eddb742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointFollowingUIElement
+  _subPanels:
+  - {fileID: 8686663593294039458}
+  _rectTransform: {fileID: 1581158546983494758}
+  _staicOffset: {x: 175, y: 50}
 --- !u!1 &2777538666400376516
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace CuroLocalization
 {
     public static class LocalizationStringExstentions

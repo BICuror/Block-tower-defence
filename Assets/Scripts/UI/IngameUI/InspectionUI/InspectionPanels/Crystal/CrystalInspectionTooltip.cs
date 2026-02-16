@@ -1,0 +1,48 @@
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using TMPro;
+
+public sealed class CrystalInspectionTooltip : InspectionPanelBase
+{
+    [Header("HeaderParameters")] 
+    [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
+    [SerializeField] private CanvasGroup _topCanvasGroup;
+    
+    [Header("Links")] 
+    [SerializeField] private GlobalEffectTooltipInvokingPanel _entityModificatorTooltipInvokingPanelPrefab;
+    [SerializeField] private InspectionTooltipController _inspectionTooltipController;
+    [SerializeField] private Transform _tooltipParent;
+    
+    private Dictionary<GlobalEffectData, GlobalEffectTooltipInvokingPanel> _crystalTooltips = new();
+    
+    public void Initialize(Item item)
+    {
+        InitializeInspectionPanelBase(item.GetComponent<InspectableObject>());
+        _inspectionTooltipController.CopyParsersFromContainer(this);
+        
+        CreateTooltips(item);
+
+        _rewardsAmountTextField.text = item.Charges.ToString();
+        _topCanvasGroup.gameObject.SetActive(!item.ToggleEffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
+    }
+
+    private void CreateTooltips(Item item)
+    {
+        List<ToggleGlobalEffectData> sortedToggleEffectDatas = item.ToggleEffectDatas.OrderBy(item => item.EffectType == EffectType.Negative).ToList();
+        
+        sortedToggleEffectDatas.ForEach(CreateTooltip);
+    }
+    
+    private void CreateTooltip(GlobalEffectData globalEffectData)
+    {
+        GlobalEffectTooltipInvokingPanel tooltipInvokingPanel = Instantiate(_entityModificatorTooltipInvokingPanelPrefab, _tooltipParent);
+        _crystalTooltips.Add(globalEffectData, tooltipInvokingPanel);
+        
+        tooltipInvokingPanel.SetEntityModificator(globalEffectData);
+        tooltipInvokingPanel.CopyParsersFromContainer(this);
+        
+        tooltipInvokingPanel.TooltipClosed += _inspectionTooltipController.ClearAllSubpanels;
+        tooltipInvokingPanel.TooltipOpened += _inspectionTooltipController.SetTooltipTagContainer;
+    }
+}

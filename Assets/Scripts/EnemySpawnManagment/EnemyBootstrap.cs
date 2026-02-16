@@ -15,7 +15,7 @@ namespace Combat
         [Cached] private StatContainer _statContainer;
         [Cached] private CombatEntity _combatEntity;
         [Cached] private EnemyHealth _enemyHealth;
-        [Cached] private Inspectable _inspectable;
+        [Cached] private InspectableObject _inspectableObject;
         [Cached] private HealthBar _healthBar;
         [Cached] private Collider _collider;
         
@@ -38,7 +38,7 @@ namespace Combat
             _enemyHealth.RefilHP();
             _collider.enabled = true;
             
-            _inspectable.SetLocalizationKey(enemyDataToSet.LocalizationKey);
+            _inspectableObject.SetLocalizationKey(enemyDataToSet.LocalizationKey);
 
             if (initializeModificators)
             {

@@ -24,7 +24,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     [SerializeField] private EffectInspectionTooltipPreview _effectPreviewTooltipPrefab;
     
     private CancellationTokenSource _activeSinglePopupCancelationTokenSource = new();
-    private readonly ListDictionary<UILayer, PointFollowingCanvasUIElement> _layers = new(); 
+    private readonly ListDictionary<UILayer, InspectionPanelBase> _layers = new(); 
     private bool _hoveredOverNonIdleTooltip;
     private UILayer _currentActiveLayer;
     
@@ -43,7 +43,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         _dragController.DroppedObject.AddListener(_ => SetActiveLayer(UILayer.Group).Forget());
     }
     
-    public async UniTask SetActiveLayer(UILayer layer)
+    private async UniTask SetActiveLayer(UILayer layer)
     {
         _currentActiveLayer = layer;
 
@@ -58,11 +58,11 @@ public sealed class InspectionTooltipManager : MonoBehaviour
             {
                 List<UniTask> destroymentTasks = new();
 
-                List<PointFollowingCanvasUIElement> elements = new List<PointFollowingCanvasUIElement>(_layers.Get(UILayer.Single));
+                List<InspectionPanelBase> panels = new List<InspectionPanelBase>(_layers.Get(UILayer.Single));
                 
-                elements.ForEach(element =>
+                panels.ForEach(panel =>
                 {
-                    if (element) destroymentTasks.Add(DestroyElement(element));
+                    if (panel) destroymentTasks.Add(DestroyElement(panel));
                 });
    
                 await UniTask.WhenAll(destroymentTasks);
@@ -76,7 +76,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     {
         EntityTooltip entityTooltip = Instantiate(_entityTooltipPrefab, _uiRoot);
            
-        await entityTooltip.Initialize(entity);
+        entityTooltip.Initialize(entity);
         
         _layers.Add(UILayer.Single, entityTooltip);
         
@@ -89,7 +89,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     {
         CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltipPrefab, _uiRoot);
            
-        await crystalInspectionTooltip.Initialize(item);
+        crystalInspectionTooltip.Initialize(item);
         
         _layers.Add(UILayer.Single, crystalInspectionTooltip);
         
@@ -101,7 +101,6 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     public async UniTask OpenEffectTooltip(EntityModificatorData entityModificatorData, Transform target)
     {
         EffectInspectionTooltip effectInspectionTooltip = Instantiate(_effectInspectionTooltipPrefab, _uiRoot);
-        
         effectInspectionTooltip.Initialize(entityModificatorData, target);
         
         _layers.Add(UILayer.Single, effectInspectionTooltip);
@@ -111,10 +110,10 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         await KeepElementActiveWhileNeeded(effectInspectionTooltip);
     }
 
-    public async UniTask<EffectInspectionTooltipPreview> OpenEffectPreviewTooltip(EntityModificatorData entityModificatorData, Transform target)
+    public EffectInspectionTooltipPreview OpenEffectPreviewTooltip(EntityModificatorData entityModificatorData, Transform target)
     {
         EffectInspectionTooltipPreview effectPreviewTooltip = Instantiate(_effectPreviewTooltipPrefab, _uiRoot);
-        effectPreviewTooltip.Initialilize(entityModificatorData, target);
+        effectPreviewTooltip.Initialize(entityModificatorData, target);
 
         _layers.Add(UILayer.Group, effectPreviewTooltip);
         UpdateTooltipStates(UILayer.Group).Forget();
@@ -122,12 +121,12 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         return effectPreviewTooltip;
     }
 
-    public async UniTask DestroyElement(PointFollowingCanvasUIElement element)
+    public async UniTask DestroyElement(InspectionPanelBase panel)
     {
-        if (_layers.Contains(UILayer.Single)) _layers.Remove(UILayer.Single, element);
-        if (_layers.Contains(UILayer.Group)) _layers.Remove(UILayer.Group, element);
-        await element.Disable();
-        Destroy(element.gameObject);
+        if (_layers.Contains(UILayer.Single)) _layers.Remove(UILayer.Single, panel);
+        if (_layers.Contains(UILayer.Group)) _layers.Remove(UILayer.Group, panel);
+        await panel.Disable();
+        Destroy(panel.gameObject);
     }
     
     public void DisableActiveSinglePopup()
@@ -147,21 +146,21 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         });
     }
 
-    private async UniTask SetElementState(PointFollowingCanvasUIElement element, bool state)
+    private async UniTask SetElementState(InspectionPanelBase panel, bool state)
     {
-        if (element.IsActive == state) return;
+        if (panel.IsActive == state) return;
 
-        if (state) await element.Enable();
-        else await element.Disable();
+        if (state) await panel.Enable();
+        else await panel.Disable();
     }
     
-    private async UniTask KeepElementActiveWhileNeeded(PointFollowingCanvasUIElement element)
+    private async UniTask KeepElementActiveWhileNeeded(InspectionPanelBase panel)
     {
         Vector2 initialPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y); 
         Vector2 currentPosition = initialPosition;
         float distance = 0f;
         
-        _hoveredOverNonIdleTooltip = element.PointerHoveredOver;
+        _hoveredOverNonIdleTooltip = panel.IsHoveredOver;
         bool hasHoveredOverNonIdleTooltip = false;
         
         DisableActiveSinglePopup();
@@ -182,7 +181,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
 
             distance = Vector2.Distance(initialPosition, currentPosition);
             
-            _hoveredOverNonIdleTooltip = element.PointerHoveredOver;
+            _hoveredOverNonIdleTooltip = panel.IsHoveredOver;
 
             if (ShouldDisableOnExitingPopup()) break;
         } 

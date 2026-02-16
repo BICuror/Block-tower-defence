@@ -1,25 +1,22 @@
-
-using WorldGeneration;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cashing;
 using Zenject;
 using Combat;
-using CuroLocalization;
 
 public sealed class BloodCollector : MonoBehaviour
 {
     [Cached] private AreaEntityDetector _areaEntityDetector;
+    [Cached] private InspectableObject _inspectableObject;
     [Cached] private EntityCanvas _entityCanvas;
     [Cached] private CombatEntity _ownerEntity;
-    [Cached] private Inspectable _inspectable;
     
     [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
     [Inject] private EnemySpawnSystem _waveStateController;
-    [Inject] private SpawnerRotator _spawnerRotator;
     [Inject] private ItemFactory _itemFactory;
 
-    [SerializeField] private Sprite _barSprite;
     [SerializeField] private EntityCanvasBar _barPrefab;
+    [SerializeField] private Sprite _barSprite;
     [SerializeField] private int _chargesToSpawn = 2;
     
     private int _entitiesKilledInArea;
@@ -28,21 +25,21 @@ public sealed class BloodCollector : MonoBehaviour
     
     private void Start()
     {
-         _bar = _entityCanvas.AddBar(_barSprite, 0f, _barPrefab);
+        _bar = _entityCanvas.AddBar(_barSprite, 0f, _barPrefab);
         
+        _waveStateController.LastWaveEnemyDied += CreateItemAsync;
         _areaEntityDetector.RemovedItem += OnEntityRemoved;
-        _waveStateController.LastWaveEnemyDied += CreateItem;
-        _spawnerRotator.RotateSpawner(transform);
         _ownerEntity.Health.Died += Unsubscribe;
     }
 
     public void SetRequiredKills(int amount)
     {
         _requiredKills = amount;
-        _inspectable.SetInspectableData(_inspectable.Name, _inspectable.Description.Replace("*", amount.ToString()));
+        _ownerEntity.ComponentsContainer.Get<InspectableObject>().ReplaceableDataParser.AddOrUpdateParsableData("{MinimalRequiredEnemiesToKill}", amount.ToString());
     }
 
-    private async void CreateItem()
+    private void CreateItemAsync() => CreateItem().Forget();
+    private async UniTask CreateItem()
     {
         Unsubscribe();
         
@@ -62,7 +59,7 @@ public sealed class BloodCollector : MonoBehaviour
 
     private void Unsubscribe()
     {
-        _waveStateController.LastWaveEnemyDied -= CreateItem;
+        _waveStateController.LastWaveEnemyDied -= CreateItemAsync;
         _ownerEntity.Health.Died -= Unsubscribe;
     }
 }

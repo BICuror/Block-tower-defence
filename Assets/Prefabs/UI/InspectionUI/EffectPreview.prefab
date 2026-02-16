@@ -10,11 +10,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5693167047386029691}
   - component: {fileID: 272690981735911592}
+  - component: {fileID: 9009782526213209366}
   - component: {fileID: 1550593450988585162}
   - component: {fileID: 8713793091378861059}
-  - component: {fileID: 9009782526213209366}
-  - component: {fileID: 2364438044622368734}
   - component: {fileID: -260329825146774765}
+  - component: {fileID: 2364438044622368734}
+  - component: {fileID: -8467842132038508559}
+  - component: {fileID: 3658296240579240519}
+  - component: {fileID: 6425167760965755544}
   m_Layer: 0
   m_Name: EffectPreview
   m_TagString: Untagged
@@ -53,6 +56,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2843698938620316056}
   m_CullTransparentMesh: 1
+--- !u!225 &9009782526213209366
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843698938620316056}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1550593450988585162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,39 +95,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
---- !u!225 &9009782526213209366
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2843698938620316056}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
---- !u!114 &2364438044622368734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2843698938620316056}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e49232ac98105574794d9fb753ee517e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _desrtroyOnDisable: 0
-  _rectTransform: {fileID: 5693167047386029691}
-  _subPanels:
-  - {fileID: 5693167047386029691}
-  _staicOffset: {x: 0, y: 15}
-  _mainGroup: {fileID: 9009782526213209366}
-  _fadeDuration: 0.2
-  _previewName: {fileID: 4564997724490142321}
-  _previewImage: {fileID: 1666409319470236751}
 --- !u!114 &-260329825146774765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +107,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
+--- !u!114 &2364438044622368734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843698938620316056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e49232ac98105574794d9fb753ee517e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointFollowingUIElement: {fileID: 3658296240579240519}
+  _uiElementFadeAnimator: {fileID: -8467842132038508559}
+  _hoverableUIElement: {fileID: 6425167760965755544}
+  _previewName: {fileID: 4564997724490142321}
+  _previewImage: {fileID: 1666409319470236751}
+--- !u!114 &-8467842132038508559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843698938620316056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b043e5af7ae1b3b48a19b8f857743023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIElementFadeAnimator
+  _mainGroup: {fileID: 9009782526213209366}
+  _fadeDuration: 0.2
+--- !u!114 &3658296240579240519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843698938620316056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381aa989ae2db0442980b7140eddb742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointFollowingUIElement
+  _subPanels:
+  - {fileID: 5693167047386029691}
+  _rectTransform: {fileID: 5693167047386029691}
+  _staicOffset: {x: 0, y: 15}
+--- !u!114 &6425167760965755544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2843698938620316056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e38ffb303637564aa3d1157392c4e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableUIElement
 --- !u!1 &2961782866590981547
 GameObject:
   m_ObjectHideFlags: 0

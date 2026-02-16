@@ -8,7 +8,7 @@ public sealed class ItemsContainer : MonoBehaviour
     [SerializeField] private Transform _parent;
     private List<Item> _items = new();
 
-    public bool IsItemInspected => _items.Exists(item => item.GetComponent<Inspectable>().IsInspected);
+    public bool IsItemInspected => _items.Exists(item => item.GetComponent<InspectableObject>().IsInspected);
     public List<Item> ContainedItems => _items;
 
     public Action ContainerUpdated;
@@ -34,12 +34,12 @@ public sealed class ItemsContainer : MonoBehaviour
 
         item.EnableToggleEffects();
 
-        Inspectable inspectable = item.GetComponent<Inspectable>();
+        InspectableObject inspectableObject = item.GetComponent<InspectableObject>();
         
-        inspectable.InspectionStarted += OnItemInspectionStarted;
-        inspectable.InspectionEnded += OnItemInspectionEnded;
+        inspectableObject.InspectionStarted += OnItemInspectionStarted;
+        inspectableObject.InspectionEnded += OnItemInspectionEnded;
 
-        inspectable.SetCanBeIdleInspected(false);
+        inspectableObject.SetCanBeIdleInspected(false);
 
         ItemAdded?.Invoke(item);
         ContainerUpdated?.Invoke();
@@ -56,12 +56,12 @@ public sealed class ItemsContainer : MonoBehaviour
 
         item.DisableToggleEffects();
         
-        Inspectable inspectable = item.GetComponent<Inspectable>();
+        InspectableObject inspectableObject = item.GetComponent<InspectableObject>();
         
-        inspectable.InspectionStarted -= OnItemInspectionStarted;
-        inspectable.InspectionEnded -= OnItemInspectionEnded;
+        inspectableObject.InspectionStarted -= OnItemInspectionStarted;
+        inspectableObject.InspectionEnded -= OnItemInspectionEnded;
         
-        inspectable.SetCanBeIdleInspected(true);
+        inspectableObject.SetCanBeIdleInspected(true);
         
         ItemRemoved?.Invoke(item);
         ContainerUpdated?.Invoke();

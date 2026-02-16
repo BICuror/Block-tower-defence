@@ -348,7 +348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 147.225, y: 0}
+  m_AnchoredPosition: {x: 147.225, y: -0}
   m_SizeDelta: {x: 294.45, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &350611528118287923
@@ -408,12 +408,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6563496282593677064}
-  - component: {fileID: 7211506274850091020}
-  - component: {fileID: 3449264828956304806}
-  - component: {fileID: 6965051409588926920}
   - component: {fileID: 1123059355074498771}
   - component: {fileID: 8137954780171062971}
+  - component: {fileID: 3449264828956304806}
+  - component: {fileID: 6965051409588926920}
   - component: {fileID: 8065320470350390549}
+  - component: {fileID: 7211506274850091020}
+  - component: {fileID: 1299467334483737672}
+  - component: {fileID: 1990945480896249891}
+  - component: {fileID: 3679458575168864392}
   m_Layer: 5
   m_Name: EffectTooltip
   m_TagString: Untagged
@@ -442,60 +445,6 @@ RectTransform:
   m_AnchoredPosition: {x: 363.1, y: -180.1}
   m_SizeDelta: {x: 609, y: 37.02}
   m_Pivot: {x: 0.5, y: 1}
---- !u!114 &7211506274850091020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3767030507997041338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b21e6e9ead3c4ae448fb1834d884dcdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _desrtroyOnDisable: 1
-  _rectTransform: {fileID: 6563496282593677064}
-  _subPanels:
-  - {fileID: 2076957776734564}
-  - {fileID: 8511498523063087370}
-  _staicOffset: {x: 0, y: 15}
-  _mainGroup: {fileID: 1123059355074498771}
-  _fadeDuration: 0.2
-  _mainPanelRectTransform: {fileID: 2076957776734564}
-  _effectIcon: {fileID: 5883403360287159710}
-  _descriptionTextField: {fileID: 3062069637111788858}
-  _nameTextField: {fileID: 556102165209757992}
-  _inspectionSubpanelsController: {fileID: 831877226779909529}
-  _tooltipTextParser: {fileID: 3449264828956304806}
-  _tooltipDataParser: {fileID: 6965051409588926920}
---- !u!114 &3449264828956304806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3767030507997041338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e4e01724144def45b6ad179eda4844c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _tooltipTextParseDataContainer: {fileID: 11400000, guid: 359a39f7e36031346ae08f9bca021430, type: 2}
-  _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
---- !u!114 &6965051409588926920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3767030507997041338}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15b3d97672b88334586812c8b983a26c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
 --- !u!225 &1123059355074498771
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -534,6 +483,33 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &3449264828956304806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4e01724144def45b6ad179eda4844c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tooltipTextParseDataContainer: {fileID: 11400000, guid: 359a39f7e36031346ae08f9bca021430, type: 2}
+  _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
+--- !u!114 &6965051409588926920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b3d97672b88334586812c8b983a26c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _allTagDataContainer: {fileID: 11400000, guid: 90e1292c394c9ca469e543d78e973e22, type: 2}
 --- !u!114 &8065320470350390549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +522,68 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
+--- !u!114 &7211506274850091020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21e6e9ead3c4ae448fb1834d884dcdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointFollowingUIElement: {fileID: 3679458575168864392}
+  _uiElementFadeAnimator: {fileID: 1299467334483737672}
+  _hoverableUIElement: {fileID: 1990945480896249891}
+  _inspectionTooltipController: {fileID: 831877226779909529}
+  _mainPanelRectTransform: {fileID: 2076957776734564}
+  _descriptionTextField: {fileID: 3062069637111788858}
+  _nameTextField: {fileID: 556102165209757992}
+  _effectIcon: {fileID: 5883403360287159710}
+--- !u!114 &1299467334483737672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b043e5af7ae1b3b48a19b8f857743023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIElementFadeAnimator
+  _mainGroup: {fileID: 1123059355074498771}
+  _fadeDuration: 0.2
+--- !u!114 &1990945480896249891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e38ffb303637564aa3d1157392c4e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableUIElement
+--- !u!114 &3679458575168864392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3767030507997041338}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381aa989ae2db0442980b7140eddb742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointFollowingUIElement
+  _subPanels:
+  - {fileID: 2076957776734564}
+  _rectTransform: {fileID: 6563496282593677064}
+  _staicOffset: {x: 0, y: 15}
 --- !u!1 &8122914573572047714
 GameObject:
   m_ObjectHideFlags: 0

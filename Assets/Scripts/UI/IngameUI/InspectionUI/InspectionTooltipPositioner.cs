@@ -16,7 +16,7 @@ public sealed class InspectionTooltipPositioner : MonoBehaviour
         _instance = this;
     } 
     
-    public Vector3 GetPosition(PointFollowingCanvasUIElement.PointFollowingElementOffsetContainer offsetsContainer, Vector2 preferredPosition)
+    public Vector3 GetPosition(PointFollowingUIElement.PointFollowingElementOffsetContainer offsetsContainer, Vector2 preferredPosition)
     {
         if (preferredPosition.y > _upCorner.transform.localPosition.y)
         {

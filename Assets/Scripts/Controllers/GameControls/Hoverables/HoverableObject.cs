@@ -5,8 +5,6 @@ public class HoverableObject : MonoBehaviour
 {
     private bool _isHoveredOver;
 
-    public bool IsHoveredOver => _isHoveredOver;
-    
     public UnityEvent HoverEntered;
     public UnityEvent HoverExited;
     
@@ -14,8 +12,6 @@ public class HoverableObject : MonoBehaviour
     {
         _isHoveredOver = true;
         HoverEntered?.Invoke();
-        
-        Debug.Log("Hover Entered");
     }
 
     public void ExitHover()

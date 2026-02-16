@@ -12,7 +12,7 @@ public class InspectorController : MonoBehaviour
     [FormerlySerializedAs("_areaVisualisation")] [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
     
-    private Inspectable _inspectable;
+    private InspectableObject _inspectableObject;
     
     public Action InspectionStopped;
     
@@ -22,7 +22,7 @@ public class InspectorController : MonoBehaviour
         
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
+            if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             { 
                 StartInspecting(hoveredInspectable);
                 
@@ -43,7 +43,7 @@ public class InspectorController : MonoBehaviour
         
         if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
         {
-            if (hit.collider.gameObject.TryGetComponent(out Inspectable hoveredInspectable))
+            if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             {
                 if (hoveredInspectable.CanBeIdleInspected)
                 {
@@ -59,7 +59,7 @@ public class InspectorController : MonoBehaviour
 
     public bool IsPossibleToDragInspectedItem(GameObject draggedObject)
     {
-        if (_inspectable != null && draggedObject == _inspectable.gameObject)
+        if (_inspectableObject != null && draggedObject == _inspectableObject.gameObject)
         {
             return true;
         }
@@ -69,38 +69,38 @@ public class InspectorController : MonoBehaviour
     
     public void StopInspecting() => _inspectionTooltipManager.DisableActiveSinglePopup();
     
-    private async UniTask StartInspecting(Inspectable inspectable)
+    private async UniTask StartInspecting(InspectableObject inspectableObject)
     {
-        if (inspectable.IsInspected) return;
+        if (inspectableObject.IsInspected) return;
         
-        _inspectable = inspectable;
-        inspectable.SetInspectedState(true);
+        _inspectableObject = inspectableObject;
+        inspectableObject.SetInspectedState(true);
 
-        _areaVisualisationInspector.ActivateVisualisation(inspectable.gameObject);
+        _areaVisualisationInspector.ActivateVisualisation(inspectableObject.gameObject);
         
         _inspectionTooltipManager.DisableActiveSinglePopup();
         
-        if (inspectable.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
+        if (inspectableObject.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
         {
             await _inspectionTooltipManager.OpenEntityTooltip(buildingOptionObject.InstantiatedBuilding);
         }
-        else if (inspectable.TryGetComponent(out CombatEntity combatEntity))
+        else if (inspectableObject.TryGetComponent(out CombatEntity combatEntity))
         {
             await _inspectionTooltipManager.OpenEntityTooltip(combatEntity);
         }
-        else if (inspectable.TryGetComponent(out Item item))
+        else if (inspectableObject.TryGetComponent(out Item item))
         {
             await _inspectionTooltipManager.OpenCrystalTooltip(item);
         }        
-        else if (inspectable.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
+        else if (inspectableObject.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
         {
             await _inspectionTooltipManager.OpenEffectTooltip(selectionOptionObject.ModificatorData, selectionOptionObject.transform);
         }
         
-        if (inspectable)
+        if (inspectableObject)
         {
-            _areaVisualisationInspector.DeactivateVisualisation(inspectable.gameObject);
-            inspectable.SetInspectedState(false);
+            _areaVisualisationInspector.DeactivateVisualisation(inspectableObject.gameObject);
+            inspectableObject.SetInspectedState(false);
         }
         
         InspectionStopped?.Invoke();

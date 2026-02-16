@@ -1037,8 +1037,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8bdbd2abcd1b8e428eb709332952634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _entityModificatorTooltipInvokingPanelPrefab: {fileID: 2304773713715259059, guid: afaa34f46685a114dbb08c6fc8a2c129, type: 3}
   _entityModificatorTooltipParent: {fileID: 6671653891318190128}
-  _entityModificatorTooltipPrefab: {fileID: 2304773713715259059, guid: afaa34f46685a114dbb08c6fc8a2c129, type: 3}
 --- !u!114 &4816265218606734753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1269,10 +1269,13 @@ GameObject:
   - component: {fileID: 3214148006842662568}
   - component: {fileID: 8100069086505224581}
   - component: {fileID: 9156131124331449065}
-  - component: {fileID: 3646298347599478733}
   - component: {fileID: 8476950577482168338}
   - component: {fileID: 5561689112559215736}
   - component: {fileID: 3114809271005709145}
+  - component: {fileID: 3646298347599478733}
+  - component: {fileID: 8187802091277806566}
+  - component: {fileID: 4622743051024826443}
+  - component: {fileID: 4599874462455438355}
   m_Layer: 0
   m_Name: EntityTooltip
   m_TagString: Untagged
@@ -1324,38 +1327,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &3646298347599478733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4612099640142485213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf6fc55d72e046e4baf10789690cb299, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _desrtroyOnDisable: 1
-  _rectTransform: {fileID: 3214148006842662568}
-  _subPanels:
-  - {fileID: 4856448244769794002}
-  - {fileID: 8280466577559301690}
-  _staicOffset: {x: 0, y: 250}
-  _mainGroup: {fileID: 9156131124331449065}
-  _fadeDuration: 0.2
-  _nameTextField: {fileID: 196448783514910786}
-  _descriptionTextField: {fileID: 2919170861722065787}
-  _tooltipTextParser: {fileID: 8476950577482168338}
-  _tooltipDataParser: {fileID: 5561689112559215736}
-  _priorityDropdownGroup: {fileID: 5315741975514752921}
-  _priorityDropdown: {fileID: 2569402322253830292}
-  _tooltipEntityModificatorContainer: {fileID: 4942003732584026053}
-  _inspectionSubpanelsController: {fileID: 4866399299798934132}
-  _tooltipStatContainer: {fileID: 4959781064709044431}
-  _scrollMaxHeightControllers:
-  - {fileID: 7604516580447352179}
-  - {fileID: 4816265218606734753}
 --- !u!114 &8476950577482168338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,6 +1366,74 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c1868c0fbdd7134395c7bb27e2b882f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CuroSettings.Other::CuroSettings.CustomSettingAppliers.UIScaleSettingApplier
+--- !u!114 &3646298347599478733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612099640142485213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6fc55d72e046e4baf10789690cb299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointFollowingUIElement: {fileID: 4622743051024826443}
+  _uiElementFadeAnimator: {fileID: 8187802091277806566}
+  _hoverableUIElement: {fileID: 4599874462455438355}
+  _nameTextField: {fileID: 196448783514910786}
+  _descriptionTextField: {fileID: 2919170861722065787}
+  _priorityDropdownGroup: {fileID: 5315741975514752921}
+  _priorityDropdown: {fileID: 2569402322253830292}
+  _entityModificatorPanelContainer: {fileID: 4942003732584026053}
+  _scrollMaxHeightControllers:
+  - {fileID: 7604516580447352179}
+  - {fileID: 4816265218606734753}
+  _inspectionTooltipController: {fileID: 4866399299798934132}
+  _statPanelContainer: {fileID: 4959781064709044431}
+--- !u!114 &8187802091277806566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612099640142485213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b043e5af7ae1b3b48a19b8f857743023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UIElementFadeAnimator
+  _mainGroup: {fileID: 9156131124331449065}
+  _fadeDuration: 0.2
+--- !u!114 &4622743051024826443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612099640142485213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381aa989ae2db0442980b7140eddb742, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PointFollowingUIElement
+  _subPanels:
+  - {fileID: 4856448244769794002}
+  - {fileID: 8280466577559301690}
+  _rectTransform: {fileID: 3214148006842662568}
+  _staicOffset: {x: 0, y: 250}
+--- !u!114 &4599874462455438355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612099640142485213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e38ffb303637564aa3d1157392c4e40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableUIElement
 --- !u!1 &4926261830172216813
 GameObject:
   m_ObjectHideFlags: 0
@@ -2422,11 +2461,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scrollMaxHeightController: {fileID: 4140652171010664248}
-  _button: {fileID: 1206749166216143834}
-  _selectedItemLabel: {fileID: 3374968489266815208}
   _customDropdownItemPrefab: {fileID: 5616467669767915592, guid: 5f4eca855809d5848bd4d93e96ce3d3e, type: 3}
-  _itemParent: {fileID: 4560910203800222992}
+  _selectedItemLabel: {fileID: 3374968489266815208}
   _dropdownGroup: {fileID: 4548152812390157615}
+  _itemParent: {fileID: 4560910203800222992}
+  _button: {fileID: 1206749166216143834}
 --- !u!114 &1206749166216143834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3257,20 +3296,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06d8cd8521fde0a4d803c8efc6756fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statTooltipPrefab: {fileID: 5687756083734673182, guid: 82b343939ae090546b83c2616510f717, type: 3}
+  _statTooltipInvokingPanelPrefab: {fileID: 5687756083734673182, guid: 82b343939ae090546b83c2616510f717, type: 3}
   _statTooltipContainer: {fileID: 636339669500357682}
-  _customStatTypeNames:
-  - MaxHealth
-  - TaskRechargeDuration
-  - ReachAreaScale
-  - Speed
-  - BuildTime
   _customStatTooltips:
   - {fileID: 8585830902517065338}
   - {fileID: 3244956081348581043}
   - {fileID: 2616051420063838096}
   - {fileID: 4392668336381407532}
   - {fileID: 5971977663342265902}
+  _customStatTypeNames:
+  - MaxHealth
+  - TaskRechargeDuration
+  - ReachAreaScale
+  - Speed
+  - BuildTime
 --- !u!114 &7604516580447352179
 MonoBehaviour:
   m_ObjectHideFlags: 0

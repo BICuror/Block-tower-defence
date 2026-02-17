@@ -22,7 +22,7 @@ namespace CuroSettings.UI
             Setting.SetValue(value);
         }
         
-        protected override void OnSettingValueLoaded()
+        protected override void UpdateSettingState()
         {
             _toggle.isOn = Setting.Value;
         }

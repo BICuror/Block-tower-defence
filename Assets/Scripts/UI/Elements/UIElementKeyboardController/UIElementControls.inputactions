@@ -1,0 +1,35 @@
+{
+    "version": 1,
+    "name": "UIElementControls",
+    "maps": [
+        {
+            "name": "Main",
+            "id": "d14e40ed-99b1-4557-9af5-ac75733551f6",
+            "actions": [
+                {
+                    "name": "Quit",
+                    "type": "Button",
+                    "id": "425e0e44-7a78-4b0b-bb0a-62fd5f901b7a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d49b2c0c-6087-41a6-8883-dac8e0fafbaa",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Quit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

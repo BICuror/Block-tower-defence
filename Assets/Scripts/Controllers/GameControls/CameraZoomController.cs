@@ -1,3 +1,4 @@
+using CuroSettings;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,7 +14,7 @@ public sealed class CameraZoomController : MonoBehaviour
     [Header("ZoomSmoothingSettings")]
     [SerializeField] private float _zoomSmoothingDuration = 0.25f;
     [SerializeField] private AnimationCurve _zoomSmoothingCurve;
-    
+    private FloatSetting _zoomSensitivitySetting;
     private Camera _camera;
     
     private float _finalZoom;
@@ -23,11 +24,12 @@ public sealed class CameraZoomController : MonoBehaviour
     {
         _camera = GetComponent<Camera>();
 
+        _zoomSensitivitySetting = SettingsContainer.GetSetting<FloatSetting>(SettingsEnum.CameraZoomSensetiviy);
         _finalZoom = _camera.orthographicSize;
     }
 
-    public void ZoomIn() => ChangeZoomValue(-_zoomSensetivity);
-    public void ZoomOut() => ChangeZoomValue(_zoomSensetivity);
+    public void ZoomIn() => ChangeZoomValue(-_zoomSensetivity * _zoomSensitivitySetting.Value);
+    public void ZoomOut() => ChangeZoomValue(_zoomSensetivity * _zoomSensitivitySetting.Value);
 
     private void ChangeZoomValue(float changeValue)
     {

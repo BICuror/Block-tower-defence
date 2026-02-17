@@ -16,10 +16,12 @@ MonoBehaviour:
   - _saveKey: FrameRate
     _settingEnum: 1
     _type: 2
-    _defaultFloatValue: 0
+    _defaultFloatValue: 60
     _defaultEnumValueIndex: 0
     _defaultIntValue: 60
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
   - _saveKey: VSync
     _settingEnum: 2
     _type: 3
@@ -27,6 +29,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 1
+    _allowedValueIndexesContainer:
+      Indexes: 
   - _saveKey: MasterVolume
     _settingEnum: 3
     _type: 0
@@ -34,6 +38,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
   - _saveKey: AmbienceVolume
     _settingEnum: 4
     _type: 0
@@ -41,6 +47,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
   - _saveKey: SFXVolume
     _settingEnum: 5
     _type: 0
@@ -48,6 +56,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
   - _saveKey: MusicVolume
     _settingEnum: 6
     _type: 0
@@ -55,6 +65,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: 0
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
   - _saveKey: Language
     _settingEnum: 7
     _type: 1
@@ -62,6 +74,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: -1
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 0000000001000000
   - _saveKey: FullscreenMode
     _settingEnum: 8
     _type: 1
@@ -69,6 +83,8 @@ MonoBehaviour:
     _defaultEnumValueIndex: 1
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 00000000010000000200000003000000
   - _saveKey: UIScale
     _settingEnum: 9
     _type: 0
@@ -76,3 +92,32 @@ MonoBehaviour:
     _defaultEnumValueIndex: 1
     _defaultIntValue: 0
     _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
+  - _saveKey: CameraRotationSensitivity
+    _settingEnum: 10
+    _type: 0
+    _defaultFloatValue: 1
+    _defaultEnumValueIndex: 1
+    _defaultIntValue: 0
+    _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
+  - _saveKey: CameraMovementSensitivity
+    _settingEnum: 11
+    _type: 0
+    _defaultFloatValue: 1
+    _defaultEnumValueIndex: 1
+    _defaultIntValue: 0
+    _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 
+  - _saveKey: CameraZoomSensetiviy
+    _settingEnum: 12
+    _type: 0
+    _defaultFloatValue: 1
+    _defaultEnumValueIndex: 1
+    _defaultIntValue: 0
+    _defaultBoolValue: 0
+    _allowedValueIndexesContainer:
+      Indexes: 

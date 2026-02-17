@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using System;
+using CuroSettings;
 
 public sealed class CameraPositionController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public sealed class CameraPositionController : MonoBehaviour
     [Range(0f, 1f)] [SerializeField] private float _cameraRadiusScale = 0.5f;
     
     private float _islandRadius;
+    private FloatSetting _cameraMovementSensitivity;
     private CameraPositionControls _controls;
     private Vector2 _movementInput;
     private Vector2 _currentPosition;
@@ -22,11 +24,11 @@ public sealed class CameraPositionController : MonoBehaviour
     
     private void Awake()
     {
-        CreateControls();
-        
         _islandRadius = _islandDataContainer.Data.IslandRadius;
-        
+        _cameraMovementSensitivity = SettingsContainer.GetSetting<FloatSetting>(SettingsEnum.CameraMovementSensitivity);
         _camera = Camera.main;
+        
+        CreateControls();
         
         SetDefaultPosition();
         _cameraCenter.position = new Vector3(_currentPosition.x, _height, _currentPosition.y);
@@ -50,7 +52,7 @@ public sealed class CameraPositionController : MonoBehaviour
 
         Vector2 movementDirection = (cameraForward * _movementInput.y) + (cameraRight * _movementInput.x);
 
-        _currentPosition += movementDirection.normalized * (_cameraCenterMovementSpeed / Time.timeScale);
+        _currentPosition += movementDirection.normalized * (_cameraCenterMovementSpeed * _cameraMovementSensitivity.Value / Time.timeScale);
 
         float higherBorder = _islandRadius + _islandRadius * _cameraRadiusScale;
         float lowerBorder = _islandRadius - _islandRadius * _cameraRadiusScale;

@@ -1,6 +1,7 @@
 using NaughtyAttributes;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace CuroSettings
 {
@@ -17,6 +18,7 @@ namespace CuroSettings
         [AllowNesting] [ShowIf("_type", SettingType.Enum)] [SerializeField] private int _defaultEnumValueIndex;
         [AllowNesting] [ShowIf("_type", SettingType.Int)] [SerializeField] private int _defaultIntValue;
         [AllowNesting] [ShowIf("_type", SettingType.Bool)] [SerializeField] private bool _defaultBoolValue;
+        [AllowNesting] [ShowIf("_type", SettingType.Enum)] [SerializeField] private AllowedValueIndexesContainer _allowedValueIndexesContainer;
 
         public string SaveKey => _saveKey;
         public SettingsEnum SettingEnum => _settingEnum;
@@ -26,7 +28,13 @@ namespace CuroSettings
         public int DefaultEnumValueIndex => _defaultEnumValueIndex;
         public int DefaultIntValue => _defaultIntValue;
         public bool DefaultBoolValue => _defaultBoolValue;
+        public List<int> AllowedValueIndexes => _allowedValueIndexesContainer.Indexes;
         
         public void SetSettingType(SettingsEnum settingEnum) => _settingEnum = settingEnum;
+    }
+
+    [Serializable] public sealed class AllowedValueIndexesContainer
+    {
+        public List<int> Indexes;
     }
 }

@@ -6,6 +6,7 @@ public sealed class EffectInspectionTooltip : InspectionPanelBase
 {   
     [SerializeField] private InspectionTooltipController _inspectionTooltipController;
     [SerializeField] private RectTransform _mainPanelRectTransform;
+    [SerializeField] private RectTransform _mainRectTransform;
     
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
@@ -37,5 +38,5 @@ public sealed class EffectInspectionTooltip : InspectionPanelBase
         _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.ModificatorDescription));
     }
     
-    private Vector2 GetDynamicOffset() => new(_mainPanelRectTransform.sizeDelta.x / 2f - _mainPanelRectTransform.sizeDelta.x / 2f, 0f);
+    private Vector2 GetDynamicOffset() => new(_mainRectTransform.sizeDelta.x / 2f - _mainPanelRectTransform.sizeDelta.x / 2f, 0f);
 }

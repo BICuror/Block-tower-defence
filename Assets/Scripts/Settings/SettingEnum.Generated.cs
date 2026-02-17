@@ -16,6 +16,9 @@ namespace CuroSettings
         Language,
         FullscreenMode,
         UIScale,
+        CameraRotationSensitivity,
+        CameraMovementSensitivity,
+        CameraZoomSensetiviy,
 
     }
 }

@@ -3,16 +3,16 @@ using TMPro;
 
 namespace CuroLocalization
 {
-    [RequireComponent(typeof(TextMeshProUGUI))]
+    [RequireComponent(typeof(TMP_Text))]
     
     public sealed class StaticTextLocalizer : MonoBehaviour
     {
         [SerializeField] private string _key;
-        private TextMeshProUGUI _textField;
+        private TMP_Text _textField;
         
         private void Awake()
         {
-            _textField = GetComponent<TextMeshProUGUI>();
+            _textField = GetComponent<TMP_Text>();
             LocalizationManager.OnLanguageChanged += Localize;
             Localize();
         }

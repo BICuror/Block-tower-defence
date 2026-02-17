@@ -38,7 +38,7 @@ namespace CuroLocalization
         
         public static void SetLanguage(SystemLanguage language)
         {
-            SupportedLanguageData supportedLanguageData = Settings.SupportedLanguages.Find(data => data.Language == language);
+            SupportedLanguageData supportedLanguageData = GetSupportedLanguageData(language);
             
             string filePath = Path.Combine(Settings.LocalizationFilesPath, supportedLanguageData.LanguageColumnKey + ".json");
             
@@ -47,10 +47,26 @@ namespace CuroLocalization
             
             OnLanguageChanged?.Invoke();
         }
+
+        public static SupportedLanguageData GetSupportedLanguageData(SystemLanguage language)
+        {
+            return Settings.SupportedLanguages.Find(data => data.Language == language);
+        }
+
+        public static SupportedLanguageData GetSupportedLanguageData(SerializableSystemLanguage _serializableSystemLanguage)
+        {
+            return Settings.SupportedLanguages.Find(data => data.SerializableLanguage == _serializableSystemLanguage);
+        } 
         
         private static void FetchLocalizationSettings()
         {
             _localizationSettings = Resources.Load<LocalizationSettings>(LOCALIZATION_SETTINGS_PATH);
         }
+    }
+    
+    public enum SerializableSystemLanguage
+    { 
+        English = 0, 
+        Russian = 1,
     }
 }

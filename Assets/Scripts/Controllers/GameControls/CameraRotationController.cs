@@ -1,5 +1,6 @@
-using UnityEngine;
 using UnityEngine.Events;
+using CuroSettings;
+using UnityEngine;
     
 [RequireComponent(typeof(GameController))]
 
@@ -12,7 +13,7 @@ public sealed class CameraRotationController : MonoBehaviour
     [Range(0f, 85f)] [SerializeField] private float _minYRotation;
 
     [Range(1f, 1000f)] [SerializeField] private float _sensetivity;
-
+    private FloatSetting _cameraRotationSensitivity;
     private Camera _camera;
 
     private Vector3 _previousPosition;
@@ -21,7 +22,12 @@ public sealed class CameraRotationController : MonoBehaviour
     public UnityEvent CameraRotated;
 
     private void OnEnable() => _camera = GetComponent<Camera>();
-    private void Start() => UpdateCameraRotation();
+
+    private void Start()
+    {
+        _cameraRotationSensitivity = SettingsContainer.GetSetting<FloatSetting>(SettingsEnum.CameraRotationSensitivity);
+        UpdateCameraRotation();
+    }
 
     public void UpdateCameraRotation() => Rotate(_previousTouchPosition);
 
@@ -33,8 +39,8 @@ public sealed class CameraRotationController : MonoBehaviour
         Vector3 newPosition = _camera.ScreenToViewportPoint(touchPosition);
         Vector3 direction = _previousPosition - newPosition;
         
-        float rotationAroundYAxis = -direction.x * _sensetivity; 
-        float rotationAroundXAxis = direction.y * _sensetivity; 
+        float rotationAroundYAxis = -direction.x * _sensetivity * _cameraRotationSensitivity.Value; 
+        float rotationAroundXAxis = direction.y * _sensetivity * _cameraRotationSensitivity.Value; 
 
         float currentRotation = transform.rotation.eulerAngles.x;
 

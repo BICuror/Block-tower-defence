@@ -20,17 +20,22 @@ namespace CuroSettings.CustomSettingAppliers
             if (Setting.GetValueIndex() != -1) return;
 
             LocalizationSettings localizationSettings = LocalizationManager.Settings;
+
+            SystemLanguage resultSystemLanguage = localizationSettings.DefaultLanguage;
             
             if (localizationSettings.SupportedLanguages.Exists(languageData => languageData.Language == Application.systemLanguage)) 
             { 
-                Setting.SetValue(Application.systemLanguage);
+                resultSystemLanguage = Application.systemLanguage;
             }
-            else Setting.SetValue(localizationSettings.DefaultLanguage);
+            
+            Setting.SetValue(LocalizationManager.GetSupportedLanguageData(resultSystemLanguage).SerializableLanguage);
         }
         
         private static void ApplyNewSettingValue()
         {
-            LocalizationManager.SetLanguage(Setting.GetValue<SystemLanguage>());
+            SystemLanguage language = LocalizationManager.GetSupportedLanguageData(Setting.GetValue<SerializableSystemLanguage>()).Language;
+            
+            LocalizationManager.SetLanguage(language);
         }
     }
 }

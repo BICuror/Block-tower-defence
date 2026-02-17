@@ -31,8 +31,8 @@ public abstract class ParserableTextContainer : MonoBehaviour
 
     protected string ParseTextByDefault(string text)
     {
-        text = VisualTextParser.ParseTooltipText(text);
         text = ReplaceableDataParser.ParseReplaceableData(text);
+        text = VisualTextParser.ParseTooltipText(text);
         
         return text;
     }

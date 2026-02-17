@@ -30,8 +30,10 @@ namespace CuroLocalization
     {
         [SerializeField] private string _languageColumnKey = "ENGLISH";
         [SerializeField] private SystemLanguage _systemLanguage = SystemLanguage.English;
+        [SerializeField] private SerializableSystemLanguage _serializableLanguage = SerializableSystemLanguage.English;
         
         public string LanguageColumnKey => _languageColumnKey;
         public SystemLanguage Language => _systemLanguage;
+        public SerializableSystemLanguage SerializableLanguage => _serializableLanguage;
     }
 }

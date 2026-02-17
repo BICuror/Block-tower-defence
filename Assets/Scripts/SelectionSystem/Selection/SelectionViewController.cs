@@ -19,6 +19,7 @@ public sealed class SelectionViewController : MonoBehaviour
     [SerializeField] private AnimationCurve _selectionViewAnimationCurve;
     
     [SerializeField] public SelectionManager _selectionManager;
+    private SelectionIndicatorContainers _currentSelectionIndicatorContainer;
 
     private void Awake()
     {
@@ -31,8 +32,6 @@ public sealed class SelectionViewController : MonoBehaviour
 
     private void EnableSelectionView()
     {
-        EnableSelectionIndicator().Forget();
-
         _selectionViewGraphics.DOKill();
         _selectionViewGraphics.DOScale(Vector3.one, _selectionViewTransitionDuration).SetEase(_selectionViewAnimationCurve);
         _selectionViewGraphics.gameObject.SetActive(true);
@@ -42,8 +41,6 @@ public sealed class SelectionViewController : MonoBehaviour
     
     private void DisableSelectionView()
     {
-        DisableSelectionIndicator().Forget();
-        
         _selectionViewGraphics.DOKill();
         _selectionViewGraphics.DOScale(Vector3.zero, _selectionViewTransitionDuration).SetEase(_selectionViewAnimationCurve).OnComplete(() => _selectionViewGraphics.gameObject.SetActive(false));
         
@@ -52,7 +49,8 @@ public sealed class SelectionViewController : MonoBehaviour
     
     private async UniTask EnableSelectionIndicator()
     {
-        TextMeshPro indicator = _selectionIndicatorContainers.Find(container => container.Type == _selectionManager.SelectionType).Indicator;
+        _currentSelectionIndicatorContainer = _selectionIndicatorContainers.Find(container => container.Type == _selectionManager.SelectionType);
+        TextMeshPro indicator = _currentSelectionIndicatorContainer.Indicator;
         indicator.gameObject.SetActive(true);
         indicator.DOKill();
         await indicator.DOFade(1f, 1f).From(0f).AsyncWaitForCompletion();
@@ -60,7 +58,7 @@ public sealed class SelectionViewController : MonoBehaviour
     
     private async UniTask DisableSelectionIndicator()
     {
-        TextMeshPro indicator = _selectionIndicatorContainers.Find(container => container.Type == _selectionManager.SelectionType).Indicator;
+        TextMeshPro indicator = _currentSelectionIndicatorContainer.Indicator;
         indicator.DOKill();
         await indicator.DOFade(0f, 1f).From(1f).AsyncWaitForCompletion();
         indicator.gameObject.SetActive(false);

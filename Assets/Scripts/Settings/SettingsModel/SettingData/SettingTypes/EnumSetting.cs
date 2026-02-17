@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using UnityEngine;
 using System;
 
 namespace CuroSettings
@@ -5,11 +7,15 @@ namespace CuroSettings
     public sealed class EnumSetting : Setting
     {
         private readonly int _defaultValueIndex;
+        private readonly List<int> _allowedValueIndexes;
         private int _valueIndex;
         
-        public EnumSetting(ISettingsSaveLoader saveLoader, string key, int defaultValueIndex) : base(saveLoader, key)
+        public List<int> AllowedValueIndexes => _allowedValueIndexes;
+        
+        public EnumSetting(ISettingsSaveLoader saveLoader, string key, int defaultValueIndex, List<int> allowedValueIndexes) : base(saveLoader, key)
         {
             _defaultValueIndex = defaultValueIndex;
+            _allowedValueIndexes = allowedValueIndexes;
         }
 
         public T GetValue<T>() where T : Enum
@@ -24,6 +30,8 @@ namespace CuroSettings
 
         public void SetValueIndex(int value)
         {
+            if (!_allowedValueIndexes.Contains(value)) Debug.Log($"Tried to set enum {value} to setting {Key}, which is not in allowedValueIndexesList in SettingsConfig");
+            
             _valueIndex = value;
             
             ValueChanged?.Invoke();

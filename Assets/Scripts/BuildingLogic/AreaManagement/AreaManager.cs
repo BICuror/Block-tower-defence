@@ -67,7 +67,8 @@ public class AreaManager : MonoBehaviour
         
         switch (_priorityType)
         {
-            case AreaEntityDetectorPriorityType.None: priorityAlgorithm = null; break;
+            case AreaEntityDetectorPriorityType.First: priorityAlgorithm = null; break;
+            case AreaEntityDetectorPriorityType.Last: priorityAlgorithm = new LastPriorityAlgorithm(); break;
             case AreaEntityDetectorPriorityType.HighestHealth: priorityAlgorithm = new HighestHealthPriorityAlgorithm(); break;
             case AreaEntityDetectorPriorityType.LowestHealth: priorityAlgorithm = new LowestHealthPriorityAlgorithm(); break;
             case AreaEntityDetectorPriorityType.HighestMaxHealth: priorityAlgorithm = new HighestMaxHealthPriorityAlgorithm(); break;
@@ -80,11 +81,12 @@ public class AreaManager : MonoBehaviour
 
 public enum AreaEntityDetectorPriorityType
 {
-    None,
-    HighestHealth,
-    LowestHealth,
-    HighestMaxHealth,
-    LowestMaxHealth,
+    First = 0,
+    Last = 1,
+    HighestHealth = 2,
+    LowestHealth = 3,
+    HighestMaxHealth = 4,
+    LowestMaxHealth = 5,
 }
 
 public abstract class EntityDetectorPriorityAlgorithm

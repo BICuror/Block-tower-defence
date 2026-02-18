@@ -34,6 +34,12 @@ namespace CuroSettings.CustomSettingAppliers
         private static void ApplyNewSettingValue()
         {
             SystemLanguage language = LocalizationManager.GetSupportedLanguageData(Setting.GetValue<SerializableSystemLanguage>()).Language;
+
+            if (!LocalizationManager.Settings.SupportedLanguages.Exists(supportedLanguageData => supportedLanguageData.Language == language))
+            {
+                Debug.Log($"{language} was tired to applied");
+                language = SystemLanguage.English;
+            }
             
             LocalizationManager.SetLanguage(language);
         }

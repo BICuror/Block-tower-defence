@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using CuroLocalization;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
@@ -14,22 +15,33 @@ public sealed class CustomDropdown : MonoBehaviour
     [SerializeField] private Transform _itemParent;
     [SerializeField] private Button _button;
     
-    private List<CustomDropdownItemData> _customDropdownDatas;
+    [Header("Localiztion")]
+    [SerializeField] private List<CustomDropdownItemLocalizationContainer> _localizationContainers;
     private List<CustomDropdownItem> _instantiatedItems = new();
+    private int _selectedValue;
 
     public Action<int> SelectedValueUpdated;
 
     private void Awake()
     {
-        _button.onClick.AddListener(EnableDropdownAsync);
+        _button.onClick.AddListener(ToggleDropdown);
+
+        LocalizationManager.OnLanguageChanged += UpdateLocalization;
     }
 
-    private void EnableDropdownAsync() => EnableDropdown().Forget();
-    private async UniTask EnableDropdown()
+    private void OnDisable() => _dropdownGroup.gameObject.SetActive(false);
+
+    private void ToggleDropdown()
     {
-        _dropdownGroup.gameObject.SetActive(true);
-        await UniTask.WaitForFixedUpdate();
-        _scrollMaxHeightController.UpdateHeight().Forget();
+        if (!_dropdownGroup.gameObject.activeSelf)
+        {
+            _dropdownGroup.gameObject.SetActive(true);
+            _scrollMaxHeightController.UpdateHeight().Forget();
+        }
+        else
+        {
+            _dropdownGroup.gameObject.SetActive(false);
+        }
     }
 
     private void DisableDropdown()
@@ -37,42 +49,52 @@ public sealed class CustomDropdown : MonoBehaviour
         _dropdownGroup.gameObject.SetActive(false);
     }
 
-    public void SetItemDatas(List<CustomDropdownItemData> datas)
+    public void SetItemValues(List<int> indexes)
     {
-        _customDropdownDatas = datas;
-        
         _instantiatedItems.ForEach(item => Destroy(item.gameObject));
         _instantiatedItems.Clear();
-        datas.ForEach(CreateCustomDropdownItem);
+        indexes.ForEach(CreateCustomDropdownItem);
     }
     
     public void SelectItem(int itemValue)
     {
-        _instantiatedItems.ForEach(item => item.SetSelectedState(item.Value == itemValue));
+        _selectedValue = itemValue;
+
+        DisableDropdown();
+        SetSelectedItem(itemValue);
         
         SelectedValueUpdated?.Invoke(itemValue);
-        _selectedItemLabel.text = _customDropdownDatas.Find(data => data.Value == itemValue).Text;
-        
-        DisableDropdown();
     }
+
+    public void SetSelectedItem(int itemValue)
+    {
+        _instantiatedItems.ForEach(item => item.SetSelectedState(item.Value == itemValue));
+        
+        _selectedItemLabel.text = _localizationContainers.Find(container => container.ItemValue == itemValue).LocalizationKey.Localize();
+    }   
     
-    private void CreateCustomDropdownItem(CustomDropdownItemData data)
+    private void CreateCustomDropdownItem(int itemValue)
     {
         CustomDropdownItem item = Instantiate(_customDropdownItemPrefab, _itemParent);
         _instantiatedItems.Add(item);
         
-        item.Initialize(data.Value, data.Text, SelectItem);
+        item.Initialize(itemValue, _localizationContainers.Find(container => container.ItemValue == itemValue).LocalizationKey, SelectItem);
+    }
+
+    private void UpdateLocalization()
+    {
+        _selectedItemLabel.text = _localizationContainers.Find(container => container.ItemValue == _selectedValue).LocalizationKey.Localize();
+        _instantiatedItems.ForEach(item => item.UpdateLocalization());
+    }
+
+    private void OnDestroy()
+    {
+        LocalizationManager.OnLanguageChanged += UpdateLocalization;
     }
 }
 
-public record CustomDropdownItemData
+[Serializable] public record CustomDropdownItemLocalizationContainer
 {
-    public int Value;
-    public string Text;
-    
-    public CustomDropdownItemData(int itemValue, string itemText)
-    {
-        Value = itemValue;
-        Text = itemText;
-    }
+    public int ItemValue;
+    public string LocalizationKey;
 }

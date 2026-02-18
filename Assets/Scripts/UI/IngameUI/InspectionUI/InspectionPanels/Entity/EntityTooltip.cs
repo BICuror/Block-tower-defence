@@ -84,11 +84,11 @@ public sealed class EntityTooltip : InspectionPanelBase
 
             List<AreaEntityDetectorPriorityType> priorityTypes = Enum.GetValues(typeof(AreaEntityDetectorPriorityType)).Cast<AreaEntityDetectorPriorityType>().ToList();
             
-            List<CustomDropdownItemData> options = new List<CustomDropdownItemData>();
+            List<int> options = new List<int>();
             
-            priorityTypes.ForEach(priorityType => options.Add(new CustomDropdownItemData((int)priorityType, priorityType.ToString())));
+            priorityTypes.ForEach(priorityType => options.Add((int)priorityType));
 
-            _priorityDropdown.SetItemDatas(options);
+            _priorityDropdown.SetItemValues(options);
             _priorityDropdown.SelectItem((int)areaManager.CurrentPriorityType);
         }
         else

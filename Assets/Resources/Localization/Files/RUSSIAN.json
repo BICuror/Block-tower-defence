@@ -105,7 +105,7 @@
   "block_tower_building_entity_tooltip_header": "Башня боец",
   "block_tower_building_entity_tooltip_description": "Наносит урон вблизи, с помощью #ContactDamage",
   "blood_collector_building_entity_tooltip_header": "Сборшик крови",
-  "blood_collector_building_entity_tooltip_description": "#com получи com# 2 #UpgradeCharge за * #bad врагов bad# убитых #com в com# #Area",
+  "blood_collector_building_entity_tooltip_description": "#com Получи com# 2 #UpgradeCharge за {MinimalRequiredEnemiesToKill} #bad врагов bad# убитых #com в com# #Area",
   "bomb_tower_building_entity_tooltip_header": "Бомбобашня",
   "bomb_tower_building_entity_tooltip_description": "#Action : #com создаёт com# бомбу, #com которую можно перемещать, com# при установке взрывается после #ExplosionDelay",
   "booster_tower_building_entity_tooltip_header": "Усилитель",
@@ -173,5 +173,11 @@
   "camera_movement_sensitivity": "Скорость перемещения камеры",
   "camera_zoom_sensetiviy": "Чувсвительность приближения камеры",
   "tower_selection_label": "<wave amplitude=3>Выбери <color=#00B9FF>БАШНЮ</color></wave>",
-  "tower_upgrade_selection_label": "<wave amplitude=3>Выбери <color=#FFD826>УЛУЧШЕНИЕ</color></wave> башни"
+  "tower_upgrade_selection_label": "<wave amplitude=3>Выбери <color=#FFD826>УЛУЧШЕНИЕ</color></wave> башни",
+  "language_setting_english_label": "English",
+  "language_setting_russian_label": "Русский",
+  "fullscreen_mode_exclusive": "Нативно-полноэкранный",
+  "fullscreen_mode_window": "Полноэкранный",
+  "fullscreen_mode_maximized": "Полноэкранное окно",
+  "fullscreen_mode_windowed": "Оконный режим"
 }

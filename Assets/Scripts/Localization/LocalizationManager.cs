@@ -38,6 +38,7 @@ namespace CuroLocalization
         
         public static void SetLanguage(SystemLanguage language)
         {
+            Debug.Log(language);
             SupportedLanguageData supportedLanguageData = GetSupportedLanguageData(language);
             
             string filePath = Path.Combine(Settings.LocalizationFilesPath, supportedLanguageData.LanguageColumnKey + ".json");

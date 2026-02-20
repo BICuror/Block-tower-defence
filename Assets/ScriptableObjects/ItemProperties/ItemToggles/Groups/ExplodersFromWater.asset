@@ -12,18 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1165e2371af6f074390831cde16f1b38, type: 3}
   m_Name: ExplodersFromWater
   m_EditorClassIdentifier: 
-  _instanceItemTypeContainers:
-  - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
-    AllEffectTypeNames:
-    - AdditionalEnemyGroupFromWaterToggleEffect
-    - AdditionalEnemyGroupToggleEffect
-    - GlobalBuildingModificatorToggleEffect
-    - GlobalEnemyModificatorToggleEffect
-    - GlobalStatChangeToggleEffect
-    - HealEachBuildingPerCrystal
-    - SpawnObjectsToggleEffect
-    - StartWaveGlobalToggleEffect
-    - TurnLastEnemyIntoMiniboss
+  _icon: {fileID: -98197151, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: spawn_explosive_enemies_from_water_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -37,6 +29,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 8
       _argumentName: BuildingLayer
       _intArgument: 0
@@ -48,6 +43,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 11400000, guid: 25d98ad61e78fb343afe7186a087b200, type: 2}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 0
       _argumentName: MinimalBuildingRadius
       _intArgument: 2
@@ -59,6 +57,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: SpawnDelay
       _intArgument: 0
@@ -70,6 +71,38 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 9
+      _argumentName: EnemyGroupData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 1
+        _groupParts:
+        - _amountPerWave: 01000000020000000200000002000000020000000200000003000000030000000400000004000000040000000500000005000000060000000600000007000000
+          _enemyData: {fileID: 11400000, guid: aeba6a783e8817540ac07de4818c00d5, type: 2}
+          _parseString: 
+  _instanceItemTypeContainers:
+  - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   _quality: 5
   _effectType: 1
   _isUnique: 0
@@ -88,13 +121,3 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: -98197151, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _effectName: Explosive waters
-  _effectDescription: Spawns #bad exploders enemies bad# from <color=blue>water</color>
-    nearby roads
-  _enemyGroup:
-    _amountMultiplier: 1
-    _groupParts:
-    - _amountPerWave: 010000000100000002000000020000000200000002000000020000000200000003000000030000000300000003000000030000000300000003000000
-      _enemyData: {fileID: 11400000, guid: aeba6a783e8817540ac07de4818c00d5, type: 2}
-      _parseString: 

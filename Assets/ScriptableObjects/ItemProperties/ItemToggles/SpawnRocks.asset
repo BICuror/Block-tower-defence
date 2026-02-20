@@ -12,18 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: SpawnRocks
   m_EditorClassIdentifier: 
-  _instanceItemTypeContainers:
-  - _itemTypeName: SpawnObjectsToggleEffect
-    AllEffectTypeNames:
-    - AdditionalEnemyGroupFromWaterToggleEffect
-    - AdditionalEnemyGroupToggleEffect
-    - GlobalBuildingModificatorToggleEffect
-    - GlobalEnemyModificatorToggleEffect
-    - GlobalStatChangeToggleEffect
-    - HealEachBuildingPerCrystal
-    - SpawnObjectsToggleEffect
-    - StartWaveGlobalToggleEffect
-    - TurnLastEnemyIntoMiniboss
+  _icon: {fileID: -1860937847, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: spawn_obstacles_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 8
@@ -37,6 +29,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 2
       _argumentName: ObjectPrefab
       _intArgument: 0
@@ -48,6 +43,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 0
       _argumentName: ObjectAmount
       _intArgument: 100
@@ -59,6 +57,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: MinObjectScale
       _intArgument: 40
@@ -70,6 +71,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: MaxObjectScale
       _intArgument: 40
@@ -81,6 +85,21 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _instanceItemTypeContainers:
+  - _itemTypeName: SpawnObjectsToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   _quality: 4
   _effectType: 1
   _isUnique: 0
@@ -99,6 +118,3 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: -1860937847, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _effectName: Trashers
-  _effectDescription: Spawn 40 rocks

@@ -12,10 +12,10 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
     [Inject] private WaveStateMachine _waveStateMachine;
-    [Inject] private WaveManager _waveManager;
+    [Inject] private WaveIndexContainer _waveIndexContainer;
     private Dictionary<EnemySpawner, List<EnemyData>> _enemySpawnDatas = new();
-    private List<AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup> _additionalGroups = new();
-    private List<AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup> _additionalWaveGroups = new();
+    private List<AdditionalEnemyGroupData> _additionalGroups = new();
+    private List<AdditionalEnemyGroupData> _additionalWaveGroups = new();
     private int _currentWaveSeed;
     private int _currentGroupSeed;
 
@@ -56,13 +56,13 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         });
     }
 
-    public void AddAdditionalEnemyGroup(AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup additionalEnemyGroup)
+    public void AddAdditionalEnemyGroup(AdditionalEnemyGroupData additionalEnemyGroup)
     {
         _additionalGroups.Add(additionalEnemyGroup);
         GenerateEnemyGroups();
     }
     
-    public void RemoveAdditionalEnemyGroup(AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup additionalEnemyGroup)
+    public void RemoveAdditionalEnemyGroup(AdditionalEnemyGroupData additionalEnemyGroup)
     {
         _additionalGroups.Remove(additionalEnemyGroup);
         GenerateEnemyGroups();
@@ -97,7 +97,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         {
             EnemyWaveGroup.GroupPart currentPart = groupParts[enemyGroupPartIndex];
 
-            int enemyAmount = Mathf.RoundToInt(currentPart.GetAmount(_waveManager.GetCurrentWave()) * amountMultiplier);
+            int enemyAmount = Mathf.RoundToInt(currentPart.GetAmount(_waveIndexContainer.GetCurrentWave()) * amountMultiplier);
 
             for (int enemyIndex = 0; enemyIndex < enemyAmount; enemyIndex++)
             {
@@ -114,7 +114,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 
         List<EnemyWaveGroup> suitableGroups = new List<EnemyWaveGroup>();
 
-        int currentWave = _waveManager.GetCurrentWave();
+        int currentWave = _waveIndexContainer.GetCurrentWave();
 
         for (int i = 0; i < waveGroups.Length; i++)
         {

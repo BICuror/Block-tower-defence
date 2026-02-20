@@ -13,7 +13,7 @@ public sealed class ItemFactory : MonoBehaviour
     [Inject] private DraggableCreator _draggableCreator;
     [Inject] private ItemsContainer _itemsContainer;
 
-    [SerializeField] private ToggleGlobalEffectData _startWaveEffectData; 
+    [SerializeField] private GlobalEffectData _startWaveEffectData; 
     [SerializeField] private ItemEffectSelector _effectSelector;
     [SerializeField] private List<Item> _itemsPrefabs;
     [SerializeField] private Item _waveItemPrefab;
@@ -25,44 +25,42 @@ public sealed class ItemFactory : MonoBehaviour
     
 #if UNITY_EDITOR
     [Button]
-    public void CreateItems()
+    public void DEBUGCreateItems()
     {
-        List<List<ToggleGlobalEffectData>> toggleGlobalEffect = _effectSelector.GetItemEffects(11, 3, 2);
+        List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(11, 3, 2);
             
-        CreateItemFromEffects(toggleGlobalEffect[0], new Vector3(12f, 0f, 12)).Forget();
-        CreateItemFromEffects(toggleGlobalEffect[1], new Vector3(12f, 0f, 12)).Forget();
+        CreateItemFromEffects(globalEffects[0], new Vector3(12f, 0f, 12)).Forget();
+        CreateItemFromEffects(globalEffects[1], new Vector3(12f, 0f, 12)).Forget();
     } 
 #endif
     
-    public async UniTask CreateWaveItems(Vector3 position, int totalStrength, int minimalItemStrength, int itemAmount)
+    public async UniTask CreateItems(Vector3 position, int totalStrength, int minimalItemStrength, int itemAmount)
     {
-        await CreateStartWaveItem(position);
-        
-        List<List<ToggleGlobalEffectData>> toggleGlobalEffect = _effectSelector.GetItemEffects(totalStrength, minimalItemStrength, itemAmount);
+        List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(totalStrength, minimalItemStrength, itemAmount);
             
-        for (int i = 0; i < toggleGlobalEffect.Count; i++)
+        for (int i = 0; i < globalEffects.Count; i++)
         {
-            await CreateItemFromEffects(toggleGlobalEffect[i], position);
+            await CreateItemFromEffects(globalEffects[i], position);
         }
     }
     
     public async UniTask CreateItem(int strength, Vector3 position)
     {
-        _effectSelector.TryGetItemEffectDatas(strength, false, out List<ToggleGlobalEffectData> toggleEfectDatas);
+        _effectSelector.TryGetItemEffectDatas(strength, false, out List<GlobalEffectData> effectDatas);
         
-        await CreateItemFromEffects(toggleEfectDatas, position);
+        await CreateItemFromEffects(effectDatas, position);
     }
 
-    private async UniTask CreateItemFromEffects(List<ToggleGlobalEffectData> toggleEfectDatas, Vector3 position)
+    private async UniTask CreateItemFromEffects(List<GlobalEffectData> effectDatas, Vector3 position)
     {
         Item itemPrefab = GetItemPrefab();
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(itemPrefab, position);
         Item item = itemDraggable.GetComponent<Item>();
         
-        item.AddToggleEffectDatas(toggleEfectDatas);
+        item.AddToggleEffectDatas(effectDatas);
         
         int charges = 0;
-        toggleEfectDatas.ForEach(effectData => charges += effectData.Quality);
+        effectDatas.ForEach(effectData => charges += effectData.Quality);
         item.SetChargesAmount(charges);
         
         _usedItemColors.Add(item.ItemColor, item);
@@ -76,8 +74,8 @@ public sealed class ItemFactory : MonoBehaviour
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(_waveItemPrefab, centerPosition);
         Item item = itemDraggable.GetComponent<Item>();
 
-        List<ToggleGlobalEffectData> toggleEffectDatas = new List<ToggleGlobalEffectData>() {_startWaveEffectData};
-        item.AddToggleEffectDatas(toggleEffectDatas);
+        List<GlobalEffectData> effectDatas = new List<GlobalEffectData>() {_startWaveEffectData};
+        item.AddToggleEffectDatas(effectDatas);
     }
 
     public void DestroyAllUnusedItems()

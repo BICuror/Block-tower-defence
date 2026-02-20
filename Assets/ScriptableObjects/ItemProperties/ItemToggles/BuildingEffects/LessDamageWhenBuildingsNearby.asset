@@ -12,18 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: LessDamageWhenBuildingsNearby
   m_EditorClassIdentifier: 
-  _instanceItemTypeContainers:
-  - _itemTypeName: GlobalBuildingModificatorToggleEffect
-    AllEffectTypeNames:
-    - AdditionalEnemyGroupFromWaterToggleEffect
-    - AdditionalEnemyGroupToggleEffect
-    - GlobalBuildingModificatorToggleEffect
-    - GlobalEnemyModificatorToggleEffect
-    - GlobalStatChangeToggleEffect
-    - HealEachBuildingPerCrystal
-    - SpawnObjectsToggleEffect
-    - StartWaveGlobalToggleEffect
-    - TurnLastEnemyIntoMiniboss
+  _icon: {fileID: 0}
+  _localizationKey: stat_down_in_building_area_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -37,6 +29,21 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _instanceItemTypeContainers:
+  - _itemTypeName: GlobalBuildingModificatorToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   _quality: 2
   _effectType: 1
   _isUnique: 1
@@ -55,7 +62,3 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: 0}
-  _effectName: Hysteria
-  _effectDescription: Buildings get #bad -25% bad# #Damage when other buildings in
-    #Area

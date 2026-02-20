@@ -8,7 +8,7 @@ public sealed class WaveContentController : MonoBehaviour
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private SelectionManager _selectionManager;
     [Inject] private ItemFactory _itemFactory;
-    [Inject] private WaveManager _waveManager;   
+    [Inject] private WaveIndexContainer _waveIndexContainer;   
     
     [SerializeField] private Transform _townhallTransform;
     
@@ -38,12 +38,13 @@ public sealed class WaveContentController : MonoBehaviour
     private void GenerateWaveItems()
     {
         WaveContent waveContent = GetCurrentWaveContent();
-        
-        _itemFactory.CreateWaveItems(_townhallTransform.position, waveContent.CombinedItemStrength, waveContent.MinimalItemStrength, waveContent.ItemsAmount).Forget();
+
+        _itemFactory.CreateStartWaveItem(_townhallTransform.transform.position).Forget();
+        _itemFactory.CreateItems(_townhallTransform.position, waveContent.CombinedItemStrength, waveContent.MinimalItemStrength, waveContent.ItemsAmount).Forget();
     }
 
     private WaveContent GetCurrentWaveContent()
     {
-        return _islandDataContainer.Data.WavesContentConfig.Waves[_waveManager.GetCurrentWave() - 1];
+        return _islandDataContainer.Data.WavesContentConfig.Waves[_waveIndexContainer.GetCurrentWave() - 1];
     }
 }

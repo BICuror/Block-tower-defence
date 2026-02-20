@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Zenject;
 using System;
 
-public sealed class GlobalStatChangeToggleEffect : GlobalToggleEffect
+public sealed class GlobalStatChangeToggleEffect : GlobalEffect
 {
     [Inject] private GlobalStatContainer _globalStatContainer;
     

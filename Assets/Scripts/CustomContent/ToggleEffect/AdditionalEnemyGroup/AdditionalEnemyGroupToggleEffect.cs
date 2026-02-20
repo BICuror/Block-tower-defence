@@ -1,22 +1,16 @@
 using Zenject;
 
-public sealed class AdditionalEnemyGroupToggleEffect : GlobalToggleEffect
+public sealed class AdditionalEnemyGroupToggleEffect : GlobalEffect
 {
-    private AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup _additionalEnemyGroup;
     [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
-    
-    public void SetAdditionalEnemyGroup(AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup additionalEnemyGroup)
-    {
-        _additionalEnemyGroup = additionalEnemyGroup;
-    }
     
     public override void Enable()
     {
-        _enemySpawnGroupCompiler.AddAdditionalEnemyGroup(_additionalEnemyGroup);
+        _enemySpawnGroupCompiler.AddAdditionalEnemyGroup(Args.GetArgument<AdditionalEnemyGroupData>("EnemyGroupData"));
     }
 
     public override void Disable()
     {
-        _enemySpawnGroupCompiler.RemoveAdditionalEnemyGroup(_additionalEnemyGroup);
+        _enemySpawnGroupCompiler.RemoveAdditionalEnemyGroup(Args.GetArgument<AdditionalEnemyGroupData>("EnemyGroupData"));
     }
 }

@@ -12,44 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: TakeLessDamageWhenHasNegativeEntityEffect
   m_EditorClassIdentifier: 
-  _itemTypeContainers:
-  - _itemTypeName: DamageModifierEntityModificator
-    AllEffectTypeNames:
-    - ActivateWhenBuilt
-    - AddIconEntityModificator
-    - AOEMortarExplotion
-    - ApplyEffectOnActivation
-    - ApplyEntityEffectOnHit
-    - ApplyModificatorOnIdleStartRemoveUponPickup
-    - ApplyModifierUntilPickUpEntityModifier
-    - ApplyPermamentEntityEffect
-    - BombsLeaveBlockTowers
-    - CreateBombsAtWaveStart
-    - CreateBoosterTower
-    - CustomParticleEntityModifier
-    - DamageModifierEntityModificator
-    - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityModificatorStatChange
-    - ExecuteEntitiesInArea
-    - FasterCycleUntilKill
-    - HeavyMortarCore
-    - IncreaseBuildTimeEachBuilt
-    - InfernoExplodeOnFullCharge
-    - InvincibleWhileBuidlging
-    - LaunchArrowsOnKill
-    - ModificatorObjectApplyerEntityModificator
-    - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
-    - MoveDiagonalyEntityModifier
-    - MultishotEntityModificator
-    - OnActivationInvokeTaskAndHurt
-    - PiercingArrows
-    - RerollAllUnusedItems
-    - ScaleDamageWithHeight
-    - ShieldEntityModificator
-    - ShootOnKill
-    - SpawnCrystalForKills
-    - TakeDamageUponPlacement
+  _icon: {fileID: 0}
+  _localizationKey: 
+  _modificatorName: Vampire
+  _modificatorDescription: If has #bad negative bad# effect, take #good -25% good#
+    #Damage
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 4
@@ -85,6 +52,47 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+  _showInInspector: 1
+  _itemTypeContainers:
+  - _itemTypeName: DamageModifierEntityModificator
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -101,9 +109,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Vampire
-  _modificatorDescription: If has #bad negative bad# effect, take #good -25% good#
-    #Damage

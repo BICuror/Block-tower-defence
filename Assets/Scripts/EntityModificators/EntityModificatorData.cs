@@ -1,15 +1,15 @@
 using System.Collections.Generic;
-using Ligofff.CustomSOIcons;
 using NaughtyAttributes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EntityModificatorData", menuName = "EntityModificatorData")]
 
-public class EntityModificatorData : ScriptableObject
+public class EntityModificatorData : InspectableData
 {
+    [SerializeField] private bool _showInInspector = true;
+    
     [Header("GlobalEffectData")]
     [SerializeField] private List<InstanceItemTypeContainer> _itemTypeContainers;
-    [SerializeField] private ArgumentsContainer _argumentsContainer;
 
     [Header("SelectionData")] 
     [SerializeField] private EntityModifcationRarity _rarity;
@@ -30,25 +30,13 @@ public class EntityModificatorData : ScriptableObject
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOwnerTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOtherEntityTags;
 
-    [Header("UI Data")] 
-    [SerializeField] private bool _showInInspector = true;
-    [SerializeField] private bool _createIcon;
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private string _modificatorName;
-    [TextArea] [SerializeField] private string _modificatorDescription;
-    
     public List<InstanceItemTypeContainer> ItemTypeContainers => _itemTypeContainers;
-    public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public EffectType EffectType => _effectType;
     public EntityModifcationRarity Rarity => _rarity;
     public List<EntityModifcatorTag> Tags => _tags;
     public bool HasStacks => _hasStacks;
     public int MaxStacks => _maxStacks;
     public bool ShowInInspector => _showInInspector;
-    public bool CreateIcon => _createIcon;
-    [CustomAssetIcon] public Sprite Icon => _icon;
-    public string ModificatorName => _modificatorName;
-    public string ModificatorDescription => _modificatorDescription;
     public bool HasRequiredTags => _hasRequiredTags;
     public bool HasBlockTags => _hasBlockTags;
     public List<EntityEffectTagReqirement> ReqiredOwnerTags => _reqiredOwnerTags.Requirements;

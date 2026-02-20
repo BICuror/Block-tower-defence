@@ -24,22 +24,31 @@ public sealed class GlobalEffectFactory
             throw e;
         }
     }
-
-    public List<GlobalToggleEffect> CreateToggleEffects(ToggleGlobalEffectData globalEffectData)
+    
+    public List<GlobalEffect> CreateEffects(List<GlobalEffectData> effectDatas)
     {
-        List<GlobalToggleEffect> toggleEffects = new();
+        List<GlobalEffect> resultEffectList = new();
+        
+        effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateEffects(effectData)));
+
+        return resultEffectList;
+    }
+    
+    public List<GlobalEffect> CreateEffects(GlobalEffectData globalEffectData)
+    {
+        List<GlobalEffect> effects = new();
         
         globalEffectData.InstanceItemTypeContainers.ForEach(instanceItemTypeContainer =>
         {
-            toggleEffects.Add(CreateEffectInstance<GlobalToggleEffect>(globalEffectData, instanceItemTypeContainer.InstanceType));
+            effects.Add(CreateEffectInstance(globalEffectData, instanceItemTypeContainer.InstanceType));
         });
         
-        return toggleEffects;
+        return effects;
     } 
     
-    private T CreateEffectInstance<T>(GlobalEffectData effectData, Type type) where T : GlobalEffect
+    private GlobalEffect CreateEffectInstance(GlobalEffectData effectData, Type type)
     {
-        T effect = (T)Activator.CreateInstance(type);
+        GlobalEffect effect = (GlobalEffect)Activator.CreateInstance(type);
 
         if (effect == null) throw new NullReferenceException($"Invalid effect type: {type}");
 
@@ -48,14 +57,5 @@ public sealed class GlobalEffectFactory
         effectData.Modify(effect);
 
         return effect;
-    }
-
-    public List<GlobalToggleEffect> CreateToggleEffects(List<ToggleGlobalEffectData> effectDatas)
-    {
-        List<GlobalToggleEffect> resultEffectList = new();
-        
-        effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateToggleEffects(effectData)));
-
-        return resultEffectList;
     }
 }

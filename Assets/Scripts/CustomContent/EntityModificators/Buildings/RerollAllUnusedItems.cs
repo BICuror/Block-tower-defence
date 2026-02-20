@@ -61,23 +61,20 @@ public sealed class RerollAllUnusedItems : EntityModificator
     private void RerollUnusedItems()
     {
         int destroyedItems = 0;
-        List<int> itemStrengths = new();
+        int itemsTotalStrength = 0;
 
         List<Item> unusedItems = _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList();
         
         unusedItems.ForEach(unusedItem =>
         {
-            if (!unusedItem.ToggleEffectDatas.Exists(data => data.InstanceItemTypeContainers.Exists(typeContainer => typeContainer.InstanceType == typeof(StartWaveGlobalToggleEffect))))
+            if (!unusedItem.EffectDatas.Exists(data => data.InstanceItemTypeContainers.Exists(typeContainer => typeContainer.InstanceType == typeof(StartWaveGlobalToggleEffect))))
             {
                 destroyedItems++;
-                itemStrengths.Add(unusedItem.Charges);
+                itemsTotalStrength += unusedItem.Charges;
                 _itemFactory.RemoveAndDestroyItem(unusedItem);
             }
         });
 
-        for (int i = 0; i < destroyedItems; i++)
-        {
-            _itemFactory.CreateItem(itemStrengths[i], Entity.transform.position).Forget();
-        }
+        _itemFactory.CreateItems(Entity.transform.position, itemsTotalStrength, 2, destroyedItems).Forget();
     }
 }

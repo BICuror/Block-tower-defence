@@ -27,8 +27,8 @@ public sealed class GlobalEffectTooltipInvokingPanel : TooltipInvokingPanel
     
     protected override void UpdateAllParsableText()
     {
-        _modificationNameText.text = ParseTextByDefault(_globalEffectData.EffectName);
-        _modificatorDescriptionText.text = ParseTextByDefault(_globalEffectData.EffectDescription);
-        _tagDataContainer = TooltipDataParser.GetTooltipTagDataFromText(_globalEffectData.EffectDescription);
+        _modificationNameText.text = ParseTextByDefault(_globalEffectData.GetName());
+        _modificatorDescriptionText.text = ParseTextByDefault(_globalEffectData.GetDescription());
+        _tagDataContainer = TooltipDataParser.GetTooltipTagDataFromText(_globalEffectData.GetDescription());
     }
 }

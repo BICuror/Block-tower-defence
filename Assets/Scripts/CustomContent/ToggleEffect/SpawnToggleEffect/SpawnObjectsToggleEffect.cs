@@ -10,7 +10,7 @@ using System;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
-public class SpawnObjectsToggleEffect : GlobalToggleEffect
+public class SpawnObjectsToggleEffect : GlobalEffect
 {
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private IslandDataContainer _islandDataContainer;

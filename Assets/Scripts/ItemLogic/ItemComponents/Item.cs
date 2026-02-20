@@ -13,25 +13,23 @@ public class Item : DraggableObject
     
     [SerializeField] private ItemColor _itemColor;
     [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
-    private List<ToggleGlobalEffectData> _toggleEffectDatas = new();
+    private List<GlobalEffectData> _effectDatas = new();
     private int _charges;
     
 #if UNITY_EDITOR
     [Header("Debug")]
-    [SerializeField] private ToggleGlobalEffectData _toggleGlobalEffectData;
+    [SerializeField] private GlobalEffectData _toggleGlobalEffectData;
     
     [Button]
     public void ApplyEffect()
     {
-        if (_toggleEffectDatas.Contains(_toggleGlobalEffectData)) return;
+        if (_effectDatas.Contains(_toggleGlobalEffectData)) return;
         
-        _toggleEffectDatas.Add(_toggleGlobalEffectData);
-        
-        _globalEffectContainer.AddEffect(_toggleGlobalEffectData);
+        _effectDatas.Add(_toggleGlobalEffectData);
     }
     
 #endif 
-    public List<ToggleGlobalEffectData> ToggleEffectDatas => _toggleEffectDatas;
+    public List<GlobalEffectData> EffectDatas => _effectDatas;
     public int Charges => _charges;
     public ItemColor ItemColor => _itemColor;
     
@@ -44,7 +42,7 @@ public class Item : DraggableObject
         PickedUp += () => ItemPickedUp?.Invoke(this);
     }
     
-    public void AddToggleEffectDatas(List<ToggleGlobalEffectData> effectDatas) => _toggleEffectDatas.AddRange(effectDatas); 
+    public void AddToggleEffectDatas(List<GlobalEffectData> effectDatas) => _effectDatas.AddRange(effectDatas); 
     public void SetChargesAmount(int charges) => _charges = charges;
 
     public async UniTask DecreaseDuration()
@@ -56,15 +54,9 @@ public class Item : DraggableObject
         DestroyItem();
     }
     
-    public void EnableToggleEffects()
-    {
-        _globalEffectContainer.AddEffects(_toggleEffectDatas);
-    }
+    public void EnableToggleEffects() => _globalEffectContainer.AddEffects(_effectDatas);
     
-    public void DisableToggleEffects()
-    {
-        _globalEffectContainer.RemoveEffects(_toggleEffectDatas);
-    }
+    public void DisableToggleEffects() => _globalEffectContainer.RemoveEffects(_effectDatas);
     
     public void DestroyItem()
     {

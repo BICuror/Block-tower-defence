@@ -4,7 +4,7 @@ using System;
 
 [CreateAssetMenu(fileName = "GlobalStatChangeToggleEffectData", menuName = "Effects/GlobalStatChangeToggleEffectData")]
 
-public sealed class GlobalStatChangeToggleEffectData : ToggleGlobalEffectData
+public sealed class GlobalStatChangeToggleEffectData : GlobalEffectData
 { 
     [SerializeField] private List<StatChange> _statChanges;
     

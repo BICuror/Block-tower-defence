@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: SpeedUpInBuildingsArea
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: 
+  _modificatorName: Speed up in area
+  _modificatorDescription: '#bad Enemies get 1 bad# #SpeedUp in #Area'
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 7
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _layerSetting: {fileID: 0}
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -20,11 +38,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -39,6 +60,7 @@ MonoBehaviour:
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
     - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
@@ -48,23 +70,11 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 7
-      _argumentName: ObjectModificator
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 8698641187551789753, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
-      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 1
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -76,7 +86,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Speed up in area
-  _modificatorDescription: '#bad Enemies get 1 bad# #SpeedUp in #Area'

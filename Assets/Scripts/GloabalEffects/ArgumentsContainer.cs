@@ -8,6 +8,8 @@ using System;
     [Header("Arguments Container")] 
     [SerializeField] private List<ArgumentContainerItem> _argumentItems;
     
+    public List<ArgumentContainerItem> ArgumentItems => _argumentItems;
+    
     public bool HasArgument(string argumentName)
     {
         return _argumentItems.Exists(item => item.ArgumentName == argumentName);
@@ -35,8 +37,10 @@ using System;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityEffectParticleHandler)] [SerializeField] private EntityEffectParticleHandler _entityEffectParticleHandler;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityObjectModifier)] [SerializeField] private EntityObjectModifier _entityObjectModifierPrefab;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.LayerSetting)] [SerializeField] private LayerSetting _layerSetting;
+    [AllowNesting] [ShowIf("_argumentType", ArgumentType.AdditionalEnemyGroup)] [SerializeField] private AdditionalEnemyGroupData _additionalEnemyGroupData;
     
     public string ArgumentName => _argumentName;
+    public ArgumentType ArgumentType => _argumentType;
 
     public object GetValue()
     {
@@ -51,6 +55,7 @@ using System;
             case ArgumentType.EntityEffectParticleHandler: return _entityEffectParticleHandler;
             case ArgumentType.EntityObjectModifier: return _entityObjectModifierPrefab;
             case ArgumentType.LayerSetting: return _layerSetting;
+            case ArgumentType.AdditionalEnemyGroup: return _additionalEnemyGroupData;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }
@@ -67,4 +72,5 @@ public enum ArgumentType
     EntityEffectParticleHandler = 6,
     EntityObjectModifier = 7,
     LayerSetting = 8,
+    AdditionalEnemyGroup = 9,
 }

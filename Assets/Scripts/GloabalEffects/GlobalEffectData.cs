@@ -1,14 +1,13 @@
 using System.Collections.Generic;
-using Ligofff.CustomSOIcons;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public abstract class GlobalEffectData : ScriptableObject
+[CreateAssetMenu(fileName = "GlobalEffectData", menuName = "Effects/GlobalEffectData")]
+
+public class GlobalEffectData : InspectableData
 {
     [Header("Effect")]
     [SerializeField] private List<InstanceItemTypeContainer> _instanceItemTypeContainers;
-    [SerializeField] private ArgumentsContainer _argumentsContainer;
     
     [Header("SelectionData")]
     [Range(1, 15)] [SerializeField] private int _quality = 3;
@@ -30,14 +29,8 @@ public abstract class GlobalEffectData : ScriptableObject
     [SerializeField] private bool _hasBlockTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockBuildingsTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private GlobalEffectTagRequirementContainer _blockGlobalEffectTags;
-
-    [Space] [Header("TooltipData")] 
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private string _effectName;
-    [TextArea] [SerializeField] private string _effectDescription;
     
     public List<InstanceItemTypeContainer> InstanceItemTypeContainers => _instanceItemTypeContainers;
-    public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public EffectAppearanceConditionData EffectAppearanceCondition => _effectAppearanceCondition;
     public ArgumentsContainer EffectAppearanceConditionArgumentsContainer => _effectAppearanceConditionArgumentsContainer;
     public List<GlobalEffectTag> Tags => _tags;
@@ -45,9 +38,6 @@ public abstract class GlobalEffectData : ScriptableObject
     public int Quality => _quality;
     public bool IsUnique => _isUnique;
     public EffectType EffectType => _effectType;
-    [CustomAssetIcon] public Sprite Icon => _icon;
-    public string EffectName => _effectName;
-    public string EffectDescription => _effectDescription;
     public bool HasRequiredTags => _hasRequiredTags;
     public bool HasBlockTags => _hasBlockTags;
     public List<EntityEffectTagReqirement> RequiredBuildingTags => _requiredBuildingTags.Requirements;

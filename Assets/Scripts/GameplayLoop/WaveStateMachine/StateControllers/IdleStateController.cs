@@ -21,13 +21,13 @@ public sealed class IdleStateController : WaveStateController
     [Inject] private SelectionManager _selectionManager;
     [Inject] private RoadGenerator _roadGenerator;
     [Inject] private ItemFactory _itemFactory;
-    [Inject] private WaveManager _waveManager;
+    [Inject] private WaveIndexContainer _waveIndexContainer;
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
     protected override async UniTask OnEnterStateStarted()
     {
-        _waveManager.IncreaseWaveCounter();
+        _waveIndexContainer.IncreaseWaveCounter();
 
         _decorationContainer.ActivateAllDecorations();
         _enemyBiomesContainer.DestroyOldBiomes();

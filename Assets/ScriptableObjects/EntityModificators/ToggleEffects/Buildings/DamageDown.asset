@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: DamageDown
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: 
+  _modificatorName: Damage decrease
+  _modificatorDescription: '#bad -30% bad# #Damage #com & com# #bad -30% bad# #ExplosionDamage'
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 0
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -27,6 +34,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -51,8 +59,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 2
   _tags: 
   _effectType: 1
@@ -69,11 +75,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 0
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Damage decrease
-  _modificatorDescription: '#bad -30% bad# #Damage #com & com# #bad -30% bad# #ExplosionDamage'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: 0

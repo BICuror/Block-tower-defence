@@ -1,4 +1,4 @@
 public sealed class MaxHealth : Stat
 {
-    protected override float MinimalValue { get => 1f; }
+    protected override float MinimalValue => 1f;
 }

@@ -19,6 +19,6 @@ public sealed class EffectInspectionTooltipPreview : InspectionPanelBase
     
     protected override void UpdateAllParsableText()
     {
-        _previewName.text = ParseTextByDefault(_entityModificatorData.ModificatorName);
+        _previewName.text = ParseTextByDefault(_entityModificatorData.GetName());
     }
 }

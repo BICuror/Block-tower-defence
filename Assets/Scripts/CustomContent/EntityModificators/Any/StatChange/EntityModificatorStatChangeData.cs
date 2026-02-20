@@ -8,6 +8,8 @@ public sealed class EntityModificatorStatChangeData : EntityModificatorData
 {
     [SerializeField] private List<StatChange> _statChanges;
     
+    public List<StatChange> StatChanges => _statChanges;
+    
     public override void Modify(EntityModificator modificator)
     {
         if (modificator is not EntityModificatorStatChange) return;

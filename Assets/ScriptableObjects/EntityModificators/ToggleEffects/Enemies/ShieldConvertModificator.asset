@@ -12,6 +12,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: ShieldConvertModificator
   m_EditorClassIdentifier: 
+  _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: 
+  _modificatorName: Shielded
+  _modificatorDescription: Convert #MaxHealth into #Shield, +25 #Shield
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: ShieldHealthScale
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 1
+      _stringArgument: HealDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: MaxShieldHealth
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 25
+      _stringArgument: HealDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+    - _argumentType: 2
+      _argumentName: CanvasBarPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 50
+      _stringArgument: HealDamageModifier
+      _gameObjectArgument: {fileID: 6005996875765172791, guid: a5a55c2865d1b3d4088a33e21ca34a9d, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ShieldEntityModificator
     AllEffectTypeNames:
@@ -20,12 +60,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -57,12 +99,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -87,41 +131,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 1
-      _argumentName: ShieldHealthScale
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0.8
-      _stringArgument: HealDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: MaxShieldHealth
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 25
-      _stringArgument: HealDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 2
-      _argumentName: CanvasBarPrefab
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 50
-      _stringArgument: HealDamageModifier
-      _gameObjectArgument: {fileID: 6005996875765172791, guid: a5a55c2865d1b3d4088a33e21ca34a9d, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 
   _effectType: 0
@@ -138,12 +147,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _modificatorName: Shielded
-  _modificatorDescription: Convert 80% of #MaxHealth into #Shield, +50 #Shield
   _statChanges:
   - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     FlatChange: 0
-    MultiplierChange: -0.8
+    MultiplierChange: -1

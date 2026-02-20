@@ -12,18 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: ExtraShieldedEnemiesToggleEffect
   m_EditorClassIdentifier: 
-  _instanceItemTypeContainers:
-  - _itemTypeName: GlobalEnemyModificatorToggleEffect
-    AllEffectTypeNames:
-    - AdditionalEnemyGroupFromWaterToggleEffect
-    - AdditionalEnemyGroupToggleEffect
-    - GlobalBuildingModificatorToggleEffect
-    - GlobalEnemyModificatorToggleEffect
-    - GlobalStatChangeToggleEffect
-    - HealEachBuildingPerCrystal
-    - SpawnObjectsToggleEffect
-    - StartWaveGlobalToggleEffect
-    - TurnLastEnemyIntoMiniboss
+  _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: convert_enemy_health_to_shield_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -37,6 +29,21 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _instanceItemTypeContainers:
+  - _itemTypeName: GlobalEnemyModificatorToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
   _quality: 7
   _effectType: 1
   _isUnique: 1
@@ -55,6 +62,3 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _effectName: Extra shielded enemies
-  _effectDescription: Convert 80% #MaxHealth into #Shield, +25 #Shield

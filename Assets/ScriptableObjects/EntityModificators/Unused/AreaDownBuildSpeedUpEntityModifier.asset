@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: AreaDownBuildSpeedUpEntityModifier
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: 
+  _modificatorName: Quick build
+  _modificatorDescription: '#bad -1 bad# #Reach, #good -99% good# #BuildTime'
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -20,11 +27,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -49,12 +59,11 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 0
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -66,10 +75,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Quick build
-  _modificatorDescription: '#bad -1 bad# #Reach, #good -99% good# #BuildTime'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: -1

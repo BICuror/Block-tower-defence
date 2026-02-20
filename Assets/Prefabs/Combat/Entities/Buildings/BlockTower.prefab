@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 3891971672056096671}
   - component: {fileID: 7813293406362514702}
   - component: {fileID: 8282743070268609198}
-  - component: {fileID: 6514130549159531199}
   - component: {fileID: 8685880848897604097}
   - component: {fileID: 6006436116937174125}
+  - component: {fileID: 7904643718485314149}
   m_Layer: 7
   m_Name: BlockTower
   m_TagString: Draggable
@@ -161,20 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78980f7ab429c864b82b2b729aa524b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6514130549159531199
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4898836349792692550}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canBeIdleInspected: 0
-  _localizationKey: block_tower_building_entity_tooltip
 --- !u!114 &8685880848897604097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +191,20 @@ MonoBehaviour:
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7904643718485314149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898836349792692550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InspectableObject
+  _canBeIdleInspected: 0
+  _localizationKey: rock_building_entity_tooltip
 --- !u!1 &9081913487005990000
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 1, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 982659189848494870}
@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1c3e6581c7b238f41a92189cf02157f1, type: 2}
+  - {fileID: 2100000, guid: 0858ef52ad7d9d1418316e677aadb195, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -298,7 +298,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9081913487005990000}
-  m_Mesh: {fileID: 4300000, guid: 7d453662dea4fe14ca37340c0eaeb18b, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 9aa2d638b7df5184cb38f41171588031, type: 3}
 --- !u!114 &3370347698432493739
 MonoBehaviour:
   m_ObjectHideFlags: 0

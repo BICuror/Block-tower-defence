@@ -1,7 +1,7 @@
 using Zenject;
 using Combat;
 
-public sealed class TurnLastEnemyIntoMiniboss : GlobalToggleEffect
+public sealed class TurnLastEnemyIntoMiniboss : GlobalEffect
 {
     [Inject] private EnemySpawnSystem _enemySpawnSystem;
     [Inject] private GlobalEnemyContainer _globalEnemyContainer;

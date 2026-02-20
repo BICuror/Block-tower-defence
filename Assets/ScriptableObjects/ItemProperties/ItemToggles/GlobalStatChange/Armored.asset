@@ -12,6 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7e36d4158907f74088b84bbd4ad37d8, type: 3}
   m_Name: Armored
   m_EditorClassIdentifier: 
+  _icon: {fileID: -255249925, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: more_enemies_less_hp_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 3
+      _argumentName: EntityModificatorData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 11400000, guid: e0ee87723e551ff4581d794fc2d884c7, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalStatChangeToggleEffect
     AllEffectTypeNames:
@@ -35,19 +55,6 @@ MonoBehaviour:
     - SpawnObjectsToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 3
-      _argumentName: EntityModificatorData
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: e0ee87723e551ff4581d794fc2d884c7, type: 2}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _quality: 4
   _effectType: 1
   _isUnique: 1
@@ -68,9 +75,6 @@ MonoBehaviour:
     Requirements:
     - Tag: 0
       Amount: 1
-  _icon: {fileID: -255249925, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _effectName: Armored
-  _effectDescription: '#good -50% good# enemies, #bad +50% enemy bad# #MaxHealth'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 6e5fae9541dd9ca4785dd9fcbb8f9465, type: 2}
     FlatChange: 0

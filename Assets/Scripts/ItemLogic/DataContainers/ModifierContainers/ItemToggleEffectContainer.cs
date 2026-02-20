@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ItemToggleEffectContainer", menuName = "Item/ItemToggleEffectContainer")]
+[CreateAssetMenu(fileName = "ItemEffectContainer", menuName = "Item/ItemEffectContainer")]
 
 public sealed class ItemToggleEffectContainer : ScriptableObject
 {
-    [SerializeField] private List<ToggleGlobalEffectData> _itemToggleEffectDatas;
+    [SerializeField] private List<GlobalEffectData> _itemEffectDatas;
     
-    public List<ToggleGlobalEffectData> EffectDatas => new(_itemToggleEffectDatas);
+    public List<GlobalEffectData> EffectDatas => new(_itemEffectDatas);
 }

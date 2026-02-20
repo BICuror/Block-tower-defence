@@ -12,6 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054db3ff61f53f745839cba5dbe343fa, type: 3}
   m_Name: PermamentRegeneration
   m_EditorClassIdentifier: 
+  _icon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: global_regen_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 3
+      _argumentName: EntityModificatorData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 11400000, guid: 3cfe413b2dd071c4baee73e58ed80dad, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalEnemyModificatorToggleEffect
     AllEffectTypeNames:
@@ -35,19 +55,6 @@ MonoBehaviour:
     - SpawnObjectsToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 3
-      _argumentName: EntityModificatorData
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 11400000, guid: 3cfe413b2dd071c4baee73e58ed80dad, type: 2}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _quality: 7
   _effectType: 1
   _isUnique: 1
@@ -66,6 +73,3 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _effectName: Divine Intervention
-  _effectDescription: '#good Buildings good# and #bad enemies bad# recive 1 #Regeneration'

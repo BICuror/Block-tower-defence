@@ -1,7 +1,7 @@
 using Zenject;
 using Combat;
 
-public sealed class GlobalBuildingModificatorToggleEffect : GlobalToggleEffect
+public sealed class GlobalBuildingModificatorToggleEffect : GlobalEffect
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     private EntityModificatorData _entityModificatorData;

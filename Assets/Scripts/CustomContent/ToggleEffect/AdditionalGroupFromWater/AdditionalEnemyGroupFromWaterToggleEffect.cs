@@ -1,18 +1,17 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using WorldGeneration;
 using UnityEngine;
 using Zenject;
 using Combat;
-using Cysharp.Threading.Tasks;
 
-public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffect
+public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalEffect
 {
     [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private RoadMapHolder _roadMapHolder;
-    private AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup _additionalEnemyGroup;
     private LayerSetting _buildingLayerSetting;
     private int _minimalBuildingRadius;
     private float _spawnDelay;
@@ -24,12 +23,6 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
         Vector2Int.up,
         Vector2Int.right
     };
-
-    
-    public void SetAdditionalEnemyGroup(AdditionalEnemyGroupToggleEffectData.AdditionalEnemyGroup additionalEnemyGroup)
-    {
-        _additionalEnemyGroup = additionalEnemyGroup;
-    }
     
     public override void Enable()
     {
@@ -52,8 +45,10 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalToggleEffe
         List<Vector3> validSpawnPositions = GetValidSpawnPositions();
 
         if (validSpawnPositions.Count == 0) return;
+
+        AdditionalEnemyGroupData enemyGroupData = Args.GetArgument<AdditionalEnemyGroupData>("EnemyGroupData"); 
         
-        List<EnemyData> enemyDatas = _enemySpawnGroupCompiler.GetEnemyGroupPart(_additionalEnemyGroup.GroupParts, _additionalEnemyGroup.AmountMultiplier);
+        List<EnemyData> enemyDatas = _enemySpawnGroupCompiler.GetEnemyGroupPart(enemyGroupData.GroupParts, enemyGroupData.AmountMultiplier);
         
         for (int i = 0; i < enemyDatas.Count; i++)
         {

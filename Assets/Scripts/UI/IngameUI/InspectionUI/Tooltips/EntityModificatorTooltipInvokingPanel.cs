@@ -45,8 +45,9 @@ public sealed class EntityModificatorTooltipInvokingPanel : TooltipInvokingPanel
 
     protected override void UpdateAllParsableText()
     {
-        _modificatorNameText.text = ParseTextByDefault(_entityModificatorData.ModificatorName);
-        _modificatorDescriptionText.text = _additionalFrontText + ParseTextByDefault(_entityModificatorData.ModificatorDescription);
-        _tagDataContainer = TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.ModificatorDescription);
+        _modificatorNameText.text = ParseTextByDefault(_entityModificatorData.GetName());
+        _modificatorDescriptionText.text = _additionalFrontText + ParseTextByDefault(_entityModificatorData.GetDescription());
+        
+        _tagDataContainer = TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.GetDescription());
     }
 }

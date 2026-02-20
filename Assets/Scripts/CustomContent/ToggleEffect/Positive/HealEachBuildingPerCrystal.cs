@@ -1,7 +1,7 @@
 using Zenject;
 using Combat;
 
-public sealed class HealEachBuildingPerCrystal : GlobalToggleEffect
+public sealed class HealEachBuildingPerCrystal : GlobalEffect
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private WaveStateMachine _waveStateMachine;

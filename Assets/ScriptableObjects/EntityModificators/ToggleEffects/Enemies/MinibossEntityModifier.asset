@@ -12,6 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: MinibossEntityModifier
   m_EditorClassIdentifier: 
+  _icon: {fileID: -1860937847, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: 
+  _modificatorName: Last standing
+  _modificatorDescription: '#bad +300% bad# #MaxHealth, #bad +15% bad# #Speed'
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 6
+      _argumentName: EntityEffectParticleHandler
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 8391014343333558595, guid: 805e9220e0ad86341aa8373a69a0b809, type: 3}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -130,19 +148,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 6
-      _argumentName: EntityEffectParticleHandler
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 8391014343333558595, guid: 805e9220e0ad86341aa8373a69a0b809, type: 3}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _rarity: 0
   _tags: 
   _effectType: 0
@@ -159,11 +164,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 1
-  _icon: {fileID: -1860937847, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Last standing
-  _modificatorDescription: '#bad +300% bad# #MaxHealth, #bad +15% bad# #Speed'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     FlatChange: 0

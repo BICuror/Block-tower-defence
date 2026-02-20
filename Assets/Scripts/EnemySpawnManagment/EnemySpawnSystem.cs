@@ -12,7 +12,7 @@ namespace Combat
     {
         [Inject] private GlobalEnemyContainer _globalEnemyContainer;
         [Inject] private IslandDataContainer _islandDataContainer;
-        [Inject] private WaveManager _waveManager;
+        [Inject] private WaveIndexContainer _waveIndexContainer;
         private List<EnemySpawner> _spawners = new();
         
         public event Action LastWaveEnemyDied;

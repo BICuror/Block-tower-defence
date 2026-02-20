@@ -2,7 +2,7 @@ using UnityEngine;
 using Zenject;
 using Combat;
 
-public sealed class GlobalEnemyModificatorToggleEffect : GlobalToggleEffect
+public sealed class GlobalEnemyModificatorToggleEffect : GlobalEffect
 {
     [Inject] private GlobalEnemyContainer _globalEnemyContainer;
     private EntityModificatorData _entityModificatorData;

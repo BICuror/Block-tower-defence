@@ -24,12 +24,12 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
         CreateTooltips(item);
 
         _rewardsAmountTextField.text = item.Charges.ToString();
-        _topCanvasGroup.gameObject.SetActive(!item.ToggleEffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
+        _topCanvasGroup.gameObject.SetActive(!item.EffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
     }
 
     private void CreateTooltips(Item item)
     {
-        List<ToggleGlobalEffectData> sortedToggleEffectDatas = item.ToggleEffectDatas.OrderBy(item => item.EffectType == EffectType.Negative).ToList();
+        List<GlobalEffectData> sortedToggleEffectDatas = item.EffectDatas.OrderBy(data => data.EffectType == EffectType.Negative).ToList();
         
         sortedToggleEffectDatas.ForEach(CreateTooltip);
     }

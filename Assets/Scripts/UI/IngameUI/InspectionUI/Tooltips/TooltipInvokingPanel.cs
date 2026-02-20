@@ -13,9 +13,9 @@ public abstract class TooltipInvokingPanel : ParserableTextContainer, IPointerEx
     public Action<TooltipParseTagDataContainer> TooltipOpened;
     public Action TooltipClosed;
     
-    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => TooltipOpened.Invoke(TagDataContainer);
+    void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData) => TooltipOpened?.Invoke(TagDataContainer);
     
-    void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => TooltipClosed.Invoke();
+    void IPointerExitHandler.OnPointerExit(PointerEventData eventData) => TooltipClosed?.Invoke();
     
     protected void UpdateContentSizeFilters()
     {

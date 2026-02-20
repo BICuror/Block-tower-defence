@@ -1,6 +1,6 @@
 using Zenject;
 
-public sealed class StartWaveGlobalToggleEffect : GlobalToggleEffect
+public sealed class StartWaveGlobalToggleEffect : GlobalEffect
 {
     [Inject] private WaveStateMachine _waveStateMachine;
     

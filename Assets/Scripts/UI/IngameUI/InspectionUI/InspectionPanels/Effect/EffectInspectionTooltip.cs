@@ -28,14 +28,15 @@ public sealed class EffectInspectionTooltip : InspectionPanelBase
     
     protected override void UpdateAllParsableText()
     {
-        _nameTextField.text = ParseTextByDefault(_entityModificatorData.ModificatorName);
-        _descriptionTextField.text = ParseTextByDefault(_entityModificatorData.ModificatorDescription);
+        _nameTextField.text = ParseTextByDefault(_entityModificatorData.GetName());
+        _descriptionTextField.text = ParseTextByDefault(_entityModificatorData.GetDescription());
     }
 
     private void InitializeInspectionTooltipController()
     {
         _inspectionTooltipController.CopyParsersFromContainer(this);
-        _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.ModificatorDescription));
+        
+        _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.GetDescription()));
     }
     
     private Vector2 GetDynamicOffset() => new(_mainRectTransform.sizeDelta.x / 2f - _mainPanelRectTransform.sizeDelta.x / 2f, 0f);

@@ -15,9 +15,9 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
     #region ModifiersSelection
 
-    public List<List<ToggleGlobalEffectData>> GetItemEffects(int totalStrength, int minStrength, int itemAmount)
+    public List<List<GlobalEffectData>> GetItemEffects(int totalStrength, int minStrength, int itemAmount)
     {
-        List<List<ToggleGlobalEffectData>> resultEffects = new();
+        List<List<GlobalEffectData>> resultEffects = new();
         
         int iterations = 50;
         
@@ -31,7 +31,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
 
             for (int i = 0; i < itemAmount; i++)
             {
-                if (TryGetItemEffectDatas(itemStrengths[i], true, out List<ToggleGlobalEffectData> effects))
+                if (TryGetItemEffectDatas(itemStrengths[i], true, out List<GlobalEffectData> effects))
                 {
                     resultEffects.Add(effects);
                 }
@@ -76,11 +76,11 @@ public sealed class ItemEffectSelector : MonoBehaviour
         return result;
     }
     
-    public bool TryGetItemEffectDatas(int strength, bool forceMeetStrength, out List<ToggleGlobalEffectData> result)
+    public bool TryGetItemEffectDatas(int strength, bool forceMeetStrength, out List<GlobalEffectData> result)
     {
         result = new();
         
-        List<ToggleGlobalEffectData> effectDatas = new(_islandDataContainer.Data.ItemToggleEffectContainer.EffectDatas);
+        List<GlobalEffectData> effectDatas = new(_islandDataContainer.Data.ItemToggleEffectContainer.EffectDatas);
         
         Debug.Log($"Trying to find item effect data for {strength}");
         List<int> nonEmptyStrengths = PopulateNonEmptyStrengthList(strength).Intersect(GetValidEffectStrengthList()).ToList();
@@ -99,7 +99,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
                 continue;
             }
 
-            if (TryGetRandomEffectDataOfStrength(currentStrength, effectDatas, result.ConvertAll(data => (GlobalEffectData)data), out ToggleGlobalEffectData effectData))
+            if (TryGetRandomEffectDataOfStrength(currentStrength, effectDatas, result.ConvertAll(data => (GlobalEffectData)data), out GlobalEffectData effectData))
             {
                 effectDatas.Remove(effectData);
                 result.Add(effectData);
@@ -139,15 +139,15 @@ public sealed class ItemEffectSelector : MonoBehaviour
         return result;
     }
     
-    private bool TryGetRandomEffectDataOfStrength(int strength, List<ToggleGlobalEffectData> datas, List<GlobalEffectData> exsistingEffects, out ToggleGlobalEffectData data)
+    private bool TryGetRandomEffectDataOfStrength(int strength, List<GlobalEffectData> datas, List<GlobalEffectData> exsistingEffects, out GlobalEffectData data)
     {
-        List<ToggleGlobalEffectData> selectedDatas = datas.FindAll(selectedData => selectedData.Quality == strength);
+        List<GlobalEffectData> selectedDatas = datas.FindAll(selectedData => selectedData.Quality == strength);
         data = null;
         
         for (int i = 0; i < selectedDatas.Count; i++)
         {
             int randomIndex = Random.Range(0, selectedDatas.Count);
-            ToggleGlobalEffectData selectedData = selectedDatas[randomIndex];
+            GlobalEffectData selectedData = selectedDatas[randomIndex];
             selectedDatas.RemoveAt(randomIndex);
          
             if (selectedData.IsUnique && TryToFindExistingEffectData(selectedData)) continue;
@@ -174,9 +174,9 @@ public sealed class ItemEffectSelector : MonoBehaviour
         return false;
     }
 
-    private bool TryToFindExistingEffectData(ToggleGlobalEffectData effectData)
+    private bool TryToFindExistingEffectData(GlobalEffectData effectData)
     {
-        return _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().Exists(item => item.ToggleEffectDatas.Exists(data => data == effectData));
+        return _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().Exists(item => item.EffectDatas.Exists(data => data == effectData));
     }
 
     private bool CheckIfEffectTagRequirementsAreMet<T>(T effectData, List<GlobalEffectData> globalEffectDatas) where T : GlobalEffectData
@@ -187,7 +187,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
         
         _itemFactory.CreatedItems.Except(_itemsContainer.ContainedItems).ToList().ForEach(item =>
         {
-            globalEffectDatas.AddRange(item.ToggleEffectDatas);
+            globalEffectDatas.AddRange(item.EffectDatas);
         });
         
         Debug.Log($"Checking requirements for {effectData.name}");
@@ -203,7 +203,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
             if (effectData.BlockGlobalEffectTags.Count > 0 && GlobalEffectTagRequirementsChecker.RequirementsAreMet(globalEffectDatas, effectData.BlockGlobalEffectTags)) return false;
         }
         
-        Debug.Log($"Suckseful Checking requirements for {effectData.name}");
+        Debug.Log($"Successful Checking requirements for {effectData.name}");
         
         return true;
     }

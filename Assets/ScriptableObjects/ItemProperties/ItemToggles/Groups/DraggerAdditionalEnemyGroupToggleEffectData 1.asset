@@ -12,6 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3771ed1197c0bd48a93217341181528, type: 3}
   m_Name: DraggerAdditionalEnemyGroupToggleEffectData 1
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: spawn_drag_enemies_from_random_spawner_effect_tooltip
+  _modificatorName: 
+  _modificatorDescription: 
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 9
+      _argumentName: EnemyGroupData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 1
+        _groupParts:
+        - _amountPerWave: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+          _enemyData: {fileID: 11400000, guid: 87a8d076db082b74d83b8e6475f74604, type: 2}
+          _parseString: 
   _instanceItemTypeContainers:
   - _itemTypeName: AdditionalEnemyGroupToggleEffect
     AllEffectTypeNames:
@@ -24,8 +47,6 @@ MonoBehaviour:
     - SpawnObjectsToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  _argumentsContainer:
-    _argumentItems: []
   _quality: 4
   _effectType: 1
   _isUnique: 0
@@ -44,12 +65,3 @@ MonoBehaviour:
     Requirements: []
   _blockGlobalEffectTags:
     Requirements: []
-  _icon: {fileID: 0}
-  _effectName: Invasion
-  _effectDescription: Adds #bad draggers units bad# to random spawner
-  _enemyGroup:
-    _amountMultiplier: 0
-    _groupParts:
-    - _amountPerWave: 010000000200000002000000020000000200000002000000020000000400000004000000040000000400000004000000040000000400000004000000
-      _enemyData: {fileID: 11400000, guid: 87a8d076db082b74d83b8e6475f74604, type: 2}
-      _parseString: 

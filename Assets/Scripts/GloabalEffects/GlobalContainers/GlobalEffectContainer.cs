@@ -6,26 +6,26 @@ public sealed class GlobalEffectContainer
     [Inject] private DiContainer _container;
     [Inject] private GlobalEffectFactory _globalEffectFactory;
     
-    private ListDictionary<ToggleGlobalEffectData, List<GlobalToggleEffect>> _activeToggleEffects = new();
+    private ListDictionary<GlobalEffectData, List<GlobalEffect>> _activeEffects = new();
 
-    public void AddEffects(List<ToggleGlobalEffectData> effectDatas) => effectDatas.ForEach(data => AddEffect(data));
+    public void AddEffects(List<GlobalEffectData> effectDatas) => effectDatas.ForEach(AddEffect);
     
-    public void AddEffect(ToggleGlobalEffectData globalEffectData)
+    public void AddEffect(GlobalEffectData globalEffectData)
     {
-        List<GlobalToggleEffect> effects = _globalEffectFactory.CreateToggleEffects(globalEffectData);
+        List<GlobalEffect> effects = _globalEffectFactory.CreateEffects(globalEffectData);
         
-        _activeToggleEffects.Add(globalEffectData, effects);
+        _activeEffects.Add(globalEffectData, effects);
         
         effects.ForEach(effect => effect.Enable());
     }
     
-    public void RemoveEffects(List<ToggleGlobalEffectData> effectDatas) => effectDatas.ForEach(data => RemoveEffect(data));
+    public void RemoveEffects(List<GlobalEffectData> effectDatas) => effectDatas.ForEach(RemoveEffect);
 
-    public void RemoveEffect(ToggleGlobalEffectData globalEffectData)
+    public void RemoveEffect(GlobalEffectData globalEffectData)
     {
-        if (_activeToggleEffects.Contains(globalEffectData))
+        if (_activeEffects.Contains(globalEffectData))
         {
-            List<GlobalToggleEffect> effects = _activeToggleEffects.Remove(globalEffectData);
+            List<GlobalEffect> effects = _activeEffects.Remove(globalEffectData);
             
             effects.ForEach(effect => effect.Disable());
         }

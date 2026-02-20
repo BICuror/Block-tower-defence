@@ -12,6 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: AreaUp
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: 
+  _modificatorName: Reacher
+  _modificatorDescription: '#good +1 good# #Reach, #bad +0.5 bad# #BuildTime'
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -20,12 +27,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -50,8 +59,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 2
   _tags: 09000000
   _effectType: 0
@@ -70,11 +77,6 @@ MonoBehaviour:
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Reacher
-  _modificatorDescription: '#good +1 good# #Reach, #bad +0.5 bad# #BuildTime'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: 1

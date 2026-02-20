@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 using WorldGeneration;
 
@@ -8,7 +9,7 @@ namespace Combat
     {
         [SerializeField] private IslandDecorationGenerator _decorationGenerator;
         [SerializeField] private EnviromentCreator _enviromentCreator;
-        [SerializeField] private WaveManager _waveManager; 
+        [FormerlySerializedAs("_waveManager")] [SerializeField] private WaveIndexContainer _instance; 
         [SerializeField] private IslandTerrainMeshCreator _islandTerrainMeshCreator;
         [SerializeField] private IslandDecorationContainer _islandDecorationContainer;
         [SerializeField] private WaveStateMachine _waveStateMachine;
@@ -24,7 +25,7 @@ namespace Combat
             Container.Bind<IslandDecorationContainer>().FromInstance(_islandDecorationContainer).AsSingle().NonLazy();
             Container.Bind<IslandTerrainMeshCreator>().FromInstance(_islandTerrainMeshCreator).AsSingle().NonLazy();
             Container.Bind<EnviromentCreator>().FromInstance(_enviromentCreator).AsSingle().NonLazy();
-            Container.Bind<WaveManager>().FromInstance(_waveManager).AsSingle().NonLazy();
+            Container.Bind<WaveIndexContainer>().FromInstance(_instance).AsSingle().NonLazy();
         }
     }
 }

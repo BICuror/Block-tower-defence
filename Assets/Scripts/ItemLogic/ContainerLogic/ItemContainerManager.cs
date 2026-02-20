@@ -6,7 +6,7 @@ using Zenject;
 
 public class ItemContainerManager : MonoBehaviour
 {
-    [Inject] private WaveManager _waveManager;
+    [Inject] private WaveIndexContainer _waveIndexContainer;
     [Inject] private SelectionManager _selectionManager;
     [SerializeField] private ItemsContainer _itemContainer;
     [SerializeField] private ItemsContainerAnimator _itemsContainerAnimator;

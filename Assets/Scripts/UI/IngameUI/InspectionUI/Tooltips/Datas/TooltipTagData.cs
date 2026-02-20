@@ -8,7 +8,8 @@ public abstract class TooltipTagData : ScriptableObject
     [SerializeField] private Color _textColor;
     [SerializeField] private Sprite _iconSprite;
     [SerializeField] private bool _onlyText;
-
+    [SerializeField] private bool _invokeTooltipPanel = true;
+    
     [Space] [Header("Localization")] 
     [SerializeField] private string _localizationKey;
     
@@ -16,6 +17,7 @@ public abstract class TooltipTagData : ScriptableObject
     [CustomAssetIcon] public Sprite IconSprite => _iconSprite;
     public bool OnlyText => _onlyText;
     public Color TextColor => _textColor;
+    public bool InvokeTooltipPanel => _invokeTooltipPanel;
     public string TagText => (_localizationKey + "_header").Localize();
     public string Description => (_localizationKey + "_description").Localize();
 }

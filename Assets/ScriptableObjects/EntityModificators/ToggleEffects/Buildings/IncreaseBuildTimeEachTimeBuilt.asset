@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: IncreaseBuildTimeEachTimeBuilt
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: 
-  _modificatorName: Regress
-  _modificatorDescription: '#bad +25% bad# #BuildTime each time built completed'
+  _localizationKey: build_time_up_on_build_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -29,6 +27,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: IncreaseBuildTimeEachBuilt

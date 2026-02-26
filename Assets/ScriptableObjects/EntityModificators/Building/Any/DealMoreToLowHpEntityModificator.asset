@@ -12,6 +12,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: DealMoreToLowHpEntityModificator
   m_EditorClassIdentifier: 
+  _icon: {fileID: 741723918, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: more_damage_to_low_hp_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 4
+      _argumentName: DamageModifierTypeName
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: DealMoreToLowHpDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 5
+      _argumentName: IsDealerDamageModifier
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: DealMoreToLowHpDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: Multiplier
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 2
+      _stringArgument: DealMoreToLowHpDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: Threshold
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0.5
+      _stringArgument: DealMoreToLowHpDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
@@ -20,12 +81,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -50,52 +113,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 4
-      _argumentName: DamageModifierTypeName
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: DealMoreToLowHpDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 5
-      _argumentName: IsDealerDamageModifier
-      _intArgument: 0
-      _boolArgument: 1
-      _floatArgument: 0
-      _stringArgument: DealMoreToLowHpDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: Multiplier
-      _intArgument: 0
-      _boolArgument: 1
-      _floatArgument: 2
-      _stringArgument: DealMoreToLowHpDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: Threshold
-      _intArgument: 0
-      _boolArgument: 1
-      _floatArgument: 0.5
-      _stringArgument: DealMoreToLowHpDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -112,9 +129,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 741723918, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Reaper
-  _modificatorDescription: '#good +200% good# #Damage #com to entities with com#
-    #MaxHealth < 50%'

@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: MaxHealthDecrease
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: 
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -52,8 +57,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 0
   _tags: 
   _effectType: 1
@@ -70,11 +73,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Hp down
-  _modificatorDescription: '#bad -20% bad# #MaxHealth'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     FlatChange: 0

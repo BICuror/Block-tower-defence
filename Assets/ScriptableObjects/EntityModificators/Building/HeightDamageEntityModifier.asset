@@ -12,6 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: HeightDamageEntityModifier
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: stats_up_by_height_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: ReachAreaFlatAddition
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 1
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: DamageModifier
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.2
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ScaleDamageWithHeight
     AllEffectTypeNames:
@@ -25,6 +58,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -52,8 +86,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -70,9 +103,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Stand tall
-  _modificatorDescription: '#good +50% good# #Damage #com for each tile com# above
-    sea level. #MaxStack = 4'

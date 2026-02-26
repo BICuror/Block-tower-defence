@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: Dexterious
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: enemies_move_diagonnaly_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: MoveDiagonalyEntityModifier
     AllEffectTypeNames:
@@ -52,8 +57,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -70,8 +73,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Dexterious
-  _modificatorDescription: Entity can move diagonally

@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Text;
 using UnityEditor;
 using System.IO;
@@ -100,3 +102,5 @@ namespace CuroLocalization
         }
     }
 }
+
+#endif

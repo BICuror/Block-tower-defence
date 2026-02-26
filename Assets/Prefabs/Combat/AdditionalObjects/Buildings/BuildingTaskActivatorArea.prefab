@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef9a20e64f247164f9448bffd0ba5109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _chance: 100
+  _chance: 25
   _buildingAreaScaner: {fileID: 7893286869487514837}
   _activationType: 1
 --- !u!1 &9221053889536044195
@@ -116,9 +116,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 1
-  _hasVisualisation: 0
-  _visualisationTransform: {fileID: 0}
   _height: 100
+  _areaScaleValue: 2
+  _overrideAdditionalScaleValue: 0
+  _additionalScaleValue: 0.95
+  _hasVisualisation: 0
+  _areaVisualisation: {fileID: 0}
 --- !u!114 &7893286869487514837
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -60,7 +60,10 @@ public sealed class BombsLeaveBlockTowers : EntityModificator
         
         public void DestroyAllCreatedTowers()
         {
-            _createdTowers.ForEach(createdTower => createdTower.Health.Die());
+            _createdTowers.ForEach(createdTower =>
+            {
+                if (createdTower) createdTower.Health.Die();
+            });
             _createdTowers.Clear();
         }
     }

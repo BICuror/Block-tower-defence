@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: SpeedIncreaseModfificator
   m_EditorClassIdentifier: 
+  _icon: {fileID: 0}
+  _localizationKey: enemies_speed_up_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -25,6 +30,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -52,8 +58,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 0
   _tags: 
   _effectType: 0
@@ -70,11 +75,6 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 0}
-  _modificatorName: Speed up
-  _modificatorDescription: '#bad +20% bad# #Speed'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 88a57a3c7a16ca241abdc99cfc33c832, type: 2}
     FlatChange: 0

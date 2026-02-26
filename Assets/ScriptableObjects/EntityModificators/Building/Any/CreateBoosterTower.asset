@@ -12,6 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: CreateBoosterTower
   m_EditorClassIdentifier: 
+  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: create_booster_tower_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 2
+      _argumentName: TowerPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.45
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2785648769302265666, guid: b8233cd0cb95f464cabeee5ab7e64d1b, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: CreateBoosterTower
     AllEffectTypeNames:
@@ -20,12 +39,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -50,19 +71,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 2
-      _argumentName: TowerPrefab
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0.45
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 2785648769302265666, guid: b8233cd0cb95f464cabeee5ab7e64d1b, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -79,9 +87,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _modificatorName: Buddy helper
-  _modificatorDescription: Creates tower #com with 3 #Reach, which #good applies
-    com# 1 #Haste good# to all buildings in #Area

@@ -12,81 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: CreateBlockTowersAtExplotion
   m_EditorClassIdentifier: 
-  _itemTypeContainers:
-  - _itemTypeName: EntityModificatorStatChange
-    AllEffectTypeNames:
-    - ActivateWhenBuilt
-    - AddIconEntityModificator
-    - AOEMortarExplotion
-    - ApplyEffectOnActivation
-    - ApplyEntityEffectOnHit
-    - ApplyModificatorOnIdleStartRemoveUponPickup
-    - ApplyModifierUntilPickUpEntityModifier
-    - ApplyPermamentEntityEffect
-    - BombsLeaveBlockTowers
-    - CreateBombsAtWaveStart
-    - CreateBoosterTower
-    - CustomParticleEntityModifier
-    - DamageModifierEntityModificator
-    - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityModificatorStatChange
-    - ExecuteEntitiesInArea
-    - FasterCycleUntilKill
-    - HeavyMortarCore
-    - IncreaseBuildTimeEachBuilt
-    - InfernoExplodeOnFullCharge
-    - InvincibleWhileBuidlging
-    - LaunchArrowsOnKill
-    - ModificatorObjectApplyerEntityModificator
-    - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
-    - MoveDiagonalyEntityModifier
-    - MultishotEntityModificator
-    - OnActivationInvokeTaskAndHurt
-    - PiercingArrows
-    - RerollAllUnusedItems
-    - ScaleDamageWithHeight
-    - ShieldEntityModificator
-    - ShootOnKill
-    - SpawnCrystalForKills
-    - TakeDamageUponPlacement
-  - _itemTypeName: BombsLeaveBlockTowers
-    AllEffectTypeNames:
-    - ActivateWhenBuilt
-    - AddIconEntityModificator
-    - AOEMortarExplotion
-    - ApplyEffectOnActivation
-    - ApplyEntityEffectOnHit
-    - ApplyModificatorOnIdleStartRemoveUponPickup
-    - ApplyModifierUntilPickUpEntityModifier
-    - ApplyPermamentEntityEffect
-    - BombsLeaveBlockTowers
-    - CreateBombsAtWaveStart
-    - CreateBoosterTower
-    - CustomParticleEntityModifier
-    - DamageModifierEntityModificator
-    - DealMoreDamageWhenMoreCrystalsSelected
-    - EntityModificatorStatChange
-    - ExecuteEntitiesInArea
-    - FasterCycleUntilKill
-    - HeavyMortarCore
-    - IncreaseBuildTimeEachBuilt
-    - InfernoExplodeOnFullCharge
-    - InvincibleWhileBuidlging
-    - LaunchArrowsOnKill
-    - ModificatorObjectApplyerEntityModificator
-    - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
-    - MoveDiagonalyEntityModifier
-    - MultishotEntityModificator
-    - OnActivationInvokeTaskAndHurt
-    - PiercingArrows
-    - RerollAllUnusedItems
-    - ScaleDamageWithHeight
-    - ShieldEntityModificator
-    - ShootOnKill
-    - SpawnCrystalForKills
-    - TakeDamageUponPlacement
+  _icon: {fileID: 1125429245, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: bomb_create_block_towers_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 2
@@ -100,6 +27,93 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
+  _itemTypeContainers:
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+  - _itemTypeName: BombsLeaveBlockTowers
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -116,9 +130,4 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: 1125429245, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Rocky compound
-  _modificatorDescription: Create all block towers at explotion position
   _statChanges: []

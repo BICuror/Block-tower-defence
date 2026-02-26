@@ -9,8 +9,10 @@ public sealed class EntityDamageModifierContainer
     public DamageModifierContainer ReciverContainer => _reciverContainer;
     public DamageModifierContainer DealerContainer => _dealerContainer;
 
-    public Action<CombatEntity> EntityKilled;
-    public Action<CombatEntity> EntityDied;
+    //invoked before entity.Die()
+    public event Action<CombatEntity> EntityKilled;
+    //invoked before entity.Die()
+    public event Action<CombatEntity> EntityDied;
     
     public EntityDamageModifierContainer(CombatEntity ownerEntity)
     {

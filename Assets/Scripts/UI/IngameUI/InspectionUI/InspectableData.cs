@@ -7,8 +7,6 @@ public abstract class InspectableData : ScriptableObject
     [Header("UI Data")] 
     [SerializeField] private Sprite _icon;
     [SerializeField] private string _localizationKey;
-    [SerializeField] private string _modificatorName;
-    [TextArea] [SerializeField] private string _modificatorDescription;
     
     [Space] [Header("ArgumentsContainer")]
     [SerializeField] private ArgumentsContainer _argumentsContainer;
@@ -20,19 +18,25 @@ public abstract class InspectableData : ScriptableObject
     
     private string ParseDescription(string initialDescription)
     {
+        if (this is EntityModificatorData)
+        {
+            initialDescription = ParseByEntityModificatorStatData((EntityModificatorData)this, initialDescription);
+        }
+        
         _argumentsContainer.ArgumentItems.ForEach(argument =>
         {
             switch (argument.ArgumentType)
             {
                 case ArgumentType.Float:
                 {
-                    float value = _argumentsContainer.GetArgument<float>(argument.ArgumentName);
+                    float value = Mathf.Abs(_argumentsContainer.GetArgument<float>(argument.ArgumentName));
                     
-                    initialDescription = ReplaceAllValues(initialDescription, $"{argument.ArgumentName}", (value * 100).ToString()); 
+                    initialDescription = ReplaceAllValues(initialDescription, $"{argument.ArgumentName}", value.ToString()); 
+                    initialDescription = ReplaceAllValues(initialDescription, $"{argument.ArgumentName}_percent", (value * 100).ToString()); 
                 } break;
                 case ArgumentType.Int:
                 {
-                    int value = _argumentsContainer.GetArgument<int>(argument.ArgumentName);
+                    int value = Mathf.Abs(_argumentsContainer.GetArgument<int>(argument.ArgumentName));
                     
                     initialDescription = ReplaceAllValues(initialDescription, $"{argument.ArgumentName}", value.ToString()); 
                 } break;
@@ -42,31 +46,45 @@ public abstract class InspectableData : ScriptableObject
                     
                     initialDescription = modificatorData.ParseDescription(initialDescription);
 
-                    if (modificatorData is EntityModificatorStatChangeData)
-                    {
-                        EntityModificatorStatChangeData statChangeData = modificatorData as EntityModificatorStatChangeData;
-                        
-                        statChangeData.StatChanges.ForEach(statChange =>
-                        {
-                            initialDescription = ReplaceAllValues(initialDescription, $"{statChange.StatData.GetStatType().Name}_flat", statChange.FlatChange.ToString());
-                            initialDescription = ReplaceAllValues(initialDescription, $"{statChange.StatData.GetStatType().Name}_mult", Mathf.Abs(statChange.MultiplierChange * 100).ToString());
-                        });
-                    }
+                    initialDescription = ParseByEntityModificatorStatData(modificatorData, initialDescription);
                 } break;
                 case ArgumentType.AdditionalEnemyGroup:
                 {
                     AdditionalEnemyGroupData enemyGroupData = _argumentsContainer.GetArgument<AdditionalEnemyGroupData>(argument.ArgumentName);
 
-                    int totalEnemyAmount = 0;
-                    
-                    enemyGroupData.GroupParts.ForEach(groupPart => totalEnemyAmount += groupPart.GetAmount(WaveIndexContainer.Instance.GetCurrentWave()));
-
-                    initialDescription = ReplaceAllValues(initialDescription, "EnemiesAmount", totalEnemyAmount.ToString());
+                    initialDescription = ParseByEnemyGroup(enemyGroupData, initialDescription);
                 } break;
             }
         });
 
         return initialDescription;
+
+        string ParseByEntityModificatorStatData(EntityModificatorData entityModificatorData, string initialText)
+        {
+            if (entityModificatorData is EntityModificatorStatChangeData)
+            {
+                EntityModificatorStatChangeData statChangeData = entityModificatorData as EntityModificatorStatChangeData;
+                        
+                statChangeData.StatChanges.ForEach(statChange =>
+                {
+                    initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_flat", Mathf.Abs(statChange.FlatChange).ToString());
+                    initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_mult", Mathf.Abs(statChange.MultiplierChange * 100).ToString());
+                });
+            }
+
+            return initialText;
+        }
+        
+        string ParseByEnemyGroup(AdditionalEnemyGroupData additionalEnemyGroupData, string initialText)
+        {
+            int totalEnemyAmount = 0;
+                    
+            additionalEnemyGroupData.GroupParts.ForEach(groupPart => totalEnemyAmount += groupPart.GetAmount(WaveIndexContainer.Instance.GetCurrentWave()));
+
+            initialText = ReplaceAllValues(initialText, "EnemiesAmount", totalEnemyAmount.ToString());
+            
+            return initialText;
+        }
     }
     
     private string ReplaceAllValues(string initialString, string initialValue, string endValue)

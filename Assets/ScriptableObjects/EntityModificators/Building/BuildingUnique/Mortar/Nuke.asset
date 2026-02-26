@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: Nuke
   m_EditorClassIdentifier: 
+  _icon: {fileID: -1408547033, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: mortar_nuke_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -20,12 +25,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -50,8 +57,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 2
   _tags: 08000000
   _effectType: 0
@@ -70,12 +75,6 @@ MonoBehaviour:
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -1408547033, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Nuke
-  _modificatorDescription: '#good +50 good# #ExplosionDamage, #good +1.5 good# #ExplosionRadius,
-    #bad +4 bad# #Recharge, #bad +2 bad# #TravelTime'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
     FlatChange: 50

@@ -12,6 +12,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: FasterFingers
   m_EditorClassIdentifier: 
+  _icon: {fileID: -132545439, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: task_recharge_down_until_kill_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: TaskMultiplierReducePerAction
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: -0.1
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 0
+      _argumentName: MaxReduceStacks
+      _intArgument: 5
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: FasterCycleUntilKill
     AllEffectTypeNames:
@@ -52,30 +85,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 1
-      _argumentName: TaskMultiplierReducePerAction
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: -0.1
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 0
-      _argumentName: MaxReduceStacks
-      _intArgument: 5
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -92,9 +101,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -132545439, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _modificatorName: Fastest fingers
-  _modificatorDescription: -0.1 #Recharge each time #Action is invoked up to 5 times.
-    #OnKill reset effect

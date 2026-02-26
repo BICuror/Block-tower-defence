@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: MinibossEntityModifier
   m_EditorClassIdentifier: 
   _icon: {fileID: -1860937847, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: 
-  _modificatorName: Last standing
-  _modificatorDescription: '#bad +300% bad# #MaxHealth, #bad +15% bad# #Speed'
+  _localizationKey: last_enemy_buff_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 6
@@ -29,6 +27,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 8391014343333558595, guid: 805e9220e0ad86341aa8373a69a0b809, type: 3}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
@@ -70,6 +71,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   - _itemTypeName: CustomParticleEntityModifier
     AllEffectTypeNames:
     - ActivateWhenBuilt
@@ -109,6 +111,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   - _itemTypeName: AddIconEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
@@ -148,6 +151,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 0
   _tags: 
   _effectType: 0

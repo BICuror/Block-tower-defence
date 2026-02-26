@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(Collider))]
 
@@ -16,6 +17,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
 
     public event Action PickedUp;
     public event Action Placed;
+    public event Action OnDrag;
     
     public event Action<DraggableObject> DraggablePickedUp; 
     public event Action<DraggableObject> DraggablePlaced;
@@ -42,6 +44,8 @@ public class DraggableObject : MonoBehaviour, IDraggable
         Placed?.Invoke();
         DraggablePlaced?.Invoke(this);
     }
+
+    void IDraggable.OnDrag() => OnDrag?.Invoke();
     
     public bool IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
     

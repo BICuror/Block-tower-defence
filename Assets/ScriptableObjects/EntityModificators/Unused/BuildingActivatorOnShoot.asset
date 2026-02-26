@@ -12,6 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: BuildingActivatorOnShoot
   m_EditorClassIdentifier: 
+  _icon: {fileID: 1546871838, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: 
+  _modificatorName: Inspiring cry
+  _modificatorDescription: On shoot 25% to #Activation another building in #Area
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 7
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 5539406982583210978, guid: dddede3c5d51dc54590352db4e72c49a, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 1573551045060595405, guid: dddede3c5d51dc54590352db4e72c49a, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -20,11 +41,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -49,23 +73,11 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 7
-      _argumentName: ObjectModificator
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 5539406982583210978, guid: dddede3c5d51dc54590352db4e72c49a, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 1573551045060595405, guid: dddede3c5d51dc54590352db4e72c49a, type: 3}
-      _layerSetting: {fileID: 0}
   _rarity: 1
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -77,7 +89,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _createIcon: 0
-  _icon: {fileID: 1546871838, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Inspiring cry
-  _modificatorDescription: On shoot 25% to #Activation another building in #Area

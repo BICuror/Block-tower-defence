@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: SpeedUpInBuildingsArea
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: 
-  _modificatorName: Speed up in area
-  _modificatorDescription: '#bad Enemies get 1 bad# #SpeedUp in #Area'
+  _localizationKey: speed_up_in_building_area_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 7
@@ -29,6 +27,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator

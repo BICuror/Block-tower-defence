@@ -70,7 +70,7 @@ public abstract class HealthBar : Shaker
             return;
         }
 
-        DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference);
+        DOVirtual.Float(_healthDifference, _displayedHealth, HealthTweenDuration, UpdateHealthDifference).SetLink(gameObject);;
     }
     
     private void IncreaseValue()
@@ -80,7 +80,7 @@ public abstract class HealthBar : Shaker
             _healthDifference = value;
             _displayedHealth = value;
             UpdatePropertyBlock();
-        });
+        }).SetLink(gameObject);
     }
     
     private void UpdateHealthDifference(float value)

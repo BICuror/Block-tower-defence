@@ -12,6 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: HealBuildingsInArea
   m_EditorClassIdentifier: 
+  _icon: {fileID: -368388063, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: heal_buildings_in_area_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 7
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2355596974610366607, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 6018946194359616491, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -20,12 +39,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -50,19 +71,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 7
-      _argumentName: ObjectModificator
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 2355596974610366607, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 6018946194359616491, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
-      _layerSetting: {fileID: 0}
   _rarity: 2
   _tags: 00000000
   _effectType: 0
@@ -81,9 +89,3 @@ MonoBehaviour:
     Requirements:
     - Tag: 0
       Amount: 1
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -368388063, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Field medic
-  _modificatorDescription: On #Action <color=green>heal 5%</color> another building
-    in #Area

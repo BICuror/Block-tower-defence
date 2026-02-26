@@ -131,6 +131,8 @@ public sealed class ShieldEntityModificator : EntityModificator
                 
                 ShieldHealthUpdated?.Invoke(_currentShieldHealth / _maxShieldHealth);
 
+                DamageNumberDisplayManager.Instance.DisplayDamageNumber(value, OwnerEntity.transform.position, DamageType.Shielded);
+                
                 return 0f;
             }
             

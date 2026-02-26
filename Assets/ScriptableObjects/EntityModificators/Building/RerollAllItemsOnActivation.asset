@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: RerollAllItemsOnActivation
   m_EditorClassIdentifier: 
+  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: item_reroll_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: RerollAllUnusedItems
     AllEffectTypeNames:
@@ -20,12 +25,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -50,8 +57,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 04000000
   _effectType: 0
@@ -70,9 +76,3 @@ MonoBehaviour:
     Requirements:
     - Tag: 4
       Amount: 1
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _modificatorName: REROLLL
-  _modificatorDescription: Reroll all unselected #Crystal on #Activation. #com Once
-    per wave com#

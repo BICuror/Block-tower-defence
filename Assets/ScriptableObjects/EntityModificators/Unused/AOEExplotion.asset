@@ -12,6 +12,69 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: AOEExplotion
   m_EditorClassIdentifier: 
+  _icon: {fileID: -333591232, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: 
+  _modificatorName: Gassy core
+  _modificatorDescription: When core explodes it also leaves aoe
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 5
+      _argumentName: ReplaceMainBehavior
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 1
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 2
+      _argumentName: AOEPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 4
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: AOERadius
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 2
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: AOEDamageMultiplier
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: AOEMortarExplotion
     AllEffectTypeNames:
@@ -20,11 +83,14 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
     - CreateBombsAtWaveStart
     - CreateBoosterTower
+    - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -49,56 +115,11 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 5
-      _argumentName: ReplaceMainBehavior
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 1
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 2
-      _argumentName: AOEPrefab
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 4
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: AOERadius
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 2
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-    - _argumentType: 1
-      _argumentName: AOEDamageMultiplier
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0.5
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
   _rarity: 2
   _tags: 
   _effectType: 0
-  _isUnique: 0
+  _hasStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -110,8 +131,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -333591232, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Gassy core
-  _modificatorDescription: When core explodes it also leaves aoe

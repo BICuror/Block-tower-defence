@@ -1,3 +1,5 @@
+#if UNITY_EDITOR
+
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEditor;
@@ -95,3 +97,5 @@ namespace CuroLocalization
         }
     }
 }
+
+#endif

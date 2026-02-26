@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: ShieldConvertModificator
   m_EditorClassIdentifier: 
   _icon: {fileID: 2027425905, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: 
-  _modificatorName: Shielded
-  _modificatorDescription: Convert #MaxHealth into #Shield, +25 #Shield
+  _localizationKey: convert_enemy_health_to_shield_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -29,6 +27,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: MaxShieldHealth
       _intArgument: 0
@@ -40,6 +41,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 2
       _argumentName: CanvasBarPrefab
       _intArgument: 0
@@ -51,6 +55,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ShieldEntityModificator

@@ -102,7 +102,8 @@ public sealed class DragController : MonoBehaviour
                 _lastValuablePosition = new Vector3(placementPosition.x, height, placementPosition.y);
             }
         }
-
+        
+        _currentIDraggable.OnDrag();
         MoveDraggable();
     }
 

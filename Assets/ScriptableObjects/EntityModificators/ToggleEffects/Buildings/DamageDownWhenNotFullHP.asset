@@ -13,10 +13,7 @@ MonoBehaviour:
   m_Name: DamageDownWhenNotFullHP
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: 
-  _modificatorName: Damage decrease
-  _modificatorDescription: '#bad -30% bad# #Damage #com & com# #bad -30% bad# #ExplosionDamage
-    when not full HP'
+  _localizationKey: stat_down_when_not_full_hp_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 3
@@ -30,6 +27,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ApplyEntityModificatorIfNotFullHP

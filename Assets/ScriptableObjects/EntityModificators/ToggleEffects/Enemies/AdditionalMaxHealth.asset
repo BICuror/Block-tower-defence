@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: AdditionalMaxHealth
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: 
-  _modificatorName: Hp up
-  _modificatorDescription: '#bad +50% bad# #MaxHealth'
+  _localizationKey: emeies_health_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _showInInspector: 1
@@ -32,6 +30,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -59,6 +58,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 0
   _tags: 
   _effectType: 1
@@ -78,4 +78,4 @@ MonoBehaviour:
   _statChanges:
   - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     FlatChange: 0
-    MultiplierChange: 0.5
+    MultiplierChange: 0.25

@@ -3,7 +3,7 @@ using UnityEngine;
 
 public sealed class VisualTextParser : MonoBehaviour
 {
-    private readonly char[] ALLOWED_END_TAG_CHARACTERS = new[] { ',', ' ', '.' };
+    private readonly char[] ALLOWED_END_TAG_CHARACTERS = new[] { ',', ' ', '.', '=', ':' };
     private const string TOOLTIP_TAG_START_CHAR = "#";
     private const string TAG_START = "<#>";
     private const string TAG_END = "</#>";
@@ -18,11 +18,13 @@ public sealed class VisualTextParser : MonoBehaviour
         return GetTagHeaderWithoutIcon(tagData) + ": " + ParseTooltipText(tagData.Description);
     }
     
-    public string GetTagHeaderWithoutIcon(TooltipTagData tagData)
+    public string GetTagHeaderWithoutIcon(TooltipTagData tagData, string tagReplacementText = null)
     {
-        string tagText = ParseTooltipText(tagData.TagText);
+        string tagHeaderText = tagData.TagText;
+
+        if (tagReplacementText != null) tagHeaderText = tagReplacementText;
         
-        return WrapInColor(tagText, tagData.TextColor);
+        return WrapInColor(ParseTooltipText(tagHeaderText), tagData.TextColor);
     }
     
     public string ParseTooltipText(string tooltipText, bool fullTag = true)
@@ -55,19 +57,18 @@ public sealed class VisualTextParser : MonoBehaviour
         {
             if (ContainsFullTag(tooltipText, initialParseText))
             {
-                if (tagData.OnlyText) tooltipText = tooltipText.Replace(initialParseText, GetTagHeaderWithoutIcon(tagData));
-                else if (fullTag) tooltipText = tooltipText.Replace(initialParseText, GetDefaultTagHeader(tagData));
+                string tagText = tagData.TagText;
+                
+                if (TryGetTagTextReplacement(initialParseText, ref tooltipText, out string tagTextReplacement)) tagText = tagTextReplacement;
+                
+                if (tagData.OnlyText) tooltipText = tooltipText.Replace(initialParseText, GetTagHeaderWithoutIcon(tagData, tagText));
+                else if (fullTag) tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData, tagText));
                 else tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
             }
             else break;
         }
         
         return tooltipText;
-    }
-
-    private string GetDefaultTagHeader(TooltipTagData tagData)
-    {
-        return GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData);
     }
     
     private string GetStringSpriteFromData(TooltipTagData tagData)
@@ -86,12 +87,30 @@ public sealed class VisualTextParser : MonoBehaviour
 
         return false;
     }
-    
+
     private bool TextEndsOnTag(string parseText, string tagText)
     {
         return parseText.IndexOf(tagText) + tagText.Length == parseText.Length;
     }
+    
+    private bool TryGetTagTextReplacement(string initialParseText, ref string tooltipText, out string tagTextReplacement)
+    {
+        tagTextReplacement = null;
+        
+        string targetReplacementText = initialParseText + '=';
+        
+        int replacementTextIndex = tooltipText.IndexOf(targetReplacementText);
+        
+        if (replacementTextIndex < 0) return false;
 
+        replacementTextIndex += targetReplacementText.Length;
+        
+        tagTextReplacement = tooltipText.Substring(replacementTextIndex).Split(' ')[0].Replace('_', ' ');
+        tooltipText = tooltipText.Remove(replacementTextIndex - 1, tagTextReplacement.Length + 1);
+        
+        return true;
+    }
+    
     #endregion
 
     #region StyleParsing
@@ -105,11 +124,10 @@ public sealed class VisualTextParser : MonoBehaviour
             while (tooltipText.Contains(initialParseTagStart)) 
             { 
                 string replaceStartValue = TAG_START.Replace(TOOLTIP_TAG_START_CHAR, parseData.ReplacedKey); 
-                tooltipText = ReplaceFirst(tooltipText, initialParseTagStart, replaceStartValue); 
-                
                 string replaceEndValue = TAG_END.Replace(TOOLTIP_TAG_START_CHAR, parseData.ReplacedKey);
                 string initialParseTagEnd = parseData.InitialKey + TOOLTIP_TAG_START_CHAR;
                 tooltipText = ReplaceFirst(tooltipText, initialParseTagEnd, replaceEndValue);
+                tooltipText = ReplaceFirst(tooltipText, initialParseTagStart, replaceStartValue); 
             }
         });
         
@@ -120,6 +138,12 @@ public sealed class VisualTextParser : MonoBehaviour
     { 
         int replacementIndex = text.IndexOf(initialValue);
 
+        if (replacementIndex == -1)
+        {
+            Debug.LogWarning(text);
+            return text;
+        }
+        
         int length = initialValue.Length;
 
         if (length + replacementIndex + 1 < text.Length) length++;
@@ -139,7 +163,7 @@ public sealed class VisualTextParser : MonoBehaviour
     {
         string colorCode = ColorUtility.ToHtmlStringRGB(color);
         
-        return $"<color=#{colorCode}>{initialString}</color>";
+        return $"<color=#{colorCode}>{initialString}</color=#{colorCode}>";
     }
 
     #endregion

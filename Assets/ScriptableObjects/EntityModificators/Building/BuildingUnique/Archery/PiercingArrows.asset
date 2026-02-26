@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: PiercingArrows
   m_EditorClassIdentifier: 
+  _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: archery_piercing_arrows_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: PiercingArrows
     AllEffectTypeNames:
@@ -52,8 +57,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -70,8 +73,3 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -792330246, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _modificatorName: Piercing arrows
-  _modificatorDescription: Arrows become #Piercing

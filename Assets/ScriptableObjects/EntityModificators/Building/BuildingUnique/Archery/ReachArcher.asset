@@ -12,6 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: ReachArcher
   m_EditorClassIdentifier: 
+  _icon: {fileID: -913185330, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: archery_big_reach_up_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -52,8 +57,6 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _argumentsContainer:
-    _argumentItems: []
   _rarity: 2
   _tags: 09000000
   _effectType: 0
@@ -72,12 +75,6 @@ MonoBehaviour:
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []
-  _showInInspector: 1
-  _createIcon: 0
-  _icon: {fileID: -913185330, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _modificatorName: MEGA REACH
-  _modificatorDescription: '#good +3 good# #Reach, #bad +2.5 bad# #BuildTime, #bad
-    -6 bad# #ProjectileSpeed'
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: 3

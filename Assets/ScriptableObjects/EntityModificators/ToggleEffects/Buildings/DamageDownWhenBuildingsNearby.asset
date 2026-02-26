@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: DamageDownWhenBuildingsNearby
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: 
-  _modificatorName: Hysteria
-  _modificatorDescription: '#bad -25% bad# #Damage when other buildings are in #Area'
+  _localizationKey: stat_down_in_building_area_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 7
@@ -29,6 +27,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: e4798188f725c2c4b9dff9063784bc5f, type: 3}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator

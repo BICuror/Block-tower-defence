@@ -5301,6 +5301,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
 --- !u!114 &183681894154958883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5344,6 +5347,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
   - {fileID: 11400000, guid: 1bcc25796c97ab14fbf1aabc73fe9a44, type: 2}
   - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
+  - {fileID: 11400000, guid: b8be7177f2e670c43a8ade144eb529c1, type: 2}
 --- !u!114 &8048016232359269500
 MonoBehaviour:
   m_ObjectHideFlags: 0

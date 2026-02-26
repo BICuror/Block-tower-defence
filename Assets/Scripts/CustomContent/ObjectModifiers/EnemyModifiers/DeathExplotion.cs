@@ -21,12 +21,12 @@ public sealed class DeathExplotion : MonoBehaviour
 
     private async void Explode()
     {
+        _explosion.transform.SetParent(null);
         transform.position = _ownerEntity.transform.position;
         
         _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage -= KillEntity;
         _ownerEntity.Health.Died -= Explode;
         
-        _explosion.transform.SetParent(null);
         await _explosion.Explode();
     }
 }

@@ -13,4 +13,3 @@ namespace Combat.Animation
         }
     }
 }
-

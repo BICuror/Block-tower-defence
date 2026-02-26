@@ -273,9 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2560bb7296696c4ab9ed6e822450421, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gpuInstanceEnabler: {fileID: 1090484299987849901}
+  _hitHighlighter: {fileID: 259093938228366921}
   _meshRenderer: {fileID: 5307450753371701605}
   _meshFilter: {fileID: 5618922150075673844}
+  _hitShaker: {fileID: 625586418974731666}
 --- !u!114 &3706642640325084935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -386,6 +387,7 @@ MonoBehaviour:
   - StructName: ContactDamage
     _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
     _defaultValue: 10
+  _shouldDestoryOnDeath: 0
 --- !u!114 &-4545223480081874719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,8 +440,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _canBeIdleInspected: 0
-  _inspectableObjectName: Enemy
-  _inspectableObjectDescription: KILL
+  _localizationKey: 
 --- !u!114 &5557728415372479728
 MonoBehaviour:
   m_ObjectHideFlags: 0

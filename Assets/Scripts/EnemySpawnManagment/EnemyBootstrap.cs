@@ -1,3 +1,4 @@
+using Combat.Animation;
 using UnityEngine;
 using Navigation;
 using Cashing;
@@ -6,9 +7,10 @@ namespace Combat
 {
     public sealed class EnemyBootstrap : MonoBehaviour
     {
-        [SerializeField] private GPUInstanceEnabler gpuInstanceEnabler;
+        [SerializeField] private HitHighlighter _hitHighlighter;
         [SerializeField] private MeshRenderer _meshRenderer;   
         [SerializeField] private MeshFilter _meshFilter;
+        [SerializeField] private HitShaker _hitShaker;
 
         [Cached] private EntityObjectModificatorContainer _entityObjectModificatorContainer;
         [Cached] private NavigationAgent _navMeshAgent;
@@ -73,11 +75,10 @@ namespace Combat
         private void SetVisualData()
         {
             _meshFilter.sharedMesh = _enemyData.Mesh;
-            _meshRenderer.sharedMaterial = _enemyData.Material;
-
-            _meshRenderer.transform.localScale = new Vector3(_enemyData.Scale, _enemyData.Scale, _enemyData.Scale);
             
-            gpuInstanceEnabler.EnableGPUInstancing();
+            _hitHighlighter.SetDefaultMaterial(_enemyData.Material);
+
+            _hitShaker.SetDefaultValues(new Vector3(_enemyData.Scale, _enemyData.Scale, _enemyData.Scale));
         }
     
         private void TryCreateSpecialObjects()

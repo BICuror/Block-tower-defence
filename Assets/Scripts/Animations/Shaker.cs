@@ -18,21 +18,27 @@ public class Shaker : MonoBehaviour
         public float Duration;
         public float Strength;
     }
-
+    
     protected void Initialize()
     {
         if (_mesh == null) _mesh = transform;
-        GetDefaultValues();
+        CaptureDefaultValues();
+    }
+
+    public void SetDefaultValues(Vector3 defaultScale)
+    {
+        _defaultScale = defaultScale;
+        _mesh.localScale = defaultScale;
     }
     
-    private void GetDefaultValues()
+    private void CaptureDefaultValues()
     {
         _defaultScale = _mesh.localScale; 
     }
     
     private void SetDefaultValues()
     { 
-        if (_defaultScale == -Vector3.one) GetDefaultValues();
+        if (_defaultScale == -Vector3.one) CaptureDefaultValues();
         
         _mesh.localScale = _defaultScale;
     }
@@ -43,18 +49,15 @@ public class Shaker : MonoBehaviour
 
         DOTween.Complete(_mesh);
         
-        _shakeDatas.ForEach(shakeData =>
-        {
-            Shake(shakeData);    
-        });
+        _shakeDatas.ForEach(Shake);
     }
 
     private void Shake(ShakeData shakeData)
     {
         switch (shakeData.ShakeType)
         {
-            case ShakeType.Scale: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength); break;
-            case ShakeType.Rotation: _mesh.DOShakeRotation(shakeData.Duration, shakeData.Strength); break;
+            case ShakeType.Scale: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength).SetLink(_mesh.gameObject); break;
+            case ShakeType.Rotation: _mesh.DOShakeRotation(shakeData.Duration, shakeData.Strength).SetLink(_mesh.gameObject); break;
         }
     }
     

@@ -48,7 +48,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageNumberDisplay
   _damageNumberText: {fileID: 3875530075457393035}
   _damageNumberColor: {r: 1, g: 0, b: 0, a: 1}
-  _healNumberColor: {r: 0, g: 1, b: 0.22891665, a: 1}
   _shieldedColor: {r: 1, g: 0.7731253, b: 0, a: 1}
   _alphaAnimationCurve:
     serializedVersion: 2
@@ -98,12 +97,12 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.21560179
       value: 0.68218553
-      inSlope: 1.1716084
-      outSlope: 1.1716084
+      inSlope: 2.3244777
+      outSlope: 2.3244777
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.063457645
     - serializedVersion: 3
       time: 1
       value: 1
@@ -241,7 +240,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 447.1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: b810cceaeb0c2594691e53a0648049b5, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 267c059e5e5c0db41af2f35258bb0787, type: 2}
   m_sharedMaterial: {fileID: 500612685803309852, guid: b810cceaeb0c2594691e53a0648049b5, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -311,6 +310,6 @@ MonoBehaviour:
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
-  m_hasFontAssetChanged: 0
+  m_hasFontAssetChanged: 1
   m_renderer: {fileID: 4591956350339055467}
   m_maskType: 0

@@ -64,6 +64,21 @@ public sealed class DragController : MonoBehaviour
 
         return false;
     }
+
+    public bool HoveredOverActivatable(Vector2 mousePosition)
+    {
+        Ray ray = _camera.ScreenPointToRay(mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit rayInfo, 100000f, _activatableObjectLayerSettings.GetLayerMask()))
+        {
+            if (rayInfo.collider.gameObject.TryGetComponent(out IActivatable activatable))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
     
     public void PickUpDraggable(Vector2 mousePosition)
     {

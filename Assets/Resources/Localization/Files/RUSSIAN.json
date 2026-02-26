@@ -170,7 +170,7 @@
   "settings_confirm_button_label": "Применть",
   "controls_tab_setting_tab": "Управление",
   "camera_rotation_sensitivity": "Чувсвительность поворота камеры",
-  "camera_movement_sensitivity": "Скорость перемещения камеры",
+  "camera_movement_sensitivity": "Скорость перемещения камеры клавиатурой",
   "camera_zoom_sensetiviy": "Чувсвительность приближения камеры",
   "tower_selection_label": "<wave amplitude=3>Выбери <color=#00B9FF>БАШНЮ</color></wave>",
   "tower_upgrade_selection_label": "<wave amplitude=3>Выбери <color=#FFD826>УЛУЧШЕНИЕ</color></wave> башни",
@@ -335,7 +335,7 @@
   "inferno_apply_fire_entity_modificator_tooltip_header": "Опаляющий луч",
   "inferno_apply_fire_entity_modificator_tooltip_description": "#OnHit накладывает {EffectStrength} #OnFire на {EffectDuration} секунды, #bad -{Damage_mult}% bad# #Damage, #bad -{ReachAreaScale_flat} bad# #Reach",
   "inferno_apply_stun_entity_modificator_tooltip_header": "Оглушающий луч",
-  "inferno_apply_stun_entity_modificator_tooltip_description": "#OnHit apply #Stun for {EffectDurationEffectDuration} second,  #bad +{ChargeDuration_mult}% bad# #ChargeDuration ",
+  "inferno_apply_stun_entity_modificator_tooltip_description": "#OnHit накладывае #Stun на {EffectDuration} секунду,  #bad +{ChargeDuration_mult}% bad# #ChargeDuration ",
   "inferno_max_damage_up_entity_modificator_tooltip_header": "Тяжёлое пламя",
   "inferno_max_damage_up_entity_modificator_tooltip_description": "#good +{MaxDamageMultiplier_flat} good# #MaxChargedDamageMultiplier, #bad +{ChargeDuration_flat} bad# #ChargeDuration",
   "mortar_damage_up_no_explosion_entity_modificator_tooltip_header": "Тяжёлое ядро",
@@ -406,5 +406,6 @@
   "temporary_stats_up_entity_modificator_tooltip_description": "Убирает это улучшение после {WavesDuration} волны и #good даёт good# {UpgradeChargesAmount} #UpgradeCharge=ЗарядовУлучшений #good +{Damage_mult}% good# #Damage, #good  -{TaskRechargeDuration_mult}% good# #Recharge, #good -{BuildTime_flat} good# #BuildTime",
   "spawn_rock_on_marked_enemy_kill_tooltip_header": "Окаменение",
   "spawn_rock_on_marked_enemy_kill_tooltip_description": "#OnKill если сущность #Mark=Помечена спавнит #jump камень jump# блокирующий путь #Enemies=Врагов",
-  "damage_indicators_label": "Использовать индикаторы урона"
+  "damage_indicators_label": "Использовать индикаторы урона",
+  "camera_drag_sensetivity": "Чувствительность перемещения камеры мышью"
 }

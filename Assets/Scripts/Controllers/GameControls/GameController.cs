@@ -40,6 +40,7 @@ public sealed class GameController : MonoBehaviour
             case ControllerState.Idle: TryIdleToInspect(); break;
             case ControllerState.Dragging: _dragController.TryDragTo(GetPointerPosition()); break;
             case ControllerState.Rotating: _cameraRotationController.Rotate(GetPointerPosition()); break;
+            case ControllerState.PositionDragging: _cameraPositionController.DragCamera(GetPointerPosition()); break;
             case ControllerState.Inspecting: break;
         }
     }
@@ -78,7 +79,7 @@ public sealed class GameController : MonoBehaviour
     
     private void TryActivateOrStartInspecting(InputAction.CallbackContext context)
     {
-        if (_currentControllerState == ControllerState.Dragging) return;
+        if (_currentControllerState == ControllerState.Dragging || _currentControllerState == ControllerState.PositionDragging) return;
         
         if (context.interaction is TapInteraction)
         {
@@ -89,8 +90,26 @@ public sealed class GameController : MonoBehaviour
         else if (context.interaction is HoldInteraction)
         {
             if (_inspectorController.TryToStartInspecting(GetPointerPosition())) _currentControllerState = ControllerState.Inspecting;
-            else _currentControllerState = ControllerState.Idle;
         }
+    }
+
+    private void TryStartDragCameraPosition()
+    {
+        if (_currentControllerState == ControllerState.Dragging) return;
+        
+        if (_inspectorController.HoveredOverInspectable(GetPointerPosition())) return;
+        
+        if (_dragController.HoveredOverActivatable(GetPointerPosition())) return;
+        
+        _cameraPositionController.CaptureCameraPosition(GetPointerPosition()); 
+        _currentControllerState = ControllerState.PositionDragging;
+    }
+
+    private void StopCameraDragPosition()
+    {
+        if (_currentControllerState == ControllerState.Dragging) return;
+        
+        _currentControllerState = ControllerState.Idle;
     }
 
     private void ReturnFromDragToIdleState()
@@ -143,6 +162,10 @@ public sealed class GameController : MonoBehaviour
         
         _controls.TouchInput.RMB.performed += TryActivateOrStartInspecting;
         
+        _controls.TouchInput.RMB.started += _ => TryStartDragCameraPosition();
+        
+        _controls.TouchInput.RMB.canceled += _ => StopCameraDragPosition();
+        
         _controls.TouchInput.ReturnDefaultCameraPosition.performed += _ => _cameraPositionController.SetDefaultPosition();
 
         _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
@@ -166,5 +189,6 @@ public sealed class GameController : MonoBehaviour
         Dragging,
         Rotating,
         Inspecting,
+        PositionDragging
     }   
 }

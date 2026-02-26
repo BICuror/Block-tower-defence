@@ -20,6 +20,7 @@ namespace CuroSettings
         CameraMovementSensitivity,
         CameraZoomSensetiviy,
         EnableDamageIndicators,
+        CameraDragSensitivity,
 
     }
 }

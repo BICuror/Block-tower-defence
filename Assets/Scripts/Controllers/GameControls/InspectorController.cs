@@ -35,6 +35,7 @@ public class InspectorController : MonoBehaviour
         return false;
     }
     
+
     public bool TryToStartIdleInspecting(Vector2 mousePosition)
     {
         if (_inspectionTooltipManager.NonIdleTooltipsOpened) return false;
@@ -51,6 +52,21 @@ public class InspectorController : MonoBehaviour
 
                     return true;
                 }
+            }
+        }
+        
+        return false;
+    }
+    
+    public bool HoveredOverInspectable(Vector2 mousePosition)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(mousePosition);
+
+        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+        {
+            if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
+            {
+                return true;
             }
         }
         

@@ -51,6 +51,8 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
     
     private async UniTask CaptureDraggable()
     {
+        await UniTask.WaitUntil(() => _buildingEntityToUpgrade.Draggable.IsPlaced);
+        
         _draggableConnector.gameObject.SetActive(true);
 
         _draggableConnector.transform.position = _buildingEntityToUpgrade.transform.position;

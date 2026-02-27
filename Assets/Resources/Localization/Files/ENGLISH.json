@@ -11,11 +11,11 @@
   "mark_effect_tooltip_header": "Mark",
   "mark_effect_description": "used to invoke some effects. #MaxStack = 1",
   "fire_effect_tooltip_header": "Fire",
-  "fire_effect_tooltip_description": "Deals 0.4 #Damage per #Stack each second. #MaxStack = 30",
+  "fire_effect_tooltip_description": "Deals 1 #Damage per #Stack each second. #MaxStack = 30",
   "poison_effect_tooltip_header": "Poison",
   "poison_effect_tooltip_description": "Deals 1% of #MaxHealth as #NonLethalDamage per #Stack each second, cannot expire. #MaxStack = 10",
   "regeneration_effect_tooltip_header": "Regeneration",
-  "regeneration_effect_tooltip_description": "Heal 5% of #MaxHealth per second. #MaxStack = 1",
+  "regeneration_effect_tooltip_description": "Heal 5% of #MaxHealth per second. #MaxStack = 3",
   "slowdown_effect_tooltip_header": "Slowdown",
   "slowdown_effect_tooltip_description": "#bad -25% bad# #Speed per #Stack . #MaxStack = 3",
   "speedup_effect_tooltip_header": "Speed up",
@@ -271,7 +271,7 @@
   "execute_low_hp_enemies_in_area_entity_modificator_tooltip_header": "Executor",
   "execute_low_hp_enemies_in_area_entity_modificator_tooltip_description": "#Enemies in #Area below 10% #CurrentHealth are instantly #Execution=Executed",
   "heal_buildings_in_area_entity_modificator_tooltip_header": "Field medic",
-  "heal_buildings_in_area_entity_modificator_tooltip_description": "On #Action <color=green>heal 5% of #MaxHealth</color> another #Building in #Area",
+  "heal_buildings_in_area_entity_modificator_tooltip_description": "On #Action <color=green>heal 5% of #MaxHealth</color> another #Buildings=Building in #Area",
   "slow_enemies_in_area_entity_modificator_tooltip_header": "Slowmo",
   "slow_enemies_in_area_entity_modificator_tooltip_description": "Apply #SlowdownEffect to all #Enemies in #Area",
   "stack_negative_effects_entity_modificator_tooltip_header": "Stacker",
@@ -407,5 +407,7 @@
   "spawn_rock_on_marked_enemy_kill_tooltip_header": "Petrify",
   "spawn_rock_on_marked_enemy_kill_tooltip_description": "#OnKill if entity is #Mark=Marked spawn #jump rock jump# blocking #Enemies=Enemy's path",
   "damage_indicators_label": "Enable damage indicators",
-  "camera_drag_sensetivity": "Camera mouse drag sensetivity "
+  "camera_drag_sensetivity": "Camera mouse drag sensetivity ",
+  "quick_enmey_tooltip_header": "Runner",
+  "quick_enmey_tooltip_description": "Small very fast enemy with low #MaxHealth"
 }

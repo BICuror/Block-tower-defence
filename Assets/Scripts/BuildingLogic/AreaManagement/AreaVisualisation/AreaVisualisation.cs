@@ -1,26 +1,30 @@
 using NaughtyAttributes;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Serialization;
 using Zenject;
 
 public abstract class AreaVisualisation : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _meshRenderer;
     [Inject] [SerializeField] private DraggableSystemConfig _draggableSystemConfig;
-    
-    [Header("Visualisation")]
+
+    [Header("Visualisation")] 
+    [SerializeField] private bool _enableOnStart;
     [SerializeField] private Transform _visualisationTransform;
     private TokenContainer _areaActiveVisualisationTokenContainer = new(true);
     private float _defaultScale = 1f;
 
-    public float DefaultScale => _defaultScale;
+    protected float DefaultScale => _defaultScale;
     protected abstract Vector3 DisabledScale { get; }
     protected abstract Vector3 EnabledScale { get; }
 
     private void Start()
     {
         _meshRenderer.material = new Material(_meshRenderer.material);
-        _visualisationTransform.localScale = DisabledScale;
+        
+        if (_enableOnStart) _visualisationTransform.localScale = EnabledScale;
+        else _visualisationTransform.localScale = DisabledScale;
 
         if (transform.parent.TryGetComponent(out HoverableObject hoverableObject)) SubscribeToHoverable(hoverableObject);
     }

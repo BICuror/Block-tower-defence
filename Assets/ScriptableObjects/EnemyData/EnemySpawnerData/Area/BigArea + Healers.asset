@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce3b1cdfede87a4badc298ec1154c9a, type: 3}
+  m_Name: BigArea + Healers
+  m_EditorClassIdentifier: 
+  _groupParts:
+  - _amountPerWave: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+    _enemyData: {fileID: 11400000, guid: 4627f7f95270f154e8f7386ff793d64a, type: 2}
+    _parseString: 2 1 5 3 8 11 14 18 23 30 37 48 56 66 80
+  - _amountPerWave: 0100000002000000010000000400000003000000070000000a0000000c00000010000000150000001b000000220000002c000000350000003d0000004b000000
+    _enemyData: {fileID: 11400000, guid: 6e26fa2cf37fce94bacfb71278be66a8, type: 2}
+    _parseString: 2 1 4 3 7 10 12 16 21 27 34 44 53 61 75
+  - _amountPerWave: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+    _enemyData: {fileID: 11400000, guid: 4627f7f95270f154e8f7386ff793d64a, type: 2}
+    _parseString: 2 1 5 3 8 11 14 18 23 30 37 48 56 66 80
+  _firstPossibleWaveEncounter: 10
+  _lastPossibleWaveEncounter: 15

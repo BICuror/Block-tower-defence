@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5164649347178834671}
-  - component: {fileID: 8444204942624662101}
   - component: {fileID: 3540986466596446437}
   - component: {fileID: 6992770854547551011}
   - component: {fileID: 8876848886570627478}
@@ -35,21 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8183048500973014740}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8444204942624662101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 350447740135002504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa2064e2a1408c44b8349d96b54a970c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyLayerSettings: {fileID: 11400000, guid: 07d5ecfce98f9e14e95d1f2867d6f1a8, type: 2}
-  _explotionEffect: {fileID: 3540986466596446437}
-  _defaultRadius: 1.5
 --- !u!114 &3540986466596446437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 1
   _visualEffect: {fileID: 8876848886570627478}
-  _detachFromParentWhilePlaying: 0
+  _detachFromParentWhilePlaying: 1
 --- !u!73398921 &6992770854547551011
 VFXRenderer:
   serializedVersion: 1
@@ -83,6 +67,11 @@ VFXRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -102,9 +91,11 @@ VFXRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
 --- !u!2083052967 &8876848886570627478
 VisualEffect:
   m_ObjectHideFlags: 0
@@ -201,6 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8183048500973014740}
   - component: {fileID: 5557845932249963836}
+  - component: {fileID: 4494948534025813065}
   m_Layer: 12
   m_Name: DeathExplotion
   m_TagString: Untagged
@@ -236,4 +228,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a9e80711b3e5ce47abd65f19520d493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _explosion: {fileID: 8444204942624662101}
+  _explosion: {fileID: 4494948534025813065}
+--- !u!114 &4494948534025813065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 889794001841637397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2064e2a1408c44b8349d96b54a970c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyLayerSettings: {fileID: 11400000, guid: 07d5ecfce98f9e14e95d1f2867d6f1a8, type: 2}
+  _explotionEffect: {fileID: 3540986466596446437}
+  _defaultRadius: 1.5

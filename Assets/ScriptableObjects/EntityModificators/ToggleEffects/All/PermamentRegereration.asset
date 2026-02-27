@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PermamentRegereration
   m_EditorClassIdentifier: 
   _icon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: global_regen_entity
+  _localizationKey: global_regen_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 4
@@ -58,6 +58,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -85,6 +86,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 0
   _tags: 
   _effectType: 1

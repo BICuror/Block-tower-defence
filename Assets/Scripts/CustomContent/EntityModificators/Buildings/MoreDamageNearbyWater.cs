@@ -4,6 +4,7 @@ using Zenject;
 public sealed class MoreDamageNearbyWater : EntityModificator
 {
     [Inject] private IslandDataContainer _islandDataContainer;
+    private EntityCanvasIcon _entityCanvasIcon;
     private LayerSetting _anyTerrainLayerSetting;
     private StatModifier _statModifier;
     private GameObject _areaDisplay;
@@ -28,6 +29,16 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         int emptyTilesNearby = TileMap.CountValidPositionsInRadius(IsEmptyTile, new Vector2Int(Mathf.RoundToInt(Entity.transform.position.x), Mathf.RoundToInt(Entity.transform.position.z)), _radius);
         
         _statModifier.SetMultiplier(emptyTilesNearby * Args.GetArgument<float>("MultiplierPerTile"));
+
+        UpdateUIIcon(emptyTilesNearby);
+    }
+
+    private void UpdateUIIcon(int emptyTilesNearby)
+    {
+        if (emptyTilesNearby > 0 && !_entityCanvasIcon) _entityCanvasIcon = AddIcon(true, emptyTilesNearby);
+        else if (emptyTilesNearby <= 0 && _entityCanvasIcon) RemoveIcon(_entityCanvasIcon);
+        
+        if (_entityCanvasIcon) _entityCanvasIcon.SetValue(emptyTilesNearby);
     }
 
     private bool IsEmptyTile(Vector2Int position) => !TileMap.HasTile(position, _anyTerrainLayerSetting);

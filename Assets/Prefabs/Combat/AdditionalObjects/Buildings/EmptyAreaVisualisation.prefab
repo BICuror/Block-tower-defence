@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6276755293320577057
 Transform:
   m_ObjectHideFlags: 0
@@ -160,6 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
   _meshRenderer: {fileID: 6472748314157104479}
   _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
+  _enableOnStart: 0
   _visualisationTransform: {fileID: 6276755293320577057}
   _height: 100
 --- !u!1 &8879340027590346412

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b250d2f357a3eb4c8e5066f4aef388d, type: 3}
   m_Name: HealEffectData
   m_EditorClassIdentifier: 
-  _maxStacks: 1
+  _maxStacks: 3
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -26,6 +26,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: SecondsPerTick
       _intArgument: 0
@@ -37,4 +40,7 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _particlePrefab: {fileID: 6100520703357821559, guid: 96dbc12107ee3114cb4c2788079b8a70, type: 3}

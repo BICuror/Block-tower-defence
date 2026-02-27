@@ -45,11 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10ea86a4846a4a44b949ef22f759337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statType: Damage
   _useStackableNearbyModifier: 0
-  _aloneModifier: 1.5
+  _statType: Damage
   _nearbyModifier: 0
+  _aloneModifier: 1.5
   _buildingAreaScaner: {fileID: 4910447815113604971}
+  _icon: {fileID: 473409037, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _showIconWhenAlone: 1
+  _showIconWhenNotAlone: 0
 --- !u!1 &4451044171943003910
 GameObject:
   m_ObjectHideFlags: 0

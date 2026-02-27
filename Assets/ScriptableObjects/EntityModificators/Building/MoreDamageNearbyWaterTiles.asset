@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: MoreDamageNearbyWaterTiles
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 827699720, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: water_damage_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
@@ -86,6 +86,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath

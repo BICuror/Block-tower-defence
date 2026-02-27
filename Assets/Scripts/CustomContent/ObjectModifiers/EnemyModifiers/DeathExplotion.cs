@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cashing;
 using Combat;
@@ -9,8 +10,6 @@ public sealed class DeathExplotion : MonoBehaviour
     
     private void Start()
     {
-        transform.SetParent(null);
-
         _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage += KillEntity;
         _ownerEntity.Health.Died += Explode;
         
@@ -19,14 +18,11 @@ public sealed class DeathExplotion : MonoBehaviour
 
     private void KillEntity() => _ownerEntity.Health.Die();
 
-    private async void Explode()
+    private void Explode()
     {
-        _explosion.transform.SetParent(null);
-        transform.position = _ownerEntity.transform.position;
-        
         _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage -= KillEntity;
         _ownerEntity.Health.Died -= Explode;
         
-        await _explosion.Explode();
+        _explosion.Explode().Forget();
     }
 }

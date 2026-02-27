@@ -27,7 +27,7 @@ namespace Combat
 
         private void Start()
         {
-            _enemyHealth.Died += OnEnemyDeath;
+            _enemyHealth.HandleDeath += OnEnemyDeath;
         }
         
         public void SetEnemyData(EnemyData enemyDataToSet, bool initializeNavigation = true, bool initializeModificators = true)

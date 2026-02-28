@@ -21,12 +21,12 @@ public sealed class DraggableConnector : MonoBehaviour
         
         dragAnimationObject.DisconnectFromJoint(_joint);
         
-        MoveTo(finalPosition, _placementDuration);
-        await PlaceObject(dragAnimationObject, finalPosition);
+        draggableObject.transform.parent = null;
+        
+        await PlaceObject(dragAnimationObject, draggableObject, finalPosition);
 
         await UniTask.WaitForFixedUpdate();
         
-        draggableObject.transform.parent = null;
         draggableObject.transform.position = finalPosition; 
         draggable.Place();
         
@@ -35,9 +35,9 @@ public sealed class DraggableConnector : MonoBehaviour
         PlacedDraggable.Invoke(draggableObject);
     }
 
-    private async UniTask PlaceObject(DragAnimationObject dragAnimationObject, Vector3 finalPosition)
+    private async UniTask PlaceObject(DragAnimationObject dragAnimationObject, GameObject draggableObject, Vector3 finalPosition)
     {
-        finalPosition += dragAnimationObject.InitialLocalPosition;
+        Vector3 initialDraggableObjectPosition = draggableObject.transform.position;
         
         Vector3 initialPosition = dragAnimationObject.transform.position;
 
@@ -45,9 +45,11 @@ public sealed class DraggableConnector : MonoBehaviour
 
         Vector3 finalRotation = new Vector3(0f, GetFinalYRotation(dragAnimationObject.transform.rotation.eulerAngles.y), 0f);
 
-        await DOVirtual.Float(0f, 1f, _placementDuration, Evaluate).AsyncWaitForCompletion();
+        await DOVirtual.Float(0f, 1f, _placementDuration, Evaluate).SetEase(Ease.Linear).AsyncWaitForCompletion();
 
         Evaluate(1);
+        
+        return;
 
         void Evaluate(float value)
         {
@@ -61,7 +63,8 @@ public sealed class DraggableConnector : MonoBehaviour
             if (initialRotation.z > 180) evaluatedZ = Mathf.Lerp(initialRotation.z, 360f, value);
             else evaluatedZ = Mathf.Lerp(initialRotation.z, 0, value);
             
-            dragAnimationObject.transform.position = Vector3.Lerp(initialPosition, finalPosition, value);
+            draggableObject.transform.position = Vector3.Lerp(initialDraggableObjectPosition, finalPosition, value);;
+            dragAnimationObject.transform.position = Vector3.Lerp(initialPosition, finalPosition + dragAnimationObject.InitialLocalPosition, value);;
             dragAnimationObject.transform.rotation = Quaternion.Euler(new Vector3(evaluatedX, evaluatedY, evaluatedZ));
         }
     }

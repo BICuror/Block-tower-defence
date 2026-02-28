@@ -95,5 +95,6 @@ public class TaskCycle : MonoBehaviour
     protected void OnDestroy() 
     { 
         _ownerEntityHealth.Died -= StopRechargeProcess;
+        StopRechargeProcess();
     }
 }

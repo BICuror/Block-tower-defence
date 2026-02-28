@@ -16,12 +16,14 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
         
         Entity.Draggable.Placed += CalculateBonusDamage;
+        CalculateBonusDamage();
 
         _radius = Args.GetArgument<int>("AreaRadius");
         _anyTerrainLayerSetting = Args.GetArgument<LayerSetting>("AnyTerrainLayer");
         
         _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(Args.GetArgument<GameObject>("AreaPrefab"));
         _areaDisplay.transform.localScale = new Vector3(1 + 2 * _radius, 100f, 1 + 2 * _radius);
+        
     }
 
     private void CalculateBonusDamage()
@@ -45,6 +47,8 @@ public sealed class MoreDamageNearbyWater : EntityModificator
 
     public override void Disable()
     {
+        if (_entityCanvasIcon) RemoveIcon(_entityCanvasIcon);
+        
         Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().RemoveAndDestroyModificator(_areaDisplay);
         Entity.StatContainer.Get<Damage>().RemoveStatModifier(_statModifier);
         Entity.Draggable.Placed -= CalculateBonusDamage;

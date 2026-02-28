@@ -9,8 +9,7 @@ namespace CuroLocalization
     public sealed class LocalizationSettings : ScriptableObject
     {
         [Space] [Header("FilesSettings")]
-        [SerializeField] private string _localizationFilesPath = "Assets/Resources/Localization/Files";
-        
+        [SerializeField] private string _localizationFilesPath = "Localization/Files";
         [Space] [Header("TableParsing")]
         [SerializeField] private string _tableCellSeparatorSymbol = "#TABLE_CELL_SEPARATOR#";
         [SerializeField] private string _tableLingSeparatorSymbol = "#TABLE_ROW_SEPARATOR#";

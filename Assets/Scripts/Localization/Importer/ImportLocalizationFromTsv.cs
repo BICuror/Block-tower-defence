@@ -21,7 +21,7 @@ namespace CuroLocalization
 
             List<LanguageData> languages = ParseLanguages(table);
 
-            SaveLanguages(languages, LocalizationManager.Settings.LocalizationFilesPath);
+            SaveLanguages(languages, "Assets/Resources/" + LocalizationManager.Settings.LocalizationFilesPath);
 
             Debug.Log("Successfully imported localization files");
             AssetDatabase.Refresh();

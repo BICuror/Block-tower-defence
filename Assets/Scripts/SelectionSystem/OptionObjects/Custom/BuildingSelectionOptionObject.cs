@@ -39,6 +39,8 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
         _draggableObject.DraggablePickedUp += _ => ((IDraggable)_instantiatedBuilding.Draggable).PickUp();
         _draggableObject.DraggablePlaced += _ => ((IDraggable)_instantiatedBuilding.Draggable).Place();
 
+        _instantiatedBuilding.ComponentsContainer.Get<Collider>().enabled = false;
+
         Outline buildingOutline = _instantiatedBuilding.ComponentsContainer.Get<DragAnimationObject>().GetComponent<Outline>();
         buildingOutline.OutlineColor = _buildingOutlineColor;
         buildingOutline.OutlineWidth = _buildingOutlineThickness;

@@ -5,7 +5,8 @@ using Combat;
 public sealed class EnemyDeathExplosionManager : MonoBehaviour
 {
     [Cached] private EntityHealth _entityHealth;
-    [SerializeField] private VisualEffectHandler _visualEffectHandler;
+    [SerializeField] private VisualEffectHandler _explosionVisualEffectHandler;
+    [SerializeField] private VisualEffectHandler _splatVisualEffectHandler;
     [SerializeField] private LayerSetting _anyTerrainLayerSetting;
     
     private void Start()
@@ -19,9 +20,10 @@ public sealed class EnemyDeathExplosionManager : MonoBehaviour
 
         if (TileMap.HasTile(roundedPosition, _anyTerrainLayerSetting))
         {
-            _visualEffectHandler.PlayBurstEffectAndForget();
+            _explosionVisualEffectHandler.PlayBurstEffectAndForget();
+            _splatVisualEffectHandler.PlayBurstEffectAndForget();
             
-            _visualEffectHandler.transform.position = new Vector3(transform.position.x, TileMap.GetHitInfo(roundedPosition, _anyTerrainLayerSetting).point.y, transform.position.z);
+            _splatVisualEffectHandler.transform.position = new Vector3(_explosionVisualEffectHandler.transform.position.x, TileMap.GetHitInfo(roundedPosition, _anyTerrainLayerSetting).point.y, _explosionVisualEffectHandler.transform.position.z);
         }
     }
 }

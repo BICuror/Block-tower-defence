@@ -13,6 +13,8 @@ public sealed class DealMoreDamageWhenMoreCrystalsSelected : EntityModificator
         _itemsContainer.ItemRemoved += UpdateStatModifier;
         
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
+
+        UpdateStatModifier(null);
     }
 
     public override void Disable()
@@ -21,6 +23,8 @@ public sealed class DealMoreDamageWhenMoreCrystalsSelected : EntityModificator
         _itemsContainer.ItemRemoved -= UpdateStatModifier;
         
         Entity.StatContainer.Get<Damage>().RemoveStatModifier(_statModifier);
+        
+        if (_entityCanvasIcon) RemoveIcon(_entityCanvasIcon);
     }
     
     private void UpdateStatModifier(Item _)

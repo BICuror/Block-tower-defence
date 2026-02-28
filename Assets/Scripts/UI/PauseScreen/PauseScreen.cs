@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine;
@@ -31,7 +32,13 @@ public sealed class PauseScreen : MonoBehaviour
         else gameObject.SetActive(true);
     }
 
-    private void Restart() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    private void Restart()
+    {
+        Destroy(gameObject);
+        DOTween.KillAll();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     private void Quit() => Application.Quit();
     
     private void OnEnable()

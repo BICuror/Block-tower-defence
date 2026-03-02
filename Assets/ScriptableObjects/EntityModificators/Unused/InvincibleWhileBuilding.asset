@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 1125429245, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _localizationKey: 
-  _modificatorName: Steadfast
-  _modificatorDescription: '#Invincibility while building'
   _argumentsContainer:
     _argumentItems: []
   _showInInspector: 1
@@ -32,6 +30,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -59,6 +58,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 
   _effectType: 0

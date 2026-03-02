@@ -2,9 +2,38 @@ using Combat;
 
 public sealed class MarkEffect : EntityEffect
 {
-    public override EntityEffectType EffectType => EntityEffectType.Positive;
+    private MarkDamageModifier _markDamageModifier;
     
-    public override void ApplyToEntity() {}
+    public override EntityEffectType EffectType => EntityEffectType.Positive;
 
-    public override void RemoveFromEntity() {}
+    protected override void OnInitialized()
+    {
+        _markDamageModifier = new MarkDamageModifier();
+        _markDamageModifier.Initialize(ArgumentsContainer.GetArgument<float>("IncomingDamageModifier"));
+    }
+
+    public override void ApplyToEntity()
+    {
+        Entity.DamageModifierContainer.ReciverContainer.Add(_markDamageModifier);
+    }
+
+    public override void RemoveFromEntity()
+    {
+        Entity.DamageModifierContainer.ReciverContainer.Remove(_markDamageModifier);
+    }
+
+    private sealed class MarkDamageModifier : DamageModifier
+    {
+        private float _damageModifier;
+        
+        public void Initialize(float damageModifier)
+        {
+            _damageModifier = damageModifier;
+        }
+        
+        public override float Modify(CombatEntity otherEntity, float value)
+        {
+            return _damageModifier * value;
+        }
+    }
 }

@@ -65,7 +65,7 @@ public sealed class CameraPositionController : MonoBehaviour
         
         Vector2 movementDirection = _cameraForward * cursorPositionDifference.y + _cameraRight * cursorPositionDifference.x;
         
-        _currentPosition += movementDirection * (_cameraDragSpeed * _cameraDragSensitivity.Value / Time.timeScale);
+        _currentPosition += movementDirection * (_cameraDragSpeed * _cameraDragSensitivity.Value);
         CaptureCameraPosition(cursorPosition);
         ClampCurrentPosition();
     }

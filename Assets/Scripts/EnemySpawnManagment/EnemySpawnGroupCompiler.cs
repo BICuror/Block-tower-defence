@@ -29,6 +29,20 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         _globalStatContainer.Get<EnemyAmountMultiplier>().ValueChanged += _ => GenerateEnemyGroups();
     }
 
+    public List<EnemyData> GetAllEnemyDatas()
+    {
+        List<EnemyData> result = new();
+        
+        _additionalGroups.ForEach(group => group.GroupParts.ForEach(groupPart => result.Add(groupPart.Data)));
+        
+        foreach (var enemySpawnData in _enemySpawnDatas)
+        {
+            result.AddRange(enemySpawnData.Value);
+        }
+        
+        return result;
+    }
+    
     public void GenerateWaveSeed()
     {
         _additionalGroups.Clear();
@@ -98,6 +112,8 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
             EnemyWaveGroup.GroupPart currentPart = groupParts[enemyGroupPartIndex];
 
             int enemyAmount = Mathf.RoundToInt(currentPart.GetAmount(_waveIndexContainer.GetCurrentWave()) * amountMultiplier);
+
+            if (enemyAmount <= 0) enemyAmount = 1;
 
             for (int enemyIndex = 0; enemyIndex < enemyAmount; enemyIndex++)
             {

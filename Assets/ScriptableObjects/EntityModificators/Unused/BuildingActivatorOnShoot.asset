@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 1546871838, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: 
-  _modificatorName: Inspiring cry
-  _modificatorDescription: On shoot 25% to #Activation another building in #Area
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 7
@@ -46,6 +44,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -73,7 +72,8 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
-  _rarity: 1
+    - TemporaryEntityModificatorEntityModificatorApplier
+  _rarity: 2
   _tags: 
   _effectType: 0
   _hasStacks: 0

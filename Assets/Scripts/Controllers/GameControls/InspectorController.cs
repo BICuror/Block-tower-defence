@@ -2,19 +2,18 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
 using Combat;
-using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
+    [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
-    [FormerlySerializedAs("_areaVisualisation")] [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
     
     private InspectableObject _inspectableObject;
     
-    public Action InspectionStopped;
+    public event Action InspectionStopped;
     
     public bool TryToStartInspecting(Vector2 mousePosition)
     {
@@ -46,12 +45,7 @@ public class InspectorController : MonoBehaviour
         {
             if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             {
-                if (hoveredInspectable.CanBeIdleInspected)
-                {
-                    StartInspecting(hoveredInspectable);
-
-                    return true;
-                }
+                return hoveredInspectable.CanBeIdleInspected;
             }
         }
         

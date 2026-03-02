@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
   _localizationKey: 
-  _modificatorName: Resoursfull
-  _modificatorDescription: Create #Crystal for each 30 kills
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 0
@@ -46,6 +44,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -73,6 +72,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 
   _effectType: 0

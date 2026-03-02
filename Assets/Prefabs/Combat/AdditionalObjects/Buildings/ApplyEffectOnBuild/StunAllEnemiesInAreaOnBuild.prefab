@@ -5057,6 +5057,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
   _meshRenderer: {fileID: 7232687536179805673}
   _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
+  _enableOnStart: 0
   _visualisationTransform: {fileID: 7680883792900178071}
   _height: 100
 --- !u!1 &8698641187551789753
@@ -5190,7 +5191,7 @@ PrefabInstance:
       objectReference: {fileID: 8926484042661614526, guid: fe3f3409a79859a46ae2c54fbe694b42, type: 3}
     - target: {fileID: 7582514485721572100, guid: 64eda0f1057f9cf4fa0192d5f7abef4c, type: 3}
       propertyPath: m_PropertySheet.m_Float.m_Array.Array.data[0].m_Value
-      value: 1.2
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7582514485721572100, guid: 64eda0f1057f9cf4fa0192d5f7abef4c, type: 3}
       propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x

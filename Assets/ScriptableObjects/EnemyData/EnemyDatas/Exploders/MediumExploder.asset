@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: MediumExploder
   m_EditorClassIdentifier: 
-  _contactDamage: 1
+  _contactDamage: 25
   _maxHealth: 85
   _speed: 1.4
   _statInitializer:
   - StructName: 
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    _defaultValue: 1
+    _defaultValue: 0.75
   - StructName: 
     _statData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    _defaultValue: 15
+    _defaultValue: 10
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: 4300000, guid: b795d1f342e4beb4c96c843702fbfb70, type: 3}
   _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}

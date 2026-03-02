@@ -30,7 +30,7 @@ public sealed class DragController : MonoBehaviour
 
     private void OnEnable() => _camera = GetComponent<Camera>();
     
-    public bool PickedUpDraggable(Vector2 mousePosition, out GameObject draggableObject)
+    public bool HoveredOverDraggableObject(Vector2 mousePosition, out GameObject draggableObject)
     {
         draggableObject = null;
         

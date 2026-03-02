@@ -30,6 +30,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -57,6 +58,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 07000000
   _effectType: 0

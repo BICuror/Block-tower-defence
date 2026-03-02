@@ -10012,6 +10012,7 @@ GameObject:
   - component: {fileID: 8434499650412647894}
   - component: {fileID: 509359543622926259}
   - component: {fileID: 8894107006257181612}
+  - component: {fileID: 3532815996823935967}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -10128,6 +10129,18 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_RenderingLayers: 1
   m_ShadowRenderingLayers: 1
+--- !u!114 &3532815996823935967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8223152019218865920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64a062d46339e754a9d402e16f9af663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroSettings::ShadowStateSettingApplier
 --- !u!1 &8467198588702299557
 GameObject:
   m_ObjectHideFlags: 0

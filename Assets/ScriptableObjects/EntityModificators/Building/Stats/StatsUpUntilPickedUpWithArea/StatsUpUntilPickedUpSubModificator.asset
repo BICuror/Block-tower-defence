@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: StatsUpUntilPickedUpSubModificator
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 1968931674, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: 
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 0
+  _itemTypeContainers:
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+  - _itemTypeName: AddIconEntityModificator
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoreSpeedWhenFullHp
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+  _rarity: 2
+  _tags: 
+  _effectType: 0
+  _hasStacks: 0
+  _maxStacks: 0
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.5
+  - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
+    FlatChange: 0
+    MultiplierChange: -0.3
+  - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
+    FlatChange: 1
+    MultiplierChange: 0

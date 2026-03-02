@@ -20,7 +20,7 @@ MonoBehaviour:
       _argumentName: DamagePercent
       _intArgument: 1
       _boolArgument: 0
-      _floatArgument: 0.05
+      _floatArgument: 0.1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -39,11 +39,13 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -60,7 +62,6 @@ MonoBehaviour:
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -71,6 +72,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 0
   _tags: 
   _effectType: 1

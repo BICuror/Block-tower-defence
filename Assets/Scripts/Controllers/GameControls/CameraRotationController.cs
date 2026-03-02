@@ -16,8 +16,8 @@ public sealed class CameraRotationController : MonoBehaviour
     private FloatSetting _cameraRotationSensitivity;
     private Camera _camera;
 
-    private Vector3 _previousPosition;
     private Vector2 _previousTouchPosition = Vector2.zero;
+    private Vector3 _previousPosition;
 
     public UnityEvent CameraRotated;
 

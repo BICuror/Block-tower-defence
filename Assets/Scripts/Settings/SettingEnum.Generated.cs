@@ -21,6 +21,8 @@ namespace CuroSettings
         CameraZoomSensetiviy,
         EnableDamageIndicators,
         CameraDragSensitivity,
+        PostProcessingEnabled,
+        ShadowsEnabled,
 
     }
 }

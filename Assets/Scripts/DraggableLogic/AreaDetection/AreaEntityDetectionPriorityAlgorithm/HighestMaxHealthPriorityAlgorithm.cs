@@ -5,7 +5,7 @@ public sealed class HighestMaxHealthPriorityAlgorithm : EntityDetectorPriorityAl
 {
     public override CombatEntity GetPrioritizedEntity(List<CombatEntity> initialList)
     {
-        float maxHealth = 1;
+        float maxHealth = float.MinValue;
         CombatEntity bestCandidate = null;
             
         for (int i = 0; i < initialList.Count; i++)

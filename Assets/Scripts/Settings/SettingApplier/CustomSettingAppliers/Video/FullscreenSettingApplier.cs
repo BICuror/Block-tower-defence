@@ -12,7 +12,7 @@ namespace CuroSettings.CustomSettingAppliers
         
         private static void ApplyNewSettingValue()
         {
-            Screen.fullScreenMode = Setting.GetValue<FullScreenMode>();
+            Screen.SetResolution(Screen.width, Screen.height,Setting.GetValue<FullScreenMode>());
         }
     }
 }

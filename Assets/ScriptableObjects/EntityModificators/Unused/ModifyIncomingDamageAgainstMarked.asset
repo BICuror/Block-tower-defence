@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
   _localizationKey: 
-  _modificatorName: Prepeared
-  _modificatorDescription: Takes 75% less damage from marked enemies
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 4
@@ -74,6 +72,7 @@ MonoBehaviour:
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
@@ -101,6 +100,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
   _tags: 
   _effectType: 0

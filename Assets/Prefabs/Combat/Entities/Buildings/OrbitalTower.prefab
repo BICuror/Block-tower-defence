@@ -5232,9 +5232,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 6756703041196153774}
+  _hasPriority: 0
+  _priorityType: 0
 --- !u!114 &7362233864325727295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5293,7 +5294,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
   - {fileID: 11400000, guid: a441dd39244b43447b33348da2d43aa8, type: 2}
   - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
-  - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
   - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
   - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
   - {fileID: 11400000, guid: 00c8f01bdea31cb449bc1f5cd613087d, type: 2}
@@ -5306,6 +5306,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
   - {fileID: 11400000, guid: 3fc8e09c6fe0ecf468721b29f275aa73, type: 2}
   - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
+  - {fileID: 11400000, guid: f9d17ef5a2523e741ba1f52282e3063c, type: 2}
+  - {fileID: 11400000, guid: 2e90431e3fbf35641938bc49530fa692, type: 2}
+  - {fileID: 11400000, guid: e93b3855d1a7ef7498610cd48f4c12c1, type: 2}
+  - {fileID: 11400000, guid: 5bd2b83d5e5630c48b3f0ad5be66fe85, type: 2}
 --- !u!114 &5220538212850705305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5498,6 +5502,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
   _meshRenderer: {fileID: 2711396845925626841}
   _draggableSystemConfig: {fileID: 0}
+  _enableOnStart: 0
   _visualisationTransform: {fileID: 8505234571119142794}
   _height: 100
 --- !u!1 &4575311875090513263

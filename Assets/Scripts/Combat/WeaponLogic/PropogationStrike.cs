@@ -50,9 +50,13 @@ public sealed class PropogationStrike : WeaponBase
             
             await UniTask.WaitForSeconds(_stepDuration);
             
+            if (!currentEntity) break;
+            
             CombatEntity newTargetEntity = GetEnemiesInRadius(currentEntity.transform.position);
             
             if (!newTargetEntity) break;
+            
+            if (Vector3.Distance(newTargetEntity.transform.position, currentEntity.transform.position) > _propogationRadius.Value * 1.5f) break;
 
             MoveBeamToNewPosition(initialTransform.position, currentEntity.transform, newTargetEntity.transform, _stepDuration).Forget();
             

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpawnRocksWhenMarkedEnemyKilled
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: spawn_rock_on_marked_enemy_kill_tooltip
+  _localizationKey: spawn_rock_on_marked_enemy_kill_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 8
@@ -88,18 +88,22 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
-  _tags: 
+  _tags: 0a000000
   _effectType: 0
   _hasStacks: 1
   _maxStacks: 3
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
-    Requirements: []
-  _hasBlockTags: 0
+    Requirements:
+    - Tag: 11
+      Amount: 1
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 11
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []

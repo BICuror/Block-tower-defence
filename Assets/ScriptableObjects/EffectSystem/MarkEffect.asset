@@ -14,5 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxStacks: 1
   _argumentsContainer:
-    _argumentItems: []
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: IncomingDamageModifier
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 1.25
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _particlePrefab: {fileID: 1955021050987271060, guid: 8a6fcd9313bee854d8676cb8573cba13, type: 3}

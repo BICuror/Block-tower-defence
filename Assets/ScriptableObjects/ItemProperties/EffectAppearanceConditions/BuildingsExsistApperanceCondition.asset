@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 589fb5c9aa592b94fa40b5b3e10f4130, type: 3}
   m_Name: BuildingsExsistApperanceCondition
   m_EditorClassIdentifier: 
-  _apperanceConditionTypeName: BuildingsAmountApperanceCondition
+  _apperanceConditionTypeName: BuildingsExsistEffectApperanceCondition
   AllConditioinTypeNames:
   - BuildingsExsistEffectApperanceCondition
+  - EnemiesHaveStateffectApperanceCondition
   - HasNonFullHealthBuildings
   - MaxBuildingsAmountApperanceCondition

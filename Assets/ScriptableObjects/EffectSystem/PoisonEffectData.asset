@@ -26,6 +26,9 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: SecondsPerTick
       _intArgument: 0
@@ -37,15 +40,21 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
     - _argumentType: 1
       _argumentName: HealthThreshold
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 0.01
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _particlePrefab: {fileID: 6057230960791925254, guid: 7242984980a12054fb0cf16ad9b323b3, type: 3}

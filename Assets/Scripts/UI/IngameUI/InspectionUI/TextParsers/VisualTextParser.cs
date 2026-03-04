@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,9 +62,9 @@ public sealed class VisualTextParser : MonoBehaviour
                 
                 if (TryGetTagTextReplacement(initialParseText, ref tooltipText, out string tagTextReplacement)) tagText = tagTextReplacement;
                 
-                if (tagData.OnlyText) tooltipText = tooltipText.Replace(initialParseText, GetTagHeaderWithoutIcon(tagData, tagText));
-                else if (fullTag) tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData, tagText));
-                else tooltipText = tooltipText.Replace(initialParseText, GetStringSpriteFromData(tagData));
+                if (tagData.OnlyText) tooltipText = ReplaceFirst(tooltipText, initialParseText, GetTagHeaderWithoutIcon(tagData, tagText));
+                else if (fullTag) tooltipText = ReplaceFirst(tooltipText, initialParseText, GetStringSpriteFromData(tagData) + GetTagHeaderWithoutIcon(tagData, tagText));
+                else tooltipText = ReplaceFirst(tooltipText,initialParseText, GetStringSpriteFromData(tagData));
             }
             else break;
         }
@@ -126,15 +127,15 @@ public sealed class VisualTextParser : MonoBehaviour
                 string replaceStartValue = TAG_START.Replace(TOOLTIP_TAG_START_CHAR, parseData.ReplacedKey); 
                 string replaceEndValue = TAG_END.Replace(TOOLTIP_TAG_START_CHAR, parseData.ReplacedKey);
                 string initialParseTagEnd = parseData.InitialKey + TOOLTIP_TAG_START_CHAR;
-                tooltipText = ReplaceFirst(tooltipText, initialParseTagEnd, replaceEndValue);
-                tooltipText = ReplaceFirst(tooltipText, initialParseTagStart, replaceStartValue); 
+                tooltipText = ReplaceFirst(tooltipText, initialParseTagEnd, replaceEndValue, false);
+                tooltipText = ReplaceFirst(tooltipText, initialParseTagStart, replaceStartValue, false); 
             }
         });
         
         return tooltipText;
     }
     
-    private string ReplaceFirst(string text, string initialValue, string replacementValue) 
+    private string ReplaceFirst(string text, string initialValue, string replacementValue, bool addWhitespaceToEnd = true) 
     { 
         int replacementIndex = text.IndexOf(initialValue);
 
@@ -149,6 +150,8 @@ public sealed class VisualTextParser : MonoBehaviour
         if (length + replacementIndex + 1 < text.Length) length++;
         
         text = text.Remove(replacementIndex, length);
+
+        if (addWhitespaceToEnd) replacementValue += ' ';
         
         text = text.Insert(replacementIndex, replacementValue); 
         

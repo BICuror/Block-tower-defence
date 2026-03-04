@@ -67,6 +67,7 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
@@ -89,7 +90,6 @@ MonoBehaviour:
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -102,7 +102,7 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
   _rarity: 2
-  _tags: 
+  _tags: 0c000000
   _effectType: 0
   _hasStacks: 0
   _maxStacks: 1

@@ -22,12 +22,14 @@ public sealed class WavesContentConfig : ScriptableObject
     [SerializeField] List<WaveContentType> _content;
     
     [Header("ItemSetting")]
+    [SerializeField] private int _additionalItemStrength = 4;
     [SerializeField] private int _combinedItemStrength = 11;
     [SerializeField] private int _minimalItemStrength = 3;
     [SerializeField] private int _itemsAmount = 2;
     
     public List<WaveContentType> Content => _content;
     
+    public int AdditionalItemStrength => _additionalItemStrength;
     public int CombinedItemStrength => _combinedItemStrength;
     public int MinimalItemStrength => _minimalItemStrength;
     public int ItemsAmount => _itemsAmount;

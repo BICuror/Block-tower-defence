@@ -53,8 +53,10 @@ MonoBehaviour:
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityModificatorStatChange
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoExplodeOnFullCharge
@@ -73,6 +75,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - ActivateWhenBuilt
@@ -94,8 +97,10 @@ MonoBehaviour:
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityModificatorStatChange
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoExplodeOnFullCharge
@@ -114,6 +119,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 01000000
   _effectType: 0
@@ -134,3 +140,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
     FlatChange: 1
     MultiplierChange: 0
+  _statInitializers: []

@@ -67,6 +67,7 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
@@ -80,16 +81,18 @@ MonoBehaviour:
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityModificatorStatChange
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -101,6 +104,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
     - ActivateWhenBuilt
@@ -108,6 +112,7 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
@@ -121,16 +126,18 @@ MonoBehaviour:
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityModificatorStatChange
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -142,6 +149,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 01000000
   _effectType: 0
@@ -162,3 +170,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: a5c43ab830c832c49b0b26cc9674533e, type: 2}
     FlatChange: 0
     MultiplierChange: 0.3
+  _statInitializers: []

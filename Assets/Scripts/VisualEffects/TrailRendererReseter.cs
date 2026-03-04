@@ -9,6 +9,9 @@ public sealed class TrailRendererReseter : MonoBehaviour
     {
         _trailRenderer.enabled = false;
         await UniTask.WaitForFixedUpdate();
+        
+        if (!gameObject) return;
+        
         _trailRenderer.Clear();
         _trailRenderer.enabled = true;
     }

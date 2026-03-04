@@ -29,6 +29,10 @@ public class EntityModificatorData : InspectableData
     [SerializeField] private bool _hasBlockTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOwnerTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOtherEntityTags;
+    
+    [Header("StatChanges")]
+    [SerializeField] private List<StatChange> _statChanges;
+    [SerializeField] private List<StatInitializer> _statInitializers;
 
     public List<InstanceItemTypeContainer> ItemTypeContainers => _itemTypeContainers;
     public EffectType EffectType => _effectType;
@@ -43,9 +47,9 @@ public class EntityModificatorData : InspectableData
     public List<EntityEffectTagReqirement> ReqiredOtherEntityTags => _reqiredOtherEntityTags.Requirements;
     public List<EntityEffectTagReqirement> BlockOwnerTags => _blockOwnerTags.Requirements;
     public List<EntityEffectTagReqirement> BlockOtherEntityTags => _blockOtherEntityTags.Requirements;
-
-    public virtual void Modify(EntityModificator modificator) {}
-
+    public List<StatChange> StatChanges => _statChanges;
+    public List<StatInitializer> StatInitializers => _statInitializers;
+    
     public void SetItemTypeNames(List<string> itemTypeNames)
     {
         _itemTypeContainers.ForEach(itemTypeContainer => itemTypeContainer.AllEffectTypeNames = itemTypeNames);
@@ -73,4 +77,7 @@ public enum EntityModifcatorTag
     AreaUp,
     RequiresMark,
     AppliesMark,
+    SelfHarm,
+    NonLethal,
+    MaxEntities,
 }

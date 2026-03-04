@@ -20,7 +20,7 @@ MonoBehaviour:
       _argumentName: MultiplierPerTile
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.25
+      _floatArgument: 0.1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -36,7 +36,7 @@ MonoBehaviour:
       _boolArgument: 0
       _floatArgument: 5
       _stringArgument: 
-      _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
+      _gameObjectArgument: {fileID: 8014568173235323351, guid: 0bdb1a568a835d345b58b05489141194, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
@@ -81,6 +81,7 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
@@ -94,16 +95,19 @@ MonoBehaviour:
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -115,6 +119,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 
   _effectType: 0
@@ -131,3 +136,5 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _statChanges: []
+  _statInitializers: []

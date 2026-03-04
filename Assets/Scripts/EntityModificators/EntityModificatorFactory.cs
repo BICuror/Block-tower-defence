@@ -22,7 +22,6 @@ public sealed class EntityModificatorFactory
     {
         EntityModificator modificator = CreateEffectInstance<EntityModificator>(instanceType);
         modificator.SetArgumentsContainer(modificatorData.ArgumentsContainer);
-        modificatorData.Modify(modificator);
         
         return modificator;
     }   

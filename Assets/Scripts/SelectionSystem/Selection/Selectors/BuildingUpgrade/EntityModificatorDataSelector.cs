@@ -39,7 +39,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
             
             List<EntityModificatorData> modificatorsOfRarity = allEffectDatas.Where(modificatorData => modificatorData.Rarity == randomRarity).ToList();
 
-            EntityModificatorData randomModificator = GetRandomEntityModificatorDataFromGroup(modificatorsOfRarity);
+            EntityModificatorData randomModificator = GetRandomEntityModificatorDataFromGroup(entity, modificatorsOfRarity);
             
             resultEffectDatas.Add(randomModificator);
             allEffectDatas.Remove(randomModificator);
@@ -151,8 +151,33 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     
     #endregion
     
-    private EntityModificatorData GetRandomEntityModificatorDataFromGroup(List<EntityModificatorData> possibleModificatorGroup)
+    private EntityModificatorData GetRandomEntityModificatorDataFromGroup(BuildingEntity buildingEntity, List<EntityModificatorData> possibleModificatorGroup)
     {
+        List<EntityModifcatorTag> entityModifcatorTags = buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags();
+        
+        Dictionary<EntityModifcatorTag, int> entityModifcatorTagCounts = new();
+        
+        entityModifcatorTags.ForEach(modificatorTag =>
+        {
+            if (entityModifcatorTagCounts.ContainsKey(modificatorTag)) entityModifcatorTagCounts[modificatorTag]++;
+            else entityModifcatorTagCounts.Add(modificatorTag, 1);
+        });
+        
+        List<EntityModificatorData> unobtainedModificatorDataList = possibleModificatorGroup.Except(buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators).ToList();
+        
+        foreach (EntityModifcatorTag entityModifcatorTag in entityModifcatorTagCounts.Keys)
+        {
+            if (entityModifcatorTagCounts[entityModifcatorTag] * _additionalChansePerSameTag > Random.Range(0, 100))
+            {
+                if (unobtainedModificatorDataList.Exists(modificator => modificator.Tags.Contains(entityModifcatorTag)))
+                {
+                    List<EntityModificatorData> tagEntityModificatorDataList = unobtainedModificatorDataList.FindAll(modificator => modificator.Tags.Contains(entityModifcatorTag));    
+                    
+                    return tagEntityModificatorDataList[Random.Range(0, tagEntityModificatorDataList.Count)];
+                }
+            }
+        }
+        
         return possibleModificatorGroup[Random.Range(0, possibleModificatorGroup.Count)];
     }
 

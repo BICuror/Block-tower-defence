@@ -31,8 +31,9 @@ namespace Combat
 
         private void RefillHealthOrRevive()
         {
-            if (_health.IsAlive()) _health.RefilHP();
-            else _health.ReviveBuilding();
+            if (!_health.IsAlive()) _health.ReviveBuilding();
+            
+            _health.ReceivePercentHeal(0.1f);
         }
 
         private void HandleDeathEvent()

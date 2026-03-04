@@ -546,6 +546,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f9d17ef5a2523e741ba1f52282e3063c, type: 2}
   - {fileID: 11400000, guid: 2e90431e3fbf35641938bc49530fa692, type: 2}
   - {fileID: 11400000, guid: e93b3855d1a7ef7498610cd48f4c12c1, type: 2}
+  - {fileID: 11400000, guid: d72610ba85d39ae48ba77b3e7c6e4ae3, type: 2}
+  - {fileID: 11400000, guid: 951bd736840bf3f4fb82ab75b0a4d4ef, type: 2}
+  - {fileID: 11400000, guid: 0d526a8593f40fa49a4a706a1c2dd620, type: 2}
 --- !u!114 &6512528250351581515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1190,7 +1193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
   _meshRenderer: {fileID: 4674010348498812853}
-  _draggableSystemConfig: {fileID: 0}
+  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
   _enableOnStart: 0
   _visualisationTransform: {fileID: 6021271923918943051}
   _height: 100

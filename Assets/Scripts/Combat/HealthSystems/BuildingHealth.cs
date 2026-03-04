@@ -1,5 +1,5 @@
-using System;
 using Cashing;
+using System;
 
 namespace Combat
 {
@@ -20,8 +20,8 @@ namespace Combat
         
         public override void Die()
         {
-            base.Die();
             BuildingDestroyed?.Invoke(_ownerEntity);
+            base.Die();
         }
     }
 }

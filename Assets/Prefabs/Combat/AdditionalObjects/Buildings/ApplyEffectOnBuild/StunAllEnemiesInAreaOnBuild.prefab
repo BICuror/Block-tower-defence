@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ab0804fd13ade4046b6977dbcc44154c, type: 2}
+  - {fileID: 2100000, guid: 76148b1c6b369b04abafd263b366e578, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -317,11 +317,11 @@ ParticleSystem:
       maxColor: {r: 0.39999995, g: 1, b: 0.100000024, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 0.6, g: 1, b: 0.99615735, a: 1}
-        key1: {r: 0.6, g: 0.99084187, b: 1, a: 1}
-        key2: {r: 0.6, g: 0.6, b: 1, a: 0}
-        key3: {r: 0.6, g: 0.94376165, b: 1, a: 0}
-        key4: {r: 0, g: 0, b: 0, a: 0}
+        key0: {r: 1, g: 0.98221976, b: 0.6, a: 1}
+        key1: {r: 1, g: 0.8820867, b: 0.6, a: 1}
+        key2: {r: 1, g: 0.88741213, b: 0.6, a: 0}
+        key3: {r: 1, g: 0.96023333, b: 0.6, a: 0}
+        key4: {r: 0.6, g: 0.94376165, b: 1, a: 0}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
@@ -329,7 +329,7 @@ ParticleSystem:
         ctime1: 16975
         ctime2: 42020
         ctime3: 65535
-        ctime4: 0
+        ctime4: 65535
         ctime5: 0
         ctime6: 0
         ctime7: 0
@@ -4984,7 +4984,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4.9, y: 100, z: 4.9}
+  m_LocalScale: {x: 4.7, y: 100, z: 4.7}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7680883792900178071}
@@ -5027,8 +5027,8 @@ MonoBehaviour:
   _autoScale: 0
   _height: 100
   _areaScaleValue: 2
-  _overrideAdditionalScaleValue: 0
-  _additionalScaleValue: 0.95
+  _overrideAdditionalScaleValue: 1
+  _additionalScaleValue: 0.7
   _hasVisualisation: 1
   _areaVisualisation: {fileID: 4052657747800554839}
 --- !u!114 &5508162354419099327

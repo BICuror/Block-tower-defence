@@ -5248,7 +5248,7 @@ MonoBehaviour:
   _roadLayerSetting: {fileID: 11400000, guid: aee0fa32245326240beeee71c24afffb, type: 2}
   _buildingAreaScaner: {fileID: 5639661037102452828}
   _draggableConnector: {fileID: 1844838674522657510}
-  _chasingTimePerTile: 0.65
+  _chasingTimePerTile: 0.5
   _draggingTimePerTile: 0.2
   _fetchDistance: 4
   _fetchType: 1
@@ -5481,6 +5481,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 338228426991660645}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3133352416415646956}
     - targetCorrespondingSourceObject: {fileID: -7029948723529949830, guid: da84eb3b1d3b8a54182404ffbd6fa7e4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2144522532489138724}
@@ -5534,3 +5537,21 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3133352416415646956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655335280819203270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp-firstpass::Outline
+  outlineMode: 1
+  outlineColor: {r: 1, g: 0, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

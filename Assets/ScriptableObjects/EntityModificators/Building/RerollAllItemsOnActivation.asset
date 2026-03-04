@@ -25,28 +25,34 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -58,6 +64,54 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  - _itemTypeName: EntityModificatorGlobalStatChange
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
+    - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 04000000
   _effectType: 0
@@ -76,3 +130,8 @@ MonoBehaviour:
     Requirements:
     - Tag: 4
       Amount: 1
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 7ece7942a667b54449f1c2ce248dc332, type: 2}
+    FlatChange: 1
+    MultiplierChange: 0
+  _statInitializers: []

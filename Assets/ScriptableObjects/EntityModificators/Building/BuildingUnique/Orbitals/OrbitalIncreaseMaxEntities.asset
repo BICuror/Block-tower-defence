@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: OrbitalIncreaseMaxEntities
+  m_EditorClassIdentifier: 
+  _icon: {fileID: -617606169, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: orbital_max_entities_up_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _showInInspector: 1
+  _itemTypeContainers:
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - ActivateWhenBuilt
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateBoosterTower
+    - CreateEggOnDeath
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorStatChange
+    - EntityModificatorStatCreate
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _rarity: 2
+  _tags: 
+  _effectType: 0
+  _hasStacks: 0
+  _maxStacks: 1
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements:
+    - Tag: 9
+      Amount: 1
+  _blockOtherEntityTags:
+    Requirements: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
+    FlatChange: 2
+    MultiplierChange: 0
+  - StatData: {fileID: 11400000, guid: 67b5674c445dc2740986e971fd3574cc, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.75
+  _statInitializers: []

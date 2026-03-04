@@ -5129,7 +5129,6 @@ GameObject:
   - component: {fileID: 5306831357595359275}
   - component: {fileID: 1179167039576349397}
   - component: {fileID: 2933314417688108438}
-  - component: {fileID: 1261345440318068905}
   - component: {fileID: -2284182736992024983}
   m_Layer: 7
   m_Name: OrbitalTower
@@ -5272,10 +5271,13 @@ MonoBehaviour:
     _defaultValue: 2
   - StructName: Damage
     _statData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
-    _defaultValue: 4
+    _defaultValue: 8
   - StructName: OrbitalSpeed
     _statData: {fileID: 11400000, guid: 67b5674c445dc2740986e971fd3574cc, type: 2}
     _defaultValue: 0.13
+  - StructName: MaxEntities
+    _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
+    _defaultValue: 3
   _destroyOnDeath: 0
 --- !u!114 &5709133665173226101
 MonoBehaviour:
@@ -5310,6 +5312,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 2e90431e3fbf35641938bc49530fa692, type: 2}
   - {fileID: 11400000, guid: e93b3855d1a7ef7498610cd48f4c12c1, type: 2}
   - {fileID: 11400000, guid: 5bd2b83d5e5630c48b3f0ad5be66fe85, type: 2}
+  - {fileID: 11400000, guid: ea68c1df515dd064b844e1058728567f, type: 2}
+  - {fileID: 11400000, guid: 1afbe0195a9313f4b93a38e2a586f96c, type: 2}
+  - {fileID: 11400000, guid: d7630ff5d416ce946ab94b580299892a, type: 2}
+  - {fileID: 11400000, guid: 482a015671ac0f94784fd923dee8e5ed, type: 2}
+  - {fileID: 11400000, guid: e17d05eedbd6e10468edba84dd145b74, type: 2}
 --- !u!114 &5220538212850705305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5360,27 +5367,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d8de4bd5ae6f834aa0faab79e43ff3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _orbitalsParent: {fileID: 7859193319382679411}
   _orbitalPositions:
   - {fileID: 127203834083690581}
   - {fileID: 3994676480505275712}
   - {fileID: 619195631037584018}
   - {fileID: 2134015691683264084}
-  _followTerrain: 1
---- !u!114 &1261345440318068905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3784759462281575648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b7b36b4560e164085f64173484a27c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _orbitalsParent: {fileID: 7859193319382679411}
   _orbitalPrefab: {fileID: 9216696173574010111, guid: 9b70736798ad37843b0d24f6557794e4, type: 3}
-  _defaultOrbiralsAmount: 3
+  _followTerrain: 1
 --- !u!114 &-2284182736992024983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5501,7 +5495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
   _meshRenderer: {fileID: 2711396845925626841}
-  _draggableSystemConfig: {fileID: 0}
+  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
   _enableOnStart: 0
   _visualisationTransform: {fileID: 8505234571119142794}
   _height: 100

@@ -1,7 +1,9 @@
+using CuroSettings;
 using UnityEngine;
 
 public abstract class ParserableTextContainer : MonoBehaviour
 {
+    [SerializeField] private bool _showFullTags;
     protected ReplaceableDataParser ReplaceableDataParser;
     protected TooltipDataParser TooltipDataParser;
     protected VisualTextParser VisualTextParser;
@@ -32,7 +34,10 @@ public abstract class ParserableTextContainer : MonoBehaviour
     protected string ParseTextByDefault(string text)
     {
         text = ReplaceableDataParser.ParseReplaceableData(text);
-        text = VisualTextParser.ParseTooltipText(text);
+
+        bool showFullTags = _showFullTags || SettingsContainer.GetSetting<BoolSetting>(SettingsEnum.FullTagsEnabled).Value;
+        
+        text = VisualTextParser.ParseTooltipText(text, showFullTags);
         
         return text;
     }

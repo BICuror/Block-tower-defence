@@ -46,6 +46,8 @@ namespace Combat
         public void ReceivePercentEffectDamage(float percent) => ReceiveEffectDamage(_maxHealth * percent);
         public void ReceiveEffectDamage(float damage)
         {
+            if (damage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
+            
             ReceiveDamage(damage);
             OnDamageTaken();
         }
@@ -55,6 +57,8 @@ namespace Combat
             float outDamage = damageDealer.DamageModifierContainer.DealerContainer.ModifyByAllModificators(baseDamage, _entity);
             
             float resultDamage = _entity.DamageModifierContainer.ReciverContainer.ModifyByAllModificators(outDamage, damageDealer);
+            
+            if (resultDamage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
             ReceiveDamage(resultDamage);
             
@@ -69,8 +73,6 @@ namespace Combat
 
         private void ReceiveDamage(float damage)
         {
-            if (damage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
-            
             _currentHp -= damage;
 
             DamageNumberDisplayManager.Instance.DisplayDamageNumber(damage, _entity.transform.position, DamageType.Damage);
@@ -78,7 +80,7 @@ namespace Combat
 
         private void OnDamageTaken()
         {
-            if (_currentHp <= 0f) Die();
+            if (!IsAlive()) Die();
             else
             {
                 EntityDamaged?.Invoke(_entity);

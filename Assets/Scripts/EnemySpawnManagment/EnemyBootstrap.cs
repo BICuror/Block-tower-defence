@@ -113,9 +113,9 @@ namespace Combat
 
         private void OnEnemyDeath()
         {
-            _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
-            _entityObjectModificatorContainer.DestroyAllModificators();
             TryRemoveEntityModificators();
+            _entityObjectModificatorContainer.DestroyAllModificators();
+            _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
             
             _navMeshAgent.Disable();
         }

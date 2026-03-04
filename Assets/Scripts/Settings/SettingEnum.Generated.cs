@@ -23,6 +23,7 @@ namespace CuroSettings
         CameraDragSensitivity,
         PostProcessingEnabled,
         ShadowsEnabled,
+        FullTagsEnabled,
 
     }
 }

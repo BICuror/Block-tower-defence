@@ -5,10 +5,11 @@ using Zenject;
 public sealed class WaveContentController : MonoBehaviour
 {
     [SerializeField] private IdleStateController _idleStateController;
+    [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private IslandDataContainer _islandDataContainer;
+    [Inject] private WaveIndexContainer _waveIndexContainer;  
     [Inject] private SelectionManager _selectionManager;
-    [Inject] private ItemFactory _itemFactory;
-    [Inject] private WaveIndexContainer _waveIndexContainer;   
+    [Inject] private ItemFactory _itemFactory; 
     
     [SerializeField] private Transform _townhallTransform;
     
@@ -41,6 +42,13 @@ public sealed class WaveContentController : MonoBehaviour
 
         _itemFactory.CreateStartWaveItem(_townhallTransform.transform.position).Forget();
         _itemFactory.CreateItems(_townhallTransform.position, waveContent.CombinedItemStrength, waveContent.MinimalItemStrength, waveContent.ItemsAmount).Forget();
+
+        int additionalItemsToCreate = _globalStatContainer.Get<AdditionalCrystalsAmount>().RoundedValue;
+        
+        if (additionalItemsToCreate > 0)
+        {
+            _itemFactory.CreateItems(_townhallTransform.position, additionalItemsToCreate * waveContent.AdditionalItemStrength, 0, additionalItemsToCreate).Forget();
+        }
     }
 
     private WaveContent GetCurrentWaveContent()

@@ -1,26 +1,33 @@
 using System.Collections.Generic;
+using WorldGeneration;
 using UnityEngine;
+using Zenject;
 using Cashing;
 using System;
 using Combat;
-using WorldGeneration;
-using Zenject;
 
 public sealed class OrbitalController : MonoBehaviour
 {
-    [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
-    [SerializeField] private Transform _orbitalsParent;
     [SerializeField] private List<Transform> _orbitalPositions;
+    [SerializeField] private Transform _orbitalsParent;
+    [SerializeField] private Orbital _orbitalPrefab;
     [SerializeField] private bool _followTerrain;
-    [Cached] private ReachAreaScale _reachAreaScale;
+    
+    [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Cached] private BuildingDraggable _buildingDraggable;
+    [Cached] private ReachAreaScale _reachAreaScale;
     [Cached] private CombatEntity _ownerEntity;
+    [Cached] private MaxEntities _maxEntities;
+    
     private readonly List<Orbital> _instantiatedOrbitals = new();
 
     private void Start()
     {
+        _maxEntities.RoundedValueChanged += UpdateOrbitalsAmount;
         _buildingDraggable.BuildCompleted += Enable;
         _buildingDraggable.PickedUp += Disable;
+        
+        UpdateOrbitalsAmount(_maxEntities.RoundedValue);
     }
 
     private void Enable()
@@ -35,10 +42,26 @@ public sealed class OrbitalController : MonoBehaviour
         _orbitalsParent.gameObject.SetActive(false);
         _instantiatedOrbitals.ForEach(orbital => orbital.gameObject.SetActive(false));
     }
-    
-    public void InstantiateAndAddOrbital(Orbital orbitalPrefab)
+
+    private void UpdateOrbitalsAmount(int orbitalAmount)
     {
-        Orbital orbital = Instantiate(orbitalPrefab);
+        if (orbitalAmount > _instantiatedOrbitals.Count)
+        {
+            int orbitalsToCreate = orbitalAmount - _instantiatedOrbitals.Count;
+
+            for (int i = 0; i < orbitalsToCreate; i++) InstantiateAndAddOrbital();
+        }
+        else if (orbitalAmount < _instantiatedOrbitals.Count)
+        {
+            int orbitalsToRemove = _instantiatedOrbitals.Count - orbitalAmount;
+
+            for (int i = 0; i < orbitalsToRemove; i++) RemoveOrbital();
+        }
+    }
+    
+    public void InstantiateAndAddOrbital()
+    {
+        Orbital orbital = Instantiate(_orbitalPrefab);
         
         orbital.SetIslandHeightMapHolder(_islandHeightMapHolder);
         orbital.SetFollowTerrainState(_followTerrain);
@@ -51,11 +74,15 @@ public sealed class OrbitalController : MonoBehaviour
         PositionAllOrbitals();
     }
     
-    public void RemoveOrbital(Orbital orbitalToRemove)
-    { 
-        _instantiatedOrbitals.Remove(orbitalToRemove);
+    public void RemoveOrbital()
+    {
+        Orbital orbital = _instantiatedOrbitals[^1];
+        
+        _instantiatedOrbitals.Remove(orbital);
         
         PositionAllOrbitals();
+        
+        Destroy(orbital.gameObject);
     }
 
     #region OrbitalInitialPositioning
@@ -116,4 +143,12 @@ public sealed class OrbitalController : MonoBehaviour
 
     #endregion
 
+    private void OnEnable() => Enable();
+    
+    private void OnDisable() => Disable();
+    
+    private void OnDestroy()
+    {
+        _maxEntities.RoundedValueChanged -= UpdateOrbitalsAmount;
+    }
 }

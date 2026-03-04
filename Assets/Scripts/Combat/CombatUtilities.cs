@@ -26,4 +26,9 @@ public static class CombatUtilities
     {
         return entity.Health.GetHp() > damage;
     }
+
+    public static void ExecuteEntity(CombatEntity entity)
+    {
+        entity.Health.Die();
+    }
 }

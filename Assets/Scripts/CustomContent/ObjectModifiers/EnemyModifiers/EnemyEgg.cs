@@ -34,7 +34,15 @@ public sealed class EnemyEgg : MonoBehaviour
 
     public async UniTask TrySpawnEnemy(EnemyData enemyData)
     {
-        await UniTask.WaitForSeconds(_invunrabilityPeriod);
+        try
+        {
+            await UniTask.WaitForSeconds(_invunrabilityPeriod, cancellationToken: _cancellationTokenSource.Token);
+        }
+        catch (Exception e)
+        {
+            e.LogAsync();
+            return;
+        }
         
         _ownerEntity.Health.InvulnerabilityTokenContainer.RemoveToken();
         

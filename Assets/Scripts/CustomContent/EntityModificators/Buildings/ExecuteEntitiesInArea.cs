@@ -48,7 +48,7 @@ public sealed class ExecuteEntitiesInArea : EntityModificator
     {
         if (combatEntity.Health.GetHpPercent() <= _executeThreshold)
         {
-            combatEntity.Health.ReceiveEnemyDamage(combatEntity.StatContainer.Get<MaxHealth>().Value, Entity);
+            CombatUtilities.ExecuteEntity(combatEntity);
         }
     }
 }

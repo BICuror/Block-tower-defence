@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: MaxEntitesUp
+  m_Name: OrbitalSingle
   m_EditorClassIdentifier: 
-  _icon: {fileID: -617606169, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: max_entities_up_entity_modificator_tooltip
+  _icon: {fileID: -53656890, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: orbital_max_entities_down_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _showInInspector: 1
@@ -25,6 +25,7 @@ MonoBehaviour:
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
@@ -47,7 +48,6 @@ MonoBehaviour:
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -59,11 +59,12 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 
   _effectType: 0
   _hasStacks: 0
-  _maxStacks: 0
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -72,10 +73,18 @@ MonoBehaviour:
     Requirements: []
   _hasBlockTags: 0
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 9
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _statChanges:
+  - StatData: {fileID: 11400000, guid: 67b5674c445dc2740986e971fd3574cc, type: 2}
+    FlatChange: 0
+    MultiplierChange: 2
   - StatData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
-    FlatChange: 2
+    FlatChange: 0
+    MultiplierChange: -10
+  - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
+    FlatChange: 60
     MultiplierChange: 0

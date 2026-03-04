@@ -5075,9 +5075,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 3945398497928646573}
+  _hasPriority: 0
+  _priorityType: 0
 --- !u!114 &7315692402385273253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5500,8 +5501,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
-  _meshRenderer: {fileID: 0}
-  _draggableSystemConfig: {fileID: 0}
+  _meshRenderer: {fileID: 8753778747347088044}
+  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
+  _enableOnStart: 0
   _visualisationTransform: {fileID: 7716149748217318842}
   _height: 100
 --- !u!1001 &761733398712600096

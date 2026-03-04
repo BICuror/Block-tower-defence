@@ -9,7 +9,6 @@ using System;
 public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 {
     [Inject] private WaveStateMachine _waveStateMachine;
-    [Cached] private CombatEntity _ownerEntity;
     
     [SerializeField] private VisualEffectHandler _visualEffectHandler;
     [SerializeField] private AreaEntityDetector _areaEntityDetector;

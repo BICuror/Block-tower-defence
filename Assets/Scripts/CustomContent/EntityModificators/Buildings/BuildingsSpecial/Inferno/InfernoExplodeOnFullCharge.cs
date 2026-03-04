@@ -10,9 +10,6 @@ public sealed class InfernoExplodeOnFullCharge : EntityModificator
     
     public override void Enable()
     {
-        Entity.StatContainer.AddStatIfDoesntExist<ExplosionDamage>(Args.GetArgument<float>("DefaultExplosionDamage"));
-        Entity.StatContainer.AddStatIfDoesntExist<ExplosionRadius>(Args.GetArgument<float>("DefaultExplosionRadius"));
-        
         _explosionPrefab = Args.GetArgument<GameObject>("ExplosionPrefab").GetComponent<Explosion>();
         _explosionPool = new WeaponPool<Explosion>(_explosionPrefab, 2, Entity);
         
@@ -25,9 +22,6 @@ public sealed class InfernoExplodeOnFullCharge : EntityModificator
     public override void Disable()
     {
         Entity.ComponentsContainer.Get<InfernoTower>().OnMaxChargeReached.RemoveAdditionalBehaviour(_addedBehavior);
-        
-        Entity.StatContainer.Remove<ExplosionDamage>();
-        Entity.StatContainer.Remove<ExplosionRadius>();
         
         _explosionPool.DestroyPool();
     }

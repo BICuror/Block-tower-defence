@@ -4,16 +4,10 @@ using System;
 public sealed class EntityModificatorStatChange : EntityModificator
 {
     private Dictionary<Type, StatModifier> _modifiers = new();
-    private List<StatChange> _statChanges;
-
-    public void SetStatChanges(List<StatChange> statChanges)
-    {
-        _statChanges = statChanges;
-    }
 
     public override bool CanBeApplied()
     {
-        foreach (StatChange statChange in _statChanges)
+        foreach (StatChange statChange in ModificatorData.StatChanges)
         {
             Type statType = statChange.StatData.GetStatType();
             
@@ -28,7 +22,7 @@ public sealed class EntityModificatorStatChange : EntityModificator
     
     public override void Enable()
     {
-        _statChanges.ForEach(statChange =>
+        ModificatorData.StatChanges.ForEach(statChange =>
         {
             Type statType = statChange.StatData.GetStatType();
             
@@ -52,5 +46,7 @@ public sealed class EntityModificatorStatChange : EntityModificator
         {
             Entity.StatContainer.Get(statType).RemoveStatModifier(_modifiers[statType]);
         }
+        
+        _modifiers.Clear();
     }
 }

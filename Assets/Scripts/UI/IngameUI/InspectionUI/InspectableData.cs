@@ -61,16 +61,16 @@ public abstract class InspectableData : ScriptableObject
 
         string ParseByEntityModificatorStatData(EntityModificatorData entityModificatorData, string initialText)
         {
-            if (entityModificatorData is EntityModificatorStatChangeData)
+            entityModificatorData.StatChanges.ForEach(statChange =>
             {
-                EntityModificatorStatChangeData statChangeData = entityModificatorData as EntityModificatorStatChangeData;
-                        
-                statChangeData.StatChanges.ForEach(statChange =>
-                {
-                    initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_flat", Mathf.Abs(statChange.FlatChange).ToString());
-                    initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_mult", Mathf.Abs(statChange.MultiplierChange * 100).ToString());
-                });
-            }
+                initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_flat", Mathf.Abs(statChange.FlatChange).ToString());
+                initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_mult", Mathf.Abs(statChange.MultiplierChange * 100).ToString());
+            });
+            
+            entityModificatorData.StatInitializers.ForEach(statInitializer =>
+            {
+                initialText = ReplaceAllValues(initialText, $"{statInitializer.StatData.GetStatType().Name}", Mathf.Abs(statInitializer.DefaultValue).ToString());
+            });
 
             return initialText;
         }

@@ -4349,6 +4349,7 @@ GameObject:
   - component: {fileID: 963194231}
   - component: {fileID: 963194237}
   - component: {fileID: 963194238}
+  - component: {fileID: 963194239}
   - component: {fileID: 963194234}
   m_Layer: 0
   m_Name: Main Camera
@@ -4462,7 +4463,7 @@ MonoBehaviour:
   _cameraPositionController: {fileID: 963194237}
   _cameraZoomController: {fileID: 963194232}
   _hoverableController: {fileID: 963194238}
-  _modifiedTimeScale: 2
+  _timeController: {fileID: 963194239}
 --- !u!114 &963194231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4686,6 +4687,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hoverableLayerSetting: {fileID: 11400000, guid: be097cf093dc5e04aa220bc83c7c7d52, type: 2}
+--- !u!114 &963194239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 550e4205ba1d09b4c897d0902dfc67bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TimeController
+  _speedUpTimeScale: 2
 --- !u!1 &1010296631
 GameObject:
   m_ObjectHideFlags: 0
@@ -11527,6 +11541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1e5451333a28b044bfd32e51f675ce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseScreen
+  _timeController: {fileID: 963194239}
   _continueButton: {fileID: 1496768902}
   _settingsButton: {fileID: 1701440003}
   _restatButton: {fileID: 1552265382}

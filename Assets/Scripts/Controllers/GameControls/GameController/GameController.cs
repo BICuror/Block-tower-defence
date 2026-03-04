@@ -8,7 +8,7 @@ public sealed class GameController : MonoBehaviour
     [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private CameraZoomController _cameraZoomController;
     [SerializeField] private HoverableController _hoverableController;
-    [SerializeField] private float _modifiedTimeScale = 2f;
+    [SerializeField] private TimeController _timeController;
     
     private GameControls _controls;
 
@@ -48,12 +48,6 @@ public sealed class GameController : MonoBehaviour
         }
     }
     
-    private void ToggleTimeScale()
-    {
-        if (Time.timeScale == 1) Time.timeScale = _modifiedTimeScale;
-        else Time.timeScale = 1;
-    }
-    
     private void FixedUpdate()
     {
         _hoverableController.CheckHover(_controls.TouchInput.PointerPosition.ReadValue<Vector2>());
@@ -89,7 +83,7 @@ public sealed class GameController : MonoBehaviour
         _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
         _controls.TouchInput.ScrolledDown.started += _ => _cameraZoomController.ZoomOut();
         
-        _controls.TouchInput.TimeToggle.performed += _ => ToggleTimeScale();
+        _controls.TouchInput.TimeToggle.performed += _ => _timeController.ToggleTimeScale();
 
         InitializeStates();
     }

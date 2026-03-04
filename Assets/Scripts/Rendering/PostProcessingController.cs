@@ -30,6 +30,7 @@ public sealed class PostProcessingController : MonoBehaviour
         _currentVolume = Instantiate(_volumeControllerPrefab, transform);
         
         _currentVolume.profile = profile;
+        _currentVolume.enabled = _postProcessingSetting.Value;
         _currentVolume.weight = 1f;
     }
 

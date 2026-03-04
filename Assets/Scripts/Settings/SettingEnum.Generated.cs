@@ -24,6 +24,7 @@ namespace CuroSettings
         PostProcessingEnabled,
         ShadowsEnabled,
         FullTagsEnabled,
+        SpeedUpTimeScale,
 
     }
 }

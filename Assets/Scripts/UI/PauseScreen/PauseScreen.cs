@@ -1,10 +1,11 @@
-using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using DG.Tweening;
 using UnityEngine;
 
 public sealed class PauseScreen : MonoBehaviour
 {
+    [SerializeField] private TimeController _timeController;
     [SerializeField] private Button _continueButton;
     [SerializeField] private Button _settingsButton;
     [SerializeField] private Button _restatButton;
@@ -44,14 +45,12 @@ public sealed class PauseScreen : MonoBehaviour
     private void OnEnable()
     {
         Camera.main.GetComponent<GameController>().Disable();
-        _capturedTimeScale = Time.timeScale;
-        Time.timeScale = 0f;
+        _timeController.Pause();
     }
     
     private void OnDisable()
     {
         Camera.main.GetComponent<GameController>().Enable();
-        if (_capturedTimeScale == 0) _capturedTimeScale = 1f;
-        Time.timeScale = _capturedTimeScale;
+        _timeController.Resume();
     }
 }

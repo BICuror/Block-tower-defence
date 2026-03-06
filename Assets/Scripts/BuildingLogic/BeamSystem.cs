@@ -99,7 +99,7 @@ public sealed class BeamSystem : MonoBehaviour
             
             elapsedTime += Time.fixedDeltaTime;
             
-            if (!target) return;
+            if (!target || !target.gameObject.activeSelf) return;
 
             Vector3 currentPosition = Vector3.Lerp(startPosition, target.position, elapsedTime / reachDuration);
             

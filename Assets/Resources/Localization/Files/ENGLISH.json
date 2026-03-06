@@ -452,5 +452,11 @@
   "contact_damage_from_max_health_entity_modificator_tooltip_header": "Spiky core",
   "contact_damage_from_max_health_entity_modificator_tooltip_description": "Get #ContactDamage equal to #MaxHealth",
   "full_tags_enabled_label": "Full descriptions",
-  "speed_up_time_scale_label": "Speed up time scale"
+  "speed_up_time_scale_label": "Speed up time scale",
+  "lightning_propogation_radius_up_entity_modificator_tooltip_header": "Propogation radius up",
+  "lightning_propogation_radius_up_entity_modificator_tooltip_description": "#good +{PropogationRadius_flat} good# #PropogationRadius",
+  "lightning_propogation_damage_up_entity_modificator_tooltip_header": "Multiplied propogation",
+  "lightning_propogation_damage_up_entity_modificator_tooltip_description": "#bad -{Damage_flat} bad# #Damage #bad -{ReachAreaScale_flat} bad# #Reach #good +{PropogationDamageMultiplier_mult}% #PropogationDamageMultiplier",
+  "lightning_global_propogation_entity_modificator_header": "Global propogation",
+  "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge"
 }

@@ -229,7 +229,7 @@
   "spawn_enemies_from_water_effect_tooltip_header": "Неспокойные воды",
   "spawn_enemies_from_water_effect_tooltip_description": "Создаёт {EnemiesAmount} #Enemies из <color=blue>воды</color> рядом с дорогами",
   "spawn_archer_enemies_from_random_spawner_effect_tooltip_header": "Вторжение лучников",
-  "spawn_archer_enemies_from_random_spawner_effect_tooltip_description": "Добавляет {EnemiesAmount} #Archers=Стрелков в случайный спавнер",
+  "spawn_archer_enemies_from_random_spawner_effect_tooltip_description": "Добавляет {EnemiesAmount} #Archer=Стрелков в случайный спавнер",
   "spawn_healer_enemies_from_random_spawner_effect_tooltip_header": "Крестовый поход",
   "spawn_healer_enemies_from_random_spawner_effect_tooltip_description": "Добавляет {EnemiesAmount} #Healer=Целителей в случайный спавнер",
   "spawn_explosive_enemies_from_water_effect_tooltip_header": "Взрывные воды",
@@ -452,5 +452,11 @@
   "contact_damage_from_max_health_entity_modificator_tooltip_header": "Шипастое ядро",
   "contact_damage_from_max_health_entity_modificator_tooltip_description": "Получает #ContactDamage равный #MaxHealth=Максимальному_здоровью",
   "full_tags_enabled_label": "Полное описание",
-  "speed_up_time_scale_label": "Ускоренное время"
+  "speed_up_time_scale_label": "Ускоренное время",
+  "lightning_propogation_radius_up_entity_modificator_tooltip_header": "Прыжки дальше",
+  "lightning_propogation_radius_up_entity_modificator_tooltip_description": "#good +{PropogationRadius_flat} good# #PropogationRadius",
+  "lightning_propogation_damage_up_entity_modificator_tooltip_header": "Утрированные прыжки",
+  "lightning_propogation_damage_up_entity_modificator_tooltip_description": "#bad -{Damage_flat} bad# #Damage #bad -{ReachAreaScale_flat} bad# #Reach #good +{PropogationDamageMultiplier_mult}% #PropogationDamageMultiplier",
+  "lightning_global_propogation_entity_modificator_header": "Глобальный прыжок",
+  "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge"
 }

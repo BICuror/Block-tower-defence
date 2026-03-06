@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine;
 using Cashing;
+using System;
 
 namespace Combat.Animation
 {
@@ -39,13 +40,19 @@ namespace Combat.Animation
         
         private async UniTask HiglightEntity()
         {
-            StopAllCoroutines();
-    
             _meshRenderer.sharedMaterial = _highlightMaterial;
     
             Highlited.Invoke();
-            
-            await UniTask.WaitForSeconds(HIGHLIGHT_DURATION);
+
+            try
+            {
+                await UniTask.WaitForSeconds(HIGHLIGHT_DURATION, cancellationToken: destroyCancellationToken);
+            }
+            catch (Exception e)
+            {
+                e.LogAsync();
+                return;
+            }
     
             _meshRenderer.sharedMaterial = _defaultMaterial;
     

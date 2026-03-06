@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: SpawnRocksWhenMarkedEnemyKilled
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
+  _icon: {fileID: 1761092156, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: spawn_rock_on_marked_enemy_kill_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
@@ -66,11 +66,16 @@ MonoBehaviour:
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
@@ -87,6 +92,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 0a000000
   _effectType: 0
@@ -107,3 +113,5 @@ MonoBehaviour:
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []
+  _statChanges: []
+  _statInitializers: []

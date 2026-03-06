@@ -261,6 +261,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
   _meshRenderer: {fileID: 2631131116879153238}
   _draggableSystemConfig: {fileID: 0}
+  _enableOnStart: 0
   _visualisationTransform: {fileID: 8385901451067842785}
   _height: 100
 --- !u!1 &5740249187848186902
@@ -487,8 +488,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962287e000fdc4e4da437fabb202e392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _barSprite: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _barPrefab: {fileID: 5354278446947390222, guid: 288adf0833fbe2644a6465f3579d7b45, type: 3}
+  _barSprite: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _chargesToSpawn: 2
 --- !u!114 &1422786105582343598
 MonoBehaviour:
@@ -502,9 +503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07776f924f29f2248bf1f4f5ebc9898a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _priorityType: 0
   _mainScanerControllers:
   - {fileID: 1257497171284337854}
+  _hasPriority: 0
+  _priorityType: 0
 --- !u!114 &8736649261534176381
 MonoBehaviour:
   m_ObjectHideFlags: 0

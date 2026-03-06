@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: HurtfullLabor
   m_EditorClassIdentifier: 
-  _icon: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _icon: {fileID: -1809229495, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: invoke_action_and_gain_damage_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
@@ -52,11 +52,16 @@ MonoBehaviour:
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill
@@ -73,6 +78,7 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
   _tags: 0c000000
   _effectType: 0
@@ -89,3 +95,5 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _statChanges: []
+  _statInitializers: []

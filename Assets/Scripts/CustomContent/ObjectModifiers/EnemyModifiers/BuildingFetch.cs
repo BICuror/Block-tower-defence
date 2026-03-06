@@ -6,6 +6,7 @@ using Combat;
 public sealed class BuildingFetch : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
+    [SerializeField] private LayerSetting _solidObjectsLayerSetting;
     [SerializeField] private LayerSetting _roadLayerSetting;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private DraggableConnector _draggableConnector;
@@ -75,7 +76,14 @@ public sealed class BuildingFetch : MonoBehaviour
                
             await _draggableConnector.MoveToPerTile(travelDestination, _draggingTimePerTile);
             
-            Vector3 placementPosition = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, _draggableConnector.transform.position, IsValidPlacementPosition);
+            Vector2Int roundedDestanationPosition = new Vector2Int(Mathf.RoundToInt(travelDestination.x), Mathf.RoundToInt(travelDestination.z));
+
+            Vector3 placementPosition = travelDestination;
+
+            if (TileMap.GetTileCount(roundedDestanationPosition, _solidObjectsLayerSetting) > 2)
+            {
+                placementPosition = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, travelDestination, IsValidPlacementPosition);
+            }
        
             await _draggableConnector.PlaceDraggable(_currentTargetEntity.gameObject, _currentTargetEntity.Draggable, placementPosition);
         }
@@ -123,8 +131,6 @@ public sealed class BuildingFetch : MonoBehaviour
     private void SetState(FetchState state)
     {
         _currentState = state;
-        
-        //_animator.SetBool("IsOpen", _currentState != FetchState.Idle);
     }
 
     private enum FetchState

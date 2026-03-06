@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
+using System;
 using TMPro;
 
 public sealed class EntityModificatorTooltipInvokingPanel : TooltipInvokingPanel
 {
     [Header("UI Elements")] 
     [SerializeField] private List<CanvasGroup> _negativeCanvasGroups;
-    [SerializeField] private TextMeshProUGUI _modificatorNameText;
-    [SerializeField] private TextMeshProUGUI _modificatorDescriptionText;
     [SerializeField] private string _additionalFrontText;
     [SerializeField] private Image _iconImage;
     
@@ -21,6 +20,8 @@ public sealed class EntityModificatorTooltipInvokingPanel : TooltipInvokingPanel
     private int _itemAmount = 1;
 
     protected override TooltipParseTagDataContainer TagDataContainer => _tagDataContainer;
+
+    public event Action<EntityModificatorData> ModificatorDataSelected;
     
     public void SetEntityModificator(EntityModificatorData entityModificatorData)
     {
@@ -31,6 +32,8 @@ public sealed class EntityModificatorTooltipInvokingPanel : TooltipInvokingPanel
         _iconImage.sprite = entityModificatorData.Icon;
 
         UpdateContentSizeFilters();
+        
+        TooltipOpened += (_) => ModificatorDataSelected?.Invoke(_entityModificatorData); 
     }
     
     public void SetAmount(int amount)
@@ -40,14 +43,11 @@ public sealed class EntityModificatorTooltipInvokingPanel : TooltipInvokingPanel
         _itemAmount = amount;
         
         _amountGroup.gameObject.SetActive(true);
-        _amountTextField.text = _itemAmount.ToString();
+        _amountTextField.text = "x" + _itemAmount.ToString();
     }
 
     protected override void UpdateAllParsableText()
     {
-        _modificatorNameText.text = ParseTextByDefault(_entityModificatorData.GetName());
-        _modificatorDescriptionText.text = _additionalFrontText + ParseTextByDefault(_entityModificatorData.GetDescription());
-        
         _tagDataContainer = TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.GetDescription());
     }
 }

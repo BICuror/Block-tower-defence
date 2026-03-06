@@ -11,8 +11,8 @@ namespace Combat
         
         public override void Die()
         {
-            EnemyDied?.Invoke(_enemyEntity);
             base.Die();
+            EnemyDied?.Invoke(_enemyEntity);
         }
     }
 }

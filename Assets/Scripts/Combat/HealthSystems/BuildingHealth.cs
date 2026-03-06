@@ -20,8 +20,8 @@ namespace Combat
         
         public override void Die()
         {
-            BuildingDestroyed?.Invoke(_ownerEntity);
             base.Die();
+            BuildingDestroyed?.Invoke(_ownerEntity);
         }
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: RechargeUpOnActivation
   m_EditorClassIdentifier: 
-  _icon: {fileID: -164964044, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _icon: {fileID: 1292693439, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: activation_haste_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
@@ -80,6 +80,7 @@ MonoBehaviour:
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
     - EntityModificatorStatConvert
     - EntityModificatorStatCreate

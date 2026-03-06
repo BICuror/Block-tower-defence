@@ -1401,7 +1401,6 @@ GameObject:
   - component: {fileID: 300664971}
   - component: {fileID: 300664974}
   - component: {fileID: 300664973}
-  - component: {fileID: 300664972}
   m_Layer: 0
   m_Name: DraggableConnector
   m_TagString: Untagged
@@ -1427,33 +1426,6 @@ Transform:
   - {fileID: 1845211219}
   m_Father: {fileID: 946631404}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &300664972
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 300664970}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &300664973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4699,7 +4671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 550e4205ba1d09b4c897d0902dfc67bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeController
-  _speedUpTimeScale: 2
 --- !u!1 &1010296631
 GameObject:
   m_ObjectHideFlags: 0
@@ -4841,7 +4812,6 @@ GameObject:
   - component: {fileID: 1056926169}
   - component: {fileID: 1056926168}
   - component: {fileID: 1056926171}
-  - component: {fileID: 1056926172}
   m_Layer: 0
   m_Name: DraggableConnector
   m_TagString: Untagged
@@ -4934,33 +4904,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _particlePrefab: {fileID: 6477815863856900193, guid: 64eda0f1057f9cf4fa0192d5f7abef4c, type: 3}
---- !u!54 &1056926172
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1056926167}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1074404219
 GameObject:
   m_ObjectHideFlags: 0
@@ -12724,7 +12667,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 1
-  m_AdditionalShaderChannelsFlag: 1
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 5

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
   m_Name: AltileryMaxEntitesUp
   m_EditorClassIdentifier: 
-  _icon: {fileID: -617606169, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _icon: {fileID: -51603424, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: max_entities_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
@@ -38,13 +38,16 @@ MonoBehaviour:
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
     - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - LaunchArrowsOnKill

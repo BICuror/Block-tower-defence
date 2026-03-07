@@ -26,7 +26,7 @@ public sealed class LightningTower : DefaultCombatTaskConditionProvider
     {
         PropogationStrike ligning = _lightningStrikeObjectPool.GetPooledWeapon();
 
-        ligning.StartPropogationStrike(_enemyAreaScaner.GetPrioritizedEntity(), _shootingPoint).Forget();
+        ligning.StartPropogationStrike(_enemyAreaScaner.GetPrioritizedEntity(), _shootingPoint.position).Forget();
     }
 
     private void OnDestroy() => _lightningStrikeObjectPool.DestroyPool();

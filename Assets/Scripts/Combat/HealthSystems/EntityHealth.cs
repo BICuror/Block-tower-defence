@@ -102,12 +102,15 @@ namespace Combat
         }
         #endregion
         
-        public virtual void Die()
+        public void Die()
         {
             _currentHp = 0;
             Died?.Invoke();
             EntityDied?.Invoke(_entity);
+            InvokeEntityDied();
             HandleDeath.Invoke();
         }
+
+        protected abstract void InvokeEntityDied();
     }   
 }

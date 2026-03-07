@@ -44,20 +44,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-    - _argumentType: 0
-      _argumentName: AreaRadius
-      _intArgument: 2
-      _boolArgument: 0
-      _floatArgument: 5
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
     - _argumentType: 8
       _argumentName: AnyTerrainLayer
       _intArgument: 2
@@ -76,7 +62,6 @@ MonoBehaviour:
   _itemTypeContainers:
   - _itemTypeName: MoreDamageNearbyWater
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -86,6 +71,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
@@ -94,6 +80,7 @@ MonoBehaviour:
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
     - EntityModificatorStatConvert
     - EntityModificatorStatCreate
@@ -105,6 +92,7 @@ MonoBehaviour:
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -124,7 +112,7 @@ MonoBehaviour:
   _tags: 
   _effectType: 0
   _hasStacks: 1
-  _maxStacks: 3
+  _maxStacks: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

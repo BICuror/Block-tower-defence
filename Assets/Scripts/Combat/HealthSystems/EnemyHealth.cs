@@ -9,9 +9,8 @@ namespace Combat
     
         public event Action<EnemyEntity> EnemyDied; 
         
-        public override void Die()
+        protected override void InvokeEntityDied()
         {
-            base.Die();
             EnemyDied?.Invoke(_enemyEntity);
         }
     }

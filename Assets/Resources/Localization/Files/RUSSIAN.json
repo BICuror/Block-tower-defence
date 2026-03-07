@@ -243,7 +243,7 @@
   "invoke_action_and_gain_damage_entity_modificator_tooltip_header": "Вредный труд",
   "invoke_action_and_gain_damage_entity_modificator_tooltip_description": "При #Activation=Активации если #CurrentHealth > {ActivationDamage}, вызывает #Action #com и com# получает {ActivationDamage} #NonLethalDamage=Нелетального_урона",
   "water_damage_up_entity_modificator_tooltip_header": "Сила воды",
-  "water_damage_up_entity_modificator_tooltip_description": "#good +{MultiplierPerTile_percent}% good# #Damage за каждую клетку <color=blue>воды</color> в #Area {AreaRadius}",
+  "water_damage_up_entity_modificator_tooltip_description": "#good +{MultiplierPerTile_percent}% good# #Damage за каждую клетку <color=blue>воды</color> в #Area",
   "crystal_damage_up_entity_modificator_tooltip_header": "Кристальный энтузиаст",
   "crystal_damage_up_entity_modificator_tooltip_description": "#good +{Multiplier_percent}% good# #Damage когода активных #Crystal=Кристалов >= {Threshold}",
   "activation_haste_entity_modificator_tooltip_header": "Активируемая перезарядка",
@@ -401,7 +401,7 @@
   "execution_keyword_tooltip_description": "Мгновенно убивает сущность, не может быть заблокированно",
   "enemies_invincibility_cursor_area_effect_tooltip_description": "#Enemies имеют {Chance}% шанс быть #Invincibility=Неуязвимыми #com когда com# курсор #com не наведён com# на них",
   "stun_close_enemies_on_build_entity_modificator_tooltip_header": "Ошеломительное появление",
-  "stun_close_enemies_on_build_entity_modificator_tooltip_description": "При завершении постройки накладывает #Stun на всех #Enemies=Врагов в #Area=Зоне_действия = 2, +{BuildTime_flat} #BuildTime",
+  "stun_close_enemies_on_build_entity_modificator_tooltip_description": "При завершении постройки накладывает #Stun на всех #Enemies=Врагов в #Area=Зоне_действия, +{BuildTime_flat} #BuildTime",
   "temporary_stats_up_entity_modificator_tooltip_header": "Рука помощи",
   "temporary_stats_up_entity_modificator_tooltip_description": "#good +{Damage_mult}% good# #Damage #good -{TaskRechargeDuration_mult}% good# #Recharge #good -{BuildTime_flat} good# #BuildTime Убирает это улучшение после {WavesDuration} волны и #good даёт good# {UpgradeChargesAmount} #UpgradeCharge=Зарядов_улучшений",
   "spawn_rock_on_marked_enemy_kill_tooltip_header": "Окаменение",
@@ -458,5 +458,9 @@
   "lightning_propogation_damage_up_entity_modificator_tooltip_header": "Утрированные прыжки",
   "lightning_propogation_damage_up_entity_modificator_tooltip_description": "#bad -{Damage_flat} bad# #Damage #bad -{ReachAreaScale_flat} bad# #Reach #good +{PropogationDamageMultiplier_mult}% #PropogationDamageMultiplier",
   "lightning_global_propogation_entity_modificator_header": "Глобальный прыжок",
-  "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge"
+  "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge",
+  "propogation_exploder_enemy_entity_tooltip_header": "Маг",
+  "propogation_exploder_enemy_entity_tooltip_description": "Запускает #Propogation при смерти или контакте",
+  "invoke_action_on_build_cycle_entity_modificator_tooltip_header": "Единство",
+  "invoke_action_on_build_cycle_entity_modificator_tooltip_description": "При постройке вызывает #Action=Действие и начинает постройку заново"
 }

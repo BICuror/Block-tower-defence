@@ -83,11 +83,12 @@ public sealed class BeamSystem : MonoBehaviour
         _lineRenderer.SetPosition(1, endPosition);
     }
 
-    public async UniTask ReachTargetAndSetIt([CanBeNull] Transform target, Vector3 startPosition, float reachDuration)
+    public async UniTask ReachTargetAndSetIt( Vector3 startPosition, [CanBeNull] Transform target, float reachDuration)
     {
         DisableBeam();
         
         float elapsedTime = 0f; 
+        float halfDuration = reachDuration / 2f;
         
         while (reachDuration > elapsedTime)
         {
@@ -101,9 +102,13 @@ public sealed class BeamSystem : MonoBehaviour
             
             if (!target || !target.gameObject.activeSelf) return;
 
-            Vector3 currentPosition = Vector3.Lerp(startPosition, target.position, elapsedTime / reachDuration);
+            float startTime = Mathf.Clamp(elapsedTime / halfDuration, 0f, 1f);
+            float endTime = Mathf.Clamp(elapsedTime / halfDuration - 1f, 0f, 1f);
+
+            Vector3 currentStartPosition = Vector3.Lerp(startPosition, target.position, startTime);
+            Vector3 currentEndPosition = Vector3.Lerp(startPosition, target.position, endTime);
             
-            UpdateLinePositions(_targets[0].position, currentPosition);
+            UpdateLinePositions(currentEndPosition, currentStartPosition);
         }
         
         SetTarget(target);

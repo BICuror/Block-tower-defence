@@ -19,18 +19,22 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     [SerializeField] private BloodCollector _bloodTowerPrefab;
     [SerializeField] private int _bloodTowerRadius;
     [SerializeField] private float _requiredPercentFromSpawner = 0.33f;
-    
+
     [Header("SpawnSettings")] 
+    [SerializeField]private float _minimalCenterDistance = 5f;
     [SerializeField] private int _maxRoadTilesInRadius = 15;
     [SerializeField] private int _minRoadTilesInRadius = 6;
     [SerializeField] private int _minimalAverageRoadWeight = 20;
     [SerializeField] private int _maximalAverageRoadWeight = 35;
     [SerializeField] private int _maximalRadius = 10;
+    private Vector2Int _centerPosition;
     
     private bool[,] _roadMap => _roadMapHolder.Map;
     
     public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData)
     {
+        _centerPosition = new Vector2Int(_islandHeightMapHolder.Map.GetLength(0), _islandHeightMapHolder.Map.GetLength(1));
+        
         layerPrebuildData = null;
         
         if (TryFindRandomPosition(spawnerPosition, out Vector2Int position))
@@ -84,6 +88,8 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     
     private bool CheckBloodCollectorPositionValidity(Vector2Int position, Vector2Int spawnerPosition)
     {
+        if (Vector2Int.Distance(position, _centerPosition) < _minimalCenterDistance) return false;
+        
         if (!TileMap.HasTile(position, _terrainLayerSetting)) return false;
          
         List<Vector2Int> possiblePositions = TileMap.FindClosestValidPositionsPerRadius(IsARoadTile, position, _bloodTowerRadius, _bloodTowerRadius);

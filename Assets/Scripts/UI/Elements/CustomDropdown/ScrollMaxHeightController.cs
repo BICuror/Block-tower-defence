@@ -13,8 +13,7 @@ public sealed class ScrollMaxHeightController : MonoBehaviour
     {
         _contentParent.ForceUpdateRectTransforms();
 
-        if (_useYieldInstruction) await UniTask.Yield();
-        else await UniTask.WaitForFixedUpdate();
+        await UniTask.NextFrame();
         
         float contentPanelHeight = _contentParent.sizeDelta.y;
 

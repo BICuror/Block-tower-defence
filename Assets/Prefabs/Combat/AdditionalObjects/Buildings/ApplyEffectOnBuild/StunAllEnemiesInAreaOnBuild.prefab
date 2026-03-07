@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7680883792900178071}
   - component: {fileID: 1301786295259751925}
   - component: {fileID: 7232687536179805673}
+  - component: {fileID: 3488392395496191238}
   m_Layer: 7
   m_Name: AreaVisualisation
   m_TagString: Untagged
@@ -91,6 +92,23 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3488392395496191238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1413093892177809441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
+  _meshRenderer: {fileID: 7232687536179805673}
+  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
+  _enableOnStart: 0
+  _visualisationTransform: {fileID: 7680883792900178071}
+  _height: 100
 --- !u!1 &5095180896007210522
 GameObject:
   m_ObjectHideFlags: 0
@@ -4966,7 +4984,6 @@ GameObject:
   - component: {fileID: 8065067502109396836}
   - component: {fileID: 7108583895118229865}
   - component: {fileID: 5508162354419099327}
-  - component: {fileID: 4052657747800554839}
   m_Layer: 10
   m_Name: AreaController
   m_TagString: Untagged
@@ -5024,13 +5041,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c649f4cda4f6041ae9f368578bdc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoScale: 0
+  _autoScale: 1
   _height: 100
   _areaScaleValue: 2
   _overrideAdditionalScaleValue: 1
   _additionalScaleValue: 0.7
   _hasVisualisation: 1
-  _areaVisualisation: {fileID: 4052657747800554839}
+  _areaVisualisation: {fileID: 3488392395496191238}
 --- !u!114 &5508162354419099327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5043,23 +5060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c102a95456e11284fa0e8670c2a44e97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4052657747800554839
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8036841130074158774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
-  _meshRenderer: {fileID: 7232687536179805673}
-  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
-  _enableOnStart: 0
-  _visualisationTransform: {fileID: 7680883792900178071}
-  _height: 100
 --- !u!1 &8698641187551789753
 GameObject:
   m_ObjectHideFlags: 0

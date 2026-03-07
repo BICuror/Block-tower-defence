@@ -14,12 +14,12 @@ public sealed class BuildingDraggable : DraggableEntity
     private BuildTime _buildTime;
     private bool _hasBuildTime;
     
-    public Action BuildCompleted;
-    public Action BuildProgressStarted;
-    public Action<float> BuildProcessUpdated;
-    public Action<BuildingDraggable> BuildingPickedUp;
-    public Action<BuildingDraggable> BuildingPlaced;
-    public Action<BuildingDraggable> BuildingBuilt;
+    public event Action BuildCompleted;
+    public event Action BuildProgressStarted;
+    public event Action<float> BuildProcessUpdated;
+    public event Action<BuildingDraggable> BuildingPickedUp;
+    public event Action<BuildingDraggable> BuildingPlaced;
+    public event Action<BuildingDraggable> BuildingBuilt;
 
     public bool IsBuilt => _isBuilt;
 

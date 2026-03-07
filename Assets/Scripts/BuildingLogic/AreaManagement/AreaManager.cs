@@ -58,7 +58,10 @@ public class AreaManager : MonoBehaviour
     
     private void TrySetEntityDetectorPriority(AreaScanerController areaScanerController, EntityDetectorPriorityAlgorithm priorityAlgorithm)
     {
-        areaScanerController.GetComponent<AreaEntityDetector>().SetPriorityAlgorithm(priorityAlgorithm);
+        if (areaScanerController.gameObject.TryGetComponent(out AreaEntityDetector detector))
+        {
+            detector.SetPriorityAlgorithm(priorityAlgorithm);   
+        }
     }
     
     private EntityDetectorPriorityAlgorithm GetActivePriorityAlgorithm()

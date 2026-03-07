@@ -80,4 +80,6 @@ public enum EntityModifcatorTag
     SelfHarm,
     NonLethal,
     MaxEntities,
+    SingleActionInvoke,
+    MultipleActionInvoke,
 }

@@ -4,6 +4,7 @@ using System;
 
 public sealed class InspectableObject : MonoBehaviour
 {
+    [SerializeField] private bool _pauseOnInspection;
     [SerializeField] private bool _canBeIdleInspected;
     [SerializeField] private string _localizationKey;
     private ReplaceableDataParser _replaceableDataParser = new();
@@ -12,6 +13,7 @@ public sealed class InspectableObject : MonoBehaviour
     public bool IsInspected => _isInspected;
     public bool CanBeIdleInspected => _canBeIdleInspected;
     
+    public bool PauseOnInspection => _pauseOnInspection;
     public string Name => (_localizationKey + "_header").Localize();
     public string Description => (_localizationKey + "_description").Localize();
     public ReplaceableDataParser ReplaceableDataParser => _replaceableDataParser;

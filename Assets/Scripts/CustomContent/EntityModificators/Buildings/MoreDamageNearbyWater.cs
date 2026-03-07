@@ -8,7 +8,6 @@ public sealed class MoreDamageNearbyWater : EntityModificator
     private LayerSetting _anyTerrainLayerSetting;
     private StatModifier _statModifier;
     private GameObject _areaDisplay;
-    private int _radius;
     
     public override void Enable()
     {
@@ -16,19 +15,17 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
         
         Entity.Draggable.Placed += CalculateBonusDamage;
-        CalculateBonusDamage();
 
-        _radius = Args.GetArgument<int>("AreaRadius");
         _anyTerrainLayerSetting = Args.GetArgument<LayerSetting>("AnyTerrainLayer");
         
         _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(Args.GetArgument<GameObject>("AreaPrefab"));
-        _areaDisplay.transform.localScale = new Vector3(1 + 2 * _radius, 100f, 1 + 2 * _radius);
         
+        CalculateBonusDamage();
     }
 
     private void CalculateBonusDamage()
     {
-        int emptyTilesNearby = TileMap.CountValidPositionsInRadius(IsEmptyTile, new Vector2Int(Mathf.RoundToInt(Entity.transform.position.x), Mathf.RoundToInt(Entity.transform.position.z)), _radius);
+        int emptyTilesNearby = TileMap.CountValidPositionsInRadius(IsEmptyTile, new Vector2Int(Mathf.RoundToInt(Entity.transform.position.x), Mathf.RoundToInt(Entity.transform.position.z)), Entity.StatContainer.Get<ReachAreaScale>().RoundedValue);
         
         _statModifier.SetMultiplier(emptyTilesNearby * Args.GetArgument<float>("MultiplierPerTile"));
 

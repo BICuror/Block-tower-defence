@@ -25,7 +25,7 @@ public sealed class UIElementFadeAnimator : MonoBehaviour
         _isActive = true;
         gameObject.SetActive(true);
         _mainGroup.interactable = true;
-        await _mainGroup.DOFade(1f, _fadeDuration).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
+        await _mainGroup.DOFade(1f, _fadeDuration).SetUpdate(true).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
     }
     
     public async UniTask Disable()
@@ -35,7 +35,7 @@ public sealed class UIElementFadeAnimator : MonoBehaviour
         
         _isActive = false;
         _mainGroup.interactable = false;
-        await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(DisableGameObject).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
+        await _mainGroup.DOFade(0f, _fadeDuration).OnComplete(DisableGameObject).SetUpdate(true).SetLink(_mainGroup.gameObject).AsyncWaitForCompletion();
     }
 
     private void DisableGameObject()

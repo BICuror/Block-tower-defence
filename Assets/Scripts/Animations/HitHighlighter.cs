@@ -8,7 +8,7 @@ namespace Combat.Animation
 {
     public sealed class HitHighlighter : MonoBehaviour
     {
-        private const float HIGHLIGHT_DURATION = 0.1f;
+        private const float HIGHLIGHT_DURATION = 0.15f;
         
         [Cached] private EntityHealth _entityHealth;
         [SerializeField] private Material _highlightMaterial;

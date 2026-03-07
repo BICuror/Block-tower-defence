@@ -169,7 +169,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         {
             try
             {
-                await UniTask.WaitForFixedUpdate(cancellationToken: _activeSinglePopupCancelationTokenSource.Token, cancelImmediately: true);
+                await UniTask.NextFrame(cancellationToken: _activeSinglePopupCancelationTokenSource.Token, cancelImmediately: true);
             }
             catch (Exception e)
             {

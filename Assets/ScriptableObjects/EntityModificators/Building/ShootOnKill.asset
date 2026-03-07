@@ -20,7 +20,6 @@ MonoBehaviour:
   _itemTypeContainers:
   - _itemTypeName: ShootOnKill
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -30,6 +29,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
@@ -50,6 +50,7 @@ MonoBehaviour:
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -66,7 +67,7 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _rarity: 2
-  _tags: 
+  _tags: 0f000000
   _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
@@ -76,9 +77,11 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 16
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _statChanges: []

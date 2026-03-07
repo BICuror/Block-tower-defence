@@ -243,7 +243,7 @@
   "invoke_action_and_gain_damage_entity_modificator_tooltip_header": "Hurtfull labor",
   "invoke_action_and_gain_damage_entity_modificator_tooltip_description": "On #Activation if #CurrentHealth > {ActivationDamage}, invoke #Action #com and com# recive {ActivationDamage} #NonLethalDamage",
   "water_damage_up_entity_modificator_tooltip_header": "Waterpower",
-  "water_damage_up_entity_modificator_tooltip_description": "#good +{MultiplierPerTile_percent}% good# #Damage for each <color=blue>water</color> tile in {AreaRadius} #Area",
+  "water_damage_up_entity_modificator_tooltip_description": "#good +{MultiplierPerTile_percent}% good# #Damage for each <color=blue>water</color> tile in #Area",
   "crystal_damage_up_entity_modificator_tooltip_header": "Crystal enthusiast",
   "crystal_damage_up_entity_modificator_tooltip_description": "#good +{Multiplier_percent}% good# #Damage when active #Crystal=Crystals >= {Threshold}",
   "activation_haste_entity_modificator_tooltip_header": "Recharge activaton",
@@ -401,7 +401,7 @@
   "execution_keyword_tooltip_description": "Instantly kills entity, can't be blocked",
   "enemies_invincibility_cursor_area_effect_tooltip_description": "#Enemies have {Chance}% to be #Invincibility=Invincible #com when com# cursor #com is not com# hovered over them",
   "stun_close_enemies_on_build_entity_modificator_tooltip_header": "Stunning enterance",
-  "stun_close_enemies_on_build_entity_modificator_tooltip_description": "On build complete applies #Stun to all #Enemies in #Area = 2, +{BuildTime_flat} #BuildTime",
+  "stun_close_enemies_on_build_entity_modificator_tooltip_description": "On build complete applies #Stun to all #Enemies in #Area, +{BuildTime_flat} #BuildTime",
   "temporary_stats_up_entity_modificator_tooltip_header": "Helping hand",
   "temporary_stats_up_entity_modificator_tooltip_description": " #good +{Damage_mult}% good# #Damage, #good  -{TaskRechargeDuration_mult}% good# #Recharge, #good -{BuildTime_flat} good# #BuildTime removes this upgrade after {WavesDuration} wave and #good gain {UpgradeChargesAmount} good# #UpgradeCharge=Upgrade_сharges",
   "spawn_rock_on_marked_enemy_kill_tooltip_header": "Petrify",
@@ -458,5 +458,9 @@
   "lightning_propogation_damage_up_entity_modificator_tooltip_header": "Multiplied propogation",
   "lightning_propogation_damage_up_entity_modificator_tooltip_description": "#bad -{Damage_flat} bad# #Damage #bad -{ReachAreaScale_flat} bad# #Reach #good +{PropogationDamageMultiplier_mult}% #PropogationDamageMultiplier",
   "lightning_global_propogation_entity_modificator_header": "Global propogation",
-  "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge"
+  "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge",
+  "propogation_exploder_enemy_entity_tooltip_header": "Mage",
+  "propogation_exploder_enemy_entity_tooltip_description": "Launches #Propogation on death or contact",
+  "invoke_action_on_build_cycle_entity_modificator_tooltip_header": "Unity",
+  "invoke_action_on_build_cycle_entity_modificator_tooltip_description": "On build invokes #Action and starts build process again"
 }

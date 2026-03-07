@@ -3,6 +3,7 @@ using WorldGeneration;
 using System.Linq;
 using UnityEngine;
 using System;
+
 using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "RoadPartGenertationAlgorithm", menuName = "Generation/RoadMapGeneratoionAlgorithm/RoadPartGenertationAlgorithm")]
@@ -37,6 +38,14 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
             _roadMap[spawnerNodes[i].x, spawnerNodes[i].y] = true;
             
             GenerateRoad(spawnerNodes[i], new Vector2Int(_centerIndex, _centerIndex));
+        }
+
+        for (int i = 0; i < spawnerNodes.Count; i++)
+        {
+            if (!HasAValidRoadFromStartToEnd(_currentStartPosition, new Vector2Int(_centerIndex, _centerIndex), int.MinValue, int.MaxValue, out int currentPathLength))
+            {
+                return GenerateRoadMap(roadNodes, spawnerNodes, _islandData);
+            }
         }
 
         return _roadMap;

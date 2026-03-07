@@ -13,22 +13,23 @@ MonoBehaviour:
   m_Name: PerformTaskWhenBuilt
   m_EditorClassIdentifier: 
   _icon: {fileID: 1968931674, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: 
+  _localizationKey: invoke_action_on_build_cycle_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _showInInspector: 1
   _itemTypeContainers:
-  - _itemTypeName: ActivateWhenBuilt
+  - _itemTypeName: InvokeActionOnBuildEntityModificator
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
@@ -37,17 +38,22 @@ MonoBehaviour:
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
@@ -59,8 +65,9 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
-  _tags: 
+  _tags: 0f000000
   _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
@@ -70,8 +77,12 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 16
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
+  _statChanges: []
+  _statInitializers: []

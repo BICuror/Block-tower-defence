@@ -2,11 +2,13 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using System;
 using Combat;
+using Zenject;
 
 [RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
+    [SerializeField] private TimeController _timeController;
     [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
     [SerializeField] private LayerSetting _inspectableLayerSetting;
@@ -85,6 +87,8 @@ public class InspectorController : MonoBehaviour
         
         _inspectableObject = inspectableObject;
         inspectableObject.SetInspectedState(true);
+        
+        if (inspectableObject.PauseOnInspection) _timeController.Pause();
 
         _areaVisualisationInspector.ActivateVisualisation(inspectableObject.gameObject);
         
@@ -112,6 +116,8 @@ public class InspectorController : MonoBehaviour
             _areaVisualisationInspector.DeactivateVisualisation(inspectableObject.gameObject);
             inspectableObject.SetInspectedState(false);
         }
+        
+        if (inspectableObject.PauseOnInspection) _timeController.Resume();
         
         InspectionStopped?.Invoke();
     }

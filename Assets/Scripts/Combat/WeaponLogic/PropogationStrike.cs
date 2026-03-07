@@ -20,58 +20,59 @@ public sealed class PropogationStrike : WeaponBase
         _propogationRadius = OwnerEntity.StatContainer.Get<PropogationRadius>();
         _damage = OwnerEntity.StatContainer.Get<Damage>();
     }
-    
-    public async UniTask StartPropogationStrike(CombatEntity initialEntity, Transform sourceTransform = null)
+
+    public async UniTask StartPropogationStrike(Vector3 startPosition)
     {
+        if (TryGetEntityInRadius(startPosition, out CombatEntity currentEntity))
+        {
+            await StartPropogationStrike(currentEntity, startPosition);
+        }
+    }
+    
+    public async UniTask StartPropogationStrike(CombatEntity initialEntity, Vector3 startPosition)
+    {
+        await _beamSystem.ReachTargetAndSetIt(startPosition, initialEntity.transform, _stepDuration);
+        
+        if (!initialEntity || !initialEntity.gameObject.activeSelf) return;
+            
+        await StartPropogationStrike(initialEntity);
+    }
+    
+    private async UniTask StartPropogationStrike(CombatEntity currentEntity)
+    {
+        _beamSystem.DisableBeam();
         _targetedEnemes.Clear();
         
-        if (sourceTransform)
-        {   
-            _beamSystem.SetSource(sourceTransform);
-            await _beamSystem.ReachTargetAndSetIt(initialEntity.transform, sourceTransform.position, _stepDuration);
-        }
-        else
-        {
-            _beamSystem.DisableBeam();
-            sourceTransform = initialEntity.transform;
-        }
-
-        CombatEntity currentEntity = initialEntity;
-        
         _lastDamage = _damage.Value;
-        
+    
         while (currentEntity && currentEntity.gameObject.activeSelf)
         {
-            currentEntity.Health.ReceiveEnemyDamage(_lastDamage, OwnerEntity);
-            _lastDamage *= _propogationDamageMultiplier.Value;
+            Vector3 hitPosition = currentEntity.transform.position;
+            
             _targetedEnemes.Add(currentEntity);
-
-            if (TryGetEntityInRadius(currentEntity.transform.position, out CombatEntity newTargetEntity))
+            currentEntity.Health.ReceiveEnemyDamage(_lastDamage, OwnerEntity); 
+            _lastDamage *= _propogationDamageMultiplier.Value; 
+            
+            if (TryGetEntityInRadius(hitPosition, out CombatEntity newTargetEntity))
             {
-                await MoveBeamToNewPosition(sourceTransform.position, currentEntity.transform, newTargetEntity.transform);
-                
-                sourceTransform = currentEntity.transform;
+                await MoveBeamToNewPosition(hitPosition, newTargetEntity.transform);
                 
                 currentEntity = newTargetEntity;
             }
             else break;
         }
-
+        
         gameObject.SetActive(false);
         _beamSystem.DisableBeam();
     }
 
-    private async UniTask MoveBeamToNewPosition(Vector3 previousPosition, Transform currentTransform, Transform desiredTransform)
+    private async UniTask MoveBeamToNewPosition(Vector3 startPositon, Transform desiredTransform)
     {
-        _beamSystem.SetSource(currentTransform.transform);
-        
-        float distance = Vector3.Distance(previousPosition, desiredTransform.position);
+        float distance = Vector3.Distance(startPositon, desiredTransform.position);
 
         if (distance > 3) distance *= 0.3f;
         
-        await _beamSystem.ReachTargetAndSetIt(currentTransform.transform, previousPosition, _stepDuration / 2f * distance);
-        if (!desiredTransform) return;
-        await _beamSystem.ReachTargetAndSetIt(desiredTransform, currentTransform.transform.position, _stepDuration / 2f * distance);
+        await _beamSystem.ReachTargetAndSetIt(startPositon, desiredTransform, _stepDuration * distance);
     }
 
     private bool TryGetEntityInRadius(Vector3 centerPosition, out CombatEntity entity)

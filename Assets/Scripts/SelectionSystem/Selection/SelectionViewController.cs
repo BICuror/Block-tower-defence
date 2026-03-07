@@ -16,7 +16,8 @@ public sealed class SelectionViewController : MonoBehaviour
     
     [SerializeField] private Transform _selectionViewGraphics;
     [SerializeField] private float _selectionViewTransitionDuration = 1f;
-    [SerializeField] private AnimationCurve _selectionViewAnimationCurve;
+    [SerializeField] private AnimationCurve _selectionViewAppearAnimationCurve;
+    [SerializeField] private AnimationCurve _selectionViewDisappearAnimationCurve;
     
     [SerializeField] public SelectionManager _selectionManager;
     private SelectionIndicatorContainers _currentSelectionIndicatorContainer;
@@ -33,18 +34,14 @@ public sealed class SelectionViewController : MonoBehaviour
     private void EnableSelectionView()
     {
         _selectionViewGraphics.DOKill();
-        _selectionViewGraphics.DOScale(Vector3.one, _selectionViewTransitionDuration).SetEase(_selectionViewAnimationCurve);
+        _selectionViewGraphics.DOScale(Vector3.one, _selectionViewTransitionDuration).SetEase(_selectionViewAppearAnimationCurve);
         _selectionViewGraphics.gameObject.SetActive(true);
-        
-        //_postProcessingController.ChangeMainVolumePostExposure(-_postExposureDimStrength, _selectionViewTransitionDuration).Forget();
     }
     
     private void DisableSelectionView()
     {
         _selectionViewGraphics.DOKill();
-        _selectionViewGraphics.DOScale(Vector3.zero, _selectionViewTransitionDuration).SetEase(_selectionViewAnimationCurve).OnComplete(() => _selectionViewGraphics.gameObject.SetActive(false));
-        
-        //_postProcessingController.ChangeMainVolumePostExposure(_postExposureDimStrength, _selectionViewTransitionDuration).Forget();
+        _selectionViewGraphics.DOScale(Vector3.zero, _selectionViewTransitionDuration).SetEase(_selectionViewDisappearAnimationCurve).OnComplete(() => _selectionViewGraphics.gameObject.SetActive(false));
     }
     
     private async UniTask EnableSelectionIndicator()

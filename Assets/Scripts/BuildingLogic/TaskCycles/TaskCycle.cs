@@ -16,8 +16,8 @@ public class TaskCycle : MonoBehaviour
     
     public TokenContainer CycleBlockTokenContainer => _cycleBlockTokenContainer;
     
-    public Action TaskPerformed;
-    public Action TaskCycled;
+    public event Action TaskPerformed;
+    public event Action TaskCycled;
 
     private void Start()
     {
@@ -53,7 +53,7 @@ public class TaskCycle : MonoBehaviour
     
     protected virtual bool CanWork() => true;
     
-    protected void StopRechargeProcess()
+    public void StopRechargeProcess()
     {
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
@@ -84,11 +84,11 @@ public class TaskCycle : MonoBehaviour
         
         _taskCycleIsActive = false;
 
-        if (_taskConditionProvider.GetTaskCondition().Invoke())
+        if (IsPossibleToPerformTask())
         {
-            TaskCycled?.Invoke();
             TryCycle();
             PerformTask();
+            TaskCycled?.Invoke();
         }
     }
     

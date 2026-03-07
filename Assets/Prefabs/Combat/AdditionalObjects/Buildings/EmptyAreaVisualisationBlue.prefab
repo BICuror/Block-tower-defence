@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6276755293320577057}
   - component: {fileID: 3430800700406113603}
   - component: {fileID: 6472748314157104479}
+  - component: {fileID: 6436792701285379665}
   m_Layer: 7
   m_Name: AreaVisualisation
   m_TagString: Untagged
@@ -91,6 +92,23 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6436792701285379665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319198942209216663}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
+  _meshRenderer: {fileID: 6472748314157104479}
+  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
+  _enableOnStart: 0
+  _visualisationTransform: {fileID: 6276755293320577057}
+  _height: 100
 --- !u!1 &8014568173235323351
 GameObject:
   m_ObjectHideFlags: 0
@@ -101,7 +119,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7921428759935524928}
   - component: {fileID: 8152252673415192599}
-  - component: {fileID: 2376686965409068599}
+  - component: {fileID: 8550512851475026524}
   m_Layer: 8
   m_Name: EmptyAreaVisualisationBlue
   m_TagString: Untagged
@@ -146,7 +164,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &2376686965409068599
+--- !u!114 &8550512851475026524
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,14 +173,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8014568173235323351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 825d5009ffa7151449bdcf05707625ac, type: 3}
+  m_Script: {fileID: 11500000, guid: 53c649f4cda4f6041ae9f368578bdc37, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SquareAreaVisualisation
-  _meshRenderer: {fileID: 6472748314157104479}
-  _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
-  _enableOnStart: 0
-  _visualisationTransform: {fileID: 6276755293320577057}
+  m_EditorClassIdentifier: Assembly-CSharp::AreaScanerController
+  _autoScale: 1
   _height: 100
+  _areaScaleValue: 2
+  _overrideAdditionalScaleValue: 1
+  _additionalScaleValue: 0.7
+  _hasVisualisation: 1
+  _areaVisualisation: {fileID: 6436792701285379665}
 --- !u!1 &8879340027590346412
 GameObject:
   m_ObjectHideFlags: 0

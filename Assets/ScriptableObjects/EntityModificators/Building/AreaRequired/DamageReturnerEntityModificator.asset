@@ -15,52 +15,10 @@ MonoBehaviour:
   _icon: {fileID: -333591232, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: attack_enemies_in_area_on_taking_damage_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 4
-      _argumentName: DamageModifierTypeName
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: ReturnDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
-    - _argumentType: 5
-      _argumentName: IsDealerDamageModifier
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: ReturnDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
-    - _argumentType: 5
-      _argumentName: IsBuildingModificator
-      _intArgument: 0
-      _boolArgument: 1
-      _floatArgument: 0
-      _stringArgument: ReturnDamageModifier
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+    _argumentItems: []
   _showInInspector: 1
   _itemTypeContainers:
-  - _itemTypeName: DamageModifierEntityModificator
+  - _itemTypeName: AttackAllEnemiesInAreaEntityModificator
     AllEffectTypeNames:
     - ActivateWhenBuilt
     - AddIconEntityModificator
@@ -72,6 +30,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart

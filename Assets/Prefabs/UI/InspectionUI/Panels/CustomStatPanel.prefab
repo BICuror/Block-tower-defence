@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ebabf42c9e16d849af3c3a4a58016ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _showFullTags: 0
   _contentSizeFitters: []
   _defaultValueColor: {r: 1, g: 1, b: 1, a: 1}
   _goodValueColor: {r: 0, g: 1, b: 0.5152199, a: 1}
@@ -440,7 +441,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1495578957412111924, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
       propertyPath: m_PixelsPerUnitMultiplier
-      value: 15
+      value: 1.88
       objectReference: {fileID: 0}
     - target: {fileID: 2690923888094962877, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
       propertyPath: m_Name
@@ -452,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3506530089468481344, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 6
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3506530089468481344, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -591,9 +592,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
-  m_EffectColor: {r: 0.047169805, g: 0.047169805, b: 0.047169805, a: 0.33333334}
+  m_EffectColor: {r: 0.122641504, g: 0.122641504, b: 0.122641504, a: 0.33333334}
   m_EffectDistance: {x: 3, y: 3}
-  m_UseGraphicAlpha: 0
+  m_UseGraphicAlpha: 1
 --- !u!224 &9156672739680823918 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7351416873936767910, guid: a1a716975f14b904187e242ee5d9da8c, type: 3}

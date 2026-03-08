@@ -24,13 +24,13 @@ public sealed class DraggableCreator : MonoBehaviour
         if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
 
         DraggableObject createdDraggable = _diContainer.InstantiatePrefab(draggablePrefab, finalPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
-
-        TryToAddToGlobalBuildingContainer(createdDraggable);
         
         createdDraggable.gameObject.SetActive(false);
         
         await CreateLauncher(centerPosition, finalPosition, launcherPrefab);
 
+        TryToAddToGlobalBuildingContainer(createdDraggable);
+        
         createdDraggable.gameObject.SetActive(true);
         
         return createdDraggable;

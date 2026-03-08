@@ -5,9 +5,15 @@ using UnityEngine;
 using Combat;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public sealed class EntityTooltip : InspectionPanelBase
 {
+    [Header("HealthBar")] 
+    [SerializeField] private TextMeshProUGUI _healthBarText;
+    [SerializeField] private Gradient _healthBarGradient;
+    [SerializeField] private Image _healthBarImage;
+    
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _nameTextField;
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
@@ -33,6 +39,10 @@ public sealed class EntityTooltip : InspectionPanelBase
         _entityModificatorPanelContainer.TooltipClosed += ReturnToDefaultInspectionState;
         
         _priorityDropdown.SelectedValueUpdated += OnPriorityDropdownValueChanged;
+
+        _combatEntity.Health.Died += DisableOnEntityDeath;
+        _combatEntity.Health.Damaged += UpdateHealthBar;
+        _combatEntity.Health.Healed += UpdateHealthBar;
     }
 
     public void Initialize(CombatEntity entity)
@@ -46,6 +56,7 @@ public sealed class EntityTooltip : InspectionPanelBase
         InitializeEntityModificatorsPanelContainer();
         InitializeStatPanelContainer();
         InitializePriorityDropdown();
+        UpdateHealthBar();
         
         _scrollMaxHeightControllers.ForEach(controller => controller.UpdateHeight().Forget());
 
@@ -105,5 +116,25 @@ public sealed class EntityTooltip : InspectionPanelBase
     private void ReturnToDefaultInspectionState()
     {
         _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(Inspectable.Description));
+    }
+
+    private void UpdateHealthBar()
+    {
+        float healthPercent = _combatEntity.Health.GetHpPercent();
+        
+        _healthBarImage.color = _healthBarGradient.Evaluate(healthPercent);
+        _healthBarImage.fillAmount = healthPercent;
+        _healthBarText.text = $"{_combatEntity.Health.GetHp():F1} / {_combatEntity.Health.GetMaxHp():F1}";
+    }
+
+    private void DisableOnEntityDeath() => Disable().Forget();
+
+    private void OnDestroy()
+    {
+        base.OnDestroy();
+        
+        _combatEntity.Health.Died -= DisableOnEntityDeath;
+        _combatEntity.Health.Damaged -= UpdateHealthBar;
+        _combatEntity.Health.Healed -= UpdateHealthBar;
     }
 }

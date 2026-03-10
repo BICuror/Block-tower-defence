@@ -91,7 +91,7 @@ public sealed class DraggableCreator : MonoBehaviour
     {
         Vector2Int roundedCenterPosition = new Vector2Int(Mathf.RoundToInt(centerPosition.x), Mathf.RoundToInt(centerPosition.z));
         
-        List<Vector2Int> foundPositions = TileMap.FindClosestValidPositionsPerRadius(IsSuitablePosition, roundedCenterPosition, radius, _islandDataContainer.Data.FlatRadius);
+        List<Vector2Int> foundPositions = TileMap.FindClosestValidPositionsInRadius(IsSuitablePosition, roundedCenterPosition, radius, _islandDataContainer.Data.FlatRadius);
         
         Vector2Int selectedPosition = foundPositions[Random.Range(0, foundPositions.Count)];
         

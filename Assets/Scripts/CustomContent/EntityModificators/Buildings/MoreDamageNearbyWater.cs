@@ -25,7 +25,7 @@ public sealed class MoreDamageNearbyWater : EntityModificator
 
     private void CalculateBonusDamage()
     {
-        int emptyTilesNearby = TileMap.CountValidPositionsInRadius(IsEmptyTile, new Vector2Int(Mathf.RoundToInt(Entity.transform.position.x), Mathf.RoundToInt(Entity.transform.position.z)), Entity.StatContainer.Get<ReachAreaScale>().RoundedValue);
+        int emptyTilesNearby = TileMap.CountValidPositionsInRadius(IsEmptyTile, new Vector2Int(Mathf.RoundToInt(Entity.transform.position.x), Mathf.RoundToInt(Entity.transform.position.z)), 0, Entity.StatContainer.Get<ReachAreaScale>().RoundedValue);
         
         _statModifier.SetMultiplier(emptyTilesNearby * Args.GetArgument<float>("MultiplierPerTile"));
 

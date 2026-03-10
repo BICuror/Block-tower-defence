@@ -1918,16 +1918,16 @@ MonoBehaviour:
   _healthBarText: {fileID: 6354262224253143829}
   _healthBarGradient:
     serializedVersion: 2
-    key0: {r: 0.16981131, g: 0.00064078474, b: 0.00064078474, a: 1}
-    key1: {r: 1, g: 0, b: 0, a: 1}
-    key2: {r: 0.04143238, g: 1, b: 0, a: 0}
+    key0: {r: 0.24528301, g: 0.24528301, b: 0.24528301, a: 1}
+    key1: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    key2: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
-    ctime0: 3662
-    ctime1: 14649
+    ctime0: 386
+    ctime1: 65535
     ctime2: 65535
     ctime3: 0
     ctime4: 0
@@ -1943,8 +1943,8 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 3
+    m_ColorSpace: 0
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _healthBarImage: {fileID: 2261940744596514258}
   _nameTextField: {fileID: 196448783514910786}
@@ -3814,7 +3814,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &302520531913079321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3916,7 +3916,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3008198800724775345}
   m_HandleRect: {fileID: 7855732024561215545}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -4051,7 +4051,7 @@ RectTransform:
   m_Father: {fileID: 44444044619223262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4111,7 +4111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &349319591255878856
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4252,7 +4252,7 @@ RectTransform:
   m_Father: {fileID: 2083926729102986690}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

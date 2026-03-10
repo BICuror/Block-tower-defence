@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 using System.Linq;
+using System;
+using Navigation;
 using Random = UnityEngine.Random;
 
 public static class TileMap
@@ -101,19 +102,35 @@ public static class TileMap
 
     #region FindSuitablePositionsInRaduis
 
-    public static int CountValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius)
+    public static List<Vector2Int> GetAllValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
     {
-        int result = 0;
+        List<Vector2Int> foundPositions = new();
         
-        for (int currentRadius = 1; currentRadius <= radius; currentRadius++)
-        { 
-            result += GetSuitablePositionsInRadius(positionValidator, position, currentRadius).Count;
+        for (int currentRadius = radius; currentRadius <= maxRadius; currentRadius++)
+        {
+            foundPositions = GetSuitablePositionsInRadius(positionValidator, position, currentRadius);
         }
 
-        return result;
+        return foundPositions;
     }
     
-    public static List<Vector2Int> FindClosestValidPositionsPerRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
+    public static int CountValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius) => GetAllValidPositionsInRadius(positionValidator, position, radius, maxRadius).Count;
+    
+    public static List<Vector2Int> FindFurthestValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius)
+    {
+        List<Vector2Int> foundPositions = new();
+        
+        for (int currentRadius = radius; currentRadius >= 0; currentRadius--)
+        {
+            foundPositions = GetSuitablePositionsInRadius(positionValidator, position, currentRadius);
+            
+            if (foundPositions.Count > 0) break;
+        }
+
+        return foundPositions;
+    }
+    
+    public static List<Vector2Int> FindClosestValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
     {
         List<Vector2Int> foundPositions = new();
         
@@ -123,8 +140,6 @@ public static class TileMap
             
             if (foundPositions.Count > 0) break;
         }
-        
-        if (foundPositions.Count == 0) return GetSuitablePositionsInRadius((_) => true, position, radius);
 
         return foundPositions;
     }
@@ -166,7 +181,7 @@ public static class TileMap
     {
         Vector2Int roundedDesiredPosition = new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
 
-        List<Vector2Int> possiblePositions = FindClosestValidPositionsPerRadius(IsValidPosition, roundedDesiredPosition, 0, maxRadius);
+        List<Vector2Int> possiblePositions = FindClosestValidPositionsInRadius(IsValidPosition, roundedDesiredPosition, 0, maxRadius);
 
         Vector2Int finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
 
@@ -184,6 +199,53 @@ public static class TileMap
 
     #endregion
 
+    #region GetAllRoadPositionsInRadius
+
+    public static List<Vector2Int> GetAllRoadPositionsInRadius(Vector2Int position, bool[,] roadMap, int radius)
+    {
+        List<Vector2Int> possiblePositions = GetAllValidPositionsInRadius(IsARoadTile, position, 0, radius);
+        
+        return possiblePositions;
+
+        bool IsARoadTile(Vector2Int searchPosition) => IsAValidRoadPosition(searchPosition, roadMap) && roadMap[searchPosition.x, searchPosition.y];
+    }
+
+    #endregion
+
+    #region GetAverageMainRoadNodeWeight
+
+    public static float GetAverageMainRoadNodeWeight(List<Vector2Int> roadPositions, int[,] weightMap)
+    {
+        List<int> roadWeights = new List<int>();
+            
+        roadPositions.ForEach(roadPosition =>
+        {
+            roadWeights.Add(weightMap[roadPosition.x, roadPosition.y]);
+            
+            Debug.Log(weightMap[roadPosition.x, roadPosition.y]);
+        });
+
+        float averageWeight = (float)roadWeights.Average();
+        
+        return averageWeight;
+    }
+
+    #endregion
+
+    #region IsAValidMapPosition
+
+    public static bool IsAValidRoadPosition(Vector2Int position, bool[,] roadMap)
+    {
+        return IsAValidMapPosition(position.x, position.y, roadMap);
+    }
+
+    public static bool IsAValidMapPosition(int x, int z, bool[,] roadMap)
+    {
+        return x >= 0 && z >= 0 && x < roadMap.GetLength(0) && z < roadMap.GetLength(1);
+    }
+
+    #endregion
+    
     #region HasAValidRoadFromStartToEnd    
     
     private static readonly Vector2Int[] _checkDirections = new Vector2Int[4]

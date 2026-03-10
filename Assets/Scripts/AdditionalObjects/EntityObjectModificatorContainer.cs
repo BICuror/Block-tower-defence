@@ -45,7 +45,7 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
     {
         _modificators.Remove(modificator);
 
-        Destroy(modificator);
+        Destroy(modificator.gameObject);
     }
     
     public void RemoveAndDestroyModificator(GameObject modificator)

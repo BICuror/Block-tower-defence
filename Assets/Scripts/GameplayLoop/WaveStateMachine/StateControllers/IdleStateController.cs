@@ -3,6 +3,7 @@ using NaughtyAttributes;
 using WorldGeneration;
 using UnityEngine;
 using System.Linq;
+using Combat;
 using Navigation;
 using Zenject;
 
@@ -10,18 +11,24 @@ public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private TerrainAnimator _roadAnimator;
-    [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
+    
+    [Inject] private WaveIndexContainer _waveIndexContainer;
+    
     [Inject] private IslandDecorationContainer _decorationContainer;
-    [Inject] private NavigationMapGenerator _navigationMapGenerator;
-    [Inject] private OptionalTaskManager _optionalTaskManager; 
-    [Inject] private ItemContainerManager _itemContainerManager;
+    
+    [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
     [Inject] private EnemyBiomeGenerator _enemyBiomeGenerator;
-    [Inject] private RoadMapGenerator _roadMapGenerator;
+    
+    [Inject] private ItemContainerManager _itemContainerManager;
     [Inject] private SelectionManager _selectionManager;
-    [Inject] private RoadGenerator _roadGenerator;
     [Inject] private ItemFactory _itemFactory;
-    [Inject] private WaveIndexContainer _waveIndexContainer;
+    
+    [Inject] private RoadWeightMapGenerator _roadWeightMapGenerator;
+    [Inject] private NavigationMapGenerator _navigationMapGenerator;
+    [Inject] private OptionalTaskManager _optionalTaskManager; 
+    [Inject] private RoadMapGenerator _roadMapGenerator;
+    [Inject] private RoadGenerator _roadGenerator;
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
@@ -83,7 +90,10 @@ public sealed class IdleStateController : WaveStateController
         RandomExstentions.ReInitializeUnityRandom();
         
         _roadMapGenerator.GenerateRoads();
+        _roadWeightMapGenerator.GenerateRoadWeightMap();
+        
         _optionalTaskManager.GenerateTasksAndModifyRoadMap();
+        
         _navigationMapGenerator.GenerateMap();
         _roadGenerator.GenerateRoads();
     }
@@ -91,8 +101,8 @@ public sealed class IdleStateController : WaveStateController
     [Button("RegenerateRoads")]
     public void RegenerateRoadsButton()
     {
-        FindObjectsByType<BloodCollector>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(bloodCollector => Destroy(bloodCollector.gameObject));
-        FindObjectsByType<Chest>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(chest => Destroy(chest.gameObject));
+        FindObjectsByType<BloodCollector>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(bloodCollector => bloodCollector.gameObject.GetComponent<CombatEntity>().Health.Die());
+        FindObjectsByType<Chest>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(chest => chest.gameObject.GetComponent<CombatEntity>().Health.Die());
         RegenerateRoads();
     }
 }

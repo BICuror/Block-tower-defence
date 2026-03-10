@@ -385,6 +385,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc2f68281950c2145892bcfce3dde9b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &26635602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 26635603}
+  - component: {fileID: 26635604}
+  m_Layer: 0
+  m_Name: TotemOptionalTaskGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &26635603
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26635602}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1415006998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &26635604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 26635602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b35d1cddb184274899dc9fd882c8666, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _terrainLayerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
+  _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
+  _totemPrefabs:
+  - {fileID: 5955889270673498647, guid: f61747bda8b589f4fa18db7875b02c11, type: 3}
+  _bloodTowerRadius: 3
+  _minimalCenterDistance: 6
+  _minRoadTilesInRadius: 8
+  _minimalAverageRoadWeight: 12
+  _maximalAverageRoadWeight: 25
+  _maximalRadius: 10
 --- !u!1 &32089741 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1892278381407435233, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
@@ -2269,7 +2323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 251b8ce6356e5a6469c1ebda88e7b69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &474860760
+--- !u!114 &474860762
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2278,9 +2332,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 32089741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69080ceb6f5957c489c0aae8f818f46a, type: 3}
+  m_Script: {fileID: 11500000, guid: 24675bc77dd6676428f22827f84383fd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadWeightMapGenerator
 --- !u!1 &482485257
 GameObject:
   m_ObjectHideFlags: 0
@@ -3839,9 +3893,9 @@ MonoBehaviour:
   _requiredPercentFromSpawner: 0.25
   _minimalCenterDistance: 6
   _maxRoadTilesInRadius: 18
-  _minRoadTilesInRadius: 10
-  _minimalAverageRoadWeight: 20
-  _maximalAverageRoadWeight: 40
+  _minRoadTilesInRadius: 8
+  _minimalAverageRoadWeight: 12
+  _maximalAverageRoadWeight: 25
   _maximalRadius: 10
 --- !u!1 &815295891
 GameObject:
@@ -14199,11 +14253,15 @@ PrefabInstance:
     - target: {fileID: 3455974183712510898, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _navigationMapHolder
       value: 
-      objectReference: {fileID: 474860760}
+      objectReference: {fileID: 0}
     - target: {fileID: 3455974183712510898, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _navigationMapGenerator
       value: 
       objectReference: {fileID: 474860755}
+    - target: {fileID: 3455974183712510898, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
+      propertyPath: _roadWeightMapGenerator
+      value: 
+      objectReference: {fileID: 474860762}
     - target: {fileID: 3455974183712510898, guid: 24e10afea6a58834a92dd97284e25a8e, type: 3}
       propertyPath: _navigationNodeMapGenerator
       value: 
@@ -14329,7 +14387,7 @@ PrefabInstance:
       objectReference: {fileID: 4001142585134908024}
     - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _optionalTaskGenerators.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: '_optionalTaskGenerators.Array.data[0]'
@@ -14339,6 +14397,10 @@ PrefabInstance:
       propertyPath: '_optionalTaskGenerators.Array.data[1]'
       value: 
       objectReference: {fileID: 2144705364}
+    - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: '_optionalTaskGenerators.Array.data[2]'
+      value: 
+      objectReference: {fileID: 26635604}
     - target: {fileID: 1808359881713834393, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: m_Name
       value: IslandGeneration
@@ -14512,6 +14574,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 811119860}
+    - targetCorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 26635603}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 350825556538506194, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
@@ -14530,7 +14595,7 @@ PrefabInstance:
       addedObject: {fileID: 474860758}
     - targetCorrespondingSourceObject: {fileID: 1892278381407435233, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 474860760}
+      addedObject: {fileID: 474860762}
     - targetCorrespondingSourceObject: {fileID: 1101650385253557965, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1189632685}

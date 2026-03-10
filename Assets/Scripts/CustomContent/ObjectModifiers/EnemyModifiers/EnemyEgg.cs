@@ -9,7 +9,6 @@ public sealed class EnemyEgg : MonoBehaviour
 {
     [Inject] private GlobalEnemyContainer _globalEnemyContainer;
 
-    [SerializeField] private float _invunrabilityPeriod = 0.5f;
     [SerializeField] private bool _autoAddToGlobalEnemyContainer;
     [SerializeField] private EnemyEntity _ownerEntity;
     
@@ -23,7 +22,6 @@ public sealed class EnemyEgg : MonoBehaviour
             return;
         }
         
-        _ownerEntity.Health.InvulnerabilityTokenContainer.AddToken();
         _ownerEntity.Health.RefilHP();
         if (_autoAddToGlobalEnemyContainer) _globalEnemyContainer.Add(_ownerEntity); 
         
@@ -36,19 +34,7 @@ public sealed class EnemyEgg : MonoBehaviour
     {
         try
         {
-            await UniTask.WaitForSeconds(_invunrabilityPeriod, cancellationToken: _cancellationTokenSource.Token);
-        }
-        catch (Exception e)
-        {
-            e.LogAsync();
-            return;
-        }
-        
-        _ownerEntity.Health.InvulnerabilityTokenContainer.RemoveToken();
-        
-        try
-        {
-            await UniTask.WaitForSeconds(_ownerEntity.StatContainer.Get<SpawnDelay>().Value, cancellationToken: _cancellationTokenSource.Token);
+            await UniTask.WaitForSeconds(_ownerEntity.StatContainer.Get<SpawnDelay>().Value + 0.5f, cancellationToken: _cancellationTokenSource.Token);
         }
         catch (Exception e)
         {

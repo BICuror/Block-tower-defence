@@ -96,8 +96,6 @@ namespace Navigation
         
         private void Initialize()
         {
-            _navigationMapHolder = NavigationMapHolder.Instance;
-            
             FindSuitableLayer();
             AdaptToNavigationLayer();
             
@@ -179,7 +177,7 @@ namespace Navigation
 
             if (!_navigationMapHolder.Map.NodeExists(currentRoundedPosition))
             {
-                List<Vector2Int> suitablePositions = TileMap.FindClosestValidPositionsPerRadius(PositionValidator, currentRoundedPosition, 0, 2);
+                List<Vector2Int> suitablePositions = TileMap.FindClosestValidPositionsInRadius(PositionValidator, currentRoundedPosition, 0, 2);
                 
                 currentRoundedPosition = suitablePositions[Random.Range(0, suitablePositions.Count)];
             }

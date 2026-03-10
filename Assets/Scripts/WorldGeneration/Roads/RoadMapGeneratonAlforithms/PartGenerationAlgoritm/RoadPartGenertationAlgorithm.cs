@@ -32,6 +32,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         _roadMap = new bool[_islandData.IslandSize, _islandData.IslandSize];
 
         _centerIndex = islandData.CenterPositionIndex;
+        
 
         for (int i = 0; i < spawnerNodes.Count; i++)
         {  
@@ -40,14 +41,27 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
             GenerateRoad(spawnerNodes[i], new Vector2Int(_centerIndex, _centerIndex));
         }
 
+        bool allRoadsValid = true;
+        
         for (int i = 0; i < spawnerNodes.Count; i++)
         {
-            if (!HasAValidRoadFromStartToEnd(_currentStartPosition, new Vector2Int(_centerIndex, _centerIndex), int.MinValue, int.MaxValue, out int currentPathLength))
+            if (!HasAValidRoadFromStartToEnd(spawnerNodes[i], new Vector2Int(_centerIndex, _centerIndex), _minLength, _maxLength, out int currentPathLength))
             {
-                return GenerateRoadMap(roadNodes, spawnerNodes, _islandData);
+                allRoadsValid = false;
             }
         }
 
+        if (!allRoadsValid)
+        {
+            List<Vector2Int> spawnerNodesShuffled = new List<Vector2Int>(spawnerNodes);
+            
+            spawnerNodesShuffled = spawnerNodesShuffled.OrderBy(position => Random.Range(0, spawnerNodesShuffled.Count)).ToList();
+            
+            Debug.Log("REITERATED");
+            
+            return GenerateRoadMap(roadNodes, spawnerNodesShuffled, _islandData);
+        }
+        
         return _roadMap;
     }
 
@@ -105,7 +119,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
                         return true;
                     }
                     
-                    if (!HasAValidRoadFromStartToEnd(_currentStartPosition, endPosition, int.MinValue, int.MaxValue, out int currentPathLength))
+                    if (!HasAValidRoadFromStartToEnd(_currentStartPosition, endPosition, int.MinValue, _maxLength, out int currentPathLength))
                     {
                         RemoveGrid(rotatedGrids[gridRotationIndex], offset);
                         continue;
@@ -116,12 +130,6 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
                         MoveRoadTo(endPosition, _currentEndPosition);
                         Debug.Log(currentPathLength + distanceToEnd);
                         return true;
-                    }
-                    
-                    if (currentPathLength > _maxLength)
-                    {
-                        RemoveGrid(rotatedGrids[gridRotationIndex], offset);
-                        continue;
                     }
                     
                     if (IterateNextRoadStep(endPosition, lastUsedRoadPartData))

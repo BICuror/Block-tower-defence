@@ -2,8 +2,8 @@ using System.Collections.Generic;
 using WorldGeneration;
 using UnityEngine;
 using System.Linq;
-using Combat;
 using Navigation;
+using Combat;
 using Zenject;
 
 public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
@@ -18,7 +18,9 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
     };
 
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
+    [Inject] private RoadWeightMapGenerator _roadWeightMapGenerator;
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
+    [Inject] private RoadWeightMapHolder _roadWeightMapHolder;
     [Inject] private RoadMapHolder _roadMapHolder;
     [Inject] private DiContainer _diContainer;
 
@@ -80,16 +82,17 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
             {
                 if (Vector2.Distance(new Vector2(_centerIndex, _centerIndex), searchPosition) > Vector2.Distance(position, searchPosition))
                 {
-                    Vector2Int roadTile = FindClosestRoadTile(position);
+                    if (TryFindClosestValidRoadTile(position, out Vector2Int roadTile))
+                    {
+                        int roadWeight = _roadWeightMapHolder.Map[roadTile.x, roadTile.y];
     
-                    if (TileMap.HasAValidRoadFromStartToEnd(_roadMap, roadTile, searchPosition, _minimalWeightFromSpawner, _maximalWeightFromSpawner, out int resultLength))
-                    {   
-                        Debug.Log($"Chest spawned at {resultLength} weight");
-                        
-                        ConnectPositionsOnRoadMap(position, roadTile);
-    
-                        selectedPosition = position;
-                        return true;
+                        if (roadWeight >= _minimalWeightFromSpawner && roadWeight <= _maximalWeightFromSpawner)
+                        {
+                            ConnectPositionsOnRoadMap(position, roadTile);
+        
+                            selectedPosition = position;
+                            return true;
+                        }
                     }
                 }
             }         
@@ -98,11 +101,15 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
         return false;
     }
     
-    private Vector2Int FindClosestRoadTile(Vector2Int searchPosition)
+    private bool TryFindClosestValidRoadTile(Vector2Int searchPosition, out Vector2Int roadTilePosition)
     {
-        List<Vector2Int> validPositions = TileMap.FindClosestValidPositionsPerRadius(RoadPositionValidator, searchPosition, 0, _currentMapSize / 2);
+        roadTilePosition = Vector2Int.zero;
+        
+        List<Vector2Int> validPositions = TileMap.FindClosestValidPositionsInRadius(RoadPositionValidator, searchPosition, 0, _currentMapSize / 2);
             
-        return validPositions[Random.Range(0, validPositions.Count)];
+        if (validPositions.Count > 0) roadTilePosition = validPositions[Random.Range(0, validPositions.Count)];
+        
+        return validPositions.Count > 0;
         
         bool RoadPositionValidator(Vector2Int position)
         {
@@ -152,13 +159,14 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
         }
 
         _roadMapHolder.SetRoadMap(roadMap);
+        _roadWeightMapGenerator.GenerateRoadWeightMap();
     }
 
     private List<Vector2Int> FindAllSuitablePositions(Vector2Int centerPosition, int radius)
     {
         List<Vector2Int> possiblePositions = new();
 
-        possiblePositions = TileMap.FindClosestValidPositionsPerRadius(ValidatePosition, centerPosition, radius, _currentMapSize / 2);
+        possiblePositions = TileMap.FindClosestValidPositionsInRadius(ValidatePosition, centerPosition, radius, _currentMapSize / 2);
 
         return possiblePositions;
 

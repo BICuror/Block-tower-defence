@@ -6,7 +6,7 @@ using Navigation;
 using Zenject;
 using Combat;
 
-public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
+public sealed class TotemTaskGeneration : OptionalTaskGenerator
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
@@ -17,13 +17,11 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     
     [SerializeField] private LayerSetting _terrainLayerSetting;
     [SerializeField] private LayerSetting _solidLayerSetting;
-    [SerializeField] private BloodCollector _bloodTowerPrefab;
+    [SerializeField] private List<Totem> _totemPrefabs;
     [SerializeField] private int _bloodTowerRadius;
-    [SerializeField] private float _requiredPercentFromSpawner = 0.33f;
 
     [Header("SpawnSettings")] 
-    [SerializeField]private float _minimalCenterDistance = 5f;
-    [SerializeField] private int _maxRoadTilesInRadius = 15;
+    [SerializeField] private float _minimalCenterDistance = 5f;
     [SerializeField] private int _minRoadTilesInRadius = 6;
     [SerializeField] private int _minimalAverageRoadWeight = 20;
     [SerializeField] private int _maximalAverageRoadWeight = 35;
@@ -40,7 +38,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
         
         if (TryFindRandomPosition(spawnerPosition, out Vector2Int position))
         {
-            CreateBloodCollector(position, spawnerPosition);
+            CreateTotem(position);
             
             return true;
         }
@@ -54,13 +52,13 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
 
         for (int radius = _maximalRadius; radius > 1; radius--)
         {
-            List<Vector2Int> possiblePositions = TileMap.FindFurthestValidPositionsInRadius(IsAValidBloodCollectorPosition, searchPosition, radius);
+            List<Vector2Int> possiblePositions = TileMap.FindFurthestValidPositionsInRadius(IsAValidTotemPosition, searchPosition, radius);
             
             possiblePositions = possiblePositions.OrderBy(_ => Random.Range(0, possiblePositions.Count)).ToList();
 
             foreach (Vector2Int position in possiblePositions)
             {
-                if (CheckBloodCollectorPositionValidity(position))
+                if (CheckTotemPositionValidity(position))
                 {
                     resultPosition = position;
                     return true;
@@ -71,7 +69,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
         return false;
     }
 
-    private bool IsAValidBloodCollectorPosition(Vector2Int position)
+    private bool IsAValidTotemPosition(Vector2Int position)
     {
         return TileMap.IsAValidRoadPosition(position, _roadMap) && 
                !TileMap.HasTile(position, _solidLayerSetting) &&
@@ -80,13 +78,13 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
                _islandHeightMapHolder.Map[position.x, position.y] > 0;
     }
     
-    private bool CheckBloodCollectorPositionValidity(Vector2Int position)
+    private bool CheckTotemPositionValidity(Vector2Int position)
     {
         List<Vector2Int> roadPositionsInRadius = TileMap.GetAllRoadPositionsInRadius(position, _roadMap, _bloodTowerRadius);
 
         Debug.Log($"Got {roadPositionsInRadius.Count} road positions nearby");
         
-        if (roadPositionsInRadius.Count < _minRoadTilesInRadius || roadPositionsInRadius.Count > _maxRoadTilesInRadius) return false;
+        if (roadPositionsInRadius.Count < _minRoadTilesInRadius) return false;
 
         float averageWeight = TileMap.GetAverageMainRoadNodeWeight(roadPositionsInRadius, _roadWeightMapHolder.Map);
             
@@ -95,21 +93,16 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
         return averageWeight >= _minimalAverageRoadWeight && averageWeight <= _maximalAverageRoadWeight;
     }
 
-    private void CreateBloodCollector(Vector2Int position, Vector2Int spawnerPosition)
+    private void CreateTotem(Vector2Int position)
     {
         int height = _islandHeightMapHolder.Map[position.x, position.y];
     
         if (height < 1) height = 1;
         height++;
             
-        BloodCollector bloodCollector = _diContainer.InstantiatePrefab(_bloodTowerPrefab, new Vector3(position.x, height, position.y), Quaternion.identity, null).GetComponent<BloodCollector>();
-        _globalBuildingContainer.Add(bloodCollector.GetComponent<BuildingEntity>());
-
-        int incomingEnemiesAmount = _enemyBiomeContainer.EnemyBiomeList.First(biome => biome.GetCenterPosition() == spawnerPosition).EnemySpawner.EntitiesAmountToSpawn;
-        incomingEnemiesAmount = Mathf.RoundToInt(incomingEnemiesAmount * _requiredPercentFromSpawner);
-            
-        if (incomingEnemiesAmount < 1) incomingEnemiesAmount = 1;
-            
-        bloodCollector.SetRequiredKills(incomingEnemiesAmount);
+        Totem randomTotemPrefab = _totemPrefabs[Random.Range(0, _totemPrefabs.Count)];
+        
+        Totem totem = _diContainer.InstantiatePrefab(randomTotemPrefab, new Vector3(position.x, height, position.y), Quaternion.identity, null).GetComponent<Totem>();
+        _globalBuildingContainer.Add(totem.GetComponent<BuildingEntity>());
     }
 }

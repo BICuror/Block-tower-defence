@@ -5114,6 +5114,8 @@ MonoBehaviour:
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 2
   _destroyOnDeath: 1
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: f887533d17d9e6244a9d4c8888a9167e, type: 3}
 --- !u!114 &5457603145016709662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5152,6 +5154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseOnInspection: 0
   _canBeIdleInspected: 0
   _localizationKey: booster_tower_building_entity_tooltip
 --- !u!114 &5781856286329589189

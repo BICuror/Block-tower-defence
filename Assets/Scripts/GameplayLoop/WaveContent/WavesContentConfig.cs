@@ -8,8 +8,8 @@ public sealed class WavesContentConfig : ScriptableObject
 {
     [SerializeField] private List<WaveContent> _waves;
     
-    public List<WaveContent> Waves => _waves;
-
+    public WaveContent GetWaveContent(int waveIndex) => _waves[waveIndex - 1];
+    
     private void OnValidate()
     {
         _waves.ForEach(wave => wave.SetInspectorIndex(_waves.IndexOf(wave) + 1));
@@ -26,6 +26,9 @@ public sealed class WavesContentConfig : ScriptableObject
     [SerializeField] private int _combinedItemStrength = 11;
     [SerializeField] private int _minimalItemStrength = 3;
     [SerializeField] private int _itemsAmount = 2;
+
+    [Header("OptionalTasks")] 
+    [SerializeField] private int _optionalTasksAmount = 2;
     
     public List<WaveContentType> Content => _content;
     
@@ -33,6 +36,7 @@ public sealed class WavesContentConfig : ScriptableObject
     public int CombinedItemStrength => _combinedItemStrength;
     public int MinimalItemStrength => _minimalItemStrength;
     public int ItemsAmount => _itemsAmount;
+    public int OptionalTasksAmount => _optionalTasksAmount;
     
     public void SetInspectorIndex(int index) => Name = $"Wave {index}";
 }

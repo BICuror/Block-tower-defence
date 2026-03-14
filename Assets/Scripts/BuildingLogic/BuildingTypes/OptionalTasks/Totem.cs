@@ -1,29 +1,29 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Cashing;
-using Combat;
+using Cysharp.Threading.Tasks;
 
-public sealed class Totem : MonoBehaviour
+public sealed class Totem : OptionalTask
 {
+    [SerializeField] private VisualEffectHandler _visualEffectHandler;
+    [SerializeField] private Sprite _nonactiveStateIcon;
     [SerializeField] private Sprite _activeStateIcon;
-    [SerializeField] private int _upgradeCharges = 2;
-    [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
-    [Inject] private EnemySpawnSystem _waveStateController;
     [Inject] private WaveStateMachine _waveStateMachine;
     [Cached] private ApplyEffectInArea _applyEffectInArea;
-    [Cached] private CombatEntity _ownerEntity;
     [Cached] private EntityCanvas _canvas;
     private EntityCanvasIcon _icon;
     private bool _totemState = true;
     
     private void Start()
     {
-        _waveStateController.LastWaveEnemyDied += GrantUpgradeChargesSync;
-        _ownerEntity.Activated += ToggleTotemState;
+        base.Start();
+        
+        OwnerEntity.Activated += ToggleTotemState;
 
-        UpdateIconState();
+        _icon = _canvas.AddIcon(_activeStateIcon);
     }
+
+    protected override bool IsCompleted() => _totemState;
 
     private void ToggleTotemState()
     {
@@ -38,21 +38,20 @@ public sealed class Totem : MonoBehaviour
 
     private void UpdateIconState()
     {
-        if (_totemState) _icon = _canvas.AddIcon(_activeStateIcon);
-        else _canvas.RemoveIcon(_icon);
-    }
-
-    private void GrantUpgradeChargesSync() => GrantUpgradeCharges().Forget();
-    private async UniTask GrantUpgradeCharges()
-    {
-        if (_totemState) await _upgradeChargeContainer.AddChargesWithAnimation(_upgradeCharges, transform);
-        
-        _ownerEntity.Health.Die();
+        if (_totemState)
+        {
+            _visualEffectHandler.PlayEffect();
+            _icon.SetIcon(_activeStateIcon);
+        }
+        else
+        {
+            _visualEffectHandler.StopPermamentEffect().Forget();
+            _icon.SetIcon(_nonactiveStateIcon);
+        }
     }
 
     private void OnDestroy()
     {
-        _waveStateController.LastWaveEnemyDied -= GrantUpgradeChargesSync;
-        _ownerEntity.Activated -= ToggleTotemState;
+        OwnerEntity.Activated -= ToggleTotemState;
     }
 }

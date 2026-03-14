@@ -10,15 +10,11 @@ public class DeathPropogationStrike : MonoBehaviour
     
     private void Start()
     {
-        _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage += KillEntity;
         _ownerEntity.Health.Died += LaunchPropogationStrike;
     }
 
-    private void KillEntity() => _ownerEntity.Health.Die();
-
     private void LaunchPropogationStrike()
     {
-        _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage -= KillEntity;
         _ownerEntity.Health.Died -= LaunchPropogationStrike;
         
         PropogationStrike propogationStrike = Instantiate(_propogationStrikePrefab, transform.position, Quaternion.identity);

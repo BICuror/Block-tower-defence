@@ -433,11 +433,12 @@ MonoBehaviour:
   _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _totemPrefabs:
   - {fileID: 5955889270673498647, guid: f61747bda8b589f4fa18db7875b02c11, type: 3}
-  _bloodTowerRadius: 3
+  - {fileID: 5955889270673498647, guid: f7e6a49c7b3f4de49805eceaea09f780, type: 3}
+  _bloodTowerRadius: 5
   _minimalCenterDistance: 6
-  _minRoadTilesInRadius: 8
-  _minimalAverageRoadWeight: 12
-  _maximalAverageRoadWeight: 25
+  _minRoadTilesInRadius: 11
+  _minimalAverageRoadWeight: 21
+  _maximalAverageRoadWeight: 1000
   _maximalRadius: 10
 --- !u!1 &32089741 stripped
 GameObject:
@@ -3295,8 +3296,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d860a239859372641a76c5c7e70edb81, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -3304,7 +3305,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!222 &631121142
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3891,7 +3892,7 @@ MonoBehaviour:
   _bloodTowerPrefab: {fileID: 2108226235141063515, guid: 31e636404eacdae42842dd3318d6299a, type: 3}
   _bloodTowerRadius: 3
   _requiredPercentFromSpawner: 0.25
-  _minimalCenterDistance: 6
+  _minimalCenterDistance: 7
   _maxRoadTilesInRadius: 18
   _minRoadTilesInRadius: 8
   _minimalAverageRoadWeight: 12
@@ -4033,8 +4034,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d860a239859372641a76c5c7e70edb81, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4042,7 +4043,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!222 &832524880
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4997,8 +4998,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d860a239859372641a76c5c7e70edb81, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5006,7 +5007,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!222 &1092959372
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5290,6 +5291,60 @@ Transform:
   - {fileID: 1622697886}
   m_Father: {fileID: 963194228}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1188723867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1188723868}
+  - component: {fileID: 1188723869}
+  m_Layer: 0
+  m_Name: ChargableTotemOptionalTaskGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1188723868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188723867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1415006998}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1188723869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188723867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15bb65afa567e354bae8d84fd4faca9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _terrainLayerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
+  _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
+  _chargableTotemPrefab: {fileID: 94815796258084472, guid: 75c1c28f45591f941938cb6d54577b42, type: 3}
+  _chargeTotemRadius: 3
+  _minimalCenterDistance: 6
+  _maxRoadTilesInRadius: 18
+  _minRoadTilesInRadius: 8
+  _minimalAverageRoadWeight: 12
+  _maximalAverageRoadWeight: 25
+  _maximalRadius: 10
 --- !u!114 &1189632683 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6745301357520427304, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
@@ -6689,8 +6744,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: d860a239859372641a76c5c7e70edb81, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6698,7 +6753,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!222 &1729654302
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14086,7 +14141,12 @@ MonoBehaviour:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 100
+  - StructName: ContactDamage
+    _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
+    _defaultValue: 20
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 0
+  _buildingDestroyedObjectPrefab: {fileID: 0}
 --- !u!114 &8464262724155894551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14387,7 +14447,7 @@ PrefabInstance:
       objectReference: {fileID: 4001142585134908024}
     - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _optionalTaskGenerators.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: '_optionalTaskGenerators.Array.data[0]'
@@ -14401,6 +14461,10 @@ PrefabInstance:
       propertyPath: '_optionalTaskGenerators.Array.data[2]'
       value: 
       objectReference: {fileID: 26635604}
+    - target: {fileID: 1412107851157380702, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: '_optionalTaskGenerators.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1188723869}
     - target: {fileID: 1808359881713834393, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: m_Name
       value: IslandGeneration
@@ -14577,6 +14641,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1
       addedObject: {fileID: 26635603}
+    - targetCorrespondingSourceObject: {fileID: 6200249474624281997, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1188723868}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 350825556538506194, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       insertIndex: -1

@@ -476,6 +476,7 @@ MonoBehaviour:
   - StructName: MaxDamageMultiplier
     _statData: {fileID: 11400000, guid: 6cf77be47666ffb4ca59e4bb4fd601cf, type: 2}
     _defaultValue: 40
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
 --- !u!114 &8306619306122458432
 MonoBehaviour:
@@ -501,6 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseOnInspection: 0
   _canBeIdleInspected: 0
   _localizationKey: inferno_tower_building_entity_tooltip
 --- !u!114 &9095846125503527913

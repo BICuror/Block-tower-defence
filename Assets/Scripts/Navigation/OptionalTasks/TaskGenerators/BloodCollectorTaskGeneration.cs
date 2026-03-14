@@ -73,7 +73,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
 
     private bool IsAValidBloodCollectorPosition(Vector2Int position)
     {
-        return TileMap.IsAValidRoadPosition(position, _roadMap) && 
+        return TileMap.IsInBounds(position, _roadMap) && 
                !TileMap.HasTile(position, _solidLayerSetting) &&
                !_roadMap[position.x, position.y] && 
                Vector2Int.Distance(position, _centerPosition) > _minimalCenterDistance &&

@@ -1,38 +1,15 @@
 using WorldGeneration;
-using UnityEngine;
-using Cashing;
 using Zenject;
-using Combat;
 
-public sealed class Chest : MonoBehaviour
+public sealed class Chest : OptionalTask
 {
-    [Cached] private CombatEntity _ownerEntity;
-    [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
-    [Inject] private EnemySpawnSystem _waveStateController;
-    [Inject] private ItemFactory _itemFactory;
     [Inject] private SpawnerRotator _spawnerRotator;
-    
-    [SerializeField] private int _chargesToSpawn = 2;
     
     private void Start()
     {
-        _waveStateController.LastWaveEnemyDied += CreateItem;
+        base.Start();
         _spawnerRotator.RotateSpawner(transform);
-        _ownerEntity.Health.Died += Unsubscribe;
     }
 
-    private async void CreateItem()
-    {
-        Unsubscribe();
-
-        await _upgradeChargeContainer.AddChargesWithAnimation(_chargesToSpawn, transform);
-        
-        _ownerEntity.Health.Die();
-    }
-
-    private void Unsubscribe()
-    {
-        _waveStateController.LastWaveEnemyDied -= CreateItem;
-        _ownerEntity.Health.Died -= Unsubscribe;
-    }
+    protected override bool IsCompleted() => true;
 }

@@ -13,11 +13,12 @@ namespace Combat
         [SerializeField] private HitShaker _hitShaker;
 
         [Cached] private EntityObjectModificatorContainer _entityObjectModificatorContainer;
+        [Cached] private EnemyContactDamager _enemyContactDamager;
+        [Cached] private InspectableObject _inspectableObject;
         [Cached] private NavigationAgent _navMeshAgent;
         [Cached] private StatContainer _statContainer;
         [Cached] private CombatEntity _combatEntity;
         [Cached] private EnemyHealth _enemyHealth;
-        [Cached] private InspectableObject _inspectableObject;
         [Cached] private HealthBar _healthBar;
         [Cached] private Collider _collider;
         
@@ -70,6 +71,8 @@ namespace Combat
             contactDamageStat.SetDefault(_enemyData.ContactDamage);
             
             _statContainer.AddStats(_enemyData.StatInitializers.ToArray());
+            
+            _enemyContactDamager.SetIsDestroyedOnContactDamage(_enemyData.DiesOnContact);
         }
     
         private void SetVisualData()

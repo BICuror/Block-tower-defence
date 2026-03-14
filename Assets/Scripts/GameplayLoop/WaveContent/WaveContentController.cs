@@ -53,6 +53,6 @@ public sealed class WaveContentController : MonoBehaviour
 
     private WaveContent GetCurrentWaveContent()
     {
-        return _islandDataContainer.Data.WavesContentConfig.Waves[_waveIndexContainer.GetCurrentWave() - 1];
+        return _islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave());
     }
 }

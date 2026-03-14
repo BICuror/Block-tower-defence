@@ -1,4 +1,5 @@
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class FasterCycleUntilKill : EntityModificator
 {
@@ -28,14 +29,14 @@ public sealed class FasterCycleUntilKill : EntityModificator
         
         _currentStacks++;
         _statModifier.SetMultiplier(_currentStacks * _taskMultiplierReducePerAction);
-        _bar.SetValue(_currentStacks / (float)_maxReduceStacks);
+        _bar.SetValue(_currentStacks / (float)_maxReduceStacks).Forget();
     }
 
     private void ResetStatModifier(CombatEntity _)
     {
         _currentStacks = 0;
         _statModifier.SetMultiplier(0f);
-        _bar.SetValue(0f);
+        _bar.SetValue(0f).Forget();
     }
 
     public override void Disable()

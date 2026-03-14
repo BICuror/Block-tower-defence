@@ -15,14 +15,14 @@ public sealed class EntityCanvasBar : ProgressBarBase
         _iconRenderer.sprite = iconSprite;
         _lastAssignedValue = value;
 
-        SetValue(value);
+        SetValue(value).Forget();
     }
 
-    public void SetValue(float value)
+    public async UniTask SetValue(float value)
     {
         if (_shakeOnValueChange) Shake();
         
-        FillBar(_lastAssignedValue, value, _tweenDuration).Forget();
+        await FillBar(_lastAssignedValue, value, _tweenDuration);
         
         _lastAssignedValue = value;
     }

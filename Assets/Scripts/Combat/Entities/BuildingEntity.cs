@@ -1,5 +1,5 @@
+using NaughtyAttributes;
 using UnityEngine;
-using Zenject;
 
 namespace Combat
 {
@@ -7,7 +7,10 @@ namespace Combat
     {
         [SerializeField] private bool _destroyOnDeath;
         
-        [Inject] private WaveStateMachine _waveStateMachine;
+        [Header("DestroyedObject")]
+        [SerializeField] private bool _leavesBuildingDestroyedObject = true;
+        [ShowIf("_leavesBuildingDestroyedObject")] [SerializeField] private BuildingDestroyedObject _buildingDestroyedObjectPrefab;
+        
         private BuildingHealth _health;
 
         public bool IsDestroyedOnDeath => _destroyOnDeath;
@@ -25,21 +28,18 @@ namespace Combat
             _health.Initialize();
             _health.RefilHP();
             _health.HandleDeath += HandleDeathEvent;
-
-            if (!_destroyOnDeath) _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted += RefillHealthOrRevive;
-        }
-
-        private void RefillHealthOrRevive()
-        {
-            if (!_health.IsAlive()) _health.ReviveBuilding();
-            
-            _health.ReceivePercentHeal(0.1f);
         }
 
         private void HandleDeathEvent()
         {
             gameObject.SetActive(false);
-            
+
+            if (_leavesBuildingDestroyedObject)
+            {
+                BuildingDestroyedObject buildingDestroyedObject = Instantiate(_buildingDestroyedObjectPrefab, transform.position, transform.rotation);
+                buildingDestroyedObject.SetEntity(this, _destroyOnDeath);
+            }
+
             if (_destroyOnDeath) Destroy(gameObject);
         }
     }

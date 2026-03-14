@@ -9,6 +9,7 @@ using Navigation;
 public sealed class EnemyData : ScriptableObject
 {
     [Header("Stats")] 
+    [SerializeField] private bool _diesOnContact;
     [SerializeField] private float _contactDamage = 10f;
     [SerializeField] private float _maxHealth = 25f;
     [SerializeField] private float _speed = 2f;
@@ -32,7 +33,8 @@ public sealed class EnemyData : ScriptableObject
     
     [SerializeField] private bool _hasObjectModificators;
     [ShowIf("_hasObjectModificators")] [SerializeField] private List<GameObject> _objectModificators;
-    
+
+    public bool DiesOnContact => _diesOnContact;
     public float ContactDamage => _contactDamage;
     public float MaxHealth => _maxHealth;
     public float Speed => _speed;

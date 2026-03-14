@@ -207,7 +207,7 @@ public static class TileMap
         
         return possiblePositions;
 
-        bool IsARoadTile(Vector2Int searchPosition) => IsAValidRoadPosition(searchPosition, roadMap) && roadMap[searchPosition.x, searchPosition.y];
+        bool IsARoadTile(Vector2Int searchPosition) => IsInBounds(searchPosition, roadMap) && roadMap[searchPosition.x, searchPosition.y];
     }
 
     #endregion
@@ -232,14 +232,14 @@ public static class TileMap
 
     #endregion
 
-    #region IsAValidMapPosition
+    #region IsInBounds
 
-    public static bool IsAValidRoadPosition(Vector2Int position, bool[,] roadMap)
+    public static bool IsInBounds(Vector2Int position, bool[,] roadMap)
     {
-        return IsAValidMapPosition(position.x, position.y, roadMap);
+        return IsInBounds(position.x, position.y, roadMap);
     }
 
-    public static bool IsAValidMapPosition(int x, int z, bool[,] roadMap)
+    public static bool IsInBounds(int x, int z, bool[,] roadMap)
     {
         return x >= 0 && z >= 0 && x < roadMap.GetLength(0) && z < roadMap.GetLength(1);
     }

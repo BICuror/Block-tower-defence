@@ -43,7 +43,7 @@ public sealed class RoadWeightMapGenerator : MonoBehaviour
             {
                 Vector2Int checkPosition = _checkDirections[i] + position;
                 
-                if (!TileMap.IsAValidRoadPosition(checkPosition, _roadMapHolder.Map)) continue;
+                if (!TileMap.IsInBounds(checkPosition, _roadMapHolder.Map)) continue;
                 
                 if (_roadMapHolder.Map[checkPosition.x, checkPosition.y])
                 {

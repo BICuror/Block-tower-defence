@@ -13,6 +13,11 @@ public sealed class EntityCanvasIcon : MonoBehaviour
         if (hasValue) SetValue(value);
     }
 
+    public void SetIcon(Sprite sprite)
+    {
+        _spriteRenderer.sprite = sprite;
+    }
+
     public void SetValue(int value)
     {
         _iconValue.text = value.ToString();

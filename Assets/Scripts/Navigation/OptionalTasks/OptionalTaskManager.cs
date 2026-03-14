@@ -7,8 +7,9 @@ using Zenject;
 
 public sealed class OptionalTaskManager : MonoBehaviour
 {
+    [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
-    [SerializeField] private int _maxOptionalTasksPerWave = 2;
+    [Inject] private WaveIndexContainer _waveIndexContainer;
     [SerializeField] private List<OptionalTaskGenerator> _optionalTaskGenerators;
     private List<AdditionalTaskLayerPrebuildData> _layerPrebuildDatas = new();
 
@@ -16,6 +17,8 @@ public sealed class OptionalTaskManager : MonoBehaviour
 
     public void GenerateTasksAndModifyRoadMap()
     {
+        int tasksToGenerate = GetRequiredTaskCount();
+        
         _layerPrebuildDatas.Clear();
 
         _optionalTaskGenerators = _optionalTaskGenerators.OrderBy(generator => Random.Range(0, _optionalTaskGenerators.Count)).ToList();
@@ -40,7 +43,14 @@ public sealed class OptionalTaskManager : MonoBehaviour
                 }
             }
             
-            if (tasksGenerated >= _maxOptionalTasksPerWave) break;
+            if (tasksGenerated >= tasksToGenerate) break;
         }
-    }   
+    }
+
+    private int GetRequiredTaskCount()
+    {
+        WavesContentConfig wavesContentConfig = _islandDataContainer.Data.WavesContentConfig;
+
+        return wavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).OptionalTasksAmount;
+    }
 }

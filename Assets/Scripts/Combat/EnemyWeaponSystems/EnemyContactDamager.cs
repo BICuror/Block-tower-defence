@@ -7,12 +7,15 @@ public sealed class EnemyContactDamager : MonoBehaviour
 {
     [Cached] private ContactDamage _contactDamage;
     [Cached] private CombatEntity _ownerEntity;
+    private bool _isDestroyedOnContactDamage;
     
     public event Action OnDealingContactDamage;    
+    
+    public void SetIsDestroyedOnContactDamage(bool isDestroyedOnContactDamage) => _isDestroyedOnContactDamage = isDestroyedOnContactDamage;
         
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.TryGetComponent<BuildingEntity>(out BuildingEntity buildingEntity))
+        if (other.gameObject.TryGetComponent(out BuildingEntity buildingEntity))
         {
             buildingEntity.Health.ReceiveEnemyDamage(_contactDamage.Value, _ownerEntity);
 
@@ -24,6 +27,8 @@ public sealed class EnemyContactDamager : MonoBehaviour
             _ownerEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(typeof(FearEffect), 1, 5f);
             
             OnDealingContactDamage?.Invoke();
+            
+            if (_isDestroyedOnContactDamage) _ownerEntity.Health.Die();
         }
     }
 }

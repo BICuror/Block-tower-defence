@@ -5702,7 +5702,7 @@ MonoBehaviour:
   _mainScanerControllers:
   - {fileID: 6962649217439341937}
   _hasPriority: 1
-  _priorityType: 2
+  _priorityType: 0
 --- !u!114 &3582716686241911845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5749,6 +5749,7 @@ MonoBehaviour:
   - StructName: PropogationRadius
     _statData: {fileID: 11400000, guid: 6fc83b23e4ce9c845a86c3f2c4687422, type: 2}
     _defaultValue: 1.5
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
 --- !u!114 &6026486521535129250
 MonoBehaviour:
@@ -5836,6 +5837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseOnInspection: 0
   _canBeIdleInspected: 0
   _localizationKey: lightning_tower_building_entity_tooltip
 --- !u!114 &6499896294953490330

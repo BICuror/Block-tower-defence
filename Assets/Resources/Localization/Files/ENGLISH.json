@@ -462,5 +462,15 @@
   "propogation_exploder_enemy_entity_tooltip_header": "Mage",
   "propogation_exploder_enemy_entity_tooltip_description": "Launches #Propogation on death or contact",
   "invoke_action_on_build_cycle_entity_modificator_tooltip_header": "Unity",
-  "invoke_action_on_build_cycle_entity_modificator_tooltip_description": "On build invokes #Action and starts build process again"
+  "invoke_action_on_build_cycle_entity_modificator_tooltip_description": "On build invokes #Action and starts build process again",
+  "healing_totem_entity_tooltip_header": "Healing totem",
+  "healing_totem_entity_tooltip_description": "#Enemies in #Area get 3 #Regeneration if active. On #Activation activates\\deactivates totem. At the end of the wave, if active, grants 2 #UpgradeCharge=Upgrade_charges",
+  "speed_totem_entity_tooltip_header": "Totem of speed",
+  "speed_totem_entity_tooltip_description": "#Enemies in #Area get 2 #SpeedUp if active. On #Activation activates\\deactivates totem. At the end of the wave, if active, grants 2 #UpgradeCharge=Upgrade_charges",
+  "destroyed_building_entity_tooltip_header": "Destroyed *",
+  "destroyed_building_entity_tooltip_description": "Building was destroyed, it will be revived at the end of this wave",
+  "destroyed_temporary_building_entity_tooltip_header": "Destroyed *",
+  "destroyed_temporary_building_entity_tooltip_description": "Building was destroyed",
+  "destroyed_optional_task_building_entity_tooltip_header": "Destroyed *",
+  "destroyed_optional_task_building_entity_tooltip_description": "Building was destroyed, it won't grant #UpgradeCharge=Upgrade_charges"
 }

@@ -135,6 +135,8 @@ MonoBehaviour:
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 20
   _destroyOnDeath: 1
+  _leavesBuildingDestroyedObject: 0
+  _buildingDestroyedObjectPrefab: {fileID: 0}
 --- !u!114 &7813293406362514702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b41222398266114da8e47bc109f91f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InspectableObject
+  _pauseOnInspection: 0
   _canBeIdleInspected: 0
   _localizationKey: rock_building_entity_tooltip
 --- !u!1 &9081913487005990000

@@ -4,6 +4,8 @@ using System;
 
 public sealed class MoveDiagonalyEntityModifier : EntityModificator
 {
+    public override bool CanBeApplied() => Entity.ComponentsContainer.Has<NavigationAgent>();
+    
     public override void Enable()
     {
         Entity.ComponentsContainer.Get<NavigationAgent>().SetNavigationAgentNodePicker(typeof(NavigationNodePickerDiagonalPicker));

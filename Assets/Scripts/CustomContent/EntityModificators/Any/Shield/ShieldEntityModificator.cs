@@ -1,6 +1,7 @@
 using Zenject;
 using System;
 using Combat;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public sealed class ShieldEntityModificator : EntityModificator
@@ -86,7 +87,7 @@ public sealed class ShieldEntityModificator : EntityModificator
     {
         if (!_shieldBar) return;
         
-        _shieldBar.SetValue(shieldHealthPercent);
+        _shieldBar.SetValue(shieldHealthPercent).Forget();
     }
 
     #endregion

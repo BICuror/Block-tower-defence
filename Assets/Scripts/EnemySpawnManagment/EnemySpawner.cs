@@ -13,6 +13,7 @@ namespace Combat
         
         public bool SpawnedAllEnemies => _enemiesToSpawn.Count == 0;
         public int EntitiesAmountToSpawn => _enemiesToSpawn.Count;
+        public List<EnemyData> EnemiesToSpawn => _enemiesToSpawn;
         
         public void SetEnemiesToSpawn(List<EnemyData> enemiesToSpawn)
         {

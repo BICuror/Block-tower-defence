@@ -460,7 +460,17 @@
   "lightning_global_propogation_entity_modificator_header": "Глобальный прыжок",
   "lightning_global_propogation_entity_modificator_description": "#good +{PropogationRadius_flat} good# #PropogationRadius #bad -{Damage_mult}% bad# #Damage #bad +{TaskRechargeDuration_flat} bad# #Recharge",
   "propogation_exploder_enemy_entity_tooltip_header": "Маг",
-  "propogation_exploder_enemy_entity_tooltip_description": "Запускает #Propogation при смерти или контакте",
+  "propogation_exploder_enemy_entity_tooltip_description": "Запускает #PropogationKeyword при смерти или контакте",
   "invoke_action_on_build_cycle_entity_modificator_tooltip_header": "Единство",
-  "invoke_action_on_build_cycle_entity_modificator_tooltip_description": "При постройке вызывает #Action=Действие и начинает постройку заново"
+  "invoke_action_on_build_cycle_entity_modificator_tooltip_description": "При постройке вызывает #Action=Действие и начинает постройку заново",
+  "healing_totem_entity_tooltip_header": "Тотем исцеления",
+  "healing_totem_entity_tooltip_description": "#Enemies=Враги в #Area=Зоне_действия получают 3 #Regeneration если тотем активен. При #Activation=Активации активирует\\деактивирует тотем. В конце волны, если активен, то даёт 2 #UpgradeCharge=Заряда_Улучшений",
+  "speed_totem_entity_tooltip_header": "Тотем скорости",
+  "speed_totem_entity_tooltip_description": "#Enemies=Враги в #Area=Зоне_действия получают 2 #SpeedUp если тотем активен. При #Activation=Активации активирует\\деактивирует тотем. В конце волны, если активен, то даёт 2 #UpgradeCharge=Заряда_Улучшений",
+  "destroyed_building_entity_tooltip_header": "Уничтоженная *",
+  "destroyed_building_entity_tooltip_description": "Здание было уничтоженно, оно будет восстановлено в конце этой волны",
+  "destroyed_temporary_building_entity_tooltip_header": "Уничтоженная *",
+  "destroyed_temporary_building_entity_tooltip_description": "Здание было уничтоженно",
+  "destroyed_optional_task_building_entity_tooltip_header": "Уничтоженная *",
+  "destroyed_optional_task_building_entity_tooltip_description": "Здание было уничтоженно, оно не сможет дать #UpgradeCharge=Заряды_улучшения"
 }

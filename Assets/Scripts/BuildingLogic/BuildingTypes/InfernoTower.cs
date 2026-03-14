@@ -1,6 +1,7 @@
 using UnityEngine;
 using Cashing;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class InfernoTower : DefaultCombatTaskConditionProvider
 {
@@ -121,7 +122,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     private void SetCharge(float value)
     {
         _beamSystem.SetAlpha(value);
-        _chargeBar.SetValue(value);
+        _chargeBar.SetValue(value).Forget();
         _infernoDamageModifier.SetCharge(value);
     }
 

@@ -10,17 +10,13 @@ public sealed class DeathExplotion : MonoBehaviour
     
     private void Start()
     {
-        _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage += KillEntity;
         _ownerEntity.Health.Died += Explode;
         
         _explosion.Initialize(_ownerEntity);
     }
 
-    private void KillEntity() => _ownerEntity.Health.Die();
-
     private void Explode()
     {
-        _ownerEntity.ComponentsContainer.Get<EnemyContactDamager>().OnDealingContactDamage -= KillEntity;
         _ownerEntity.Health.Died -= Explode;
         
         _explosion.Explode().Forget();

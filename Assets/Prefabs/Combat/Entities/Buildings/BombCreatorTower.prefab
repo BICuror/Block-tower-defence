@@ -231,21 +231,22 @@ MonoBehaviour:
     _defaultValue: 3
   - StructName: TaskRechargeDuration
     _statData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    _defaultValue: 3
+    _defaultValue: 2.7
   - StructName: ExplosionDamage
     _statData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    _defaultValue: 14
+    _defaultValue: 18
   - StructName: ExplosionRadius
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    _defaultValue: 2
+    _defaultValue: 1
   - StructName: MaxEntities
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     _defaultValue: 3
   - StructName: ExplosionDelay
     _statData: {fileID: 11400000, guid: 3cc872057f40f7542b58245ed6a75b0b, type: 2}
     _defaultValue: 1.5
-  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
 --- !u!114 &3759008627434136307
 MonoBehaviour:
   m_ObjectHideFlags: 0

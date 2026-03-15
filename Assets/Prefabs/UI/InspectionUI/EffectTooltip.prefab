@@ -539,8 +539,8 @@ MonoBehaviour:
   _uiElementFadeAnimator: {fileID: 1299467334483737672}
   _hoverableUIElement: {fileID: 1990945480896249891}
   _inspectionTooltipController: {fileID: 831877226779909529}
-  _mainPanelRectTransform: {fileID: 2076957776734564}
-  _mainRectTransform: {fileID: 6563496282593677064}
+  _mainPanelRectTransform: {fileID: 6563496282593677064}
+  _mainRectTransform: {fileID: 7265779237958072110}
   _descriptionTextField: {fileID: 3062069637111788858}
   _nameTextField: {fileID: 556102165209757992}
   _effectIcon: {fileID: 5883403360287159710}
@@ -585,7 +585,7 @@ MonoBehaviour:
   _subPanels:
   - {fileID: 2076957776734564}
   _rectTransform: {fileID: 6563496282593677064}
-  _staicOffset: {x: 35, y: 15}
+  _staicOffset: {x: 0, y: 15}
 --- !u!1 &8122914573572047714
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,7 +991,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac0dcfaa4433cc142b7ee583e1a6740f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::InspectionTooltipController
 --- !u!224 &8511498523063087370 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5993463597291143114, guid: c592f1106c7a58b48abf3fa5ae5ae0b3, type: 3}

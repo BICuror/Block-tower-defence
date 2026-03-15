@@ -4,12 +4,14 @@ using Combat;
 
 public sealed class HealBuildingOnShootInArea : EntityObjectModifier
 {
-    [Range(0f, 1f)] [SerializeField] private float _healPercent;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [Cached] private TaskCycle _taskCycle;
+    private float _healAmount;
     
     private void Start()
     {
+        _healAmount = Args.GetArgument<float>("HealAmount");
+        
         _taskCycle.TaskPerformed += TryToActivate;
     }
 
@@ -19,7 +21,7 @@ public sealed class HealBuildingOnShootInArea : EntityObjectModifier
 
         CombatEntity entity = _buildingAreaScaner.RandomItem;
         
-        entity.Health.ReceivePercentHeal(_healPercent);
+        entity.Health.ReceiveHeal(_healAmount);
     }
 
     private void OnDestroy()

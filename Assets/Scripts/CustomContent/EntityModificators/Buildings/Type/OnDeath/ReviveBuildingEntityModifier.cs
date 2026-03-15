@@ -1,16 +1,35 @@
-using UnityEngine;
+using Cysharp.Threading.Tasks;
+using Combat;
 
-public class ReviveBuildingEntityModifier : MonoBehaviour
+public sealed class ReviveBuildingEntityModifier : EntityModificator
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private BuildingHealth _buildingHealth;
+    private float _reviveDuration;
+    
+    public override bool CanBeApplied() => Entity.ComponentsContainer.Has<BuildingHealth>();
+    
+    public override void Enable()
     {
-        
+        _buildingHealth = Entity.ComponentsContainer.Get<BuildingHealth>();
+        _reviveDuration = Args.GetArgument<float>("ReviveDuration");
+
+        _buildingHealth.Died += StartReviveProcess;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void StartReviveProcess() => ReviveEntity().Forget();
+
+    private async UniTask ReviveEntity()
     {
-        
+        await UniTask.WaitForSeconds(_reviveDuration);
+
+        if (!Entity.Health.IsAlive())
+        {
+            Entity.ComponentsContainer.Get<BuildingEntity>().ReviveBuilding().Forget();
+        }
+    }
+    
+    public override void Disable()
+    {
+        _buildingHealth.Died -= StartReviveProcess;
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 using Combat;
 
-public sealed class CreateBoosterTower : EntityModificator
+public sealed class CreateTemporaryBuilding : EntityModificator
 {
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private DraggableCreator _draggableCreator;
@@ -23,18 +23,23 @@ public sealed class CreateBoosterTower : EntityModificator
         }
         else if (waveState == WaveState.Attack)
         {
-            TryDestroyTower();
+            TryDestroyTower().Forget();
         }
     }
 
     public override void Disable()
     {
         _waveStateMachine.StateEnded -= OnStateQuitStarted;
-        TryDestroyTower();
+        TryDestroyTower().Forget();
     }
 
-    private void TryDestroyTower()
+    private async UniTask TryDestroyTower()
     {
-        if (_createdTower) _createdTower.GetComponent<BuildingEntity>().Health.Die();
+        if (_createdTower)
+        {
+            await UniTask.WaitUntil(() => _createdTower.GetComponent<DraggableObject>().IsPlaced);
+            
+            _createdTower.GetComponent<BuildingEntity>().Health.Die();
+        }
     }
 }

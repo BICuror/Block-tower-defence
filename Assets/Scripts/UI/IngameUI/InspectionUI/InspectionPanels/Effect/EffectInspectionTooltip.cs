@@ -39,5 +39,5 @@ public sealed class EffectInspectionTooltip : InspectionPanelBase
         _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.GetDescription()));
     }
     
-    private Vector2 GetDynamicOffset() => new(_mainRectTransform.sizeDelta.x / 2f - _mainPanelRectTransform.sizeDelta.x / 2f, 0f);
+    private Vector2 GetDynamicOffset() => new(-_mainRectTransform.sizeDelta.x / 2f + _mainPanelRectTransform.sizeDelta.x / 2f, 0f);
 }

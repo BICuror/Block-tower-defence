@@ -1,5 +1,7 @@
+using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
+using System;
 
 namespace Combat
 {
@@ -10,11 +12,14 @@ namespace Combat
         [Header("DestroyedObject")]
         [SerializeField] private bool _leavesBuildingDestroyedObject = true;
         [ShowIf("_leavesBuildingDestroyedObject")] [SerializeField] private BuildingDestroyedObject _buildingDestroyedObjectPrefab;
+        private BuildingDestroyedObject _currentDestroyedObject;
         
         private BuildingHealth _health;
 
         public bool IsDestroyedOnDeath => _destroyOnDeath;
         public BuildingHealth BuildingHealth => _health;
+        
+        public event Action<BuildingEntity> BuildingRevived;
 
         private void Awake()
         {
@@ -29,6 +34,21 @@ namespace Combat
             _health.RefilHP();
             _health.HandleDeath += HandleDeathEvent;
         }
+        
+        public async UniTask ReviveBuilding()
+        {
+            if (_currentDestroyedObject)
+            {
+                await UniTask.WaitUntil(() => _currentDestroyedObject.CanBeRevived);
+
+                transform.position = _currentDestroyedObject.transform.position;
+                _currentDestroyedObject.Destroy().Forget();
+            }
+            
+            gameObject.SetActive(true);
+            Health.ReceivePercentHeal(0.1f);
+            BuildingRevived?.Invoke(this);
+        }
 
         private void HandleDeathEvent()
         {
@@ -36,8 +56,8 @@ namespace Combat
 
             if (_leavesBuildingDestroyedObject)
             {
-                BuildingDestroyedObject buildingDestroyedObject = Instantiate(_buildingDestroyedObjectPrefab, transform.position, transform.rotation);
-                buildingDestroyedObject.SetEntity(this, _destroyOnDeath);
+                _currentDestroyedObject = Instantiate(_buildingDestroyedObjectPrefab, transform.position, transform.rotation);
+                _currentDestroyedObject.SetEntity(this, _destroyOnDeath);
             }
 
             if (_destroyOnDeath) Destroy(gameObject);

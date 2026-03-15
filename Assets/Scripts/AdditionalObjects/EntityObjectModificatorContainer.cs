@@ -19,11 +19,12 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
         return modificatorPrefab.CanBeAppliedToEntity(_ownerEntity);
     }
     
-    public EntityObjectModifier InstantiateAndAddModificator(EntityObjectModifier modificatorPrefab)
+    public EntityObjectModifier InstantiateAndAddModificator(EntityObjectModifier modificatorPrefab, ArgumentsContainer argumentsContainer)
     {
         EntityObjectModifier modificator = _diContainer.InstantiatePrefab(modificatorPrefab, transform).GetComponent<EntityObjectModifier>();
         
         _ownerEntity.InjectCachedToObjectAndChildren(modificator.gameObject);
+        modificator.SetArgumentsContainer(argumentsContainer);
         AdaptObjectModifier(modificator.gameObject);
         _modificators.Add(modificator);
 

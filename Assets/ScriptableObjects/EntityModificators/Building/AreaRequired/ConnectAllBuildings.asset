@@ -10,31 +10,58 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: CreateBoosterTower
+  m_Name: ConnectAllBuildings
   m_EditorClassIdentifier: 
-  _icon: {fileID: -2031328269, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: create_booster_tower_entity_modificator_tooltip
+  _icon: {fileID: 814398628, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: connect_buildings_in_area_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 2
-      _argumentName: TowerPrefab
+    - _argumentType: 7
+      _argumentName: ObjectModificator
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.45
+      _floatArgument: 0.1
       _stringArgument: 
-      _gameObjectArgument: {fileID: 2785648769302265666, guid: b8233cd0cb95f464cabeee5ab7e64d1b, type: 3}
+      _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 6413476263091842070, guid: e1a34afa6ed32c0468b9cad5bd421e72, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: BeamDamage
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 30
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 6413476263091842070, guid: e1a34afa6ed32c0468b9cad5bd421e72, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: BeamDamagePeriod
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.25
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 6413476263091842070, guid: e1a34afa6ed32c0468b9cad5bd421e72, type: 3}
       _layerSetting: {fileID: 0}
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
   _showInInspector: 1
   _itemTypeContainers:
-  - _itemTypeName: CreateBoosterTower
+  - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -44,11 +71,13 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -59,11 +88,14 @@ MonoBehaviour:
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -72,6 +104,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill

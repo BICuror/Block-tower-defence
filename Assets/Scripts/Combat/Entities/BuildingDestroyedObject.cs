@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using Combat;
+using Cysharp.Threading.Tasks;
 
 public sealed class BuildingDestroyedObject : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public sealed class BuildingDestroyedObject : MonoBehaviour
     private BuildingEntity _buildingEntity;
     private bool _destroyedOnDeath;
     
+    public bool CanBeRevived => _draggableObject.IsPlaced;
+
     public void SetEntity(BuildingEntity entity, bool destroyOnDeath)
     {
         _buildingEntity = entity;
@@ -21,17 +24,22 @@ public sealed class BuildingDestroyedObject : MonoBehaviour
 
         _waveStateMachine.GetWaveStateController(WaveState.Attack).QuitStateCompleted += OnWaveEnd;
     }
-
-    private void OnWaveEnd()
+    
+    public async UniTask Destroy()
     {
         _waveStateMachine.GetWaveStateController(WaveState.Attack).QuitStateCompleted -= OnWaveEnd;
-        
-        if (!_destroyedOnDeath)
-        {
-            _buildingEntity.transform.position = transform.position;
-            _buildingEntity.BuildingHealth.ReviveBuilding();
-        }
+
+        await UniTask.WaitWhile(() => !_draggableObject.IsPlaced);
         
         Destroy(gameObject);
+    }
+    
+    private void OnWaveEnd() 
+    { 
+        if (!_destroyedOnDeath) 
+        { 
+            _buildingEntity.ReviveBuilding().Forget();
+        }
+        else Destroy().Forget();
     }
 }

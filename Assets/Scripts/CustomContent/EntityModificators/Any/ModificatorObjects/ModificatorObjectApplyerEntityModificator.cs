@@ -13,7 +13,7 @@ public sealed class ModificatorObjectApplyerEntityModificator : EntityModificato
     {
         EntityObjectModifier prefab = Args.GetArgument<EntityObjectModifier>("ObjectModificator");
         
-        _instantiatedObjectModificator = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(prefab);
+        _instantiatedObjectModificator = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(prefab, Args);
     }
 
     public override void Disable()

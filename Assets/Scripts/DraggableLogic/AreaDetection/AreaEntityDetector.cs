@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using Cashing;
 
@@ -27,6 +28,16 @@ namespace Combat
             if (other.gameObject.TryGetComponent(out CombatEntity entity))
             {
                 RemoveEntity(entity);
+            }
+        }
+
+        private void RemoveAll()
+        {
+            int itemsAmount = List.Count;
+
+            for (int i = 0; i < itemsAmount; i++)
+            {
+                RemoveEntity(List[^1]);
             }
         }
         

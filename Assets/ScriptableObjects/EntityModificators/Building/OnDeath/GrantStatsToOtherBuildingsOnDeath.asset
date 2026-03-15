@@ -10,82 +10,83 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: HealBuildingsInArea
+  m_Name: GrantStatsToOtherBuildingsOnDeath
   m_EditorClassIdentifier: 
-  _icon: {fileID: -368388063, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: heal_buildings_in_area_entity_modificator_tooltip
+  _icon: {fileID: 0}
+  _localizationKey: grant_stats_on_death_to_other_buildings_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 7
-      _argumentName: ObjectModificator
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 2355596974610366607, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 6018946194359616491, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+    _argumentItems: []
   _showInInspector: 1
   _itemTypeContainers:
-  - _itemTypeName: ModificatorObjectApplyerEntityModificator
+  - _itemTypeName: GrantStatsToAllBuildingssOnDeathEntityModificator
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
     - CreateBoosterTower
     - CreateEggOnDeath
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   _rarity: 2
-  _tags: 00000000
+  _tags: 
   _effectType: 0
-  _hasStacks: 0
-  _maxStacks: 0
+  _hasStacks: 1
+  _maxStacks: 3
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 1
+  _hasBlockTags: 0
   _blockOwnerTags:
     Requirements: []
   _blockOtherEntityTags:
-    Requirements:
-    - Tag: 0
-      Amount: 1
+    Requirements: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
+    FlatChange: 5
+    MultiplierChange: 0
+  _statInitializers: []

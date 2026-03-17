@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -10,20 +12,38 @@ namespace WorldGeneration
         [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
         [Inject] private RoadNodeGenerator _roadNodeGenerator;
         [Inject] private RoadMapHolder _roadMapHolder;
-        
+
         private IslandData _islandData => _islandDataContainer.Data;
 
-        public void GenerateRoads()
+        public async UniTask GenerateRoads()
         {
+            await GenerateRoadMap();
+            
+            AddCenterRoad();
+        }
+
+        private async UniTask GenerateRoadMap()
+        {
+            bool isComplete = false;
+            
             List<Vector2Int> spawnerNodes = _enemyBiomeContainer.GetEnemyBiomesPositions();
 
             Vector2Int[,] roadNodes = _roadNodeGenerator.GetAllNodes();
-
-            bool[,] roadMap = _islandData.RoadMapGenerationAlgorithm.GenerateRoadMap(roadNodes, spawnerNodes, _islandData);
             
-            _roadMapHolder.SetRoadMap(roadMap);
+            _islandData.RoadMapGenerationAlgorithm.SetRandomSeed(Random.Range(int.MinValue, int.MaxValue));
+            
+            Thread roadGenerationThread = new Thread(() => 
+            {
+                bool[,] roadMap = _islandData.RoadMapGenerationAlgorithm.GenerateRoadMap(roadNodes, spawnerNodes, _islandData);
 
-            AddCenterRoad();
+                _roadMapHolder.SetRoadMap(roadMap);
+            
+                isComplete = true;
+            });
+            
+            roadGenerationThread.Start();
+
+            await UniTask.WaitUntil(() => isComplete);
         }
 
         private void AddCenterRoad()

@@ -5027,7 +5027,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6457869471833738900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f8ab3ca28982e57448ba790e596d962d, type: 3}
   m_Name: 
@@ -5063,16 +5063,16 @@ MonoBehaviour:
       - _BaseColor
       _meshRenderer: {fileID: 1964877568536517903}
       _material: {fileID: 2100000, guid: b5ad62d56a0038e4ab515a4a8c7d3bbb, type: 2}
-      _color: {r: 0.06666667, g: 0.16078432, b: 0.2627451, a: 1}
+      _color: {r: 0.13725491, g: 0.23529412, b: 0.34117648, a: 1}
     - _propertyNames:
       - _Color
       _meshRenderer: {fileID: 3266508396694505207}
       _material: {fileID: 2100000, guid: 317235798f7a69d4c8846682542f2016, type: 2}
-      _color: {r: 0.17254902, g: 0.36078432, b: 0.5647059, a: 1}
+      _color: {r: 0.4509804, g: 0.654902, b: 0.7647059, a: 1}
     _enviromentLightChanges:
     - _light: {fileID: 509359543622926259}
       _intensity: 0.3
-      _color: {r: 0.94509804, g: 0.8039216, b: 0.7882353, a: 1}
+      _color: {r: 0.41568628, g: 0.6392157, b: 0.8862745, a: 1}
     _volumeProfile: {fileID: 11400000, guid: 8c226320fd1ecde4d8d4faa7b499fb5a, type: 2}
   - _enviromentMaterialChanges:
     - _propertyNames:
@@ -5148,16 +5148,16 @@ MonoBehaviour:
       - _BaseColor
       _meshRenderer: {fileID: 1964877568536517903}
       _material: {fileID: 2100000, guid: b5ad62d56a0038e4ab515a4a8c7d3bbb, type: 2}
-      _color: {r: 0.25490198, g: 0.45882353, b: 0.48235294, a: 1}
+      _color: {r: 0.36862746, g: 0.7921569, b: 0.8392157, a: 1}
     - _propertyNames:
       - _Color
       _meshRenderer: {fileID: 3266508396694505207}
       _material: {fileID: 2100000, guid: 317235798f7a69d4c8846682542f2016, type: 2}
-      _color: {r: 0.34509805, g: 0.6509804, b: 0.78431374, a: 1}
+      _color: {r: 0.37254903, g: 0.69803923, b: 0.7647059, a: 1}
     _enviromentLightChanges:
     - _light: {fileID: 509359543622926259}
       _intensity: 1
-      _color: {r: 0.7921569, g: 0.7499513, b: 0.6, a: 1}
+      _color: {r: 0.9607843, g: 0.8, b: 0.78431374, a: 1}
     _volumeProfile: {fileID: 11400000, guid: dfdc0709a04156d4d87c43c1c09d305c, type: 2}
   _changeDuration: 6
   _rainParticles: {fileID: 1007363888413050465}
@@ -10169,7 +10169,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -0.6666667, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 40, y: 40, z: 40}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5421183739841777320}
@@ -10181,7 +10181,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8467198588702299557}
-  m_Mesh: {fileID: 4300000, guid: 1340630fb7a3267499177be33f281f05, type: 3}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1964877568536517903
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -5,11 +5,21 @@ namespace WorldGeneration
 {
     public abstract class RoadGenerationAlgorithm : ScriptableObject
     {
-        protected bool[,] _roadMap;
         protected IslandData _islandData;
+        protected bool[,] _roadMap;
+        private System.Random _random;
+        private int _randomSeed;
 
         public abstract bool[,] GenerateRoadMap(Vector2Int[,] roadNodes, List<Vector2Int> spawnerNodes, IslandData islandData);
 
+        public void SetRandomSeed(int seed)
+        {
+            _randomSeed = seed;
+            _random = new System.Random(_randomSeed);
+        }
+        
+        public int Random(int min, int max) => _random.Next(min, max);
+        
         protected int NormalizeNumber(int num)
         {
             if (num == 0) return 0;
@@ -62,7 +72,7 @@ namespace WorldGeneration
             if (previousDirectionsSum.x > previousDirectionsSum.y) return new Vector2Int(0, yDifference);
             if (previousDirectionsSum.y > previousDirectionsSum.x) return new Vector2Int(xDifference, 0);
             
-            if (Random.value >= 0.5f) return new Vector2Int(0, yDifference);
+            if (Random(0, 100) >= 50f) return new Vector2Int(0, yDifference);
             return new Vector2Int(xDifference, 0);
         }
     }

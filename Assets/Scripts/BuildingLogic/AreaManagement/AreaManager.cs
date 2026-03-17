@@ -21,9 +21,9 @@ public class AreaManager : MonoBehaviour
     private void Start()
     {
         _reachAreaScale.ValueChanged += _ => UpdateScale();
-        UpdateScale();
-
+        
         UpdateAllScanersPriorityAlgorithm();
+        UpdateScale();
     }
 
     public void SetPriorityType(AreaEntityDetectorPriorityType priorityType)

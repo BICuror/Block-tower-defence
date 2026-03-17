@@ -4,8 +4,6 @@ using System.Linq;
 using UnityEngine;
 using System;
 
-using Random = UnityEngine.Random;
-
 [CreateAssetMenu(fileName = "RoadPartGenertationAlgorithm", menuName = "Generation/RoadMapGeneratoionAlgorithm/RoadPartGenertationAlgorithm")]
 
 public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
@@ -33,7 +31,6 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
         _centerIndex = islandData.CenterPositionIndex;
         
-
         for (int i = 0; i < spawnerNodes.Count; i++)
         {  
             _roadMap[spawnerNodes[i].x, spawnerNodes[i].y] = true;
@@ -55,7 +52,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
         {
             List<Vector2Int> spawnerNodesShuffled = new List<Vector2Int>(spawnerNodes);
             
-            spawnerNodesShuffled = spawnerNodesShuffled.OrderBy(position => Random.Range(0, spawnerNodesShuffled.Count)).ToList();
+            spawnerNodesShuffled = spawnerNodesShuffled.OrderBy(position => Random(0, spawnerNodesShuffled.Count)).ToList();
             
             Debug.Log("REITERATED");
             
@@ -84,7 +81,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
     
     private bool IterateNextRoadStep(Vector2Int currentPosition, RoadPartData lastUsedRoadPartData)
     {
-        List<RoadPartData> roadPartDatas = _roadPartDatas.OrderBy(item => Random.Range(0, _roadPartDatas.Count)).ToList();
+        List<RoadPartData> roadPartDatas = _roadPartDatas.OrderBy(item => Random(0, _roadPartDatas.Count)).ToList();
 
         if (lastUsedRoadPartData != null)
         {
@@ -101,7 +98,7 @@ public sealed class RoadPartGenertationAlgorithm : RoadGenerationAlgorithm
 
             List<RoadPartTileState[,]> rotatedGrids = GetAllRotatedGridParts(partData.GetTileGrid());
             
-            rotatedGrids = rotatedGrids.OrderBy(item => Random.Range(0, rotatedGrids.Count)).ToList();
+            rotatedGrids = rotatedGrids.OrderBy(item => Random(0, rotatedGrids.Count)).ToList();
 
             for (int gridRotationIndex = 0; gridRotationIndex < rotatedGrids.Count; gridRotationIndex++)
             {

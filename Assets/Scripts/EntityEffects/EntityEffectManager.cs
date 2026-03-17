@@ -13,6 +13,7 @@ namespace Combat
         [Cached] private EntityHealth _entityHealth;
         private Dictionary<Type, EntityEffect> _appliedEffects = new();
         private Dictionary<Type, EntityEffectRemovalHandler> _removalHandlers = new();
+        private List<Type> _effectImmunities = new();
         
         public List<Type> AppliedEffectTypes => _appliedEffects.Keys.ToList();
         public Dictionary<Type, EntityEffect> AppliedEffects => _appliedEffects;
@@ -31,6 +32,10 @@ namespace Combat
             draggableObject.PickedUp += RemoveAllEffects;
         }
         
+        public void AddEffectImmunity(Type effectType) => _effectImmunities.Add(effectType);
+        
+        public void RemoveEffectImmunity(Type effectType) => _effectImmunities.Remove(effectType);
+        
         public bool HasEffect(EntityEffectType effectType) => _appliedEffects.Values.ToList().Exists(effect => effect.EffectType == effectType);
         
         public bool HasEffect(Type effectType) => _appliedEffects.ContainsKey(effectType);
@@ -39,7 +44,7 @@ namespace Combat
 
         public void TryApplyTemporaryEffect(Type effectType, int strength, float duration)
         {
-            if (!EffectsCanBeApplied) return;
+            if (!EffectsCanBeApplied || _effectImmunities.Contains(effectType)) return;
 
             if (_appliedEffects.TryGetValue(effectType, out EntityEffect exsistingEffect))
             {
@@ -72,7 +77,7 @@ namespace Combat
         
         public void TryApplyEffect(Type effectType, int strength)
         {
-            if (!EffectsCanBeApplied) return;
+            if (!EffectsCanBeApplied || _effectImmunities.Contains(effectType)) return;
             
             if (_appliedEffects.TryGetValue(effectType, out EntityEffect exsistingEffect))
             {

@@ -1,3 +1,4 @@
+using System;
 using Combat.Animation;
 using UnityEngine;
 using Navigation;
@@ -43,6 +44,8 @@ namespace Combat
             
             _inspectableObject.SetLocalizationKey(enemyDataToSet.LocalizationKey);
 
+            ApplyEntityEffectImmunities();
+
             if (initializeModificators)
             {
                 TryCreateSpecialObjects();
@@ -55,6 +58,8 @@ namespace Combat
                 _navMeshAgent.Enable();
             }
         }
+
+        #region ApplyData
 
         private void SetStats()
         {
@@ -103,6 +108,20 @@ namespace Combat
                 _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(entityModificatorData);
             });
         }
+        
+        private void ApplyEntityEffectImmunities()
+        {
+            _enemyData.EffectImmunities.ForEach(effectType =>
+            {
+                Type entityEffectType = Type.GetType(effectType);
+                
+                _combatEntity.ComponentsContainer.Get<EntityEffectManager>().AddEffectImmunity(entityEffectType);
+            });
+        }
+
+        #endregion
+
+        #region RemoveData
 
         private void TryRemoveEntityModificators()
         {
@@ -114,11 +133,24 @@ namespace Combat
             });
         }
 
+        private void RemoveEntityEffectImmunities()
+        {
+            _enemyData.EffectImmunities.ForEach(effectType =>
+            {
+                Type entityEffectType = Type.GetType(effectType);
+                
+                _combatEntity.ComponentsContainer.Get<EntityEffectManager>().RemoveEffectImmunity(entityEffectType);
+            });
+        }
+        
+        #endregion
+
         private void OnEnemyDeath()
         {
             TryRemoveEntityModificators();
             _entityObjectModificatorContainer.DestroyAllModificators();
             _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
+            RemoveEntityEffectImmunities();
             
             _navMeshAgent.Disable();
         }

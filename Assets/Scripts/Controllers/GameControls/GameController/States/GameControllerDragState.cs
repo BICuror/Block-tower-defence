@@ -8,6 +8,7 @@ using System;
 public sealed class GameControllerDragState : GameControllerState
 {
     [SerializeField] private InspectorController _inspectorController;
+    [SerializeField] private CursorController _cursorController;
     [SerializeField] private DragController _dragController;
     
     private GameControls _controls;
@@ -46,6 +47,8 @@ public sealed class GameControllerDragState : GameControllerState
         _dragController.PickUpDraggable(GetPointerPosition());
         
         DragObject().Forget();
+        
+        _cursorController.SetCursorState(CursorController.CursorState.Drag);
     }
 
     private async UniTask DragObject()

@@ -27,3 +27,8 @@ MonoBehaviour:
     ReplacedKey: color=#858585
   - InitialKey: com
     ReplacedKey: color=#B7B7B7
+  _replaceableParseDatas:
+  - InitialKey: startTag
+    ReplacedKey: '<sprite name=PointerTooltipIcon> '
+  - InitialKey: '|'
+    ReplacedKey: '\n<sprite name=PointerTooltipIcon> '

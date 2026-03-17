@@ -11,13 +11,7 @@ public sealed class AOEBehaviour : CombatBehaviour<Vector3>, IDisposable
     {
         Args = args;
     }
-
-    protected override void OnOwnerEntitySet()
-    {
-        Entity.StatContainer.AddStatIfDoesntExist<AOERadius>(Args, "AOERadius");
-        Entity.StatContainer.AddStatIfDoesntExist<AOEDamageMultiplier>(Args, "AOEDamageMultiplier");
-    }
-
+    
     public override void Execute(Vector3 explotionPosition)
     {
         Explode(explotionPosition).Forget();

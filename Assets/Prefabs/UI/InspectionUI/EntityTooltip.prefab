@@ -2921,8 +2921,8 @@ CanvasGroup:
   m_GameObject: {fileID: 5315765595677308835}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &3960152035541416729
 MonoBehaviour:
@@ -4634,7 +4634,7 @@ MonoBehaviour:
   m_fontSizeMin: 0.5
   m_fontSizeMax: 15
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

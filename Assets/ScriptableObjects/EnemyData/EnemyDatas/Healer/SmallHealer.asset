@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: SmallHealer
   m_EditorClassIdentifier: 
+  _diesOnContact: 0
   _contactDamage: 5
   _maxHealth: 60
   _speed: 1.75
@@ -19,6 +20,8 @@ MonoBehaviour:
   - StructName: 
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 1
+  _effectImmunities:
+  - HealEffect
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: -1953288486275512048, guid: a0e7b449535191e43b71fe53951499c6, type: 3}
   _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}

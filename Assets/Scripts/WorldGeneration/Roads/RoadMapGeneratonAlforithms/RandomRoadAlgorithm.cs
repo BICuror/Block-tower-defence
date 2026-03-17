@@ -74,7 +74,7 @@ namespace WorldGeneration
 
                 if (shouldUseRandomDirection)
                 {
-                    Vector2Int randomDirection = _randomDirections[Random.Range(0, _randomDirections.Length)];
+                    Vector2Int randomDirection = _randomDirections[Random(0, _randomDirections.Length)];
 
                     if (IsInBorders(randomDirection + currentPosition)) direction = randomDirection;
                 }
@@ -85,7 +85,7 @@ namespace WorldGeneration
                 
                 if (direction.x != 0 && direction.y != 0)
                 {
-                    if (Random.Range(0, 100) > 50) direction.x = 0;
+                    if (Random(0, 100) > 50) direction.x = 0;
                     else direction.y = 0;
                 }
 
@@ -104,8 +104,8 @@ namespace WorldGeneration
 
         private bool ShouldUseRandomDirection(int currentIteration)
         {
-            if (currentIteration < _maxIteraions && Random.Range(0f, 1f) <= _chanseForRandomDirection) return true;
-            else if (currentIteration >= _maxIteraions && Random.Range(0f, 1f) <= _chanseForRandomDirectionAfterAllIterations) return true;
+            if (currentIteration < _maxIteraions && Random(0, 100) <= _chanseForRandomDirection * 100) return true;
+            else if (currentIteration >= _maxIteraions && Random(0, 100) <= _chanseForRandomDirectionAfterAllIterations * 100) return true;
             else return false;
         }
 

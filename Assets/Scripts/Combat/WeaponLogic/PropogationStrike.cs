@@ -32,8 +32,6 @@ public sealed class PropogationStrike : WeaponBase
     public async UniTask StartPropogationStrike(CombatEntity initialEntity, Vector3 startPosition)
     {
         await _beamSystem.ReachTargetAndSetIt(startPosition, initialEntity.transform, _stepDuration);
-        
-        if (!initialEntity || !initialEntity.gameObject.activeSelf) return;
             
         await StartPropogationStrike(initialEntity);
     }

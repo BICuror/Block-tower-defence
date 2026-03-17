@@ -43,7 +43,7 @@ public sealed class IdleStateController : WaveStateController
 
         _enemySpawnGroupCompiler.GenerateWaveSeed();
         
-        RegenerateRoads();
+        await RegenerateRoads();
         
         RegenerateEnemyBiomes();
         
@@ -85,11 +85,11 @@ public sealed class IdleStateController : WaveStateController
         _enemyBiomesContainer.GenerateBiomesDecorations();
     }
     
-    private void RegenerateRoads()
+    private async UniTask RegenerateRoads()
     {
         RandomExstentions.ReInitializeUnityRandom();
-        
-        _roadMapGenerator.GenerateRoads();
+
+        await _roadMapGenerator.GenerateRoads();
         _roadWeightMapGenerator.GenerateRoadWeightMap();
         
         _optionalTaskManager.GenerateTasksAndModifyRoadMap();
@@ -102,6 +102,6 @@ public sealed class IdleStateController : WaveStateController
     public void RegenerateRoadsButton()
     {
         FindObjectsByType<OptionalTask>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList().ForEach(bloodCollector => bloodCollector.gameObject.GetComponent<CombatEntity>().Health.Die());
-        RegenerateRoads();
+        RegenerateRoads().Forget();
     }
 }

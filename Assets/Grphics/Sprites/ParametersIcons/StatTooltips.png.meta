@@ -1042,7 +1042,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1051,6 +1051,28 @@ TextureImporter:
       bones: []
       spriteID: 34daa221841dce5458552e02b786c747
       internalID: -364146219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PointerTooltipIcon
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 495
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 971d744ac9d2f4749be4475e356a38f1
+      internalID: 442996351
       vertices: []
       indices: 
       edges: []
@@ -1098,6 +1120,7 @@ TextureImporter:
       OnKillTooltip: -1791193441
       OrbitalSpeedTooltipIcon: -1412815817
       PiercingTooltip: 1683251753
+      PointerTooltipIcon: 442996351
       PoisonEffectTooltip: -1439210628
       ProjectileSpeedTooltip: -53656890
       PropogationDamageMultiplierTooltip: 672983621

@@ -6,6 +6,7 @@ public sealed class GameCameraPositionDragState : GameControllerState
     [SerializeField] private CameraRotationController _cameraRotationController;
     [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private InspectorController _inspectorController;
+    [SerializeField] private CursorController _cursorController;
     [SerializeField] private DragController _dragController;
     private GameControls _controls;
 
@@ -34,6 +35,8 @@ public sealed class GameCameraPositionDragState : GameControllerState
         _cameraPositionController.CaptureCameraPosition(GetPointerPosition());
 
         RepositionCamera().Forget();
+        
+        _cursorController.SetCursorState(CursorController.CursorState.Move);
     }
 
     private async UniTask RepositionCamera()

@@ -14,7 +14,7 @@ public abstract class InspectableData : ScriptableObject
     [CustomAssetIcon] public Sprite Icon => _icon;
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
     public string GetName() => (_localizationKey + "_header").Localize();
-    public string GetDescription() => ParseDescription((_localizationKey + "_description").Localize());
+    public string GetDescription() => ParseDescription("startTag " + (_localizationKey + "_description").Localize());
     
     private string ParseDescription(string initialDescription)
     {

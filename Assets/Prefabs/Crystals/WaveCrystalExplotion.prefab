@@ -70,19 +70,19 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 2.027346, y: 1.182259, z: 2.3468063, w: 0}
+      - m_Value: {x: 0, y: 0.60382754, z: 0.597202, w: 0}
         m_Name: CircleImpactColor
         m_Overridden: 1
-      - m_Value: {x: 2.7750607, y: 1.3456426, z: 2.1431074, w: 1}
+      - m_Value: {x: 0, y: 4.205299, z: 3.9775455, w: 1}
         m_Name: BigSphereColor
         m_Overridden: 1
-      - m_Value: {x: 2, y: 0.5735848, z: 2, w: 1}
+      - m_Value: {x: 0, y: 2.774463, z: 2.4502962, w: 1}
         m_Name: MedumSphereColor
         m_Overridden: 1
-      - m_Value: {x: 3.2111173, y: 0.4954725, z: 3.2111173, w: 0}
+      - m_Value: {x: 0, y: 0.60382754, z: 0.5457247, w: 0}
         m_Name: SmallSphereColor
         m_Overridden: 1
-      - m_Value: {x: 3.0317595, y: 0.98389167, z: 3.0317595, w: 1}
+      - m_Value: {x: 0, y: 1.8304628, z: 1.8304628, w: 1}
         m_Name: SparksColor
         m_Overridden: 1
     m_Uint:
@@ -126,6 +126,11 @@ VFXRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -145,9 +150,11 @@ VFXRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
 --- !u!114 &8324663063960217067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,3 +169,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stopAction: 1
   _visualEffect: {fileID: 8225904345069887624}
+  _detachFromParentWhilePlaying: 0

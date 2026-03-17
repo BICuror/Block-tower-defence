@@ -30,12 +30,27 @@ public sealed class VisualTextParser : MonoBehaviour
     
     public string ParseTooltipText(string tooltipText, bool fullTag = true)
     {
+        tooltipText = ReplaceReplaceableTags(tooltipText);
         tooltipText = ParseTooltipTextByTagDatas(tooltipText, fullTag);   
         tooltipText = ParseByParseData(tooltipText);
         
         return tooltipText;
     }
 
+    #region ReplaceTags
+
+    public string ReplaceReplaceableTags(string tooltipText)
+    {
+        _tooltipTextParseDataContainer.ReplaceableParseDatas.ForEach(replaceableParseData =>
+        {
+            tooltipText = tooltipText.Replace(replaceableParseData.InitialKey, replaceableParseData.ReplacedKey);
+        });
+        
+        return tooltipText;
+    }
+
+    #endregion
+    
     #region TagParse
 
     private string ParseTooltipTextByTagDatas(string tooltipText, bool fullTag = true)

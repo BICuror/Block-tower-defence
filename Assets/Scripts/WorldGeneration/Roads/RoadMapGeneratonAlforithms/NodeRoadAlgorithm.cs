@@ -106,8 +106,8 @@ namespace WorldGeneration
             } 
         }
 
-        private bool ShouldTurnBack() => Random.Range(0f, 1f) < _chanseToTurnBack;
-        private bool RandomBool() => Random.Range(0, 100) > 50;
+        private bool ShouldTurnBack() => Random(0, 100) < _chanseToTurnBack * 100;
+        private bool RandomBool() => Random(0, 100) > 50;
         private bool NodeIsUnouched(int x, int y) => _touchedNodesMap[x, y] == false;
     }
 }

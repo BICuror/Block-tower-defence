@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using CuroLocalization;
 using NaughtyAttributes;
 using UnityEngine;
 using Navigation;
@@ -15,6 +14,9 @@ public sealed class EnemyData : ScriptableObject
     [SerializeField] private float _speed = 2f;
 
     [SerializeField] private List<StatInitializer> _statInitializer;
+    
+    [Header("EffectImmunities")]
+    [SerializeField] private List<string> _effectImmunities;
     
     [Header("NavigationData")]
     [SerializeField] private NavigationAgentData _navigationData;
@@ -39,6 +41,7 @@ public sealed class EnemyData : ScriptableObject
     public float MaxHealth => _maxHealth;
     public float Speed => _speed;
     public List<StatInitializer> StatInitializers => _statInitializer;
+    public List<string> EffectImmunities => _effectImmunities;
     public NavigationAgentData NavigationData => _navigationData;
     public bool HasEntityModificators => _hasEntityModificators;
     public List<EntityModificatorData> EntityModificatorDatas => _entityModificatorDatas;

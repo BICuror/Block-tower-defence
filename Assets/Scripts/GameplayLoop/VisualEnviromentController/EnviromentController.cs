@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine.Rendering;
+using NaughtyAttributes;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using System;
-using Cysharp.Threading.Tasks;
-using NaughtyAttributes;
+
 using Random = UnityEngine.Random;
 
 public sealed class EnviromentController : MonoBehaviour

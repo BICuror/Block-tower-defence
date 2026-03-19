@@ -14,6 +14,8 @@ public sealed class GlobalEffectTooltipInvokingPanel : TooltipInvokingPanel
     private TooltipParseTagDataContainer _tagDataContainer;
     private GlobalEffectData _globalEffectData;
 
+    public float PreferredTextWidth => _modificatorDescriptionText.preferredWidth;
+    
     protected override TooltipParseTagDataContainer TagDataContainer => _tagDataContainer;
     
     public void SetEntityModificator(GlobalEffectData globalEffectData)

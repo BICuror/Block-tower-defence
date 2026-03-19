@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using UnityEngine.UI;
 using System.Linq;
 using UnityEngine;
 using TMPro;
@@ -8,16 +10,22 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
     [Header("HeaderParameters")] 
     [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
     [SerializeField] private CanvasGroup _topCanvasGroup;
-    
+
     [Header("Links")] 
+    [SerializeField] private RectTransform _mainPanel;
     [SerializeField] private GlobalEffectTooltipInvokingPanel _entityModificatorTooltipInvokingPanelPrefab;
     [SerializeField] private InspectionTooltipController _inspectionTooltipController;
+    [SerializeField] private VerticalLayoutGroup _contentLayoutGroup;
+    [SerializeField] private float _maxContentLayountGroupSize = 250f;
+    [SerializeField] private float _additionalSize = 10f;
     [SerializeField] private Transform _tooltipParent;
     
     private Dictionary<GlobalEffectData, GlobalEffectTooltipInvokingPanel> _crystalTooltips = new();
     
-    public void Initialize(Item item)
+    public async UniTask Initialize(Item item)
     {
+        _contentLayoutGroup.childControlWidth = false;
+        
         InitializeInspectionPanelBase(item.GetComponent<InspectableObject>());
         _inspectionTooltipController.CopyParsersFromContainer(this);
         
@@ -25,6 +33,27 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
 
         _rewardsAmountTextField.text = item.Charges.ToString();
         _topCanvasGroup.gameObject.SetActive(!item.EffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
+
+        await UniTask.WaitForFixedUpdate();
+
+        float maxSize = 0;
+        
+        foreach (GlobalEffectTooltipInvokingPanel globalEffectTooltipInvokingPanel in _crystalTooltips.Values)
+        {
+            float panelSize = globalEffectTooltipInvokingPanel.PreferredTextWidth;
+
+            if (panelSize > maxSize)
+            {
+                maxSize = panelSize;
+                Debug.Log(maxSize);
+            }
+        }
+        
+        if (maxSize > _maxContentLayountGroupSize) maxSize = _maxContentLayountGroupSize;
+
+        _mainPanel.GetComponent<LayoutElement>().preferredWidth = maxSize + _additionalSize;
+
+        _contentLayoutGroup.childControlWidth = true;
     }
 
     private void CreateTooltips(Item item)

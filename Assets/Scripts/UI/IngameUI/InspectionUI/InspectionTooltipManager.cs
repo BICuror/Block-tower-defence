@@ -89,7 +89,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     {
         CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltipPrefab, _uiRoot);
            
-        crystalInspectionTooltip.Initialize(item);
+        await crystalInspectionTooltip.Initialize(item);
         
         _layers.Add(UILayer.Single, crystalInspectionTooltip);
         

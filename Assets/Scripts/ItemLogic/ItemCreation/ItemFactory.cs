@@ -99,9 +99,7 @@ public sealed class ItemFactory : MonoBehaviour
     {
         List<ItemColor> allItemColors = Enum.GetValues(typeof(ItemColor)).Cast<ItemColor>().ToList();
 
-        List<ItemColor> usedItemColors = _usedItemColors.GetAllKeys();
-        
-        List<ItemColor> nonUsedItemColors = allItemColors.Except(usedItemColors).ToList();
+        List<ItemColor> nonUsedItemColors = allItemColors.Except(_usedItemColors.GetAllKeys()).ToList();
 
         if (nonUsedItemColors.Count > 0)
         {
@@ -125,6 +123,5 @@ public enum ItemColor
 {
     Red,
     Yellow,
-    Blue,
     Purple
 }

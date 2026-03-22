@@ -1064,7 +1064,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1073,6 +1073,28 @@ TextureImporter:
       bones: []
       spriteID: 971d744ac9d2f4749be4475e356a38f1
       internalID: 442996351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HealingOrb
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 495
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e83a1b041571b6840886bbdc53470c1a
+      internalID: 751631946
       vertices: []
       indices: 
       edges: []
@@ -1107,6 +1129,7 @@ TextureImporter:
       ExplotionDelay: -836971711
       ExplotionRadiusTooltip: 1546871838
       FearEffectTooltip: 1599308698
+      HealingOrb: 751631946
       Invinsibility: 1125429245
       MarkIcon: -1408547033
       MaxDamage: 775677324

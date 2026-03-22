@@ -5749,8 +5749,9 @@ MonoBehaviour:
   - StructName: PropogationRadius
     _statData: {fileID: 11400000, guid: 6fc83b23e4ce9c845a86c3f2c4687422, type: 2}
     _defaultValue: 1.5
-  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
 --- !u!114 &6026486521535129250
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5813,6 +5814,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 57ff6401c5bde9c45a3a922ddbee3f4b, type: 2}
   - {fileID: 11400000, guid: d1aabb5f496b4a44ea389c2cdaa28ae3, type: 2}
   - {fileID: 11400000, guid: 22d317ac11c59fb4db7223f8754cf4b0, type: 2}
+  - {fileID: 11400000, guid: 4d3d7451e1ea64940a1cfeb17f0e0e37, type: 2}
+  - {fileID: 11400000, guid: 51fd41b2b0b7c044d8a9052b3d9b248e, type: 2}
 --- !u!114 &2354109481658448472
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -438,7 +438,6 @@ GameObject:
   - component: {fileID: 3317625323264587365}
   - component: {fileID: 21295871323419421}
   - component: {fileID: 8110531671198179174}
-  - component: {fileID: 5673830095161958512}
   m_Layer: 13
   m_Name: Crystal
   m_TagString: Untagged
@@ -532,27 +531,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
---- !u!114 &5673830095161958512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2403032933835088123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33e6654bc880f97429f7e69c41ce5543, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _shakeDatas:
-  - ShakeType: 1
-    Duration: 0.2
-    Strength: 3.5
-  - ShakeType: 0
-    Duration: 0.2
-    Strength: 0.05
-  _mesh: {fileID: 3227090590318790440}
-  _hoverableObject: {fileID: 6676585006974006265}
 --- !u!1 &4472407851492265832
 GameObject:
   m_ObjectHideFlags: 0

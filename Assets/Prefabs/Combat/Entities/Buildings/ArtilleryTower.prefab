@@ -152,8 +152,9 @@ MonoBehaviour:
   - StructName: MaxEntities
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     _defaultValue: 1
-  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
 --- !u!114 &6744749896849936341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,6 +198,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 752789bdaeb3c304d8709e094662c781, type: 2}
   - {fileID: 11400000, guid: 351be86ab5475164394a85c2f95d9a81, type: 2}
   - {fileID: 11400000, guid: 257aa3f2a616a834c9e5b879371ba1fd, type: 2}
+  - {fileID: 11400000, guid: 680c3f0bc99941840a163f49207f1455, type: 2}
+  - {fileID: 11400000, guid: 51fd41b2b0b7c044d8a9052b3d9b248e, type: 2}
 --- !u!114 &1175310730679555674
 MonoBehaviour:
   m_ObjectHideFlags: 0

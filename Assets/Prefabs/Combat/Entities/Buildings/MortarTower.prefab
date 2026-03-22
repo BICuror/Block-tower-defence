@@ -5356,6 +5356,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 257aa3f2a616a834c9e5b879371ba1fd, type: 2}
   - {fileID: 11400000, guid: d72610ba85d39ae48ba77b3e7c6e4ae3, type: 2}
   - {fileID: 11400000, guid: 951bd736840bf3f4fb82ab75b0a4d4ef, type: 2}
+  - {fileID: 11400000, guid: 5168a6ad88aaab348984ccdc0098b76b, type: 2}
+  - {fileID: 11400000, guid: 680c3f0bc99941840a163f49207f1455, type: 2}
+  - {fileID: 11400000, guid: d7bb48a818f693340b860c03c6276841, type: 2}
+  - {fileID: 11400000, guid: 309083f62b5ebf947a8e0f7549ea5f04, type: 2}
+  - {fileID: 11400000, guid: 32dae67f215ec9b4eab45ccc4b569806, type: 2}
+  - {fileID: 11400000, guid: 4844213b8f6852d4d852b067e2f36f9e, type: 2}
 --- !u!114 &8048016232359269500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5393,8 +5399,9 @@ MonoBehaviour:
   - StructName: ExplosionRadius
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
     _defaultValue: 2
-  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
 --- !u!114 &7114909489339946991
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5278,8 +5278,9 @@ MonoBehaviour:
   - StructName: MaxEntities
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     _defaultValue: 3
-  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
 --- !u!114 &5709133665173226101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5318,6 +5319,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d7630ff5d416ce946ab94b580299892a, type: 2}
   - {fileID: 11400000, guid: 482a015671ac0f94784fd923dee8e5ed, type: 2}
   - {fileID: 11400000, guid: e17d05eedbd6e10468edba84dd145b74, type: 2}
+  - {fileID: 11400000, guid: 4844213b8f6852d4d852b067e2f36f9e, type: 2}
+  - {fileID: 11400000, guid: 32dae67f215ec9b4eab45ccc4b569806, type: 2}
+  - {fileID: 11400000, guid: 309083f62b5ebf947a8e0f7549ea5f04, type: 2}
+  - {fileID: 11400000, guid: d7bb48a818f693340b860c03c6276841, type: 2}
+  - {fileID: 11400000, guid: 5168a6ad88aaab348984ccdc0098b76b, type: 2}
+  - {fileID: 11400000, guid: 680c3f0bc99941840a163f49207f1455, type: 2}
+  - {fileID: 11400000, guid: 4d3d7451e1ea64940a1cfeb17f0e0e37, type: 2}
+  - {fileID: 11400000, guid: 51fd41b2b0b7c044d8a9052b3d9b248e, type: 2}
+  - {fileID: 11400000, guid: 51fd41b2b0b7c044d8a9052b3d9b248e, type: 2}
+  - {fileID: 11400000, guid: 5168a6ad88aaab348984ccdc0098b76b, type: 2}
+  - {fileID: 11400000, guid: 680c3f0bc99941840a163f49207f1455, type: 2}
+  - {fileID: 11400000, guid: d7bb48a818f693340b860c03c6276841, type: 2}
+  - {fileID: 11400000, guid: 309083f62b5ebf947a8e0f7549ea5f04, type: 2}
 --- !u!114 &5220538212850705305
 MonoBehaviour:
   m_ObjectHideFlags: 0

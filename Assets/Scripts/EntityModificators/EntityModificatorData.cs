@@ -82,4 +82,7 @@ public enum EntityModifcatorTag
     MaxEntities,
     SingleActionInvoke,
     MultipleActionInvoke,
+    DeathRelated,
+    TemporaryTowers,
+    OnBuild
 }

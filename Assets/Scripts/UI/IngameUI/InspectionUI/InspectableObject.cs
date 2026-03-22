@@ -15,7 +15,7 @@ public sealed class InspectableObject : MonoBehaviour
     
     public bool PauseOnInspection => _pauseOnInspection;
     public string Name => (_localizationKey + "_header").Localize();
-    public string Description => (_localizationKey + "_description").Localize();
+    public string Description => "startTag " + (_localizationKey + "_description").Localize();
     public ReplaceableDataParser ReplaceableDataParser => _replaceableDataParser;
 
     public event Action InspectionStarted;

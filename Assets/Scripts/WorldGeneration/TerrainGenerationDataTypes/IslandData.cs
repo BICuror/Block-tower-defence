@@ -17,9 +17,12 @@ namespace WorldGeneration
         
         [SerializeField] private GlobalStatInitializerConfig _globalStatInitializerConfig;
         public GlobalStatInitializerConfig GlobalStatInitializerConfig => _globalStatInitializerConfig;
-        
-        [Header("SelectionSettings")][Space]
+
+        [Header("SelectionSettings")] [Space] 
+        [SerializeField] private EntityModificatorDataContainer _entityModificatorDataContainer;
         [SerializeField] private SelectionContainer _selectionContainer;
+        
+        public EntityModificatorDataContainer EntityModificatorDataContainer => _entityModificatorDataContainer;
         public SelectionContainer SelectionContainer => _selectionContainer;
 
         [Header("ItemSpawnSettings")][Space]

@@ -1,14 +1,17 @@
+using TMPEffects.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using System;
 using TMPro;
+
+using Random = UnityEngine.Random;
 
 public sealed class DamageNumberDisplay : MonoBehaviour
 {
     [SerializeField] TMP_Text _damageNumberText;
     
-    [SerializeField] private Color _damageNumberColor;
-    [SerializeField] private Color _shieldedColor;
+    [SerializeField] private SerializedDictionary<DamageVisualsType, DamageTypeVisualsContainer> _damageTypeVisualContainers;
     
     [Header("Animation")]
     [SerializeField] private AnimationCurve _alphaAnimationCurve;
@@ -19,7 +22,7 @@ public sealed class DamageNumberDisplay : MonoBehaviour
     [SerializeField] private float _yVariety = 0.5f;
     [SerializeField] private float _xVariety = 1;
     
-    public async UniTask DisplayDamageNumber(float damage, Vector3 position, DamageType damageType)
+    public async UniTask DisplayDamageNumber(float damage, Vector3 position, DamageVisualsType damageVisualsType)
     {
         int roundedDamageValue = Mathf.RoundToInt(damage);
 
@@ -29,7 +32,7 @@ public sealed class DamageNumberDisplay : MonoBehaviour
             return;
         }
 
-        SetVisualData(roundedDamageValue, damageType);
+        SetVisualData(roundedDamageValue, damageVisualsType);
         
         transform.position = position;
         gameObject.SetActive(true);
@@ -43,20 +46,23 @@ public sealed class DamageNumberDisplay : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private void SetVisualData(int damageValue, DamageType damageType)
+    private void SetVisualData(int damageValue, DamageVisualsType damageVisualsType)
     {
-        switch (damageType)
-        {
-            case DamageType.Damage: _damageNumberText.color = _damageNumberColor; break;
-            case DamageType.Shielded : _damageNumberText.color = _shieldedColor; break;
-        }
-        
+        _damageNumberText.color = _damageTypeVisualContainers[damageVisualsType].DamageColor;
         _damageNumberText.text = damageValue.ToString();
+    }
+    
+    [Serializable] private sealed class DamageTypeVisualsContainer
+    {
+        public Color DamageColor;
     }
 }
 
-public enum DamageType
+public enum DamageVisualsType
 {
     Damage,
-    Shielded
+    Shielded,
+    Fire,
+    Poison,
+    NonLethal,
 }

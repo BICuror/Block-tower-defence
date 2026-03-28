@@ -16,11 +16,9 @@ MonoBehaviour:
   _localizationKey: small_reach_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -30,21 +28,32 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -53,6 +62,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -60,11 +70,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 01000000020000000300000004000000
   _rarity: 2
   _tags: 09000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -85,3 +98,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
     FlatChange: 0.5
     MultiplierChange: 0
+  _statInitializers: []

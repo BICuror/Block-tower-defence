@@ -44,11 +44,9 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -58,11 +56,14 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -73,11 +74,14 @@ MonoBehaviour:
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -86,6 +90,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -93,11 +98,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 0200000004000000050000000600000003000000
   _rarity: 2
   _tags: 01000000
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

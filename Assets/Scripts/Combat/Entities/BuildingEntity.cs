@@ -7,6 +7,7 @@ namespace Combat
 {
     public sealed class BuildingEntity : CombatEntity
     {
+        [SerializeField] private BuildingEntityType _buildingEntityType;
         [SerializeField] private bool _destroyOnDeath;
         
         [Header("DestroyedObject")]
@@ -16,6 +17,7 @@ namespace Combat
         
         private BuildingHealth _health;
 
+        public BuildingEntityType BuildingEntityType => _buildingEntityType;
         public bool IsDestroyedOnDeath => _destroyOnDeath;
         public BuildingHealth BuildingHealth => _health;
         

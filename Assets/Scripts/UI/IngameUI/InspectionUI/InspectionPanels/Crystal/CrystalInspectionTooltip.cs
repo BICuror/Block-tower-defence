@@ -34,8 +34,6 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
         _rewardsAmountTextField.text = item.Charges.ToString();
         _topCanvasGroup.gameObject.SetActive(!item.EffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
 
-        await UniTask.WaitForFixedUpdate();
-
         float maxSize = 0;
         
         foreach (GlobalEffectTooltipInvokingPanel globalEffectTooltipInvokingPanel in _crystalTooltips.Values)

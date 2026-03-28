@@ -16,7 +16,6 @@ MonoBehaviour:
   _localizationKey: bomb_pre_create_all_bombs_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -98,11 +97,14 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 06000000
   _rarity: 2
   _tags: 02000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -120,3 +122,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     FlatChange: 2
     MultiplierChange: 0
+  _statInitializers: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CreateBlockTowers
   m_EditorClassIdentifier: 
   _icon: {fileID: -2031328269, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: create_block_towers_entity_modificator_tooltip_header
+  _localizationKey: create_block_towers_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 2
@@ -30,7 +30,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: CreateTemporaryBuilding
     AllEffectTypeNames:
@@ -191,11 +190,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 12000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

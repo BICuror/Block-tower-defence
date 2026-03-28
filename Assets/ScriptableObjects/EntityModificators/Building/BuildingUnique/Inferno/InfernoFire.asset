@@ -58,7 +58,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -138,11 +137,14 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 03000000
   _rarity: 2
   _tags: 01000000
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 0
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -161,3 +163,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: -1
     MultiplierChange: 0
+  _statInitializers: []

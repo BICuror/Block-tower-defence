@@ -3,7 +3,7 @@ using System;
 
 namespace Combat
 {
-    public abstract class EntityHealth : IHealth
+    public abstract class EntityHealth
     {
         [Cached] private CombatEntity _entity;
         [Cached] private MaxHealth _maxHpStat;
@@ -43,12 +43,11 @@ namespace Combat
         }
         
         #region DamageRecivement 
-        public void ReceivePercentEffectDamage(float percent) => ReceiveEffectDamage(_maxHealth * percent);
-        public void ReceiveEffectDamage(float damage)
+        public void ReceiveEffectDamage(float damage, DamageVisualsType damageVisualsType)
         {
             if (damage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
-            ReceiveDamage(damage);
+            ReceiveDamage(damage, damageVisualsType);
             OnDamageTaken();
         }
 
@@ -60,7 +59,7 @@ namespace Combat
             
             if (resultDamage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
-            ReceiveDamage(resultDamage);
+            ReceiveDamage(resultDamage, DamageVisualsType.Damage);
             
             if (!IsAlive())
             {
@@ -71,11 +70,11 @@ namespace Combat
             OnDamageTaken();
         }
 
-        private void ReceiveDamage(float damage)
+        private void ReceiveDamage(float damage, DamageVisualsType damageVisualsType)
         {
             _currentHp -= damage;
 
-            DamageNumberDisplayManager.Instance.DisplayDamageNumber(damage, _entity.transform.position, DamageType.Damage);
+            DamageNumberDisplayManager.Instance.DisplayDamageNumber(damage, _entity.transform.position, damageVisualsType);
         }
 
         private void OnDamageTaken()

@@ -14,7 +14,7 @@ public sealed class GlobalBuildingContainer
 
     public List<BuildingEntity> GetPlayerBuildings()
     {
-        return _globalBuildingEntities.FindAll(buildingEntity => buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AvailableModificators.Count > 0);
+        return _globalBuildingEntities.FindAll(buildingEntity => buildingEntity.BuildingEntityType != BuildingEntityType.None);
     }
     
     public List<EntityModifcatorTag> GetBuildingTags(BuildingEntity excludedEntity = null)

@@ -58,7 +58,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: TemporaryEntityModificatorEntityModificatorApplier
     AllEffectTypeNames:
@@ -113,11 +112,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 3
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

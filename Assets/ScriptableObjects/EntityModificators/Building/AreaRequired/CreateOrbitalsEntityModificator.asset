@@ -30,11 +30,9 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatCreate
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -44,11 +42,14 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -59,11 +60,14 @@ MonoBehaviour:
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -72,6 +76,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -81,7 +86,6 @@ MonoBehaviour:
     - ToggleReachAreaScaleEntityModificator
   - _itemTypeName: GameObjectApplierEntityModificator
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -91,11 +95,14 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -106,11 +113,14 @@ MonoBehaviour:
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -119,6 +129,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -126,11 +137,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 05000000060000000700000008000000
   _rarity: 2
   _tags: 0e000000
+  _hasStacks: 1
+  _maxStacks: 1
   _effectType: 0
-  _hasStacks: 0
-  _maxStacks: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

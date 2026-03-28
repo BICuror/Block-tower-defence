@@ -18,11 +18,11 @@ public sealed class PoisonEffect : EntityTickEffect
         
         if (Entity.Health.GetHp() <= tickDamage)
         {
-            Entity.Health.ReceiveEffectDamage(Entity.Health.GetHp() - _healthThreshold);
+            Entity.Health.ReceiveEffectDamage(Entity.Health.GetHp() - _healthThreshold, DamageVisualsType.Poison);
         }
         else
         {
-            Entity.Health.ReceiveEffectDamage(tickDamage);
+            Entity.Health.ReceiveEffectDamage(tickDamage, DamageVisualsType.Poison);
         }
     }
 

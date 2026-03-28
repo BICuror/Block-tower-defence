@@ -137,8 +137,10 @@ MonoBehaviour:
   - StructName: ContactDamage
     _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
     _defaultValue: 15
-  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
+  _buildingEntityType: 8
   _destroyOnDeath: 0
+  _leavesBuildingDestroyedObject: 1
+  _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
 --- !u!114 &325036398314342257
 MonoBehaviour:
   m_ObjectHideFlags: 0

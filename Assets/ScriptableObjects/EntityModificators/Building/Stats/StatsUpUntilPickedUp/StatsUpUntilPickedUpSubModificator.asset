@@ -16,95 +16,121 @@ MonoBehaviour:
   _localizationKey: 
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 0
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
   - _itemTypeName: AddIconEntityModificator
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 0
+  _effectType: 0
+  _showInInspector: 0
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -123,3 +149,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
     FlatChange: 0
     MultiplierChange: -0.3
+  _statInitializers: []

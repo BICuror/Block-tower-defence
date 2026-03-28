@@ -13,11 +13,6 @@ public sealed class VisualTextParser : MonoBehaviour
     [SerializeField] private TooltipAllTagDataContainer _allTagDataContainer;
     
     private ReplaceableDataParser _replaceableDataParser;
-
-    public string GetTagDescription(TooltipTagData tagData)
-    {
-        return GetTagHeaderWithoutIcon(tagData) + ": " + ParseTooltipText(tagData.Description);
-    }
     
     public string GetTagHeaderWithoutIcon(TooltipTagData tagData, string tagReplacementText = null)
     {

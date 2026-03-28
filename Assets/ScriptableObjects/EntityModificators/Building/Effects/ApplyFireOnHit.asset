@@ -58,52 +58,68 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
     - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
     - ApplyEntityModificatorIfNotFullHP
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
+    - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
-    - MoreSpeedWhenFullHp
     - MoveDiagonalyEntityModifier
     - MultishotEntityModificator
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 02000000060000000800000003000000
   _rarity: 2
   _tags: 01000000
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -115,3 +131,5 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _statChanges: []
+  _statInitializers: []

@@ -12,6 +12,6 @@ public sealed class OnFireEffect : EntityTickEffect
     
     protected override void Tick()
     {
-        Entity.Health.ReceiveEffectDamage(_damagePerStack * Stack);
+        Entity.Health.ReceiveEffectDamage(_damagePerStack * Stack, DamageVisualsType.Fire);
     } 
 }

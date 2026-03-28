@@ -9,11 +9,9 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
 {
     private readonly ListDictionary<EntityModificatorData, List<EntityModificator>> _appliedModificators = new();
     [SerializeField] private List<EntityModificatorData> _initialModificatorDatas;
-    [SerializeField] private List<EntityModificatorData> _allAvailableModificators;
     [Inject] private EntityModificatorFactory _entityModificatorFactory;
     [Cached] private CombatEntity _ownerEntity;
         
-    public List<EntityModificatorData> AvailableModificators => new List<EntityModificatorData>(_allAvailableModificators);
     public List<EntityModificatorData> AppliedModificators => _appliedModificators.GetAllKeys();
 
     private async void Start()

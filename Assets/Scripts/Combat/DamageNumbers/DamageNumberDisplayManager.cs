@@ -18,10 +18,10 @@ public sealed class DamageNumberDisplayManager : MonoBehaviour
         _damageIndicatorsEnabled = SettingsContainer.GetSetting<BoolSetting>(SettingsEnum.EnableDamageIndicators);
     }
 
-    public void DisplayDamageNumber(float damage, Vector3 position, DamageType damageType)
+    public void DisplayDamageNumber(float damage, Vector3 position, DamageVisualsType damageVisualsType)
     {
         if (!_damageIndicatorsEnabled.Value) return;
         
-        _displayPool.GetNextPooledObject().DisplayDamageNumber(damage, position, damageType).Forget();
+        _displayPool.GetNextPooledObject().DisplayDamageNumber(damage, position, damageVisualsType).Forget();
     }
 }

@@ -2,13 +2,15 @@ using Combat;
 
 public class NonLethalDamageModifier : DamageModifier
 {
-    public virtual ResolveOrder Order => ResolveOrder.Final;
+    public override ResolveOrder Order => ResolveOrder.Final;
     
     public override float Modify(CombatEntity otherEntity, float value)
     {
-        if (otherEntity.Health.GetHp() > value) otherEntity.Health.ReceiveEffectDamage(value);
-        else otherEntity.Health.ReceiveEffectDamage(otherEntity.Health.GetHp() - 0.01f);
+        if (otherEntity.Health.GetHp() <= value + CombatUtilities.MINIMAL_NONLETHAL_HEALTH)
+        {
+            value = otherEntity.Health.GetHp() - CombatUtilities.MINIMAL_NONLETHAL_HEALTH;
+        }
         
-        return 0;
+        return value;
     }
 }

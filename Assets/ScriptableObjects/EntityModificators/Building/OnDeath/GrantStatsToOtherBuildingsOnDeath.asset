@@ -16,7 +16,6 @@ MonoBehaviour:
   _localizationKey: grant_stats_on_death_to_other_buildings_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: GrantStatsToAllBuildingssOnDeathEntityModificator
     AllEffectTypeNames:
@@ -71,11 +70,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 02000000040000000600000007000000
   _rarity: 2
   _tags: 11000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 3
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

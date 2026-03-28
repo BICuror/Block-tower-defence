@@ -38,10 +38,11 @@ public sealed class WaveContentController : MonoBehaviour
 
     private void GenerateWaveItems()
     {
+        int minimalItemStrength = _islandDataContainer.Data.WavesContentConfig.MinimalItemStrength;
         WaveContent waveContent = GetCurrentWaveContent();
 
         _itemFactory.CreateStartWaveItem(_townhallTransform.transform.position).Forget();
-        _itemFactory.CreateItems(_townhallTransform.position, waveContent.CombinedItemStrength, waveContent.MinimalItemStrength, waveContent.ItemsAmount).Forget();
+        _itemFactory.CreateItems(_townhallTransform.position, waveContent.CombinedItemStrength, minimalItemStrength, waveContent.ItemsAmount).Forget();
 
         int additionalItemsToCreate = _globalStatContainer.Get<AdditionalCrystalsAmount>().RoundedValue;
         

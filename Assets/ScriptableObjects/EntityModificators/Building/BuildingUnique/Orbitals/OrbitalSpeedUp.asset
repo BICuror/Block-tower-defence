@@ -16,7 +16,6 @@ MonoBehaviour:
   _localizationKey: orbital_travel_speed_up_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -60,11 +59,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 05000000
   _rarity: 2
   _tags: 
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -82,3 +84,4 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 67b5674c445dc2740986e971fd3574cc, type: 2}
     FlatChange: 0
     MultiplierChange: -0.5
+  _statInitializers: []

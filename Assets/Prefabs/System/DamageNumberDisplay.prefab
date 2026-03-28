@@ -47,8 +47,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageNumberDisplay
   _damageNumberText: {fileID: 3875530075457393035}
-  _damageNumberColor: {r: 1, g: 0, b: 0, a: 1}
-  _shieldedColor: {r: 1, g: 0.7731253, b: 0, a: 1}
+  _damageTypeVisualContainers:
+    _serializedList:
+    - Key: 0
+      Value:
+        DamageColor: {r: 1, g: 0, b: 0, a: 1}
+    - Key: 1
+      Value:
+        DamageColor: {r: 1, g: 0.77254903, b: 0, a: 1}
+    - Key: 2
+      Value:
+        DamageColor: {r: 1, g: 0.55344284, b: 0, a: 1}
+    - Key: 3
+      Value:
+        DamageColor: {r: 0.5680938, g: 0, b: 1, a: 1}
+    - Key: 4
+      Value:
+        DamageColor: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
   _alphaAnimationCurve:
     serializedVersion: 2
     m_Curve:

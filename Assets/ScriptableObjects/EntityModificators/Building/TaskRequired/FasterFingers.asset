@@ -44,11 +44,9 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: FasterCycleUntilKill
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -58,21 +56,32 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -81,25 +90,34 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 0500000008000000
   _rarity: 2
   _tags: 0d000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 2
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
+  _statChanges: []
+  _statInitializers: []

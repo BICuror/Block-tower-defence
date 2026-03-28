@@ -7,6 +7,7 @@ public abstract class TooltipPanelBase : ParserableTextContainer
 {
     [Header("UI Elements")] 
     [SerializeField] private UIElementFadeAnimator _uiElementFadeAnimator;
+    [SerializeField] private TextMeshProUGUI _nameTextField;
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
     [SerializeField] private Image _iconImage;
     private TooltipTagData _tooltipTagData;
@@ -26,6 +27,7 @@ public abstract class TooltipPanelBase : ParserableTextContainer
 
     protected override void UpdateAllParsableText()
     {
-        _descriptionTextField.text = VisualTextParser.GetTagDescription(_tooltipTagData);
+        _nameTextField.text = VisualTextParser.GetTagHeaderWithoutIcon(_tooltipTagData);
+        _descriptionTextField.text = VisualTextParser.ParseTooltipText("startTag " + _tooltipTagData.Description);
     }
 }

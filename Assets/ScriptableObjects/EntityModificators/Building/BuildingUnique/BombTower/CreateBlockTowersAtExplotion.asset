@@ -30,7 +30,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
@@ -114,11 +113,14 @@ MonoBehaviour:
     - SpawnCrystalForKills
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 06000000
   _rarity: 2
   _tags: 
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -131,3 +133,4 @@ MonoBehaviour:
   _blockOtherEntityTags:
     Requirements: []
   _statChanges: []
+  _statInitializers: []

@@ -9,6 +9,7 @@ using Random = UnityEngine.Random;
 
 public sealed class EntityModificatorDataSelector : MonoBehaviour
 {
+    [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [SerializeField] [Range(0f, 100f)] private int _additionalChansePerSameTag;
     [SerializeField] private List<EntityModificatorRarityDrop> _modificatorRarityDrops;
@@ -18,9 +19,9 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     {
         List<EntityModificatorData> resultEffectDatas = new();
         
-        List<EntityModificatorData> allEffectDatas = entity.ComponentsContainer.Get<EntityModificatorsContainer>().AvailableModificators.FindAll(modificator =>
+        List<EntityModificatorData> allEffectDatas = _islandDataContainer.Data.EntityModificatorDataContainer.EntityModificatorDataList.FindAll(modificator =>
         {
-            return CheckStacksRequirements(modificator, entity) && CheckTagRequirements(modificator, entity);
+            return CheckBuildingEntityTagRequirements(modificator, entity) && CheckStacksRequirements(modificator, entity) && CheckTagRequirements(modificator, entity);
         });
         
         List<EntityModifcationRarity> droppedRarities = new();
@@ -50,6 +51,20 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
         return resultEffectDatas;
     }
 
+    #region BuildingEntityTagCheck
+
+    private bool CheckBuildingEntityTagRequirements(EntityModificatorData modificatorData, BuildingEntity entity)
+    {
+        if (modificatorData.BuildingTagsInclude)
+        {
+            return modificatorData.BuildingEntityTypeTags.Contains(entity.BuildingEntityType);
+        }
+        
+        return !modificatorData.BuildingEntityTypeTags.Contains(entity.BuildingEntityType);
+    }
+
+    #endregion
+    
     #region UniquieTagCheck
 
     private bool CheckStacksRequirements(EntityModificatorData modificatorData, BuildingEntity entity)
@@ -93,7 +108,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     }
     
     #endregion
-
+    
     #region RaritySelection
     
     private List<EntityModificatorRarityDrop> GetAvailableRarityDrops(List<EntityModificatorData> availableModificators)

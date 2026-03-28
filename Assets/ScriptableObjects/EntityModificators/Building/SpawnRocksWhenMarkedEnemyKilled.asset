@@ -44,7 +44,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ConvertMarkedEnemiesIntoRockOnKill
     AllEffectTypeNames:
@@ -99,11 +98,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 08000000
   _rarity: 2
   _tags: 0a000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 3
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 1
   _anyRequired: 0
   _reqiredOwnerTags:

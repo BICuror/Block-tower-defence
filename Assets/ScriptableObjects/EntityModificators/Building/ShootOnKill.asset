@@ -16,7 +16,6 @@ MonoBehaviour:
   _localizationKey: invoke_action_on_kill_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 1
   _itemTypeContainers:
   - _itemTypeName: ShootOnKill
     AllEffectTypeNames:
@@ -31,10 +30,12 @@ MonoBehaviour:
     - ApplyPermamentEntityEffect
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -45,6 +46,8 @@ MonoBehaviour:
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
@@ -59,6 +62,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -66,11 +70,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 08000000070000000300000005000000
   _rarity: 2
   _tags: 0f000000
-  _effectType: 0
   _hasStacks: 1
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:
@@ -80,7 +87,7 @@ MonoBehaviour:
   _hasBlockTags: 1
   _blockOwnerTags:
     Requirements:
-    - Tag: 16
+    - Tag: 15
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []

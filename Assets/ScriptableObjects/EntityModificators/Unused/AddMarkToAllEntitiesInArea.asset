@@ -30,7 +30,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 0
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -45,10 +44,12 @@ MonoBehaviour:
     - ApplyPermamentEntityEffect
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
@@ -59,6 +60,8 @@ MonoBehaviour:
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
@@ -73,6 +76,7 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
@@ -80,11 +84,14 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 06000000
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 0
   _hasRequiredTags: 0
   _anyRequired: 0
   _reqiredOwnerTags:

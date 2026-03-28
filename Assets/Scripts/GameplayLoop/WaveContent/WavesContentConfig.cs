@@ -6,7 +6,10 @@ using System;
 
 public sealed class WavesContentConfig : ScriptableObject
 {
+    [SerializeField] private int _minimalItemStrength = 1;
     [SerializeField] private List<WaveContent> _waves;
+    
+    public int MinimalItemStrength => _minimalItemStrength;
     
     public WaveContent GetWaveContent(int waveIndex) => _waves[waveIndex - 1];
     
@@ -24,7 +27,6 @@ public sealed class WavesContentConfig : ScriptableObject
     [Header("ItemSetting")]
     [SerializeField] private int _additionalItemStrength = 4;
     [SerializeField] private int _combinedItemStrength = 11;
-    [SerializeField] private int _minimalItemStrength = 3;
     [SerializeField] private int _itemsAmount = 2;
 
     [Header("OptionalTasks")] 
@@ -34,7 +36,6 @@ public sealed class WavesContentConfig : ScriptableObject
     
     public int AdditionalItemStrength => _additionalItemStrength;
     public int CombinedItemStrength => _combinedItemStrength;
-    public int MinimalItemStrength => _minimalItemStrength;
     public int ItemsAmount => _itemsAmount;
     public int OptionalTasksAmount => _optionalTasksAmount;
     

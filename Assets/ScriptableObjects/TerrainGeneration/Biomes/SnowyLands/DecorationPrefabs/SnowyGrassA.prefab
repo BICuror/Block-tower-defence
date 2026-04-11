@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: -6813224525145235383}
   - component: {fileID: 607489773414029940}
   - component: {fileID: 285082783261390795}
-  - component: {fileID: 259604198651260790}
   m_Layer: 19
   m_Name: SnowyGrassA
   m_TagString: Untagged
@@ -191,19 +190,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c635bbbe437077440bc601b789c435ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HoverableAudioPlayer
-  _audioClipToPlayOnHoverEnter: 11
-  _audioClipToPlayOnHoverExit: 0
---- !u!114 &259604198651260790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1920141983010233156}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c635bbbe437077440bc601b789c435ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HoverableAudioPlayer
-  _audioClipToPlayOnHoverEnter: 11
+  _audioClipToPlayOnHoverEnter: 12
   _audioClipToPlayOnHoverExit: 0

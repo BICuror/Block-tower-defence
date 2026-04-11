@@ -38,7 +38,7 @@ public sealed class CameraZoomController : MonoBehaviour
         _finalZoom = Mathf.Clamp(_finalZoom + changeValue, _minZoomValue, _maxZoomValue);
 
         if (_zoomTween != null) _zoomTween.Kill();
-        _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve).SetUpdate(UpdateType.Fixed);
+        _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve).SetUpdate(true);
     }
 
     private void SetZoom(float value)

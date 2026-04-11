@@ -52,7 +52,7 @@ public abstract class AreaVisualisation : MonoBehaviour
         _visualisationTransform.DOKill();
         _visualisationTransform.gameObject.SetActive(true);
         
-        _visualisationTransform.DOScale(EnabledScale, _draggableSystemConfig.AreaVisualisationAppearDuration).SetEase(_draggableSystemConfig.AreaVisualisationAppearCurve);
+        _visualisationTransform.DOScale(EnabledScale, _draggableSystemConfig.AreaVisualisationAppearDuration).SetEase(_draggableSystemConfig.AreaVisualisationAppearCurve).SetUpdate(true).SetLink(_visualisationTransform.gameObject);
     }
 
     public void DisableVisualisation()
@@ -63,7 +63,7 @@ public abstract class AreaVisualisation : MonoBehaviour
         
         _visualisationTransform.DOKill();
         
-        _visualisationTransform.DOScale(DisabledScale, _draggableSystemConfig.AreaVisualisationDisappearDuration).SetEase(_draggableSystemConfig.AreaVisualisationDisappearCurve).OnComplete(() =>
+        _visualisationTransform.DOScale(DisabledScale, _draggableSystemConfig.AreaVisualisationDisappearDuration).SetEase(_draggableSystemConfig.AreaVisualisationDisappearCurve).SetUpdate(true).SetLink(_visualisationTransform.gameObject).OnComplete(() =>
         {
             _visualisationTransform.gameObject.SetActive(false);
         });

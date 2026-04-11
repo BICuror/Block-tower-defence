@@ -47,11 +47,14 @@ MonoBehaviour:
     - _audioReference: {fileID: 11400000, guid: 6679248accf3d554f9a25c18059b0a4d, type: 2}
       _soundID: launch_projectile
       EnumValue: 10
+    - _audioReference: {fileID: 11400000, guid: faaaa7b19fbc0f44baa93452f4c56fbb, type: 2}
+      _soundID: shield_break
+      EnumValue: 11
   - _subSectorName: enviroment
     _audioReferenceEntries:
     - _audioReference: {fileID: 11400000, guid: 4b7676a583cd65c4aac11c0a5237775d, type: 2}
       _soundID: vegetation_hover
-      EnumValue: 11
+      EnumValue: 12
     - _audioReference: {fileID: 11400000, guid: 104e24a2bbe68ad43b71405572fa8695, type: 2}
       _soundID: rocks_hover
-      EnumValue: 12
+      EnumValue: 13

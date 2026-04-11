@@ -1,6 +1,7 @@
 using Zenject;
 using System;
 using Combat;
+using CuroAudio;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -127,8 +128,12 @@ public sealed class ShieldEntityModificator : EntityModificator
             if (_currentShieldHealth > 0f)
             {
                 _currentShieldHealth -= value;
-                
-                if (_currentShieldHealth <= 0f) _currentShieldHealth = 0f;
+
+                if (_currentShieldHealth <= 0f)
+                {
+                    _currentShieldHealth = 0f;
+                    AudioSystem.PlaySFX(AudioEnum.sound_combat_shield_break, OwnerEntity.transform.position);
+                }
                 
                 ShieldHealthUpdated?.Invoke(_currentShieldHealth / _maxShieldHealth);
 

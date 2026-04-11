@@ -9,8 +9,9 @@ using Zenject;
 
 public sealed class IdleStateController : WaveStateController
 {
-    [SerializeField] private CameraPositionController _cameraPositionController;
     [SerializeField] private TerrainAnimator _roadAnimator;
+    
+    [Inject] private CameraPositionController _cameraPositionController;
     
     [Inject] private WaveIndexContainer _waveIndexContainer;
     

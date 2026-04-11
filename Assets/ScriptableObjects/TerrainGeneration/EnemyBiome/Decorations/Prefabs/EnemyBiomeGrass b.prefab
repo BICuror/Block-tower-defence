@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8538581570065973705}
   - component: {fileID: -40645147682453261}
   - component: {fileID: 5411714956586081819}
+  - component: {fileID: -2206964031429832987}
   m_Layer: 19
   m_Name: EnemyBiomeGrass b
   m_TagString: Untagged
@@ -62,6 +63,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,9 +89,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &3164477649589358940
 MonoBehaviour:
@@ -170,3 +178,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5117892, y: 0.55688184, z: 0.4114902}
   m_Center: {x: 0.010994762, y: 0.27844092, z: -0.049120426}
+--- !u!114 &-2206964031429832987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9207276081886055861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c635bbbe437077440bc601b789c435ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableAudioPlayer
+  _audioClipToPlayOnHoverEnter: 11
+  _audioClipToPlayOnHoverExit: 0

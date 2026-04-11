@@ -3,17 +3,20 @@ using CuroAudio;
 
 namespace CuroSettings.CustomSettingAppliers.Audio
 {
-    public class AmbienceVolumeSettingApplier : SettingApplier<FloatSetting>
+    public sealed class AmbienceVolumeSettingApplier : SettingApplier<FloatSetting>
     {
+        private static FloatSetting _setting; 
+        
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting(SettingsEnum.AmbienceVolume, ApplyNewSettingValue);
+            _setting = FetchSetting(SettingsEnum.AmbienceVolume, ApplyNewSettingValue);
+            ApplyNewSettingValue();
         }
 
         private static void ApplyNewSettingValue()
         {
-            AudioSystem.SetVolume(AudioChannelType.Ambience, Setting.Value);
+            AudioSystem.SetVolume(AudioChannelType.Ambience, _setting.Value);
         }
     }
 }

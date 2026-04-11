@@ -3,6 +3,7 @@ using Combat.Animation;
 using UnityEngine;
 using Navigation;
 using Cashing;
+using CuroAudio;
 
 namespace Combat
 {
@@ -147,6 +148,8 @@ namespace Combat
 
         private void OnEnemyDeath()
         {
+            AudioSystem.PlaySFX(_enemyData.DeathSound, transform.position);
+            
             TryRemoveEntityModificators();
             _entityObjectModificatorContainer.DestroyAllModificators();
             _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());

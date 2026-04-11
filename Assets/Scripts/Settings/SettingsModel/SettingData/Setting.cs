@@ -9,6 +9,8 @@ namespace CuroSettings
         
         public Action ValueChanged;
         public Action ValueLoaded;
+
+        public string DebugKey => Key;
     
         protected Setting(ISettingsSaveLoader saveLoader, string key)
         {

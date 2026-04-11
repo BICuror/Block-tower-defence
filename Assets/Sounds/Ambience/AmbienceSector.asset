@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 188794c15f6d21d45a8474f64cfc28f7, type: 3}
+  m_Name: AmbienceSector
+  m_EditorClassIdentifier: 
+  _generatedEnumName: Ambience
+  _sectorName: ambience
+  _subSectors:
+  - _subSectorName: evniroment
+    _audioReferenceEntries:
+    - _audioReference: {fileID: 11400000, guid: 36726b31b83fa8e4f85de0dcb441a9b4, type: 2}
+      _soundID: sea
+      EnumValue: 13
+  - _subSectorName: weather
+    _audioReferenceEntries:
+    - _audioReference: {fileID: 11400000, guid: 0f006838c8b99a84e8d95b6aeee01bed, type: 2}
+      _soundID: rain
+      EnumValue: 14

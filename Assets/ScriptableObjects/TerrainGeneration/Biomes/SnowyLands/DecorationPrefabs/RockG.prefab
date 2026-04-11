@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -1303517527770005118}
   - component: {fileID: 8458183172936532484}
   - component: {fileID: 3658047984790308463}
+  - component: {fileID: 1860751876852626392}
   m_Layer: 19
   m_Name: RockG
   m_TagString: Untagged
@@ -62,6 +63,11 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -83,9 +89,11 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!114 &1014965278520579911
 MonoBehaviour:
@@ -170,3 +178,17 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.2755423, y: 0.83327633, z: 1.876091}
   m_Center: {x: -0.0000002682209, y: 0.41663817, z: 0}
+--- !u!114 &1860751876852626392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4048679011298859436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c635bbbe437077440bc601b789c435ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HoverableAudioPlayer
+  _audioClipToPlayOnHoverEnter: 12
+  _audioClipToPlayOnHoverExit: 0

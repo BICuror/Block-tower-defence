@@ -11,6 +11,16 @@ namespace CuroAudio
         music_game_wave,
         sound_ui_button_hover,
         sound_ui_button_click,
+        sound_general_gameplay_placement,
+        sound_general_gameplay_building_selection_complete,
+        sound_general_gameplay_building_upgrade_selection_complete,
+        sound_enemy_death,
+        sound_enemy_exploder_death,
+        sound_combat_launch_projectile,
+        sound_enviroment_vegetation_hover,
+        sound_enviroment_rocks_hover,
+        ambience_evniroment_sea,
+        ambience_weather_rain,
 
     }
 }

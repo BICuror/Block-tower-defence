@@ -15,4 +15,12 @@ namespace CuroAudio
         public float VolumeModifier => _volumeModifier;
         public abstract AudioAssetLifetimeDuration LifetimeDuration { get; }
     }
+
+    public abstract class AudioReferenceWithTransition : AudioReference
+    {
+        [Header("Transition")]
+        [SerializeField] private float _transitionDuration = 0.5f;
+        
+        public float TransitionDuration => _transitionDuration;
+    }
 }

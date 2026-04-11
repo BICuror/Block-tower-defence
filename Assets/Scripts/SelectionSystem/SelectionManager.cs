@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using System;
+using CuroAudio;
 using NaughtyAttributes;
 
 public sealed class SelectionManager : MonoBehaviour
@@ -104,8 +105,18 @@ public sealed class SelectionManager : MonoBehaviour
     {
         switch (_currentSelection)
         {
-            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.EndSelection(); break;
-            case SelectionType.Building: await UniTask.WaitForSeconds(1f); break;
+            case SelectionType.BuildingUpgrade:
+            {
+                AudioSystem.PlaySFX(AudioEnum.sound_general_gameplay_building_upgrade_selection_complete, transform.position);
+                await _buildingUpgradeSelector.EndSelection(); 
+                break;
+            }
+            case SelectionType.Building:
+            {
+                AudioSystem.PlaySFX(AudioEnum.sound_general_gameplay_building_selection_complete, transform.position);
+                await UniTask.WaitForSeconds(1f); 
+                break;
+            }
         }
     }
     

@@ -1,10 +1,12 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace Combat
 {
     public sealed class Explosion : WeaponBase
     {
+        [SerializeField] private ScreenShakeData _screenShakeData;
         [SerializeField] private LayerSetting _enemyLayerSettings;
         [SerializeField] private VisualEffectHandler _explotionEffect;
         [SerializeField] private float _defaultRadius = 1f;
@@ -31,6 +33,7 @@ namespace Combat
                 DamageEntity(_explosionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
             }
 
+            ScreenShakeController.Instance.PlayScreenShake(_screenShakeData, transform.position);
             await _explotionEffect.PlayBurstEffect();
         }
 

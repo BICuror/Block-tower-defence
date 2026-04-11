@@ -7,6 +7,7 @@ using UnityEngine;
 public sealed class CameraRotationController : MonoBehaviour
 {       
     [SerializeField] private Transform _target;
+    [SerializeField] private Camera _camera;
     
     [SerializeField] private float _distanceToTarget;
     [Range(0f, 85f)] [SerializeField] private float _maxYRotation;
@@ -14,14 +15,11 @@ public sealed class CameraRotationController : MonoBehaviour
 
     [Range(1f, 1000f)] [SerializeField] private float _sensetivity;
     private FloatSetting _cameraRotationSensitivity;
-    private Camera _camera;
 
     private Vector2 _previousTouchPosition = Vector2.zero;
     private Vector3 _previousPosition;
 
     public UnityEvent CameraRotated;
-
-    private void OnEnable() => _camera = GetComponent<Camera>();
 
     private void Start()
     {

@@ -4,15 +4,18 @@ namespace CuroSettings.CustomSettingAppliers
 {
     public sealed class FrameRateSettingApplier : SettingApplier<IntSetting>
     {
+        private static IntSetting _setting; 
+        
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting(SettingsEnum.FrameRate, ApplyNewSettingValue);
+            _setting = FetchSetting(SettingsEnum.FrameRate, ApplyNewSettingValue);
+            ApplyNewSettingValue();
         }
         
         private static void ApplyNewSettingValue()
         {
-            Application.targetFrameRate = Setting.Value;
+            Application.targetFrameRate = _setting.Value;
         }
     }
 }

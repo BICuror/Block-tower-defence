@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using CuroAudio;
 
 namespace Combat
 {
@@ -21,6 +22,8 @@ namespace Combat
         public async UniTask TravelToPoint(Vector3 finalPosition)
         {
             Vector3 startPosition = transform.position;
+            
+            AudioSystem.PlaySFX(AudioEnum.sound_combat_launch_projectile, startPosition);
     
             float time = 0f;
     

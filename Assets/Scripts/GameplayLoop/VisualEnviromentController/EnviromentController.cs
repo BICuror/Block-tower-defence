@@ -6,7 +6,7 @@ using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using System;
-
+using CuroAudio;
 using Random = UnityEngine.Random;
 
 public sealed class EnviromentController : MonoBehaviour
@@ -31,6 +31,8 @@ public sealed class EnviromentController : MonoBehaviour
         _currentEnviromentStateIndex = Random.Range(0, _enviromentStates.Count);
 
         SetEnviromentState(_enviromentStates[_currentEnviromentStateIndex]);
+        
+        AudioSystem.PlayAmbience(AudioEnum.ambience_evniroment_sea, AudioLayer.Main);
     }
 
     [Button] public void DebugChangeEnviromentState() => TryEnterNextState();
@@ -78,8 +80,16 @@ public sealed class EnviromentController : MonoBehaviour
 
     private void UpdateRainState()
     {
-        if (Random.Range(0, 100) < _rainChance) _rainParticles.Play();
-        else _rainParticles.Stop();
+        if (Random.Range(0, 100) < _rainChance)
+        {
+            AudioSystem.PlayAmbience(AudioEnum.ambience_weather_rain, AudioLayer.Additional);
+            _rainParticles.Play();
+        }
+        else
+        {
+            AudioSystem.StopAmbience(AudioLayer.Additional, false);
+            _rainParticles.Stop();
+        }
     }
 
     private void MoveToNextState()

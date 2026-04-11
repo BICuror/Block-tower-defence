@@ -1,14 +1,14 @@
 using UnityEngine;
-
-[RequireComponent(typeof(Camera))]
+using Zenject;
 
 public sealed class GameController : MonoBehaviour
 {
+    [Inject] private CameraPositionController _cameraPositionController;
+    [Inject] private CameraZoomController _cameraZoomController;
+    [Inject] private HoverableController _hoverableController; 
+    [Inject] private TimeController _timeController;
+    
     [SerializeField] private TMPEffects.SerializedCollections.SerializedDictionary<ControllerState, GameControllerState> _states = new();
-    [SerializeField] private CameraPositionController _cameraPositionController;
-    [SerializeField] private CameraZoomController _cameraZoomController;
-    [SerializeField] private HoverableController _hoverableController;
-    [SerializeField] private TimeController _timeController;
     
     private GameControls _controls;
 

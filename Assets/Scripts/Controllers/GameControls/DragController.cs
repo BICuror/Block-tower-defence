@@ -1,8 +1,6 @@
 using UnityEngine.Events;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
-
 public sealed class DragController : MonoBehaviour
 {
     [Header("LayerSettings")]
@@ -15,11 +13,10 @@ public sealed class DragController : MonoBehaviour
 
     [Header("DragSettings")]
     [SerializeField] private float _placingHeight;
-
+    
     [Header("Links")]
+    [SerializeField] private Camera _camera;
     [SerializeField] private DraggableConnector _draggableConnector;
-
-    private Camera _camera;
 
     public UnityEvent<GameObject> PickedObject;
     public UnityEvent<GameObject> DroppedObject;
@@ -27,8 +24,6 @@ public sealed class DragController : MonoBehaviour
     private GameObject _currentDraggableGameObject;
     private IDraggable _currentIDraggable;
     private Vector3 _lastValuablePosition;
-
-    private void OnEnable() => _camera = GetComponent<Camera>();
     
     public bool HoveredOverDraggableObject(Vector2 mousePosition, out GameObject draggableObject)
     {

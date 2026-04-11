@@ -1,15 +1,14 @@
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
-using System.Threading;
 using UnityEngine;
-using System;
+using Zenject;
 
 public sealed class GameControllerDragState : GameControllerState
 {
-    [SerializeField] private InspectorController _inspectorController;
-    [SerializeField] private CursorController _cursorController;
-    [SerializeField] private DragController _dragController;
+    [Inject] private InspectorController _inspectorController;
+    [Inject] private CursorController _cursorController;
+    [Inject] private DragController _dragController;
     
     private GameControls _controls;
     

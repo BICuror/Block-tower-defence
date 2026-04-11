@@ -1,7 +1,10 @@
+using Combat;
+using CuroAudio;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine;
 using DG.Tweening;
+using Zenject;
 
 public sealed class DraggableConnector : MonoBehaviour
 {
@@ -10,8 +13,9 @@ public sealed class DraggableConnector : MonoBehaviour
     [SerializeField] private float _dragSpeed;
 
     [Header("PlacementSettings")]
-    public UnityEvent<GameObject> PlacedDraggable;
+    [SerializeField] private ScreenShakeData _placementScreenShakeData;
     [SerializeField] private float _placementDuration;
+    public UnityEvent<GameObject> PlacedDraggable;
     private Tween _movmentTween;
     
     public async UniTask PlaceDraggable(GameObject draggableObject, IDraggable draggable, Vector3 finalPosition)
@@ -32,6 +36,12 @@ public sealed class DraggableConnector : MonoBehaviour
         dragAnimationObject.SetInitialParent();
 
         PlacedDraggable.Invoke(draggableObject);
+
+        if (draggableObject.TryGetComponent(out BuildingEntity buildingEntity))
+        {
+            ScreenShakeController.Instance.PlayScreenShake(_placementScreenShakeData, finalPosition);
+        }
+        AudioSystem.PlaySFX(AudioEnum.sound_general_gameplay_placement, transform.position);
     }
 
     private async UniTask PlaceObject(DragAnimationObject dragAnimationObject, GameObject draggableObject, Vector3 finalPosition)

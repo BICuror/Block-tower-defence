@@ -1,4 +1,5 @@
 using UnityEngine;
+using CuroAudio;
 using System;
 
 namespace Combat
@@ -23,6 +24,7 @@ namespace Combat
             transform.LookAt(targetPosition);
 
             Rigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
+            AudioSystem.PlaySFX(AudioEnum.sound_combat_launch_projectile, transform.position);
         }
 
         private void OnTriggerEnter(Collider other)

@@ -43,24 +43,24 @@ namespace CuroAudio
             _audioPlayer.PlaySFX(reference, token);
         }
 
-        public static void PlayMusic(MusicReference reference, AudioLayer layer)
+        public static void PlayMusic(MusicReference reference, AudioLayer layer, bool removeAllOther = false, bool awaitStopToStart = false)
         {
-            _audioPlayer.PlayMusic(reference, layer);
+            _audioPlayer.PlayMusic(reference, layer, removeAllOther, awaitStopToStart);
         }
 
-        public static void PlayAmbience(AmbienceReference reference, AudioLayer layer)
+        public static void PlayAmbience(AmbienceReference reference, AudioLayer layer, bool removeAllOther = false, bool awaitStopToStart = false)
         {
-            _audioPlayer.PlayAmbience(reference, layer);
+            _audioPlayer.PlayAmbience(reference, layer, removeAllOther, awaitStopToStart);
         }
 
-        public static void StopMusic(AudioLayer layer)
+        public static void StopMusic(AudioLayer layer, bool tryActivateLowerPriorityAudio = true, bool awaitStopToStart = false)
         {
-            _audioPlayer.StopMusic(layer);
+            _audioPlayer.StopMusic(layer, tryActivateLowerPriorityAudio, awaitStopToStart);
         }
 
-        public static void StopAmbience(AudioLayer layer)
+        public static void StopAmbience(AudioLayer layer, bool tryActivateLowerPriorityAudio = true, bool awaitStopToStart = false)
         {
-            _audioPlayer.StopAmbience(layer);
+            _audioPlayer.StopAmbience(layer, tryActivateLowerPriorityAudio, awaitStopToStart);
         }
 
         #region Volume

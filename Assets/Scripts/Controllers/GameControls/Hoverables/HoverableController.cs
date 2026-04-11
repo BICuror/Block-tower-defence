@@ -1,18 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
-
 public sealed class HoverableController : MonoBehaviour
 {
     [SerializeField] private LayerSetting _hoverableLayerSetting;
+    [SerializeField] private Camera _camera;
+    
     private List<HoverableObject> _lastHoveredOverObjects = new();
-    private Camera _camera;
-
-    private void Awake()
-    {
-        _camera = GetComponent<Camera>();
-    }
     
     public void CheckHover(Vector2 pointerPosition)
     {

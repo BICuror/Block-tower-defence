@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System;
+using System.Linq;
 
 namespace CuroAudio
 {
@@ -8,23 +8,24 @@ namespace CuroAudio
         private Dictionary<AudioLayer, T> _activeAudioReferences = new();
         
         public bool IsEmpty => _activeAudioReferences.Count == 0;
+
+        public T GetAudioReference(AudioLayer audioLayer) => _activeAudioReferences[audioLayer];
         
-        public T GetHighestPriorityAudioReference()
+        public AudioLayer GetHighestPriorityLayer()
         {
-            int amount = Enum.GetValues(typeof(AudioLayer)).Length;
-
-            for (int i = 1; i <= amount; i++)
-            {
-                AudioLayer layer = (AudioLayer)(amount - i);
-                
-                if (_activeAudioReferences.TryGetValue(layer, out T reference))
-                {
-                    return reference;
-                }
-            }
-
-            throw new Exception($"Could not find active audio reference");
+            return GetAllPresentAudioLayers()[^1];
         }
+
+        public List<AudioLayer> GetAllPresentAudioLayers()
+        {
+            List<AudioLayer> layers = _activeAudioReferences.Keys.ToList();
+            
+            layers.Sort();
+            
+            return layers;
+        }
+        
+        public bool HasLayer(AudioLayer layer) => _activeAudioReferences.ContainsKey(layer);
         
         public void RemoveLayer(AudioLayer layer)
         {

@@ -1,13 +1,14 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public sealed class GameCameraPositionDragState : GameControllerState
 {
-    [SerializeField] private CameraRotationController _cameraRotationController;
-    [SerializeField] private CameraPositionController _cameraPositionController;
-    [SerializeField] private InspectorController _inspectorController;
-    [SerializeField] private CursorController _cursorController;
-    [SerializeField] private DragController _dragController;
+    [Inject] private CameraRotationController _cameraRotationController;
+    [Inject] private CameraPositionController _cameraPositionController;
+    [Inject] private InspectorController _inspectorController;
+    [Inject] private CursorController _cursorController;
+    [Inject] private DragController _dragController;
     private GameControls _controls;
 
     protected override ControllerState State => ControllerState.PositionDragging;

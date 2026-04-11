@@ -1,10 +1,11 @@
 using UnityEngine.InputSystem.Interactions;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using Zenject;
 
 public sealed class GameControllerInspectionState : GameControllerState
 {
-    [SerializeField] private InspectorController _inspectorController;
+    [Inject] private InspectorController _inspectorController;
     private GameControls _controls;
 
     protected override ControllerState State => ControllerState.Inspecting;

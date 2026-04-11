@@ -6,6 +6,8 @@ using System;
 public sealed class CameraPositionController : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataContainer;
+    
+    [SerializeField] private Camera _camera;
     [SerializeField] private Transform _cameraCenter;
     [SerializeField] private float _cameraCenterMovementSpeed = 0.3f;
     [SerializeField] private float _cameraDragSpeed = 0.003f;
@@ -23,7 +25,6 @@ public sealed class CameraPositionController : MonoBehaviour
     private float _highestBorder;
     private float _lowestBorder;
     private float _islandRadius;
-    private Camera _camera;
     
     private Vector2 _previousCursorPosition;
     

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public sealed class IngameUIElementManager : MonoBehaviour
 {
@@ -19,9 +20,10 @@ public sealed class IngameUIElementManager : MonoBehaviour
         }
     }
     #endregion
+    
+    [Inject] private CameraRotationController _cameraRotationController;
 
     [SerializeField] private Camera _camera;
-    [SerializeField] private CameraRotationController _cameraRotationController;
 
     private List<StaticUIElement> _staticUIElements;
     private List<DynamicUIElement> _dynamicUIElements;

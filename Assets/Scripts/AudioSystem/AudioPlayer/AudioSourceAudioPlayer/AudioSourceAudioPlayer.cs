@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using System.Linq;
 
 using Object = UnityEngine.Object;
 
@@ -69,24 +69,34 @@ namespace CuroAudio
             _sfxModule.PlaySFXAtPosition(reference, position).Forget();
         }
 
-        void IAudioPlayer.PlayMusic(MusicReference reference, AudioLayer layer)
+        void IAudioPlayer.PlayMusic(MusicReference reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
         {
-            _musicModule.SetToLayerAndPlayHighestPriorityMusic(reference, layer).Forget();
-        }
-        
-        void IAudioPlayer.PlayAmbience(AmbienceReference reference, AudioLayer layer)
-        {
-            _ambienceModule.SetToLayerAndPlayHighestPriorityAmbience(reference, layer).Forget();
+            _musicModule.PlayAudio(reference, layer, removeAllOther, awaitStopToStart).Forget();
         }
 
-        void IAudioPlayer.StopMusic(AudioLayer layer)
+        void IAudioPlayer.PlayAmbience(AmbienceReference reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
         {
-            _musicModule.StopAndPlayHighestPriorityMusic(layer).Forget();
+            _ambienceModule.PlayAudio(reference, layer, removeAllOther, awaitStopToStart).Forget();
         }
 
-        void IAudioPlayer.StopAmbience(AudioLayer layer)
+        bool IAudioPlayer.TryEnqueueMusic(MusicReference reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
         {
-            _ambienceModule.StopAndPlayHighestPriorityAmbience(layer).Forget();
+            return _musicModule.TryEnqueueAudio(reference, layer, removeAllOther, awaitStopToStart);
+        }
+
+        bool IAudioPlayer.TryEnqueueAmbience(AmbienceReference reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
+        {
+            return _ambienceModule.TryEnqueueAudio(reference, layer, removeAllOther, awaitStopToStart);
+        }
+
+        public void StopMusic(AudioLayer layer, bool tryActivateLowerPriorityAudio = true, bool awaitStopToStart = true)
+        {
+            _musicModule.StopAudio(layer, tryActivateLowerPriorityAudio, awaitStopToStart).Forget();
+        }
+
+        void IAudioPlayer.StopAmbience(AudioLayer layer, bool tryActivateLowerPriorityAudio, bool awaitStopToStart)
+        {
+            _ambienceModule.StopAudio(layer, tryActivateLowerPriorityAudio, awaitStopToStart).Forget();
         }
 
         #region VolumeControl
@@ -117,136 +127,160 @@ namespace CuroAudio
                 case AudioChannelType.SFX:
                 {
                     _audioSources.MainAudioMixer.SetFloat("SFXVolume", Mathf.Log10(value) * 20);
-                } break;
+                    break;
+                } 
                 case AudioChannelType.Music:
                 {
                     _audioSources.MainAudioMixer.SetFloat("MusicVolume", Mathf.Log10(value) * 20);
-                } break;
+                    break;
+                } 
                 case AudioChannelType.Ambience:
                 {
                     _audioSources.MainAudioMixer.SetFloat("AmbienceVolume", Mathf.Log10(value) * 20);
-                } break;
+                    break;
+                } 
             }
         }
         
         #endregion
-        
-        private sealed class MusicModule
+
+        private abstract class TransitionAudioModule<T> where T : AudioReferenceWithTransition
         {
-            private AudioChannelLayerContainer<MusicReference> _layerContainer = new();
+            private AudioChannelLayerContainer<T> _layerContainer = new();
+
+            public bool TryEnqueueAudio(T reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
+            {
+                if (_layerContainer.HasLayer(layer)) return false;
+                
+                if (_layerContainer.GetHighestPriorityLayer() == layer)
+                {
+                    PlayAudio(reference, layer, removeAllOther, awaitStopToStart).Forget();
+                }
+                else
+                {
+                    _layerContainer.SetActiveReferenceToLayer(reference, layer);
+                }
+                
+                return true;
+            }
+            
+            public async UniTask StopAudio(AudioLayer layer, bool tryActivateLowerPriorityAudio, bool awaitStopToStart)
+            {
+                if (awaitStopToStart) await StopLayer(layer);
+                else StopLayer(layer).Forget();
+                
+                if (!tryActivateLowerPriorityAudio || _layerContainer.IsEmpty) return;
+
+                AudioLayer highestPriorityLayer = _layerContainer.GetHighestPriorityLayer();
+
+                await PlayLayer(highestPriorityLayer);
+            }
+            
+            public async UniTask PlayAudio(T reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
+            {
+                bool layerContainsReference = LayerContainsReference(layer, reference);
+                
+                if (removeAllOther)
+                {
+                    List<AudioLayer> excludedLayers = new();
+                    
+                    if (layerContainsReference) excludedLayers.Add(layer);
+                    
+                    if (awaitStopToStart) await StopAllLayers(excludedLayers);
+                    else StopAllLayers(excludedLayers).Forget();
+                }
+                else if (!layerContainsReference)
+                { 
+                    if (awaitStopToStart) await StopLayer(layer);
+                    else StopLayer(layer).Forget();
+                }
+                
+                _layerContainer.SetActiveReferenceToLayer(reference, layer);
+                
+                await PlayLayer(layer);
+            }
+            
+            private bool LayerContainsReference(AudioLayer layer, T reference)
+            {
+                return _layerContainer.HasLayer(layer) && _layerContainer.GetAudioReference(layer) == reference;
+            }
+            
+            private async UniTask StopAllLayers(List<AudioLayer> excludedLayers)
+            {
+                List<AudioLayer> audioLayersToStop = _layerContainer.GetAllPresentAudioLayers().Except(excludedLayers).ToList();
+
+                float maxAudioLength = 0f;
+
+                audioLayersToStop.ForEach(layer =>
+                {
+                    maxAudioLength = Mathf.Max(maxAudioLength, _layerContainer.GetAudioReference(layer).TransitionDuration);
+                });
+                
+                audioLayersToStop.ForEach(layer => StopLayer(layer).Forget());
+
+                await UniTask.WaitForSeconds(maxAudioLength, ignoreTimeScale: true);
+            }
+            
+            private async UniTask StopLayer(AudioLayer layer)
+            {
+                if (!_layerContainer.HasLayer(layer)) return;
+                
+                T audioReference = _layerContainer.GetAudioReference(layer);
+                AudioSource source = GetAudioSource(layer);
+
+                ReplaceAudioSource(layer);
+                
+                await AudioUtility.DoVirtual(1f, 0f, audioReference.TransitionDuration, value => SetSourceVolume(source, value * audioReference.VolumeModifier));
+                source.Stop();
+                AudioAssetProvider.UnloadAudioAsset(audioReference);
+                
+                _layerContainer.RemoveLayer(layer);
+            }
+            
+            private async UniTask PlayLayer(AudioLayer layer)
+            {
+                T audioReference = _layerContainer.GetAudioReference(layer);
+                AudioSource source = GetAudioSource(layer);
+                
+                source.clip = await AudioAssetProvider.LoadAudioClipsFromReference(audioReference);
+                source.Play();
+                
+                await AudioUtility.DoVirtual(0f, 1f, audioReference.TransitionDuration, value => SetSourceVolume(source, value * audioReference.VolumeModifier));
+            }
+            
+            private void SetSourceVolume(AudioSource source, float volume)
+            {
+                source.volume = volume;
+            }
+            
+            protected abstract AudioSource GetAudioSource(AudioLayer layer);
+            protected abstract void ReplaceAudioSource(AudioLayer layer);
+        }
+        
+        private sealed class MusicModule : TransitionAudioModule<MusicReference>
+        {
             private AudioSourceAudioPlayerObject _audioSources;
-            private float _currentMusicVolumeModifier = 1f;
 
             public MusicModule(AudioSourceAudioPlayerObject audioSources)
             {
                 _audioSources = audioSources;
-            }        
-            
-            public async UniTask SetToLayerAndPlayHighestPriorityMusic(MusicReference reference, AudioLayer layer)
-            {
-                if (!_layerContainer.IsEmpty)
-                {
-                    MusicReference highestPriorityAudioReference = _layerContainer.GetHighestPriorityAudioReference();
-                    if (reference == highestPriorityAudioReference) return;
-                    
-                    await StopMusic(layer);
-                }
-            
-                _layerContainer.SetActiveReferenceToLayer(reference, layer);
-                
-                await PlayHighestPriorityMusic();
             }
-            
-            public async UniTask StopAndPlayHighestPriorityMusic(AudioLayer layer)
-            {
-                await StopMusic(layer);
-                await PlayHighestPriorityMusic();
-            }
-            
-            private async UniTask StopMusic(AudioLayer layer)
-            {
-                if (_layerContainer.IsEmpty) return;
-                
-                MusicReference activeMusicReference = _layerContainer.GetHighestPriorityAudioReference();
-                _layerContainer.RemoveLayer(layer);
-                await AudioUtility.DoVirtual(1f, 0f, activeMusicReference.TransitionDuration, SetMusicSourceVolume);
-                AudioAssetProvider.UnloadAudioAsset(activeMusicReference);
-            }
-            
-            private async UniTask PlayHighestPriorityMusic()
-            {
-                if (_layerContainer.IsEmpty) return;
-                
-                MusicReference musicReference = _layerContainer.GetHighestPriorityAudioReference();
-                _currentMusicVolumeModifier = musicReference.VolumeModifier;
-                _audioSources.MusicAudioSource.clip = await AudioAssetProvider.LoadAudioClipsFromReference(musicReference);
-                _audioSources.MusicAudioSource.Play();
-                await AudioUtility.DoVirtual(0f, 1f, musicReference.TransitionDuration, SetMusicSourceVolume);
-            }
-            
-            private void SetMusicSourceVolume(float volume)
-            {
-                _audioSources.MusicAudioSource.volume = volume * _currentMusicVolumeModifier;
-            }
+
+            protected override AudioSource GetAudioSource(AudioLayer layer) => _audioSources.GetMusicAudioSource(layer);
+            protected override void ReplaceAudioSource(AudioLayer layer) => _audioSources.ReplaceMusicAudioSource(layer).Forget();
         }
 
-        private sealed class AmbienceModule
+        private sealed class AmbienceModule : TransitionAudioModule<AmbienceReference>
         {
-            private AudioChannelLayerContainer<AmbienceReference> _layerContainer = new();
             private AudioSourceAudioPlayerObject _audioSources;
-            private float _currentAmbienceVolumeModifier = 1f;
-            
+
             public AmbienceModule(AudioSourceAudioPlayerObject audioSources)
             {
                 _audioSources = audioSources;
             }
 
-            public async UniTask SetToLayerAndPlayHighestPriorityAmbience(AmbienceReference reference, AudioLayer layer)
-            {
-                if (!_layerContainer.IsEmpty)
-                {
-                    AmbienceReference highestPriorityAudioReference = _layerContainer.GetHighestPriorityAudioReference();
-                    if (reference == highestPriorityAudioReference) return;
-                    
-                    await StopAmbience(layer);
-                }
-            
-                _layerContainer.SetActiveReferenceToLayer(reference, layer);
-                
-                await PlayHighestPriorityAmbience();
-            }
-            
-            public async UniTask StopAndPlayHighestPriorityAmbience(AudioLayer layer)
-            {
-                await StopAmbience(layer);
-                await PlayHighestPriorityAmbience();
-            }
-            
-            private async UniTask StopAmbience(AudioLayer layer)
-            {
-                if (_layerContainer.IsEmpty) return;
-                
-                AmbienceReference activeAmbienceReference = _layerContainer.GetHighestPriorityAudioReference();
-                _layerContainer.RemoveLayer(layer);
-                await AudioUtility.DoVirtual(1f, 0f, activeAmbienceReference.TransitionDuration, SetAmbienceVolume);
-                AudioAssetProvider.UnloadAudioAsset(activeAmbienceReference);
-            }
-            
-            private async UniTask PlayHighestPriorityAmbience()
-            {
-                if (_layerContainer.IsEmpty) return;
-                
-                AmbienceReference ambienceReference = _layerContainer.GetHighestPriorityAudioReference();
-                _currentAmbienceVolumeModifier = ambienceReference.VolumeModifier;
-                _audioSources.AmbienceAudioSource.clip = await AudioAssetProvider.LoadAudioClipsFromReference(ambienceReference);
-                _audioSources.AmbienceAudioSource.Play();
-                await AudioUtility.DoVirtual(0f, 1f, ambienceReference.TransitionDuration, SetAmbienceVolume);
-            }
-            
-            private void SetAmbienceVolume(float volume)
-            {
-                _audioSources.AmbienceAudioSource.volume = volume * _currentAmbienceVolumeModifier;
-            }
+            protected override AudioSource GetAudioSource(AudioLayer layer) => _audioSources.GetAmbienceAudioSource(layer);
+            protected override void ReplaceAudioSource(AudioLayer layer) => _audioSources.ReplaceAmbienceAudioSource(layer).Forget();
         }
 
         private sealed class SFXModule
@@ -270,44 +304,32 @@ namespace CuroAudio
             public async UniTask PlaySFXAtPosition(SFXReference sfxReference, Vector3 position)
             {
                 AudioClip clip = await AudioAssetProvider.LoadAudioClipsFromReference(sfxReference);
-                AudioSource source = _audioSources.SFXAudioSourcePool.GetSource();
-                source.transform.position = position;
+                AudioSourcePoolObject sourcePoolObject = _audioSources.SFXAudioSourcePool.GetSource();
+                sourcePoolObject.transform.position = position;
                 
-                ApplyReferenceSettingsToSource(sfxReference, source);
+                ApplyReferenceSettingsToSource(sfxReference, sourcePoolObject.Source);
 
-                source.clip = clip;
-                source.Play();
-
-                await UniTask.WaitForSeconds(clip.length);
+                await sourcePoolObject.PlayAudioClip(clip);
                 
-                _audioSources.SFXAudioSourcePool.ReturnSource(source);
+                _audioSources.SFXAudioSourcePool.ReturnSource(sourcePoolObject);
             }
             
             public async UniTask PlaySFX(SFXReference sfxReference, CancellationToken cancellationToken)
             {
                 AudioClip clip = await AudioAssetProvider.LoadAudioClipsFromReference(sfxReference);
-                AudioSource source = _audioSources.SFXAudioSourcePool.GetSource();
+                AudioSourcePoolObject sourcePoolObject = _audioSources.SFXAudioSourcePool.GetSource();
                 
-                ApplyReferenceSettingsToSource(sfxReference, source);
+                ApplyReferenceSettingsToSource(sfxReference, sourcePoolObject.Source);
 
-                source.clip = clip;
-                source.Play();
-
-                try
-                {
-                    await UniTask.WaitForSeconds(clip.length, cancellationToken: cancellationToken);
-                }
-                catch
-                {
-                    source.Stop();
-                }
+                await sourcePoolObject.PlayAudioClip(clip, cancellationToken);
                 
-                _audioSources.SFXAudioSourcePool.ReturnSource(source);
+                _audioSources.SFXAudioSourcePool.ReturnSource(sourcePoolObject);
             }
 
             private void ApplyReferenceSettingsToSource(SFXReference sfxReference, AudioSource audioSource)
             {
                 audioSource.volume = sfxReference.VolumeModifier;
+                audioSource.pitch = sfxReference.Pitch;
                 
                 if (sfxReference.UseRandomPitch)
                 {

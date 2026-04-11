@@ -4,11 +4,14 @@ using System.Threading;
 using UnityEngine;
 using Combat;
 using System;
+using Zenject;
 
 public sealed class InspectionTooltipManager : MonoBehaviour
 {
     private static InspectionTooltipManager _instance;
     public static InspectionTooltipManager Instance => _instance;
+    
+    [Inject] private DragController _dragController;
     
     [Header("ActivityCondition")]
     [SerializeField] [Range(-1f, 1f)] private float _directionDotProductThreshold = -0.2f;
@@ -17,7 +20,6 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     
     [Header("Links")]
     [SerializeField] private Transform _uiRoot;
-    [SerializeField] private DragController _dragController;
     [SerializeField] private EntityTooltip _entityTooltipPrefab;
     [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltipPrefab;
     [SerializeField] private EffectInspectionTooltip _effectInspectionTooltipPrefab;

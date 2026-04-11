@@ -11,8 +11,9 @@ namespace CuroAudio
         [Header("RandomSFX")]
         [SerializeField] private bool _useRandomSFX;
         [ShowIf("_useRandomSFX")] [SerializeField] private List<AssetReference> _randomSFXReferences;
-        
-        [Space] [Header("Pitch")]
+
+        [Space] [Header("Pitch")] 
+        [SerializeField] private float _pitch = 1f;
         [SerializeField] private bool _useRandomPitch;
         [ShowIf("_useRandomPitch")] [SerializeField] private float _pitchMagnitude = 0.05f;
         
@@ -22,6 +23,7 @@ namespace CuroAudio
         public bool UseRandomSFX => _useRandomSFX;
         public List<AssetReference> RandomSFXReferences => _randomSFXReferences;
         
+        public float Pitch => _pitch;
         public bool UseRandomPitch => _useRandomPitch;
         public float PitchMagnitude => _pitchMagnitude;
         

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CuroAudio;
 using NaughtyAttributes;
 using UnityEngine;
 using Navigation;
@@ -36,6 +37,9 @@ public sealed class EnemyData : ScriptableObject
     [SerializeField] private bool _hasObjectModificators;
     [ShowIf("_hasObjectModificators")] [SerializeField] private List<GameObject> _objectModificators;
 
+    [Header("Audio")] 
+    [SerializeField] private AudioEnum _deathSound = AudioEnum.sound_enemy_death; 
+    
     public bool DiesOnContact => _diesOnContact;
     public float ContactDamage => _contactDamage;
     public float MaxHealth => _maxHealth;
@@ -52,4 +56,5 @@ public sealed class EnemyData : ScriptableObject
     public Mesh Mesh => _mesh;
     public Material Material => _material;
     public float Scale => _scale;
+    public AudioEnum DeathSound => _deathSound;
 }

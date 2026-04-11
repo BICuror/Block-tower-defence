@@ -15,27 +15,25 @@ namespace CuroAudio
         {
             {AudioAssetLifetimeDuration.Short, 15},
             {AudioAssetLifetimeDuration.Medium, 30},
-            {AudioAssetLifetimeDuration.Long, 120}
+            {AudioAssetLifetimeDuration.Long, 90}
         };
         
         private static readonly Dictionary<AudioReference, AudioAssetUnloadTimer> _unloadTimers = new();
 
         public static async UniTask<AudioClip> LoadAudioClipsFromReference(AudioReference audioReference)
         {
-            if (_unloadTimers.TryGetValue(audioReference, out AudioAssetUnloadTimer unloadTimer))
+            if (_unloadTimers.ContainsKey(audioReference))
             {
-                while (!unloadTimer.AssetsAreLoaded)
-                {
-                    await UniTask.WaitForFixedUpdate();
-                }
-                
-                unloadTimer.ResetTimerDuration(); 
-                return unloadTimer.RandomClip;
+                _unloadTimers[audioReference].ResetTimerDuration();
+            }
+            else
+            {
+                await CreateNewUnloadTimer(audioReference);
             }
 
-            AudioAssetUnloadTimer newUnloadTimer = await CreateNewUnloadTimer(audioReference);
-
-            return newUnloadTimer.RandomClip;
+            await UniTask.WaitUntil(() => _unloadTimers[audioReference].AssetsAreLoaded);
+            
+            return _unloadTimers[audioReference].RandomClip;
         }
 
         public static void UnloadAudioAsset(AudioReference audioReference)
@@ -47,7 +45,7 @@ namespace CuroAudio
         {
             AudioAssetUnloadTimer newUnloadTimer = new(audioReference);
             _unloadTimers[audioReference] = newUnloadTimer;
-            newUnloadTimer.ReferenceAssetsUnloaded += RemoveAudioReferenceUnloadTimer;
+            newUnloadTimer.Unloaded += RemoveAudioReferenceUnloadTimer;
 
             SFXReference sfxReference = audioReference as SFXReference;
 
@@ -60,14 +58,15 @@ namespace CuroAudio
                 await newUnloadTimer.LoadAssets(audioReference.AudioFileReference);
             }
             
-            if (audioReference.LifetimeDuration != AudioAssetLifetimeDuration.NoLifetime) newUnloadTimer.StartTimer().Forget();
+            newUnloadTimer.StartTimer().Forget();
             
             return newUnloadTimer;
         }
 
-        private static void RemoveAudioReferenceUnloadTimer(AudioReference audioReference)
+        private static void RemoveAudioReferenceUnloadTimer(AudioAssetUnloadTimer unloadTimer)
         {
-            _unloadTimers.Remove(audioReference);
+            unloadTimer.Unloaded -= RemoveAudioReferenceUnloadTimer;
+            _unloadTimers.Remove(unloadTimer.AudioReference);
         }
         
         private sealed class AudioAssetUnloadTimer
@@ -78,10 +77,11 @@ namespace CuroAudio
             private bool _assetsAreLoaded;
             private int _leftDuration;
             
+            public AudioReference AudioReference => _associatedAudioReference;
             public AudioClip RandomClip => _clips[Random.Range(0, _clips.Count)];
             public bool AssetsAreLoaded => _assetsAreLoaded;
             
-            public event Action<AudioReference> ReferenceAssetsUnloaded; 
+            public event Action<AudioAssetUnloadTimer> Unloaded; 
             
             public AudioAssetUnloadTimer(AudioReference audioReference)
             {
@@ -110,11 +110,15 @@ namespace CuroAudio
             
             public void ResetTimerDuration()
             {
+                if (_associatedAudioReference.LifetimeDuration == AudioAssetLifetimeDuration.NoLifetime) return;
+                
                 _leftDuration = _lifetimeDurations[_associatedAudioReference.LifetimeDuration];
             }
 
             public async UniTask StartTimer()
             {
+                if (_associatedAudioReference.LifetimeDuration == AudioAssetLifetimeDuration.NoLifetime) return;
+                
                 ResetTimerDuration();
 
                 while (_leftDuration > 0)
@@ -133,9 +137,13 @@ namespace CuroAudio
 
             public void Unload()
             {
-                ReferenceAssetsUnloaded?.Invoke(_associatedAudioReference);
+                Unloaded?.Invoke(this);
                 _unloadCancellationTokenSource.Cancel();
-                _clips.ForEach(Addressables.Release);
+                _clips.ForEach(clip =>
+                {
+                    //Addressables.Release(clip);
+                    Resources.UnloadAsset(clip);
+                });
             }
         }
     }

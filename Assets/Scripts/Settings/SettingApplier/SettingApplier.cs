@@ -1,29 +1,23 @@
-using UnityEngine;
 using System;
 
 namespace CuroSettings
 {
     public abstract class SettingApplier<T> where T : Setting
     {
-        private const bool THROW_EXCEPTION_WHEN_SETTING_IS_NOT_FOUND = false;
+        public Setting _setting;
         
-        protected static T Setting;
-        
-        protected static void FetchSetting(SettingsEnum key, Action applySetting)
+        protected static T FetchSetting(SettingsEnum key, Action applySetting)
         {
             if (SettingsContainer.SettingsExists(key))
             {
-                Setting = SettingsContainer.GetSetting<T>(key);
-                
-                Setting.ValueChanged += applySetting;
-                applySetting.Invoke();
+                T setting = SettingsContainer.GetSetting<T>(key);
+
+                setting.ValueChanged += applySetting;
+
+                return setting;
             }
-            else
-            {
-                if (THROW_EXCEPTION_WHEN_SETTING_IS_NOT_FOUND) throw new Exception($"Setting applier could not find setting with key: {key}");
-                
-                Debug.LogWarning($"Setting applier could not find setting with key: {key}");
-            }
+
+            throw new Exception($"Setting applier could not find setting with key: {key}");
         }
     }
 }

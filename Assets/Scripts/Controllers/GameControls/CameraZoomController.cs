@@ -1,11 +1,12 @@
+using System;
 using CuroSettings;
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(Camera))]
-
 public sealed class CameraZoomController : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
+    
     [Header("ZoomSettings")]
     [SerializeField] private float _zoomSensetivity;
     [SerializeField] private float _minZoomValue;
@@ -15,15 +16,14 @@ public sealed class CameraZoomController : MonoBehaviour
     [SerializeField] private float _zoomSmoothingDuration = 0.25f;
     [SerializeField] private AnimationCurve _zoomSmoothingCurve;
     private FloatSetting _zoomSensitivitySetting;
-    private Camera _camera;
+
+    public Action ZoomChanged;
     
     private float _finalZoom;
     private Tween _zoomTween;
     
     private void OnEnable()
     {
-        _camera = GetComponent<Camera>();
-
         _zoomSensitivitySetting = SettingsContainer.GetSetting<FloatSetting>(SettingsEnum.CameraZoomSensetiviy);
         _finalZoom = _camera.orthographicSize;
     }
@@ -38,8 +38,13 @@ public sealed class CameraZoomController : MonoBehaviour
         _finalZoom = Mathf.Clamp(_finalZoom + changeValue, _minZoomValue, _maxZoomValue);
 
         if (_zoomTween != null) _zoomTween.Kill();
-        _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve);
+        _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve).SetUpdate(UpdateType.Fixed);
     }
 
-    private void SetZoom(float value) => _camera.orthographicSize = value;
+    private void SetZoom(float value)
+    {
+        _camera.orthographicSize = value;
+        
+        ZoomChanged?.Invoke();
+    }
 }

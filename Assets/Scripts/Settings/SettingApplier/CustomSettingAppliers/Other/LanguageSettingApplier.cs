@@ -5,19 +5,22 @@ namespace CuroSettings.CustomSettingAppliers
 {
     public sealed class LanguageSettingApplier : SettingApplier<EnumSetting>
     {
+        private static EnumSetting _setting; 
+        
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Initialize()
         {
             TryGetSystemLanguage();
             
-            FetchSetting(SettingsEnum.Language, ApplyNewSettingValue);
+            _setting = FetchSetting(SettingsEnum.Language, ApplyNewSettingValue);
+            ApplyNewSettingValue();
         }
 
         private static void TryGetSystemLanguage()
         {
-            Setting = SettingsContainer.GetSetting<EnumSetting>(SettingsEnum.Language);
+            _setting = SettingsContainer.GetSetting<EnumSetting>(SettingsEnum.Language);
             
-            if (Setting.GetValueIndex() != -1) return;
+            if (_setting.GetValueIndex() != -1) return;
 
             LocalizationSettings localizationSettings = LocalizationManager.Settings;
 
@@ -28,12 +31,12 @@ namespace CuroSettings.CustomSettingAppliers
                 resultSystemLanguage = Application.systemLanguage;
             }
             
-            Setting.SetValue(LocalizationManager.GetSupportedLanguageData(resultSystemLanguage).SerializableLanguage);
+            _setting.SetValue(LocalizationManager.GetSupportedLanguageData(resultSystemLanguage).SerializableLanguage);
         }
         
         private static void ApplyNewSettingValue()
         {
-            SystemLanguage language = LocalizationManager.GetSupportedLanguageData(Setting.GetValue<SerializableSystemLanguage>()).Language;
+            SystemLanguage language = LocalizationManager.GetSupportedLanguageData(_setting.GetValue<SerializableSystemLanguage>()).Language;
 
             if (!LocalizationManager.Settings.SupportedLanguages.Exists(supportedLanguageData => supportedLanguageData.Language == language))
             {

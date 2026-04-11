@@ -1,14 +1,13 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 using System;
 using Combat;
-using Zenject;
-
-[RequireComponent(typeof(Camera))]
 
 public class InspectorController : MonoBehaviour
 {
-    [SerializeField] private TimeController _timeController;
+    [Inject] private TimeController _timeController;
+    
     [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
     [SerializeField] private LayerSetting _inspectableLayerSetting;

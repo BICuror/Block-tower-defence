@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb933d4a310d18146ad798d4e020a40e, type: 3}
+  m_Name: VegetationHover
+  m_EditorClassIdentifier: 
+  _audioReference:
+    m_AssetGUID: 02b126b1dedb1384b9285b5b1d07dba2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _volumeModifier: 0.131
+  _useRandomSFX: 1
+  _randomSFXReferences:
+  - m_AssetGUID: 02b126b1dedb1384b9285b5b1d07dba2
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 419afaa02ccaf784fbd236c8e5305044
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 478c82be77f403942aba90b348819d4a
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  - m_AssetGUID: 47401eec2a9a3ca4d8830792a192b3e3
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
+  _pitch: 0.5
+  _useRandomPitch: 1
+  _pitchMagnitude: 0.5
+  _lifetimeDuration: 3

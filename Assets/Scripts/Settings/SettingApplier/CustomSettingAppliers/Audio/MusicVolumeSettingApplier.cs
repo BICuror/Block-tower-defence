@@ -5,15 +5,18 @@ namespace CuroSettings.CustomSettingAppliers.Audio
 {
     public class MusicVolumeSettingApplier : SettingApplier<FloatSetting>
     {
+        private static FloatSetting _setting;
+        
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         private static void Initialize()
         {
-            FetchSetting(SettingsEnum.MusicVolume, ApplyNewSettingValue);
+            _setting = FetchSetting(SettingsEnum.MusicVolume, ApplyNewSettingValue);
+            ApplyNewSettingValue();
         }
         
         private static void ApplyNewSettingValue()
         {
-            AudioSystem.SetVolume(AudioChannelType.Music, Setting.Value);
+            AudioSystem.SetVolume(AudioChannelType.Music, _setting.Value);
         }
     }
 }

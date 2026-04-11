@@ -1,9 +1,10 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public sealed class GameControllerRotationState : GameControllerState
 {
-    [SerializeField] private CameraRotationController _cameraRotationController;
+    [Inject] private CameraRotationController _cameraRotationController;
     private GameControls _controls;
     
     protected override ControllerState State => ControllerState.Rotating;

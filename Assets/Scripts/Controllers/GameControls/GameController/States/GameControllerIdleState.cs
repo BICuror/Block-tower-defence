@@ -1,10 +1,11 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 public sealed class GameControllerIdleState : GameControllerState
 {
-    [SerializeField] private InspectorController _inspectorController;
-    [SerializeField] private CursorController _cursorController;
+    [Inject] private InspectorController _inspectorController;
+    [Inject] private CursorController _cursorController;
     private GameControls _controls;
 
     protected override ControllerState State => ControllerState.Idle;

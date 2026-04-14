@@ -5,6 +5,7 @@ namespace CuroAudio
     public enum AudioLayer
     {
         Main = 0,
-        Additional = 1
+        Weather = 1,
+        Daytime = 2,
     }
 }

@@ -41,7 +41,6 @@ public sealed class DraggableConnector : MonoBehaviour
         {
             ScreenShakeController.Instance.PlayScreenShake(_placementScreenShakeData, finalPosition);
         }
-        AudioSystem.PlaySFX(AudioEnum.sound_general_gameplay_placement, transform.position);
     }
 
     private async UniTask PlaceObject(DragAnimationObject dragAnimationObject, GameObject draggableObject, Vector3 finalPosition)

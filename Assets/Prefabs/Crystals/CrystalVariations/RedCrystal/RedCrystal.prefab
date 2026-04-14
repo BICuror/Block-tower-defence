@@ -4977,6 +4977,8 @@ GameObject:
   - component: {fileID: 1305424881754724633}
   - component: {fileID: -1740854102193638907}
   - component: {fileID: -5335810708953867849}
+  - component: {fileID: -783298387329447418}
+  - component: {fileID: -840849360970369167}
   m_Layer: 13
   m_Name: RedCrystal
   m_TagString: Draggable
@@ -5099,6 +5101,35 @@ MonoBehaviour:
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-783298387329447418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944490093618053086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 19
+  _audioClipToPlayOnDragged: 18
+--- !u!114 &-840849360970369167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944490093618053086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb32c3481e5b92429316696ba7a718e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InspectableAudioPlayer
+  _audioClipToPlayOnInspectionStart: 20
+  _audioClipToPlayOnInspectionEnd: 21
 --- !u!1 &2403032933835088123
 GameObject:
   m_ObjectHideFlags: 0

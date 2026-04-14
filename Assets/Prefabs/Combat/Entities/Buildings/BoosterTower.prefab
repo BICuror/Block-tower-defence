@@ -4975,6 +4975,7 @@ GameObject:
   - component: {fileID: 5781856286329589189}
   - component: {fileID: -2813065794598741715}
   - component: {fileID: 292439785402927277}
+  - component: {fileID: -5490375013983178170}
   m_Layer: 7
   m_Name: BoosterTower
   m_TagString: Draggable
@@ -5113,6 +5114,7 @@ MonoBehaviour:
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 2
+  _buildingEntityType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 1
   _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: f887533d17d9e6244a9d4c8888a9167e, type: 3}
@@ -5129,7 +5131,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
 --- !u!114 &561810178927590438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5214,6 +5215,20 @@ MonoBehaviour:
   _areaEntityDetector: {fileID: 7466747641916913374}
   _effectTypeName: HasteEffect
   _effectStaks: 1
+--- !u!114 &-5490375013983178170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2785648769302265666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 5
 --- !u!1 &6419556192949382454
 GameObject:
   m_ObjectHideFlags: 0

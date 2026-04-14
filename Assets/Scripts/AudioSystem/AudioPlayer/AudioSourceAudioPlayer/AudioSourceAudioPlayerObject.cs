@@ -89,11 +89,14 @@ namespace CuroAudio
                     return source;
                 }
                 
-                return Instantiate(_sourcePrefab, _parentTransform);
+                AudioSourcePoolObject sourcePoolObject = Instantiate(_sourcePrefab, _parentTransform);
+                sourcePoolObject.AudioSourceReturned += ReturnSource;
+                return sourcePoolObject;
             }
 
-            public void ReturnSource(AudioSourcePoolObject source)
+            private void ReturnSource(AudioSourcePoolObject source)
             {
+                source.transform.parent = _parentTransform;
                 source.gameObject.SetActive(false);
                 _unusedSources.Add(source);
             }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using System;
+using Cysharp.Threading.Tasks;
 
 namespace CuroAudio
 {
@@ -41,6 +42,11 @@ namespace CuroAudio
             if (ChannelIsMuted(AudioChannelType.SFX)) return;
             
             _audioPlayer.PlaySFX(reference, token);
+        }
+
+        public static UniTask<AudioSource> PlayLoopSFX(SFXReference reference)
+        {
+            return _audioPlayer.PlayLoopSFX(reference);
         }
 
         public static void PlayMusic(MusicReference reference, AudioLayer layer, bool removeAllOther = false, bool awaitStopToStart = false)
@@ -116,6 +122,15 @@ namespace CuroAudio
             if (audioReference is not SFXReference) throw new Exception($"Tried to play audioReference {audioReference.name} as SFXReference, while it is {audioReference.GetType()}");
             
             PlaySFX(audioReference as SFXReference);
+        }
+        
+        public static UniTask<AudioSource> PlayLoopSFX(AudioEnum audioEnum)
+        {
+            AudioReference audioReference = GetAudioReference(audioEnum);
+            
+            if (audioReference is not SFXReference) throw new Exception($"Tried to play audioReference {audioReference.name} as SFXReference, while it is {audioReference.GetType()}");
+            
+            return PlayLoopSFX(audioReference as SFXReference);
         }
     
         public static void PlayMusic(AudioEnum audioEnum, AudioLayer layer)

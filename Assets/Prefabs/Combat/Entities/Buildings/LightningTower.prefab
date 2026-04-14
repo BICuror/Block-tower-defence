@@ -5599,6 +5599,7 @@ GameObject:
   - component: {fileID: 6499896294953490330}
   - component: {fileID: 9185199116908273586}
   - component: {fileID: 5494015683619608005}
+  - component: {fileID: 6302588979363284464}
   m_Layer: 7
   m_Name: LightningTower
   m_TagString: Draggable
@@ -5778,45 +5779,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators:
-  - {fileID: 11400000, guid: 6cce0aa5c95bbc043abcdec995f8f3d2, type: 2}
-  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
-  - {fileID: 11400000, guid: a441dd39244b43447b33348da2d43aa8, type: 2}
-  - {fileID: 11400000, guid: 236891895a23fd54c8487dd00e365cee, type: 2}
-  - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
-  - {fileID: 11400000, guid: 785a4ab1f615c8f43953a743e8f5b370, type: 2}
-  - {fileID: 11400000, guid: e6f526be5871a36449db8c578e0c09e6, type: 2}
-  - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
-  - {fileID: 11400000, guid: 965d8a0600408424b9cb12f910cb1a27, type: 2}
-  - {fileID: 11400000, guid: 00c8f01bdea31cb449bc1f5cd613087d, type: 2}
-  - {fileID: 11400000, guid: 986a970c79823d7478b41f108f3862c3, type: 2}
-  - {fileID: 11400000, guid: 5b1f0399001e3da499f9eda44aad3d6c, type: 2}
-  - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
-  - {fileID: 11400000, guid: 90aa638f7f19938459a12f3220d87a52, type: 2}
-  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
-  - {fileID: 11400000, guid: baf101d91b46e2b4a97b9b1a0b46e6a0, type: 2}
-  - {fileID: 11400000, guid: a467cbbfebadabf4a81108c2383170bb, type: 2}
-  - {fileID: 11400000, guid: 8cf92eda629c2ec48a329a815d75a504, type: 2}
-  - {fileID: 11400000, guid: df1567796476f5440a2117c7945561f0, type: 2}
-  - {fileID: 11400000, guid: 4724c287469796c4c9cbb5bbea681100, type: 2}
-  - {fileID: 11400000, guid: 3fc8e09c6fe0ecf468721b29f275aa73, type: 2}
-  - {fileID: 11400000, guid: c77b913b34675ee43843bbaa471650b6, type: 2}
-  - {fileID: 11400000, guid: e5f8125c956370a4d9f9810c7db4aeeb, type: 2}
-  - {fileID: 11400000, guid: b8be7177f2e670c43a8ade144eb529c1, type: 2}
-  - {fileID: 11400000, guid: 4d4b845e23364a54fa2ac71d90dc9f52, type: 2}
-  - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
-  - {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
-  - {fileID: 11400000, guid: 2e90431e3fbf35641938bc49530fa692, type: 2}
-  - {fileID: 11400000, guid: f9d17ef5a2523e741ba1f52282e3063c, type: 2}
-  - {fileID: 11400000, guid: e93b3855d1a7ef7498610cd48f4c12c1, type: 2}
-  - {fileID: 11400000, guid: 257aa3f2a616a834c9e5b879371ba1fd, type: 2}
-  - {fileID: 11400000, guid: d72610ba85d39ae48ba77b3e7c6e4ae3, type: 2}
-  - {fileID: 11400000, guid: 951bd736840bf3f4fb82ab75b0a4d4ef, type: 2}
-  - {fileID: 11400000, guid: 57ff6401c5bde9c45a3a922ddbee3f4b, type: 2}
-  - {fileID: 11400000, guid: d1aabb5f496b4a44ea389c2cdaa28ae3, type: 2}
-  - {fileID: 11400000, guid: 22d317ac11c59fb4db7223f8754cf4b0, type: 2}
-  - {fileID: 11400000, guid: 4d3d7451e1ea64940a1cfeb17f0e0e37, type: 2}
-  - {fileID: 11400000, guid: 51fd41b2b0b7c044d8a9052b3d9b248e, type: 2}
 --- !u!114 &2354109481658448472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5888,6 +5850,20 @@ MonoBehaviour:
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6302588979363284464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8141121563948167434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 5
 --- !u!1001 &8041683409796376865
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 1882178022793193485}
   - component: {fileID: 3051641801879490263}
   - component: {fileID: 146204986344496676}
+  - component: {fileID: -5868992738899762041}
   m_Layer: 7
   m_Name: BrawlerTower
   m_TagString: Draggable
@@ -154,7 +155,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
 --- !u!114 &8996593245456271576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +212,20 @@ MonoBehaviour:
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-5868992738899762041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1454633664084635710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 5
 --- !u!1 &4338490770623798528
 GameObject:
   m_ObjectHideFlags: 0

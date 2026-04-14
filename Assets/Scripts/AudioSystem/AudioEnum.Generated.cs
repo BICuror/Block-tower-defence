@@ -19,7 +19,13 @@ namespace CuroAudio
         sound_combat_shield_break = 11,
         sound_enviroment_vegetation_hover = 12,
         sound_enviroment_rocks_hover = 13,
+        sound_crystal_drag = 18,
+        sound_crystal_place = 19,
+        sound_crystal_inspection_enter = 20,
+        sound_crystal_inspection_exit = 21,
         ambience_evniroment_sea = 14,
         ambience_weather_rain = 15,
+        ambience_day_time_day = 16,
+        ambience_day_time_night = 17,
     }
 }

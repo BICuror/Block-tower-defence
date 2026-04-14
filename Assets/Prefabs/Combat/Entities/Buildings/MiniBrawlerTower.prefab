@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 8685880848897604097}
   - component: {fileID: 6006436116937174125}
   - component: {fileID: 7904643718485314149}
+  - component: {fileID: 3170563511737169409}
   m_Layer: 7
   m_Name: MiniBrawlerTower
   m_TagString: Draggable
@@ -134,6 +135,7 @@ MonoBehaviour:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 20
+  _buildingEntityType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 0
   _buildingDestroyedObjectPrefab: {fileID: 0}
@@ -150,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
 --- !u!114 &8282743070268609198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,6 +209,20 @@ MonoBehaviour:
   _pauseOnInspection: 0
   _canBeIdleInspected: 0
   _localizationKey: rock_building_entity_tooltip
+--- !u!114 &3170563511737169409
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4898836349792692550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 5
 --- !u!1 &9081913487005990000
 GameObject:
   m_ObjectHideFlags: 0

@@ -69,6 +69,11 @@ namespace CuroAudio
             _sfxModule.PlaySFXAtPosition(reference, position).Forget();
         }
 
+        UniTask<AudioSource> IAudioPlayer.PlayLoopSFX(SFXReference reference)
+        {
+            return _sfxModule.PlayLoopSFX(reference);
+        }
+
         void IAudioPlayer.PlayMusic(MusicReference reference, AudioLayer layer, bool removeAllOther, bool awaitStopToStart)
         {
             _musicModule.PlayAudio(reference, layer, removeAllOther, awaitStopToStart).Forget();
@@ -310,8 +315,6 @@ namespace CuroAudio
                 ApplyReferenceSettingsToSource(sfxReference, sourcePoolObject.Source);
 
                 await sourcePoolObject.PlayAudioClip(clip);
-                
-                _audioSources.SFXAudioSourcePool.ReturnSource(sourcePoolObject);
             }
             
             public async UniTask PlaySFX(SFXReference sfxReference, CancellationToken cancellationToken)
@@ -322,18 +325,30 @@ namespace CuroAudio
                 ApplyReferenceSettingsToSource(sfxReference, sourcePoolObject.Source);
 
                 await sourcePoolObject.PlayAudioClip(clip, cancellationToken);
+            }
+            
+            public async UniTask<AudioSource> PlayLoopSFX(SFXReference sfxReference)
+            {
+                AudioClip clip = await AudioAssetProvider.LoadAudioClipsFromReference(sfxReference);
+                AudioSourcePoolObject sourcePoolObject = _audioSources.SFXAudioSourcePool.GetSource();
                 
-                _audioSources.SFXAudioSourcePool.ReturnSource(sourcePoolObject);
+                ApplyReferenceSettingsToSource(sfxReference, sourcePoolObject.Source);
+
+                sourcePoolObject.PlayAudioClip(clip).Forget();
+                sourcePoolObject.Source.loop = true;
+                
+                return sourcePoolObject.Source;
             }
 
             private void ApplyReferenceSettingsToSource(SFXReference sfxReference, AudioSource audioSource)
             {
                 audioSource.volume = sfxReference.VolumeModifier;
                 audioSource.pitch = sfxReference.Pitch;
+                audioSource.loop = false;
                 
                 if (sfxReference.UseRandomPitch)
                 {
-                    audioSource.pitch += Random.Range(1f - sfxReference.PitchMagnitude, 1f + sfxReference.PitchMagnitude);
+                    audioSource.pitch += Random.Range(-sfxReference.PitchMagnitude, sfxReference.PitchMagnitude);
                 }
             }
         }

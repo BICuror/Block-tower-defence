@@ -58,6 +58,8 @@ public sealed class EnviromentController : MonoBehaviour
         _postProcessingController.SetProfile(state.VolumeProfile);
         
         UpdateRainState();
+        
+        AudioSystem.PlayAmbience(state.Ambience, AudioLayer.Daytime);
     }
 
     private void TryEnterNextState()
@@ -76,18 +78,19 @@ public sealed class EnviromentController : MonoBehaviour
         _postProcessingController.ChangeCustomVolume(_enviromentStates[_currentEnviromentStateIndex].VolumeProfile, _changeDuration).Forget();
 
         UpdateRainState();
+        AudioSystem.PlayAmbience(_enviromentStates[_currentEnviromentStateIndex].Ambience, AudioLayer.Daytime);
     }
 
     private void UpdateRainState()
     {
         if (Random.Range(0, 100) < _rainChance)
         {
-            AudioSystem.PlayAmbience(AudioEnum.ambience_weather_rain, AudioLayer.Additional);
+            AudioSystem.PlayAmbience(AudioEnum.ambience_weather_rain, AudioLayer.Weather);
             _rainParticles.Play();
         }
         else
         {
-            AudioSystem.StopAmbience(AudioLayer.Additional, false);
+            AudioSystem.StopAmbience(AudioLayer.Weather, false);
             _rainParticles.Stop();
         }
     }
@@ -118,10 +121,12 @@ public sealed class EnviromentController : MonoBehaviour
         [SerializeField] private List<EnviromentMaterialChange> _enviromentMaterialChanges;
         [SerializeField] private List<EnviromentLightChange> _enviromentLightChanges;
         [SerializeField] private VolumeProfile _volumeProfile;
+        [SerializeField] private AudioEnum _ambience;
         
         public List<EnviromentMaterialChange> EnviromentMaterialChanges => _enviromentMaterialChanges;
         public List<EnviromentLightChange> EnviromentLightChanges => _enviromentLightChanges;
         public VolumeProfile VolumeProfile => _volumeProfile;
+        public AudioEnum Ambience => _ambience;
     }
 
     [Serializable] private sealed class EnviromentMaterialChange

@@ -11,6 +11,7 @@ public sealed class AudioSourcePoolObject : MonoBehaviour
 
     public Action ClipStarted;
     public Action ClipEnded;
+    public Action<AudioSourcePoolObject> AudioSourceReturned;
     
     public AudioSource Source => _audioSource;
     
@@ -30,7 +31,8 @@ public sealed class AudioSourcePoolObject : MonoBehaviour
             _audioSource.Stop();
         }
         
-        ClipEnded?.Invoke();
         _audioSource.clip = null;
+        ClipEnded?.Invoke();
+        AudioSourceReturned?.Invoke(this);
     }
 }

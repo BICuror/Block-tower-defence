@@ -56,8 +56,8 @@ public class Shaker : MonoBehaviour
     {
         switch (shakeData.ShakeType)
         {
-            case ShakeType.Scale: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength).SetLink(_mesh.gameObject); break;
-            case ShakeType.Rotation: _mesh.DOShakeRotation(shakeData.Duration, shakeData.Strength).SetLink(_mesh.gameObject); break;
+            case ShakeType.Scale: _mesh.DOShakeScale(shakeData.Duration, shakeData.Strength).SetLink(_mesh.gameObject).SetUpdate(true); break;
+            case ShakeType.Rotation: _mesh.DOShakeRotation(shakeData.Duration, shakeData.Strength).SetLink(_mesh.gameObject).SetUpdate(true); break;
         }
     }
     

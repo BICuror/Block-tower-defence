@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 3756345925330576276}
   - component: {fileID: 8453782725496141231}
   - component: {fileID: -6051162938306634913}
+  - component: {fileID: 3266679432932372826}
   m_Layer: 7
   m_Name: ArtilleryTower
   m_TagString: Draggable
@@ -181,26 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators:
-  - {fileID: 11400000, guid: f224a0cb3d183534a8e0a142786cb5a9, type: 2}
-  - {fileID: 11400000, guid: 9f74ba2a298ecbd4fb3e574d2958abd6, type: 2}
-  - {fileID: 11400000, guid: 7ec2e55c11a36a344a5c52f39084b001, type: 2}
-  - {fileID: 11400000, guid: 965d8a0600408424b9cb12f910cb1a27, type: 2}
-  - {fileID: 11400000, guid: 00c8f01bdea31cb449bc1f5cd613087d, type: 2}
-  - {fileID: 11400000, guid: 8ab263fa3de9ceb45b0a948dfd8b87b2, type: 2}
-  - {fileID: 11400000, guid: 90aa638f7f19938459a12f3220d87a52, type: 2}
-  - {fileID: 11400000, guid: 9a5e1e9531bf10c4e83cd6f1e658a99e, type: 2}
-  - {fileID: 11400000, guid: baf101d91b46e2b4a97b9b1a0b46e6a0, type: 2}
-  - {fileID: 11400000, guid: a467cbbfebadabf4a81108c2383170bb, type: 2}
-  - {fileID: 11400000, guid: 3fc8e09c6fe0ecf468721b29f275aa73, type: 2}
-  - {fileID: 11400000, guid: c77b913b34675ee43843bbaa471650b6, type: 2}
-  - {fileID: 11400000, guid: e5f8125c956370a4d9f9810c7db4aeeb, type: 2}
-  - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
-  - {fileID: 11400000, guid: 752789bdaeb3c304d8709e094662c781, type: 2}
-  - {fileID: 11400000, guid: 351be86ab5475164394a85c2f95d9a81, type: 2}
-  - {fileID: 11400000, guid: 257aa3f2a616a834c9e5b879371ba1fd, type: 2}
-  - {fileID: 11400000, guid: 680c3f0bc99941840a163f49207f1455, type: 2}
-  - {fileID: 11400000, guid: 51fd41b2b0b7c044d8a9052b3d9b248e, type: 2}
 --- !u!114 &1175310730679555674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,6 +267,20 @@ MonoBehaviour:
   _mainScanerControllers: []
   _hasPriority: 0
   _priorityType: 0
+--- !u!114 &3266679432932372826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131155814804274169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 5
 --- !u!1 &2009600825240663061
 GameObject:
   m_ObjectHideFlags: 0

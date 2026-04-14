@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 8803740391824341365}
   - component: {fileID: 3468345330417763868}
   - component: {fileID: -8391406027131239682}
+  - component: {fileID: -3557425785306416615}
   m_Layer: 13
   m_Name: TemporaryTowerDestroyedObject
   m_TagString: Draggable
@@ -338,6 +339,7 @@ MonoBehaviour:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 100
+  _buildingEntityType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 0
   _buildingDestroyedObjectPrefab: {fileID: 0}
@@ -354,4 +356,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityModificatorsContainer
   _initialModificatorDatas: []
-  _allAvailableModificators: []
+--- !u!114 &-3557425785306416615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4622600621741714287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c47fea3bab0b94540b37d84e9e1f61d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
+  _audioClipToPlayOnPickedUp: 0
+  _audioClipToPlayOnPlaced: 5

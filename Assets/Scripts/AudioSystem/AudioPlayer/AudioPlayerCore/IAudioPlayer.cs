@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
 
@@ -9,6 +10,7 @@ namespace CuroAudio
         public void PlaySFX(SFXReference reference);
         public void PlaySFX(SFXReference reference, CancellationToken token);
         public void PlaySFX(SFXReference reference, Vector3 position);
+        public UniTask<AudioSource> PlayLoopSFX(SFXReference reference);
         public void PlayMusic(MusicReference reference, AudioLayer layer, bool removeAllOther = true, bool awaitStopToStart = false);
         public void PlayAmbience(AmbienceReference reference, AudioLayer layer, bool removeAllOther = false, bool awaitStopToStart = false);
         

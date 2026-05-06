@@ -23,6 +23,9 @@ public sealed class WavesContentConfig : ScriptableObject
 {
     [HideInInspector] public string Name;
     [SerializeField] List<WaveContentType> _content;
+
+    [Header("EnemyWaveGeneration")] 
+    [SerializeField] private bool _forceExistingBuildingAttackWaves;
     
     [Header("ItemSetting")]
     [SerializeField] private int _additionalItemStrength = 4;
@@ -34,6 +37,7 @@ public sealed class WavesContentConfig : ScriptableObject
     
     public List<WaveContentType> Content => _content;
     
+    public bool ForceExistingBuildingAttackWaves => _forceExistingBuildingAttackWaves;
     public int AdditionalItemStrength => _additionalItemStrength;
     public int CombinedItemStrength => _combinedItemStrength;
     public int ItemsAmount => _itemsAmount;

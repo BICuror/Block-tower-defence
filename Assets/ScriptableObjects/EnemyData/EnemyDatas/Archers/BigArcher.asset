@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: BigArcher
   m_EditorClassIdentifier: 
+  _buildingAttackType: 0
+  _spawnDelay: 1.9
+  _diesOnContact: 0
   _contactDamage: 2.5
   _maxHealth: 140
   _speed: 1.75
@@ -28,6 +31,7 @@ MonoBehaviour:
   - StructName: 
     _statData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
     _defaultValue: 1
+  _effectImmunities: []
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: 4300000, guid: b795d1f342e4beb4c96c843702fbfb70, type: 3}
   _material: {fileID: 2100000, guid: c717fb89e24ff384785039c0f1169eee, type: 2}
@@ -38,3 +42,4 @@ MonoBehaviour:
   _hasObjectModificators: 1
   _objectModificators:
   - {fileID: 7635548585433285287, guid: a3e43829c967d034aab6ef241e2db292, type: 3}
+  _deathSound: 8

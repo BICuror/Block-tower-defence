@@ -25,13 +25,16 @@ namespace WorldGeneration
             _transitionMaterial = new Material(_transitionMaterial);
 
             _baseSpawnerMaterial = _spawnerMesh.sharedMaterial;
+
+            ApplyTransitionMaterial();
+            SetRaduisToTransitionMaterial(0f);
         }
 
         public void ApplyTransitionMaterial()
         {
             _decorationContainer.ApplyMaterialToAllDecorations(_transitionMaterial);
         
-            _spawnerMesh.sharedMaterial = _terrainAnimator.TransitionMaterial;;
+            _spawnerMesh.sharedMaterial = _transitionMaterial;
         }  
 
         private void ApplyBaseMaterial()

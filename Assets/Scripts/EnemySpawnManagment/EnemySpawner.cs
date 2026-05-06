@@ -6,8 +6,6 @@ namespace Combat
 {
     public sealed class EnemySpawner : MonoBehaviour
     {
-        private const float SPAWN_DELAY = 0.65f;
-        
         [SerializeField] private EnemySpawnerInfoDisplayer _enemySpawnerInfoDisplayer;
         private List<EnemyData> _enemiesToSpawn;
         
@@ -19,26 +17,29 @@ namespace Combat
         {
             _enemiesToSpawn = enemiesToSpawn;
     
-            _enemySpawnerInfoDisplayer.DisplaySpawnInfo(_enemiesToSpawn);
+            _enemySpawnerInfoDisplayer.SetSpawnInfo(_enemiesToSpawn);
         }
-    
-        private void TryToSpawnEnemy() 
-        {
-            if (SpawnedAllEnemies == false) 
-            {
-                SpawnEnemy();
-            }
-        }
+
+        public void ShowEnemySpawnInfo() => _enemySpawnerInfoDisplayer.ShowSpawnInfo();
+        public void HideEnemySpawnInfo() => _enemySpawnerInfoDisplayer.HideSpawnInfo();
 
         public async UniTask SpawnGroup()
         {
             _enemySpawnerInfoDisplayer.HideSpawnInfo();
             
-            while (_enemiesToSpawn.Count > 0)
+            while (true)
             {
+                float minimalSpawnDelay = _enemiesToSpawn[0].SpawnDelay;
+                
                 SpawnEnemy();
                 
-                await UniTask.WaitForSeconds(SPAWN_DELAY);
+                if (_enemiesToSpawn.Count > 0)
+                {
+                    minimalSpawnDelay = Mathf.Min(_enemiesToSpawn[0].SpawnDelay, minimalSpawnDelay);
+                    
+                    await UniTask.WaitForSeconds(minimalSpawnDelay);
+                }
+                else return;
             }
         }
         

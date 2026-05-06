@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: MediumQuick
   m_EditorClassIdentifier: 
+  _buildingAttackType: 1
+  _spawnDelay: 0.7
+  _diesOnContact: 0
   _contactDamage: 1
   _maxHealth: 125
   _speed: 0.7
   _statInitializer: []
+  _effectImmunities: []
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: 4300000, guid: b795d1f342e4beb4c96c843702fbfb70, type: 3}
   _material: {fileID: 2100000, guid: a4fbcfbf316981941bf76b3352ff4d9c, type: 2}
@@ -25,3 +29,4 @@ MonoBehaviour:
   _entityModificatorDatas: []
   _hasObjectModificators: 0
   _objectModificators: []
+  _deathSound: 8

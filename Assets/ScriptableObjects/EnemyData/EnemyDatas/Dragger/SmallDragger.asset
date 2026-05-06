@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: SmallDragger
   m_EditorClassIdentifier: 
+  _buildingAttackType: 0
+  _spawnDelay: 1.9
+  _diesOnContact: 0
   _contactDamage: 5
   _maxHealth: 120
   _speed: 1.5
@@ -19,6 +22,7 @@ MonoBehaviour:
   - StructName: 
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 2
+  _effectImmunities: []
   _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
   _mesh: {fileID: 4300000, guid: 24abc5cc9ec100d4e9468a7da08d77b8, type: 3}
   _material: {fileID: 2100000, guid: eb25a30c052643a40b42f778673de011, type: 2}
@@ -29,3 +33,4 @@ MonoBehaviour:
   _hasObjectModificators: 1
   _objectModificators:
   - {fileID: 6901511779479771416, guid: dc873c58626de194a9f359c0ea28aa68, type: 3}
+  _deathSound: 8

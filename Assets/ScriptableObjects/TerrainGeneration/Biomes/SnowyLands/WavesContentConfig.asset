@@ -12,109 +12,110 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fd811eaa81676843877e7953d918665, type: 3}
   m_Name: WavesContentConfig
   m_EditorClassIdentifier: Assembly-CSharp::WavesContentConfig
+  _minimalItemStrength: 1
   _waves:
   - Name: Wave 1
     _content: 00000000
+    _forceExistingBuildingAttackWaves: 1
     _additionalItemStrength: 2
     _combinedItemStrength: 3
-    _minimalItemStrength: 0
     _itemsAmount: 1
     _optionalTasksAmount: 1
   - Name: Wave 2
     _content: 01000000
+    _forceExistingBuildingAttackWaves: 1
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 2
     _itemsAmount: 2
     _optionalTasksAmount: 2
   - Name: Wave 3
     _content: 00000000
+    _forceExistingBuildingAttackWaves: 1
     _additionalItemStrength: 4
     _combinedItemStrength: 4
-    _minimalItemStrength: 0
     _itemsAmount: 1
     _optionalTasksAmount: 1
   - Name: Wave 4
     _content: 01000000
+    _forceExistingBuildingAttackWaves: 1
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 3
     _itemsAmount: 2
     _optionalTasksAmount: 2
   - Name: Wave 5
     _content: 00000000
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 4
-    _minimalItemStrength: 2
     _itemsAmount: 2
     _optionalTasksAmount: 1
   - Name: Wave 6
     _content: 01000000
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 3
     _itemsAmount: 2
     _optionalTasksAmount: 2
   - Name: Wave 7
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 4
-    _minimalItemStrength: 3
     _itemsAmount: 1
     _optionalTasksAmount: 3
   - Name: Wave 8
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 3
     _itemsAmount: 3
     _optionalTasksAmount: 1
   - Name: Wave 9
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 4
-    _minimalItemStrength: 3
     _itemsAmount: 1
     _optionalTasksAmount: 3
   - Name: Wave 10
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 3
     _itemsAmount: 3
     _optionalTasksAmount: 1
   - Name: Wave 11
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 3
-    _minimalItemStrength: 3
     _itemsAmount: 1
     _optionalTasksAmount: 3
   - Name: Wave 12
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 3
     _itemsAmount: 3
     _optionalTasksAmount: 1
   - Name: Wave 13
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 3
-    _minimalItemStrength: 3
     _itemsAmount: 1
     _optionalTasksAmount: 3
   - Name: Wave 14
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
-    _minimalItemStrength: 3
     _itemsAmount: 3
     _optionalTasksAmount: 1
   - Name: Wave 15
     _content: 
+    _forceExistingBuildingAttackWaves: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 3
-    _minimalItemStrength: 3
     _itemsAmount: 3
     _optionalTasksAmount: 1

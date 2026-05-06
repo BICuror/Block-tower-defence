@@ -9,6 +9,8 @@ using Navigation;
 public sealed class EnemyData : ScriptableObject
 {
     [Header("Stats")] 
+    [SerializeField] private BuildingAttackType _buildingAttackType = BuildingAttackType.Group;
+    [SerializeField] private float _spawnDelay = 0.65f;
     [SerializeField] private bool _diesOnContact;
     [SerializeField] private float _contactDamage = 10f;
     [SerializeField] private float _maxHealth = 25f;
@@ -38,8 +40,10 @@ public sealed class EnemyData : ScriptableObject
     [ShowIf("_hasObjectModificators")] [SerializeField] private List<GameObject> _objectModificators;
 
     [Header("Audio")] 
-    [SerializeField] private AudioEnum _deathSound = AudioEnum.sound_enemy_death; 
-    
+    [SerializeField] private AudioEnum _deathSound = AudioEnum.sound_enemy_death;
+
+    public BuildingAttackType BuildingAttackType => _buildingAttackType;
+    public float SpawnDelay => _spawnDelay;
     public bool DiesOnContact => _diesOnContact;
     public float ContactDamage => _contactDamage;
     public float MaxHealth => _maxHealth;

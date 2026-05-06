@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: MediumHealer
   m_EditorClassIdentifier: 
+  _buildingAttackType: 0
+  _spawnDelay: 2
   _diesOnContact: 0
   _contactDamage: 5
   _maxHealth: 125
@@ -32,3 +34,4 @@ MonoBehaviour:
   _hasObjectModificators: 1
   _objectModificators:
   - {fileID: 3846886491062329686, guid: fc09ed39e63b42f4ca2d502fa5108b65, type: 3}
+  _deathSound: 8

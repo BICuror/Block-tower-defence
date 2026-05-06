@@ -8,6 +8,7 @@ namespace Combat
     public sealed class BuildingEntity : CombatEntity
     {
         [SerializeField] private BuildingEntityType _buildingEntityType;
+        [SerializeField] private BuildingAttackType _buildingAttackType; 
         [SerializeField] private bool _destroyOnDeath;
         
         [Header("DestroyedObject")]
@@ -18,6 +19,7 @@ namespace Combat
         private BuildingHealth _health;
 
         public BuildingEntityType BuildingEntityType => _buildingEntityType;
+        public BuildingAttackType BuildingAttackType => _buildingAttackType;
         public bool IsDestroyedOnDeath => _destroyOnDeath;
         public BuildingHealth BuildingHealth => _health;
         
@@ -65,4 +67,27 @@ namespace Combat
             if (_destroyOnDeath) Destroy(gameObject);
         }
     }
+}
+
+//used for perk selection
+public enum BuildingEntityType
+{
+    None = 0,
+    Archery = 1,
+    Mortar = 2,
+    Inferno = 3,
+    Lightning = 4,
+    Orbital = 5,
+    BombTower = 6,
+    Artilery = 7,
+    Brawler = 8,
+}
+
+//primararly used for selection of first waves, where only one building is available
+public enum BuildingAttackType
+{
+    None,
+    Area,
+    Single,
+    Group
 }

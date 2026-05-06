@@ -71,19 +71,6 @@ public enum EntityModifcationRarity
     Legendary
 }
 
-public enum BuildingEntityType
-{
-    None = 0,
-    Archery = 1,
-    Mortar = 2,
-    Inferno = 3,
-    Lightning = 4,
-    Orbital = 5,
-    BombTower = 6,
-    Artilery = 7,
-    Brawler = 8,
-}
-
 public enum EntityModifcatorTag
 {
     Heal,

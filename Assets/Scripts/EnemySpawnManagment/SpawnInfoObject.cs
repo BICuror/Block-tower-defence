@@ -15,13 +15,13 @@ public sealed class SpawnInfoObject : MonoBehaviour
 
     public void Appear()
     {
-        transform.localScale = Vector3.zero;
+        gameObject.SetActive(true);
         transform.DOScale(new Vector3(_finalScale, _finalScale, _finalScale), _animationDuration);
     }
 
     public void Disappear()
     { 
-        transform.DOScale(Vector3.zero, _animationDuration).OnComplete(() => Destroy(gameObject));
+        transform.DOScale(Vector3.zero, _animationDuration).OnComplete(() => gameObject.SetActive(false));
     }
 
     public void SetEnemiyData(EnemyData enemyData)

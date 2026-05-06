@@ -28,10 +28,6 @@ public sealed class EnemyWaveGroup : ScriptableObject
 
         public int GetAmount(int wave)
         {
-            Debug.Log(_enemyData);
-            Debug.Log(wave);
-            
-            if (wave <= 0) return _amountPerWave[0];
             if (wave >= _amountPerWave.Count) return _amountPerWave[^1];
             
             return _amountPerWave[wave];
@@ -42,6 +38,8 @@ public sealed class EnemyWaveGroup : ScriptableObject
 
         public void ParseString()
         {
+            if (string.IsNullOrEmpty(_parseString)) return;
+            
             string currentString = _parseString;
 
             int index = 0;

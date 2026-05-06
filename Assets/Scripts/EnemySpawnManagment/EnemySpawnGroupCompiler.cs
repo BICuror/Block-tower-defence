@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using WorldGeneration;
 using UnityEngine;
 using Zenject;
@@ -8,14 +9,16 @@ using Random = System.Random;
 
 public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 {
+    [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
-    [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private WaveIndexContainer _waveIndexContainer;
+    [Inject] private WaveStateMachine _waveStateMachine;
     private Dictionary<EnemySpawner, List<EnemyData>> _enemySpawnDatas = new();
     private List<AdditionalEnemyGroupData> _additionalGroups = new();
     private List<AdditionalEnemyGroupData> _additionalWaveGroups = new();
+    private bool _forceSpawnExistingBuildingAttackTypeGroups;
     private int _currentWaveSeed;
     private int _currentGroupSeed;
 
@@ -42,16 +45,21 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         
         return result;
     }
+
+    public void RegenerateWaveSeed()
+    {
+        _currentWaveSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue); 
+        _currentGroupSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+    }
     
-    public void GenerateWaveSeed()
+    public void SetNextWaveData(bool forceExistingBuildingAttackWaves)
     {
         _additionalGroups.Clear();
-        _currentWaveSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue); 
-        _currentGroupSeed = UnityEngine.Random.Range(int.MinValue, int.MaxValue); 
-        GenerateEnemyGroups();
+
+        _forceSpawnExistingBuildingAttackTypeGroups = forceExistingBuildingAttackWaves;
     }
 
-    private void GenerateEnemyGroups()
+    public void GenerateEnemyGroups()
     {
         GenerateMainEnemyGroups();
         GenerateAdditionalEnemyGroups();
@@ -127,14 +135,12 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
     private EnemyWaveGroup FindSuitableRandomGroup()
     {
         EnemyWaveGroup[] waveGroups = _islandData.WavesData.WaveGroups;
-
+        
         List<EnemyWaveGroup> suitableGroups = new List<EnemyWaveGroup>();
-
-        int currentWave = _waveIndexContainer.GetCurrentWave();
 
         for (int i = 0; i < waveGroups.Length; i++)
         {
-            if (waveGroups[i].FirstPossibleWaveEncounter <= currentWave && waveGroups[i].LastPossibleWaveEncounter >= currentWave)
+            if (CanSpawnWaveGroup(waveGroups[i]))
             {
                 suitableGroups.Add(waveGroups[i]);
             }
@@ -151,5 +157,26 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
             
             spanwer.SetEnemiesToSpawn(_enemySpawnDatas[spanwer]);
         }
+    }
+
+    private bool CanSpawnWaveGroup(EnemyWaveGroup group)
+    {
+        int currentWave = _waveIndexContainer.GetCurrentWave();
+
+        if (group.FirstPossibleWaveEncounter > currentWave || group.LastPossibleWaveEncounter < currentWave) return false;
+
+        if (!_forceSpawnExistingBuildingAttackTypeGroups) return true;
+     
+        List<BuildingAttackType> existingBuildingAttackTypes = new();
+        
+        _globalBuildingContainer.GetPlayerBuildings().ForEach(buildingEntity =>
+        {
+            if (!existingBuildingAttackTypes.Contains(buildingEntity.BuildingAttackType) && buildingEntity.BuildingAttackType != BuildingAttackType.None)
+            {
+                existingBuildingAttackTypes.Add(buildingEntity.BuildingAttackType);
+            }
+        });
+        
+        return group.GroupParts.Exists(part => existingBuildingAttackTypes.Contains(part.Data.BuildingAttackType));
     }
 }

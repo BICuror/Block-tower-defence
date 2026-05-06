@@ -1091,7 +1091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3638fe4927734a0488f20521c9ed886c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _creationRadius: 4
+  _creationRadius: 5
 --- !u!1001 &216602177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15493,6 +15493,7 @@ MonoBehaviour:
     _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
     _defaultValue: 20
   _buildingEntityType: 0
+  _buildingAttackType: 0
   _destroyOnDeath: 0
   _leavesBuildingDestroyedObject: 0
   _buildingDestroyedObjectPrefab: {fileID: 0}

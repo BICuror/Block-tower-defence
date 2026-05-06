@@ -8,11 +8,16 @@ public sealed class EnemySpawnerInfoDisplayer : MonoBehaviour
     [SerializeField] private float _distanceBetweenInfoObjects;
 
     private List<SpawnInfoObject> _spawnInfoObjects = new();
+    private bool _showInfoObjects;
 
-    public void DisplaySpawnInfo(List<EnemyData> enemiesToSpawn)
+    public void SetSpawnInfo(List<EnemyData> enemiesToSpawn)
     {
-        HideSpawnInfo();
-
+        if (_showInfoObjects)
+        {
+            HideSpawnInfo();
+            _showInfoObjects = true;
+        }
+        
         Dictionary<EnemyData, int> datas = new Dictionary<EnemyData, int>();
         List<EnemyData> countedDatas = new List<EnemyData>();
 
@@ -33,24 +38,40 @@ public sealed class EnemySpawnerInfoDisplayer : MonoBehaviour
 
         for (int i = 0; i < datas.Keys.Count; i++)
         {
-            SpawnInfoObject spo = Instantiate(_spawnInfoObjectPrefab, _parent.transform.position, _parent.rotation, _parent);
-            spo.transform.localPosition = new Vector3(_distanceBetweenInfoObjects * i - halfDistance, 0f, 0f);
-            spo.transform.Rotate(90f, 0, 180f);
+            SpawnInfoObject infoObject = Instantiate(_spawnInfoObjectPrefab, _parent.transform.position, _parent.rotation, _parent);
+            infoObject.transform.localPosition = new Vector3(_distanceBetweenInfoObjects * i - halfDistance, 0f, 0f);
+            infoObject.transform.Rotate(90f, 0, 180f);
+            infoObject.transform.localScale = Vector3.zero;
+            infoObject.gameObject.SetActive(false);
+            
+            _spawnInfoObjects.Add(infoObject);
 
-            _spawnInfoObjects.Add(spo);
-
-            spo.SetEnemiyData(countedDatas[i]);
-            spo.SetAmount(datas[countedDatas[i]]); 
+            infoObject.SetEnemiyData(countedDatas[i]);
+            infoObject.SetAmount(datas[countedDatas[i]]); 
         }
+        
+        if (_showInfoObjects) ShowSpawnInfo();
     }
 
     public void HideSpawnInfo()
     {
+        _showInfoObjects = false;
+
         for (int i = 0; i < _spawnInfoObjects.Count; i++)
         {
             _spawnInfoObjects[i].Disappear();
         }
 
         _spawnInfoObjects.Clear();
+    }
+
+    public void ShowSpawnInfo()
+    {
+        _showInfoObjects = true;
+        
+        for (int i = 0; i < _spawnInfoObjects.Count; i++)
+        {
+            _spawnInfoObjects[i].Appear();
+        }
     }
 }

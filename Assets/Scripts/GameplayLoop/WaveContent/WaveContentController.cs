@@ -16,7 +16,7 @@ public sealed class WaveContentController : MonoBehaviour
     private void Awake()
     {
         _idleStateController.EnteredStateStarted += TryEnableWaveContent;
-        _selectionManager.SelectionEnded += GenerateWaveItems;
+        _idleStateController.EnteredStateCompleted += GenerateWaveItems;
     }
 
     private void TryEnableWaveContent()
@@ -30,7 +30,7 @@ public sealed class WaveContentController : MonoBehaviour
     {
         switch (contentType)
         {
-            case WaveContentType.BuildingSelection: _selectionManager.EnqueueSelection(SelectionType.Building); break;
+            case WaveContentType.BuildingSelection: break;
             case WaveContentType.FreeBuildingUpgradeSelection: _selectionManager.EnqueueSelection(SelectionType.BuildingUpgrade); break;
             case WaveContentType.BossWave: break;
         }

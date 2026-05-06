@@ -24,6 +24,12 @@ namespace Combat
             _globalEnemyContainer.EnemyRemoved += _ => CheckIfAllEnemiesDied();
         }
         
+        public void SetEnemyGroupVisibility(bool state)
+        {
+            if (state) _spawners.ForEach(spawner => spawner.ShowEnemySpawnInfo());   
+            else _spawners.ForEach(spawner => spawner.HideEnemySpawnInfo());   
+        }
+        
         public void StartWave()
         {
             for (int i = 0; i < _spawners.Count; i++)

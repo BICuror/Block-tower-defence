@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using NaughtyAttributes;
 using UnityEngine;
+using CuroAudio;
 using Zenject;
 using System;
-using CuroAudio;
-using NaughtyAttributes;
 
 public sealed class SelectionManager : MonoBehaviour
 {
@@ -21,6 +21,7 @@ public sealed class SelectionManager : MonoBehaviour
     private Queue<SelectionType> _enqeuedSelections = new();
     private SelectionType _currentSelection;
     private bool _selectionOptionsCanBePlaced;
+    private bool _continueSelectionOnEnd;
     private bool _selectionIsActive;
     
     public bool SelectionPhaseIsActive => _selectionIsActive;
@@ -57,19 +58,19 @@ public sealed class SelectionManager : MonoBehaviour
         else EndSelectionPhase();
     }
 
-    private void StartSelectionPhase()
+    public void StartSelectionPhase()
     {
         _selectionIsActive = true;
 
         SelectionStarted?.Invoke();
     }
-    
-    private async UniTask StartQueuedSelection()
+
+    public async UniTask StartSelection(SelectionType selectionType, bool continueIfOtherSelectionsExist = true)
     {
-        _currentSelection = _enqeuedSelections.Dequeue();
-        
-        SelectionStepStarted?.Invoke(); 
-        
+        _continueSelectionOnEnd = continueIfOtherSelectionsExist;
+        _currentSelection = selectionType;
+        SelectionStepStarted?.Invoke();
+
         switch (_currentSelection)
         {
             case SelectionType.Building:
@@ -77,13 +78,22 @@ public sealed class SelectionManager : MonoBehaviour
                 if (_globalBuildingContainer.GetPlayerBuildings().Count < _globalStatContainer.Get<MaxBuildings>().Value)
                 {
                     await _buildingSelector.StartBuildingsSelection();
-                } break;
+                }
+
+                break;
             }
             case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelection}");
         }
-        
+
         _selectionOptionsCanBePlaced = true;
+
+        await UniTask.WaitWhile(() => _selectionOptionsCanBePlaced);
+    }
+    
+    private async UniTask StartQueuedSelection(bool continueIfOtherSelectionsExist = true)
+    {
+        await StartSelection(_enqeuedSelections.Dequeue(), continueIfOtherSelectionsExist);
     }
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
@@ -96,8 +106,8 @@ public sealed class SelectionManager : MonoBehaviour
         SelectionStepEnded?.Invoke(); 
         
         await EndSelection();
-
-        if (_enqeuedSelections.Count > 0) StartQueuedSelection().Forget();
+        
+        if (_enqeuedSelections.Count > 0 && _continueSelectionOnEnd) StartQueuedSelection().Forget();
         else EndSelectionPhase();
     }
     

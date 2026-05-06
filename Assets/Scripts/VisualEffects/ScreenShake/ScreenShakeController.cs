@@ -22,8 +22,8 @@ public sealed class ScreenShakeController : MonoBehaviour
         Vector3 intensityVector = new Vector3(1f, 1f, 0f) * screenShakeData.Intensity * focusValue;
         float duration = screenShakeData.Duration * focusValue;
         
-        _cameraParent.DOShakePosition(duration, _positionShakeStrengthModifier * intensityVector).SetEase(_shakeCurve).SetLink(_cameraParent.gameObject);
-        _cameraParent.DOShakeRotation(duration, _rotationShakeStrengthModifier * intensityVector).SetEase(_shakeCurve).SetLink(_cameraParent.gameObject);
+        _cameraParent.DOShakePosition(duration, _positionShakeStrengthModifier * intensityVector).SetEase(_shakeCurve).SetLink(_cameraParent.gameObject).SetUpdate(true);
+        _cameraParent.DOShakeRotation(duration, _rotationShakeStrengthModifier * intensityVector).SetEase(_shakeCurve).SetLink(_cameraParent.gameObject).SetUpdate(true);
     }
 }
 

@@ -5447,6 +5447,7 @@ MonoBehaviour:
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
     _defaultValue: 2
   _buildingEntityType: 2
+  _buildingAttackType: 1
   _destroyOnDeath: 0
   _leavesBuildingDestroyedObject: 1
   _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 863aa857e6af3de419954fb4d347a120, type: 3}
@@ -5521,6 +5522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
   _audioClipToPlayOnPickedUp: 0
   _audioClipToPlayOnPlaced: 5
+  _audioClipToPlayOnDragged: 0
 --- !u!1 &4972928926287705394
 GameObject:
   m_ObjectHideFlags: 0

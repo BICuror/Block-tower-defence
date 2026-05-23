@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba29af3eeb05284da765e3449ef1165, type: 3}
+  m_Name: UniqueRock
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 7322823339953873925, guid: b7974362f7e42fd40b4fc6e9eae58399, type: 3}
+  - {fileID: 6567653992782342680, guid: 1ac0cb94cbc35cd428a4eb8d49c41235, type: 3}
+  - {fileID: -2313873904627698005, guid: b8e52af902e449549ba12bbdc8d0bb93, type: 3}
+  _amount: 1
+  _hasYScale: 1
+  _minYScale: 1.5
+  _maxYScale: 1.9
+  _minScale: 0.3
+  _maxScale: 0.3
+  _placementOffset: 0
+  _maxRotation: {x: 0, y: 360, z: 0}

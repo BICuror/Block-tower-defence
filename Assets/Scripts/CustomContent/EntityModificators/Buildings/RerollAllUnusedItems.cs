@@ -9,6 +9,7 @@ public sealed class RerollAllUnusedItems : EntityModificator
     [Inject] private ItemsContainer _itemsContainer;
     [Inject] private ItemFactory _itemFactory;
     private EntityCanvasIcon _entityCanvasIcon;
+    private bool _abilityEnabled;
     
     public override void Enable()
     {
@@ -36,15 +37,20 @@ public sealed class RerollAllUnusedItems : EntityModificator
     
     private void EnableRerollAbility()
     {
-        _entityCanvasIcon = AddIcon(false);
+        if (_abilityEnabled) return;
         
+        _entityCanvasIcon = AddIcon(false);
         Entity.Activated += TryActivateReroll;
+        _abilityEnabled = true;
     }
     
     private void DisableRerollAbility()
     {
+        if (!_abilityEnabled) return;
+        
         if (_entityCanvasIcon) RemoveIcon(_entityCanvasIcon);
         Entity.Activated -= TryActivateReroll;
+        _abilityEnabled = false;
     }
 
     private void TryActivateReroll()

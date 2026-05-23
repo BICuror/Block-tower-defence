@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -56,10 +57,18 @@ namespace WorldGeneration
             {
                 if (_enemyBiomes[i].GetStage() >= _islandData.EnemyBiomeStages.Length)
                 {
-                    _enemyBiomes[i].Destroy();
-
-                    _enemyBiomes.RemoveAt(i);
+                    DestroyBiome(_enemyBiomes[i]);
                 }
+            }
+        }
+
+        public void DestroyExcessiveBiomes(int maxAmount)
+        {
+            List<EnemyBiome> sortedBiomes = _enemyBiomes.OrderBy(biome => biome.GetStage()).ToList();
+
+            for (int i = maxAmount; i < sortedBiomes.Count; i++)
+            {
+                DestroyBiome(sortedBiomes[i]);
             }
         }
 
@@ -93,6 +102,13 @@ namespace WorldGeneration
             }
             
             return result;
+        }
+
+        private void DestroyBiome(EnemyBiome biome)
+        {
+            biome.Destroy();
+
+            _enemyBiomes.Remove(biome);
         }
     }
 }

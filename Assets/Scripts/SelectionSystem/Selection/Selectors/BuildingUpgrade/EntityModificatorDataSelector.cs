@@ -19,10 +19,8 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     {
         List<EntityModificatorData> resultEffectDatas = new();
         
-        List<EntityModificatorData> allEffectDatas = _islandDataContainer.Data.EntityModificatorDataContainer.EntityModificatorDataList.FindAll(modificator =>
-        {
-            return CheckBuildingEntityTagRequirements(modificator, entity) && CheckStacksRequirements(modificator, entity) && CheckTagRequirements(modificator, entity);
-        });
+        List<EntityModificatorData> allEffectDatas = _islandDataContainer.Data.EntityModificatorDataContainer.EntityModificatorDataList.FindAll(modificator => 
+           UpgradeCanAppear(modificator, entity));
         
         List<EntityModifcationRarity> droppedRarities = new();
 
@@ -49,6 +47,14 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
         _currentSelectionIndex++;
 
         return resultEffectDatas;
+    }
+
+    private bool UpgradeCanAppear(EntityModificatorData modificatorData, BuildingEntity entity)
+    {
+        return CheckBuildingEntityTagRequirements(modificatorData, entity) && 
+               CheckStacksRequirements(modificatorData, entity) && 
+               CheckTagRequirements(modificatorData, entity) && 
+               CheckExistingRequiredUpgradesRequirement(modificatorData, entity);
     }
 
     #region BuildingEntityTagCheck
@@ -87,8 +93,6 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
 
         List<EntityModifcatorTag> ownerTags = entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags();
         List<EntityModifcatorTag> otherTags = _globalBuildingContainer.GetBuildingTags(entity);
-
-        Debug.Log($"Checking requirements for {modificatorData.name}");
         
         if (modificatorData.HasRequiredTags)
         {
@@ -102,7 +106,21 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
             if (modificatorData.BlockOtherEntityTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.BlockOtherEntityTags)) return false;
         }
         
-        Debug.Log($"Suckseful Checking requirements for {modificatorData.name}");
+        return true;
+    }
+    
+    #endregion
+    
+    #region ExistingUpgradesRequirementsCheck
+
+    private bool CheckExistingRequiredUpgradesRequirement(EntityModificatorData modificatorData, BuildingEntity entity)
+    {
+        if (!modificatorData.HasRequiredUpgrades) return true;
+        
+        for (int i = 0; i < modificatorData.RequiredUpgrades.Count; i++)
+        {
+            if (!entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Contains(modificatorData.RequiredUpgrades[i])) return false;
+        }
         
         return true;
     }

@@ -9,33 +9,45 @@ namespace WorldGeneration
         
         [SerializeField] private bool _generateWaterDecorations;
         [SerializeField] private DecorationContainer _decorationContainer;
+        [SerializeField] private LayerSetting _decorationLayerSetting;
 
         public void GenerateDecorations(BlockGrid blockGrid, Vector2 offset)
         {
             int areaSize = blockGrid.GetSize();
         
-            _decorationContainer.CreateNewContainer(areaSize);
+            _decorationContainer.CreateNewContainer();
 
-            for (int x = 0; x < areaSize; x++)
+            int halfAreaSize = Mathf.RoundToInt(areaSize / 2f);
+            
+            for (int x = -halfAreaSize; x < areaSize + halfAreaSize; x++)
             {
-                for (int z = 0; z < areaSize; z++)
+                for (int z = -halfAreaSize; z < areaSize + halfAreaSize; z++)
                 {
-                    if (blockGrid.GetMaxHeight(x, z) > 0)
+                    if (Vector2Int.Distance(new Vector2Int(x, z), new Vector2Int(halfAreaSize, halfAreaSize)) > areaSize) continue;
+
+                    DecorationModule decorationModule;
+                    
+                    Vector3Int spawnPosition = new Vector3Int(x, 0, z);
+                    
+                    if (blockGrid.IsInBounds(spawnPosition) && blockGrid.GetMaxHeight(x, z) > 0)
                     {
-                        DecorationModule decorationModule = GetDecorationModule(x, z);
-    
-                        if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f))
-                        {         
-                            CreateDecorations(GetRandomDecoration(decorationModule.Decorations), new Vector3Int(x, blockGrid.GetMaxHeight(x, z), z), offset);
-                        }
+                        decorationModule = GetDecorationModule(x, z);
+
+                        spawnPosition.y = blockGrid.GetMaxHeight(x, z);
                     }
                     else if (_generateWaterDecorations)
                     {
-                        DecorationModule decorationModule = _islandDataContainer.Data.WaterDecorationsModule;
-                        
-                        if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f))
-                        {         
-                            CreateDecorations(GetRandomDecoration(decorationModule.Decorations), new Vector3Int(x, blockGrid.GetMaxHeight(x, z), z), offset);
+                        decorationModule = _islandDataContainer.Data.WaterDecorationsModule;
+                    }
+                    else continue;
+                    
+                    if (decorationModule.DecorationAppearRate > Random.Range(0f, 1f))
+                    {
+                        DecorationData decoration = GetRandomDecoration(decorationModule.Decorations);
+
+                        if (CanBeSpawned(decoration, spawnPosition))
+                        {
+                            CreateDecorations(decoration, spawnPosition, offset);
                         }
                     }
                 }
@@ -48,23 +60,27 @@ namespace WorldGeneration
         {
             int amountOfDecorations = Random.Range(1, decoration.Amount); 
 
-            MeshRenderer[] decorations = new MeshRenderer[amountOfDecorations];
-
             for (int i = 0; i < amountOfDecorations; i++)
             {
-                Vector3 spawnPosition = position + new Vector3(Random.Range(-decoration.PlacmentOffset, decoration.PlacmentOffset), 0.5f, Random.Range(-decoration.PlacmentOffset, decoration.PlacmentOffset));
+                Vector3 spawnPosition = position + new Vector3(Random.Range(-decoration.PlacementOffset, decoration.PlacementOffset), 0.5f, Random.Range(-decoration.PlacementOffset, decoration.PlacementOffset));
 
-                float randomXRot = Random.Range(-decoration.MaxRotation.x, decoration.MaxRotation.x);    
-                float randomYRot = Random.Range(-decoration.MaxRotation.y, decoration.MaxRotation.y); 
-                float randomZRot = Random.Range(-decoration.MaxRotation.z, decoration.MaxRotation.z); 
+                float randomXRot = GetRandomRotationAngle(decoration.RotateXAxis, decoration.LockToRightAngleRotation);
+                float randomYRot = GetRandomRotationAngle(decoration.RotateYAxis, decoration.LockToRightAngleRotation);
+                float randomZRot = GetRandomRotationAngle(decoration.RotateZAxis, decoration.LockToRightAngleRotation);
                 
-                decorations[i] = Instantiate(decoration.Prefabs[Random.Range(0, decoration.Prefabs.Length)], spawnPosition + new Vector3(offset.x, 0f, offset.y), Quaternion.Euler(randomXRot, randomYRot, randomZRot), transform);                    
+                Quaternion rotation = Quaternion.Euler(randomXRot, randomYRot, randomZRot);
+                
+                DecorationObject decorationObject = Instantiate(decoration.Prefabs[Random.Range(0, decoration.Prefabs.Length)], spawnPosition + new Vector3(offset.x, 0f, offset.y), rotation, transform);
 
                 float randomScale = Random.Range(decoration.MinScale, decoration.MaxScale);
-                decorations[i].transform.localScale = new Vector3(randomScale, randomScale, randomScale); 
+                Vector3 scale = new Vector3(randomScale, randomScale, randomScale); 
+                
+                if (decoration.HasYScale) scale.y = Random.Range(decoration.MinYScale, decoration.MaxYScale);
+                
+                decorationObject.transform.localScale = scale; 
+                
+                _decorationContainer.AddDecorations(position.x, position.z, decorationObject);
             }
-
-            _decorationContainer.AddDecorations(position.x, position.z, decorations);
         }
 
         private DecorationData GetRandomDecoration(Decoration[] decorations)
@@ -76,8 +92,24 @@ namespace WorldGeneration
                 if (random < decorations[i].AppearRate) return decorations[i].DecorationData;
             }
 
-            Debug.LogError("Decoration not found");
+            Debug.LogError("DecorationObject not found");
             return new DecorationData();
+        }
+
+        private float GetRandomRotationAngle(bool rotationAllowed, bool lockToRightAngle)
+        {
+            if (!rotationAllowed) return 0f;
+            
+            if (!lockToRightAngle) return Random.Range(0f, -360f);
+                
+            return Random.Range(0, 4) * 90f;
+        }
+
+        private bool CanBeSpawned(DecorationData decoration, Vector3 position)
+        {
+            float halfExtent = decoration.DecorationScale * 0.5f;
+            
+            return !Physics.CheckBox(position, new Vector3(halfExtent, 100f, halfExtent), Quaternion.identity, _decorationLayerSetting.GetLayerMask());
         }
     }
 }

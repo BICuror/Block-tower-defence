@@ -5,7 +5,6 @@ namespace WorldGeneration
 {
     public sealed class RoadGenerator : MonoBehaviour
     {
-        [Inject] private TextureManager _textureManager;
         [Inject] private HeightMapGenerator _heightMapGenerator;
         [Inject] private IslandDecorationContainer _islandDecorationContainer;
         [Inject] private IslandGridHolder _islandGridHolder;
@@ -34,7 +33,7 @@ namespace WorldGeneration
         {
             RoadMeshGenerator roadMeshGenerator = new RoadMeshGenerator();
 
-            roadMeshGenerator.SetupGenerator(roadBlockGrid, _textureManager);
+            roadMeshGenerator.SetupGenerator(roadBlockGrid);
             
             _roadTerrainSetter.SetMesh(roadMeshGenerator.GetDefaultMesh()); 
             

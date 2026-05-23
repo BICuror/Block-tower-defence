@@ -42,7 +42,7 @@ public sealed class IdleStateController : WaveStateController
         _decorationContainer.ActivateAllDecorations();
         _enemyBiomesContainer.DestroyOldBiomes();
 
-        TryGenerateNewEnemyBiome();
+        UpdateEnemyBiomesAmount();
         
         await _itemContainerManager.UpdateContainedItems();
         await TryStartBuildingSelection();
@@ -78,11 +78,14 @@ public sealed class IdleStateController : WaveStateController
         _enemySpawnSystem.SetEnemyGroupVisibility(false);
     }
 
-    private void TryGenerateNewEnemyBiome()
+    private void UpdateEnemyBiomesAmount()
     {
         RandomExstentions.ReInitializeUnityRandom();
+
+        int biomesCount = _islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).EnemySpawnersAmount;
         
-        _enemyBiomeGenerator.TryGenerateNewBiome();
+        _enemyBiomeGenerator.GenerateBiomes(biomesCount);
+        _enemyBiomesContainer.DestroyExcessiveBiomes(biomesCount);
     }
 
     private void RegenerateEnemyBiomes()

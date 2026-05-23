@@ -5,8 +5,6 @@ namespace WorldGeneration
 {
     public sealed class IslandTerrainMeshCreator : MonoBehaviour
     {
-        [Inject] private TextureManager _textureManager;
-
         [SerializeField] private TilemapOverlapSeamsGenerator _tilemapOverlapSeamsGenerator;
         [SerializeField] private IslandTileTerrainGenerator _islandTileTerrainGenerator;
         [SerializeField] private TerrainSetter _islandBottomTerrainSetter;
@@ -15,7 +13,7 @@ namespace WorldGeneration
 
         public void CreateMesh(BlockGrid blockGrid)
         {
-            _meshGenerator.SetupGenerator(blockGrid, _textureManager);
+            _meshGenerator.SetupGenerator(blockGrid);
 
             _islandBottomTerrainSetter.SetMesh(_meshGenerator.GetBottomMesh());
             

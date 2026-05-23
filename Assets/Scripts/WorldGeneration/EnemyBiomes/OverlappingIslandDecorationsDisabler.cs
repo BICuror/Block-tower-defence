@@ -20,7 +20,7 @@ namespace WorldGeneration
                 {   
                     if (enemyBiomeMap[x, z])
                     {
-                        _islandDecorationContainer.SetActiveDecorationsIfInBound(biomePosition.x + x, biomePosition.y + z, false);
+                        _islandDecorationContainer.SetActiveDecorations(biomePosition.x + x, biomePosition.y + z, false);
                     }
                 } 
             }

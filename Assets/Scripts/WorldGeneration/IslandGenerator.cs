@@ -24,8 +24,8 @@ namespace WorldGeneration
             GenerateNewSeedsAndHeightMap();
             ConvertHeightMapToBlockGrid();
             GenerateTerrainMesh();
-            GenerateDecorations();
             CreateEnviroment();
+            GenerateDecorations();
         }
 
         private void GenerateNewSeedsAndHeightMap()

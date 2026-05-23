@@ -92,7 +92,6 @@ namespace WorldGeneration
         };
 
         protected BlockGrid _blockGrid;
-        protected TextureManager _textureManager;
 
         private List<Vector3> _vertices = new List<Vector3>();
         private List<int> _indices = new List<int>();
@@ -100,10 +99,9 @@ namespace WorldGeneration
 
         protected virtual float BottomWallHeight => 100;
 
-        public void SetupGenerator(BlockGrid blockGrid, TextureManager textureManager)
+        public void SetupGenerator(BlockGrid blockGrid)
         {
             _blockGrid = blockGrid;
-            _textureManager = textureManager;
 
             _cubeFaces = new Dictionary<Vector3Int, FaceData>();
 

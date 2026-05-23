@@ -86,11 +86,16 @@ MonoBehaviour:
     Requirements: []
   _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 9
+      Amount: 1
   _blockOtherEntityTags:
     Requirements:
     - Tag: 9
       Amount: 1
+  _hasRequiredUpgrades: 1
+  _requiredUpgrades:
+  - {fileID: 11400000, guid: 1bcc25796c97ab14fbf1aabc73fe9a44, type: 2}
   _statChanges:
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     FlatChange: 2

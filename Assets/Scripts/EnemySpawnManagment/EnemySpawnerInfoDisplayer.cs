@@ -18,6 +18,8 @@ public sealed class EnemySpawnerInfoDisplayer : MonoBehaviour
             _showInfoObjects = true;
         }
         
+        _spawnInfoObjects.Clear();
+        
         Dictionary<EnemyData, int> datas = new Dictionary<EnemyData, int>();
         List<EnemyData> countedDatas = new List<EnemyData>();
 
@@ -61,8 +63,6 @@ public sealed class EnemySpawnerInfoDisplayer : MonoBehaviour
         {
             _spawnInfoObjects[i].Disappear();
         }
-
-        _spawnInfoObjects.Clear();
     }
 
     public void ShowSpawnInfo()

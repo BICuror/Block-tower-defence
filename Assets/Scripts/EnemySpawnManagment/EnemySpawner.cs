@@ -25,7 +25,7 @@ namespace Combat
 
         public async UniTask SpawnGroup()
         {
-            _enemySpawnerInfoDisplayer.HideSpawnInfo();
+            HideEnemySpawnInfo();
             
             while (true)
             {

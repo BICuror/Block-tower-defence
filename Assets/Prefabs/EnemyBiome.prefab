@@ -104,6 +104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6e67d075d04a384f96ea2d34e824bea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _useRaycastToDeactivateDecorations: 0
+  _decorationLayerSetting: {fileID: 0}
 --- !u!1 &1055785648559278882
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +543,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _generateWaterDecorations: 0
   _decorationContainer: {fileID: 5657343768842555441}
+  _decorationLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
 --- !u!114 &8867280263951497180
 MonoBehaviour:
   m_ObjectHideFlags: 0

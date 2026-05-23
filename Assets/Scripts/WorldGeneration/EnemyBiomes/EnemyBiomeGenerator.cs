@@ -16,9 +16,9 @@ namespace WorldGeneration
 
         [SerializeField] private EnemyBiome _enemyBiomePrefab;
 
-        public void TryGenerateNewBiome()
+        public void GenerateBiomes(int requiredTotalAmount)
         {
-            if (_islandData.MaxAmountOfEnemyBiomes > _enemyBiomeContainer.EnemyBiomeAmount) 
+            for (int i = _enemyBiomeContainer.EnemyBiomeAmount; i < requiredTotalAmount; i++)
             {
                 GenerateNewBiome();
             }

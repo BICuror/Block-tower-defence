@@ -10,9 +10,13 @@ namespace CuroLocalization
     {
         [Space] [Header("FilesSettings")]
         [SerializeField] private string _localizationFilesPath = "Localization/Files";
+        
         [Space] [Header("TableParsing")]
         [SerializeField] private string _tableCellSeparatorSymbol = "#TABLE_CELL_SEPARATOR#";
         [SerializeField] private string _tableLingSeparatorSymbol = "#TABLE_ROW_SEPARATOR#";
+
+        [Space] [Header("EnabledLanguages")] 
+        [SerializeField] private List<SerializableSystemLanguage> _disabledLanguages;
         
         [Space] [Header("SupportedLanguages")]
         [SerializeField] private List<SupportedLanguageData> _supportedLanguages;
@@ -21,6 +25,7 @@ namespace CuroLocalization
         public string LocalizationFilesPath => _localizationFilesPath;
         public string TableCellSeparatorSymbol => _tableCellSeparatorSymbol;
         public string TableLingSeparatorSymbol => _tableLingSeparatorSymbol;
+        public List<SerializableSystemLanguage> DisabledLanguages => _disabledLanguages;
         public List<SupportedLanguageData> SupportedLanguages => _supportedLanguages;
         public SystemLanguage DefaultLanguage => _defaultLanguage;
     }

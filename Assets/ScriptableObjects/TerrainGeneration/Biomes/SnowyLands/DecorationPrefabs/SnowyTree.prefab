@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1813306786448791620}
   - component: {fileID: 6482526805165556310}
   - component: {fileID: -8636209293106316499}
+  - component: {fileID: 6501748349387906448}
   m_Layer: 17
   m_Name: SnowyTree
   m_TagString: Untagged
@@ -192,3 +193,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HoverableAudioPlayer
   _audioClipToPlayOnHoverEnter: 12
   _audioClipToPlayOnHoverExit: 0
+--- !u!114 &6501748349387906448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3590956070851394210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baabd9cb53b5ff14d8073e3b66f883d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DecorationObject
+  _meshRenderers:
+  - {fileID: 7745868917988759672}

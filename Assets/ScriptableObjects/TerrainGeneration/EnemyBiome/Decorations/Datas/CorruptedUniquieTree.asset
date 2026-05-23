@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba29af3eeb05284da765e3449ef1165, type: 3}
+  m_Name: CorruptedUniquieTree
+  m_EditorClassIdentifier: 
+  _prefabs:
+  - {fileID: 605260393571206639, guid: af2db3e9d0561f642b1a2dee8c7a3ae5, type: 3}
+  - {fileID: 3743345943095834868, guid: 7e4ed4f91b0324146b79369f46e9fec0, type: 3}
+  - {fileID: 8999310539665915348, guid: 9ed6a4865abc63c43a981a28d34ee80b, type: 3}
+  _amount: 1
+  _hasYScale: 1
+  _minYScale: 0.8
+  _maxYScale: 1
+  _minScale: 0.8
+  _maxScale: 0.9
+  _placementOffset: 0.129
+  _decorationScale: 2
+  _lockToRightAngleRotation: 0
+  _rotateXAxis: 0
+  _rotateYAxis: 1
+  _rotateZAxis: 0

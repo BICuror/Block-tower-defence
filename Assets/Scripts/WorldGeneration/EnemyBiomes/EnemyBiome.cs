@@ -11,7 +11,6 @@ namespace WorldGeneration
         private IslandData _islandData => _islandDataContainer.Data;
         
         [Inject] private EnemyBiomeMeshGenerator _terrainMeshGenerator;
-        [Inject] private TextureManager _textureManager;
         [Inject] private IslandGridHolder _islandGridHolder;
         [Inject] private EnemyBiomeMapGenerator _enemyBiomeMapGenerator;
         [Inject] private EnemyBiomeMapToGridConverter _enemyBiomeMapToGridConverter;
@@ -104,7 +103,7 @@ namespace WorldGeneration
 
         private void GenerateMesh(BlockGrid blockGrid)
         {
-            _terrainMeshGenerator.SetupGenerator(blockGrid, _textureManager);
+            _terrainMeshGenerator.SetupGenerator(blockGrid);
             _terrainMeshGenerator.SetPosition(new Vector3Int((int)(transform.position.x), 0, (int)(transform.position.z)));
             
             Mesh mesh = _terrainMeshGenerator.GetDefaultMesh();

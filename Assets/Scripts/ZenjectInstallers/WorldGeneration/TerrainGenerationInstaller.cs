@@ -9,14 +9,13 @@ namespace Combat
     {
         [SerializeField] private IslandDecorationGenerator _decorationGenerator;
         [SerializeField] private EnviromentCreator _enviromentCreator;
-        [FormerlySerializedAs("_waveManager")] [SerializeField] private WaveIndexContainer _instance; 
+        [SerializeField] private WaveIndexContainer _instance; 
         [SerializeField] private IslandTerrainMeshCreator _islandTerrainMeshCreator;
         [SerializeField] private IslandDecorationContainer _islandDecorationContainer;
         [SerializeField] private WaveStateMachine _waveStateMachine;
     
         public override void InstallBindings()
         {
-            Container.Bind<TextureManager>().AsSingle().NonLazy();
             Container.Bind<BiomeMapGenerator>().AsSingle().NonLazy();
             Container.Bind<HeightMapGenerator>().AsSingle().NonLazy();
     

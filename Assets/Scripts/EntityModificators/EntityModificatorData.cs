@@ -35,6 +35,10 @@ public class EntityModificatorData : InspectableData
     [SerializeField] private bool _hasBlockTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOwnerTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockOtherEntityTags;
+
+    [Header("RequiredUpgrades")] 
+    [SerializeField] private bool _hasRequiredUpgrades;
+    [AllowNesting] [ShowIf("_hasRequiredUpgrades")] [SerializeField] private List<EntityModificatorData> _requiredUpgrades;
     
     [Space] [Header("StatChanges")]
     [SerializeField] private List<StatChange> _statChanges;
@@ -55,6 +59,8 @@ public class EntityModificatorData : InspectableData
     public List<EntityEffectTagReqirement> ReqiredOtherEntityTags => _reqiredOtherEntityTags.Requirements;
     public List<EntityEffectTagReqirement> BlockOwnerTags => _blockOwnerTags.Requirements;
     public List<EntityEffectTagReqirement> BlockOtherEntityTags => _blockOtherEntityTags.Requirements;
+    public bool HasRequiredUpgrades => _hasRequiredUpgrades;
+    public List<EntityModificatorData> RequiredUpgrades => _requiredUpgrades;
     public List<StatChange> StatChanges => _statChanges;
     public List<StatInitializer> StatInitializers => _statInitializers;
     

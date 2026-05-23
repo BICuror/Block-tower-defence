@@ -45,9 +45,6 @@ namespace WorldGeneration
 
         [SerializeField] private Texture _enemyBiomeDecorationsTextures;
         public Texture EnemyBiomeDecorationsTextures => _enemyBiomeDecorationsTextures;
-        
-        [SerializeField] private CubeTextures _defaultTexture;
-        public CubeTextures DefaultTexture => _defaultTexture;
 
         [SerializeField] private TilemapData _roadTilemap;
         public TilemapData RoadTilemap => _roadTilemap;
@@ -92,12 +89,6 @@ namespace WorldGeneration
         public DecorationModule WaterDecorationsModule;
 
         [Header("EnemyBiomeStagesSettings")] [Space] 
-        [SerializeField] private int _maxAmountOfEnemyBiomes;
-        public int MaxAmountOfEnemyBiomes => _maxAmountOfEnemyBiomes;
-
-        [Range(1, 10)] [SerializeField] private int _begginingAmountOfEnemyBiomes;
-        public int BegginingAmountOfEnemyBiomes => _begginingAmountOfEnemyBiomes;
-
         [SerializeField] private EnemyBiomeStage[] _enemyBiomeStages;
         public EnemyBiomeStage[] EnemyBiomeStages => _enemyBiomeStages;    
         

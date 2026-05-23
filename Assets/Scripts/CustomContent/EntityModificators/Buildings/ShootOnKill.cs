@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Combat;
 
 public sealed class ShootOnKill : EntityModificator
@@ -9,8 +10,10 @@ public sealed class ShootOnKill : EntityModificator
         Entity.DamageModifierContainer.EntityKilled += InvokeActivity;
     }
 
-    private void InvokeActivity(CombatEntity _)
+    private async void InvokeActivity(CombatEntity _)
     {
+        await UniTask.WaitForFixedUpdate();
+        
         Entity.ComponentsContainer.Get<TaskCycle>().PerformTask();
     }
 

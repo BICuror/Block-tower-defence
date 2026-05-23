@@ -23,7 +23,6 @@ MonoBehaviour:
   _buildingsTexture: {fileID: 2800000, guid: a528da801076f1b429475575540860d7, type: 3}
   _buildingsEmissionTexture: {fileID: 2800000, guid: 77f873b37f1181048bee1b31adf2d434, type: 3}
   _enemyBiomeDecorationsTextures: {fileID: 2800000, guid: 65a036a51e1348c489004c458e4d99f1, type: 3}
-  _defaultTexture: {fileID: 11400000, guid: 50ee3e6c73c369c42863f2b176370212, type: 2}
   _roadTilemap: {fileID: 11400000, guid: 9e484b6abcd1e1748b733a4ff99e5b5c, type: 2}
   _spawnerPositionValidator: {fileID: 11400000, guid: 17cc441cdf3207f4884e2a5ca7538876, type: 2}
   _roadMapGenerationAlgorithm: {fileID: 11400000, guid: 9dfc053a9ae51354c961d7e7e507b6a6, type: 2}
@@ -68,18 +67,22 @@ MonoBehaviour:
       m_RotationOrder: 4
     NoiseScale: {x: 6, y: 6}
   WaterDecorationsModule:
-    DecorationAppearRate: 0.04
+    DecorationAppearRate: 0.015
     Decorations:
+    - _appearRate: 0.045
+      DecorationData: {fileID: 11400000, guid: 6c887d8b346a2c24eb92365c5c5b3850, type: 2}
+    - _appearRate: 0.13
+      DecorationData: {fileID: 11400000, guid: 1a84321721c621e47812cffd4180ba6c, type: 2}
     - _appearRate: 1
       DecorationData: {fileID: 11400000, guid: 14449d3910c32814aa66a47622bfa87d, type: 2}
-  _maxAmountOfEnemyBiomes: 3
-  _begginingAmountOfEnemyBiomes: 1
   _enemyBiomeStages:
   - DecorationsModule:
       DecorationAppearRate: 0.25
       Decorations:
       - _appearRate: 0.19
         DecorationData: {fileID: 11400000, guid: ef5aa1d08d23e9c49a1776248a0ff32a, type: 2}
+      - _appearRate: 0.261
+        DecorationData: {fileID: 11400000, guid: 118c744cad5d82a4293fb0b4f8bfe3a0, type: 2}
       - _appearRate: 1
         DecorationData: {fileID: 11400000, guid: 96fa610c9db83664c869d48ad35f1713, type: 2}
     _enemyBiomeRadius: 4
@@ -112,6 +115,8 @@ MonoBehaviour:
       Decorations:
       - _appearRate: 0.19
         DecorationData: {fileID: 11400000, guid: ef5aa1d08d23e9c49a1776248a0ff32a, type: 2}
+      - _appearRate: 0.347
+        DecorationData: {fileID: 11400000, guid: 118c744cad5d82a4293fb0b4f8bfe3a0, type: 2}
       - _appearRate: 1
         DecorationData: {fileID: 11400000, guid: 96fa610c9db83664c869d48ad35f1713, type: 2}
     _enemyBiomeRadius: 6
@@ -144,6 +149,8 @@ MonoBehaviour:
       Decorations:
       - _appearRate: 0.4
         DecorationData: {fileID: 11400000, guid: ef5aa1d08d23e9c49a1776248a0ff32a, type: 2}
+      - _appearRate: 0.502
+        DecorationData: {fileID: 11400000, guid: 118c744cad5d82a4293fb0b4f8bfe3a0, type: 2}
       - _appearRate: 1
         DecorationData: {fileID: 11400000, guid: 96fa610c9db83664c869d48ad35f1713, type: 2}
     _enemyBiomeRadius: 8

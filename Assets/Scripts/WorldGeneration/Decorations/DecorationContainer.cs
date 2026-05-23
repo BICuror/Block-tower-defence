@@ -1,93 +1,56 @@
+ using NaughtyAttributes;
 using UnityEngine;
 
 namespace WorldGeneration
 {
     public class DecorationContainer : MonoBehaviour
     {
-        private MeshRenderer[,][] _decorations;
-
-        private int _areaSize;
-
-        public void CreateNewContainer(int size)
+        [SerializeField] private bool _useRaycastToDeactivateDecorations;
+        [ShowIf("_useRaycastToDeactivateDecorations")] [SerializeField] private LayerSetting _decorationLayerSetting;
+        private ListDictionary<Vector2Int, DecorationObject> _decorations = new();
+        
+        public void CreateNewContainer()
         {
             DestroyAllDecorations();
 
-            _areaSize = size;
-
-            _decorations = new MeshRenderer[_areaSize, _areaSize][];
+            _decorations = new();
         } 
 
-        public void AddDecorations(int x, int z, MeshRenderer[] decorationsToAdd)
+        public void AddDecorations(int x, int z, DecorationObject decoration)
         {
-            _decorations[x, z] = decorationsToAdd;
+            _decorations.Add(new Vector2Int(x, z), decoration);
         }
 
         public void ActivateAllDecorations()
         {
-            for (int x = 0; x < _areaSize; x++)
-            {
-                for (int y = 0; y < _areaSize; y++)
-                {
-                    for (int i = 0; i < _decorations[x, y]?.Length; i++)
-                    {
-                        _decorations[x, y][i].gameObject?.SetActive(true);
-                    }
-                }
-            }
-        }
-
-        public void SetActiveDecorationsIfInBound(int x, int z, bool state)
-        {
-            if (x >= 0 && z >= 0 && x < _areaSize && z < _areaSize) SetActiveDecorations(x, z, state);
+            _decorations.GetAllItems().ForEach(decorationObject => decorationObject.gameObject.SetActive(true));
         }
 
         public void SetActiveDecorations(int x, int z, bool state)
         {
-            if (_decorations[x, z] != null)
+            if (_useRaycastToDeactivateDecorations && !state)
             {
-                for (int i = 0; i < _decorations[x, z].Length; i++)
+                while (TileMap.HasTile(new Vector2Int(x, z), _decorationLayerSetting))
                 {
-                    _decorations[x, z][i].gameObject.SetActive(state);
+                    TileMap.GetHitObject(new Vector2Int(x, z), _decorationLayerSetting).SetActive(false);
                 }
             }
+            
+            Vector2Int position = new Vector2Int(x, z);
+            
+            if (!_decorations.Contains(position)) return;
+            
+            _decorations.Get(position).ForEach(decorationObject => decorationObject.gameObject.SetActive(state));
         }
-
-        public void DestroyAllDecorations()
-        {
-            for (int x = 0; x < _areaSize; x++)
-            {
-                for (int z = 0; z < _areaSize; z++)
-                {
-                    if (_decorations[x, z] != null)
-                    {
-                        for (int i = 0; i < _decorations[x, z].Length; i++)
-                        {
-                            Destroy(_decorations[x, z][i].gameObject);
-                        }
-                    }
-                }
-            }
-        }
-
+        
         public void ApplyMaterialToAllDecorations(Material materialToApply)
         {
-            MaterialPropertyBlock block = new MaterialPropertyBlock();
-
-            for (int x = 0; x < _areaSize; x++)
-            {
-                for (int y = 0; y < _areaSize; y++)
-                {
-                    if (_decorations[x, y] != null)
-                    {
-                        for (int i = 0; i < _decorations[x, y].Length; i++)
-                        {
-                            _decorations[x, y][i].sharedMaterial = materialToApply;
-                        
-                            _decorations[x, y][i].SetPropertyBlock(block);
-                        }
-                    }
-                }
-            }
+            _decorations.GetAllItems().ForEach(decorationObject => decorationObject.SetMaterial(materialToApply));
+        }
+        
+        private void DestroyAllDecorations()
+        { 
+            _decorations.GetAllItems().ForEach(decorationObject => Destroy(decorationObject.gameObject));
         }
     }
 }

@@ -39,5 +39,7 @@ namespace CuroSettings.UI
         {
             _dropdown.SetSelectedItem(Setting.GetValueIndex());
         }
+
+        protected virtual List<T> GetExcludedItems() => null;
     }
 }

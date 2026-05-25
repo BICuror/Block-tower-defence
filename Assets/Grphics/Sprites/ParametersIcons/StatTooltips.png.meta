@@ -1174,7 +1174,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1183,6 +1183,72 @@ TextureImporter:
       bones: []
       spriteID: d1921ba5ba1e55e46bb7deb021787ced
       internalID: 976847614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeTier_1
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 394
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c17c3cbfedee9940b0c7c0e80fac2f4
+      internalID: 1482176742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeTier_2
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 394
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1874f2158452ed045a82eed8a866c415
+      internalID: 603651550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UpgradeTier_3
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 394
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2b811e97bde20943b9fa93bf2ab7fab
+      internalID: 394367524
       vertices: []
       indices: 
       edges: []
@@ -1250,6 +1316,9 @@ TextureImporter:
       StackTooltipData: 741723918
       StunTooltipIcon: -589584921
       TravelTimeTooltip: -255249925
+      UpgradeTier_1: 1482176742
+      UpgradeTier_2: 603651550
+      UpgradeTier_3: 394367524
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

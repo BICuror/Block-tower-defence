@@ -3,12 +3,12 @@ using System.Linq;
 using Combat;
 using System;
 
-public sealed class DamageModifierContainer
+public sealed class ValueModifierContainer
 {
     private ListDictionary<Type, DamageModifier> _modifiersDictionaryList;
     private CombatEntity _ownerEntity;
 
-    public DamageModifierContainer(CombatEntity ownerEntity)
+    public ValueModifierContainer(CombatEntity ownerEntity)
     {
         _modifiersDictionaryList = new(SortDamageModifiers);
         _ownerEntity = ownerEntity;

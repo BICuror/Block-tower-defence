@@ -26,9 +26,11 @@ public sealed class InspectionStatDetailsTooltip : TooltipPanelBase
         string flatModifierStringValue = "";
 
         if (_stat.GetFlatModifier() > 0) flatModifierStringValue = $" + {_stat.GetFlatModifier():F2}";
-        else if (_stat.GetFlatModifier() < 0) flatModifierStringValue = $" - {_stat.GetFlatModifier():F2}";
+        else if (_stat.GetFlatModifier() < 0) flatModifierStringValue = $" - {MathF.Abs(_stat.GetFlatModifier()):F2}";
+
+        string multiplierModifierStringValue = "";
         
-        string multiplierModifierStringValue = $" * {Math.Round(_stat.GetMultiplierModifier() * 100):F0}%";
+        if (_stat.GetMultiplierModifier() != 1f) multiplierModifierStringValue = $" * {Math.Round(_stat.GetMultiplierModifier() * 100):F0}%";
 
         string valueText;
 

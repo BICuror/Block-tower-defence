@@ -108,7 +108,7 @@ public static class TileMap
         
         for (int currentRadius = radius; currentRadius <= maxRadius; currentRadius++)
         {
-            foundPositions = GetSuitablePositionsInRadius(positionValidator, position, currentRadius);
+            foundPositions.AddRange(GetSuitablePositionsInRadius(positionValidator, position, currentRadius));
         }
 
         return foundPositions;

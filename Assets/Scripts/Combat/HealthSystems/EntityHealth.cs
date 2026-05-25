@@ -53,9 +53,9 @@ namespace Combat
 
         public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
         {
-            float outDamage = damageDealer.DamageModifierContainer.DealerContainer.ModifyByAllModificators(baseDamage, _entity);
+            float outDamage = damageDealer.ValueModifierContainer.DamageDealerContainer.ModifyByAllModificators(baseDamage, _entity);
             
-            float resultDamage = _entity.DamageModifierContainer.ReciverContainer.ModifyByAllModificators(outDamage, damageDealer);
+            float resultDamage = _entity.ValueModifierContainer.DamageReceiverContainer.ModifyByAllModificators(outDamage, damageDealer);
             
             if (resultDamage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
@@ -63,8 +63,8 @@ namespace Combat
             
             if (!IsAlive())
             {
-                damageDealer.DamageModifierContainer.InvokeOnKillEffects(_entity);
-                _entity.DamageModifierContainer.InvokeOnDeathEffects(damageDealer);
+                damageDealer.ValueModifierContainer.InvokeOnKillEffects(_entity);
+                _entity.ValueModifierContainer.InvokeOnDeathEffects(damageDealer);
             }
             
             OnDamageTaken();
@@ -90,15 +90,26 @@ namespace Combat
         
         #region HealRecivement
         public void ReceivePercentHeal(float percent) => ReceiveHeal(percent * _maxHealth);
-        public void ReceiveHeal(float heal)
+        
+        public void ReceiveHeal(float baseHeal, CombatEntity healDealer)
         {
-            if (heal == 0 || IsFullHp()) return;
+            float outHeal = healDealer.ValueModifierContainer.DamageDealerContainer.ModifyByAllModificators(baseHeal, _entity);
             
-            if (_currentHp + heal < _maxHealth) _currentHp += heal;
+            float resultHeal = _entity.ValueModifierContainer.DamageReceiverContainer.ModifyByAllModificators(outHeal, healDealer);
+            
+            ReceiveHeal(resultHeal);
+        }
+
+        private void ReceiveHeal(float healValue)
+        {
+            if (healValue <= 0 || IsFullHp()) return;
+            
+            if (_currentHp + healValue < _maxHealth) _currentHp += healValue;
             else _currentHp = _maxHealth;
             
             Healed?.Invoke();
         }
+        
         #endregion
         
         public void Die()

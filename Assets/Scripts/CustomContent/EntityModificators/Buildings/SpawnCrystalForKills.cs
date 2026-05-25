@@ -8,12 +8,12 @@ public sealed class SpawnCrystalForKills : EntityModificator
     
     public override void Enable()
     {
-        Entity.DamageModifierContainer.EntityKilled += TrySpawnCrystal;
+        Entity.ValueModifierContainer.EntityKilled += TrySpawnCrystal;
     }
 
     public override void Disable()
     {
-        Entity.DamageModifierContainer.EntityKilled -= TrySpawnCrystal;
+        Entity.ValueModifierContainer.EntityKilled -= TrySpawnCrystal;
     }
 
     private void TrySpawnCrystal(CombatEntity killedEntity)

@@ -17,7 +17,7 @@ public sealed class CreateHealingOrbsOnKill : EntityModificator
         _launcher = Args.GetArgument<GameObject>("Launcher").GetComponent<Launcher>();
         _requiredKills = Args.GetArgument<int>("RequiredKills");
         
-        Entity.DamageModifierContainer.EntityKilled += TrySpawnHealingOrb;
+        Entity.ValueModifierContainer.EntityKilled += TrySpawnHealingOrb;
     }
 
     private void TrySpawnHealingOrb(CombatEntity killedEntity)
@@ -33,6 +33,6 @@ public sealed class CreateHealingOrbsOnKill : EntityModificator
     
     public override void Disable()
     {
-        Entity.DamageModifierContainer.EntityKilled -= TrySpawnHealingOrb;
+        Entity.ValueModifierContainer.EntityKilled -= TrySpawnHealingOrb;
     }
 }

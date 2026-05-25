@@ -17,7 +17,7 @@ public sealed class ShieldEntityModificator : EntityModificator
         InitializeShieldDamageModificator();
         _shieldDamageModificator.ShieldHealthUpdated += OnShieldHealthUpdated;
         
-        Entity.DamageModifierContainer.ReciverContainer.Add(_shieldDamageModificator);
+        Entity.ValueModifierContainer.DamageReceiverContainer.Add(_shieldDamageModificator);
 
         Initialize();
 
@@ -97,7 +97,7 @@ public sealed class ShieldEntityModificator : EntityModificator
     {
         TryRemoveIcon(0f);
         TryRemoveBar(0f);
-        Entity.DamageModifierContainer.ReciverContainer.Remove(_shieldDamageModificator);
+        Entity.ValueModifierContainer.DamageReceiverContainer.Remove(_shieldDamageModificator);
         _shieldDamageModificator.ShieldHealthUpdated -= OnShieldHealthUpdated;
         _waveStateMachine.StateStarted -= TryReinitializeShield;
     }

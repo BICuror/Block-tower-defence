@@ -16,11 +16,11 @@ public sealed class DamageModifierEntityModificator : EntityModificator
 
         if (IsDamageDealerModifier)
         {
-            Entity.DamageModifierContainer.DealerContainer.Add(_damageModifier);
+            Entity.ValueModifierContainer.DamageDealerContainer.Add(_damageModifier);
         }
         else
         {
-            Entity.DamageModifierContainer.ReciverContainer.Add(_damageModifier);
+            Entity.ValueModifierContainer.DamageReceiverContainer.Add(_damageModifier);
         }
     }
 
@@ -30,11 +30,11 @@ public sealed class DamageModifierEntityModificator : EntityModificator
 
         if (IsDamageDealerModifier)
         {
-            Entity.DamageModifierContainer.DealerContainer.Remove(_damageModifier);
+            Entity.ValueModifierContainer.DamageDealerContainer.Remove(_damageModifier);
         }
         else
         {
-            Entity.DamageModifierContainer.ReciverContainer.Remove(_damageModifier);
+            Entity.ValueModifierContainer.DamageReceiverContainer.Remove(_damageModifier);
         }
     }
 }

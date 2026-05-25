@@ -26,7 +26,7 @@ public sealed class LaunchArrowsOnKill : EntityModificator
         foreach (Arrow arrow in _arrowPool.Pool) { SubscribeToArrow(arrow); }
         _arrowPool.PoolObject.ObjectCreated += SubscribeToArrow;
 
-        Entity.DamageModifierContainer.EntityKilled += TryToLaunchArrowAsync;
+        Entity.ValueModifierContainer.EntityKilled += TryToLaunchArrowAsync;
     }
 
     private void TryToLaunchArrowAsync(CombatEntity _) => TryToLaunchArrow().Forget();
@@ -60,7 +60,7 @@ public sealed class LaunchArrowsOnKill : EntityModificator
         _cancellationTokenSource.Cancel();
         _cancellationTokenSource.Dispose();
         
-        Entity.DamageModifierContainer.EntityKilled -= TryToLaunchArrowAsync;
+        Entity.ValueModifierContainer.EntityKilled -= TryToLaunchArrowAsync;
         _arrowPool.DestroyPool();
     }
 }

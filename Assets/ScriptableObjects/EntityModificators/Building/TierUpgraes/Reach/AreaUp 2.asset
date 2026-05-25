@@ -1,0 +1,105 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: AreaUp 2
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 369750012, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: reach_tier_2_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _itemTypeContainers:
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaEntityModificator
+    - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateBombsAtWaveStart
+    - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
+    - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 01000000020000000300000004000000
+  _rarity: 2
+  _tags: 09000000
+  _hasStacks: 1
+  _maxStacks: 1
+  _effectType: 0
+  _showInInspector: 1
+  _hasRequiredTags: 0
+  _anyRequired: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _hasRequiredUpgrades: 1
+  _requiredUpgrades:
+  - {fileID: 11400000, guid: f89085c6453509a4092e17d01b9bd7e9, type: 2}
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
+    FlatChange: 1
+    MultiplierChange: 0
+  - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.1
+  _statInitializers: []

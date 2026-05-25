@@ -6,6 +6,7 @@ public sealed class HealBuildingOnShootInArea : EntityObjectModifier
 {
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [Cached] private TaskCycle _taskCycle;
+    [Cached] private CombatEntity _owner;
     private float _healAmount;
     
     private void Start()
@@ -21,7 +22,7 @@ public sealed class HealBuildingOnShootInArea : EntityObjectModifier
 
         CombatEntity entity = _buildingAreaScaner.RandomItem;
         
-        entity.Health.ReceiveHeal(_healAmount);
+        entity.Health.ReceiveHeal(_healAmount, _owner);
     }
 
     private void OnDestroy()

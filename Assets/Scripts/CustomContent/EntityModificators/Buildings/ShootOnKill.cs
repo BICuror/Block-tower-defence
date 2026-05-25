@@ -7,7 +7,7 @@ public sealed class ShootOnKill : EntityModificator
     
     public override void Enable()
     {
-        Entity.DamageModifierContainer.EntityKilled += InvokeActivity;
+        Entity.ValueModifierContainer.EntityKilled += InvokeActivity;
     }
 
     private async void InvokeActivity(CombatEntity _)
@@ -19,6 +19,6 @@ public sealed class ShootOnKill : EntityModificator
 
     public override void Disable()
     {
-        Entity.DamageModifierContainer.EntityKilled -= InvokeActivity;
+        Entity.ValueModifierContainer.EntityKilled -= InvokeActivity;
     }
 }

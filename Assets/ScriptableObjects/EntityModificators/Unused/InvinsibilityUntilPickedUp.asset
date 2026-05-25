@@ -45,7 +45,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
   _itemTypeContainers:
-  - _itemTypeName: ActivateWhenBuilt
+  - _itemTypeName: AddIconEntityModificator
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -117,5 +117,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []

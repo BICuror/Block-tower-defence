@@ -98,5 +98,10 @@ public enum EntityModifcatorTag
     MultipleActionInvoke,
     DeathRelated,
     TemporaryTowers,
-    OnBuild
+    OnBuild,
+    DamageUp,
+    RechargeDown,
+    BuildTimeDown,
+    HealthUp,
+    ExplosionUp,
 }

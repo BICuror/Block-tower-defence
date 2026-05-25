@@ -8,9 +8,9 @@ namespace Combat
     {
         private const float INVANURABILITY_PERIOD = 0.3f;
         
-        private EntityDamageModifierContainer _damageModifierContainer;
+        private EntityValueModifierContainer _valueModifierContainer;
 
-        public EntityDamageModifierContainer DamageModifierContainer => _damageModifierContainer;
+        public EntityValueModifierContainer ValueModifierContainer => _valueModifierContainer;
         public DraggableObject Draggable => ComponentsContainer.Get<DraggableObject>();
         public EntityHealth Health => ComponentsContainer.Get<EntityHealth>();
 
@@ -20,7 +20,7 @@ namespace Combat
         {
             base.Awake();
             
-            _damageModifierContainer = new EntityDamageModifierContainer(this);
+            _valueModifierContainer = new EntityValueModifierContainer(this);
         }
         
         public void Activate() => Activated?.Invoke();

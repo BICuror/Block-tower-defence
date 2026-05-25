@@ -13,7 +13,7 @@ public sealed class ConvertMarkedEnemiesIntoRockOnKill : EntityModificator
     
     public override void Enable()
     {
-        Entity.DamageModifierContainer.EntityKilled += SpawnRock;
+        Entity.ValueModifierContainer.EntityKilled += SpawnRock;
         _waveStateMachine.GetWaveStateController(WaveState.Attack).QuitStateCompleted += DestroyAllTowers;
     }
 
@@ -21,7 +21,7 @@ public sealed class ConvertMarkedEnemiesIntoRockOnKill : EntityModificator
     {
         DestroyAllTowers();
         
-        Entity.DamageModifierContainer.EntityKilled -= SpawnRock;
+        Entity.ValueModifierContainer.EntityKilled -= SpawnRock;
         _waveStateMachine.GetWaveStateController(WaveState.Attack).QuitStateCompleted -= DestroyAllTowers;
     }
 

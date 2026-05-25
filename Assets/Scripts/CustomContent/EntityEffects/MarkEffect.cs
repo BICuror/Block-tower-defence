@@ -14,12 +14,12 @@ public sealed class MarkEffect : EntityEffect
 
     public override void ApplyToEntity()
     {
-        Entity.DamageModifierContainer.ReciverContainer.Add(_markDamageModifier);
+        Entity.ValueModifierContainer.DamageReceiverContainer.Add(_markDamageModifier);
     }
 
     public override void RemoveFromEntity()
     {
-        Entity.DamageModifierContainer.ReciverContainer.Remove(_markDamageModifier);
+        Entity.ValueModifierContainer.DamageReceiverContainer.Remove(_markDamageModifier);
     }
 
     private sealed class MarkDamageModifier : DamageModifier

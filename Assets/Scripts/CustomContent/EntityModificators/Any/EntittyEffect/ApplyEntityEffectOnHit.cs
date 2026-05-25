@@ -10,11 +10,11 @@ public sealed class ApplyEntityEffectOnHit : EntityModificator
         
         _createdModifier.SetArgumentsContainer(Args);
         
-        Entity.DamageModifierContainer.DealerContainer.Add(_createdModifier);
+        Entity.ValueModifierContainer.DamageDealerContainer.Add(_createdModifier);
     }
 
     public override void Disable()
     {
-        Entity.DamageModifierContainer.DealerContainer.Remove(_createdModifier);
+        Entity.ValueModifierContainer.DamageDealerContainer.Remove(_createdModifier);
     }
 }

@@ -62,12 +62,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -81,6 +83,7 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -115,12 +118,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -134,6 +139,7 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -158,6 +164,8 @@ MonoBehaviour:
       Amount: 1
   _blockOtherEntityTags:
     Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
   _statChanges:
   - StatData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
     FlatChange: 0

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: AreaUp 3
+  m_Name: RechargeUp 2
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _localizationKey: big_reach_up_entity_modificator_tooltip
+  _icon: {fileID: 148981153, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: recharge_tier_2_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -48,12 +48,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -67,13 +69,14 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 1
-  _buildingEntityTypeTags: 0100000003000000
+  _buildingEntityTypeTags: 01000000020000000300000004000000
   _rarity: 2
-  _tags: 09000000
+  _tags: 15000000
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
@@ -84,26 +87,19 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 1
+  _hasBlockTags: 0
   _blockOwnerTags:
-    Requirements:
-    - Tag: 9
-      Amount: 1
+    Requirements: []
   _blockOtherEntityTags:
-    Requirements:
-    - Tag: 9
-      Amount: 1
+    Requirements: []
   _hasRequiredUpgrades: 1
   _requiredUpgrades:
-  - {fileID: 11400000, guid: 1bcc25796c97ab14fbf1aabc73fe9a44, type: 2}
+  - {fileID: 11400000, guid: 232c6aa071ba3554e8395370060714cb, type: 2}
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    FlatChange: 2
-    MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    FlatChange: 0.5
-    MultiplierChange: 0
+  - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
+    FlatChange: 0
+    MultiplierChange: -0.3
   - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
     FlatChange: 0
-    MultiplierChange: 0.25
+    MultiplierChange: -0.35
   _statInitializers: []

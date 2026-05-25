@@ -18,7 +18,7 @@ public sealed class FasterCycleUntilKill : EntityModificator
         
         Entity.StatContainer.Get<TaskRechargeDuration>().AddStatModifier(_statModifier);
         Entity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += ReduceTaskRechargeDuration;
-        Entity.DamageModifierContainer.EntityKilled += ResetStatModifier;
+        Entity.ValueModifierContainer.EntityKilled += ResetStatModifier;
 
         _bar = AddBar(0);
     }
@@ -43,7 +43,7 @@ public sealed class FasterCycleUntilKill : EntityModificator
     {
         Entity.StatContainer.Get<TaskRechargeDuration>().RemoveStatModifier(_statModifier);
         Entity.ComponentsContainer.Get<TaskCycle>().TaskPerformed -= ReduceTaskRechargeDuration;
-        Entity.DamageModifierContainer.EntityKilled -= ResetStatModifier;
+        Entity.ValueModifierContainer.EntityKilled -= ResetStatModifier;
         
         RemoveBar(_bar);
     }

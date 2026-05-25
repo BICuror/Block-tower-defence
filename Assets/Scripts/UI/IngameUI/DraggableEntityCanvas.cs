@@ -11,7 +11,7 @@ public sealed class DraggableEntityCanvas : StaticUIElement
         base.Start();
         
         _buildingDraggable.PickedUp += DisableCanvas;
-        _buildingDraggable.BuildingBuilt += _ => EnableCanvas();
+        _buildingDraggable.BuildCompleted += EnableCanvas;
     }
 
     private void EnableCanvas() => _mainCanvasParent.SetActive(true);

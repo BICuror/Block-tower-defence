@@ -31,7 +31,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     {
         base.Start();
         
-        _ownerEntity.DamageModifierContainer.DealerContainer.Add(_infernoDamageModifier);
+        _ownerEntity.ValueModifierContainer.DamageDealerContainer.Add(_infernoDamageModifier);
         
         _chargeBar = _ownerEntity.ComponentsContainer.Get<EntityCanvas>().AddBar(_canvasBarIcon, 0f, _chargeBarPrefab);
         

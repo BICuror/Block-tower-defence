@@ -80,7 +80,7 @@ public sealed class BuildingDraggable : DraggableEntity
         CompleteBuild();
     }
 
-    private void CompleteBuild()
+    public void CompleteBuild()
     {
         _isBuilt = true;
         BuildCompleted?.Invoke();

@@ -1,20 +1,9 @@
 using Cashing;
+using Combat;
 
 public sealed class BuildingTaskCycle : TaskCycle
 {
-    [Cached] private BuildingDraggable _buildingDraggable;
+    [Cached] private BuildingEntity _buildingEntityOwner;
 
-    private void Start()
-    {
-        _buildingDraggable.PickedUp += StopRechargeProcess;
-        _buildingDraggable.BuildCompleted += TryCycle;
-    }
-
-    protected override bool CanWork() =>  _buildingDraggable.IsBuilt;
-
-    private void OnDestroy()
-    {
-        base.OnDestroy();
-        _buildingDraggable.BuildCompleted -= TryCycle;
-    } 
+    protected override void CreateTaskCycleCore() => taskCycleCore = new BuildingCycleCore(_buildingEntityOwner, _buildingEntityOwner.StatContainer.Get<TaskRechargeDuration>());
 }

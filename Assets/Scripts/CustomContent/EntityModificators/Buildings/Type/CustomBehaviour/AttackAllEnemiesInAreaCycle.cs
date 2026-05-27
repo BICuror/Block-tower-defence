@@ -1,22 +1,26 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using System.Threading;
-using System;
+using UnityEngine;
 using Combat;
 
 public sealed class AttackAllEnemiesInAreaCycle : EntityModificator
 {
-    private float _timePeriod;
+    private TaskRechargeDuration _taskRechargeDuration;
     private float _damage;
     
-    private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
     private AreaEntityDetector _areaEntityDetector;
-    private bool _attackCycleIsActive;
+    private BuildingCycleCore _taskCycle;
     
     public override void Enable()
     {
-        _timePeriod = Args.GetArgument<float>("TimePeriod");
         _damage = Args.GetArgument<float>("Damage");
+        
+        _taskRechargeDuration = new TaskRechargeDuration();
+        _taskRechargeDuration.SetDefault(Args.GetArgument<float>("TimePeriod"));
+
+        _taskCycle = new BuildingCycleCore((BuildingEntity)Entity, _taskRechargeDuration);
+        _taskCycle.TaskPerformed = AttackAllEnemiesInArea;
+        _taskCycle.Enable();
+        _taskCycle.TryCycle();
 
         _areaEntityDetector = Entity.ComponentsContainer.Get<AreaEntityDetector>();
         
@@ -26,57 +30,32 @@ public sealed class AttackAllEnemiesInAreaCycle : EntityModificator
 
     private void TryActivateAttack(CombatEntity _)
     {
-        if (_attackCycleIsActive || _areaEntityDetector.IsEmpty) return;
+        if (_areaEntityDetector.IsEmpty) return;
+
+        Debug.Log("TRIED INVOKEING");
         
-        StartAttackCycle().Forget();
+        _taskCycle.TryCycle();
     }
 
     private void TryDeactivateAttack(CombatEntity _)
     {
-        if (!_attackCycleIsActive || !_areaEntityDetector.IsEmpty) return;
+        if (!_areaEntityDetector.IsEmpty) return;
         
-        _cancellationTokenSource.Cancel();
-        _cancellationTokenSource.Dispose();
-        _cancellationTokenSource = new();
+        _taskCycle.StopRechargeProcess();
     }
-
-    private async UniTask StartAttackCycle()
-    {
-        if (_attackCycleIsActive) return;
-
-        _attackCycleIsActive = true;
-
-        while (true)
-        {
-            try
-            {
-                await UniTask.WaitForSeconds(_timePeriod, cancellationToken: _cancellationTokenSource.Token);
-            }
-            catch (Exception e)
-            {
-                e.LogAsync();
-                break;
-            }
-
-            AttackAllEnemiesInArea();
-        }
-
-        _attackCycleIsActive = false;
-    }
-
+    
     private void AttackAllEnemiesInArea()
     {
         List<CombatEntity> capturedEntities = new(_areaEntityDetector.GetList());
         
-        foreach (CombatEntity combatEntity in capturedEntities)
-        {
-            combatEntity.Health.ReceiveEnemyDamage(_damage, Entity);
-        }
+        capturedEntities.ForEach(entity => entity.Health.ReceiveEnemyDamage(_damage, Entity));
     }
     
     public override void Disable()
     {
         _areaEntityDetector.AddedItem -= TryActivateAttack;
         _areaEntityDetector.RemovedItem -= TryDeactivateAttack;
+        _taskCycle.StopRechargeProcess();
+        _taskCycle.Disable();
     }
 }

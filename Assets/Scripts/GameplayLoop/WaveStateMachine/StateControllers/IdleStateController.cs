@@ -40,7 +40,6 @@ public sealed class IdleStateController : WaveStateController
         _waveIndexContainer.IncreaseWaveCounter();
 
         _decorationContainer.ActivateAllDecorations();
-        _enemyBiomesContainer.DestroyOldBiomes();
 
         UpdateEnemyBiomesAmount();
         
@@ -84,8 +83,9 @@ public sealed class IdleStateController : WaveStateController
 
         int biomesCount = _islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).EnemySpawnersAmount;
         
-        _enemyBiomeGenerator.GenerateBiomes(biomesCount);
+        _enemyBiomesContainer.DestroyOldBiomes();
         _enemyBiomesContainer.DestroyExcessiveBiomes(biomesCount);
+        _enemyBiomeGenerator.GenerateBiomes(biomesCount);
     }
 
     private void RegenerateEnemyBiomes()

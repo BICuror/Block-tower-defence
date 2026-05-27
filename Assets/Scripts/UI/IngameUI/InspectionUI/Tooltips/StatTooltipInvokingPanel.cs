@@ -49,9 +49,14 @@ public sealed class StatTooltipInvokingPanel : TooltipInvokingPanel
 
     private void UpdateDisplayedStatValue()
     {
-        _statValueText.text = Math.Round(_stat.Value, 2).ToString();
+        string statValue;
 
-        bool badValue = (_stat.Value < _stat.Default && !_stat.LowValueIsGood) || (_stat.Value > _stat.Default && _stat.LowValueIsGood);
+        if (_tagData.PresentAsMultiplier) statValue = $"{Math.Round(_stat.Value, 2) * 100:F0}%";
+        else statValue = Math.Round(_stat.Value, 2).ToString();
+        
+        _statValueText.text = statValue;
+
+        bool badValue = (_stat.Value < _stat.Default && !_tagData.LowValueIsGood) || (_stat.Value > _stat.Default && _tagData.LowValueIsGood);
         
         if (_stat.Value == _stat.Default) _statValueText.color = _defaultValueColor;
         else if (badValue) _statValueText.color = _badValueColor;

@@ -9,7 +9,6 @@ namespace WorldGeneration
         
         [SerializeField] private bool _generateWaterDecorations;
         [SerializeField] private DecorationContainer _decorationContainer;
-        [SerializeField] private LayerSetting _decorationLayerSetting;
 
         public void GenerateDecorations(BlockGrid blockGrid, Vector2 offset)
         {
@@ -45,7 +44,7 @@ namespace WorldGeneration
                     {
                         DecorationData decoration = GetRandomDecoration(decorationModule.Decorations);
 
-                        if (CanBeSpawned(decoration, spawnPosition))
+                        if (decoration.Prefabs[0].GetPlaceAvailability(spawnPosition))
                         {
                             CreateDecorations(decoration, spawnPosition, offset);
                         }
@@ -78,6 +77,7 @@ namespace WorldGeneration
                 if (decoration.HasYScale) scale.y = Random.Range(decoration.MinYScale, decoration.MaxYScale);
                 
                 decorationObject.transform.localScale = scale; 
+                decorationObject.SetState(true);
                 
                 _decorationContainer.AddDecorations(position.x, position.z, decorationObject);
             }
@@ -103,13 +103,6 @@ namespace WorldGeneration
             if (!lockToRightAngle) return Random.Range(0f, -360f);
                 
             return Random.Range(0, 4) * 90f;
-        }
-
-        private bool CanBeSpawned(DecorationData decoration, Vector3 position)
-        {
-            float halfExtent = decoration.DecorationScale * 0.5f;
-            
-            return !Physics.CheckBox(position, new Vector3(halfExtent, 100f, halfExtent), Quaternion.identity, _decorationLayerSetting.GetLayerMask());
         }
     }
 }

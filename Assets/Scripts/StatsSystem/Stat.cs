@@ -12,9 +12,7 @@ public class Stat
     private float _value;
     private int _roundedValue;
 
-    protected virtual float MinimalValue => 0; 
-    //used purely for ui
-    public virtual bool LowValueIsGood => false;
+    protected virtual float MinimalValue => 0;
     
     public float Default => _default;
     public float Value => _value;

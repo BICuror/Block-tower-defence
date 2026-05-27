@@ -16,5 +16,11 @@ MonoBehaviour:
   _textColor: {r: 0.07450981, g: 0.25882354, b: 0.30588236, a: 1}
   _iconSprite: {fileID: 1427845749, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _onlyText: 0
+  _invokeTooltipPanel: 1
   _localizationKey: aoe_damage_multiplier_stat_tooltip
   _associatedStatTypeName: AOEDamageMultiplier
+  _presentAsMultiplier: 1
+  _lowValueIsGood: 0
+  _dependsOnStat: 1
+  _dependencyStatData: {fileID: 11400000, guid: 8b6717121ba124a4da0a7a019b0a7f32, type: 2}
+  _resultStatLocKey: aoe_damage_header

@@ -1,7 +1,1 @@
-public sealed class InspectionEffectTooltip : TooltipPanelBase
-{
-    public void Initialize(EffectTooltipTagData tagData)
-    {
-        SetTagData(tagData);
-    }
-}
+public sealed class InspectionEffectTooltip : TooltipPanelBase {}

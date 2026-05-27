@@ -1,4 +1,3 @@
-using UnityEngine.Events;
 using UnityEngine;
 using Zenject;
 using Combat;
@@ -26,14 +25,14 @@ namespace WorldGeneration
         [SerializeField] private TerrainAnimator _terrainAnimator;
         [SerializeField] private EnemyBiomeDecorationMaterialChanger _enemyBiomeDecorationManager;
 
-        private int _currentStage;
         private Vector2Int _centerPosition;
         private BlockGrid _currentBlockGrid;
         private Vector2Int _spawnerNodeIndex;
+        private int _currentStage;
         
         public Vector2Int SpawnerNodeIndex => _spawnerNodeIndex;
-        public int CurrentStage => _currentStage;
         public EnemySpawner EnemySpawner => _enemySpawner;
+        public int CurrentStage => _currentStage;
         
         public void Initialize()
         {
@@ -56,30 +55,29 @@ namespace WorldGeneration
         public void EnableTerrain(float duration) => _terrainAnimator.StartAppearing(duration);
 
         public void IncreaseCurrentStage() => _currentStage++;
-        public int GetStage() => _currentStage;
 
         private void AdjustPosition()
         {
             int radius = _islandData.EnemyBiomeStages[_currentStage].EnemyBiomeRadius;
 
-            transform.position = new Vector3(_centerPosition.x - radius, 0f, _centerPosition.y - radius);
+            transform.position = new Vector3(_centerPosition.x - radius - 1f, 0f, _centerPosition.y - radius - 1f);
 
             float height = _islandGridHolder.Grid.GetMaxHeight(_centerPosition.x, _centerPosition.y);
 
             if (height == 0) height += 1f;
 
-            _enemySpawner.transform.localPosition = new Vector3(radius, height + 1f, radius);
+            _enemySpawner.transform.localPosition = new Vector3(radius + 1f, height + 1f, radius + 1f);
         }
 
         public void RegenerateBiome()
         {
             AdjustPosition();
 
-            bool[,] enemyBiomeMap = _enemyBiomeMapGenerator.GenerateEnemyMap(GetStage());
+            bool[,] enemyBiomeMap = _enemyBiomeMapGenerator.GenerateEnemyMap(_currentStage);
 
-            _currentBlockGrid = _enemyBiomeMapToGridConverter.ConvertEnemyMapToGrid(enemyBiomeMap, GetStage(), GetBiomePosition());
+            _currentBlockGrid = _enemyBiomeMapToGridConverter.ConvertEnemyMapToGrid(enemyBiomeMap, _currentStage, GetBiomePosition());
 
-            _overlappingIslandDecorationsDisabler.DisableOverlappingIslandDecorations(enemyBiomeMap, GetStage(), GetBiomePosition());
+            _overlappingIslandDecorationsDisabler.DisableOverlappingIslandDecorations(enemyBiomeMap, _currentStage, GetBiomePosition());
 
             GenerateMesh(_currentBlockGrid);
             
@@ -90,8 +88,6 @@ namespace WorldGeneration
 
         public void GenerateDecorations()
         {
-            int radius = _islandData.EnemyBiomeStages[_currentStage].EnemyBiomeRadius;
-
             Vector2Int currentPos = new Vector2Int((int)(transform.position.x), (int)(transform.position.z));
 
             _enemyBiomeDecorationGenerator.SetDecorationModule(_islandData.EnemyBiomeStages[_currentStage].DecorationsModule);

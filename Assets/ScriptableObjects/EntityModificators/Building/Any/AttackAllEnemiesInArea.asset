@@ -9,15 +9,43 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: StrongerAOE
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: AttackAllEnemiesInArea
   m_EditorClassIdentifier: 
-  _icon: {fileID: 1427845749, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: mortar_aoe_damage_up_entity_modificator_tooltip
+  _icon: {fileID: 1968931674, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: multishot_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems: []
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: Damage
+      _intArgument: 1
+      _boolArgument: 0
+      _floatArgument: 1
+      _stringArgument: DealMoreToFullHpDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: TimePeriod
+      _intArgument: 1
+      _boolArgument: 0
+      _floatArgument: 1
+      _stringArgument: DealMoreToFullHpDamageModifier
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _itemTypeContainers:
-  - _itemTypeName: EntityModificatorStatChange
+  - _itemTypeName: AttackAllEnemiesInAreaEntityModificator
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -28,6 +56,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -48,12 +77,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -67,32 +98,31 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
-  _buildingEntityTypeTags: 02000000
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 
   _rarity: 2
-  _tags: 06000000
-  _hasStacks: 0
-  _maxStacks: 0
+  _tags: 
+  _hasStacks: 1
+  _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 1
-  _anyRequired: 0
+  _hasRequiredTags: 0
   _reqiredOwnerTags:
-    Requirements:
-    - Tag: 6
-      Amount: 1
+    Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 28
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
-  _statChanges:
-  - StatData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
-    FlatChange: 0
-    MultiplierChange: 0.5
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
+  _statChanges: []
   _statInitializers: []

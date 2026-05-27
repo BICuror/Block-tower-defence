@@ -12,7 +12,7 @@ public abstract class TooltipPanelBase : ParserableTextContainer
     [SerializeField] private Image _iconImage;
     private TooltipTagData _tooltipTagData;
     
-    protected void SetTagData(TooltipTagData tagData)
+    public void SetTagData(TooltipTagData tagData)
     {
         _tooltipTagData = tagData;
         _iconImage.sprite = _tooltipTagData.IconSprite;

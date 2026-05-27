@@ -1,10 +1,8 @@
 using System.Collections.Generic;
-using WorldGeneration;
 using UnityEngine;
 using Zenject;
 using System;
-
-using Random = UnityEngine.Random;
+using Cysharp.Threading.Tasks;
 
 namespace Combat
 {
@@ -32,10 +30,7 @@ namespace Combat
         
         public void StartWave()
         {
-            for (int i = 0; i < _spawners.Count; i++)
-            {   
-                _spawners[i].SpawnGroup();
-            }
+            _spawners.ForEach(spawner => spawner.SpawnGroup().Forget());
         }
         
         public void AddSpawner(EnemySpawner spawner)
@@ -50,7 +45,18 @@ namespace Combat
     
         private void CheckIfAllEnemiesDied()
         {
+            if (_globalEnemyContainer.Entities.Count > 0) return;
+
+            _spawners.ForEach(spawner => spawner.TrySpawnEnemy());
+            
             if (_globalEnemyContainer.Entities.Count > 0 || !AllEnemiesSpawned) return;
+
+            OnAllEnemiesDied();
+        }
+
+        private void OnAllEnemiesDied()
+        {
+            _spawners.ForEach(spawner => spawner.StopSpawning());
             
             LastWaveEnemyDied.Invoke();
         }

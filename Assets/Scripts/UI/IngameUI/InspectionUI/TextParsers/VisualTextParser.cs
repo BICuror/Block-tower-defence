@@ -82,7 +82,7 @@ public sealed class VisualTextParser : MonoBehaviour
         return tooltipText;
     }
     
-    private string GetStringSpriteFromData(TooltipTagData tagData)
+    public string GetStringSpriteFromData(TooltipTagData tagData)
     {
         return $"<sprite name={tagData.IconSprite.name}>";
     }
@@ -172,7 +172,7 @@ public sealed class VisualTextParser : MonoBehaviour
 
     #region ColorParsing
     
-    private string WrapInColor(string initialString, Color color)
+    public string WrapInColor(string initialString, Color color)
     {
         string colorCode = ColorUtility.ToHtmlStringRGB(color);
         

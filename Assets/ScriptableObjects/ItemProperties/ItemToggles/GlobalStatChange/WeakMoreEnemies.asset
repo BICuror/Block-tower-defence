@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e36d4158907f74088b84bbd4ad37d8, type: 3}
+  m_Name: WeakMoreEnemies
+  m_EditorClassIdentifier: 
+  _icon: {fileID: -617606169, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: more_enemies_effect_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _instanceItemTypeContainers:
+  - _itemTypeName: GlobalStatChangeToggleEffect
+    AllEffectTypeNames:
+    - AdditionalEnemyGroupFromWaterToggleEffect
+    - AdditionalEnemyGroupToggleEffect
+    - GlobalBuildingModificatorToggleEffect
+    - GlobalEnemyModificatorToggleEffect
+    - GlobalStatChangeToggleEffect
+    - HealEachBuildingPerCrystal
+    - SpawnObjectsToggleEffect
+    - StartWaveGlobalToggleEffect
+    - TurnLastEnemyIntoMiniboss
+  _quality: 3
+  _effectType: 1
+  _isUnique: 1
+  _tags: 
+  _hasEffectAppearanceCondition: 0
+  _effectAppearanceCondition: {fileID: 0}
+  _effectAppearanceConditionArgumentsContainer:
+    _argumentItems: []
+  _hasRequiredTags: 0
+  _requiredBuildingTags:
+    Requirements: []
+  _requiredGlobalEffectsTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockBuildingsTags:
+    Requirements: []
+  _blockGlobalEffectTags:
+    Requirements:
+    - Tag: 0
+      Amount: 1
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 6e5fae9541dd9ca4785dd9fcbb8f9465, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.3

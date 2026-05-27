@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: ReachArcher
+  m_Name: StrongerAOE
   m_EditorClassIdentifier: 
-  _icon: {fileID: -913185330, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: archery_big_reach_up_entity_modificator_tooltip
+  _icon: {fileID: 1427845749, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: mortar_aoe_damage_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -48,12 +48,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -67,38 +69,34 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 1
-  _buildingEntityTypeTags: 01000000
+  _buildingEntityTypeTags: 02000000
   _rarity: 2
-  _tags: 09000000
-  _hasStacks: 1
-  _maxStacks: 1
+  _tags: 06000000
+  _hasStacks: 0
+  _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
-  _anyRequired: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 6
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 1
+  _hasBlockTags: 0
   _blockOwnerTags:
-    Requirements:
-    - Tag: 9
-      Amount: 1
+    Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    FlatChange: 3
-    MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    FlatChange: 2.5
-    MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: caad7db37dd41034db8f53d421cb2add, type: 2}
-    FlatChange: -6
-    MultiplierChange: 0
+  - StatData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.5
   _statInitializers: []

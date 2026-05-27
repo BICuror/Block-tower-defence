@@ -92,6 +92,8 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
         if (!modificatorData.HasRequiredTags && !modificatorData.HasBlockTags) return true;
 
         List<EntityModifcatorTag> ownerTags = entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags();
+        ownerTags.AddRange(entity.DefaultBuildingTags);
+        
         List<EntityModifcatorTag> otherTags = _globalBuildingContainer.GetBuildingTags(entity);
         
         if (modificatorData.HasRequiredTags)

@@ -2,22 +2,26 @@ using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace Combat
 {
     public sealed class BuildingEntity : CombatEntity
     {
+        [Header("Data")]
+        [SerializeField] private List<EntityModifcatorTag> _defaultBuildingTags;
         [SerializeField] private BuildingEntityType _buildingEntityType;
         [SerializeField] private BuildingAttackType _buildingAttackType; 
-        [SerializeField] private bool _destroyOnDeath;
         
         [Header("DestroyedObject")]
+        [SerializeField] private bool _destroyOnDeath;
         [SerializeField] private bool _leavesBuildingDestroyedObject = true;
         [ShowIf("_leavesBuildingDestroyedObject")] [SerializeField] private BuildingDestroyedObject _buildingDestroyedObjectPrefab;
         private BuildingDestroyedObject _currentDestroyedObject;
         
         private BuildingHealth _health;
 
+        public List<EntityModifcatorTag> DefaultBuildingTags => _defaultBuildingTags;
         public BuildingEntityType BuildingEntityType => _buildingEntityType;
         public BuildingAttackType BuildingAttackType => _buildingAttackType;
         public bool IsDestroyedOnDeath => _destroyOnDeath;

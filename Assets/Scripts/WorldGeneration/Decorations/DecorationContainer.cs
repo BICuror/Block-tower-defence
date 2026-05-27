@@ -5,6 +5,7 @@ namespace WorldGeneration
 {
     public class DecorationContainer : MonoBehaviour
     {
+        [SerializeField] private int _maxDecorationRadius = 1;
         [SerializeField] private bool _useRaycastToDeactivateDecorations;
         [ShowIf("_useRaycastToDeactivateDecorations")] [SerializeField] private LayerSetting _decorationLayerSetting;
         private ListDictionary<Vector2Int, DecorationObject> _decorations = new();
@@ -23,24 +24,29 @@ namespace WorldGeneration
 
         public void ActivateAllDecorations()
         {
-            _decorations.GetAllItems().ForEach(decorationObject => decorationObject.gameObject.SetActive(true));
+            _decorations.GetAllItems().ForEach(decorationObject => decorationObject.SetState(true));
         }
 
         public void SetActiveDecorations(int x, int z, bool state)
         {
+            Vector2Int position = new Vector2Int(x, z);
+
             if (_useRaycastToDeactivateDecorations && !state)
             {
-                while (TileMap.HasTile(new Vector2Int(x, z), _decorationLayerSetting))
+                TileMap.GetHitObjects(new Vector2Int(x, z), _decorationLayerSetting).ForEach(decorationGameObject =>
                 {
-                    TileMap.GetHitObject(new Vector2Int(x, z), _decorationLayerSetting).SetActive(false);
-                }
+                    DecorationObject decorationObject = decorationGameObject.GetComponent<DecorationObject>();
+                                        
+                    if (_decorations.Contains(position) && !_decorations.Get(position).Contains(decorationObject))
+                    {
+                        decorationObject.SetState(false);
+                    }
+                });
             }
-            
-            Vector2Int position = new Vector2Int(x, z);
             
             if (!_decorations.Contains(position)) return;
             
-            _decorations.Get(position).ForEach(decorationObject => decorationObject.gameObject.SetActive(state));
+            _decorations.Get(position).ForEach(decorationObject => decorationObject.SetState(state));
         }
         
         public void ApplyMaterialToAllDecorations(Material materialToApply)

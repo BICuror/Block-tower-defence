@@ -46,7 +46,7 @@ public sealed class ItemFactory : MonoBehaviour
     
     public async UniTask CreateItem(int strength, Vector3 position)
     {
-        _effectSelector.TryGetItemEffectDatas(strength, false, out List<GlobalEffectData> effectDatas);
+        _effectSelector.TryGetItemEffectDatas(strength, new(), false, out List<GlobalEffectData> effectDatas);
         
         await CreateItemFromEffects(effectDatas, position);
     }

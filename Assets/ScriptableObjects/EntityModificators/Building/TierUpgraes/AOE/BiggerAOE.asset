@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: MaxHealthUp
+  m_Name: BiggerAOE
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _localizationKey: max_health_up_entity_modificator_tooltip
+  _icon: {fileID: 260667796, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: mortar_aoe_radius_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -48,12 +48,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -67,32 +69,37 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 0
-  _buildingEntityTypeTags: 040000000600000007000000
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 02000000
   _rarity: 2
-  _tags: 
+  _tags: 06000000
   _hasStacks: 0
-  _maxStacks: 1
+  _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
-  _anyRequired: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 6
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
   _hasBlockTags: 0
   _blockOwnerTags:
     Requirements: []
   _blockOtherEntityTags:
-    Requirements:
-    - Tag: 9
-      Amount: 1
+    Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
+  - StatData: {fileID: 11400000, guid: 20a523a05882b7b459a94f9e821998e2, type: 2}
+    FlatChange: 1
+    MultiplierChange: 0
+  - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
     FlatChange: 0
-    MultiplierChange: 1
+    MultiplierChange: 0.15
   _statInitializers: []

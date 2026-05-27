@@ -86,6 +86,22 @@ public static class TileMap
 
         return hit.collider.gameObject;
     }
+    
+    public static List<GameObject> GetHitObjects(Vector2Int position, LayerSetting layerSetting)
+    {
+        Ray heightRay = GetRay(position);
+
+        RaycastHit[] hits = Physics.RaycastAll(heightRay, RAY_LENGTH, layerSetting.GetLayerMask());
+        
+        List<GameObject> result = new List<GameObject>();
+        
+        foreach (RaycastHit raycastHit in hits)
+        {
+            result.Add(raycastHit.collider.gameObject);
+        }
+
+        return result;
+    }
 
     #endregion
 

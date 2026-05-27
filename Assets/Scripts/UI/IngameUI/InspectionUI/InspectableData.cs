@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Ligofff.CustomSOIcons;
 using CuroLocalization;
 using UnityEngine;
@@ -13,14 +14,26 @@ public abstract class InspectableData : ScriptableObject
     
     [CustomAssetIcon] public Sprite Icon => _icon;
     public ArgumentsContainer ArgumentsContainer => _argumentsContainer;
-    public string GetName() => (_localizationKey + "_header").Localize();
+    
+    public string GetNameLocalizationKey() => _localizationKey + "_header";
+    public string GetName() => GetNameLocalizationKey().Localize();
     public string GetDescription() => ParseDescription("startTag " + (_localizationKey + "_description").Localize());
     
     private string ParseDescription(string initialDescription)
     {
         if (this is EntityModificatorData)
         {
-            initialDescription = ParseByEntityModificatorStatData((EntityModificatorData)this, initialDescription);
+            EntityModificatorData data = (EntityModificatorData)this;
+            
+            initialDescription = ParseByStatInitializer(data.StatInitializers, initialDescription);
+            initialDescription = ParseByStatChange(data.StatChanges, initialDescription);
+        }
+        
+        if (this is GlobalStatChangeToggleEffectData)
+        {
+            GlobalStatChangeToggleEffectData data = (GlobalStatChangeToggleEffectData)this;
+            
+            initialDescription = ParseByStatChange(data.StatChanges, initialDescription);
         }
         
         _argumentsContainer.ArgumentItems.ForEach(argument =>
@@ -46,7 +59,8 @@ public abstract class InspectableData : ScriptableObject
                     
                     initialDescription = modificatorData.ParseDescription(initialDescription);
 
-                    initialDescription = ParseByEntityModificatorStatData(modificatorData, initialDescription);
+                    initialDescription = ParseByStatChange(modificatorData.StatChanges, initialDescription);
+                    initialDescription = ParseByStatInitializer(modificatorData.StatInitializers, initialDescription);
                 } break;
                 case ArgumentType.AdditionalEnemyGroup:
                 {
@@ -59,15 +73,20 @@ public abstract class InspectableData : ScriptableObject
 
         return initialDescription;
 
-        string ParseByEntityModificatorStatData(EntityModificatorData entityModificatorData, string initialText)
+        string ParseByStatChange(List<StatChange> statChanges, string initialText)
         {
-            entityModificatorData.StatChanges.ForEach(statChange =>
+            statChanges.ForEach(statChange =>
             {
                 initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_flat", Mathf.Abs(statChange.FlatChange).ToString());
                 initialText = ReplaceAllValues(initialText, $"{statChange.StatData.GetStatType().Name}_mult", Mathf.Abs(statChange.MultiplierChange * 100).ToString());
             });
-            
-            entityModificatorData.StatInitializers.ForEach(statInitializer =>
+
+            return initialText;
+        }
+
+        string ParseByStatInitializer(List<StatInitializer> initializers, string initialText)
+        {
+            initializers.ForEach(statInitializer =>
             {
                 initialText = ReplaceAllValues(initialText, $"{statInitializer.StatData.GetStatType().Name}", Mathf.Abs(statInitializer.DefaultValue).ToString());
             });

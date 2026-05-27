@@ -8,6 +8,8 @@ public sealed class GlobalStatChangeToggleEffectData : GlobalEffectData
 { 
     [SerializeField] private List<StatChange> _statChanges;
     
+    public List<StatChange> StatChanges => _statChanges;
+    
     public override void Modify(GlobalEffect effect)
     {
         if (effect is not GlobalStatChangeToggleEffect) return;

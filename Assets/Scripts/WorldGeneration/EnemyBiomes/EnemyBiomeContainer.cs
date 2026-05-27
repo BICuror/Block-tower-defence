@@ -53,9 +53,9 @@ namespace WorldGeneration
 
         public void DestroyOldBiomes()
         {
-            for (int i = 0; i < _enemyBiomes.Count; i++)
+            for (int i = _enemyBiomes.Count - 1; i >= 0; i--)
             {
-                if (_enemyBiomes[i].GetStage() >= _islandData.EnemyBiomeStages.Length)
+                if (_enemyBiomes[i].CurrentStage >= _islandData.EnemyBiomeStages.Length)
                 {
                     DestroyBiome(_enemyBiomes[i]);
                 }
@@ -64,7 +64,7 @@ namespace WorldGeneration
 
         public void DestroyExcessiveBiomes(int maxAmount)
         {
-            List<EnemyBiome> sortedBiomes = _enemyBiomes.OrderBy(biome => biome.GetStage()).ToList();
+            List<EnemyBiome> sortedBiomes = _enemyBiomes.OrderBy(biome => biome.CurrentStage).ToList();
 
             for (int i = maxAmount; i < sortedBiomes.Count; i++)
             {

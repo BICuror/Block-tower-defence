@@ -1,10 +1,10 @@
+using CuroLocalization;
 using UnityEngine.UI;
 using UnityEngine;
-using TMPro;
 
 public sealed class EffectInspectionTooltipPreview : InspectionPanelBase
 {
-    [SerializeField] private TextMeshProUGUI _previewName;
+    [SerializeField] private StaticTextLocalizer _previewName;
     [SerializeField] private Image _previewImage;
     private EntityModificatorData _entityModificatorData;
     
@@ -19,6 +19,6 @@ public sealed class EffectInspectionTooltipPreview : InspectionPanelBase
     
     protected override void UpdateAllParsableText()
     {
-        _previewName.text = ParseTextByDefault(_entityModificatorData.GetName());
+        _previewName.SetKey(_entityModificatorData.GetNameLocalizationKey(), ParseTextByDefault);
     }
 }

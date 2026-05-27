@@ -4,6 +4,8 @@ using UnityEngine;
 
 public sealed class UIElementFadeAnimator : MonoBehaviour
 {
+    [SerializeField] private bool _destroyUponDisabling = false;
+    
     [Header("FadeAnimation")]
     [SerializeField] private CanvasGroup _mainGroup;
     [SerializeField] private float _fadeDuration = 0.2f;
@@ -40,6 +42,9 @@ public sealed class UIElementFadeAnimator : MonoBehaviour
 
     private void DisableGameObject()
     {
-        if (gameObject) gameObject.SetActive(false);
+        if (!gameObject) return;
+
+        if (_destroyUponDisabling) Destroy(gameObject);
+        else gameObject.SetActive(false);
     }
 }

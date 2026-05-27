@@ -123,7 +123,7 @@ MonoBehaviour:
   _pointFollowingUIElement: {fileID: 3658296240579240519}
   _uiElementFadeAnimator: {fileID: -8467842132038508559}
   _hoverableUIElement: {fileID: 6425167760965755544}
-  _previewName: {fileID: 4564997724490142321}
+  _previewName: {fileID: 9010502123864012687}
   _previewImage: {fileID: 1666409319470236751}
 --- !u!114 &-8467842132038508559
 MonoBehaviour:
@@ -137,6 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b043e5af7ae1b3b48a19b8f857743023, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIElementFadeAnimator
+  _destroyUponDisabling: 0
   _mainGroup: {fileID: 9009782526213209366}
   _fadeDuration: 0.2
 --- !u!114 &3658296240579240519
@@ -365,6 +366,7 @@ GameObject:
   - component: {fileID: 5762406530955340478}
   - component: {fileID: 9070168658006587558}
   - component: {fileID: 4564997724490142321}
+  - component: {fileID: 9010502123864012687}
   m_Layer: 0
   m_Name: NameTextField
   m_TagString: Untagged
@@ -491,6 +493,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &9010502123864012687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6014213129363717908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9abec6d29ed7442aa8d5e5972492ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CuroLocalization::CuroLocalization.StaticTextLocalizer
+  _key: 
 --- !u!1001 &1867035593050699252
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,44 +29,46 @@ public sealed class InspectionTooltipController : ParserableTextContainer
                 {
                     if (_inspectedEntity && _inspectedEntity.StatContainer.Has(Type.GetType(statTooltipTagData.AssociatedStatTypeName)))
                     {
-                        Stat stat = _inspectedEntity.StatContainer.Get(
-                            Type.GetType(statTooltipTagData.AssociatedStatTypeName));
-                        InspectionStatDetailsTooltip statDetailsTooltip =
-                            Instantiate(_statDetailsTooltipPrefab, _subpanelsContainer);
-                        statDetailsTooltip.Initialize(stat, statTooltipTagData);
+                        InspectionStatDetailsTooltip statDetailsTooltip = Instantiate(_statDetailsTooltipPrefab, _subpanelsContainer);
+                        InitializeBaseTooltip(statDetailsTooltip, tagData);
+                        statDetailsTooltip.Initialize(_inspectedEntity, statTooltipTagData);
                         _instantiatedTooltips.Add(statDetailsTooltip);
                     }
                     else
                     {
                         InspectionStatTooltip statTooltip = Instantiate(_statTooltipPrefab, _subpanelsContainer);
-                        statTooltip.Initialize(statTooltipTagData);
+                        InitializeBaseTooltip(statTooltip, tagData);
                         _instantiatedTooltips.Add(statTooltip);
                     }
                 }
-                else if (tagData is EffectTooltipTagData effectTooltipTagData)
+                else if (tagData is EffectTooltipTagData)
                 {
                     InspectionEffectTooltip effectTooltip = Instantiate(_effectTooltipPrefab, _subpanelsContainer);
-                    effectTooltip.Initialize(effectTooltipTagData);
+                    InitializeBaseTooltip(effectTooltip, tagData);
                     _instantiatedTooltips.Add(effectTooltip);
                 }
-                else if (tagData is KeywordTooltipTagData keywordTooltipTagData)
+                else if (tagData is KeywordTooltipTagData)
                 {
                     InspectionKeywordTooltip keywordTooltip = Instantiate(_keywordTooltipPrefab, _subpanelsContainer);
-                    keywordTooltip.Initialize(keywordTooltipTagData);
-                    _instantiatedTooltips.Add(keywordTooltip);
+                    InitializeBaseTooltip(keywordTooltip, tagData);
                 }
-
-                _instantiatedTooltips[^1].CopyParsersFromContainer(this);
-                _instantiatedTooltips[^1].Enable();
             }
         });
+    }
+
+    private void InitializeBaseTooltip(TooltipPanelBase tooltipPanel, TooltipTagData tagData)
+    {
+        tooltipPanel.SetTagData(tagData);
+        tooltipPanel.CopyParsersFromContainer(this);
+        _instantiatedTooltips.Add(tooltipPanel);
+        tooltipPanel.Enable();
     }
     
     public void ClearAllSubpanels()
     {
         for (int i = 0; i < _instantiatedTooltips.Count; i++)
         {
-            _instantiatedTooltips[i].Disable();
+            if (_instantiatedTooltips[i].gameObject != null) _instantiatedTooltips[i].Disable();
         }
         
         _instantiatedTooltips.Clear();

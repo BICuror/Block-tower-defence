@@ -205,8 +205,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7510805093858887334}
   - component: {fileID: 205158955601419773}
-  - component: {fileID: 1907596957670294220}
   - component: {fileID: 4100215888515179892}
+  - component: {fileID: 2561895600458879799}
   m_Layer: 0
   m_Name: EnemyArcherObject
   m_TagString: Draggable
@@ -246,18 +246,6 @@ MonoBehaviour:
   - {fileID: 424324858221258045}
   _hasPriority: 0
   _priorityType: 0
---- !u!114 &1907596957670294220
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7635548585433285287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0630b7427698a90418bc76eea958cf21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4100215888515179892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -272,3 +260,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _arrowLifetime: 5
   _arrowPrefab: {fileID: 6864095567677677045, guid: ae23f8801fdfb7240b285315d717b832, type: 3}
+--- !u!114 &2561895600458879799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7635548585433285287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 277b3cbc04ac69e42b02a93c5e2ba1a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyTaskCycle

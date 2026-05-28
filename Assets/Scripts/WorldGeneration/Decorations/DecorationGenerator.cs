@@ -44,7 +44,9 @@ namespace WorldGeneration
                     {
                         DecorationData decoration = GetRandomDecoration(decorationModule.Decorations);
 
-                        if (decoration.Prefabs[0].GetPlaceAvailability(spawnPosition))
+                        Vector2Int checkPosition = new Vector2Int(x + Mathf.RoundToInt(offset.x), z + Mathf.RoundToInt(offset.y));
+                        
+                        if (_decorationContainer.GetHightestPossibleDecorationRadius(checkPosition) > decoration.Prefabs[0].TileRadius)
                         {
                             CreateDecorations(decoration, spawnPosition, offset);
                         }
@@ -77,6 +79,7 @@ namespace WorldGeneration
                 if (decoration.HasYScale) scale.y = Random.Range(decoration.MinYScale, decoration.MaxYScale);
                 
                 decorationObject.transform.localScale = scale; 
+                decorationObject.SetDefaultScale(scale);
                 decorationObject.SetState(true);
                 
                 _decorationContainer.AddDecorations(position.x, position.z, decorationObject);

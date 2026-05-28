@@ -1,4 +1,3 @@
- using NaughtyAttributes;
 using UnityEngine;
 
 namespace WorldGeneration
@@ -6,8 +5,6 @@ namespace WorldGeneration
     public class DecorationContainer : MonoBehaviour
     {
         [SerializeField] private int _maxDecorationRadius = 1;
-        [SerializeField] private bool _useRaycastToDeactivateDecorations;
-        [ShowIf("_useRaycastToDeactivateDecorations")] [SerializeField] private LayerSetting _decorationLayerSetting;
         private ListDictionary<Vector2Int, DecorationObject> _decorations = new();
         
         public void CreateNewContainer()
@@ -22,27 +19,68 @@ namespace WorldGeneration
             _decorations.Add(new Vector2Int(x, z), decoration);
         }
 
-        public void ActivateAllDecorations()
+        public void UpdateDecorationsState()
         {
-            _decorations.GetAllItems().ForEach(decorationObject => decorationObject.SetState(true));
+            _decorations.GetAllKeys().ForEach(position =>
+            {
+                int highestDecorationRadius = GetHightestPossibleDecorationRadius(position, false);
+                
+                _decorations.Get(position).ForEach(decoration => decoration.SetState(decoration.TileRadius < highestDecorationRadius));
+            });
+        }
+
+        public int GetHightestPossibleDecorationRadius(Vector2Int position, bool includeOtherDecorations = true)
+        {
+            int minimalValue = int.MaxValue;
+            
+            for (int x = -_maxDecorationRadius; x <= _maxDecorationRadius; x++)
+            {
+                for (int z = -_maxDecorationRadius; z <= _maxDecorationRadius; z++)
+                {
+                    Vector2Int checkPosition = new Vector2Int(position.x + x, position.y + z);
+
+                    int currentRadius = Mathf.Max(Mathf.Abs(x), Mathf.Abs(z));
+                    
+                    if (IsOccupied(checkPosition)) minimalValue = Mathf.Min(currentRadius, minimalValue);
+                }
+            }
+
+            Debug.LogError(minimalValue);
+            return minimalValue;
+
+            bool IsOccupied(Vector2Int checkPosition) =>
+                TileMap.HasTile(checkPosition, LayerSettingType.DecorationExclusionLayer) ||
+                (includeOtherDecorations && TileMap.HasTile(checkPosition, LayerSettingType.BlockingDecoration));
+        }
+
+        private void DisableAllDecorationsAround(Vector2Int position)
+        {
+            for (int x = -_maxDecorationRadius; x <= _maxDecorationRadius; x++) 
+            { 
+                for (int z = -_maxDecorationRadius; z <= _maxDecorationRadius; z++) 
+                { 
+                    Vector2Int checkPosition = new Vector2Int(position.x + x, position.y + z);
+                    
+                    if (!_decorations.Contains(checkPosition)) continue;
+                    
+                    int currentRadius = Mathf.Max(Mathf.Abs(x), Mathf.Abs(z));
+                    
+                    _decorations.Get(checkPosition).ForEach(decorationObject =>
+                    {
+                        if (decorationObject.TileRadius >= currentRadius)
+                        {
+                            decorationObject.SetState(false);
+                        }
+                    });
+                }
+            }
         }
 
         public void SetActiveDecorations(int x, int z, bool state)
         {
             Vector2Int position = new Vector2Int(x, z);
-
-            if (_useRaycastToDeactivateDecorations && !state)
-            {
-                TileMap.GetHitObjects(new Vector2Int(x, z), _decorationLayerSetting).ForEach(decorationGameObject =>
-                {
-                    DecorationObject decorationObject = decorationGameObject.GetComponent<DecorationObject>();
-                                        
-                    if (_decorations.Contains(position) && !_decorations.Get(position).Contains(decorationObject))
-                    {
-                        decorationObject.SetState(false);
-                    }
-                });
-            }
+            
+            if (!state) DisableAllDecorationsAround(position);
             
             if (!_decorations.Contains(position)) return;
             

@@ -10,7 +10,6 @@ public class InspectorController : MonoBehaviour
     
     [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
     [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
-    [SerializeField] private LayerSetting _inspectableLayerSetting;
     
     private InspectableObject _inspectableObject;
     
@@ -20,7 +19,7 @@ public class InspectorController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
-        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+        if (TileMap.HasTile(ray, LayerSettingType.InspectableObjects, out RaycastHit hit))
         {
             if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             { 
@@ -42,7 +41,7 @@ public class InspectorController : MonoBehaviour
         
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
-        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+        if (TileMap.HasTile(ray, LayerSettingType.InspectableObjects, out RaycastHit hit))
         {
             if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             {
@@ -57,7 +56,7 @@ public class InspectorController : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
-        if (TileMap.HasTile(ray, _inspectableLayerSetting, out RaycastHit hit))
+        if (TileMap.HasTile(ray, LayerSettingType.InspectableObjects, out RaycastHit hit))
         {
             if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             {

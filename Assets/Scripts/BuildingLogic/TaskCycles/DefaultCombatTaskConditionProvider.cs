@@ -5,8 +5,8 @@ namespace Combat
 {
     public class DefaultCombatTaskConditionProvider : MonoBehaviour, ITaskConditionProvider
     {
-        [Cached] private TaskCycle _taskCycle;
         [Cached] private AreaEntityDetector _scaner;
+        [Cached] private TaskCycle _taskCycle;
 
         protected void Start()
         {

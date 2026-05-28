@@ -15,8 +15,6 @@ public sealed class ChargableTotemTaskGeneration : OptionalTaskGenerator
     [Inject] private RoadMapHolder _roadMapHolder;
     [Inject] private DiContainer _diContainer;
     
-    [SerializeField] private LayerSetting _terrainLayerSetting;
-    [SerializeField] private LayerSetting _solidLayerSetting;
     [SerializeField] private ChargableTotem _chargableTotemPrefab;
     [SerializeField] private int _chargeTotemRadius;
 
@@ -78,7 +76,7 @@ public sealed class ChargableTotemTaskGeneration : OptionalTaskGenerator
     private bool IsAChargableTotemPosition(Vector2Int position)
     {
         return TileMap.IsInBounds(position, _roadMap) && 
-               !TileMap.HasTile(position, _solidLayerSetting) &&
+               !TileMap.HasTile(position, LayerSettingType.SolidObjects) &&
                !_roadMap[position.x, position.y] && 
                Vector2Int.Distance(position, _centerPosition) > _minimalCenterDistance &&
                _islandHeightMapHolder.Map[position.x, position.y] > 0;

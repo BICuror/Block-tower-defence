@@ -5,7 +5,6 @@ public sealed class MoreDamageNearbyWater : EntityModificator
 {
     [Inject] private IslandDataContainer _islandDataContainer;
     private EntityCanvasIcon _entityCanvasIcon;
-    private LayerSetting _anyTerrainLayerSetting;
     private StatModifier _statModifier;
     private GameObject _areaDisplay;
     
@@ -15,8 +14,6 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
         
         Entity.Draggable.Placed += CalculateBonusDamage;
-
-        _anyTerrainLayerSetting = Args.GetArgument<LayerSetting>("AnyTerrainLayer");
         
         _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(Args.GetArgument<GameObject>("AreaPrefab"));
         
@@ -40,7 +37,7 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         if (_entityCanvasIcon) _entityCanvasIcon.SetValue(emptyTilesNearby);
     }
 
-    private bool IsEmptyTile(Vector2Int position) => !TileMap.HasTile(position, _anyTerrainLayerSetting);
+    private bool IsEmptyTile(Vector2Int position) => !TileMap.HasTile(position, LayerSettingType.AnyTerrain);
 
     public override void Disable()
     {

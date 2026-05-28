@@ -31,7 +31,7 @@ public sealed class ConvertMarkedEnemiesIntoRockOnKill : EntityModificator
         
         Vector2Int roundedPosition = new Vector2Int(Mathf.RoundToInt(killedEntity.transform.position.x), Mathf.RoundToInt(killedEntity.transform.position.z));
         
-        if (TileMap.HasTile(roundedPosition, Args.GetArgument<LayerSetting>("SolidObjectsLayer"))) return;
+        if (TileMap.HasTile(roundedPosition, LayerSettingType.SolidObjects)) return;
 
         int height = _islandHeightMapHolder.Map[roundedPosition.x, roundedPosition.y];
         if (height < 1) height = 1;

@@ -44,20 +44,6 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-    - _argumentType: 8
-      _argumentName: AnyTerrainLayer
-      _intArgument: 2
-      _boolArgument: 0
-      _floatArgument: 5
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 8014568173235323351, guid: c67a164165f217745aefa395ba7cf80f, type: 3}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
   _itemTypeContainers:
   - _itemTypeName: MoreDamageNearbyWater
     AllEffectTypeNames:
@@ -70,6 +56,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea

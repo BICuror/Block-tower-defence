@@ -1,21 +1,18 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "DefaultAndWaterPlacemenntModule", menuName = "DraggableSystem/PlacementConditions/DefaultAndWaterPlacemenntModule")]
+[CreateAssetMenu(fileName = "DefaultAndWaterPlacementModule", menuName = "DraggableSystem/PlacementConditions/DefaultAndWaterPlacementModule")]
 
-public sealed class DefaultAndWaterPlacemenntModule : PlacementModule
+public sealed class DefaultAndWaterPlacementModule : PlacementModule
 {
-    [SerializeField] private LayerSetting _sutableTerrainLayerSetting;
-    [SerializeField] private LayerSetting _nonStackableLayerSetting;
-
     public override bool CanBePlaced(Vector2Int position)
     {
-        int nonStackableTiels = TileMap.GetTileCount(position, _nonStackableLayerSetting);
+        int nonStackableTiels = TileMap.GetTileCount(position, LayerSettingType.SolidObjects);
     
         if (nonStackableTiels == 0) return true;
         
         if (nonStackableTiels == 1)
         {
-            GameObject nonStackableTile = TileMap.GetHitObject(position, _nonStackableLayerSetting);
+            GameObject nonStackableTile = TileMap.GetHitObject(position, LayerSettingType.SolidObjects);
 
             if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
             {
@@ -28,9 +25,9 @@ public sealed class DefaultAndWaterPlacemenntModule : PlacementModule
 
     public override float GetHeight(Vector2Int position)
     {
-        if (TileMap.HasTile(position, _sutableTerrainLayerSetting))
+        if (TileMap.HasTile(position, LayerSettingType.AnyTerrain))
         {
-            RaycastHit hit = TileMap.GetHitInfo(position, _sutableTerrainLayerSetting);
+            RaycastHit hit = TileMap.GetHitInfo(position, LayerSettingType.AnyTerrain);
             
             return hit.point.y + AdditionalPlacementHeight;
         }

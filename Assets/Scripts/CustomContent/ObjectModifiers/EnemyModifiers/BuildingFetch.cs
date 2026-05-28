@@ -6,8 +6,6 @@ using Combat;
 public sealed class BuildingFetch : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
-    [SerializeField] private LayerSetting _solidObjectsLayerSetting;
-    [SerializeField] private LayerSetting _roadLayerSetting;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private DraggableConnector _draggableConnector;
     [SerializeField] private float _chasingTimePerTile = 0.65f;
@@ -80,7 +78,7 @@ public sealed class BuildingFetch : MonoBehaviour
 
             Vector3 placementPosition = travelDestination;
 
-            if (TileMap.GetTileCount(roundedDestanationPosition, _solidObjectsLayerSetting) > 2)
+            if (TileMap.GetTileCount(roundedDestanationPosition, LayerSettingType.SolidObjects) > 2)
             {
                 placementPosition = TileMap.GetNearestDraggablePlacePosition(_currentTargetEntity.Draggable, travelDestination, IsValidPlacementPosition);
             }
@@ -92,7 +90,7 @@ public sealed class BuildingFetch : MonoBehaviour
         
         return;
 
-        bool IsValidPlacementPosition(Vector2Int position) => !TileMap.HasTile(position, _roadLayerSetting);
+        bool IsValidPlacementPosition(Vector2Int position) => !TileMap.HasTile(position, LayerSettingType.RoadTerrain);
     }
     
     private Vector3 GetDesiredPlacementPosition()

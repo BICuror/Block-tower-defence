@@ -22,7 +22,6 @@ public class SpawnObjectsToggleEffect : GlobalEffect
     private int _randomSeed;
     private System.Random _random;
     
-    private LayerSetting _solidObjectsLayerSetting;
     private GameObject _objectPrefab;
     private float _maxObjectScale;
     private float _minObjectScale;
@@ -36,7 +35,6 @@ public class SpawnObjectsToggleEffect : GlobalEffect
 
         _isInitialized = true;
 
-        _solidObjectsLayerSetting = Args.GetArgument<LayerSetting>("SolidObjectsLayerSetting");
         _objectPrefab = Args.GetArgument<GameObject>("ObjectPrefab");
         _maxObjectScale = Args.GetArgument<float>("MaxObjectScale");
         _minObjectScale = Args.GetArgument<float>("MinObjectScale");
@@ -108,7 +106,7 @@ public class SpawnObjectsToggleEffect : GlobalEffect
     {
         return position.x >= 0 && position.x < _islandDataContainer.Data.IslandSize && position.y >= 0 && position.y < _islandDataContainer.Data.IslandSize && 
             _islandHeightMapHolder.Map[position.x, position.y] > 0 && !_roadMapHolder.Map[position.x, position.y] && 
-            !TileMap.HasTile(position, _solidObjectsLayerSetting);
+            !TileMap.HasTile(position, LayerSettingType.SolidObjects);
     }
 
     private void CancelPreviousTask()

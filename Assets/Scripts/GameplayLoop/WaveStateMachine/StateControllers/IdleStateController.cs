@@ -38,10 +38,10 @@ public sealed class IdleStateController : WaveStateController
     protected override async UniTask OnEnterStateStarted()
     {
         _waveIndexContainer.IncreaseWaveCounter();
-
-        _decorationContainer.ActivateAllDecorations();
-
+        
+        _decorationContainer.UpdateDecorationsState();
         UpdateEnemyBiomesAmount();
+        
         
         await _itemContainerManager.UpdateContainedItems();
         await TryStartBuildingSelection();

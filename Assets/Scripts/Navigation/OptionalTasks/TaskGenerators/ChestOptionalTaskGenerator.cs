@@ -35,7 +35,6 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
     [SerializeField] private int _maximalAdditionalRoad = 5;
     
     [Header("SpawnSettings")]
-    [SerializeField] private LayerSetting _solidObjectsLayer;
     [SerializeField] private int _maximalRaduis = 12;
 
     private bool[,] _roadMap => _roadMapHolder.Map;
@@ -174,7 +173,7 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
         {
             if (IsValidPosition(position.x, position.y) == false || _roadMap[position.x, position.y]) return false;
                      
-            if (TileMap.HasTile(position, _solidObjectsLayer)) return false;
+            if (TileMap.HasTile(position, LayerSettingType.SolidObjects)) return false;
 
             bool hasRoadAround = false;
 

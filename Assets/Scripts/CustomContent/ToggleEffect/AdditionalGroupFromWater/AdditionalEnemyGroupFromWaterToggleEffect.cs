@@ -12,7 +12,6 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalEffect
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private WaveStateMachine _waveStateMachine;
     [Inject] private RoadMapHolder _roadMapHolder;
-    private LayerSetting _buildingLayerSetting;
     private int _minimalBuildingRadius;
     private float _spawnDelay;
     
@@ -26,7 +25,6 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalEffect
     
     public override void Enable()
     {
-        _buildingLayerSetting = Args.GetArgument<LayerSetting>("BuildingLayer");
         _minimalBuildingRadius = Args.GetArgument<int>("MinimalBuildingRadius");
         _spawnDelay = Args.GetArgument<float>("SpawnDelay");
         
@@ -101,7 +99,7 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalEffect
                 
                 if (_roadMapHolder.Map[checkX, checkZ])
                 {
-                    if (!TileMap.HasTileNearby(new Vector2Int(x, z), _minimalBuildingRadius, _buildingLayerSetting)) return true;
+                    if (!TileMap.HasTileNearby(new Vector2Int(x, z), _minimalBuildingRadius, LayerSettingType.Buildings)) return true;
                 }
             }
         }

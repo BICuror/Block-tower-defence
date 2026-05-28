@@ -15,8 +15,6 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     [Inject] private RoadMapHolder _roadMapHolder;
     [Inject] private DiContainer _diContainer;
     
-    [SerializeField] private LayerSetting _terrainLayerSetting;
-    [SerializeField] private LayerSetting _solidLayerSetting;
     [SerializeField] private BloodCollector _bloodTowerPrefab;
     [SerializeField] private int _bloodTowerRadius;
     [SerializeField] private float _requiredPercentFromSpawner = 0.33f;
@@ -74,7 +72,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     private bool IsAValidBloodCollectorPosition(Vector2Int position)
     {
         return TileMap.IsInBounds(position, _roadMap) && 
-               !TileMap.HasTile(position, _solidLayerSetting) &&
+               !TileMap.HasTile(position, LayerSettingType.SolidObjects) &&
                !_roadMap[position.x, position.y] && 
                Vector2Int.Distance(position, _centerPosition) > _minimalCenterDistance &&
                _islandHeightMapHolder.Map[position.x, position.y] > 0;

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
-using Navigation;
+
 using Random = UnityEngine.Random;
 
 public static class TileMap
@@ -12,36 +12,35 @@ public static class TileMap
 
     #region HasTile
 
-    public static bool HasTile(Vector2Int position, LayerSetting layerSetting)
+    public static bool HasTile(Vector2Int position, LayerSettingType layerSettingType)
     {
         Ray heightRay = GetRay(position);
 
-        return Physics.Raycast(heightRay, RAY_LENGTH, layerSetting.GetLayerMask());
+        return HasTile(heightRay, layerSettingType);
+    }
+    
+    public static bool HasTile(Ray heightRay, LayerSettingType layerSettingType)
+    {
+        return Physics.Raycast(heightRay, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
     }
 
-    public static bool HasTile(Vector2Int position, LayerSetting layerSetting, out RaycastHit hit)
+    public static bool HasTile(Vector2Int position, LayerSettingType layerSettingType, out RaycastHit hit)
     {
         Ray heightRay = GetRay(position);
 
-        return Physics.Raycast(heightRay, out hit, RAY_LENGTH, layerSetting.GetLayerMask());
+        return Physics.Raycast(heightRay, out hit, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
     }
 
-    public static bool HasTile(Ray heightRay, LayerSetting layerSetting, out RaycastHit hit)
+    public static bool HasTile(Ray heightRay, LayerSettingType layerSettingType, out RaycastHit hit)
     {
-        return Physics.Raycast(heightRay, out hit, RAY_LENGTH, layerSetting.GetLayerMask());
-    }
-
-    public static bool HasTile(Ray heightRay, LayerSetting layerSetting)
-    {
-        return Physics.Raycast(heightRay, RAY_LENGTH, layerSetting.GetLayerMask());
+        return Physics.Raycast(heightRay, out hit, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
     }
 
     #endregion
 
     #region FindSuitablePosition
 
-    public static Vector2Int FindSuitablePositionNearby(Predicate<Vector2Int> positionValidator, Vector2Int position,
-        int maxRadius = 10)
+    public static Vector2Int FindSuitablePositionNearby(Predicate<Vector2Int> positionValidator, Vector2Int position, int maxRadius = 10)
     {
         int centerX = position.x;
         int centerZ = position.y;
@@ -69,29 +68,29 @@ public static class TileMap
 
     #region GetHit
 
-    public static RaycastHit GetHitInfo(Vector2Int position, LayerSetting layerSetting)
+    public static RaycastHit GetHitInfo(Vector2Int position, LayerSettingType layerSettingType)
     {
         Ray heightRay = GetRay(position);
 
-        Physics.Raycast(heightRay, out RaycastHit hit, RAY_LENGTH, layerSetting.GetLayerMask());
+        Physics.Raycast(heightRay, out RaycastHit hit, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
 
         return hit;
     }
 
-    public static GameObject GetHitObject(Vector2Int position, LayerSetting layerSetting)
+    public static GameObject GetHitObject(Vector2Int position, LayerSettingType layerSettingType)
     {
         Ray heightRay = GetRay(position);
 
-        Physics.Raycast(heightRay, out RaycastHit hit, RAY_LENGTH, layerSetting.GetLayerMask());
+        Physics.Raycast(heightRay, out RaycastHit hit, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
 
         return hit.collider.gameObject;
     }
     
-    public static List<GameObject> GetHitObjects(Vector2Int position, LayerSetting layerSetting)
+    public static List<GameObject> GetHitObjects(Vector2Int position, LayerSettingType layerSettingType)
     {
         Ray heightRay = GetRay(position);
 
-        RaycastHit[] hits = Physics.RaycastAll(heightRay, RAY_LENGTH, layerSetting.GetLayerMask());
+        RaycastHit[] hits = Physics.RaycastAll(heightRay, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
         
         List<GameObject> result = new List<GameObject>();
         
@@ -107,9 +106,9 @@ public static class TileMap
 
     #region GetTileCount
 
-    public static int GetTileCount(Vector2Int position, LayerSetting layerSetting)
+    public static int GetTileCount(Vector2Int position, LayerSettingType layerSettingType)
     {
-        RaycastHit[] hits = Physics.RaycastAll(GetRay(position), RAY_LENGTH, layerSetting.GetLayerMask());
+        RaycastHit[] hits = Physics.RaycastAll(GetRay(position), RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
 
         return hits.Length;
     }
@@ -340,7 +339,7 @@ public static class TileMap
     
     #region HasTileNearby
 
-    public static bool HasTileNearby(Vector2Int position, int radius, LayerSetting layerSetting, bool squareRadius = false)
+    public static bool HasTileNearby(Vector2Int position, int radius, LayerSettingType layerSettingType, bool squareRadius = false)
     {
         for (int x = -radius; x <= radius; x++)
         {
@@ -350,7 +349,7 @@ public static class TileMap
                 
                 if (squareRadius || checkPosition.magnitude <= radius)
                 {
-                    if (HasTile(position + checkPosition, layerSetting))
+                    if (HasTile(position + checkPosition, layerSettingType))
                     {
                         return true;
                     }

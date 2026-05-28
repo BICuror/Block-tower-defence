@@ -15,8 +15,6 @@ public sealed class TotemTaskGeneration : OptionalTaskGenerator
     [Inject] private RoadMapHolder _roadMapHolder;
     [Inject] private DiContainer _diContainer;
     
-    [SerializeField] private LayerSetting _terrainLayerSetting;
-    [SerializeField] private LayerSetting _solidLayerSetting;
     [SerializeField] private List<Totem> _totemPrefabs;
     [SerializeField] private int _bloodTowerRadius;
 
@@ -72,7 +70,7 @@ public sealed class TotemTaskGeneration : OptionalTaskGenerator
     private bool IsAValidTotemPosition(Vector2Int position)
     {
         return TileMap.IsInBounds(position, _roadMap) && 
-               !TileMap.HasTile(position, _solidLayerSetting) &&
+               !TileMap.HasTile(position, LayerSettingType.SolidObjects) &&
                !_roadMap[position.x, position.y] && 
                Vector2Int.Distance(position, _centerPosition) > _minimalCenterDistance &&
                _islandHeightMapHolder.Map[position.x, position.y] > 0;

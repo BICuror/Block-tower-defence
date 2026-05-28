@@ -4,7 +4,7 @@ using CuroAudio;
 
 namespace Combat
 {
-    public sealed class MortarProjectile : Weapon
+    public sealed class MortarProjectile : ColliderWeapon
     {
         [SerializeField] private LayerSetting _enemyLayerSettings; 
         [SerializeField] private AnimationCurve _heightCurve; 

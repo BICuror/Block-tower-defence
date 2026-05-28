@@ -5,12 +5,10 @@ using System;
 
 namespace Combat
 {
-    public abstract class Weapon : WeaponBase
+    public abstract class Weapon : ColliderWeapon
     {
-        [SerializeField] protected Collider Collider; 
-        [SerializeField] protected Rigidbody Rigidbody;
-        
         private CancellationTokenSource _cancellationTokenSource = new();
+        private bool _lifetimeTrackActive;
         private float _lifetime;
         
         public void Initialize(CombatEntity ownerEntity, float lifetime)
@@ -22,20 +20,16 @@ namespace Combat
         
         #region StateManagements
 
-        protected void OnEnable()
-        {
-            StopLifetimeTrack();
-            SetState(true);
-            
-            if (_lifetime > 0) StartLifetimeTrack().Forget();
-        }
+        protected void OnEnable() => StartLifetimeTrack().Forget();
 
         protected void OnDisable() => StopLifetimeTrack();
         
         private async UniTask StartLifetimeTrack()
-        {      
+        {
             _cancellationTokenSource = new();
 
+            _lifetimeTrackActive = true;
+            
             try
             {
                 await UniTask.WaitForSeconds(_lifetime, cancellationToken: _cancellationTokenSource.Token, cancelImmediately: true);
@@ -43,25 +37,20 @@ namespace Combat
             catch (Exception e)
             {
                 e.LogAsync(); 
-                return;
             }
+
+            _lifetimeTrackActive = false;
             
             SetState(false);
         }
 
-        private void StopLifetimeTrack()
+        public void StopLifetimeTrack()
         {
-            if (_cancellationTokenSource == null) return;
+            if (!_lifetimeTrackActive) return;
             
             _cancellationTokenSource.Cancel();
             _cancellationTokenSource.Dispose();
             _cancellationTokenSource = null;
-        }
-        
-        protected void SetState(bool state)
-        {
-            Collider.enabled = state;
-            gameObject.SetActive(state);
         }
         #endregion
     }

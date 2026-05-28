@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using NaughtyAttributes;
 using DG.Tweening;
 using UnityEngine;
 

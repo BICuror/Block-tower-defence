@@ -30,4 +30,9 @@ public class WeaponBase : MonoBehaviour
     }
     
     protected virtual void OnInitialized() {}
+    
+    protected virtual void SetState(bool state)
+    {
+        gameObject.SetActive(state);
+    }
 }

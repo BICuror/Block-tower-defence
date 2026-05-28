@@ -18,10 +18,14 @@ namespace Combat
 
         public void Launch(float speed, Vector3 targetPosition, Vector3 shootingPosition)
         {
+            SetState(false);
+            
             Rigidbody.linearVelocity = Vector3.zero;
             transform.position = shootingPosition;
 
             transform.LookAt(targetPosition);
+
+            SetState(true);
 
             Rigidbody.AddForce(transform.forward * speed, ForceMode.Impulse);
             AudioSystem.PlaySFX(AudioEnum.sound_combat_launch_projectile, transform.position);
@@ -40,7 +44,7 @@ namespace Combat
         public void DisableArrow()
         {
             _visualEffectHandler.PlayBurstEffectAndForget();
-            SetState(false);
+            StopLifetimeTrack();
         }
     }
 }

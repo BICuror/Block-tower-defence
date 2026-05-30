@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "GlobalEffectData", menuName = "Effects/GlobalEffectData")]
 
@@ -12,9 +13,12 @@ public class GlobalEffectData : InspectableData
     [Header("SelectionData")]
     [Range(1, 15)] [SerializeField] private int _quality = 3;
     [SerializeField] private EffectType _effectType;
-    [SerializeField] private bool _isUnique;
     [SerializeField] private List<GlobalEffectTag> _tags;
-
+    
+    [Header("Stacks")]
+    [FormerlySerializedAs("_isUnique")] [SerializeField] private bool _hasStacks;
+    [ShowIf("_hasStacks")] [SerializeField] private int _maxStacks;
+    
     [Space] [Header("EffectAppearanceCondition")] 
     [SerializeField] private bool _hasEffectAppearanceCondition;
     [AllowNesting] [ShowIf("_hasEffectAppearanceCondition")] [SerializeField] private EffectAppearanceConditionData _effectAppearanceCondition;
@@ -36,7 +40,8 @@ public class GlobalEffectData : InspectableData
     public List<GlobalEffectTag> Tags => _tags;
     public bool HasAppearanceCondition => _hasEffectAppearanceCondition;
     public int Quality => _quality;
-    public bool IsUnique => _isUnique;
+    public bool HasStacks => _hasStacks;
+    public int MaxStacks => _maxStacks;
     public EffectType EffectType => _effectType;
     public bool HasRequiredTags => _hasRequiredTags;
     public bool HasBlockTags => _hasBlockTags;

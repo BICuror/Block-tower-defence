@@ -21,6 +21,8 @@ namespace Combat
 
         public async UniTask TravelToPoint(Vector3 finalPosition)
         {
+            SetState(true);
+            
             Vector3 startPosition = transform.position;
             
             AudioSystem.PlaySFX(AudioEnum.sound_combat_launch_projectile, startPosition);
@@ -42,7 +44,6 @@ namespace Combat
                 await UniTask.WaitForFixedUpdate();
             }
 
-            Collider.enabled = false;
             SetState(false);
         }
 

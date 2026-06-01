@@ -29,9 +29,10 @@ public sealed class ChargableTotemTaskGeneration : OptionalTaskGenerator
     
     private bool[,] _roadMap => _roadMapHolder.Map;
     
-    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData)
+    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData, out OptionalTask optionalTask)
     {
         layerPrebuildData = null;
+        optionalTask = null;
         
         if (_enemyBiomeContainer.EnemyBiomeList.First(biome => biome.GetCenterPosition() == spawnerPosition).EnemySpawner.EnemiesToSpawn.Exists(enemyData => enemyData.DiesOnContact))
         {
@@ -42,7 +43,7 @@ public sealed class ChargableTotemTaskGeneration : OptionalTaskGenerator
         
         if (TryFindRandomPosition(spawnerPosition, out Vector2Int position))
         {
-            CreateChargableTotem(position, spawnerPosition);
+            optionalTask = CreateChargableTotem(position, spawnerPosition);
             
             return true;
         }
@@ -97,7 +98,7 @@ public sealed class ChargableTotemTaskGeneration : OptionalTaskGenerator
         return averageWeight >= _minimalAverageRoadWeight && averageWeight <= _maximalAverageRoadWeight;
     }
 
-    private void CreateChargableTotem(Vector2Int position, Vector2Int spawnerPosition)
+    private OptionalTask CreateChargableTotem(Vector2Int position, Vector2Int spawnerPosition)
     {
         int height = _islandHeightMapHolder.Map[position.x, position.y];
     
@@ -113,5 +114,7 @@ public sealed class ChargableTotemTaskGeneration : OptionalTaskGenerator
         if (incomingEnemiesAmount < 1) incomingEnemiesAmount = 1;
             
         chargeableTotem.CalculateRequiredCharge(incomingEnemiesAmount, TileMap.GetAllRoadPositionsInRadius(position, _roadMap, _chargeTotemRadius).Count);
+
+        return chargeableTotem.GetComponent<OptionalTask>();
     }
 }

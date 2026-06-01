@@ -7,7 +7,6 @@ using Combat;
 public sealed class BloodCollector : OptionalTask
 {
     [Cached] private AreaEntityDetector _areaEntityDetector;
-    [Cached] private EntityCanvas _entityCanvas;
 
     [Header("VFX")]
     [SerializeField] private Transform _bloodFountanTransform;
@@ -27,7 +26,7 @@ public sealed class BloodCollector : OptionalTask
     {
         base.Start();
         
-        _bar = _entityCanvas.AddBar(_barSprite, 0f, _barPrefab);
+        _bar = EntityCanvas.AddBar(_barSprite, 0f, _barPrefab);
         
         _areaEntityDetector.RemovedItem += OnEntityRemoved;
     }
@@ -64,8 +63,8 @@ public sealed class BloodCollector : OptionalTask
             {
                 await _bar.SetValue(1f);
                 
-                _entityCanvas.RemoveBar(_bar);
-                _entityCanvas.AddIcon(_completedIcon);
+                EntityCanvas.RemoveBar(_bar);
+                EntityCanvas.AddIcon(_completedIcon);
             }
             else await _bar.SetValue(progress);
         }

@@ -81,7 +81,7 @@ public sealed class IdleStateController : WaveStateController
     {
         RandomExstentions.ReInitializeUnityRandom();
 
-        int biomesCount = _islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).EnemySpawnersAmount;
+        int biomesCount = _waveIndexContainer.GetCurrentWaveContent().EnemySpawnersAmount;
         
         _enemyBiomesContainer.DestroyOldBiomes();
         _enemyBiomesContainer.DestroyExcessiveBiomes(biomesCount);
@@ -98,10 +98,10 @@ public sealed class IdleStateController : WaveStateController
 
     private async UniTask TryStartBuildingSelection()
     {
-        if (_islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).Content.Contains(WaveContentType.BuildingSelection))
+        if (_waveIndexContainer.GetCurrentWaveContent().Content.Contains(WaveContentType.BuildingSelection))
         {
             _selectionManager.StartSelectionPhase();
-            _selectionManager.StartSelection(SelectionType.Building, false).Forget();
+            _selectionManager.StartSelection(new SelectionSettings(SelectionType.Building), false).Forget();
             await UniTask.WaitWhile(() => _selectionManager.SelectionPhaseIsActive);
         }
     }
@@ -109,7 +109,7 @@ public sealed class IdleStateController : WaveStateController
     private void GenerateEnemyGroups()
     {
         _enemySpawnGroupCompiler.RegenerateWaveSeed();
-        _enemySpawnGroupCompiler.SetNextWaveData(_islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).ForceExistingBuildingAttackWaves);
+        _enemySpawnGroupCompiler.SetNextWaveData(_waveIndexContainer.GetCurrentWaveContent().ForceExistingBuildingAttackWaves);
         _enemySpawnGroupCompiler.GenerateEnemyGroups();
     }
     

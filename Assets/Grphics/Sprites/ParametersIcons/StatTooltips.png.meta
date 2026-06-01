@@ -1196,7 +1196,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1218,7 +1218,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1240,7 +1240,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1249,6 +1249,28 @@ TextureImporter:
       bones: []
       spriteID: f2b811e97bde20943b9fa93bf2ab7fab
       internalID: 394367524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RerollTooltipIcon
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 394
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d17cd60152e8c9243aca0497bb767e27
+      internalID: -1335251848
       vertices: []
       indices: 
       edges: []
@@ -1309,6 +1331,7 @@ TextureImporter:
       ReachTooltip: -1860937847
       RechargeTooltip: -792330246
       RechargeUpTooltip: -132545439
+      RerollTooltipIcon: -1335251848
       ShieldTooltip: 2027425905
       SlowdownEffectTooltipIcon: -1379777271
       SpeedTooltip: -875806093

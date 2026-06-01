@@ -18,14 +18,17 @@ public sealed class SelectionManager : MonoBehaviour
     [SerializeField] private BuildingSelector _buildingSelector;
     [SerializeField] private BuildingUpgradeSelector _buildingUpgradeSelector;
     
-    private Queue<SelectionType> _enqeuedSelections = new();
-    private SelectionType _currentSelection;
+    private List<SelectionSettings> _enqeuedSelections = new();
+    private SelectionSettings _currentSelection;
     private bool _selectionOptionsCanBePlaced;
     private bool _continueSelectionOnEnd;
     private bool _selectionIsActive;
+    private int _rerollsLeft;
     
     public bool SelectionPhaseIsActive => _selectionIsActive;
-    public SelectionType SelectionType => _currentSelection;
+    public SelectionSettings CurrentSelection => _currentSelection;
+    public bool SelectionOptionsCanBePlaced => _selectionOptionsCanBePlaced;
+    public int RerollsLeft => _rerollsLeft;
 
     public event Action SelectionStarted; 
     public event Action SelectionEnded;
@@ -39,14 +42,10 @@ public sealed class SelectionManager : MonoBehaviour
         await UniTask.WaitForSeconds(5);
     }
 
-    [Button] public void DEBUGEnqueueBuildingUpgradeSelection() => EnqueueSelection(SelectionType.BuildingUpgrade);
+    [Button] public void DEBUGEnqueueBuildingUpgradeSelection() => EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
     
-    public bool SelectionOptionCanBePlaced(SelectionType type)
-    {
-        return _selectionOptionsCanBePlaced && type == _currentSelection;
-    }
-    
-    public void EnqueueSelection(SelectionType selectionType) => _enqeuedSelections.Enqueue(selectionType);
+    public void EnqueueSelection(SelectionSettings settings) => _enqeuedSelections.Add(settings);
+    public void AddRerolls(int amount) => _rerollsLeft += amount;
     
     public void TryStartQueuedSelection()
     {
@@ -65,24 +64,24 @@ public sealed class SelectionManager : MonoBehaviour
         SelectionStarted?.Invoke();
     }
 
-    public async UniTask StartSelection(SelectionType selectionType, bool continueIfOtherSelectionsExist = true)
+    public async UniTask StartSelection(SelectionSettings settings, bool continueIfOtherSelectionsExist = true)
     {
         _continueSelectionOnEnd = continueIfOtherSelectionsExist;
-        _currentSelection = selectionType;
+        _currentSelection = settings;
         SelectionStepStarted?.Invoke();
 
-        switch (_currentSelection)
+        switch (_currentSelection.SelectionType)
         {
             case SelectionType.Building:
             {
                 if (_globalBuildingContainer.GetPlayerBuildings().Count < _globalStatContainer.Get<MaxBuildings>().Value)
                 {
-                    await _buildingSelector.StartBuildingsSelection();
+                    await _buildingSelector.StartSelection(settings);
                 }
 
                 break;
             }
-            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartUpgradeSelection(); break;
+            case SelectionType.BuildingUpgrade: await _buildingUpgradeSelector.StartSelection(settings); break;
             default: throw new NotImplementedException($"Tried to start selection of type {_currentSelection}");
         }
 
@@ -93,11 +92,21 @@ public sealed class SelectionManager : MonoBehaviour
     
     private async UniTask StartQueuedSelection(bool continueIfOtherSelectionsExist = true)
     {
-        await StartSelection(_enqeuedSelections.Dequeue(), continueIfOtherSelectionsExist);
+        SelectionSettings settings = _enqeuedSelections[0];
+        
+        _enqeuedSelections.RemoveAt(0);
+        
+        await StartSelection(settings, continueIfOtherSelectionsExist);
     }
 
     private async UniTask ResolveCurrentSelection(SelectionOptionObject optionObject)
     {
+        if (optionObject is RerollSelectionOptionObject)
+        {
+            RerollCurrentSelection().Forget();
+            return;
+        }
+        
         optionObject.ApplySelectedEffect();
         
         _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
@@ -108,12 +117,12 @@ public sealed class SelectionManager : MonoBehaviour
         await EndSelection();
         
         if (_enqeuedSelections.Count > 0 && _continueSelectionOnEnd) StartQueuedSelection().Forget();
-        else EndSelectionPhase();
+        else EndSelectionPhase().Forget();
     }
     
     private async UniTask EndSelection()
     {
-        switch (_currentSelection)
+        switch (_currentSelection.SelectionType)
         {
             case SelectionType.BuildingUpgrade:
             {
@@ -130,10 +139,39 @@ public sealed class SelectionManager : MonoBehaviour
         }
     }
     
-    private void EndSelectionPhase() 
+    private async UniTask EndSelectionPhase() 
     {
         _selectionIsActive = false;
         
         SelectionEnded?.Invoke();
+    }
+
+    public async UniTask RerollCurrentSelection()
+    {
+        _rerollsLeft--;
+        _selectionOptionObjectController.DestroyAllCreatedSelectionOptions();
+        _selectionOptionsCanBePlaced = false;
+
+        SelectionSettings copiedSelectionSettings = new SelectionSettings(_currentSelection.SelectionType, _currentSelection.SelectionOptionsAmount + 1, _currentSelection.Target);
+                    
+        SelectionStepEnded?.Invoke(); 
+        
+        await EndSelection();
+        
+        StartSelection(copiedSelectionSettings).Forget();
+    }
+}
+
+public sealed class SelectionSettings
+{
+    public readonly SelectionType SelectionType;
+    public int SelectionOptionsAmount;
+    public GameObject Target;
+
+    public SelectionSettings(SelectionType selectionType, int selectionOptionsAmount = 0, GameObject target = null)
+    {
+        SelectionType = selectionType;
+        SelectionOptionsAmount = selectionOptionsAmount;
+        Target = target;
     }
 }

@@ -46,7 +46,7 @@ public sealed class SelectionViewController : MonoBehaviour
     
     private async UniTask EnableSelectionIndicator()
     {
-        _currentSelectionIndicatorContainer = _selectionIndicatorContainers.Find(container => container.Type == _selectionManager.SelectionType);
+        _currentSelectionIndicatorContainer = _selectionIndicatorContainers.Find(container => container.Type == _selectionManager.CurrentSelection.SelectionType);
         TextMeshPro indicator = _currentSelectionIndicatorContainer.Indicator;
         indicator.gameObject.SetActive(true);
         indicator.DOKill();

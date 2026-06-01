@@ -4,29 +4,26 @@ using UnityEngine;
 using Zenject;
 using Combat;
 
-public sealed class BuildingSelector : MonoBehaviour
+public sealed class BuildingSelector : SelectorBase<BuildingSelectionOptionObject>
 {
-    [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private IslandDataContainer _islandDataHolder;
+    private List<BuildingEntity> _selectedBuildingEntities = new();
     
-    [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
-    [SerializeField] private BuildingSelectionOptionObject _selectionObject;
-    
-    public async UniTask StartBuildingsSelection()
+    public override async UniTask StartSelection(SelectionSettings settings)
     {
         BuildingSelectionOptionDataContainer datasContainer = _islandDataHolder.Data.SelectionContainer.BuildingSelectionOptionDataContainer;
         
-        List<BuildingEntity> buildingPrefabs = datasContainer.GetRandomPrefabs(_globalStatContainer.Get<SelectionOptionsAmount>().RoundedValue);
+        _selectedBuildingEntities = datasContainer.GetRandomPrefabs(GetSelectionOptionsAmount(settings));
 
-        await _selectionOptionObjectController.CreateSelectionOptionObjects(_selectionObject, buildingPrefabs.Count, InitializeSelectionOption);
-        
-        void InitializeSelectionOption(BuildingSelectionOptionObject selectionOptionObject)
-        {
-            int prefabIndex = Random.Range(0, buildingPrefabs.Count);
+        await CreateOptionObjects(settings);
+    }
+    
+    protected override void InitializeSelectionOption(BuildingSelectionOptionObject optionObject)
+    {
+        int prefabIndex = Random.Range(0, _selectedBuildingEntities.Count);
             
-            selectionOptionObject.SetBuilding(buildingPrefabs[prefabIndex]);
+        optionObject.SetBuilding(_selectedBuildingEntities[prefabIndex]);
 
-            buildingPrefabs.RemoveAt(prefabIndex);
-        }
+        _selectedBuildingEntities.RemoveAt(prefabIndex);
     }
 }

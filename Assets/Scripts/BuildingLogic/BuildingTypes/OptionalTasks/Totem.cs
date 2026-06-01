@@ -10,7 +10,6 @@ public sealed class Totem : OptionalTask
     [SerializeField] private Sprite _activeStateIcon;
     [Inject] private WaveStateMachine _waveStateMachine;
     [Cached] private ApplyEffectInArea _applyEffectInArea;
-    [Cached] private EntityCanvas _canvas;
     private EntityCanvasIcon _icon;
     private bool _totemState = true;
     
@@ -20,7 +19,7 @@ public sealed class Totem : OptionalTask
         
         OwnerEntity.Activated += ToggleTotemState;
 
-        _icon = _canvas.AddIcon(_activeStateIcon);
+        _icon = EntityCanvas.AddIcon(_activeStateIcon);
     }
 
     protected override bool IsCompleted() => _totemState;

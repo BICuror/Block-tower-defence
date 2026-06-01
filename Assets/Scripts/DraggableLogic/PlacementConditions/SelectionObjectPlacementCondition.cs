@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using Combat;
 
@@ -5,7 +6,8 @@ using Combat;
 
 public sealed class SelectionObjectPlacementCondition : PlacementModule
 {
-    [SerializeField] private SelectionType _selectionType;
+    [SerializeField] private bool _requiresSelectionType = true;
+    [ShowIf("_requiresSelectionType")] [SerializeField] private SelectionType _selectionType;
     
     public override bool CanBePlaced(Vector2Int position)
     {
@@ -13,7 +15,7 @@ public sealed class SelectionObjectPlacementCondition : PlacementModule
         {
             SelectionManager selectionManager = hit.collider.transform.parent.gameObject.GetComponent<BuildingEntity>().ComponentsContainer.Get<SelectionManager>();
 
-            return selectionManager.SelectionOptionCanBePlaced(_selectionType);
+            return selectionManager.SelectionOptionsCanBePlaced && (!_requiresSelectionType || selectionManager.CurrentSelection.SelectionType == _selectionType);
         }
         
         if (!TileMap.HasTile(position, LayerSettingType.SolidTerrain)) return false;

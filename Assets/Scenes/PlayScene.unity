@@ -1026,6 +1026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3638fe4927734a0488f20521c9ed886c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rerollSelectionOptionObject: {fileID: 1540906858915847692, guid: 803ae527c1130934993afd2f6a9ac3d3, type: 3}
   _creationRadius: 5
 --- !u!1 &216911922
 GameObject:
@@ -4047,10 +4048,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 317bb1e42b6a0da468a80febe1738f69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _selectionOptionObjectController: {fileID: 209377834}
+  _selectionObject: {fileID: 2062154613735269688, guid: d73f234d51e6f7b4c839cfb5cc483066, type: 3}
   _entityModificatorDataSelector: {fileID: 946631406}
   _draggableConnector: {fileID: 300664974}
-  _buildingUpgradeSelectionOptionObjectPrefab: {fileID: 2062154613735269688, guid: d73f234d51e6f7b4c839cfb5cc483066, type: 3}
-  _selectionOptionObjectController: {fileID: 209377834}
   _centerPosition: {fileID: 1218002477}
 --- !u!114 &946631406
 MonoBehaviour:
@@ -7790,6 +7791,7 @@ MonoBehaviour:
   _crystalInspectionTooltipPrefab: {fileID: 4577728077339426284, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
   _effectInspectionTooltipPrefab: {fileID: 7211506274850091020, guid: ffcf668de163c934b859484bcb35b877, type: 3}
   _effectPreviewTooltipPrefab: {fileID: 2364438044622368734, guid: a3d2792b90749ab478d7b6723dafd9b4, type: 3}
+  _rerollPrevieTooltipPrefab: {fileID: 7077863330190419813, guid: 352e707ff02de4249adeda298c3b9d8d, type: 3}
 --- !u!1 &1962901648
 GameObject:
   m_ObjectHideFlags: 0

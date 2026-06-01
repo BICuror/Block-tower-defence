@@ -352,6 +352,9 @@ MonoBehaviour:
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 5
+  _defaultBuildingTags: 
+  _buildingEntityType: 0
+  _buildingAttackType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 1
   _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 054838046c14fe546b4bcae8a3463c66, type: 3}
@@ -368,7 +371,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
 --- !u!114 &6007259640921042130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,6 +456,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Totem
   _chargesToSpawn: 2
+  _upgradeTooltipTagData: {fileID: 11400000, guid: 710db6f0033c1f7469ceff825e2d8afc, type: 2}
+  _rerollTooltipTagData: {fileID: 11400000, guid: 922dbd1142bc6074eb8ba77f22c902b4, type: 2}
   _visualEffectHandler: {fileID: 8605832063958497912}
   _nonactiveStateIcon: {fileID: -364146219, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _activeStateIcon: {fileID: -418726026, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}

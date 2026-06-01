@@ -115,7 +115,9 @@ public sealed class EntityTooltip : InspectionPanelBase
 
     private void ReturnToDefaultInspectionState()
     {
-        _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(Inspectable.Description));
+        string parsedDescription = ParseByReplacebleData(Inspectable.Description);
+        
+        _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(parsedDescription));
     }
 
     private void UpdateHealthBar()

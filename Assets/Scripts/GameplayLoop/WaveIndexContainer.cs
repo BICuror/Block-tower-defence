@@ -1,7 +1,10 @@
 using UnityEngine;
+using Zenject;
 
 public sealed class WaveIndexContainer : MonoBehaviour
 {
+    [Inject] private IslandDataContainer _islandDataContainer;
+    
     private static WaveIndexContainer _instance;
     
     public static WaveIndexContainer Instance => _instance;
@@ -12,4 +15,9 @@ public sealed class WaveIndexContainer : MonoBehaviour
     
     public int GetCurrentWave() => _currentWave;
     public void IncreaseWaveCounter() => _currentWave++;
+
+    public WaveContent GetCurrentWaveContent()
+    {
+        return _islandDataContainer.Data.WavesContentConfig.GetWaveContent(GetCurrentWave());
+    }
 }

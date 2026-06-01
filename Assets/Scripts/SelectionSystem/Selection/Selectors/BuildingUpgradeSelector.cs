@@ -4,14 +4,13 @@ using UnityEngine;
 using Zenject;
 using Combat;
 
-public sealed class BuildingUpgradeSelector : MonoBehaviour
+public sealed class BuildingUpgradeSelector : SelectorBase<BuildingUpgradeSelectionOptionObject>
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [SerializeField] private EntityModificatorDataSelector _entityModificatorDataSelector;
     [SerializeField] private DraggableConnector _draggableConnector;
-    [SerializeField] private BuildingUpgradeSelectionOptionObject _buildingUpgradeSelectionOptionObjectPrefab;
-    [SerializeField] private SelectionOptionObjectController _selectionOptionObjectController;
     [SerializeField] private Transform _centerPosition;
+    private List<EntityModificatorData> _entityModificatorDatas;
     private BuildingEntity _buildingEntityToUpgrade;
     private Vector3Int _initialPosition;
 
@@ -20,28 +19,22 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         _draggableConnector.transform.SetParent(null);
         _draggableConnector.transform.localScale = Vector3.one;
     }
-    
-    public async UniTask StartUpgradeSelection()
+
+    public override async UniTask StartSelection(SelectionSettings settings)
     {
         _buildingEntityToUpgrade = FindBuildingsWithLeastModificators();
+
+        if (settings.Target != null) _buildingEntityToUpgrade = settings.Target.GetComponent<BuildingEntity>();
             
+        settings.Target = _buildingEntityToUpgrade.gameObject;
+        
         _initialPosition = Vector3Int.RoundToInt(_buildingEntityToUpgrade.transform.position);
         
         await CaptureDraggable();
         
-        List<EntityModificatorData> modifierDatas = _entityModificatorDataSelector.GetRandomEntityEffectDatas(_buildingEntityToUpgrade, 3);
+        _entityModificatorDatas = _entityModificatorDataSelector.GetRandomEntityEffectDatas(_buildingEntityToUpgrade, GetSelectionOptionsAmount(settings));
         
-        await _selectionOptionObjectController.CreateSelectionOptionObjects(_buildingUpgradeSelectionOptionObjectPrefab, modifierDatas.Count, InitializeSelectionOption);
-        
-        void InitializeSelectionOption(BuildingUpgradeSelectionOptionObject selectionOptionObject)
-        {
-            int prefabIndex = Random.Range(0, modifierDatas.Count);
-            
-            selectionOptionObject.SetTargetBuildingEntity(_buildingEntityToUpgrade);
-            selectionOptionObject.SetEffectData(modifierDatas[prefabIndex]);
-
-            modifierDatas.RemoveAt(prefabIndex);
-        }
+        await CreateOptionObjects(settings);
     }
 
     public async UniTask EndSelection()
@@ -96,5 +89,15 @@ public sealed class BuildingUpgradeSelector : MonoBehaviour
         }
         
         return foundEntity;
+    }
+
+    protected override void InitializeSelectionOption(BuildingUpgradeSelectionOptionObject optionObject)
+    {
+        int prefabIndex = Random.Range(0, _entityModificatorDatas.Count);
+            
+        optionObject.SetTargetBuildingEntity(_buildingEntityToUpgrade);
+        optionObject.SetEffectData(_entityModificatorDatas[prefabIndex]);
+
+        _entityModificatorDatas.RemoveAt(prefabIndex);
     }
 }

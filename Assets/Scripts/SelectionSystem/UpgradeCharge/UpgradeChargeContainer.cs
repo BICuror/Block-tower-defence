@@ -47,7 +47,7 @@ public sealed class UpgradeChargeContainer : MonoBehaviour
         
         if (_currentCharge >= _chargesPerUpgrade)
         {
-            _selectionManager.EnqueueSelection(SelectionType.BuildingUpgrade);
+            _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
             _chargeBar.ResetBar();
             _currentCharge = 0;
         }

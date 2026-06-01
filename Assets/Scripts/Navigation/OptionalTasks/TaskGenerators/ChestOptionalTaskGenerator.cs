@@ -3,8 +3,8 @@ using WorldGeneration;
 using UnityEngine;
 using System.Linq;
 using Navigation;
-using Combat;
 using Zenject;
+using Combat;
 
 public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
 {
@@ -41,25 +41,19 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
     private int _currentMapSize;
     private int _centerIndex;
 
-    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData)
+    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData, out OptionalTask optionalTask)
     {
         layerPrebuildData = null;
+        optionalTask = null;
         
         _currentMapSize = _roadMap.GetLength(0);
         _centerIndex = _currentMapSize / 2 + 1;
 
         if (TryFindRandomPosition(spawnerPosition, out Vector2Int resultPosition))
         {
-            int height = _islandHeightMapHolder.Map[resultPosition.x, resultPosition.y];
-    
-            if (height < 1) height = 1;
-            height++;
-    
-            GameObject chest = _diContainer.InstantiatePrefab(_chestPrefab, new Vector3(resultPosition.x, height, resultPosition.y), Quaternion.identity, null);
+            optionalTask = CreateChestOnPosition(resultPosition);
             
-            _globalBuildingContainer.Add(chest.GetComponent<BuildingEntity>());
-            
-            layerPrebuildData = new AdditionalTaskLayerPrebuildData(new ExsistanceNavigationCondition(chest), resultPosition);
+            layerPrebuildData = new AdditionalTaskLayerPrebuildData(new ExsistanceNavigationCondition(optionalTask.gameObject), resultPosition);
         
             return true;
         }
@@ -187,6 +181,20 @@ public sealed class ChestOptionalTaskGenerator : OptionalTaskGenerator
             
             return !hasRoadAround;
         }
+    }
+
+    private OptionalTask CreateChestOnPosition(Vector2Int position)
+    {
+        int height = _islandHeightMapHolder.Map[position.x, position.y];
+    
+        if (height < 1) height = 1;
+        height++;
+    
+        GameObject chest = _diContainer.InstantiatePrefab(_chestPrefab, new Vector3(position.x, height, position.y), Quaternion.identity, null);
+            
+        _globalBuildingContainer.Add(chest.GetComponent<BuildingEntity>());
+
+        return chest.GetComponent<OptionalTask>();
     }
     
     private bool IsValidPosition(int x, int y) => x >= 0 && x < _currentMapSize && y >= 0 && y < _currentMapSize;

@@ -24,6 +24,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     [SerializeField] private CrystalInspectionTooltip _crystalInspectionTooltipPrefab;
     [SerializeField] private EffectInspectionTooltip _effectInspectionTooltipPrefab;
     [SerializeField] private EffectInspectionTooltipPreview _effectPreviewTooltipPrefab;
+    [SerializeField] private RerollIspectionPanel _rerollPrevieTooltipPrefab;
     
     private CancellationTokenSource _activeSinglePopupCancelationTokenSource = new();
     private readonly ListDictionary<UILayer, InspectionPanelBase> _layers = new(); 
@@ -122,7 +123,18 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         
         return effectPreviewTooltip;
     }
+    
+    public InspectionPanelBase OpenRerollPreview(Transform target)
+    {
+        RerollIspectionPanel rerollPrevieTooltip = Instantiate(_rerollPrevieTooltipPrefab, _uiRoot);
+        rerollPrevieTooltip.Initialize(target);
 
+        _layers.Add(UILayer.Group, rerollPrevieTooltip);
+        UpdateTooltipStates(UILayer.Group).Forget();
+        
+        return rerollPrevieTooltip;
+    }
+    
     public async UniTask DestroyElement(InspectionPanelBase panel)
     {
         if (_layers.Contains(UILayer.Single)) _layers.Remove(UILayer.Single, panel);

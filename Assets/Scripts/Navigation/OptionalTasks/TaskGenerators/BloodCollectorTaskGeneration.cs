@@ -30,15 +30,16 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
     
     private bool[,] _roadMap => _roadMapHolder.Map;
     
-    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData)
+    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData, out OptionalTask optionalTask)
     {
-        _centerPosition = new Vector2Int(_islandHeightMapHolder.Map.GetLength(0), _islandHeightMapHolder.Map.GetLength(1));
-        
         layerPrebuildData = null;
+        optionalTask = null;
+        
+        _centerPosition = new Vector2Int(_islandHeightMapHolder.Map.GetLength(0), _islandHeightMapHolder.Map.GetLength(1));
         
         if (TryFindRandomPosition(spawnerPosition, out Vector2Int position))
         {
-            CreateBloodCollector(position, spawnerPosition);
+            optionalTask = CreateBloodCollector(position, spawnerPosition);
             
             return true;
         }
@@ -93,7 +94,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
         return averageWeight >= _minimalAverageRoadWeight && averageWeight <= _maximalAverageRoadWeight;
     }
 
-    private void CreateBloodCollector(Vector2Int position, Vector2Int spawnerPosition)
+    private OptionalTask CreateBloodCollector(Vector2Int position, Vector2Int spawnerPosition)
     {
         int height = _islandHeightMapHolder.Map[position.x, position.y];
     
@@ -109,5 +110,7 @@ public sealed class BloodCollectorTaskGeneration : OptionalTaskGenerator
         if (incomingEnemiesAmount < 1) incomingEnemiesAmount = 1;
             
         bloodCollector.SetRequiredKills(incomingEnemiesAmount);
+
+        return bloodCollector.GetComponent<OptionalTask>();
     }
 }

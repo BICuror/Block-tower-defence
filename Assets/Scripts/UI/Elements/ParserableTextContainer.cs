@@ -31,6 +31,11 @@ public abstract class ParserableTextContainer : MonoBehaviour
     
     protected virtual void UpdateAllParsableText() {}
 
+    protected string ParseByReplacebleData(string text)
+    {
+        return ReplaceableDataParser.ParseReplaceableData(text);
+    }   
+    
     protected string ParseTextByDefault(string text)
     {
         text = ReplaceableDataParser.ParseReplaceableData(text);

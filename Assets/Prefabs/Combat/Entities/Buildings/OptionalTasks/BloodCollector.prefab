@@ -619,10 +619,10 @@ GameObject:
   - component: {fileID: -3365627974174819169}
   - component: {fileID: 1645264611473827992}
   - component: {fileID: 642792427098173389}
-  - component: {fileID: 2108226235141063515}
   - component: {fileID: 1422786105582343598}
   - component: {fileID: 8736649261534176381}
   - component: {fileID: 8565026080540660738}
+  - component: {fileID: 2108226235141063515}
   m_Layer: 7
   m_Name: BloodCollector
   m_TagString: Untagged
@@ -727,6 +727,9 @@ MonoBehaviour:
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 3
+  _defaultBuildingTags: 
+  _buildingEntityType: 0
+  _buildingAttackType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 1
   _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 054838046c14fe546b4bcae8a3463c66, type: 3}
@@ -785,26 +788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
---- !u!114 &2108226235141063515
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6442317979181897654}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 962287e000fdc4e4da437fabb202e392, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _chargesToSpawn: 2
-  _bloodFountanTransform: {fileID: 1835611464631718001}
-  _startingScale: 0.1
-  _finalScale: 0.3
-  _barPrefab: {fileID: 5354278446947390222, guid: 288adf0833fbe2644a6465f3579d7b45, type: 3}
-  _completedIcon: {fileID: -418726026, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _barSprite: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
 --- !u!114 &1422786105582343598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,6 +834,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59554cdbae90ade4cbbc1fead608a8b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EntityObjectModificatorContainer
+--- !u!114 &2108226235141063515
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6442317979181897654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 962287e000fdc4e4da437fabb202e392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _chargesToSpawn: 2
+  _upgradeTooltipTagData: {fileID: 11400000, guid: 710db6f0033c1f7469ceff825e2d8afc, type: 2}
+  _rerollTooltipTagData: {fileID: 11400000, guid: 922dbd1142bc6074eb8ba77f22c902b4, type: 2}
+  _bloodFountanTransform: {fileID: 1835611464631718001}
+  _startingScale: 0.1
+  _finalScale: 0.3
+  _barPrefab: {fileID: 5354278446947390222, guid: 288adf0833fbe2644a6465f3579d7b45, type: 3}
+  _completedIcon: {fileID: -418726026, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _barSprite: {fileID: -1791193441, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
 --- !u!1 &6750127208251512881
 GameObject:
   m_ObjectHideFlags: 0

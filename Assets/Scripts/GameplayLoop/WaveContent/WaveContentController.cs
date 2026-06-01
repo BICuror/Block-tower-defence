@@ -21,7 +21,7 @@ public sealed class WaveContentController : MonoBehaviour
 
     private void TryEnableWaveContent()
     {
-        WaveContent waveContent = GetCurrentWaveContent();
+        WaveContent waveContent = _waveIndexContainer.GetCurrentWaveContent();
         
         waveContent.Content.ForEach(EnableContent);
     }
@@ -31,15 +31,15 @@ public sealed class WaveContentController : MonoBehaviour
         switch (contentType)
         {
             case WaveContentType.BuildingSelection: break;
-            case WaveContentType.FreeBuildingUpgradeSelection: _selectionManager.EnqueueSelection(SelectionType.BuildingUpgrade); break;
+            case WaveContentType.FreeBuildingUpgradeSelection: _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade, 5)); break;
             case WaveContentType.BossWave: break;
         }
     }
 
     private void GenerateWaveItems()
     {
+        WaveContent waveContent = _waveIndexContainer.GetCurrentWaveContent();
         int minimalItemStrength = _islandDataContainer.Data.WavesContentConfig.MinimalItemStrength;
-        WaveContent waveContent = GetCurrentWaveContent();
 
         _itemFactory.CreateStartWaveItem(_townhallTransform.transform.position).Forget();
         _itemFactory.CreateItems(_townhallTransform.position, waveContent.CombinedItemStrength, minimalItemStrength, waveContent.ItemsAmount).Forget();
@@ -50,10 +50,5 @@ public sealed class WaveContentController : MonoBehaviour
         {
             _itemFactory.CreateItems(_townhallTransform.position, additionalItemsToCreate * waveContent.AdditionalItemStrength, 0, additionalItemsToCreate).Forget();
         }
-    }
-
-    private WaveContent GetCurrentWaveContent()
-    {
-        return _islandDataContainer.Data.WavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave());
     }
 }

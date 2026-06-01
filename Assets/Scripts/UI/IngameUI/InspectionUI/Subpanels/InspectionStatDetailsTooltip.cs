@@ -56,12 +56,14 @@ public sealed class InspectionStatDetailsTooltip : TooltipPanelBase
 
         string flatModifierStringValue = GetParsedValue(Math.Abs(_mainStat.GetFlatModifier()), presentEverythingAsPercent);
 
-        if (_mainStat.GetFlatModifier() > 0) result = $"({result} + {flatModifierStringValue})";
-        else if (_mainStat.GetFlatModifier() < 0) result = $"({result} - {flatModifierStringValue})";
+        if (_mainStat.GetFlatModifier() > 0) result = $"{result} + {flatModifierStringValue}";
+        else if (_mainStat.GetFlatModifier() < 0) result = $"{result} - {flatModifierStringValue}";
         
         if (_mainStat.GetMultiplierModifier() != 1f)
         {
-            result += $" * {GetParsedValue(_mainStat.Default, true)}";
+            if (_mainStat.GetFlatModifier() != 0) result = $"({result})";
+            
+            result += $" * {GetParsedValue(_mainStat.GetMultiplierModifier(), true)}";
         }
         
         result = VisualTextParser.WrapInColor(result, _calculationColor);

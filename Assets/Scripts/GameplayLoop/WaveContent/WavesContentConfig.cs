@@ -54,7 +54,8 @@ public sealed class WavesContentConfig : ScriptableObject
 
 public enum WaveContentType
 {
-    BuildingSelection,
-    FreeBuildingUpgradeSelection,
-    BossWave,
+    BuildingSelection = 0,
+    FreeBuildingUpgradeSelection = 1,
+    BossWave = 2,
+    RerollRewardFromOptionalTask = 3,
 }

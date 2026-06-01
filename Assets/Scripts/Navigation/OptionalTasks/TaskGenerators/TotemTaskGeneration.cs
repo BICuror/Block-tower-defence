@@ -28,15 +28,16 @@ public sealed class TotemTaskGeneration : OptionalTaskGenerator
     
     private bool[,] _roadMap => _roadMapHolder.Map;
     
-    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData)
+    public override bool TryGenerateOptionalTask(Vector2Int spawnerPosition, out AdditionalTaskLayerPrebuildData layerPrebuildData, out OptionalTask optionalTask)
     {
-        _centerPosition = new Vector2Int(_islandHeightMapHolder.Map.GetLength(0), _islandHeightMapHolder.Map.GetLength(1));
-        
         layerPrebuildData = null;
+        optionalTask = null;
+        
+        _centerPosition = new Vector2Int(_islandHeightMapHolder.Map.GetLength(0), _islandHeightMapHolder.Map.GetLength(1));
         
         if (TryFindRandomPosition(spawnerPosition, out Vector2Int position))
         {
-            CreateTotem(position);
+            optionalTask = CreateTotem(position);
             
             return true;
         }
@@ -91,7 +92,7 @@ public sealed class TotemTaskGeneration : OptionalTaskGenerator
         return averageWeight >= _minimalAverageRoadWeight && averageWeight <= _maximalAverageRoadWeight;
     }
 
-    private void CreateTotem(Vector2Int position)
+    private OptionalTask CreateTotem(Vector2Int position)
     {
         int height = _islandHeightMapHolder.Map[position.x, position.y];
     
@@ -102,5 +103,7 @@ public sealed class TotemTaskGeneration : OptionalTaskGenerator
         
         Totem totem = _diContainer.InstantiatePrefab(randomTotemPrefab, new Vector3(position.x, height, position.y), Quaternion.identity, null).GetComponent<Totem>();
         _globalBuildingContainer.Add(totem.GetComponent<BuildingEntity>());
+
+        return totem.GetComponent<OptionalTask>();
     }
 }

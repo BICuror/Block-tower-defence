@@ -15210,6 +15210,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _chargesToSpawn: 1
+  _upgradeTooltipTagData: {fileID: 11400000, guid: 710db6f0033c1f7469ceff825e2d8afc, type: 2}
+  _rerollTooltipTagData: {fileID: 11400000, guid: 922dbd1142bc6074eb8ba77f22c902b4, type: 2}
 --- !u!114 &9082483487705635966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15226,6 +15228,9 @@ MonoBehaviour:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 20
+  _defaultBuildingTags: 
+  _buildingEntityType: 0
+  _buildingAttackType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 1
   _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: 054838046c14fe546b4bcae8a3463c66, type: 3}
@@ -15284,7 +15289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
 --- !u!114 &7545092893255015733
 MonoBehaviour:
   m_ObjectHideFlags: 0

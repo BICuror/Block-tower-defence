@@ -17,7 +17,6 @@ public sealed class ChargableTotem : OptionalTask
     [SerializeField] private float _requiredChargePerEnemyForTile;
     
     [Inject] private UpgradeChargeContainer _chargeContainer;
-    [Cached] private EntityCanvas _entityCanvas;
     [Cached] private AreaEntityDetector _entityDetector;
     
     private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -33,7 +32,7 @@ public sealed class ChargableTotem : OptionalTask
         _entityDetector.AddedItem += TryStartGainingCharge;
         _entityDetector.RemovedItem += TryStopGainingCharge;
         
-        _chargeBar = _entityCanvas.AddBar(_chargeIcon, 0f, _chargeBarPrefab);
+        _chargeBar = EntityCanvas.AddBar(_chargeIcon, 0f, _chargeBarPrefab);
     }
 
     protected override bool IsCompleted() => _currentCharge >= _requiredCharge;

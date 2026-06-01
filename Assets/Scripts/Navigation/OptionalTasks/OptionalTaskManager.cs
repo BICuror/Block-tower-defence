@@ -18,6 +18,7 @@ public sealed class OptionalTaskManager : MonoBehaviour
     public void GenerateTasksAndModifyRoadMap()
     {
         int tasksToGenerate = GetRequiredTaskCount();
+        List<OptionalTaskRewardType> rewardTypes = GetRewardTypes(tasksToGenerate);
         
         _layerPrebuildDatas.Clear();
 
@@ -30,13 +31,15 @@ public sealed class OptionalTaskManager : MonoBehaviour
         {
             for (int taskGeneratorIndex = 0; taskGeneratorIndex < _optionalTaskGenerators.Count; taskGeneratorIndex++)
             {
-                if (_optionalTaskGenerators[taskGeneratorIndex].TryGenerateOptionalTask(spawnerPositions[spawnerIndex], out AdditionalTaskLayerPrebuildData layerPrebuildData))
+                if (_optionalTaskGenerators[taskGeneratorIndex].TryGenerateOptionalTask(spawnerPositions[spawnerIndex], out AdditionalTaskLayerPrebuildData layerPrebuildData, out OptionalTask optionalTask))
                 {
                     if (layerPrebuildData != null)
                     {
                         _layerPrebuildDatas.Add(layerPrebuildData);
                     }
 
+                    optionalTask.SetRewardType(rewardTypes[spawnerIndex]);
+                    
                     tasksGenerated++;
 
                     break;
@@ -47,10 +50,27 @@ public sealed class OptionalTaskManager : MonoBehaviour
         }
     }
 
+    private List<OptionalTaskRewardType> GetRewardTypes(int amount)
+    {
+        List<OptionalTaskRewardType> rewardTypes = new();
+
+        int rerollsAmount = _waveIndexContainer.GetCurrentWaveContent().Content.Count(type => type == WaveContentType.RerollRewardFromOptionalTask);
+
+        for (int i = 0; i < rerollsAmount && i < amount; i++)
+        {
+            rewardTypes.Add(OptionalTaskRewardType.Reroll);
+        }
+
+        for (int i = rerollsAmount; i < amount; i++)
+        {
+            rewardTypes.Add(OptionalTaskRewardType.UpgradeCharges);
+        }
+        
+        return rewardTypes;
+    }
+
     private int GetRequiredTaskCount()
     {
-        WavesContentConfig wavesContentConfig = _islandDataContainer.Data.WavesContentConfig;
-
-        return wavesContentConfig.GetWaveContent(_waveIndexContainer.GetCurrentWave()).OptionalTasksAmount;
+        return _waveIndexContainer.GetCurrentWaveContent().OptionalTasksAmount;
     }
 }

@@ -17,7 +17,7 @@ public class GlobalEffectData : InspectableData
     
     [Header("Stacks")]
     [FormerlySerializedAs("_isUnique")] [SerializeField] private bool _hasStacks;
-    [ShowIf("_hasStacks")] [SerializeField] private int _maxStacks;
+    [AllowNesting] [ShowIf("_hasStacks")] [SerializeField] private int _maxStacks = 1;
     
     [Space] [Header("EffectAppearanceCondition")] 
     [SerializeField] private bool _hasEffectAppearanceCondition;

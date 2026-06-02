@@ -125,6 +125,7 @@ MonoBehaviour:
   _hoverableUIElement: {fileID: 2718510580333981180}
   _rewardsAmountTextField: {fileID: 5394468545300387969}
   _topCanvasGroup: {fileID: 9040480935850354839}
+  _upgradeKeywordTooltipTagData: {fileID: 11400000, guid: 710db6f0033c1f7469ceff825e2d8afc, type: 2}
   _mainPanel: {fileID: 612609853589768455}
   _entityModificatorTooltipInvokingPanelPrefab: {fileID: 8624138400892477592, guid: b753451cbda172241ba8c2ba2fe009f1, type: 3}
   _inspectionTooltipController: {fileID: 2953025072565230696}
@@ -252,7 +253,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0}
+  m_AnchoredPosition: {x: 0, y: -23.15}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666194690913814886
@@ -331,7 +332,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -4}
-  m_SizeDelta: {x: 12, y: 12}
+  m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8856009911995663144
 CanvasRenderer:
@@ -354,14 +355,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.7924762, b: 0, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 1761114895, guid: a72f37edbaf76dc42bd4a77412609a49, type: 3}
+  m_Sprite: {fileID: -93496308, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

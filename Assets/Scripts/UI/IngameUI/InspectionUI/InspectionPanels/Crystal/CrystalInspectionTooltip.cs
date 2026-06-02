@@ -10,6 +10,7 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
     [Header("HeaderParameters")] 
     [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
     [SerializeField] private CanvasGroup _topCanvasGroup;
+    [SerializeField] private KeywordTooltipTagData _upgradeKeywordTooltipTagData;
 
     [Header("Links")] 
     [SerializeField] private RectTransform _mainPanel;
@@ -52,6 +53,8 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
         _mainPanel.GetComponent<LayoutElement>().preferredWidth = maxSize + _additionalSize;
 
         _contentLayoutGroup.childControlWidth = true;
+
+        SetDefaultTooltipTagContainer();
     }
 
     private void CreateTooltips(Item item)
@@ -69,7 +72,15 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
         tooltipInvokingPanel.SetEntityModificator(globalEffectData);
         tooltipInvokingPanel.CopyParsersFromContainer(this);
         
-        tooltipInvokingPanel.TooltipClosed += _inspectionTooltipController.ClearAllSubpanels;
+        tooltipInvokingPanel.TooltipClosed += SetDefaultTooltipTagContainer;
         tooltipInvokingPanel.TooltipOpened += _inspectionTooltipController.SetTooltipTagContainer;
+    }
+
+    private void SetDefaultTooltipTagContainer()
+    {
+        TooltipParseTagDataContainer tagDataContainer = new();
+        tagDataContainer.TagDatas.Add(_upgradeKeywordTooltipTagData);
+        
+        _inspectionTooltipController.SetTooltipTagContainer(tagDataContainer);
     }
 }

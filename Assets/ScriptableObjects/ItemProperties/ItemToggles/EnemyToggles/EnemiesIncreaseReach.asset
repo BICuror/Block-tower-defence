@@ -42,10 +42,11 @@ MonoBehaviour:
     - SpawnObjectsToggleEffect
     - StartWaveGlobalToggleEffect
     - TurnLastEnemyIntoMiniboss
-  _quality: 2
+  _quality: 1
   _effectType: 1
-  _isUnique: 0
   _tags: 
+  _hasStacks: 0
+  _maxStacks: 1
   _hasEffectAppearanceCondition: 1
   _effectAppearanceCondition: {fileID: 11400000, guid: 999476e55b4c0be459a1cd8eeeace5d5, type: 2}
   _effectAppearanceConditionArgumentsContainer:

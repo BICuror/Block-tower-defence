@@ -14,8 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: -53656890, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _localizationKey: start_wave_effect_tooltip
-  _modificatorName: 
-  _modificatorDescription: 
   _argumentsContainer:
     _argumentItems: []
   _instanceItemTypeContainers:
@@ -32,8 +30,9 @@ MonoBehaviour:
     - TurnLastEnemyIntoMiniboss
   _quality: 1
   _effectType: 0
-  _isUnique: 0
   _tags: 
+  _hasStacks: 0
+  _maxStacks: 0
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
   _effectAppearanceConditionArgumentsContainer:

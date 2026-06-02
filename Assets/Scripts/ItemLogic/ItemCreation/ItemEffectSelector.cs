@@ -157,7 +157,7 @@ public sealed class ItemEffectSelector : MonoBehaviour
             GlobalEffectData selectedData = selectedDatas[randomIndex];
             selectedDatas.RemoveAt(randomIndex);
          
-            if (selectedData.HasStacks && existingEffects.Count(data => data == selectedData) <= selectedData.MaxStacks) continue;
+            if (selectedData.HasStacks && existingEffects.Count(data => data == selectedData) >= selectedData.MaxStacks) continue;
 
             if (!CheckIfEffectTagRequirementsAreMet(selectedData, existingEffects)) continue;
             

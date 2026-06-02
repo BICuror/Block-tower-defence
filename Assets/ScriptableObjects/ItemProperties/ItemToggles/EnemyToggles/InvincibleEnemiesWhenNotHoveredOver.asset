@@ -32,7 +32,7 @@ MonoBehaviour:
         _groupParts: []
     - _argumentType: 0
       _argumentName: Chance
-      _intArgument: 15
+      _intArgument: 20
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 
@@ -58,8 +58,9 @@ MonoBehaviour:
     - TurnLastEnemyIntoMiniboss
   _quality: 5
   _effectType: 1
-  _isUnique: 1
   _tags: 
+  _hasStacks: 1
+  _maxStacks: 1
   _hasEffectAppearanceCondition: 0
   _effectAppearanceCondition: {fileID: 0}
   _effectAppearanceConditionArgumentsContainer:

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "WavesContentConfig", menuName = "WavesContentConfig")]
 
@@ -36,7 +35,6 @@ public sealed class WavesContentConfig : ScriptableObject
     [Header("OptionalTasks")] 
     [SerializeField] private int _optionalTasksAmount = 2;
 
-    [FormerlySerializedAs("_maxEnemySpawnersAmount")]
     [Header("EnemySpawners")] 
     [SerializeField] private int _enemySpawnersAmount = 3;
     

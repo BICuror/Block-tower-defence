@@ -9,43 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: InvinsibilityUntilPickedUp
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: PropogartionUp 2
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _localizationKey: 
+  _icon: {fileID: -132354474, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: propogation_tier_2_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 4
-      _argumentName: EffectTypeName
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: InvincibilityEffect
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
-    - _argumentType: 0
-      _argumentName: EffectStrength
-      _intArgument: 1
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+    _argumentItems: []
   _itemTypeContainers:
-  - _itemTypeName: AddIconEntityModificator
+  - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -56,10 +28,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -76,12 +50,14 @@ MonoBehaviour:
     - GameObjectApplierEntityModificator
     - GrantStatsToAllBuildingssOnDeathEntityModificator
     - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
     - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -95,21 +71,23 @@ MonoBehaviour:
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
+  _tagsInclude: 0
   _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 
   _hasStacks: 0
-  _maxStacks: 1
+  _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
-  _anyRequired: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 29
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
   _hasBlockTags: 0
@@ -119,5 +97,8 @@ MonoBehaviour:
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
-  _statChanges: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 69fcb066e4b92a74a83da456ea07ea7f, type: 2}
+    FlatChange: 0.3
+    MultiplierChange: 0
   _statInitializers: []

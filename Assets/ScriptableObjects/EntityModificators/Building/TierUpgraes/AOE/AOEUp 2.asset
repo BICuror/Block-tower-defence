@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: MoreExplosionDamage
+  m_Name: AOEUp 2
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _localizationKey: mortar_explosion_damage_up_entity_modificator_tooltip
+  _icon: {fileID: -660822687, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: aoe_tier_2_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -28,6 +28,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -73,18 +74,19 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
+  _tagsInclude: 0
   _buildingEntityTypeTags: 02000000
   _rarity: 2
-  _tags: 
+  _tags: 06000000
   _hasStacks: 0
   _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
-  _anyRequired: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 6
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
   _hasBlockTags: 0
@@ -92,16 +94,14 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _hasRequiredUpgrades: 0
-  _requiredUpgrades: []
+  _hasRequiredUpgrades: 1
+  _requiredUpgrades:
+  - {fileID: 11400000, guid: 9a75cdf9ce9c5984da1f688ac1060e8a, type: 2}
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    FlatChange: -0.5
+  - StatData: {fileID: 11400000, guid: 20a523a05882b7b459a94f9e821998e2, type: 2}
+    FlatChange: 0.25
     MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: 5e8b85fba4737254599072092f655308, type: 2}
-    FlatChange: 1.5
-    MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
-    FlatChange: 10
+  - StatData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
+    FlatChange: 0.25
     MultiplierChange: 0
   _statInitializers: []

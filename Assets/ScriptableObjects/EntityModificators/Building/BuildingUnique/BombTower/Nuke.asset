@@ -28,10 +28,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -86,7 +88,7 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 1
+  _hasBlockTags: 0
   _blockOwnerTags:
     Requirements:
     - Tag: 14
@@ -98,17 +100,17 @@ MonoBehaviour:
   _statChanges:
   - StatData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
     FlatChange: 0
-    MultiplierChange: 5
+    MultiplierChange: 4
   - StatData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    FlatChange: 0
-    MultiplierChange: 1
+    FlatChange: 4
+    MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 3cc872057f40f7542b58245ed6a75b0b, type: 2}
-    FlatChange: 6
+    FlatChange: 4
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    FlatChange: 5
+    FlatChange: 6
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     FlatChange: 0
-    MultiplierChange: -10
+    MultiplierChange: -0.5
   _statInitializers: []

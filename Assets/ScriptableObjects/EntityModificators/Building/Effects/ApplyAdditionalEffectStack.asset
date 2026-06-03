@@ -84,6 +84,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -139,11 +140,11 @@ MonoBehaviour:
   _showInInspector: 1
   _hasRequiredTags: 1
   _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
     Requirements:
     - Tag: 1
       Amount: 1
-  _reqiredOtherEntityTags:
-    Requirements: []
   _hasBlockTags: 0
   _blockOwnerTags:
     Requirements: []

@@ -26,13 +26,11 @@ public sealed class AOE : WeaponBase
         _radius = OwnerEntity.StatContainer.Get<AOERadius>();
     }
 
-    [Button] public void ActivateAOEDEBUG() => ActiveAOE().Forget();
-
     public async UniTask ActiveAOE()
     {
-        UpdateAOERadius(AOERadius * 2);
+        UpdateAOERadius(AOERadius);
+        SetState(true);
         
-        gameObject.SetActive(true);
         _explotionEffect.PlayBurstEffectAndForget();
 
         float elapsedTime = 0f;
@@ -50,13 +48,13 @@ public sealed class AOE : WeaponBase
             {
                 await UniTask.WaitForSeconds(_secondsPerHit, cancellationToken: _cancellationTokenSource.Token);
             }
-            catch { return; }
+            catch { break; }
             
             elapsedTime += _secondsPerHit;
         }
 
         await _explotionEffect.StopPermamentEffect();
-        gameObject.SetActive(false);
+        SetState(false);
     }
 
     public void DeactiveAOE()
@@ -67,9 +65,9 @@ public sealed class AOE : WeaponBase
         _explotionEffect.StopPermamentEffect().Forget();
     }
     
-    private void UpdateAOERadius(float explotionRaduis)
+    private void UpdateAOERadius(float aoeRadius)
     {
-        float scale = explotionRaduis;
+        float scale = aoeRadius * 2;
 
         _explotionEffect.transform.localScale = new Vector3(scale, scale, scale);
     }

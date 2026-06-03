@@ -9,15 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: MoreRadiusBuildTimeIncrease
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: HurtfullLabor
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _localizationKey: mortar_exploision_radius_up_entity_modificator_tooltip
+  _icon: {fileID: -1809229495, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: invoke_action_and_gain_damage_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems: []
+    _argumentItems:
+    - _argumentType: 1
+      _argumentName: ActivationDamage
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 4
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _itemTypeContainers:
-  - _itemTypeName: EntityModificatorStatChange
+  - _itemTypeName: OnActivationInvokeTaskAndHurt
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -28,10 +42,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -74,31 +90,26 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 1
-  _buildingEntityTypeTags: 02000000
+  _buildingEntityTypeTags: 0400000002000000
   _rarity: 2
-  _tags: 
-  _hasStacks: 0
-  _maxStacks: 0
+  _tags: 0c0000001f000000
+  _hasStacks: 1
+  _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 0
-  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 31
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
-  _statChanges:
-  - StatData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
-    FlatChange: 1
-    MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
-    FlatChange: 2
-    MultiplierChange: 0
+  _statChanges: []
   _statInitializers: []

@@ -34,7 +34,7 @@ MonoBehaviour:
       _argumentName: BeamDamage
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 30
+      _floatArgument: 25
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -116,17 +117,18 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 1
-  _buildingEntityTypeTags: 010000000300000005000000
+  _buildingEntityTypeTags: 030000000500000002000000
   _rarity: 2
   _tags: 
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
-  _anyRequired: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 28
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
   _hasBlockTags: 0

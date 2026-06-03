@@ -42,6 +42,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -87,7 +88,7 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
+  _tagsInclude: 0
   _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 12000000
@@ -95,7 +96,7 @@ MonoBehaviour:
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:

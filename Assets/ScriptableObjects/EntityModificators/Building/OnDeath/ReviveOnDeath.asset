@@ -20,7 +20,7 @@ MonoBehaviour:
       _argumentName: ReviveDuration
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 4
+      _floatArgument: 3
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -42,6 +42,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -88,7 +89,7 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 02000000040000000600000007000000
+  _buildingEntityTypeTags: 0600000007000000
   _rarity: 2
   _tags: 11000000
   _hasStacks: 1

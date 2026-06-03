@@ -48,7 +48,7 @@ MonoBehaviour:
       _argumentName: ChargePerAttack
       _intArgument: 0
       _boolArgument: 1
-      _floatArgument: 0.1
+      _floatArgument: 0.05
       _stringArgument: HealDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -70,6 +70,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea

@@ -20,7 +20,7 @@ MonoBehaviour:
       _argumentName: HealPercent
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.5
+      _floatArgument: 0.66
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -42,6 +42,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -88,7 +89,7 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 06000000070000000200000004000000
+  _buildingEntityTypeTags: 0600000007000000
   _rarity: 2
   _tags: 00000000
   _hasStacks: 1

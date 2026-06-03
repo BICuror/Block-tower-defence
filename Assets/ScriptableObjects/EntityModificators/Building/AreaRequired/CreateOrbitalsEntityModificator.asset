@@ -42,10 +42,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -98,10 +100,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -146,20 +150,21 @@ MonoBehaviour:
   _tagsInclude: 0
   _buildingEntityTypeTags: 05000000060000000700000008000000
   _rarity: 2
-  _tags: 0e000000
+  _tags: 1e000000
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 0
-  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 30
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _hasRequiredUpgrades: 0
@@ -168,7 +173,7 @@ MonoBehaviour:
   _statInitializers:
   - StructName: 
     _statData: {fileID: 11400000, guid: 67b5674c445dc2740986e971fd3574cc, type: 2}
-    _defaultValue: 0.2
+    _defaultValue: 0.24
   - StructName: 
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     _defaultValue: 2

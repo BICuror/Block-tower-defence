@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dragAnimationObject: {fileID: 205213375953794551}
-  _placementRequirements: {fileID: 11400000, guid: ed0b37b53241cdb4487b3177528ef075, type: 2}
+  _placementRequirements: {fileID: 11400000, guid: 3192eeec3521d3043840728b896d2c7b, type: 2}
   _isDraggable: 1
 --- !u!114 &5471361061980286686
 MonoBehaviour:
@@ -134,10 +134,11 @@ MonoBehaviour:
   _statInitializers:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
-    _defaultValue: 100
+    _defaultValue: 300
   - StructName: ContactDamage
     _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
-    _defaultValue: 15
+    _defaultValue: 150
+  _defaultBuildingTags: 
   _buildingEntityType: 8
   _buildingAttackType: 2
   _destroyOnDeath: 0

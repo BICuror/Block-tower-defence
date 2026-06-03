@@ -32,7 +32,7 @@ MonoBehaviour:
         _groupParts: []
     - _argumentType: 0
       _argumentName: ArrowsPerKill
-      _intArgument: 5
+      _intArgument: 7
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 
@@ -62,7 +62,7 @@ MonoBehaviour:
       _argumentName: DelayBetweenShots
       _intArgument: 5
       _boolArgument: 0
-      _floatArgument: 0.15
+      _floatArgument: 0.1
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -84,6 +84,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -138,7 +139,6 @@ MonoBehaviour:
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 0
-  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:

@@ -9,57 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: TemporaryStatsUp
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: PropogartionUp 3
   m_EditorClassIdentifier: 
-  _icon: {fileID: -2032523432, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: temporary_stats_up_entity_modificator_tooltip
+  _icon: {fileID: -250911053, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: propogation_tier_3_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 0
-      _argumentName: WavesDuration
-      _intArgument: 1
-      _boolArgument: 0
-      _floatArgument: 0.75
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
-    - _argumentType: 3
-      _argumentName: EntityModificator
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0.2
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
-    - _argumentType: 0
-      _argumentName: UpgradeChargesAmount
-      _intArgument: 4
-      _boolArgument: 0
-      _floatArgument: 0.2
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+    _argumentItems: []
   _itemTypeContainers:
-  - _itemTypeName: TemporaryEntityModificatorEntityModificatorApplier
+  - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -70,10 +28,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -119,13 +79,15 @@ MonoBehaviour:
   _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 
-  _hasStacks: 1
-  _maxStacks: 3
+  _hasStacks: 0
+  _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 29
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
   _hasBlockTags: 0
@@ -135,5 +97,11 @@ MonoBehaviour:
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
-  _statChanges: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 6fc83b23e4ce9c845a86c3f2c4687422, type: 2}
+    FlatChange: 2
+    MultiplierChange: 0
+  - StatData: {fileID: 11400000, guid: 69fcb066e4b92a74a83da456ea07ea7f, type: 2}
+    FlatChange: 0.15
+    MultiplierChange: 0
   _statInitializers: []

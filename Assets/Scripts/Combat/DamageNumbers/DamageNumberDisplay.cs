@@ -1,8 +1,6 @@
-using TMPEffects.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
-using System;
 using TMPro;
 
 using Random = UnityEngine.Random;
@@ -10,8 +8,8 @@ using Random = UnityEngine.Random;
 public sealed class DamageNumberDisplay : MonoBehaviour
 {
     [SerializeField] TMP_Text _damageNumberText;
-    
-    [SerializeField] private SerializedDictionary<DamageVisualsType, DamageTypeVisualsContainer> _damageTypeVisualContainers;
+
+    [SerializeField] private DamageNumberConfig _damageNumberConfig;
     
     [Header("Animation")]
     [SerializeField] private AnimationCurve _alphaAnimationCurve;
@@ -48,13 +46,8 @@ public sealed class DamageNumberDisplay : MonoBehaviour
 
     private void SetVisualData(int damageValue, DamageVisualsType damageVisualsType)
     {
-        _damageNumberText.color = _damageTypeVisualContainers[damageVisualsType].DamageColor;
+        _damageNumberText.color = _damageNumberConfig.GetDamageColor(damageVisualsType);
         _damageNumberText.text = damageValue.ToString();
-    }
-    
-    [Serializable] private sealed class DamageTypeVisualsContainer
-    {
-        public Color DamageColor;
     }
 }
 

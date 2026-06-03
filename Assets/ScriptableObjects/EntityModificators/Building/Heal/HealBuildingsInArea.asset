@@ -34,7 +34,7 @@ MonoBehaviour:
       _argumentName: HealAmount
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 3
+      _floatArgument: 5
       _stringArgument: 
       _gameObjectArgument: {fileID: 2355596974610366607, guid: 535ab1f1a01e4ce4fb98dac6c9b81c4c, type: 3}
       _entityModificatorData: {fileID: 0}
@@ -56,6 +56,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -102,25 +103,27 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 0500000006000000000000000800000007000000
+  _buildingEntityTypeTags: 05000000060000000800000007000000
   _rarity: 2
   _tags: 00000000
   _hasStacks: 0
   _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 28
+      Amount: 1
+    - Tag: 27
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 1
+  _hasBlockTags: 0
   _blockOwnerTags:
     Requirements: []
   _blockOtherEntityTags:
-    Requirements:
-    - Tag: 0
-      Amount: 1
+    Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
   _statChanges: []

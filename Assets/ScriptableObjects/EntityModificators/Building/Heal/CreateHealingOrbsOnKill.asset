@@ -46,7 +46,7 @@ MonoBehaviour:
         _groupParts: []
     - _argumentType: 0
       _argumentName: RequiredKills
-      _intArgument: 12
+      _intArgument: 8
       _boolArgument: 0
       _floatArgument: 1
       _stringArgument: HealDamageModifier
@@ -70,6 +70,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -128,7 +129,7 @@ MonoBehaviour:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 1
+  _hasBlockTags: 0
   _blockOwnerTags:
     Requirements: []
   _blockOtherEntityTags:

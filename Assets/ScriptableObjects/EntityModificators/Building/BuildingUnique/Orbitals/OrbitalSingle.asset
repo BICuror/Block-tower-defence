@@ -28,10 +28,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -77,7 +79,7 @@ MonoBehaviour:
   _buildingEntityTypeTags: 05000000
   _rarity: 2
   _tags: 
-  _hasStacks: 0
+  _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
@@ -101,7 +103,7 @@ MonoBehaviour:
     MultiplierChange: 2
   - StatData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     FlatChange: 0
-    MultiplierChange: -10
+    MultiplierChange: -2
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: 60
     MultiplierChange: 0

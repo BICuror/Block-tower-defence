@@ -45,7 +45,6 @@ namespace WorldGeneration
                 }
             }
 
-            Debug.LogError(minimalValue);
             return minimalValue;
 
             bool IsOccupied(Vector2Int checkPosition) =>

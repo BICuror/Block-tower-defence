@@ -32,7 +32,7 @@ MonoBehaviour:
         _groupParts: []
     - _argumentType: 0
       _argumentName: EffectStrength
-      _intArgument: 3
+      _intArgument: 2
       _boolArgument: 0
       _floatArgument: 0
       _stringArgument: 
@@ -70,6 +70,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -126,6 +127,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -180,7 +182,6 @@ MonoBehaviour:
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 0
-  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
@@ -197,6 +198,6 @@ MonoBehaviour:
     FlatChange: 0
     MultiplierChange: -0.5
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    FlatChange: -2
+    FlatChange: -1
     MultiplierChange: 0
   _statInitializers: []

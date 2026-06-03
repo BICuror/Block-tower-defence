@@ -105,4 +105,7 @@ public enum EntityModifcatorTag
     HasExplosionDamage = 26,
     HasRecharge = 27,
     HasReachArea = 28,
+    HasPropogation = 29,
+    HasMaxEntities = 30,
+    Activation = 31,
 }

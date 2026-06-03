@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: StrongerAOE
+  m_Name: AOEUp 1
   m_EditorClassIdentifier: 
-  _icon: {fileID: 1427845749, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: mortar_aoe_damage_up_entity_modificator_tooltip
+  _icon: {fileID: 1686761180, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: aoe_tier_1_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -28,6 +28,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -73,7 +74,7 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
+  _tagsInclude: 0
   _buildingEntityTypeTags: 02000000
   _rarity: 2
   _tags: 06000000
@@ -96,7 +97,7 @@ MonoBehaviour:
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
   _statChanges:
-  - StatData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
-    FlatChange: 0
-    MultiplierChange: 0.5
+  - StatData: {fileID: 11400000, guid: 20a523a05882b7b459a94f9e821998e2, type: 2}
+    FlatChange: 0.75
+    MultiplierChange: 0
   _statInitializers: []

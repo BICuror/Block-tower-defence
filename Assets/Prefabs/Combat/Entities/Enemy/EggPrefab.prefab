@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 2741087370764162865}
   - component: {fileID: 9071622223124352225}
   - component: {fileID: 5026139668924396656}
+  - component: {fileID: 2451756797395807129}
   m_Layer: 9
   m_Name: EggPrefab
   m_TagString: Enemy
@@ -190,6 +191,9 @@ MonoBehaviour:
   - StructName: SpawnDelay
     _statData: {fileID: 11400000, guid: aa9be83ed5e46a74ebc20381ba7a49d0, type: 2}
     _defaultValue: 5
+  - StructName: ContactDamage
+    _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
+    _defaultValue: 1
   _shouldDestoryOnDeath: 1
 --- !u!114 &1473540362893138095
 MonoBehaviour:
@@ -258,7 +262,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialModificatorDatas: []
-  _allAvailableModificators: []
 --- !u!114 &9071622223124352225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,9 +287,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0600d1eed3e26a848888216c6c715aeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEgg
-  _invunrabilityPeriod: 0.2
   _autoAddToGlobalEnemyContainer: 1
   _ownerEntity: {fileID: 5338315934051013164}
+--- !u!114 &2451756797395807129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2935730226360874662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ec133fd47bd68143a6e118b70005b12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyContactDamager
 --- !u!1 &7054756542685745599
 GameObject:
   m_ObjectHideFlags: 0

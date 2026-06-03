@@ -28,6 +28,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -95,12 +96,12 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges:
   - StatData: {fileID: 11400000, guid: 69fcb066e4b92a74a83da456ea07ea7f, type: 2}
-    FlatChange: 0.3
+    FlatChange: 0.35
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
     FlatChange: -5
     MultiplierChange: 0
   - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    FlatChange: -2
+    FlatChange: -1
     MultiplierChange: 0
   _statInitializers: []

@@ -9,29 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: HurtfullLabor
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: AOEUp 3
   m_EditorClassIdentifier: 
-  _icon: {fileID: -1809229495, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: invoke_action_and_gain_damage_entity_modificator_tooltip
+  _icon: {fileID: -1861934326, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: aoe_tier_3_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 1
-      _argumentName: ActivationDamage
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 3
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+    _argumentItems: []
   _itemTypeContainers:
-  - _itemTypeName: OnActivationInvokeTaskAndHurt
+  - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -42,6 +28,7 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
@@ -88,16 +75,18 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 08000000070000000500000003000000
+  _buildingEntityTypeTags: 02000000
   _rarity: 2
-  _tags: 0c000000
-  _hasStacks: 1
-  _maxStacks: 1
+  _tags: 06000000
+  _hasStacks: 0
+  _maxStacks: 0
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 6
+      Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
   _hasBlockTags: 0
@@ -105,7 +94,11 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _hasRequiredUpgrades: 0
-  _requiredUpgrades: []
-  _statChanges: []
+  _hasRequiredUpgrades: 1
+  _requiredUpgrades:
+  - {fileID: 11400000}
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
+    FlatChange: 0.75
+    MultiplierChange: 0
   _statInitializers: []

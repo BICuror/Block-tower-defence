@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: BiggerAOE
+  m_Name: PropogartionUp 1
   m_EditorClassIdentifier: 
-  _icon: {fileID: 260667796, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: mortar_aoe_radius_up_entity_modificator_tooltip
+  _icon: {fileID: 1563142184, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: propogation_tier_1_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -28,10 +28,12 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -73,10 +75,10 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
-  _buildingEntityTypeTags: 02000000
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 
   _rarity: 2
-  _tags: 06000000
+  _tags: 
   _hasStacks: 0
   _maxStacks: 0
   _effectType: 0
@@ -84,7 +86,7 @@ MonoBehaviour:
   _hasRequiredTags: 1
   _reqiredOwnerTags:
     Requirements:
-    - Tag: 6
+    - Tag: 29
       Amount: 1
   _reqiredOtherEntityTags:
     Requirements: []
@@ -96,10 +98,7 @@ MonoBehaviour:
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 20a523a05882b7b459a94f9e821998e2, type: 2}
-    FlatChange: 1
+  - StatData: {fileID: 11400000, guid: 6fc83b23e4ce9c845a86c3f2c4687422, type: 2}
+    FlatChange: 1.5
     MultiplierChange: 0
-  - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
-    FlatChange: 0
-    MultiplierChange: 0.15
   _statInitializers: []

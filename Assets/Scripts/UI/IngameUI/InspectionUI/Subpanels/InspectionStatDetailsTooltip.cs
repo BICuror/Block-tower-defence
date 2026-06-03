@@ -90,7 +90,7 @@ public sealed class InspectionStatDetailsTooltip : TooltipPanelBase
 
     private string GetParsedValue(float value, bool presentAsPercent)
     {
-        if (presentAsPercent) return $"{Math.Round(value) * 100:F0}%";
+        if (presentAsPercent) return $"{value * 100:F0}%";
 
         return $"{value:F1}";
     }

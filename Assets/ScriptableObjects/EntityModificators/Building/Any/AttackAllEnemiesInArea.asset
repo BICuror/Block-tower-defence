@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
   m_Name: AttackAllEnemiesInArea
   m_EditorClassIdentifier: 
-  _icon: {fileID: 1968931674, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: multishot_entity_modificator_tooltip
+  _icon: {fileID: 424653164, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: attack_all_enemies_in_area_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 1
@@ -61,6 +61,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -103,7 +104,7 @@ MonoBehaviour:
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 
+  _buildingEntityTypeTags: 070000000800000006000000
   _rarity: 2
   _tags: 
   _hasStacks: 1
@@ -124,5 +125,8 @@ MonoBehaviour:
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
-  _statChanges: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
+    FlatChange: 0
+    MultiplierChange: 0.8
   _statInitializers: []

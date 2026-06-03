@@ -9,7 +9,13 @@ using System;
 public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 {
     [Inject] private WaveStateMachine _waveStateMachine;
+
+    [Header("UI")] 
+    [SerializeField] private Sprite _iconSprite;
+    private EntityCanvasIcon _entityCanvasIcon;
+    [Cached] private EntityCanvas _canvas;
     
+    [Header("Links")]
     [SerializeField] private VisualEffectHandler _visualEffectHandler;
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
     [SerializeField] private string _effectTypeName;
@@ -54,12 +60,39 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
         _visualEffectHandler.PlayBurstEffectAndForget();
         
         _charges--;
+        UpdateIconState();
     } 
     
-    private void TryRefillCharge() => _charges = _maxCharges;
+    private void TryRefillCharge()
+    {
+        _charges = _maxCharges;
+        UpdateIconState();
+    }
+
+    private void UpdateIconState()
+    {
+        if (!_hasCharges) return;
+
+        if (_charges < 0 && _entityCanvasIcon)
+        {
+            _canvas.RemoveIcon(_entityCanvasIcon);
+            _entityCanvasIcon = null;
+            return;
+        }
+
+        if (_charges > 0 && !_entityCanvasIcon)
+        {
+            _entityCanvasIcon = _canvas.AddIcon(_iconSprite, true, _charges);
+            return;
+        }
+        
+        _entityCanvasIcon.SetValue(_charges);
+    }
     
     private void OnDestroy()
     {
         _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted -= TryRefillCharge;
+        _charges = 0;
+        UpdateIconState();
     }
 }

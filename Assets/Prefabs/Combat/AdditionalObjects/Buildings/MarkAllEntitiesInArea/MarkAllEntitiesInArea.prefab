@@ -69,9 +69,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 1
-  _hasVisualisation: 0
-  _visualisationTransform: {fileID: 0}
   _height: 100
+  _areaScaleValue: 2
+  _overrideAdditionalScaleValue: 0
+  _additionalScaleValue: 0.95
+  _hasVisualisation: 0
+  _areaVisualisation: {fileID: 0}
 --- !u!114 &5508162354419099327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,12 +132,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7831244e67bdda4499983947a93daaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _iconSprite: {fileID: -686756865, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _visualEffectHandler: {fileID: 4025761130839690585}
   _areaEntityDetector: {fileID: 5508162354419099327}
   _effectTypeName: MarkEffect
+  _duration: 0
   _effectStaks: 1
+  _canBeCastOutOfAttackState: 0
   _hasCharges: 1
-  _maxCharges: 1
+  _maxCharges: 2
 --- !u!1001 &7943139585311302968
 PrefabInstance:
   m_ObjectHideFlags: 0

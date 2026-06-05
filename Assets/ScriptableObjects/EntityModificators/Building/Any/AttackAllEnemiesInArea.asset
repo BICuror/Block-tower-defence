@@ -61,6 +61,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -111,16 +112,16 @@ MonoBehaviour:
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Requirements: []
-  _reqiredOtherEntityTags:
-    Requirements: []
-  _hasBlockTags: 1
-  _blockOwnerTags:
     Requirements:
     - Tag: 28
       Amount: 1
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
   _blockOtherEntityTags:
     Requirements: []
   _hasRequiredUpgrades: 0

@@ -95,8 +95,9 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
-  _hasRequiredUpgrades: 0
-  _requiredUpgrades: []
+  _hasRequiredUpgrades: 1
+  _requiredUpgrades:
+  - {fileID: 11400000, guid: b14c79ca19d154a44ba6a5f52a61b7bc, type: 2}
   _statChanges:
   - StatData: {fileID: 11400000, guid: 69fcb066e4b92a74a83da456ea07ea7f, type: 2}
     FlatChange: 0.3

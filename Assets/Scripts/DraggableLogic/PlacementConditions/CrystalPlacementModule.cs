@@ -13,7 +13,7 @@ public sealed class CrystalPlacementModule : PlacementModule
             return townhall.GetComponentInChildren<SelectionManager>().SelectionPhaseIsActive == false;
         }
         
-        if (!TileMap.HasTile(position, LayerSettingType.SolidTerrain)) return false;
+        if (!IsValidPosition(position)) return false;
         
         int nonStackableTiels = TileMap.GetTileCount(position, LayerSettingType.NonstackableCreatedItems);
 
@@ -37,8 +37,12 @@ public sealed class CrystalPlacementModule : PlacementModule
         {
             return hit.point.y;
         }
-        
-        return TileMap.GetHitInfo(position, LayerSettingType.SolidTerrain).point.y + AdditionalPlacementHeight;
+
+        float height = TileMap.GetHitInfo(position, LayerSettingType.SolidTerrain).point.y;
+
+        if (height < 1) height = 1;
+
+        return height + AdditionalPlacementHeight;
     }
     
     public override Vector2Int GetPlacementPosition(Vector2Int position)

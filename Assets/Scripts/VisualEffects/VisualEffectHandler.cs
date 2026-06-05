@@ -154,7 +154,7 @@ public sealed class VisualEffectHandler : MonoBehaviour
         _cancellationTokenSource.Dispose();
         _cancellationTokenSource = new();
     }
-
+    
     private void OnDestroy() => CancelStopAction();
     
     private enum StopActionType

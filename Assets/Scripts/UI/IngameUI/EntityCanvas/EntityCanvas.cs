@@ -25,6 +25,12 @@ public sealed class EntityCanvas : IngameUIElement
     [SerializeField] private Transform _canvasIconParent;
     private List<EntityCanvasIcon> _icons = new();
 
+    [Header("AbilityIcons")]
+    [SerializeField] private float _abilityIconsHeight = 1.5f;
+    [SerializeField] private float _abilityIconsSpacing = 1.5f;
+    [SerializeField] private EntityCanvasAbilityIcon _entityCanvasAbilityIconPrefab;
+    private List<EntityCanvasAbilityIcon> _abilityIcons = new();
+    
     private void Start()
     {
         _healthBar.HealthBarStateUpdated += UpdateCanvasLayout;
@@ -74,7 +80,31 @@ public sealed class EntityCanvas : IngameUIElement
         UpdateIconsLayout();    
     }
 
-    private void UpdateCanvasLayout()
+    public EntityCanvasAbilityIcon AddAbilityIcon(Sprite iconSprite, float value, EntityCanvasAbilityIcon customAbilityIconPrefab = null)
+    {
+        EntityCanvasAbilityIcon abilityIconPrefab = customAbilityIconPrefab ?? _entityCanvasAbilityIconPrefab; 
+
+        EntityCanvasAbilityIcon icon = Instantiate(abilityIconPrefab, _customContentParent);
+        icon.StateUpdated += UpdateCanvasLayout;
+        icon.Initialize(iconSprite, value);
+        
+        _abilityIcons.Add(icon);
+        
+        UpdateCanvasLayout();         
+        
+        return icon;
+    }
+    
+    public void RemoveAbilityIcon(EntityCanvasAbilityIcon icon)
+    {
+        icon.StateUpdated -= UpdateCanvasLayout;
+        _abilityIcons.Remove(icon);
+        Destroy(icon.gameObject);
+        
+        UpdateCanvasLayout();    
+    }
+    
+    [Button] public void UpdateCanvasLayout()
     {
         float currentHeight = 0f;
         
@@ -85,6 +115,17 @@ public sealed class EntityCanvas : IngameUIElement
             _bars[i].transform.localPosition = new Vector3(0f, 0f, -currentHeight);
             
             currentHeight += _barHeight + _itemsSpacing;
+        }
+
+        for (int i = 0; i < _abilityIcons.Count; i++)
+        {
+            if (!_abilityIcons[i].IsActive) continue;
+            
+            currentHeight += _abilityIconsHeight;
+            
+            _abilityIcons[i].transform.localPosition = new Vector3(0f, 0f, -currentHeight);
+            
+            currentHeight += _abilityIconsHeight + _abilityIconsSpacing;
         }
         
         _canvasIconParent.localPosition = new Vector3(0f, 0f, -currentHeight);

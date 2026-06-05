@@ -5114,7 +5114,9 @@ MonoBehaviour:
   - StructName: ReachAreaScale
     _statData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
     _defaultValue: 2
+  _defaultBuildingTags: 
   _buildingEntityType: 0
+  _buildingAttackType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 1
   _buildingDestroyedObjectPrefab: {fileID: 9130392318539329251, guid: f887533d17d9e6244a9d4c8888a9167e, type: 3}
@@ -5156,7 +5158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
-  _canBeIdleInspected: 0
+  _canBeIdleInspected: 1
   _localizationKey: booster_tower_building_entity_tooltip
 --- !u!114 &5781856286329589189
 MonoBehaviour:
@@ -5229,6 +5231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
   _audioClipToPlayOnPickedUp: 0
   _audioClipToPlayOnPlaced: 5
+  _audioClipToPlayOnDragged: 0
 --- !u!1 &6419556192949382454
 GameObject:
   m_ObjectHideFlags: 0

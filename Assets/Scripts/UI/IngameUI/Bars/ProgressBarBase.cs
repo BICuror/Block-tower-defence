@@ -2,13 +2,13 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 
-[RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(Renderer))]
 
 public abstract class ProgressBarBase : Shaker
 {
     [SerializeField] private Material _barMaterial;
+    [SerializeField] private Renderer _renderer;
     private MaterialPropertyBlock _materialPropertyBlock;
-    private MeshRenderer _meshRenderer;
     protected Tween CurrentTween;
     
     protected abstract string ProgressFieldName { get; }
@@ -17,9 +17,9 @@ public abstract class ProgressBarBase : Shaker
     {
         base.Initialize();
         
-        _meshRenderer = GetComponent<MeshRenderer>();
+        if (_renderer == null) _renderer = GetComponent<Renderer>();
 
-        _meshRenderer.sharedMaterial = _barMaterial;
+        _renderer.sharedMaterial = _barMaterial;
         _materialPropertyBlock = new MaterialPropertyBlock();
     }
     
@@ -39,12 +39,12 @@ public abstract class ProgressBarBase : Shaker
         if (CurrentTween != null && CurrentTween.IsPlaying()) CurrentTween.Complete();
     }
 
-    protected abstract void OnFillComplete();
+    protected virtual void OnFillComplete() {}
 
     private void SetPropertyBlock(float progressValue)
     {
         _materialPropertyBlock.SetFloat(ProgressFieldName, progressValue);
-        _meshRenderer.SetPropertyBlock(_materialPropertyBlock);
+        _renderer.SetPropertyBlock(_materialPropertyBlock);
     }
 
     protected void OnDestroy()

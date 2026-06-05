@@ -14,23 +14,13 @@ public sealed class GameControllerInspectionState : GameControllerState
     {
         _controls = controls;
         
-        _controls.TouchInput.RMB.performed += TryEnterState;
+        _controls.TouchInput.Inspection.performed += TryEnterState;
         _inspectorController.InspectionStopped += InvokeTryExitState;
     }
 
     private void TryEnterState(InputAction.CallbackContext context)
     {
-        if (context.interaction is TapInteraction)
-        {
-            _inspectorController.StopInspecting();
-        }
-        else if (context.interaction is HoldInteraction)
-        {
-            if (_inspectorController.HoveredOverInspectable(GetPointerPosition()))
-            {
-                InvokeTryEnterState();
-            }
-        }
+        InvokeTryEnterState();
     }
 
     protected override void OnEnter()

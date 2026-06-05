@@ -4,9 +4,9 @@ using Combat;
 
 public sealed class EnemyArcherObject : DefaultCombatTaskConditionProvider
 {
-    [Cached] private CombatEntity _ownerEntity;
+    [SerializeField] private AreaEntityDetector _enemyAreaScaner;
     [Cached] private ProjectileSpeed _projectileSpeed;
-    [Cached] private AreaEntityDetector _enemyAreaScaner;
+    [Cached] private CombatEntity _ownerEntity;
     
     [SerializeField] private float _arrowLifetime = 5f;
         

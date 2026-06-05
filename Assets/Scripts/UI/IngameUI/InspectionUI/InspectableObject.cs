@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using CuroLocalization;
 using UnityEngine;
 using System;
@@ -6,12 +7,14 @@ public sealed class InspectableObject : MonoBehaviour
 {
     [SerializeField] private bool _pauseOnInspection;
     [SerializeField] private bool _canBeIdleInspected;
+    [ShowIf("_canBeIdleInspected")] [SerializeField] private float _idleHoldInspectionDelay = 0.6f;
     [SerializeField] private string _localizationKey;
     private ReplaceableDataParser _replaceableDataParser = new();
     private bool _isInspected;
     
     public bool IsInspected => _isInspected;
     public bool CanBeIdleInspected => _canBeIdleInspected;
+    public float IdleHoldInspectionDelay => _idleHoldInspectionDelay;
     
     public bool PauseOnInspection => _pauseOnInspection;
     public string Name => (_localizationKey + "_header").Localize();

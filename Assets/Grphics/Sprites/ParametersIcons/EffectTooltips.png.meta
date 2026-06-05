@@ -1614,7 +1614,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1623,6 +1623,28 @@ TextureImporter:
       bones: []
       spriteID: b0002867b45657842b5bab72bb11cc57
       internalID: -1144595787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CreateAOEOnBuildIcon
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 697
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff4dfff972f9dc24b82326f6fac16f66
+      internalID: -1342571092
       vertices: []
       indices: 
       edges: []
@@ -1651,6 +1673,7 @@ TextureImporter:
       BuildUp_1: -1297672284
       BuildUp_2: 44216050
       BuildUp_3: -1533465709
+      CreateAOEOnBuildIcon: -1342571092
       CreateAOEOnKill: -1144595787
       CrystalDamage: 473409037
       DamageUpCloseUpIcon: -889599480

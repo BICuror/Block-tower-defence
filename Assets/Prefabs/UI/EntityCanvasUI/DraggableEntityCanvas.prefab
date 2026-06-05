@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1253958990235852498}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.12}
+  m_LocalPosition: {x: 0, y: 2, z: -0.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -123,6 +123,9 @@ MonoBehaviour:
   _iconsSpacing: 0.4
   _entityCanvasIconPrefab: {fileID: 809770600236111286, guid: 972e0e131d9c2874caa79ad139b061f9, type: 3}
   _canvasIconParent: {fileID: 1543958672118755204}
+  _abilityIconsHeight: 0.2
+  _abilityIconsSpacing: 0.4
+  _entityCanvasAbilityIconPrefab: {fileID: 5566936337026502411, guid: f93aed42ef593ba4099a0c1ac0b25373, type: 3}
 --- !u!114 &7098606200419486982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6447114768740418421, guid: e29c3f767fe9afb48953138485697c0c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.25
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6447114768740418421, guid: e29c3f767fe9afb48953138485697c0c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -212,7 +215,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120107346048484211, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2120107346048484211, guid: c94f6cb334353c44fa1fb335acc06822, type: 3}
       propertyPath: m_LocalPosition.z

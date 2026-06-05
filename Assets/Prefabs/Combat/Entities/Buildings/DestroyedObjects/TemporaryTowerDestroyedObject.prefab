@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
-  _canBeIdleInspected: 0
+  _canBeIdleInspected: 1
   _localizationKey: destroyed_temporary_building_entity_tooltip
 --- !u!114 &6622374694917245992
 MonoBehaviour:
@@ -339,7 +339,9 @@ MonoBehaviour:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 100
+  _defaultBuildingTags: 
   _buildingEntityType: 0
+  _buildingAttackType: 0
   _destroyOnDeath: 1
   _leavesBuildingDestroyedObject: 0
   _buildingDestroyedObjectPrefab: {fileID: 0}
@@ -370,3 +372,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DraggableAudioPlayer
   _audioClipToPlayOnPickedUp: 0
   _audioClipToPlayOnPlaced: 5
+  _audioClipToPlayOnDragged: 0

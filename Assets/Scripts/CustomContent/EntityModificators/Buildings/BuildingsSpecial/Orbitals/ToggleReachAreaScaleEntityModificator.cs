@@ -1,17 +1,22 @@
 public sealed class ToggleReachAreaScaleEntityModificator : EntityModificator
 {
+    private EntityCanvasAbilityIcon _abilityIcon;
     private StatModifier _statModifier = new();
     
     public override void Enable()
     {
         Entity.StatContainer.Get<ReachAreaScale>().AddStatModifier(_statModifier);
         Entity.Activated += ChangeReachAreaScale;
+
+        _abilityIcon = AddAbilityIcon(1);
     }
 
     public override void Disable()
     {
         Entity.StatContainer.Get<ReachAreaScale>().RemoveStatModifier(_statModifier);
         Entity.Activated -= ChangeReachAreaScale;
+        
+        RemoveAbilityIcon(_abilityIcon);
     }
     
     private void ChangeReachAreaScale()
@@ -26,5 +31,5 @@ public sealed class ToggleReachAreaScaleEntityModificator : EntityModificator
         {
             _statModifier.SetFlat(0);
         }
-    }
+    } 
 }

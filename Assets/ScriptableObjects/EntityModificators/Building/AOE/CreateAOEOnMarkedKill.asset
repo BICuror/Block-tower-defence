@@ -61,6 +61,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -119,6 +120,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -164,7 +166,7 @@ MonoBehaviour:
   _tagsInclude: 0
   _buildingEntityTypeTags: 030000000600000008000000
   _rarity: 2
-  _tags: 0a000000
+  _tags: 0a00000006000000
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0

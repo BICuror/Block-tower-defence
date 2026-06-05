@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4a6e7d36b2886418cccf2573ce06be, type: 3}
   m_Name: StoneBiome
   m_EditorClassIdentifier: 
-  _heightMultiplier: 7
+  _heightMultiplier: 2
   _noiseSetting:
   - NoiseCurve:
       serializedVersion: 2
@@ -40,7 +40,7 @@ MonoBehaviour:
       m_RotationOrder: 4
     NoiseScale: {x: 1, y: 1}
   _decorationModule:
-    DecorationAppearRate: 0.15
+    DecorationAppearRate: 0.085
     Decorations:
     - _appearRate: 1
       DecorationData: {fileID: 11400000, guid: f6df80aeb280ce343acd6ccfd249ef11, type: 2}

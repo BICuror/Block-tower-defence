@@ -24,11 +24,8 @@ public sealed class GameControllerDragState : GameControllerState
     }
 
     private void TryActivateObject(InputAction.CallbackContext context)
-    {
-        if (context.interaction is TapInteraction)
-        {
-            _dragController.ActivatedSomething(GetPointerPosition());
-        }
+    { 
+        _dragController.ActivatedSomething(GetPointerPosition());
     }
 
     private void TryEnterState()

@@ -22,6 +22,16 @@ public abstract class EntityModificator
         Entity.ComponentsContainer.Get<EntityCanvas>().RemoveIcon(icon);
     }
     
+    protected EntityCanvasAbilityIcon AddAbilityIcon(float value, EntityCanvasAbilityIcon customIconPrefab = null)
+    {
+        return Entity.ComponentsContainer.Get<EntityCanvas>().AddAbilityIcon(ModificatorData.Icon, value, customIconPrefab);
+    }
+
+    protected void RemoveAbilityIcon(EntityCanvasAbilityIcon icon)
+    {
+        Entity.ComponentsContainer.Get<EntityCanvas>().RemoveAbilityIcon(icon);
+    }
+    
     protected EntityCanvasBar AddBar(float value, EntityCanvasBar customBarPrefab = null)
     {
         return Entity.ComponentsContainer.Get<EntityCanvas>().AddBar(ModificatorData.Icon, value, customBarPrefab);

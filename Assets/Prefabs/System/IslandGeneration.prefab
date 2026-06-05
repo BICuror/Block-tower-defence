@@ -739,7 +739,6 @@ MonoBehaviour:
   _maximalWeightFromSpawner: 23
   _minimalAdditionalRoad: 1
   _maximalAdditionalRoad: 5
-  _solidObjectsLayer: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _maximalRaduis: 12
 --- !u!1 &5577991169471601263
 GameObject:
@@ -785,11 +784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feffaca03058bb246a0738b53c6faa08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _terrainLayerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
-  _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _bloodTowerPrefab: {fileID: 2108226235141063515, guid: 31e636404eacdae42842dd3318d6299a, type: 3}
   _bloodTowerRadius: 3
-  _requiredPercentFromSpawner: 0.25
+  _requiredPercentFromSpawner: 0.33
   _minimalCenterDistance: 7
   _maxRoadTilesInRadius: 18
   _minRoadTilesInRadius: 8
@@ -840,8 +837,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b35d1cddb184274899dc9fd882c8666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _terrainLayerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
-  _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _totemPrefabs:
   - {fileID: 5955889270673498647, guid: f61747bda8b589f4fa18db7875b02c11, type: 3}
   - {fileID: 5955889270673498647, guid: f7e6a49c7b3f4de49805eceaea09f780, type: 3}
@@ -1005,8 +1000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15bb65afa567e354bae8d84fd4faca9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _terrainLayerSetting: {fileID: 11400000, guid: 8cf621b4f25aa5f4b9c18142a9365f06, type: 2}
-  _solidLayerSetting: {fileID: 11400000, guid: 48ac404c03e63134ab225bbbc8d40560, type: 2}
   _chargableTotemPrefab: {fileID: 94815796258084472, guid: 75c1c28f45591f941938cb6d54577b42, type: 3}
   _chargeTotemRadius: 3
   _minimalCenterDistance: 6
@@ -1075,8 +1068,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxDecorationRadius: 1
-  _useRaycastToDeactivateDecorations: 1
-  _decorationLayerSetting: {fileID: 11400000, guid: d7642da9f7d5d794f9fe351482d9bfab, type: 2}
 --- !u!1 &7435840197688889996
 GameObject:
   m_ObjectHideFlags: 0

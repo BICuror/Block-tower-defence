@@ -9,29 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: HealOtherBuildingsOnDeath
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: ToggleAreaScale
   m_EditorClassIdentifier: 
-  _icon: {fileID: 0}
-  _localizationKey: heal_other_buildings_on_death_entity_modificator_tooltip
+  _icon: {fileID: -913185330, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _localizationKey: orbital_toggle_area_scale_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems:
-    - _argumentType: 1
-      _argumentName: HealPercent
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0.66
-      _stringArgument: 
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+    _argumentItems: []
   _itemTypeContainers:
-  - _itemTypeName: HealAllBuidlingsOnDeathEntityModificator
+  - _itemTypeName: ToggleReachAreaScaleEntityModificator
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -47,6 +33,8 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -88,12 +76,71 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 0
-  _buildingEntityTypeTags: 0600000007000000
+  - _itemTypeName: EntityModificatorStatChange
+    AllEffectTypeNames:
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
+    - AttackAllEnemiesInAreaEntityModificator
+    - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
+    - CreateBombsAtWaveStart
+    - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
+    - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 05000000
   _rarity: 2
-  _tags: 00000000
+  _tags: 
   _hasStacks: 1
-  _maxStacks: 3
+  _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 0
@@ -108,5 +155,8 @@ MonoBehaviour:
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
-  _statChanges: []
+  _statChanges:
+  - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
+    FlatChange: 1
+    MultiplierChange: 0
   _statInitializers: []

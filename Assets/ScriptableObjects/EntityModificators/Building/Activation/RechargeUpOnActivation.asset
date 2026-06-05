@@ -20,7 +20,7 @@ MonoBehaviour:
       _argumentName: Duration
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 8
+      _floatArgument: 5
       _stringArgument: 
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -58,6 +58,20 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+    - _argumentType: 0
+      _argumentName: ActivationStacks
+      _intArgument: 2
+      _boolArgument: 0
+      _floatArgument: 5
+      _stringArgument: RechargeUpEffect
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 848744844543777820, guid: 6720f4f1703cef941a05e2948a90a811, type: 3}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _itemTypeContainers:
   - _itemTypeName: ApplyEffectOnActivation
     AllEffectTypeNames:
@@ -75,6 +89,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 using Cashing;
 using Combat;
 using System;
+using Cysharp.Threading.Tasks;
 
 public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 {
@@ -12,7 +12,7 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 
     [Header("UI")] 
     [SerializeField] private Sprite _iconSprite;
-    private EntityCanvasIcon _entityCanvasIcon;
+    private EntityCanvasAbilityIcon _abilityIcon;
     [Cached] private EntityCanvas _canvas;
     
     [Header("Links")]
@@ -25,23 +25,22 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
     [SerializeField] private bool _canBeCastOutOfAttackState = false;
     
     [Header("Charges")]
-    [SerializeField] private bool _hasCharges;
-    [ShowIf("_hasCharges")] [SerializeField] private int _maxCharges;
+    [SerializeField] private int _maxCharges;
     private Type _effectType;
     private int _charges;
     
     protected void Start()
     {
         _effectType = Type.GetType(_effectTypeName);
-
         _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted += TryRefillCharge;
+        _abilityIcon = _canvas.AddAbilityIcon(_iconSprite, (float)_charges / _maxCharges);
     }
 
     protected void ApplyEffect()
     {
         if (!_canBeCastOutOfAttackState && _waveStateMachine.CurrentState != WaveState.Attack) return;
         
-        if (_hasCharges && _charges <= 0) return;
+        if (_charges <= 0) return;
         
         IReadOnlyList<CombatEntity> entitiesInArea = _areaEntityDetector.GetList();
 
@@ -71,28 +70,14 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 
     private void UpdateIconState()
     {
-        if (!_hasCharges) return;
-
-        if (_charges < 0 && _entityCanvasIcon)
-        {
-            _canvas.RemoveIcon(_entityCanvasIcon);
-            _entityCanvasIcon = null;
-            return;
-        }
-
-        if (_charges > 0 && !_entityCanvasIcon)
-        {
-            _entityCanvasIcon = _canvas.AddIcon(_iconSprite, true, _charges);
-            return;
-        }
-        
-        _entityCanvasIcon.SetValue(_charges);
+        _abilityIcon.SetValue((float)_charges / _maxCharges).Forget();
     }
     
     private void OnDestroy()
     {
         _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted -= TryRefillCharge;
         _charges = 0;
+        _canvas.RemoveAbilityIcon(_abilityIcon);
         UpdateIconState();
     }
 }

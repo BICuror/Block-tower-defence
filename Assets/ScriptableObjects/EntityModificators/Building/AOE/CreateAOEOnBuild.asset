@@ -9,15 +9,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
-  m_Name: ToggleAreaScale
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: CreateAOEOnBuild
   m_EditorClassIdentifier: 
-  _icon: {fileID: -913185330, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
-  _localizationKey: orbital_toggle_area_scale_entity_modificator_tooltip
+  _icon: {fileID: -1342571092, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: create_aoe_on_build_entity_modificator_tooltip
   _argumentsContainer:
-    _argumentItems: []
+    _argumentItems:
+    - _argumentType: 2
+      _argumentName: AOEPrefab
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 2054331593039991038, guid: b50e564510b511e45bae035588053c3e, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 0}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _itemTypeContainers:
-  - _itemTypeName: ToggleReachAreaScaleEntityModificator
+  - _itemTypeName: CreateAOEOnBuild
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -33,6 +47,66 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
+    - CreateBombsAtWaveStart
+    - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
+    - CustomParticleEntityModifier
+    - DamageModifierEntityModificator
+    - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
+    - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
+    - ExecuteEntitiesInArea
+    - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
+    - HeavyMortarCore
+    - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoreDamageNearbyWater
+    - MoveDiagonalyEntityModifier
+    - MultishotEntityModificator
+    - OnActivationInvokeTaskAndHurt
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
+    - ScaleDamageWithHeight
+    - ShieldEntityModificator
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - TakeDamageUponPlacement
+    - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  - _itemTypeName: EntityModificatorStatCreate
+    AllEffectTypeNames:
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEffectOnActivation
+    - ApplyEntityEffectOnHit
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
+    - AttackAllEnemiesInAreaEntityModificator
+    - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -91,6 +165,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -133,28 +208,36 @@ MonoBehaviour:
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
-  _tagsInclude: 1
-  _buildingEntityTypeTags: 05000000
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 060000000800000007000000
   _rarity: 2
-  _tags: 
+  _tags: 0600000013000000
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
-  _hasRequiredTags: 0
+  _hasRequiredTags: 1
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Requirements: []
+    Requirements:
+    - Tag: 6
+      Amount: 1
   _blockOtherEntityTags:
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
   _statChanges:
-  - StatData: {fileID: 11400000, guid: 026a0b73cbdd5884ab97523621e42de2, type: 2}
-    FlatChange: 1
+  - StatData: {fileID: 11400000, guid: 39cc8c671d43b0f428830efa8702d1e7, type: 2}
+    FlatChange: 0.5
     MultiplierChange: 0
-  _statInitializers: []
+  _statInitializers:
+  - StructName: 
+    _statData: {fileID: 11400000, guid: 20a523a05882b7b459a94f9e821998e2, type: 2}
+    _defaultValue: 1.5
+  - StructName: 
+    _statData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
+    _defaultValue: 1

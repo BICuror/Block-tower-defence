@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f4a6e7d36b2886418cccf2573ce06be, type: 3}
   m_Name: DefaultBiome
   m_EditorClassIdentifier: 
-  _heightMultiplier: 3
+  _heightMultiplier: 2
   _noiseSetting:
   - NoiseCurve:
       serializedVersion: 2
@@ -40,17 +40,17 @@ MonoBehaviour:
       m_RotationOrder: 0
     NoiseScale: {x: 1, y: 1}
   _decorationModule:
-    DecorationAppearRate: 0.25
+    DecorationAppearRate: 0.444
     Decorations:
-    - _appearRate: 0.218
+    - _appearRate: 0.5
       DecorationData: {fileID: 11400000, guid: a21cd38cdfd1bce4fbeae69c4c6eecfd, type: 2}
-    - _appearRate: 0.46
+    - _appearRate: 0.815
       DecorationData: {fileID: 11400000, guid: f6df80aeb280ce343acd6ccfd249ef11, type: 2}
-    - _appearRate: 0.599
+    - _appearRate: 0.824
       DecorationData: {fileID: 11400000, guid: 59367e2f56321b24e9e135c5f0625834, type: 2}
-    - _appearRate: 0.631
+    - _appearRate: 0.852
       DecorationData: {fileID: 11400000, guid: 0ee16943d163a23439e5103c5e1d4303, type: 2}
-    - _appearRate: 0.67
+    - _appearRate: 0.874
       DecorationData: {fileID: 11400000, guid: 6c887d8b346a2c24eb92365c5c5b3850, type: 2}
     - _appearRate: 1
       DecorationData: {fileID: 11400000, guid: 6c51ee8e810bc7b4db46c6d4fff55948, type: 2}

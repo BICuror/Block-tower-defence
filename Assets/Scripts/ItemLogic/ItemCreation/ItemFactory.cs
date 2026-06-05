@@ -1,18 +1,20 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
+using WorldGeneration;
 using System.Linq;
 using UnityEngine;
 using Zenject;
 using System;
-
 using Random = UnityEngine.Random;
 
 public sealed class ItemFactory : MonoBehaviour
 {
+    [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private DraggableCreator _draggableCreator;
     [Inject] private ItemsContainer _itemsContainer;
 
+    [SerializeField] private float _creationRadius = 3;
     [SerializeField] private GlobalEffectData _startWaveEffectData; 
     [SerializeField] private ItemEffectSelector _effectSelector;
     [SerializeField] private List<Item> _itemsPrefabs;
@@ -29,8 +31,8 @@ public sealed class ItemFactory : MonoBehaviour
     {
         List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(11, 3, 2);
             
-        CreateItemFromEffects(globalEffects[0], new Vector3(12f, 0f, 12)).Forget();
-        CreateItemFromEffects(globalEffects[1], new Vector3(12f, 0f, 12)).Forget();
+        CreateItemFromEffects(globalEffects[0], new Vector3(12f, 0f, 12), Vector3.zero).Forget();
+        CreateItemFromEffects(globalEffects[1], new Vector3(12f, 0f, 12), Vector3.zero).Forget();
     } 
 #endif
     
@@ -38,9 +40,25 @@ public sealed class ItemFactory : MonoBehaviour
     {
         List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(totalStrength, minimalItemStrength, itemAmount);
             
-        for (int i = 0; i < globalEffects.Count; i++)
+        float angleStep = 360f / (itemAmount + 1);
+        
+        float offset = Random.Range(0, 360f);
+        
+        for (int i = 0; i < itemAmount + 1; i++)
         {
-            await CreateItemFromEffects(globalEffects[i], position);
+            Vector3 finalPosition = GetOffset(i) + position;
+            finalPosition.y = _islandHeightMapHolder.GetHeightSafe(Mathf.RoundToInt(finalPosition.x), Mathf.RoundToInt(finalPosition.z)) + 1;
+            
+            if (itemAmount > i) await CreateItemFromEffects(globalEffects[i], position, finalPosition);
+            else await CreateStartWaveItem(position, finalPosition);
+        }
+        
+        Vector3 GetOffset(int index)
+        {
+            float xOffset = Mathf.Cos(Mathf.Deg2Rad * (angleStep * index + offset)) * _creationRadius;
+            float zOffset = Mathf.Sin(Mathf.Deg2Rad * (angleStep * index + offset)) * _creationRadius;
+
+            return new Vector3(xOffset, 0f, zOffset);
         }
     }
     
@@ -48,13 +66,16 @@ public sealed class ItemFactory : MonoBehaviour
     {
         _effectSelector.TryGetItemEffectDatas(strength, new(), false, out List<GlobalEffectData> effectDatas);
         
-        await CreateItemFromEffects(effectDatas, position);
+        await CreateItemFromEffects(effectDatas, position, Vector3.zero);
     }
 
-    private async UniTask CreateItemFromEffects(List<GlobalEffectData> effectDatas, Vector3 position)
+    private async UniTask CreateItemFromEffects(List<GlobalEffectData> effectDatas, Vector3 position, Vector3 desiredPosition)
     {
         Item itemPrefab = GetItemPrefab();
-        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(itemPrefab, position);
+        DraggableObject itemDraggable;
+        if (desiredPosition == Vector3.zero) itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(itemPrefab, position);
+        else itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(itemPrefab, position, desiredPosition);
+        
         Item item = itemDraggable.GetComponent<Item>();
         
         item.AddToggleEffectDatas(effectDatas);
@@ -69,9 +90,9 @@ public sealed class ItemFactory : MonoBehaviour
         item.ItemDestroyed += RemoveItem;
     }
 
-    public async UniTask CreateStartWaveItem(Vector3 centerPosition)
+    public async UniTask CreateStartWaveItem(Vector3 centerPosition, Vector3 finalPosition)
     {
-        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnRandomPosition(_waveItemPrefab, centerPosition);
+        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(_waveItemPrefab, centerPosition, finalPosition);
         Item item = itemDraggable.GetComponent<Item>();
 
         List<GlobalEffectData> effectDatas = new List<GlobalEffectData>() {_startWaveEffectData};

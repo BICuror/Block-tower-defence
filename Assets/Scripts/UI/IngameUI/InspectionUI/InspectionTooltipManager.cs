@@ -156,7 +156,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
 
         _layers.Get(layer).ForEach(async (element) => 
         {
-            await SetElementState(element, _currentActiveLayer == layer);
+            await SetElementState(element, _currentActiveLayer == layer || layer == UILayer.Group);
         });
     }
 

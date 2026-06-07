@@ -7,14 +7,14 @@ public sealed class InspectableObject : MonoBehaviour
 {
     [SerializeField] private bool _pauseOnInspection;
     [SerializeField] private bool _canBeIdleInspected;
-    [ShowIf("_canBeIdleInspected")] [SerializeField] private float _idleHoldInspectionDelay = 0.6f;
+    [ShowIf("_canBeIdleInspected")] [SerializeField] private float _idleInspectionDelay = 0.4f;
     [SerializeField] private string _localizationKey;
     private ReplaceableDataParser _replaceableDataParser = new();
     private bool _isInspected;
     
     public bool IsInspected => _isInspected;
     public bool CanBeIdleInspected => _canBeIdleInspected;
-    public float IdleHoldInspectionDelay => _idleHoldInspectionDelay;
+    public float IdleInspectionDelay => _idleInspectionDelay;
     
     public bool PauseOnInspection => _pauseOnInspection;
     public string Name => (_localizationKey + "_header").Localize();

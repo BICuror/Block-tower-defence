@@ -1,17 +1,16 @@
+using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
 
 public abstract class GameControllerState : MonoBehaviour
 {
-    protected GameControls GameControls;
-
     public event Action<ControllerState> TriedToEnterState;
     public event Action<ControllerState> TriedToExitState;
 
     protected bool IsActive;
     protected abstract ControllerState State { get; }
     
-    public abstract void Initialize(GameControls controls);
+    public abstract void Initialize(InputActionMap actionMap);
 
     public void Enter()
     {

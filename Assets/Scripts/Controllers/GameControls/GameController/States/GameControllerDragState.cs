@@ -1,4 +1,3 @@
-using UnityEngine.InputSystem.Interactions;
 using UnityEngine.InputSystem;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -10,17 +9,21 @@ public sealed class GameControllerDragState : GameControllerState
     [Inject] private CursorController _cursorController;
     [Inject] private DragController _dragController;
     
-    private GameControls _controls;
+    private InputAction _pointerPositionAction;
+    private InputAction _activateAction;
+    private InputAction _dragAction;
     
     protected override ControllerState State => ControllerState.Dragging;
 
-    public override void Initialize(GameControls controls)
+    public override void Initialize(InputActionMap actionMap)
     {
-        _controls = controls;
+        _pointerPositionAction = actionMap["PointerPosition"];
+        _activateAction = actionMap["ActivateOrDragCamera"];
+        _dragAction = actionMap["DragOrRotateCamera"];
         
-        _controls.TouchInput.LMB.started += _ => TryEnterState();
-        _controls.TouchInput.LMB.canceled += _ => InvokeTryExitState();
-        _controls.TouchInput.RMB.performed += TryActivateObject;
+        _dragAction.started += _ => TryEnterState();
+        _dragAction.canceled += _ => InvokeTryExitState();
+        _activateAction.performed += TryActivateObject;
     }
 
     private void TryActivateObject(InputAction.CallbackContext context)
@@ -49,7 +52,7 @@ public sealed class GameControllerDragState : GameControllerState
 
     private async UniTask DragObject()
     {
-        while (_controls.TouchInput.LMB.IsPressed() && IsActive)
+        while (_dragAction.IsPressed() && IsActive)
         {
             await UniTask.WaitForFixedUpdate();
             
@@ -64,5 +67,5 @@ public sealed class GameControllerDragState : GameControllerState
 
     public override bool CanExitStateTo(ControllerState currentState) => currentState is ControllerState.Idle;
     
-    private Vector2 GetPointerPosition() => _controls.TouchInput.PointerPosition.ReadValue<Vector2>();
+    private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
 }

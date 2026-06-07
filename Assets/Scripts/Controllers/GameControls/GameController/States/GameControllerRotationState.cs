@@ -1,20 +1,32 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using Zenject;
 
 public sealed class GameControllerRotationState : GameControllerState
 {
     [Inject] private CameraRotationController _cameraRotationController;
-    private GameControls _controls;
+    [Inject] private InspectorController _inspectorController;
+    
+    private InputAction _pointerPositionAction;
+    private InputAction _dragAction;
     
     protected override ControllerState State => ControllerState.Rotating;
     
-    public override void Initialize(GameControls controls)
+    public override void Initialize(InputActionMap actionMap)
     {
-        _controls = controls;
+        _pointerPositionAction = actionMap["PointerPosition"];
+        _dragAction = actionMap["DragOrRotateCamera"];
         
-        _controls.TouchInput.LMB.started += _ => InvokeTryEnterState();
-        _controls.TouchInput.LMB.canceled += _ => InvokeTryExitState();
+        _dragAction.started += _ => TryEnterState();
+        _dragAction.canceled += _ => InvokeTryExitState();
+    }
+    
+    private void TryEnterState()
+    {
+        if (_inspectorController.IsHoveredOverNonIdleUI()) return;
+
+        InvokeTryEnterState();
     }
 
     protected override void OnEnter()
@@ -25,7 +37,7 @@ public sealed class GameControllerRotationState : GameControllerState
 
     private async UniTask RotateCamera()
     {
-        while (_controls.TouchInput.LMB.IsPressed() && IsActive)
+        while (_dragAction.IsPressed() && IsActive)
         {
             await UniTask.WaitForFixedUpdate();
             
@@ -35,9 +47,9 @@ public sealed class GameControllerRotationState : GameControllerState
         InvokeTryExitState();
     }
 
-    public override bool CanEnterStateFrom(ControllerState currentState) => currentState is ControllerState.Idle or ControllerState.PositionDragging;
+    public override bool CanEnterStateFrom(ControllerState currentState) => currentState is ControllerState.Idle or ControllerState.PositionDragging or ControllerState.Inspecting;
 
     public override bool CanExitStateTo(ControllerState currentState) => currentState is ControllerState.Inspecting or ControllerState.Idle or ControllerState.PositionDragging; 
     
-    private Vector2 GetPointerPosition() => _controls.TouchInput.PointerPosition.ReadValue<Vector2>();
+    private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
 }

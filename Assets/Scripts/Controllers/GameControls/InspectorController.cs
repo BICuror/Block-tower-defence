@@ -35,8 +35,10 @@ public class InspectorController : MonoBehaviour
     }
     
 
-    public bool TryToStartIdleInspecting(Vector2 mousePosition)
+    public bool TryFindIdleInspectable(Vector2 mousePosition, out InspectableObject inspectableObject)
     {
+        inspectableObject = null;
+        
         if (_inspectionTooltipManager.NonIdleTooltipsOpened) return false;
         
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
@@ -45,6 +47,7 @@ public class InspectorController : MonoBehaviour
         {
             if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             {
+                inspectableObject = hoveredInspectable;
                 return hoveredInspectable.CanBeIdleInspected;
             }
         }
@@ -74,8 +77,10 @@ public class InspectorController : MonoBehaviour
             return true;
         }
         
-        return !_inspectionTooltipManager.HoveredOverNonIdleTooltip;
+        return !IsHoveredOverNonIdleUI();
     }
+
+    public bool IsHoveredOverNonIdleUI() => _inspectionTooltipManager.HoveredOverNonIdleTooltip;
     
     public void StopInspecting() => _inspectionTooltipManager.DisableActiveSinglePopup();
     

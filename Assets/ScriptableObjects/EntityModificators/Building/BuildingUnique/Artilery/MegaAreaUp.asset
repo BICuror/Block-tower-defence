@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MegaAreaUp
   m_EditorClassIdentifier: 
   _icon: {fileID: 0}
-  _localizationKey: 'G#good +{ReachAreaScale_flat} good# #Reach | '
+  _localizationKey: altilery_area_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
   _itemTypeContainers:
@@ -33,6 +33,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath

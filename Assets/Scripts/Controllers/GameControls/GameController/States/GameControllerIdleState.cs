@@ -1,18 +1,20 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 public sealed class GameControllerIdleState : GameControllerState
 {
     [Inject] private InspectorController _inspectorController;
     [Inject] private CursorController _cursorController;
-    private GameControls _controls;
+    
+    private InputAction _pointerPositionAction;
 
     protected override ControllerState State => ControllerState.Idle;
 
-    public override void Initialize(GameControls controls)
+    public override void Initialize(InputActionMap actionMap)
     {
-        _controls = controls;
+        _pointerPositionAction = actionMap["PointerPosition"];
     }
 
     protected override void OnEnter()
@@ -44,5 +46,5 @@ public sealed class GameControllerIdleState : GameControllerState
     public override bool CanEnterStateFrom(ControllerState currentState) => true;
     public override bool CanExitStateTo(ControllerState currentState) => true;
     
-    private Vector2 GetPointerPosition() => _controls.TouchInput.PointerPosition.ReadValue<Vector2>();
+    private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
 }

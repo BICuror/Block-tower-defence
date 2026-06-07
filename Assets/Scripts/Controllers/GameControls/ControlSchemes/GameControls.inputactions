@@ -3,7 +3,7 @@
     "name": "GameControls",
     "maps": [
         {
-            "name": "TouchInput",
+            "name": "GameControls",
             "id": "83b0a702-3d20-4c1d-85da-e2b1105b3f92",
             "actions": [
                 {
@@ -34,7 +34,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LMB",
+                    "name": "ActivateOrDragCamera",
                     "type": "Button",
                     "id": "f9e6ee71-80fb-438c-82c2-59953b554c6a",
                     "expectedControlType": "",
@@ -43,7 +43,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RMB",
+                    "name": "DragOrRotateCamera",
                     "type": "Button",
                     "id": "8bf2ada9-6e15-4161-ad5f-b147e4afebc6",
                     "expectedControlType": "",
@@ -55,16 +55,16 @@
                     "name": "ReturnDefaultCameraPosition",
                     "type": "Button",
                     "id": "739e6511-4277-4978-b23c-6231c2e1c614",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "TimeToggle",
+                    "name": "ToggleTime",
                     "type": "Button",
                     "id": "129a129b-33bb-46e2-b9f9-47294dff7e4e",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -73,6 +73,42 @@
                     "name": "Inspection",
                     "type": "Button",
                     "id": "5443b6a2-d1f3-496f-8b6a-7886f2560676",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraForward",
+                    "type": "Button",
+                    "id": "ba97081c-bb1d-49b4-ab70-f203d4e074cb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraBack",
+                    "type": "Button",
+                    "id": "85b2c363-b592-450f-a2a9-5d7fbfdba651",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraRight",
+                    "type": "Button",
+                    "id": "5fd2235d-845e-4cca-96c0-50d264390e40",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraLeft",
+                    "type": "Button",
+                    "id": "827db895-6765-44d6-aa42-6b7a4885b6bf",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -171,22 +207,22 @@
                 {
                     "name": "",
                     "id": "6443cff4-bb6c-4c3f-b7ea-e75ba0666e16",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RMB",
+                    "action": "DragOrRotateCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "be2bb755-fa13-429f-be41-2a7028d557b4",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LMB",
+                    "action": "ActivateOrDragCamera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -208,7 +244,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "TimeToggle",
+                    "action": "ToggleTime",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -220,6 +256,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Inspection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ef35b0a-9d9f-4cd8-a09a-eb85478fa548",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a104432d-8f66-4fcc-b599-35ecd043f811",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1af2ce0b-20e9-433b-9586-5faf154c99b5",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fa2716d8-435c-415d-97ac-b1101ca1ad37",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

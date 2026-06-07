@@ -1,3 +1,4 @@
+using UnityEngine.InputSystem;
 using CuroSettings;
 using UnityEngine;
 using Zenject;
@@ -7,8 +8,11 @@ public sealed class CameraPositionController : MonoBehaviour
 {
     [Inject] private IslandDataContainer _islandDataContainer;
     
-    [SerializeField] private Camera _camera;
+    [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Transform _cameraCenter;
+    [SerializeField] private Camera _camera;
+    
+    [Header("MovementSettings")]
     [SerializeField] private float _cameraCenterMovementSpeed = 0.3f;
     [SerializeField] private float _cameraDragSpeed = 0.003f;
     [SerializeField] private float _height = 5f;
@@ -19,7 +23,6 @@ public sealed class CameraPositionController : MonoBehaviour
     private FloatSetting _cameraMovementSensitivity;
     private FloatSetting _cameraDragSensitivity;
     
-    private CameraPositionControls _controls;
     private Vector2 _currentPosition;
     private Vector2 _movementInput;
     private float _highestBorder;
@@ -99,31 +102,19 @@ public sealed class CameraPositionController : MonoBehaviour
         
     #region Enable\Disable
     
-    public void Enable() => _controls.Enable();
-    public void Disable() => _controls.Disable();
-    
     private void CreateControls()
     {
-        _controls = new CameraPositionControls();
-
-        _controls.Main.Right.started += _ => _movementInput.x += 1;
-        _controls.Main.Right.canceled += _ => _movementInput.x -= 1;
+        _playerInput.currentActionMap["CameraRight"].started += _ => _movementInput.x += 1;
+        _playerInput.currentActionMap["CameraRight"].canceled += _ => _movementInput.x -= 1;
         
-        _controls.Main.Left.started += _ => _movementInput.x -= 1;
-        _controls.Main.Left.canceled += _ => _movementInput.x += 1;
+        _playerInput.currentActionMap["CameraLeft"].started += _ => _movementInput.x -= 1;
+        _playerInput.currentActionMap["CameraLeft"].canceled += _ => _movementInput.x += 1;
         
-        _controls.Main.Forward.started += _ => _movementInput.y += 1;
-        _controls.Main.Forward.canceled += _ => _movementInput.y -= 1;
+        _playerInput.currentActionMap["CameraForward"].started += _ => _movementInput.y += 1;
+        _playerInput.currentActionMap["CameraForward"].canceled += _ => _movementInput.y -= 1;
         
-        _controls.Main.Back.started += _ => _movementInput.y -= 1;
-        _controls.Main.Back.canceled += _ => _movementInput.y += 1;
-    }
-    
-    private void OnDestroy() 
-    {
-        Disable();
-        _controls.Dispose();
-        _controls = null;
+        _playerInput.currentActionMap["CameraBack"].started += _ => _movementInput.y -= 1;
+        _playerInput.currentActionMap["CameraBack"].canceled += _ => _movementInput.y += 1;
     }
     
     #endregion 

@@ -31,7 +31,7 @@ public sealed class WaveContentController : MonoBehaviour
         switch (contentType)
         {
             case WaveContentType.BuildingSelection: break;
-            case WaveContentType.FreeBuildingUpgradeSelection: _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade, 5)); break;
+            case WaveContentType.FreeBuildingUpgradeSelection: _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade, 4)); break;
             case WaveContentType.BossWave: break;
         }
     }

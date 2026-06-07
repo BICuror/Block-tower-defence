@@ -1,3 +1,5 @@
+using TMPEffects.SerializedCollections;
+using UnityEngine.InputSystem;
 using UnityEngine;
 using Zenject;
 
@@ -8,17 +10,17 @@ public sealed class GameController : MonoBehaviour
     [Inject] private HoverableController _hoverableController; 
     [Inject] private TimeController _timeController;
     
-    [SerializeField] private TMPEffects.SerializedCollections.SerializedDictionary<ControllerState, GameControllerState> _states = new();
-    
-    private GameControls _controls;
+    [SerializeField] private SerializedDictionary<ControllerState, GameControllerState> _states = new();
+    [SerializeField] private PlayerInput _controls;
 
     private ControllerState _currentControllerState;
-
+    private InputAction _pointerPositionAction;
+    
     private void InitializeStates()
     {
         foreach (GameControllerState gameControllerState in _states.Values)
         {
-            gameControllerState.Initialize(_controls);
+            gameControllerState.Initialize(_controls.currentActionMap);
             gameControllerState.TriedToEnterState += TryEnterState;
             gameControllerState.TriedToExitState += TryExitState;
         }
@@ -50,21 +52,19 @@ public sealed class GameController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        _hoverableController.CheckHover(_controls.TouchInput.PointerPosition.ReadValue<Vector2>());
+        _hoverableController.CheckHover(_pointerPositionAction.ReadValue<Vector2>());
     }
 
     #region Enable\Disable
 
     public void Enable()
     {
-        _controls.Enable();
-        _cameraPositionController.Enable();
+        _controls.currentActionMap.Enable();
     }
 
     public void Disable()
     {
-        _controls.Disable();
-        _cameraPositionController.Disable();
+        _controls.currentActionMap.Disable();
     } 
 
     private void Start()
@@ -76,22 +76,21 @@ public sealed class GameController : MonoBehaviour
     
     private void CreateControls()
     {
-        _controls = new GameControls();
-
-        _controls.TouchInput.ReturnDefaultCameraPosition.performed += _ => _cameraPositionController.SetDefaultPosition();
-
-        _controls.TouchInput.ScrolledUp.started += _ => _cameraZoomController.ZoomIn();
-        _controls.TouchInput.ScrolledDown.started += _ => _cameraZoomController.ZoomOut();
+        _pointerPositionAction = _controls.currentActionMap["PointerPosition"];
         
-        _controls.TouchInput.TimeToggle.performed += _ => _timeController.ToggleTimeScale();
+        _controls.currentActionMap["ReturnDefaultCameraPosition"].performed += _ => _cameraPositionController.SetDefaultPosition();
+
+        _controls.currentActionMap["ScrolledUp"].performed += _ => _cameraZoomController.ZoomIn();
+        _controls.currentActionMap["ScrolledDown"].performed += _ => _cameraZoomController.ZoomOut();
+        
+        _controls.currentActionMap["ToggleTime"].performed += _ => _timeController.ToggleTimeScale();
 
         InitializeStates();
     }
 
-    private void OnDestroy() 
+    private void OnDestroy()
     {
         Disable();
-        _controls.Dispose();
         _controls = null;
     }
 

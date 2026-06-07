@@ -16,6 +16,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "PointerDelta",
+                    "type": "Value",
+                    "id": "e761c0ce-a85f-4eb8-9c7d-333be770575f",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "ScrolledUp",
                     "type": "Button",
                     "id": "8d42b8cc-62a2-4558-b5bd-b1c5bfe32f8b",
@@ -300,6 +309,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "CameraLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "60f21b87-c7f6-4427-9bc6-f52f877ffc1d",
+                    "path": "<Pointer>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

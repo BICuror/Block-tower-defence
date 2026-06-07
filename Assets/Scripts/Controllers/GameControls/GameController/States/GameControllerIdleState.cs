@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine;
 using Zenject;
 
 public sealed class GameControllerIdleState : GameControllerState

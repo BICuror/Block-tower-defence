@@ -79,4 +79,10 @@ public sealed class GameControllerInspectionState : GameControllerState
     }
     
     private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
+
+    public override void UnbindInputActions()
+    {
+        _inspectorController.InspectionStopped -= InvokeTryExitState;
+        _inspectionAction.performed -= TryEnterState;
+    }
 }

@@ -15275,6 +15275,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: chest_building_entity_tooltip
 --- !u!114 &642792427098173389
 MonoBehaviour:
@@ -15439,8 +15440,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
+  outlineColor: {r: 1, g: 0.5861086, b: 0.1462264, a: 1}
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
@@ -15758,8 +15759,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 0
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
-  outlineWidth: 2
+  outlineColor: {r: 1, g: 0.5861086, b: 0.1462264, a: 1}
+  outlineWidth: 1
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []

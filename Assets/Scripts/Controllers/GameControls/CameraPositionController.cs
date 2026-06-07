@@ -29,9 +29,7 @@ public sealed class CameraPositionController : MonoBehaviour
     private float _lowestBorder;
     private float _islandRadius;
     
-    private Vector2 _previousCursorPosition;
-    
-    private Vector2 _screenResolution => new Vector2(Screen.width, Screen.height);
+    private Vector2 _screenResolution => new(Screen.width, Screen.height);
     private Vector2 _cameraForward => new Vector2(_camera.transform.forward.x, _camera.transform.forward.z).normalized;
     private Vector2 _cameraRight => new Vector2(_camera.transform.right.x, _camera.transform.right.z).normalized;
 
@@ -47,8 +45,6 @@ public sealed class CameraPositionController : MonoBehaviour
         
         _highestBorder = _islandRadius + _islandRadius * _cameraRadiusScale;
         _lowestBorder = _islandRadius - _islandRadius * _cameraRadiusScale;
-       
-        CreateControls();
         
         SetDefaultPosition();
         _cameraCenter.position = new Vector3(_currentPosition.x, _height, _currentPosition.y);
@@ -59,18 +55,12 @@ public sealed class CameraPositionController : MonoBehaviour
         _currentPosition = new Vector2(_islandDataContainer.Data.CenterPositionIndex, _islandDataContainer.Data.CenterPositionIndex);
     }
     
-    public void CaptureCameraPosition(Vector2 cursorPosition) => _previousCursorPosition = cursorPosition;
-    
-    public void DragCamera(Vector2 cursorPosition)
+    public void DragCamera(Vector2 cameraDelta)
     {
-        Vector2 cursorPositionDifference = _previousCursorPosition - cursorPosition;
-
-        cursorPositionDifference /= _screenResolution;
-        
-        Vector2 movementDirection = _cameraForward * cursorPositionDifference.y + _cameraRight * cursorPositionDifference.x;
+        cameraDelta /= _screenResolution;
+        Vector2 movementDirection = _cameraForward * -cameraDelta.y + _cameraRight * -cameraDelta.x;
         
         _currentPosition += movementDirection * (_cameraDragSpeed * _cameraDragSensitivity.Value);
-        CaptureCameraPosition(cursorPosition);
         ClampCurrentPosition();
     }
     
@@ -102,20 +92,40 @@ public sealed class CameraPositionController : MonoBehaviour
         
     #region Enable\Disable
     
-    private void CreateControls()
+    public void BindControls()
     {
-        _playerInput.currentActionMap["CameraRight"].started += _ => _movementInput.x += 1;
-        _playerInput.currentActionMap["CameraRight"].canceled += _ => _movementInput.x -= 1;
+        _playerInput.currentActionMap["CameraRight"].started += IncreaseXVelocity;
+        _playerInput.currentActionMap["CameraRight"].canceled += DecreaseXVelocity;
         
-        _playerInput.currentActionMap["CameraLeft"].started += _ => _movementInput.x -= 1;
-        _playerInput.currentActionMap["CameraLeft"].canceled += _ => _movementInput.x += 1;
+        _playerInput.currentActionMap["CameraLeft"].started += DecreaseXVelocity;
+        _playerInput.currentActionMap["CameraLeft"].canceled += IncreaseXVelocity;
         
-        _playerInput.currentActionMap["CameraForward"].started += _ => _movementInput.y += 1;
-        _playerInput.currentActionMap["CameraForward"].canceled += _ => _movementInput.y -= 1;
+        _playerInput.currentActionMap["CameraForward"].started += IncreaseYVelocity;
+        _playerInput.currentActionMap["CameraForward"].canceled += DecreaseYVelocity;
         
-        _playerInput.currentActionMap["CameraBack"].started += _ => _movementInput.y -= 1;
-        _playerInput.currentActionMap["CameraBack"].canceled += _ => _movementInput.y += 1;
+        _playerInput.currentActionMap["CameraBack"].started += DecreaseYVelocity;
+        _playerInput.currentActionMap["CameraBack"].canceled += IncreaseYVelocity;
+    }
+
+    public void UnbindControls()
+    {
+        _playerInput.currentActionMap["CameraRight"].started -= IncreaseXVelocity;
+        _playerInput.currentActionMap["CameraRight"].canceled -= DecreaseXVelocity;
+        
+        _playerInput.currentActionMap["CameraLeft"].started -= DecreaseXVelocity;
+        _playerInput.currentActionMap["CameraLeft"].canceled -= IncreaseXVelocity;
+        
+        _playerInput.currentActionMap["CameraForward"].started -= IncreaseYVelocity;
+        _playerInput.currentActionMap["CameraForward"].canceled -= DecreaseYVelocity;
+        
+        _playerInput.currentActionMap["CameraBack"].started -= DecreaseYVelocity;
+        _playerInput.currentActionMap["CameraBack"].canceled -= IncreaseYVelocity;
     }
     
-    #endregion 
+    private void IncreaseXVelocity(InputAction.CallbackContext _) => _movementInput.x += 1;
+    private void DecreaseXVelocity(InputAction.CallbackContext _) => _movementInput.x -= 1;
+    private void IncreaseYVelocity(InputAction.CallbackContext _) => _movementInput.y += 1;
+    private void DecreaseYVelocity(InputAction.CallbackContext _) => _movementInput.y -= 1;
+
+    #endregion
 }

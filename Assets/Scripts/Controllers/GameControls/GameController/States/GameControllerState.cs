@@ -11,7 +11,7 @@ public abstract class GameControllerState : MonoBehaviour
     protected abstract ControllerState State { get; }
     
     public abstract void Initialize(InputActionMap actionMap);
-
+    
     public void Enter()
     {
         IsActive = true;
@@ -30,6 +30,10 @@ public abstract class GameControllerState : MonoBehaviour
     protected virtual void OnEnter() {}
     protected virtual void OnExit() {}
     
+    protected void InvokeTryEnterState(InputAction.CallbackContext _) => InvokeTryEnterState();
+    protected void InvokeTryExitState(InputAction.CallbackContext _) => InvokeTryExitState();
     protected void InvokeTryEnterState() => TriedToEnterState?.Invoke(State);
     protected void InvokeTryExitState() => TriedToExitState?.Invoke(State);
+    
+    public virtual void UnbindInputActions() {}
 }

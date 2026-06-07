@@ -21,17 +21,17 @@ public sealed class GameControllerDragState : GameControllerState
         _activateAction = actionMap["ActivateOrDragCamera"];
         _dragAction = actionMap["DragOrRotateCamera"];
         
-        _dragAction.started += _ => TryEnterState();
-        _dragAction.canceled += _ => InvokeTryExitState();
         _activateAction.performed += TryActivateObject;
+        _dragAction.canceled += InvokeTryExitState;
+        _dragAction.started += TryEnterState;
     }
 
-    private void TryActivateObject(InputAction.CallbackContext context)
+    private void TryActivateObject(InputAction.CallbackContext _)
     { 
         _dragController.ActivatedSomething(GetPointerPosition());
     }
 
-    private void TryEnterState()
+    private void TryEnterState(InputAction.CallbackContext _)
     {
         if (_dragController.HoveredOverDraggableObject(GetPointerPosition(), out GameObject draggedObject))
         {
@@ -68,4 +68,11 @@ public sealed class GameControllerDragState : GameControllerState
     public override bool CanExitStateTo(ControllerState currentState) => currentState is ControllerState.Idle;
     
     private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
+
+    public override void UnbindInputActions()
+    {
+        _activateAction.performed -= TryActivateObject;
+        _dragAction.canceled -= InvokeTryExitState;
+        _dragAction.started -= TryEnterState;
+    }
 }

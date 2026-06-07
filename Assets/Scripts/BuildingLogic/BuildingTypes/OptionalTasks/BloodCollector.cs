@@ -18,6 +18,7 @@ public sealed class BloodCollector : OptionalTask
     [SerializeField] private Sprite _completedIcon;
     [SerializeField] private Sprite _barSprite;
     
+    private EntityCanvasIcon _killsLeftIcon;
     private int _entitiesKilledInArea;
     private EntityCanvasBar _bar;
     private int _requiredKills;
@@ -36,6 +37,7 @@ public sealed class BloodCollector : OptionalTask
     public void SetRequiredKills(int amount)
     {
         _requiredKills = amount;
+        _killsLeftIcon = EntityCanvas.AddIcon(_barSprite, true, _requiredKills);
         OwnerEntity.ComponentsContainer.Get<InspectableObject>().ReplaceableDataParser.AddOrUpdateParsableData("{MinimalRequiredEnemiesToKill}", amount.ToString());
     }
 
@@ -64,9 +66,14 @@ public sealed class BloodCollector : OptionalTask
                 await _bar.SetValue(1f);
                 
                 EntityCanvas.RemoveBar(_bar);
+                EntityCanvas.RemoveIcon(_killsLeftIcon);
                 EntityCanvas.AddIcon(_completedIcon);
             }
-            else await _bar.SetValue(progress);
+            else
+            {
+                _killsLeftIcon.SetValue(_requiredKills - _entitiesKilledInArea);
+                await _bar.SetValue(progress);
+            }
         }
     }
 }

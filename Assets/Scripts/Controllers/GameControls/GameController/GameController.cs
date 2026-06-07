@@ -59,40 +59,59 @@ public sealed class GameController : MonoBehaviour
 
     public void Enable()
     {
-        _controls.currentActionMap.Enable();
+        _controls.ActivateInput();
     }
 
     public void Disable()
     {
+        _controls.DeactivateInput();
+    }
+
+    public void Dispose()
+    {
+        _controls.currentActionMap["ReturnDefaultCameraPosition"].performed -= SetDefaultPosition;
+
+        _controls.currentActionMap["ScrolledUp"].performed -= ZoomIn;
+        _controls.currentActionMap["ScrolledDown"].performed -= ZoomOut;
+        
+        _controls.currentActionMap["ToggleTime"].performed -= ToggleTimeScale;
+        
+        _cameraPositionController.UnbindControls();
+        
+        foreach (GameControllerState controllerState in _states.Values)
+        {
+            controllerState.UnbindInputActions();
+        }
+        
         _controls.currentActionMap.Disable();
-    } 
+        _controls.currentActionMap.Dispose();
+    }
 
     private void Start()
     {   
         CreateControls();
-
-        Enable();
     }
     
     private void CreateControls()
     {
         _pointerPositionAction = _controls.currentActionMap["PointerPosition"];
         
-        _controls.currentActionMap["ReturnDefaultCameraPosition"].performed += _ => _cameraPositionController.SetDefaultPosition();
+        _controls.currentActionMap["ReturnDefaultCameraPosition"].performed += SetDefaultPosition;
 
-        _controls.currentActionMap["ScrolledUp"].performed += _ => _cameraZoomController.ZoomIn();
-        _controls.currentActionMap["ScrolledDown"].performed += _ => _cameraZoomController.ZoomOut();
+        _controls.currentActionMap["ScrolledUp"].performed += ZoomIn;
+        _controls.currentActionMap["ScrolledDown"].performed += ZoomOut;
         
-        _controls.currentActionMap["ToggleTime"].performed += _ => _timeController.ToggleTimeScale();
+        _controls.currentActionMap["ToggleTime"].performed += ToggleTimeScale;
 
+        _cameraPositionController.BindControls();
+        
         InitializeStates();
     }
-
-    private void OnDestroy()
-    {
-        Disable();
-        _controls = null;
-    }
-
+    
+    private void SetDefaultPosition(InputAction.CallbackContext _) => _cameraPositionController.SetDefaultPosition();
+    private void ZoomIn(InputAction.CallbackContext _) => _cameraZoomController.ZoomIn();
+    private void ZoomOut(InputAction.CallbackContext _) => _cameraZoomController.ZoomOut();
+    private void ToggleTimeScale(InputAction.CallbackContext _) => _timeController.ToggleTimeScale();
+    
     #endregion
 }

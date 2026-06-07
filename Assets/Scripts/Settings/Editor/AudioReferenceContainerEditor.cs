@@ -12,7 +12,7 @@ using UnityEditor;
 namespace CuroSettings
 {
     [CustomEditor(typeof(SettingsConfig))]
-    public sealed class AudioReferenceContainerEditor : Editor
+    public sealed class SettingsConfigEditor : Editor
     {
         public override void OnInspectorGUI()
         {

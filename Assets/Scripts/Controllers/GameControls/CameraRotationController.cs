@@ -13,12 +13,11 @@ public sealed class CameraRotationController : MonoBehaviour
     [Range(0f, 85f)] [SerializeField] private float _maxYRotation;
     [Range(0f, 85f)] [SerializeField] private float _minYRotation;
 
-    [Range(1f, 1000f)] [SerializeField] private float _sensetivity;
+    [SerializeField] private float _sensetivity;
     private FloatSetting _cameraRotationSensitivity;
 
-    private Vector2 _previousTouchPosition = Vector2.zero;
-    private Vector3 _previousPosition;
-
+    private Vector2 _screenResolution => new(Screen.width, Screen.height);
+    
     public UnityEvent CameraRotated;
 
     private void Start()
@@ -27,18 +26,14 @@ public sealed class CameraRotationController : MonoBehaviour
         UpdateCameraRotation();
     }
 
-    public void UpdateCameraRotation() => Rotate(_previousTouchPosition);
+    public void UpdateCameraRotation() => Rotate(Vector2.zero);
 
-    public void SetPreviousMousePosition(Vector2 mousePosition) => _previousPosition = _camera.ScreenToViewportPoint(mousePosition);
-
-    public void Rotate(Vector2 touchPosition)
+    public void Rotate(Vector2 touchDelta)
     {       
-        _previousTouchPosition = touchPosition;
-        Vector3 newPosition = _camera.ScreenToViewportPoint(touchPosition);
-        Vector3 direction = _previousPosition - newPosition;
+        touchDelta /= _screenResolution;
         
-        float rotationAroundYAxis = -direction.x * _sensetivity * _cameraRotationSensitivity.Value; 
-        float rotationAroundXAxis = direction.y * _sensetivity * _cameraRotationSensitivity.Value; 
+        float rotationAroundYAxis = touchDelta.x * _sensetivity * _cameraRotationSensitivity.Value; 
+        float rotationAroundXAxis = -touchDelta.y * _sensetivity * _cameraRotationSensitivity.Value; 
 
         float currentRotation = transform.rotation.eulerAngles.x;
 
@@ -53,10 +48,8 @@ public sealed class CameraRotationController : MonoBehaviour
 
         transform.Translate(new Vector3(0, 0, -_distanceToTarget));
 
-        _previousPosition = newPosition;
-
         InvokeCameraRotatedEvent();
     }
 
-    public void InvokeCameraRotatedEvent() => CameraRotated.Invoke();
+    private void InvokeCameraRotatedEvent() => CameraRotated.Invoke();
 }

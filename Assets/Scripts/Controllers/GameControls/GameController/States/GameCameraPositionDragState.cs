@@ -12,6 +12,7 @@ public sealed class GameCameraPositionDragState : GameControllerState
     [Inject] private DragController _dragController;
     
     private InputAction _pointerPositionAction;
+    private InputAction _pointerDeltaAction;
     private InputAction _cameraDragAction;
 
     protected override ControllerState State => ControllerState.PositionDragging;
@@ -19,14 +20,14 @@ public sealed class GameCameraPositionDragState : GameControllerState
     public override void Initialize(InputActionMap actionMap)
     {
         _pointerPositionAction = actionMap["PointerPosition"];
+        _pointerDeltaAction = actionMap["PointerDelta"];
         _cameraDragAction = actionMap["ActivateOrDragCamera"];
         
         _cameraPositionController.CameraPositionUpdated += _cameraRotationController.UpdateCameraRotation;
-        _cameraDragAction.canceled += _ => InvokeTryExitState();
-        _cameraDragAction.started += _ => TryEnterState();
+        _cameraDragAction.canceled += InvokeTryExitState;
+        _cameraDragAction.started += TryEnterState;
     }
-
-    private void TryEnterState()
+    private void TryEnterState(InputAction.CallbackContext _)
     {
         if (_inspectorController.HoveredOverInspectable(GetPointerPosition())) return;
         
@@ -39,8 +40,6 @@ public sealed class GameCameraPositionDragState : GameControllerState
 
     protected override void OnEnter()
     {
-        _cameraPositionController.CaptureCameraPosition(GetPointerPosition());
-
         RepositionCamera().Forget();
         
         _cursorController.SetCursorState(CursorController.CursorState.Move);
@@ -52,7 +51,7 @@ public sealed class GameCameraPositionDragState : GameControllerState
         {
             await UniTask.WaitForFixedUpdate();
 
-            _cameraPositionController.DragCamera(GetPointerPosition());
+            _cameraPositionController.DragCamera(GetPointerDelta());
         }
         
         InvokeTryExitState();
@@ -63,4 +62,12 @@ public sealed class GameCameraPositionDragState : GameControllerState
     public override bool CanExitStateTo(ControllerState currentState) => currentState is ControllerState.Idle or ControllerState.Rotating or ControllerState.Dragging;
     
     private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
+    private Vector2 GetPointerDelta() => _pointerDeltaAction.ReadValue<Vector2>() / Time.timeScale;
+
+    public override void UnbindInputActions()
+    {
+        _cameraPositionController.CameraPositionUpdated -= _cameraRotationController.UpdateCameraRotation;
+        _cameraDragAction.canceled -= InvokeTryExitState;
+        _cameraDragAction.started -= TryEnterState;
+    }
 }

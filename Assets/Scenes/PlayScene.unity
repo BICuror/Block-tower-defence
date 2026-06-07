@@ -6510,9 +6510,9 @@ MonoBehaviour:
   _target: {fileID: 89254459}
   _camera: {fileID: 963194227}
   _distanceToTarget: 50
-  _maxYRotation: 85
+  _maxYRotation: 75
   _minYRotation: 7
-  _sensetivity: 180
+  _sensetivity: 500
   CameraRotated:
     m_PersistentCalls:
       m_Calls: []
@@ -6532,10 +6532,10 @@ MonoBehaviour:
   _cameraCenter: {fileID: 89254459}
   _camera: {fileID: 963194227}
   _cameraCenterMovementSpeed: 0.3
-  _cameraDragSpeed: 25
+  _cameraDragSpeed: 180
   _height: 5
-  _easingSleepThreshold: 0.01
-  _cameraEasingSpeed: 0.3
+  _easingSleepThreshold: 0.0001
+  _cameraEasingSpeed: 0.4
   _cameraRadiusScale: 0.9
 --- !u!114 &1079345527
 MonoBehaviour:
@@ -7256,7 +7256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: 7fb4dd987718e0449943dcc06b8a0431, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 3
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -16967,11 +16967,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 164629533448412724, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _maximalAverageRoadWeight
-      value: 37
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 164629533448412724, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _minimalAverageRoadWeight
       value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 164629533448412724, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
+      propertyPath: _requiredPercentFromSpawner
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 553018736983640589, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
       propertyPath: _enemyBiomePrefab

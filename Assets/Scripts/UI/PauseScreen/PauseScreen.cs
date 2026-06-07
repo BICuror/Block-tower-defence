@@ -35,28 +35,30 @@ public sealed class PauseScreen : MonoBehaviour
         {
             if (_rebindScreen.gameObject.activeSelf) _rebindScreen.gameObject.SetActive(false);
             else if (_settingsScreen.gameObject.activeSelf) _settingsScreen.gameObject.SetActive(false);
-            else gameObject.SetActive(false);
+            else Disable();
         }
-        else gameObject.SetActive(true);
+        else Enable();
     }
 
     private void Restart()
     {
-        Destroy(gameObject);
+        _gameController.Dispose();
         DOTween.KillAll();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Quit() => Application.Quit();
     
-    private void OnEnable()
+    private void Enable()
     {
+        gameObject.SetActive(true);
         _gameController.Disable();
         _timeController.Pause();
     }
     
-    private void OnDisable()
+    private void Disable()
     {
+        gameObject.SetActive(false);
         _gameController.Enable();
         _timeController.Resume();
     }

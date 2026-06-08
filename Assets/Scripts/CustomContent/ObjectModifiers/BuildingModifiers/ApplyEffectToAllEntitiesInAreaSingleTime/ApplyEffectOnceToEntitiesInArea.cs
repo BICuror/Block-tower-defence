@@ -23,8 +23,9 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
     [SerializeField] private int _effectStaks;
 
     [SerializeField] private bool _canBeCastOutOfAttackState = false;
-    
-    [Header("Charges")]
+
+    [Header("Charges")] 
+    [SerializeField] private bool _hasCharges;
     [SerializeField] private int _maxCharges;
     private Type _effectType;
     private int _charges;
@@ -40,7 +41,7 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
     {
         if (!_canBeCastOutOfAttackState && _waveStateMachine.CurrentState != WaveState.Attack) return;
         
-        if (_charges <= 0) return;
+        if (_hasCharges && _charges <= 0) return;
         
         IReadOnlyList<CombatEntity> entitiesInArea = _areaEntityDetector.GetList();
 
@@ -57,6 +58,8 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
         }
 
         _visualEffectHandler.PlayBurstEffectAndForget();
+        
+        if (!_hasCharges) return;
         
         _charges--;
         UpdateIconState();

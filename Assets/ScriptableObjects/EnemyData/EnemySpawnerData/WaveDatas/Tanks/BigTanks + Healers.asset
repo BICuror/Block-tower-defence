@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce3b1cdfede87a4badc298ec1154c9a, type: 3}
+  m_Name: BigTanks + Healers
+  m_EditorClassIdentifier: 
+  _groupParts:
+  - _enemyData: {fileID: 11400000, guid: 4627f7f95270f154e8f7386ff793d64a, type: 2}
+    _useDefaultWeightContainer: 1
+    _defaultGroupWeightContainer: {fileID: 11400000, guid: 6c6af1473b4c9924880e5fbe426d8fe5, type: 2}
+    _enemyGroupWeightContainer:
+      _amountPerWave: 
+      _parseString: 
+    _enemyAmountScale: 1
+  - _enemyData: {fileID: 11400000, guid: b252001dd47367e4e99e2f2ff3483719, type: 2}
+    _useDefaultWeightContainer: 1
+    _defaultGroupWeightContainer: {fileID: 11400000, guid: 606fa369a8d22194f94648a162a5566d, type: 2}
+    _enemyGroupWeightContainer:
+      _amountPerWave: 
+      _parseString: 
+    _enemyAmountScale: 0.8
+  - _enemyData: {fileID: 11400000, guid: 4627f7f95270f154e8f7386ff793d64a, type: 2}
+    _useDefaultWeightContainer: 1
+    _defaultGroupWeightContainer: {fileID: 11400000, guid: 6c6af1473b4c9924880e5fbe426d8fe5, type: 2}
+    _enemyGroupWeightContainer:
+      _amountPerWave: 
+      _parseString: 
+    _enemyAmountScale: 1
+  _firstPossibleWaveEncounter: 9
+  _lastPossibleWaveEncounter: 15

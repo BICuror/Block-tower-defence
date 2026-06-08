@@ -1,58 +1,57 @@
 using System.Collections.Generic;
-using ModestTree;
 using NaughtyAttributes;
 using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "EnemyWaveGroup", menuName = "SpawnManagement/EnemyWaveGroup")]
 
 public sealed class EnemyWaveGroup : ScriptableObject
 {
-    [SerializeField] private List<GroupPart> _groupParts;
+    [SerializeField] private List<EnemyGroupPart> _groupParts;
     [SerializeField] private int _firstPossibleWaveEncounter, _lastPossibleWaveEncounter;
     
-    public List<GroupPart> GroupParts => _groupParts;
+    public List<EnemyGroupPart> GroupParts => _groupParts;
     public int FirstPossibleWaveEncounter => _firstPossibleWaveEncounter;
     public int LastPossibleWaveEncounter => _lastPossibleWaveEncounter;
     
     [Button] private void ParseAll()
     {
-        _groupParts.ForEach(part => part.ParseString());
+        _groupParts.ForEach(part => part.ParseEnemyGroupWeightContainers());
     }
+}
+
+[Serializable] public sealed class EnemyGroupPart
+{
+    [SerializeField] private EnemyData _enemyData;
+    [SerializeField] private bool _useDefaultWeightContainer = true;
+    [AllowNesting] [ShowIf("_useDefaultWeightContainer")] [SerializeField] private EnemyWaveDefaultGroupWeightContainer _defaultGroupWeightContainer;
+    [AllowNesting] [HideIf("_useDefaultWeightContainer")] [SerializeField] private EnemyGroupWeightContainer _enemyGroupWeightContainer;
+
+    [SerializeField] private float _enemyAmountScale = 1f;
     
-    [System.Serializable] public struct GroupPart
+    public EnemyData Data => _enemyData;
+
+    public int GetEnemyAmount(int waveIndex)
     {
-        [SerializeField] private List<int> _amountPerWave;
-        [SerializeField] private EnemyData _enemyData;
+        int amount = 0;
+
+        if (_useDefaultWeightContainer)
+        {
+            amount = _defaultGroupWeightContainer.EnemyGroupWeightContainer.GetAmount(waveIndex);
+        }
+        else
+        {
+            amount = _enemyGroupWeightContainer.GetAmount(waveIndex);
+        }
+
+        amount = Mathf.RoundToInt(amount * _enemyAmountScale);
         
-        public EnemyData Data => _enemyData;
+        return amount;
+    }
 
-        public int GetAmount(int wave)
-        {
-            if (wave >= _amountPerWave.Count) return _amountPerWave[^1];
-            
-            return _amountPerWave[wave];
-        }
-
-        [Header("Parsing")] 
-        [SerializeField] private string _parseString;
-
-        public void ParseString()
-        {
-            if (string.IsNullOrEmpty(_parseString)) return;
-            
-            string currentString = _parseString;
-
-            int index = 0;
-            _amountPerWave.Clear();
-            _amountPerWave.Add(1);
-            
-            string[] split = currentString.Split(' ');  
-            
-            for (int i = 0; i < split.Length; i++)
-            {
-                if (split[i].IndexOf(' ') >= 0) split[i] = split[i].Remove(split[i].IndexOf(' '));
-                if (!string.IsNullOrEmpty(split[i])) _amountPerWave.Add(int.Parse(split[i]));
-            }
-        }
+    public void ParseEnemyGroupWeightContainers()
+    {
+        _defaultGroupWeightContainer.ParseEnemyGroupWeightContainer();
+        _enemyGroupWeightContainer.ParseEnemyGroupWeightContainer();
     }
 }

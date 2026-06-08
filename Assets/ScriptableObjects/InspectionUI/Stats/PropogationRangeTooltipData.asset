@@ -13,8 +13,14 @@ MonoBehaviour:
   m_Name: PropogationRangeTooltipData
   m_EditorClassIdentifier: 
   _tag: PropogationRadius
-  _textColor: {r: 0.65705454, g: 0.17697577, b: 0.9150943, a: 1}
+  _textColor: {r: 0.7372549, g: 0.29803923, b: 0.15294118, a: 1}
   _iconSprite: {fileID: -98197151, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _onlyText: 0
+  _invokeTooltipPanel: 1
   _localizationKey: propogattion_radius_stat_tooltip
   _associatedStatTypeName: PropogationRadius
+  _presentAsMultiplier: 0
+  _lowValueIsGood: 0
+  _dependsOnStat: 0
+  _dependencyStatData: {fileID: 0}
+  _resultStatLocKey: 

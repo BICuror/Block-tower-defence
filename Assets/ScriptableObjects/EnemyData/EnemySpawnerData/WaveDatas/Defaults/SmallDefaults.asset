@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce3b1cdfede87a4badc298ec1154c9a, type: 3}
+  m_Name: SmallDefaults
+  m_EditorClassIdentifier: 
+  _groupParts:
+  - _enemyData: {fileID: 11400000, guid: 64c70108f76f22e40bc367791856422a, type: 2}
+    _useDefaultWeightContainer: 1
+    _defaultGroupWeightContainer: {fileID: 11400000, guid: eb074648d0033234aa80b4e98e55b12a, type: 2}
+    _enemyGroupWeightContainer:
+      _amountPerWave: 
+      _parseString: 
+    _enemyAmountScale: 1
+  _firstPossibleWaveEncounter: 0
+  _lastPossibleWaveEncounter: 8

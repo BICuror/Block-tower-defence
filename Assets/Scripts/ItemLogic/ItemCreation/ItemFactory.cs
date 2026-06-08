@@ -36,20 +36,26 @@ public sealed class ItemFactory : MonoBehaviour
     } 
 #endif
     
-    public async UniTask CreateItems(Vector3 position, int totalStrength, int minimalItemStrength, int itemAmount)
+    public async UniTask CreateItems(Vector3 position, int totalStrength, int minimalItemStrength, int itemAmount, bool createStartWaveItem = false)
     {
         List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(totalStrength, minimalItemStrength, itemAmount);
-            
-        float angleStep = 360f / (itemAmount + 1);
+
+        int totalItemAmount = itemAmount;
+        
+        if (createStartWaveItem) totalItemAmount += 1;
+        
+        float angleStep = 360f / totalItemAmount;
         
         float offset = Random.Range(0, 360f);
         
-        for (int i = 0; i < itemAmount + 1; i++)
+        for (int i = 0; i < totalItemAmount; i++)
         {
+            bool isStartWaveItem = i == itemAmount;
+            
             Vector3 finalPosition = GetOffset(i) + position;
             finalPosition.y = _islandHeightMapHolder.GetHeightSafe(Mathf.RoundToInt(finalPosition.x), Mathf.RoundToInt(finalPosition.z)) + 1;
             
-            if (itemAmount > i) await CreateItemFromEffects(globalEffects[i], position, finalPosition);
+            if (!isStartWaveItem) await CreateItemFromEffects(globalEffects[i], position, finalPosition);
             else await CreateStartWaveItem(position, finalPosition);
         }
         

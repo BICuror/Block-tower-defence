@@ -5,8 +5,8 @@ using System;
 [Serializable] public sealed class AdditionalEnemyGroupData
 {
     [Range(0f, 1f)] [SerializeField] private float _amountMultiplier;
-    [SerializeField] private List<EnemyWaveGroup.GroupPart> _groupParts;
+    [SerializeField] private List<EnemyGroupPart> _groupParts;
     
     public float AmountMultiplier => _amountMultiplier;
-    public List<EnemyWaveGroup.GroupPart> GroupParts => _groupParts;
+    public List<EnemyGroupPart> GroupParts => _groupParts;
 }

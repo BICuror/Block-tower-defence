@@ -72,9 +72,13 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 1
         _groupParts:
-        - _amountPerWave: 01000000020000000200000002000000020000000200000003000000030000000400000004000000040000000500000005000000060000000600000007000000
-          _enemyData: {fileID: 11400000, guid: 6ffcd8ca972b894448698740b307b7f7, type: 2}
-          _parseString: 
+        - _enemyData: {fileID: 11400000, guid: ff6df655f30346c4c8ecfe14c1eee628, type: 2}
+          _useDefaultWeightContainer: 0
+          _defaultGroupWeightContainer: {fileID: 0}
+          _enemyGroupWeightContainer:
+            _amountPerWave: 0100000001000000010000000100000002000000020000000300000003000000040000000500000006000000
+            _parseString: 
+          _enemyAmountScale: 1
   _instanceItemTypeContainers:
   - _itemTypeName: AdditionalEnemyGroupFromWaterToggleEffect
     AllEffectTypeNames:

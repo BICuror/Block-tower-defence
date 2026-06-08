@@ -30,9 +30,13 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 1
         _groupParts:
-        - _amountPerWave: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-          _enemyData: {fileID: 11400000, guid: 87a8d076db082b74d83b8e6475f74604, type: 2}
-          _parseString: 
+        - _enemyData: {fileID: 11400000, guid: 87a8d076db082b74d83b8e6475f74604, type: 2}
+          _useDefaultWeightContainer: 0
+          _defaultGroupWeightContainer: {fileID: 0}
+          _enemyGroupWeightContainer:
+            _amountPerWave: 01000000
+            _parseString: 1
+          _enemyAmountScale: 1
   _instanceItemTypeContainers:
   - _itemTypeName: AdditionalEnemyGroupToggleEffect
     AllEffectTypeNames:

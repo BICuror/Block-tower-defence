@@ -106,20 +106,20 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         }
     }
     
-    public List<EnemyData> GetEnemyGroupPartAmountModified(List<EnemyWaveGroup.GroupPart> groupParts)
+    public List<EnemyData> GetEnemyGroupPartAmountModified(List<EnemyGroupPart> groupParts)
     {
         return GetEnemyGroupPart(groupParts, _globalStatContainer.Get<EnemyAmountMultiplier>().Value);
     }
 
-    public List<EnemyData> GetEnemyGroupPart(List<EnemyWaveGroup.GroupPart> groupParts, float amountMultiplier)
+    public List<EnemyData> GetEnemyGroupPart(List<EnemyGroupPart> groupParts, float amountMultiplier)
     {
         List<EnemyData> groupEnemies = new List<EnemyData>();
         
         for (int enemyGroupPartIndex = 0; enemyGroupPartIndex < groupParts.Count; enemyGroupPartIndex++)
         {
-            EnemyWaveGroup.GroupPart currentPart = groupParts[enemyGroupPartIndex];
+            EnemyGroupPart currentPart = groupParts[enemyGroupPartIndex];
 
-            int enemyAmount = Mathf.RoundToInt(currentPart.GetAmount(_waveIndexContainer.GetCurrentWave()) * amountMultiplier);
+            int enemyAmount = Mathf.RoundToInt(currentPart.GetEnemyAmount(_waveIndexContainer.GetCurrentWave()) * amountMultiplier);
 
             if (enemyAmount <= 0) enemyAmount = 1;
 

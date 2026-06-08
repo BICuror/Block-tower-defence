@@ -98,7 +98,7 @@ public abstract class InspectableData : ScriptableObject
         {
             int totalEnemyAmount = 0;
                     
-            additionalEnemyGroupData.GroupParts.ForEach(groupPart => totalEnemyAmount += groupPart.GetAmount(WaveIndexContainer.Instance.GetCurrentWave()));
+            additionalEnemyGroupData.GroupParts.ForEach(groupPart => totalEnemyAmount += groupPart.GetEnemyAmount(WaveIndexContainer.Instance.GetCurrentWave()));
 
             initialText = ReplaceAllValues(initialText, "EnemiesAmount", totalEnemyAmount.ToString());
             

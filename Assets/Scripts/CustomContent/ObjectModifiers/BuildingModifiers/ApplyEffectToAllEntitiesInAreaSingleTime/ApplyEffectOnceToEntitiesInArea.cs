@@ -1,20 +1,14 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
-using Cashing;
 using Combat;
 using System;
-using Cysharp.Threading.Tasks;
 
 public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 {
     [Inject] private WaveStateMachine _waveStateMachine;
 
-    [Header("UI")] 
-    [SerializeField] private Sprite _iconSprite;
-    private EntityCanvasAbilityIcon _abilityIcon;
-    [Cached] private EntityCanvas _canvas;
-    
     [Header("Links")]
     [SerializeField] private VisualEffectHandler _visualEffectHandler;
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
@@ -26,22 +20,21 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
 
     [Header("Charges")] 
     [SerializeField] private bool _hasCharges;
-    [SerializeField] private int _maxCharges;
+    [ShowIf("_hasCharges")] [SerializeField] protected int MaxCharges;
     private Type _effectType;
-    private int _charges;
+    protected int CurrentCharges;
     
     protected void Start()
     {
         _effectType = Type.GetType(_effectTypeName);
         _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted += TryRefillCharge;
-        _abilityIcon = _canvas.AddAbilityIcon(_iconSprite, (float)_charges / _maxCharges);
     }
 
     protected void ApplyEffect()
     {
         if (!_canBeCastOutOfAttackState && _waveStateMachine.CurrentState != WaveState.Attack) return;
         
-        if (_hasCharges && _charges <= 0) return;
+        if (_hasCharges && CurrentCharges <= 0) return;
         
         IReadOnlyList<CombatEntity> entitiesInArea = _areaEntityDetector.GetList();
 
@@ -60,27 +53,24 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
         _visualEffectHandler.PlayBurstEffectAndForget();
         
         if (!_hasCharges) return;
-        
-        _charges--;
-        UpdateIconState();
+
+        SetCharges(CurrentCharges - 1);
     } 
     
-    private void TryRefillCharge()
+    private void TryRefillCharge() => SetCharges(MaxCharges);
+
+    private void SetCharges(int value)
     {
-        _charges = _maxCharges;
-        UpdateIconState();
+        CurrentCharges = value;
+        
+        OnChargesValueChanged();
     }
 
-    private void UpdateIconState()
-    {
-        _abilityIcon.SetValue((float)_charges / _maxCharges).Forget();
-    }
+    protected virtual void OnChargesValueChanged() {}
     
-    private void OnDestroy()
+    protected void OnDestroy()
     {
         _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted -= TryRefillCharge;
-        _charges = 0;
-        _canvas.RemoveAbilityIcon(_abilityIcon);
-        UpdateIconState();
+        SetCharges(0);
     }
 }

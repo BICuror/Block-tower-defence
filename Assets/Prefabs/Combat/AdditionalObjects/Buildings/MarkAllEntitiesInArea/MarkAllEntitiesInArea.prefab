@@ -132,7 +132,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7831244e67bdda4499983947a93daaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _iconSprite: {fileID: -686756865, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _visualEffectHandler: {fileID: 4025761130839690585}
   _areaEntityDetector: {fileID: 5508162354419099327}
   _effectTypeName: MarkEffect
@@ -140,7 +139,8 @@ MonoBehaviour:
   _effectStaks: 1
   _canBeCastOutOfAttackState: 0
   _hasCharges: 1
-  _maxCharges: 2
+  MaxCharges: 2
+  _iconSprite: {fileID: -686756865, guid: 1931599c4107e624a84165116f765cd5, type: 3}
 --- !u!1001 &7943139585311302968
 PrefabInstance:
   m_ObjectHideFlags: 0

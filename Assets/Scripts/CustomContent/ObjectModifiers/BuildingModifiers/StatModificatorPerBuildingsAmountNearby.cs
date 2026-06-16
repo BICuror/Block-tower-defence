@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using Cashing;
 using System;
@@ -10,10 +11,10 @@ public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifi
     [SerializeField] private float _nearbyModifier;
     [SerializeField] private float _aloneModifier;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
-    [Header("UI")]
-    [SerializeField] private Sprite _icon;
-    [SerializeField] private bool _showIconWhenAlone;
+    [Header("UI")] [SerializeField] private bool _showIconWhenAlone;
+    [ShowIf("_showIconWhenAlone")] [SerializeField] private Sprite _aloneIcon;
     [SerializeField] private bool _showIconWhenNotAlone;
+    [ShowIf("_showIconWhenNotAlone")] [SerializeField] private Sprite _notAloneIcon;
     [Cached] private EntityCanvas _entityCanvas;
     [Cached] private CombatEntity _ownerEntity;
     private EntityCanvasIcon _entityCanvasIcon;
@@ -56,8 +57,13 @@ public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifi
         
         bool shouldBeEnabled = (isAlone && _showIconWhenAlone) || (!isAlone && _showIconWhenNotAlone);
 
-        if (shouldBeEnabled && !_entityCanvasIcon) _entityCanvasIcon = _entityCanvas.AddIcon(_icon, _useStackableNearbyModifier);
+        if (shouldBeEnabled && !_entityCanvasIcon) _entityCanvasIcon = _entityCanvas.AddIcon(_aloneIcon, _useStackableNearbyModifier);
         else if (!shouldBeEnabled && _entityCanvasIcon) _entityCanvas.RemoveIcon(_entityCanvasIcon);
+        
+        if (!_entityCanvasIcon.gameObject) return;
+        
+        if (isAlone) _entityCanvasIcon.SetIcon(_aloneIcon);
+        else _entityCanvasIcon.SetIcon(_notAloneIcon);
         
         if (_useStackableNearbyModifier && _entityCanvasIcon) _entityCanvasIcon.SetValue(_buildingAreaScaner.Count);
     }

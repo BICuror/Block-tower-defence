@@ -51,6 +51,8 @@ MonoBehaviour:
   _barMaterial: {fileID: 2100000, guid: a3e8314efe9dd6a4398680688b9bb90a, type: 2}
   _renderer: {fileID: 9039813594018090266}
   _spriteRenderer: {fileID: 4089498070181457538}
+  _defaultScale: 0.7
+  _depletedScale: 0.4
 --- !u!114 &-2798261645347586770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -306,7 +308,7 @@ Transform:
   m_GameObject: {fileID: 8587680734021595249}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.01}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 1
   m_Children: []

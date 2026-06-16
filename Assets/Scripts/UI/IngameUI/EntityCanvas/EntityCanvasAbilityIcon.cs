@@ -2,12 +2,19 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using System;
+using DG.Tweening;
 
 public sealed class EntityCanvasAbilityIcon : ProgressBarBase
 {
     [Inject] private WaveStateMachine _waveStateMachine;
     
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    
+    [Header("Scale")]
+    [SerializeField] private float _defaultScale = 1f;
+    [SerializeField] private float _depletedScale;
+
+    private float _fillDuration = 1f;
     private WaveState _activeWaveState;
     private bool _hasActiveWaveState;
     private float _previousValue;
@@ -25,6 +32,8 @@ public sealed class EntityCanvasAbilityIcon : ProgressBarBase
         
         SetValue(value).Forget();
     }
+    
+    public void SetFillDuration(float fillDuration) => _fillDuration = fillDuration;
 
     public async void SetActiveWaveState(WaveState waveState)
     {
@@ -38,9 +47,15 @@ public sealed class EntityCanvasAbilityIcon : ProgressBarBase
     }
 
     public async UniTask SetValue(float value)
-    {
-        await FillBar(_previousValue, value, 1f);
+    { 
+        transform.DOKill();
+        
+        if (value != 0 )transform.DOScale(_defaultScale, 0.5f).SetLink(gameObject);
+        
+        await FillBar(_previousValue, value, _fillDuration);
         _previousValue = value;
+        
+        if (value == 0) transform.DOScale(_depletedScale, 0.5f).SetLink(gameObject);
     }
 
     private void UpdateState(WaveState waveState)

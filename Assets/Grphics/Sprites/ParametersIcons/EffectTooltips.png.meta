@@ -1636,7 +1636,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1645,6 +1645,72 @@ TextureImporter:
       bones: []
       spriteID: ff4dfff972f9dc24b82326f6fac16f66
       internalID: -1342571092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DamageUp
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 293
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b46079b8db6a4f48ba9a83ffa177fb9
+      internalID: 281690487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DamageDown
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 192
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeda675eb4bee604bbd417138293b494
+      internalID: -1927012866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LonewolfIcon
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 495
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b0951093b45cf442b54d2eb5883588f
+      internalID: -131931221
       vertices: []
       indices: 
       edges: []
@@ -1676,6 +1742,8 @@ TextureImporter:
       CreateAOEOnBuildIcon: -1342571092
       CreateAOEOnKill: -1144595787
       CrystalDamage: 473409037
+      DamageDown: -1927012866
+      DamageUp: 281690487
       DamageUpCloseUpIcon: -889599480
       DamageUp_1: 1196280753
       DamageUp_2: -744350586
@@ -1699,6 +1767,7 @@ TextureImporter:
       HurtfullLaborTooltip: -1809229495
       Insparation: 1546871838
       LastStandingTooltip: -1860937847
+      LonewolfIcon: -131931221
       Marker: 775677324
       MaxEntitiesUpTooltip: -51603424
       Multishot: 1968931674

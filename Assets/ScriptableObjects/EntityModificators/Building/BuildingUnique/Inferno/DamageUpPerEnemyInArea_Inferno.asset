@@ -48,7 +48,7 @@ MonoBehaviour:
       _argumentName: FlatChangeMax
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 30
+      _floatArgument: 0.5
       _stringArgument: BuildTime
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -103,6 +103,8 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill

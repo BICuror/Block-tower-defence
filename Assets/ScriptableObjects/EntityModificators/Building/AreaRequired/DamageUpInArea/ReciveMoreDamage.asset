@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ReciveMoreDamage
   m_EditorClassIdentifier: 
   _icon: {fileID: 741723918, guid: 1931599c4107e624a84165116f765cd5, type: 3}
-  _localizationKey: 
+  _localizationKey: increase_incoming_damage_nearby_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
     - _argumentType: 4
@@ -75,6 +75,7 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -124,7 +125,7 @@ MonoBehaviour:
   _hasStacks: 0
   _maxStacks: 0
   _effectType: 1
-  _showInInspector: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
   _reqiredOwnerTags:
     Requirements: []

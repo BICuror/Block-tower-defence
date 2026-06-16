@@ -120,7 +120,9 @@ MonoBehaviour:
     - Tag: 27
       Amount: 1
   _reqiredOtherEntityTags:
-    Requirements: []
+    Requirements:
+    - Tag: 7
+      Amount: 1
   _hasBlockTags: 0
   _blockOwnerTags:
     Requirements: []

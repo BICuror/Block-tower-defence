@@ -45,10 +45,10 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
     - _argumentType: 1
-      _argumentName: DamageModifier
+      _argumentName: DamageModifierValueDecrease
       _intArgument: 0
       _boolArgument: 0
-      _floatArgument: 0.75
+      _floatArgument: 0.25
       _stringArgument: HealDamageModifier
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -75,6 +75,8 @@ MonoBehaviour:
     - BombsLeaveBlockTowers
     - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill

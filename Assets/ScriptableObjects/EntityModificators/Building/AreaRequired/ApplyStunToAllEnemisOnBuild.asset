@@ -30,6 +30,62 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+    - _argumentType: 4
+      _argumentName: EffectTypeName
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: StunEffect
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: f54b1194613eac54989fcf0728ea6597, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 1
+      _argumentName: EffectDuration
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 2.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: f54b1194613eac54989fcf0728ea6597, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 0
+      _argumentName: EffectStacks
+      _intArgument: 1
+      _boolArgument: 0
+      _floatArgument: 2.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: f54b1194613eac54989fcf0728ea6597, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 5
+      _argumentName: HasCharges
+      _intArgument: 1
+      _boolArgument: 0
+      _floatArgument: 2.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: f54b1194613eac54989fcf0728ea6597, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:

@@ -161,9 +161,9 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
 
     private bool CanSpawnWaveGroup(EnemyWaveGroup group)
     {
-        int currentWave = _waveIndexContainer.GetCurrentWave();
+        WaveContent content = _waveIndexContainer.GetCurrentWaveContent();
 
-        if (group.FirstPossibleWaveEncounter > currentWave || group.LastPossibleWaveEncounter < currentWave) return false;
+        if (content.RequiredEnemyTier != group.WaveGroupTier) return false;
 
         if (!_forceSpawnExistingBuildingAttackTypeGroups) return true;
      

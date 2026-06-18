@@ -9,5 +9,5 @@ public sealed class IncomingDamageModifier : DamageModifier
         _damageModifier = Args.GetArgument<float>("DamageModifier");
     }
     
-    public override float Modify(CombatEntity otherEntity, float value) => value * _damageModifier;
+    public override float Modify(CombatEntity otherEntity, float value) => value * (1 + _damageModifier);
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 using Combat;
@@ -12,27 +11,31 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
     [Header("Links")]
     [SerializeField] private VisualEffectHandler _visualEffectHandler;
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
-    [SerializeField] private string _effectTypeName;
-    [SerializeField] private float _duration;
-    [SerializeField] private int _effectStaks;
-
-    [SerializeField] private bool _canBeCastOutOfAttackState = false;
-
-    [Header("Charges")] 
-    [SerializeField] private bool _hasCharges;
-    [ShowIf("_hasCharges")] [SerializeField] protected int MaxCharges;
+    
+    private float _duration;
+    private int _effectStacks;
+    private bool _hasCharges;
     private Type _effectType;
+    
+    protected int MaxCharges;
+    
     protected int CurrentCharges;
     
     protected void Start()
     {
-        _effectType = Type.GetType(_effectTypeName);
+        _effectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
+        _duration = Args.GetArgument<float>("EffectDuration");
+        _effectStacks = Args.GetArgument<int>("EffectStacks");
+        
+        _hasCharges = Args.GetArgument<bool>("HasCharges");
+        if (_hasCharges) MaxCharges = Args.GetArgument<int>("Chargers");
+        
         _waveStateMachine.GetWaveStateController(WaveState.Attack).EnteredStateCompleted += TryRefillCharge;
     }
 
     protected void ApplyEffect()
     {
-        if (!_canBeCastOutOfAttackState && _waveStateMachine.CurrentState != WaveState.Attack) return;
+        if (_waveStateMachine.CurrentState != WaveState.Attack) return;
         
         if (_hasCharges && CurrentCharges <= 0) return;
         
@@ -42,11 +45,11 @@ public class ApplyEffectOnceToEntitiesInArea : EntityObjectModifier
         {
             if (_duration > 0)
             {
-                entitiesInArea[i].ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(_effectType, _effectStaks, _duration);
+                entitiesInArea[i].ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(_effectType, _effectStacks, _duration);
             }
             else
             {
-                entitiesInArea[i].ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_effectType, _effectStaks);
+                entitiesInArea[i].ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_effectType, _effectStacks);
             }
         }
 

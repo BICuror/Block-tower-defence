@@ -20,6 +20,15 @@ using System;
         ArgumentContainerItem item = _argumentItems.Find(item => item.ArgumentName == argumentName);
 
         return (T)item.GetValue();
+    }    
+    
+    public T GetArgumentWithDefaultValue<T>(string argumentName, T defaultValue)
+    {
+        if (!HasArgument(argumentName)) return defaultValue;
+        
+        ArgumentContainerItem item = _argumentItems.Find(item => item.ArgumentName == argumentName);
+
+        return (T)item.GetValue();
     }
 }
 
@@ -38,6 +47,7 @@ using System;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityObjectModifier)] [SerializeField] private EntityObjectModifier _entityObjectModifierPrefab;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.LayerSetting)] [SerializeField] private LayerSetting _layerSetting;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.AdditionalEnemyGroup)] [SerializeField] private AdditionalEnemyGroupData _additionalEnemyGroupData;
+    [AllowNesting] [ShowIf("_argumentType", ArgumentType.Sprite)] [SerializeField] private Sprite _sprite;
     
     public string ArgumentName => _argumentName;
     public ArgumentType ArgumentType => _argumentType;
@@ -56,6 +66,7 @@ using System;
             case ArgumentType.EntityObjectModifier: return _entityObjectModifierPrefab;
             case ArgumentType.LayerSetting: return _layerSetting;
             case ArgumentType.AdditionalEnemyGroup: return _additionalEnemyGroupData;
+            case ArgumentType.Sprite: return _sprite;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }
@@ -73,4 +84,5 @@ public enum ArgumentType
     EntityObjectModifier = 7,
     LayerSetting = 8,
     AdditionalEnemyGroup = 9,
+    Sprite = 10,
 }

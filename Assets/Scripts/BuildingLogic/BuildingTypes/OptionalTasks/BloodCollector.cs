@@ -8,6 +8,13 @@ public sealed class BloodCollector : OptionalTask
 {
     [Cached] private AreaEntityDetector _areaEntityDetector;
 
+    [Header("CollectionAnimation")]
+    [SerializeField] private AnimationCurve _horizontalAnimationCurve;
+    [SerializeField] private AnimationCurve _verticalAnimationCurve;
+    [SerializeField] private GameObject _bloodDropPrefab;
+    [SerializeField] private Transform _targetTransform;
+    [SerializeField] private float _animationDuration;
+    
     [Header("VFX")]
     [SerializeField] private Transform _bloodFountanTransform;
     [SerializeField] private float _startingScale = 0.1f;
@@ -45,12 +52,14 @@ public sealed class BloodCollector : OptionalTask
     {
         if (!entity.Health.IsAlive())
         {
-            IncreaseKilledEntities().Forget();
+            IncreaseKilledEntities(entity.transform.position).Forget();
         }
     }
 
-    private async UniTask IncreaseKilledEntities()
+    private async UniTask IncreaseKilledEntities(Vector3 entityDeathPosition)
     {
+        await AnimateBloodDrop(entityDeathPosition);
+        
         if (_entitiesKilledInArea < _requiredKills)
         {
             _entitiesKilledInArea++;
@@ -75,5 +84,25 @@ public sealed class BloodCollector : OptionalTask
                 await _bar.SetValue(progress);
             }
         }
+    }
+    
+    private async UniTask AnimateBloodDrop(Vector3 startPosition)
+    {
+        GameObject bloodDrop = Instantiate(_bloodDropPrefab, startPosition, Quaternion.identity);
+        
+        Vector3 endPosition = _targetTransform.position;
+        
+        await DOVirtual.Float(0f, 1f, _animationDuration, MoveCharge).SetLink(gameObject).AsyncWaitForCompletion();
+        
+        void MoveCharge(float progress)
+        {
+            Vector3 lerpedPosition = Vector3.LerpUnclamped(startPosition, endPosition, _horizontalAnimationCurve.Evaluate(progress));
+
+            lerpedPosition.y += _verticalAnimationCurve.Evaluate(progress);
+            
+            bloodDrop.transform.position = lerpedPosition;
+        }
+        
+        Destroy(bloodDrop.gameObject);
     }
 }

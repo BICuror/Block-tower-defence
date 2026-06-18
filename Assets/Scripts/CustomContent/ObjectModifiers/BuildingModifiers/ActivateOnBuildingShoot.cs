@@ -6,14 +6,16 @@ using Random = UnityEngine.Random;
 
 public sealed class ActivateOnBuildingShoot : EntityObjectModifier
 {
-    [Range(0, 100)] [SerializeField] private float _chance;
     [SerializeField] private AreaEntityDetector _buildingAreaScaner;
     [SerializeField] private ActivationType _activationType;
     [Cached] private TaskCycle _taskCycle;
+    private int _chance;
     
     private void Start()
     {
         _taskCycle.TaskPerformed += TryToActivate;
+
+        _chance = Args.GetArgument<int>("Chance");
     }
 
     private void TryToActivate()

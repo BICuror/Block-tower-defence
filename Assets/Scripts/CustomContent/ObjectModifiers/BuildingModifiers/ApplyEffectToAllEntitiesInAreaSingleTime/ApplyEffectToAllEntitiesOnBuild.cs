@@ -1,6 +1,6 @@
 using Cashing;
 
-public class ApplyEffectToAllEntitesOnBuild : ApplyEffectOnceToEntitiesInArea
+public class ApplyEffectToAllEntitiesOnBuild : ApplyEffectOnceToEntitiesInArea
 {
     [Cached] private BuildingDraggable _ownerBuildingDraggable;
     

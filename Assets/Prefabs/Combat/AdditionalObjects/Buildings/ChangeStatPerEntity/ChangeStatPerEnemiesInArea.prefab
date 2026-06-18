@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6871167627582267784}
   - component: {fileID: 7720884877998912417}
   m_Layer: 7
-  m_Name: DamageUpForEachBuildingNearby
+  m_Name: ChangeStatPerEnemiesInArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,15 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10ea86a4846a4a44b949ef22f759337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useStackableNearbyModifier: 1
-  _statType: Damage
-  _nearbyModifier: 0.25
-  _aloneModifier: 0
-  _buildingAreaScaner: {fileID: 4910447815113604971}
-  _showIconWhenAlone: 0
-  _aloneIcon: {fileID: 0}
-  _showIconWhenNotAlone: 1
-  _notAloneIcon: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _areaScaner: {fileID: 4910447815113604971}
+  _aloneIcon: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _notAloneIcon: {fileID: -1927012866, guid: 1931599c4107e624a84165116f765cd5, type: 3}
 --- !u!1 &4451044171943003910
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,7 +60,7 @@ GameObject:
   - component: {fileID: 8319717669161922108}
   - component: {fileID: 8678008105837192539}
   - component: {fileID: 4910447815113604971}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: AreaController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,12 +115,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c649f4cda4f6041ae9f368578bdc37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _autoScale: 0
+  _autoScale: 1
   _height: 100
   _areaScaleValue: 2
   _overrideAdditionalScaleValue: 0
   _additionalScaleValue: 0.95
-  _hasVisualisation: 1
+  _hasVisualisation: 0
   _areaVisualisation: {fileID: 0}
 --- !u!114 &4910447815113604971
 MonoBehaviour:

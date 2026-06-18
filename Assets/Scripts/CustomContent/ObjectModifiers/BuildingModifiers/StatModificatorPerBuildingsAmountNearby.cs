@@ -1,4 +1,3 @@
-using NaughtyAttributes;
 using UnityEngine;
 using Cashing;
 using System;
@@ -6,46 +5,77 @@ using Combat;
 
 public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifier
 {
-    [SerializeField] private bool _useStackableNearbyModifier;
-    [SerializeField] private string _statType;
-    [SerializeField] private float _nearbyModifier;
-    [SerializeField] private float _aloneModifier;
-    [SerializeField] private AreaEntityDetector _buildingAreaScaner;
-    [Header("UI")] [SerializeField] private bool _showIconWhenAlone;
-    [ShowIf("_showIconWhenAlone")] [SerializeField] private Sprite _aloneIcon;
-    [SerializeField] private bool _showIconWhenNotAlone;
-    [ShowIf("_showIconWhenNotAlone")] [SerializeField] private Sprite _notAloneIcon;
+    [SerializeField] private AreaEntityDetector _areaScaner;
+    
     [Cached] private EntityCanvas _entityCanvas;
     [Cached] private CombatEntity _ownerEntity;
+    
+    private Type _statType;
+    
+    private float _flatChangeWhenNoEntitiesInArea;
+    private float _multChangeWhenNoEntitiesInArea;
+    private float _flatChangePerEntity;
+    private float _flatChangeMax;
+    private float _multChangePerEntity;
+    private float _multChangeMax;
+    
+    private bool _showIconWhenNoEntitiesInArea;
+    private bool _showIconWhenEntitiesInArea;
+    private bool _displayEntitiesInAreaAmount;
+    
+    private Sprite _hasEntitiesInAreaIcon;
+    private Sprite _noEntitiesInAreaIcon;
+    
     private EntityCanvasIcon _entityCanvasIcon;
     private StatModifier _statModifier = new();
     
     private void Start()
     {
-        _ownerEntity.StatContainer.Get(GetStatType()).AddStatModifier(_statModifier);
+        _statType = Type.GetType(Args.GetArgument<string>("StatTypeName"));
         
-        _buildingAreaScaner.AddedItem += RecalculateDamageBoost;
-        _buildingAreaScaner.RemovedItem += RecalculateDamageBoost;
+        _hasEntitiesInAreaIcon = Args.GetArgumentWithDefaultValue<Sprite>("HasEntitiesInAreaIcon", null);
+        _noEntitiesInAreaIcon = Args.GetArgumentWithDefaultValue<Sprite>("NoEntitiesInAreaIcon", null);
+
+        _showIconWhenNoEntitiesInArea = _noEntitiesInAreaIcon;
+        _showIconWhenEntitiesInArea = _hasEntitiesInAreaIcon;
         
+        _displayEntitiesInAreaAmount = Args.GetArgumentWithDefaultValue<bool>("DisplayValueWithIcon", false);
+        
+        _flatChangeWhenNoEntitiesInArea = Args.GetArgumentWithDefaultValue<float>("FlatChangeWhenNoEntitiesInArea", 0);
+        _multChangeWhenNoEntitiesInArea = Args.GetArgumentWithDefaultValue<float>("MultChangeWhenNoEntitiesInArea", 0);
+        
+        _flatChangePerEntity = Args.GetArgumentWithDefaultValue<float>("FlatChangePerEntity", 0);
+        _flatChangeMax = Args.GetArgumentWithDefaultValue<float>("FlatChangeMax", 0);
+        
+        _multChangePerEntity = Args.GetArgumentWithDefaultValue<float>("MultChangePerEntity", 0);
+        _multChangeMax = Args.GetArgumentWithDefaultValue<float>("MultChangeMax", 0);
+        
+        _ownerEntity.StatContainer.Get(_statType).AddStatModifier(_statModifier);
+        _areaScaner.RemovedItem += RecalculateDamageBoost;
+        _areaScaner.AddedItem += RecalculateDamageBoost;
         RecalculateDamageBoost();
     }
     
-    private Type GetStatType() => Type.GetType(_statType);
-    
-    public override bool CanBeAppliedToEntity(CombatEntity entity) => entity.StatContainer.Has<ReachAreaScale>() && entity.StatContainer.Has(GetStatType()); 
+    public override bool CanBeAppliedToEntity(CombatEntity entity, ArgumentsContainer argumentsContainer) => entity.StatContainer.Has(Type.GetType(argumentsContainer.GetArgument<string>("StatTypeName"))); 
 
     private void RecalculateDamageBoost(CombatEntity _) => RecalculateDamageBoost();
     
     private void RecalculateDamageBoost()
     {
-        if (_buildingAreaScaner.Count == 0)
+        int entitiesInArea = _areaScaner.Count;
+        
+        if (entitiesInArea == 0)
         {
-            _statModifier.SetMultiplier(_aloneModifier);
+            _statModifier.SetFlat(_flatChangeWhenNoEntitiesInArea);
+            _statModifier.SetMultiplier(_multChangeWhenNoEntitiesInArea);
         }
         else
         {
-            if (_useStackableNearbyModifier) _statModifier.SetMultiplier(_nearbyModifier * _buildingAreaScaner.Count);
-            else _statModifier.SetMultiplier(_nearbyModifier);
+            float flatChange = Mathf.Clamp(entitiesInArea * _flatChangePerEntity, -_flatChangeMax, _flatChangeMax);
+            _statModifier.SetFlat(flatChange);
+
+            float multChange = Mathf.Clamp(entitiesInArea * _multChangePerEntity, -_multChangeMax, _multChangeMax);
+            _statModifier.SetMultiplier(multChange);
         }
 
         UpdateIconUI();
@@ -53,27 +83,28 @@ public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifi
 
     private void UpdateIconUI()
     {
-        bool isAlone = _buildingAreaScaner.Count == 0;
+        bool hasEntitiesInArea = !_areaScaner.IsEmpty;
         
-        bool shouldBeEnabled = (isAlone && _showIconWhenAlone) || (!isAlone && _showIconWhenNotAlone);
+        bool shouldBeEnabled = (hasEntitiesInArea && _showIconWhenEntitiesInArea) || 
+                               (!hasEntitiesInArea && _showIconWhenNoEntitiesInArea);
 
-        if (shouldBeEnabled && !_entityCanvasIcon) _entityCanvasIcon = _entityCanvas.AddIcon(_aloneIcon, _useStackableNearbyModifier);
+        if (shouldBeEnabled && !_entityCanvasIcon) _entityCanvasIcon = _entityCanvas.AddIcon(_hasEntitiesInAreaIcon, _displayEntitiesInAreaAmount);
         else if (!shouldBeEnabled && _entityCanvasIcon) _entityCanvas.RemoveIcon(_entityCanvasIcon);
         
-        if (!_entityCanvasIcon.gameObject) return;
+        if (!_entityCanvasIcon) return;
         
-        if (isAlone) _entityCanvasIcon.SetIcon(_aloneIcon);
-        else _entityCanvasIcon.SetIcon(_notAloneIcon);
+        if (hasEntitiesInArea) _entityCanvasIcon.SetIcon(_hasEntitiesInAreaIcon);
+        else _entityCanvasIcon.SetIcon(_noEntitiesInAreaIcon);
         
-        if (_useStackableNearbyModifier && _entityCanvasIcon) _entityCanvasIcon.SetValue(_buildingAreaScaner.Count);
+        if (_displayEntitiesInAreaAmount && _entityCanvasIcon) _entityCanvasIcon.SetValue(_areaScaner.Count);
     }
     
     private void OnDestroy()
     {
-        _ownerEntity.StatContainer.Get(GetStatType()).RemoveStatModifier(_statModifier);
+        _ownerEntity.StatContainer.Get(_statType).RemoveStatModifier(_statModifier);
         
-        _buildingAreaScaner.AddedItem -= RecalculateDamageBoost;
-        _buildingAreaScaner.RemovedItem -= RecalculateDamageBoost;
+        _areaScaner.AddedItem -= RecalculateDamageBoost;
+        _areaScaner.RemovedItem -= RecalculateDamageBoost;
         
         if (_entityCanvasIcon) _entityCanvas.RemoveIcon(_entityCanvasIcon);
     }

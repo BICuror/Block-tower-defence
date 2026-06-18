@@ -6,7 +6,7 @@ public sealed class ModificatorObjectApplyerEntityModificator : EntityModificato
     {
         EntityObjectModifier prefab = Args.GetArgument<EntityObjectModifier>("ObjectModificator");
 
-        return Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().CanBeAppliedToEntity(prefab);
+        return Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().CanBeAppliedToEntity(prefab, Args);
     }
     
     public override void Enable()

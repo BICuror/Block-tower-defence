@@ -16,7 +16,7 @@ MonoBehaviour:
   _localizationKey: increase_incoming_damage_nearby_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
-    - _argumentType: 2
+    - _argumentType: 7
       _argumentName: ObjectPrefab
       _intArgument: 0
       _boolArgument: 0
@@ -25,13 +25,27 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 1840394728301295906, guid: 26ed5bbbfcd3b8a40ad9acd6076ec860, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8483767074314891490, guid: 26ed5bbbfcd3b8a40ad9acd6076ec860, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 3
+      _argumentName: EntityModificatorData
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 1840394728301295906, guid: 26ed5bbbfcd3b8a40ad9acd6076ec860, type: 3}
+      _entityModificatorData: {fileID: 11400000, guid: cec17b385be55144b9d300a5d7ab732c, type: 2}
+      _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: 9e2e411e4c7c0ce43a15325e08cba920, type: 3}
       _layerSetting: {fileID: 0}
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
   _itemTypeContainers:
-  - _itemTypeName: GameObjectApplierEntityModificator
+  - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -45,7 +59,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill

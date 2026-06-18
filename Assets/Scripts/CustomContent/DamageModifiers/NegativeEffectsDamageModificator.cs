@@ -8,7 +8,7 @@ public sealed class NegativeEffectsDamageModificator : DamageModifier
     public override void Initialize()
     {
         _isDamageDealerModifier = Args.GetArgument<bool>("IsDealerDamageModifier");
-        _damageMultiplier = Args.GetArgument<float>("DamageModifier");
+        _damageMultiplier = Args.GetArgument<float>("DamageModifierValueDecrease");
     }
     
     public override float Modify(CombatEntity otherEntity, float value)
@@ -17,14 +17,14 @@ public sealed class NegativeEffectsDamageModificator : DamageModifier
         {
             if (otherEntity.ComponentsContainer.Get<EntityEffectManager>().HasEffect(EntityEffectType.Negative))
             {
-                value *= _damageMultiplier;
+                value *= 1 - _damageMultiplier;
             }
         }
         else
         {
             if (OwnerEntity.ComponentsContainer.Get<EntityEffectManager>().HasEffect(EntityEffectType.Negative))
             {
-                value *= _damageMultiplier;
+                value *= 1 - _damageMultiplier;
             }
         }
         

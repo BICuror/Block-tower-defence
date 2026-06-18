@@ -13,10 +13,9 @@ public sealed class EntityObjectModificatorContainer : MonoBehaviour
     private List<EntityObjectModifier> _modificators = new();
     private List<GameObject> _gameObjectModificators = new();
     
-
-    public bool CanBeAppliedToEntity(EntityObjectModifier modificatorPrefab)
+    public bool CanBeAppliedToEntity(EntityObjectModifier modificatorPrefab, ArgumentsContainer argumentsContainer)
     {
-        return modificatorPrefab.CanBeAppliedToEntity(_ownerEntity);
+        return modificatorPrefab.CanBeAppliedToEntity(_ownerEntity, argumentsContainer);
     }
     
     public EntityObjectModifier InstantiateAndAddModificator(EntityObjectModifier modificatorPrefab, ArgumentsContainer argumentsContainer)

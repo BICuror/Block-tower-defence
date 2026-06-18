@@ -5,15 +5,15 @@ using Combat;
 public sealed class ApplyEffectInArea : EntityObjectModifier
 {
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
-    [SerializeField] private string _effectTypeName;
-    [SerializeField] private int _effectStaks;
+    private int _effectStacks;
     private Type _effectType;
 
     private void Start() => Enable();
 
     public void Enable()
     {
-        _effectType = Type.GetType(_effectTypeName);
+        _effectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
+        _effectStacks = Args.GetArgument<int>("EffectStacks");
         
         _areaEntityDetector.AddedItem += ApplyEffect;
         _areaEntityDetector.RemovedItem += RemoveEffect;
@@ -35,13 +35,13 @@ public sealed class ApplyEffectInArea : EntityObjectModifier
         }
     }
     
-    private void ApplyEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_effectType, _effectStaks);
+    private void ApplyEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().TryApplyEffect(_effectType, _effectStacks);
 
-    private void RemoveEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().RemoveEffect(_effectType, _effectStaks);
+    private void RemoveEffect(CombatEntity entity) => entity.ComponentsContainer.Get<EntityEffectManager>().RemoveEffect(_effectType, _effectStacks);
 
     private void OnDestroy() => Disable();
     
-    public override bool CanBeAppliedToEntity(CombatEntity entity)
+    public override bool CanBeAppliedToEntity(CombatEntity entity, ArgumentsContainer argumentsContainer)
     {
         return entity.StatContainer.Has<ReachAreaScale>() && entity.ComponentsContainer.Has<AreaManager>();
     }

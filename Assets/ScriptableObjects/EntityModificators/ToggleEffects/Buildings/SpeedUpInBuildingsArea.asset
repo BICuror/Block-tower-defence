@@ -30,11 +30,37 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-  _showInInspector: 1
+    - _argumentType: 4
+      _argumentName: EffectTypeName
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: SpeedUpEffect
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+    - _argumentType: 0
+      _argumentName: EffectStacks
+      _intArgument: 1
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: SpeedUpEffect
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -44,24 +70,37 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
+    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
     - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
     - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
     - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -70,20 +109,24 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 
   _rarity: 1
   _tags: 
-  _effectType: 1
   _hasStacks: 0
   _maxStacks: 1
+  _effectType: 1
+  _showInInspector: 1
   _hasRequiredTags: 0
-  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
@@ -93,5 +136,7 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []

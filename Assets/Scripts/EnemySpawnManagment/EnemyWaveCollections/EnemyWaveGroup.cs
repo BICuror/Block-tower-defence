@@ -8,11 +8,10 @@ using System;
 public sealed class EnemyWaveGroup : ScriptableObject
 {
     [SerializeField] private List<EnemyGroupPart> _groupParts;
-    [SerializeField] private int _firstPossibleWaveEncounter, _lastPossibleWaveEncounter;
+    [SerializeField] private EnemyTier _waveGroupTier;
     
     public List<EnemyGroupPart> GroupParts => _groupParts;
-    public int FirstPossibleWaveEncounter => _firstPossibleWaveEncounter;
-    public int LastPossibleWaveEncounter => _lastPossibleWaveEncounter;
+    public EnemyTier WaveGroupTier => _waveGroupTier;
     
     [Button] private void ParseAll()
     {

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "WavesContentConfig", menuName = "WavesContentConfig")]
 
@@ -25,6 +26,7 @@ public sealed class WavesContentConfig : ScriptableObject
     [SerializeField] List<WaveContentType> _content;
 
     [Header("EnemyWaveGeneration")] 
+    [SerializeField] private EnemyTier _requiredEnemyTier;
     [SerializeField] private bool _forceExistingBuildingAttackWaves;
     
     [Header("ItemSetting")]
@@ -40,6 +42,7 @@ public sealed class WavesContentConfig : ScriptableObject
     
     public List<WaveContentType> Content => _content;
     
+    public EnemyTier RequiredEnemyTier => _requiredEnemyTier;
     public bool ForceExistingBuildingAttackWaves => _forceExistingBuildingAttackWaves;
     public int AdditionalItemStrength => _additionalItemStrength;
     public int CombinedItemStrength => _combinedItemStrength;

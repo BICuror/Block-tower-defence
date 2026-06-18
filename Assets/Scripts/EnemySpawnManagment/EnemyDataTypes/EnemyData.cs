@@ -1,14 +1,15 @@
 using System.Collections.Generic;
-using CuroAudio;
 using NaughtyAttributes;
 using UnityEngine;
 using Navigation;
+using CuroAudio;
 
 [CreateAssetMenu(fileName = "EnemyData", menuName = "EnemyDatas/EnemyData")]
 
 public sealed class EnemyData : ScriptableObject
 {
     [Header("Stats")] 
+    [SerializeField] private EnemyTier _tier;
     [SerializeField] private BuildingAttackType _buildingAttackType = BuildingAttackType.Group;
     [SerializeField] private float _spawnDelay = 0.65f;
     [SerializeField] private bool _diesOnContact;
@@ -42,6 +43,7 @@ public sealed class EnemyData : ScriptableObject
     [Header("Audio")] 
     [SerializeField] private AudioEnum _deathSound = AudioEnum.sound_enemy_death;
 
+    public EnemyTier Tier => _tier;
     public BuildingAttackType BuildingAttackType => _buildingAttackType;
     public float SpawnDelay => _spawnDelay;
     public bool DiesOnContact => _diesOnContact;
@@ -61,4 +63,12 @@ public sealed class EnemyData : ScriptableObject
     public Material Material => _material;
     public float Scale => _scale;
     public AudioEnum DeathSound => _deathSound;
+}
+
+//Used for enemy tier selection when generating enemy waves
+public enum EnemyTier
+{
+    Tier_1,
+    Tier_2,
+    Tier_3,
 }

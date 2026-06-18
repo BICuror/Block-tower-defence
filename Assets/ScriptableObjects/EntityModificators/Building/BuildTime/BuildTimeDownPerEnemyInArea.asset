@@ -16,8 +16,23 @@ MonoBehaviour:
   _localizationKey: build_time_down_for_each_enemy_in_area_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
+    - _argumentType: 7
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0.75
+      _stringArgument: BuildTime
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 0bdea7dde5ce4084a9eb1e00231959e1, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 4
-      _argumentName: StatType
+      _argumentName: StatTypeName
       _intArgument: 0
       _boolArgument: 0
       _floatArgument: 0.2
@@ -30,34 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-    - _argumentType: 1
-      _argumentName: FlatChangePerEntity
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: BuildTime
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
-    - _argumentType: 1
-      _argumentName: FlatChangeMax
-      _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
-      _stringArgument: BuildTime
-      _gameObjectArgument: {fileID: 0}
-      _entityModificatorData: {fileID: 0}
-      _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 0}
-      _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
-        _amountMultiplier: 0
-        _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 1
       _argumentName: MultChangePerEntity
       _intArgument: 0
@@ -72,6 +60,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 1
       _argumentName: MultChangeMax
       _intArgument: 0
@@ -86,8 +75,9 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
-  - _itemTypeName: ChangeStatPerEntityInArea
+  - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -101,7 +91,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill

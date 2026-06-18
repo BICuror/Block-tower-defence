@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6871167627582267784}
   - component: {fileID: 7720884877998912417}
   m_Layer: 7
-  m_Name: DamageDownWhenBuildingsNearby
+  m_Name: ChangeStatPerBuildingsInArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,14 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10ea86a4846a4a44b949ef22f759337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _useStackableNearbyModifier: 0
-  _statType: Damage
-  _nearbyModifier: -0.4
-  _aloneModifier: 0
-  _buildingAreaScaner: {fileID: 4910447815113604971}
-  _showIconWhenAlone: 0
-  _aloneIcon: {fileID: 0}
-  _showIconWhenNotAlone: 1
+  _areaScaner: {fileID: 4910447815113604971}
+  _aloneIcon: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
   _notAloneIcon: {fileID: -1927012866, guid: 1931599c4107e624a84165116f765cd5, type: 3}
 --- !u!1 &4451044171943003910
 GameObject:

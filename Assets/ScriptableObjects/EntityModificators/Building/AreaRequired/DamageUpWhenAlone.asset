@@ -30,6 +30,97 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+    - _argumentType: 4
+      _argumentName: StatTypeName
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: -0.5
+      _stringArgument: Damage
+      _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+    - _argumentType: 10
+      _argumentName: HasEntitiesInAreaIcon
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: -1927012866, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+    - _argumentType: 10
+      _argumentName: NoEntitiesInAreaIcon
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+    - _argumentType: 1
+      _argumentName: MultChangeWhenNoEntitiesInArea
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0.75
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: MultChangeMax
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: MultChangePerEntity
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: -0.5
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 76844098276948853, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 797b51ef7bb731544bc2548bf9a22167, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -45,7 +136,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill

@@ -1,15 +1,17 @@
 using UnityEngine;
 using Combat;
 
-public sealed class ApplyModificatorInArea : MonoBehaviour
+public sealed class ApplyModificatorInArea : EntityObjectModifier
 {
-    [SerializeField] private EntityModificatorData _entityModificatorData;
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
+    private EntityModificatorData _entityModificatorData;
     
-    private void Awake()
+    private void Start()
     {
         _areaEntityDetector.AddedItem += ApplyModificator;
         _areaEntityDetector.RemovedItem += RemoveModificator;
+        
+        _entityModificatorData = Args.GetArgument<EntityModificatorData>("EntityModificatorData");
     }
 
     private void ApplyModificator(CombatEntity entity)

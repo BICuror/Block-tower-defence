@@ -10,7 +10,6 @@ public sealed class EnemyData : ScriptableObject
 {
     [Header("Stats")] 
     [SerializeField] private EnemyTier _tier;
-    [SerializeField] private BuildingAttackType _buildingAttackType = BuildingAttackType.Group;
     [SerializeField] private float _spawnDelay = 0.65f;
     [SerializeField] private bool _diesOnContact;
     [SerializeField] private float _contactDamage = 10f;
@@ -44,7 +43,6 @@ public sealed class EnemyData : ScriptableObject
     [SerializeField] private AudioEnum _deathSound = AudioEnum.sound_enemy_death;
 
     public EnemyTier Tier => _tier;
-    public BuildingAttackType BuildingAttackType => _buildingAttackType;
     public float SpawnDelay => _spawnDelay;
     public bool DiesOnContact => _diesOnContact;
     public float ContactDamage => _contactDamage;

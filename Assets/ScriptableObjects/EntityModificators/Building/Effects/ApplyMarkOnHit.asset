@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStrength
       _intArgument: 1
@@ -44,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
@@ -59,8 +61,8 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
     - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
@@ -107,7 +109,7 @@ MonoBehaviour:
   _buildingEntityTypeTags: 020000000500000007000000
   _rarity: 2
   _tags: 010000000b000000
-  _hasStacks: 0
+  _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1

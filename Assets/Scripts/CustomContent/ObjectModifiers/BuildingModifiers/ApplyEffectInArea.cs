@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 using System;
 using Combat;
@@ -5,15 +6,22 @@ using Combat;
 public sealed class ApplyEffectInArea : EntityObjectModifier
 {
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
-    private int _effectStacks;
+    [SerializeField] private bool _applyDataFromInspector;
+    [ShowIf("_applyDataFromInspector")] [SerializeField] private int _effectStacks;
+    [ShowIf("_applyDataFromInspector")] [SerializeField] private string _effectTypeName;
+    
     private Type _effectType;
-
+    
     private void Start() => Enable();
 
     public void Enable()
     {
-        _effectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
-        _effectStacks = Args.GetArgument<int>("EffectStacks");
+        if (!_applyDataFromInspector)
+        {
+            _effectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
+            _effectStacks = Args.GetArgument<int>("EffectStacks");
+        }
+        else _effectType = Type.GetType(_effectTypeName);
         
         _areaEntityDetector.AddedItem += ApplyEffect;
         _areaEntityDetector.RemovedItem += RemoveEffect;

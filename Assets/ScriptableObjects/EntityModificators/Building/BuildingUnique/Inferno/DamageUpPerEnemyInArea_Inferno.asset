@@ -16,8 +16,23 @@ MonoBehaviour:
   _localizationKey: damage_up_for_each_enemy_in_area_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems:
+    - _argumentType: 7
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 1
+      _floatArgument: 30
+      _stringArgument: BuildTime
+      _gameObjectArgument: {fileID: 0}
+      _entityModificatorData: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 7720884877998912417, guid: 0bdea7dde5ce4084a9eb1e00231959e1, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupData:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 4
-      _argumentName: StatType
+      _argumentName: StatTypeName
       _intArgument: 0
       _boolArgument: 0
       _floatArgument: 0.2
@@ -30,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 1
       _argumentName: FlatChangePerEntity
       _intArgument: 0
@@ -44,6 +60,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 1
       _argumentName: FlatChangeMax
       _intArgument: 0
@@ -58,11 +75,12 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-    - _argumentType: 1
-      _argumentName: MultChangePerEntity
+      _sprite: {fileID: 0}
+    - _argumentType: 10
+      _argumentName: HasEntitiesInAreaIcon
       _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
+      _boolArgument: 1
+      _floatArgument: 30
       _stringArgument: BuildTime
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -72,11 +90,12 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
-    - _argumentType: 1
-      _argumentName: MultChangeMax
+      _sprite: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+    - _argumentType: 5
+      _argumentName: DisplayValueWithIcon
       _intArgument: 0
-      _boolArgument: 0
-      _floatArgument: 0
+      _boolArgument: 1
+      _floatArgument: 30
       _stringArgument: BuildTime
       _gameObjectArgument: {fileID: 0}
       _entityModificatorData: {fileID: 0}
@@ -86,8 +105,9 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
-  - _itemTypeName: ChangeStatPerEntityInArea
+  - _itemTypeName: AddIconEntityModificator
     AllEffectTypeNames:
     - AddIconEntityModificator
     - AOEMortarExplotion
@@ -101,7 +121,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill

@@ -42,12 +42,21 @@ public sealed class PauseScreen : MonoBehaviour
 
     private void Restart()
     {
-        _gameController.Dispose();
-        DOTween.KillAll();
+        CleanUp();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    private void Quit() => Application.Quit();
+    private void Quit()
+    {
+        CleanUp();
+        SceneManager.LoadScene(0);
+    }
+
+    private void CleanUp()
+    {
+        _gameController.Dispose();
+        DOTween.KillAll();
+    }
     
     private void Enable()
     {

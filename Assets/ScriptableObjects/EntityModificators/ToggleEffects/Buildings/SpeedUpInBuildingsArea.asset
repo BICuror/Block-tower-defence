@@ -25,11 +25,12 @@ MonoBehaviour:
       _gameObjectArgument: {fileID: 8698641187551789753, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
       _entityModificatorData: {fileID: 0}
       _entityEffectParticleHandler: {fileID: 0}
-      _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: f040a6b603887c24a998b3fbdcf3018a, type: 3}
+      _entityObjectModifierPrefab: {fileID: 3655408004283669586, guid: 9e2e411e4c7c0ce43a15325e08cba920, type: 3}
       _layerSetting: {fileID: 0}
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 4
       _argumentName: EffectTypeName
       _intArgument: 0
@@ -44,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStacks
       _intArgument: 1
@@ -58,6 +60,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -73,7 +76,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill

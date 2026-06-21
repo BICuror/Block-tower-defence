@@ -8,9 +8,12 @@ using System;
 public sealed class EnemyWaveGroup : ScriptableObject
 {
     [SerializeField] private List<EnemyGroupPart> _groupParts;
+    
+    [SerializeField] private BuildingAttackType _buildingAttackType;
     [SerializeField] private EnemyTier _waveGroupTier;
     
     public List<EnemyGroupPart> GroupParts => _groupParts;
+    public BuildingAttackType BuildingAttackType => _buildingAttackType;
     public EnemyTier WaveGroupTier => _waveGroupTier;
     
     [Button] private void ParseAll()

@@ -57,15 +57,20 @@ public sealed class GameController : MonoBehaviour
 
     #region Enable\Disable
 
-    public void Enable()
+    public void EnableState(ControllerState state)
     {
-        _controls.ActivateInput();
+        _states[state].Initialize(_controls.currentActionMap);
+        _states[state].gameObject.SetActive(true);
     }
 
-    public void Disable()
+    public void DisableState(ControllerState state)
     {
-        _controls.DeactivateInput();
+        _states[state].UnbindInputActions();
+        _states[state].gameObject.SetActive(false);
     }
+    
+    public void Enable() => _controls.ActivateInput();
+    public void Disable() => _controls.DeactivateInput();
 
     public void Dispose()
     {
@@ -87,7 +92,7 @@ public sealed class GameController : MonoBehaviour
         _controls.currentActionMap.Dispose();
     }
 
-    private void Start()
+    private void Awake()
     {   
         CreateControls();
     }

@@ -15,7 +15,7 @@ public class InspectorController : MonoBehaviour
     
     public event Action InspectionStopped;
     
-    public bool TryToStartInspecting(Vector2 mousePosition)
+    public void TryToStartInspecting(Vector2 mousePosition)
     {
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         
@@ -23,15 +23,13 @@ public class InspectorController : MonoBehaviour
         {
             if (hit.collider.gameObject.TryGetComponent(out InspectableObject hoveredInspectable))
             { 
-                StartInspecting(hoveredInspectable);
+                StartInspecting(hoveredInspectable, true).Forget();
                 
-                return true;
+                return;
             }
         }
 
         StopInspecting();
-
-        return false;
     }
     
 
@@ -84,9 +82,9 @@ public class InspectorController : MonoBehaviour
     
     public void StopInspecting() => _inspectionTooltipManager.DisableActiveSinglePopup();
     
-    private async UniTask StartInspecting(InspectableObject inspectableObject)
+    private async UniTask StartInspecting(InspectableObject inspectableObject, bool forceInspection = false)
     {
-        if (inspectableObject.IsInspected) return;
+        if (!forceInspection && inspectableObject.IsInspected) return;
         
         _inspectableObject = inspectableObject;
         inspectableObject.SetInspectedState(true);

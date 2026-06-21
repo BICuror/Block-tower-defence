@@ -68,7 +68,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _autoScale: 1
-  _additionalScaleValue: 0.95
   _hasVisualisation: 0
   _visualisationTransform: {fileID: 0}
   _height: 100
@@ -95,7 +94,7 @@ GameObject:
   - component: {fileID: 4772473489809162237}
   - component: {fileID: 3655408004283669586}
   m_Layer: 10
-  m_Name: SpeedupInArea
+  m_Name: ApplyEffectInArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,5 +129,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _areaEntityDetector: {fileID: 5508162354419099327}
-  _effectTypeName: SpeedUpEffect
+  _effectTypeName: SlowdownEffect
   _effectStaks: 1

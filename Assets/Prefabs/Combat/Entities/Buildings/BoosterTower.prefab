@@ -5159,6 +5159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: booster_tower_building_entity_tooltip
 --- !u!114 &5781856286329589189
 MonoBehaviour:
@@ -5186,19 +5187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HoverEntered:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Shaker, Assembly-CSharp
-        m_MethodName: Shake
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   HoverExited:
     m_PersistentCalls:
       m_Calls: []
@@ -5215,8 +5204,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _areaEntityDetector: {fileID: 7466747641916913374}
+  _applyDataFromInspector: 1
+  _effectStacks: 2
   _effectTypeName: HasteEffect
-  _effectStaks: 1
 --- !u!114 &-5490375013983178170
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -176,7 +176,7 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
                 existingBuildingAttackTypes.Add(buildingEntity.BuildingAttackType);
             }
         });
-        
-        return group.GroupParts.Exists(part => existingBuildingAttackTypes.Contains(part.Data.BuildingAttackType));
+
+        return existingBuildingAttackTypes.Contains(group.BuildingAttackType);
     }
 }

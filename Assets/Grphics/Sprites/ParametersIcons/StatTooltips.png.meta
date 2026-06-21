@@ -1306,7 +1306,7 @@ TextureImporter:
         width: 100
         height: 100
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -1315,6 +1315,28 @@ TextureImporter:
       bones: []
       spriteID: b47d720571b2b3343be85ae236868750
       internalID: 92626092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: AOEKeywordTooltip
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 394
+        width: 100
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40a080954824d5a4dac069aed5d5fce9
+      internalID: 1444612964
       vertices: []
       indices: 
       edges: []
@@ -1334,6 +1356,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       AOEDamageMultiplierTooltip: 1427845749
+      AOEKeywordTooltip: 1444612964
       AOERadiusTooltip: 260667796
       ActionStatTooltip: 1859461284
       ActivationStatTooltip: -164964044

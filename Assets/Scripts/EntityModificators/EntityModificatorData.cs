@@ -109,4 +109,5 @@ public enum EntityModifcatorTag
     HasMaxEntities = 30,
     ActiveAbility = 31,
     DowngradeBuildTime = 32,
+    RemovesExplosion = 33,
 }

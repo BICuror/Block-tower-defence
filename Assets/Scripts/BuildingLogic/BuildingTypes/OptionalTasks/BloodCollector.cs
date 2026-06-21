@@ -58,7 +58,7 @@ public sealed class BloodCollector : OptionalTask
 
     private async UniTask IncreaseKilledEntities(Vector3 entityDeathPosition)
     {
-        await AnimateBloodDrop(entityDeathPosition);
+        AnimateBloodDrop(entityDeathPosition).Forget();
         
         if (_entitiesKilledInArea < _requiredKills)
         {

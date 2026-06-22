@@ -1,10 +1,8 @@
-using Combat;
-using CuroAudio;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Events;
 using UnityEngine;
 using DG.Tweening;
-using Zenject;
+using Combat;
 
 public sealed class DraggableConnector : MonoBehaviour
 {

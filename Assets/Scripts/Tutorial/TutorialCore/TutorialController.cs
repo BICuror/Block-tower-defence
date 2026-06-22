@@ -19,7 +19,11 @@ namespace Tutorial
             {
                 _steps[i].StartStep();
                 
+                Debug.Log($"Started step {_steps[i].gameObject.name}");
+                
                 await UniTask.WaitUntil(() => _steps[i].IsComplete);
+                
+                Debug.Log($"Ended step {_steps[i].gameObject.name}");
                 
                 _steps[i].EndStep();
             }

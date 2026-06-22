@@ -8,14 +8,14 @@ namespace Tutorial
     {
         [SerializeField] private CanvasGroup _canvasGroup;
 
-        public override async UniTask StartStep()
+        protected async UniTask EnableUI()
         {
-            await _canvasGroup.DOFade(1f, 0.5f).From(0f).SetLink(_canvasGroup.gameObject).From(0f).AsyncWaitForCompletion();
+            await _canvasGroup.DOFade(1f, 0.5f).From(0f).SetLink(_canvasGroup.gameObject).AsyncWaitForCompletion();
         }
 
-        public override async UniTask EndStep()
+        protected async UniTask DisableUI()
         {
-            await _canvasGroup.DOFade(0f, 0.5f).From(0f).SetLink(_canvasGroup.gameObject).From(1f).AsyncWaitForCompletion();
+            await _canvasGroup.DOFade(0f, 0.5f).From(1f).SetLink(_canvasGroup.gameObject).AsyncWaitForCompletion();
         }
     }
 }

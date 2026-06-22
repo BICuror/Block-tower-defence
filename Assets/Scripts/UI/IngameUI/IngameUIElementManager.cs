@@ -1,7 +1,8 @@
-using System;
 using System.Collections.Generic;
+using GameControls.Controllers;
 using UnityEngine;
 using Zenject;
+using System;
 
 public sealed class IngameUIElementManager : MonoBehaviour
 {
@@ -21,7 +22,7 @@ public sealed class IngameUIElementManager : MonoBehaviour
     }
     #endregion
     
-    [Inject] private CameraRotationController _cameraRotationController;
+    [Inject] private CameraController _cameraController;
 
     [SerializeField] private Camera _camera;
 
@@ -37,7 +38,7 @@ public sealed class IngameUIElementManager : MonoBehaviour
 
         CreateSingletoneInstance();
 
-        _cameraRotationController.CameraRotated.AddListener(OnCameraRotated);
+        _cameraController.CameraRotated += OnCameraRotated;
     }
 
     public void AddStaticUIElement(StaticUIElement element)

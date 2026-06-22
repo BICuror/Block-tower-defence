@@ -3,6 +3,7 @@ using UnityEngine;
 using Zenject;
 using System;
 using DG.Tweening;
+using UnityEngine.Serialization;
 
 public sealed class EntityCanvasAbilityIcon : ProgressBarBase
 {
@@ -11,8 +12,8 @@ public sealed class EntityCanvasAbilityIcon : ProgressBarBase
     [SerializeField] private SpriteRenderer _spriteRenderer;
     
     [Header("Scale")]
-    [SerializeField] private float _defaultScale = 1f;
-    [SerializeField] private float _depletedScale;
+    [SerializeField] private float _defaultIconScale = 1f;
+    [SerializeField] private float _depletedIconScale;
 
     private float _fillDuration = 1f;
     private WaveState _activeWaveState;
@@ -50,12 +51,12 @@ public sealed class EntityCanvasAbilityIcon : ProgressBarBase
     { 
         transform.DOKill();
         
-        if (value != 0 )transform.DOScale(_defaultScale, 0.5f).SetLink(gameObject);
+        if (value != 0 )transform.DOScale(_defaultIconScale, 0.5f).SetLink(gameObject);
         
         await FillBar(_previousValue, value, _fillDuration);
         _previousValue = value;
         
-        if (value == 0) transform.DOScale(_depletedScale, 0.5f).SetLink(gameObject);
+        if (value == 0) transform.DOScale(_depletedIconScale, 0.5f).SetLink(gameObject);
     }
 
     private void UpdateState(WaveState waveState)

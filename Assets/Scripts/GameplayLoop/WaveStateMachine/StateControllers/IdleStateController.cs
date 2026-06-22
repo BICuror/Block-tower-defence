@@ -4,6 +4,7 @@ using WorldGeneration;
 using UnityEngine;
 using System.Linq;
 using Combat;
+using GameControls.Controllers;
 using Navigation;
 using Zenject;
 
@@ -11,7 +12,7 @@ public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
     
-    [Inject] private CameraPositionController _cameraPositionController;
+    [Inject] private CameraController _cameraController;
     
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private WaveIndexContainer _waveIndexContainer;
@@ -61,7 +62,7 @@ public sealed class IdleStateController : WaveStateController
     {
         RandomExstentions.ReInitializeUnityRandom();
         
-        _cameraPositionController.SetDefaultPosition();
+        _cameraController.SetDefaultPosition();
         
         _selectionManager.TryStartQueuedSelection();
 

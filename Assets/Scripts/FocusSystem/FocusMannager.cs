@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using GameControls.Controllers;
+using GameControls.Features;
 using UnityEngine;
 using Zenject;
 
@@ -7,8 +9,8 @@ public sealed class FocusMannager : MonoBehaviour
     private static FocusMannager _instance;
     public static FocusMannager Instance => _instance;
     
-    [Inject] private CameraRotationController _cameraRotationController;
-    [Inject] private CameraZoomController _cameraZoomController;
+    [Inject] private CameraZoomGameControllerFeature _cameraZoomController;
+    [Inject] private CameraController _cameraController;
 
     [Header("Viewport")] 
     [SerializeField] private Camera _camera;
@@ -23,7 +25,7 @@ public sealed class FocusMannager : MonoBehaviour
     private void Start()
     {
         _cameraZoomController.ZoomChanged += UpdateAllFocusElementValues;
-        _cameraRotationController.CameraRotated.AddListener(UpdateAllFocusElementValues);
+        _cameraController.CameraRotated += UpdateAllFocusElementValues;
     }
 
     public void AddFocusElement(FocusElement focusElement)

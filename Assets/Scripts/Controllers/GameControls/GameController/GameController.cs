@@ -1,122 +1,104 @@
 using TMPEffects.SerializedCollections;
 using UnityEngine.InputSystem;
+using GameControls.Features;
+using GameControls.States;
+using System.Linq;
 using UnityEngine;
-using Zenject;
 
-public sealed class GameController : MonoBehaviour
+namespace GameControls
 {
-    [Inject] private CameraPositionController _cameraPositionController;
-    [Inject] private CameraZoomController _cameraZoomController;
-    [Inject] private HoverableController _hoverableController; 
-    [Inject] private TimeController _timeController;
-    
-    [SerializeField] private SerializedDictionary<ControllerState, GameControllerState> _states = new();
-    [SerializeField] private PlayerInput _controls;
-
-    private ControllerState _currentControllerState;
-    private InputAction _pointerPositionAction;
-    
-    private void InitializeStates()
+    public sealed class GameController : MonoBehaviour
     {
-        foreach (GameControllerState gameControllerState in _states.Values)
+        [SerializeField] private SerializedDictionary<ControllerFeature, GameControllerFeature> _features = new();
+        [SerializeField] private SerializedDictionary<ControllerState, GameControllerState> _states = new();
+        [SerializeField] private PlayerInput _controls;
+
+        private ControllerState _currentControllerState;
+        
+        #region Enable\Disable
+        
+        private void Awake() => CreateControls();
+        
+        private void CreateControls()
         {
-            gameControllerState.Initialize(_controls.currentActionMap);
-            gameControllerState.TriedToEnterState += TryEnterState;
-            gameControllerState.TriedToExitState += TryExitState;
-        }
-    }
-
-    private void TryEnterState(ControllerState state)
-    {
-        if (_states[_currentControllerState].CanExitStateTo(state) && _states[state].CanEnterStateFrom(_currentControllerState))
-        {
-            _states[_currentControllerState].Exit();   
-            _currentControllerState = state;
-            _states[state].Enter();   
-        }
-    }
-    
-    private void TryExitState(ControllerState state)
-    {
-        if (_currentControllerState != state) return;
-        
-        ControllerState idleState = ControllerState.Idle;
-        
-        if (_states[_currentControllerState].CanExitStateTo(idleState) && _states[idleState].CanEnterStateFrom(_currentControllerState))
-        {
-            _states[_currentControllerState].Exit();   
-            _currentControllerState = idleState;
-            _states[idleState].Enter();   
-        }
-    }
-    
-    private void FixedUpdate()
-    {
-        _hoverableController.CheckHover(_pointerPositionAction.ReadValue<Vector2>());
-    }
-
-    #region Enable\Disable
-
-    public void EnableState(ControllerState state)
-    {
-        _states[state].Initialize(_controls.currentActionMap);
-        _states[state].gameObject.SetActive(true);
-    }
-
-    public void DisableState(ControllerState state)
-    {
-        _states[state].UnbindInputActions();
-        _states[state].gameObject.SetActive(false);
-    }
-    
-    public void Enable() => _controls.ActivateInput();
-    public void Disable() => _controls.DeactivateInput();
-
-    public void Dispose()
-    {
-        _controls.currentActionMap["ReturnDefaultCameraPosition"].performed -= SetDefaultPosition;
-
-        _controls.currentActionMap["ScrolledUp"].performed -= ZoomIn;
-        _controls.currentActionMap["ScrolledDown"].performed -= ZoomOut;
-        
-        _controls.currentActionMap["ToggleTime"].performed -= ToggleTimeScale;
-        
-        _cameraPositionController.UnbindControls();
-        
-        foreach (GameControllerState controllerState in _states.Values)
-        {
-            controllerState.UnbindInputActions();
+            InitializeStates();
+            InitializeFeatures();
         }
         
-        _controls.currentActionMap.Disable();
-        _controls.currentActionMap.Dispose();
-    }
+        public void Enable() => _controls.ActivateInput();
+        public void Disable() => _controls.DeactivateInput();
 
-    private void Awake()
-    {   
-        CreateControls();
-    }
-    
-    private void CreateControls()
-    {
-        _pointerPositionAction = _controls.currentActionMap["PointerPosition"];
-        
-        _controls.currentActionMap["ReturnDefaultCameraPosition"].performed += SetDefaultPosition;
+        public void Dispose()
+        {
+            _features.Keys.ToList().ForEach(DisableFeature);
+            _states.Keys.ToList().ForEach(DisableState);
 
-        _controls.currentActionMap["ScrolledUp"].performed += ZoomIn;
-        _controls.currentActionMap["ScrolledDown"].performed += ZoomOut;
+            _controls.currentActionMap.Disable();
+            _controls.currentActionMap.Dispose();
+        }
         
-        _controls.currentActionMap["ToggleTime"].performed += ToggleTimeScale;
+        #endregion
 
-        _cameraPositionController.BindControls();
+        #region Features
         
-        InitializeStates();
+        public void EnableFeature(ControllerFeature feature) => _features[feature].EnableFeature();
+        public void DisableFeature(ControllerFeature feature) => _features[feature].DisableFeature();
+        
+        private void InitializeFeatures()
+        {
+            foreach (GameControllerFeature gameControllerFeature in _features.Values)
+            {
+                gameControllerFeature.SetInputActionMap(_controls.currentActionMap);
+                gameControllerFeature.Initialize();
+                gameControllerFeature.EnableFeature();
+            }
+        }
+
+        #endregion
+        
+        #region States
+        
+        public void EnableState(ControllerState state) => _states[state].EnableState();
+        public void DisableState(ControllerState state) => _states[state].DisableState();
+        
+        private void InitializeStates()
+        {
+            foreach (GameControllerState gameControllerState in _states.Values)
+            {
+                gameControllerState.SetInputActionMap(_controls.currentActionMap);
+                gameControllerState.Initialize();
+                gameControllerState.EnableState();
+                gameControllerState.TriedToEnterState += TryEnterState;
+                gameControllerState.TriedToExitState += TryExitState;
+            }
+        }
+
+        private void TryEnterState(ControllerState state)
+        {
+            if (_states[_currentControllerState].CanExitStateTo(state) &&
+                _states[state].CanEnterStateFrom(_currentControllerState))
+            {
+                _states[_currentControllerState].Exit();
+                _currentControllerState = state;
+                _states[state].Enter();
+            }
+        }
+
+        private void TryExitState(ControllerState state)
+        {
+            if (_currentControllerState != state) return;
+
+            ControllerState idleState = ControllerState.Idle;
+
+            if (_states[_currentControllerState].CanExitStateTo(idleState) &&
+                _states[idleState].CanEnterStateFrom(_currentControllerState))
+            {
+                _states[_currentControllerState].Exit();
+                _currentControllerState = idleState;
+                _states[idleState].Enter();
+            }
+        }
+
+        #endregion
     }
-    
-    private void SetDefaultPosition(InputAction.CallbackContext _) => _cameraPositionController.SetDefaultPosition();
-    private void ZoomIn(InputAction.CallbackContext _) => _cameraZoomController.ZoomIn();
-    private void ZoomOut(InputAction.CallbackContext _) => _cameraZoomController.ZoomOut();
-    private void ToggleTimeScale(InputAction.CallbackContext _) => _timeController.ToggleTimeScale();
-    
-    #endregion
 }

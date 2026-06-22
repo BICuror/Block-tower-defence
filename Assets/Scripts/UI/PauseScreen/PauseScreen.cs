@@ -1,6 +1,7 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
+using GameControls;
 using UnityEngine;
 using Zenject;
 

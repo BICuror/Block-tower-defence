@@ -1,20 +1,21 @@
 using Cysharp.Threading.Tasks;
-using Tutorial;
+using GameControls.States;
+using GameControls;
 using Zenject;
 
-namespace TutorialContent
+namespace Tutorial.Custom
 {
-    public sealed class EventTutorialStep : TutorialStep
+    public sealed class TutorialInitializationStep : TutorialStep
     {
         [Inject] private GameController _gameController;
         
         public override UniTask StartStep()
         {
-            CompleteStep();
-            
-            _gameController.DisableState(ControllerState.PositionDragging);
+            _gameController.DisableState(ControllerState.CameraRepositionDrag);
             _gameController.DisableState(ControllerState.Inspecting);
             _gameController.DisableState(ControllerState.Rotating);
+            
+            CompleteStep();
             
             return UniTask.CompletedTask;
         }

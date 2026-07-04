@@ -49,7 +49,7 @@ namespace GameControls.States
             if (_dragController.HoveredOverDraggableObject(GetPointerPosition(), out GameObject draggedObject))
             {
                 if (!_inspectorController.IsPossibleToDragInspectedItem(draggedObject)) return;
-
+            
                 InvokeTryEnterState();
             }
         }
@@ -76,9 +76,7 @@ namespace GameControls.States
             InvokeTryExitState();
         }
 
-        public override bool CanEnterStateFrom(ControllerState currentState) => currentState is ControllerState.Idle
-            or ControllerState.Inspecting or ControllerState.CameraRepositionDrag;
-
+        public override bool CanEnterStateFrom(ControllerState currentState) => currentState is ControllerState.Idle or ControllerState.Inspecting or ControllerState.CameraRepositionDrag;
         public override bool CanExitStateTo(ControllerState currentState) => currentState is ControllerState.Idle;
 
         private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();

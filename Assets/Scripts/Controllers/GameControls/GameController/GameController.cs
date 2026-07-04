@@ -23,6 +23,7 @@ namespace GameControls
         {
             InitializeStates();
             InitializeFeatures();
+            Enable();
         }
         
         public void Enable() => _controls.ActivateInput();
@@ -65,16 +66,18 @@ namespace GameControls
         {
             foreach (GameControllerState gameControllerState in _states.Values)
             {
+                gameControllerState.TriedToEnterState += TryEnterState;
+                gameControllerState.TriedToExitState += TryExitState;
                 gameControllerState.SetInputActionMap(_controls.currentActionMap);
                 gameControllerState.Initialize();
                 gameControllerState.EnableState();
-                gameControllerState.TriedToEnterState += TryEnterState;
-                gameControllerState.TriedToExitState += TryExitState;
             }
         }
 
         private void TryEnterState(ControllerState state)
         {
+            if (state == ControllerState.Dragging) Debug.Log("Dragging");
+            
             if (_states[_currentControllerState].CanExitStateTo(state) &&
                 _states[state].CanEnterStateFrom(_currentControllerState))
             {

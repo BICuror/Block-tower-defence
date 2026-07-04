@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 2
       _argumentName: RockTowerPrefab
       _intArgument: 0
@@ -44,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: ConvertMarkedEnemiesIntoRockOnKill
     AllEffectTypeNames:
@@ -59,7 +61,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -114,17 +115,21 @@ MonoBehaviour:
   _showInInspector: 1
   _hasRequiredTags: 1
   _reqiredOwnerTags:
+    Condition: 0
     Requirements:
     - Tag: 11
       Amount: 1
   _reqiredOtherEntityTags:
+    Condition: 0
     Requirements:
     - Tag: 11
       Amount: 1
   _hasBlockTags: 1
   _blockOwnerTags:
+    Condition: 0
     Requirements: []
   _blockOtherEntityTags:
+    Condition: 0
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []

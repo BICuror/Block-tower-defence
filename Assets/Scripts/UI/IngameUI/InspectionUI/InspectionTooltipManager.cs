@@ -34,6 +34,8 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     
     public bool NonIdleTooltipsOpened => _layers.Contains(UILayer.Single);
     public bool HoveredOverNonIdleTooltip => _hoveredOverNonIdleTooltip;
+
+    public event Action<InspectionPanelBase> OpenedTooltip;
     
     private void Awake()
     {
@@ -81,12 +83,8 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         EntityTooltip entityTooltip = Instantiate(_entityTooltipPrefab, _uiRoot);
            
         entityTooltip.Initialize(entity);
-        
-        _layers.Add(UILayer.Single, entityTooltip);
-        
-        SetActiveLayer(UILayer.Single).Forget();
-        
-        await KeepElementActiveWhileNeeded(entityTooltip);
+
+        await OpenTooltip(entityTooltip);
     }
 
     public async UniTask OpenCrystalTooltip(Item item)
@@ -94,24 +92,27 @@ public sealed class InspectionTooltipManager : MonoBehaviour
         CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltipPrefab, _uiRoot);
            
         await crystalInspectionTooltip.Initialize(item);
-        
-        _layers.Add(UILayer.Single, crystalInspectionTooltip);
-        
-        SetActiveLayer(UILayer.Single).Forget();
-        
-        await KeepElementActiveWhileNeeded(crystalInspectionTooltip);
+
+        await OpenTooltip(crystalInspectionTooltip);
     }
     
     public async UniTask OpenEffectTooltip(EntityModificatorData entityModificatorData, Transform target)
     {
         EffectInspectionTooltip effectInspectionTooltip = Instantiate(_effectInspectionTooltipPrefab, _uiRoot);
         effectInspectionTooltip.Initialize(entityModificatorData, target);
-        
-        _layers.Add(UILayer.Single, effectInspectionTooltip);
+
+        await OpenTooltip(effectInspectionTooltip);
+    }
+
+    private async UniTask OpenTooltip(InspectionPanelBase panelBase)
+    {
+        _layers.Add(UILayer.Single, panelBase);
         
         SetActiveLayer(UILayer.Single).Forget();
         
-        await KeepElementActiveWhileNeeded(effectInspectionTooltip);
+        OpenedTooltip?.Invoke(panelBase);
+        
+        await KeepElementActiveWhileNeeded(panelBase);
     }
 
     public EffectInspectionTooltipPreview OpenEffectPreviewTooltip(EntityModificatorData entityModificatorData, Transform target)

@@ -2,9 +2,8 @@ namespace CuroAudio
 {
     public enum AudioAssetLifetimeDuration
     {
-        NoLifetime,
-        Short,
-        Medium,
-        Long
+        Short = 1,
+        Medium = 2,
+        Long = 3
     }
 }

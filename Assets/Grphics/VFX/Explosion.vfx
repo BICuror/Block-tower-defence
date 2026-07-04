@@ -194,22 +194,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: BigSpherePower
-    path: BigSpherePower
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.3
-    min: 0
-    max: 1
-    enumValues: []
-    descendantCount: 0
   - name: MedumSphereColor
     path: MedumSphereColor
     tooltip: 
@@ -226,22 +210,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: MediumSpherePower
-    path: MediumSpherePower
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.45
-    min: 0
-    max: 1
-    enumValues: []
-    descendantCount: 0
   - name: SmallSphereColor
     path: SmallSphereColor
     tooltip: 
@@ -256,22 +224,6 @@ MonoBehaviour:
       m_SerializableObject: '{"r":0.0,"g":0.0,"b":0.0,"a":0.0}'
     min: -Infinity
     max: Infinity
-    enumValues: []
-    descendantCount: 0
-  - name: SmallSpherePower
-    path: SmallSpherePower
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0
-    min: 0
-    max: 1
     enumValues: []
     descendantCount: 0
   - name: ExplotionSize
@@ -322,6 +274,54 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
+  - name: BigSpherePower
+    path: BigSpherePower
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.3
+    min: 0
+    max: 1
+    enumValues: []
+    descendantCount: 0
+  - name: MediumSpherePower
+    path: MediumSpherePower
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.45
+    min: 0
+    max: 1
+    enumValues: []
+    descendantCount: 0
+  - name: SmallSpherePower
+    path: SmallSpherePower
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0
+    min: 0
+    max: 1
+    enumValues: []
+    descendantCount: 0
   - name: Sparks
     path: 
     tooltip: 
@@ -333,22 +333,6 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: 
       m_SerializableObject: 
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
-  - name: SparcksSpawnRadius
-    path: SparcksSpawnRadius
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.05
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -381,6 +365,22 @@ MonoBehaviour:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: SparcksSpawnRadius
+    path: SparcksSpawnRadius
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.05
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -2017,7 +2017,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614819}
   m_ExposedName: SparksColor
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 0
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -2911,7 +2911,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ee70055b11f409d4f9280e7939d039aa","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
     m_Space: -1
   m_Property:
     name: _Texture
@@ -4152,7 +4152,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ee70055b11f409d4f9280e7939d039aa","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
     m_Space: -1
   m_Property:
     name: _Texture
@@ -5211,7 +5211,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"ee70055b11f409d4f9280e7939d039aa","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
     m_Space: -1
   m_Property:
     name: _Texture
@@ -6856,7 +6856,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615249}
   m_ExposedName: MedumSphereColor
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 3
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -7073,7 +7073,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615255}
   m_ExposedName: SmallSphereColor
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 4
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -7290,7 +7290,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615261}
   m_ExposedName: ExplotionSize
   m_Exposed: 1
-  m_Order: 11
+  m_Order: 5
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -7389,7 +7389,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615263}
   m_ExposedName: SphereTexture
   m_Exposed: 1
-  m_Order: 12
+  m_Order: 6
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -7624,7 +7624,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615269}
   m_ExposedName: ExplotionLifeTime
   m_Exposed: 1
-  m_Order: 13
+  m_Order: 7
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -8885,7 +8885,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615407}
   m_ExposedName: BigSpherePower
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 8
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -8968,7 +8968,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615413}
   m_ExposedName: MediumSpherePower
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 9
   m_Category: Spheres
   m_Min:
     m_Type:
@@ -10201,7 +10201,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"a33d1e5c24352d94fa58e03a15b167f8","type":3}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
     m_Space: -1
   m_Property:
     name: _Texture
@@ -10296,7 +10296,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615556}
   m_ExposedName: ImpactCircleTexture
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 11
   m_Category: "\u0421ircleImpact"
   m_Min:
     m_Type:
@@ -10740,7 +10740,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615596}
   m_ExposedName: CircleImpactColor
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 12
   m_Category: "\u0421ircleImpact"
   m_Min:
     m_Type:
@@ -10957,7 +10957,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615602}
   m_ExposedName: LineTexture
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 13
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -12651,7 +12651,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"obj":{"fileID":10300,"guid":"0000000000000000f000000000000000","type":0}}'
+      m_SerializableObject: '{"obj":{"fileID":2800000,"guid":"276d9e395ae18fe40a9b4988549f2349","type":3}}'
     m_Space: -1
   m_Property:
     name: _Texture
@@ -13991,7 +13991,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615830}
   m_ExposedName: SparcksSpawnRadius
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 14
   m_Category: Sparks
   m_Min:
     m_Type:

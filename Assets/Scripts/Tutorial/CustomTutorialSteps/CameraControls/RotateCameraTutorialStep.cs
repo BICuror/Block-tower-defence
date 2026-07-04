@@ -1,12 +1,12 @@
-using Cysharp.Threading.Tasks;
 using GameControls.Controllers;
+using Cysharp.Threading.Tasks;
 using GameControls.States;
 using GameControls;
 using Zenject;
 
 namespace Tutorial.Custom
 {
-    public sealed class MoveCameraTutorialStep : ProgressTutorialStep
+    public sealed class RotateCameraTutorialStep : ProgressTutorialStep
     {
         [Inject] private CameraController _cameraController;
         [Inject] private GameController _gameController;
@@ -15,13 +15,14 @@ namespace Tutorial.Custom
         {
             await EnableUI();
             
-            _gameController.EnableState(ControllerState.CameraRepositionDrag);
-            _cameraController.CameraPositionUpdated += IncreaseProgress;
+            _gameController.EnableState(ControllerState.Rotating);
+            
+            _cameraController.CameraRotated += IncreaseProgress;
         }
 
         public override async UniTask EndStep()
         {
-            _cameraController.CameraPositionUpdated -= IncreaseProgress;
+            _cameraController.CameraRotated -= IncreaseProgress;
             await DisableUI();
         }
     }

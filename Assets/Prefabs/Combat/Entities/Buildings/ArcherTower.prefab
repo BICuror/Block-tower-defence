@@ -5434,7 +5434,7 @@ MonoBehaviour:
   - StructName: ProjectileSpeed
     _statData: {fileID: 11400000, guid: caad7db37dd41034db8f53d421cb2add, type: 2}
     _defaultValue: 12
-  _defaultBuildingTags: 190000001b0000001c000000
+  _defaultBuildingTags: 07000000190000001b0000001c000000
   _buildingEntityType: 1
   _buildingAttackType: 3
   _destroyOnDeath: 0
@@ -5491,6 +5491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: archer_tower_building_entity_tooltip
 --- !u!114 &4851645258994465015
 MonoBehaviour:

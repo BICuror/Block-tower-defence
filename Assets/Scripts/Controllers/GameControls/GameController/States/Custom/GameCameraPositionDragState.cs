@@ -8,7 +8,6 @@ namespace GameControls.States
 {
     public sealed class GameCameraPositionDragState : GameControllerState
     {
-        [Inject] private CameraRotationController _cameraRotationController;
         [Inject] private InspectorController _inspectorController;
         [Inject] private CursorController _cursorController;
         [Inject] private CameraController _cameraController;
@@ -29,14 +28,12 @@ namespace GameControls.States
 
         protected override void OnEnableState()
         {
-            _cameraController.CameraPositionUpdated += _cameraRotationController.UpdateCameraRotation;
             _cameraDragAction.canceled += InvokeTryExitState;
             _cameraDragAction.started += TryEnterState;
         }
 
         protected override void OnDisableState()
         {
-            _cameraController.CameraPositionUpdated -= _cameraRotationController.UpdateCameraRotation;
             _cameraDragAction.canceled -= InvokeTryExitState;
             _cameraDragAction.started -= TryEnterState;
         }

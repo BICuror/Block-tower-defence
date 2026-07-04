@@ -17,16 +17,11 @@ namespace CuroAudio
         [SerializeField] private bool _useRandomPitch;
         [ShowIf("_useRandomPitch")] [SerializeField] private float _pitchMagnitude = 0.05f;
         
-        [Space] [Header("LifetimeDuration")]
-        [SerializeField] private AudioAssetLifetimeDuration _lifetimeDuration = AudioAssetLifetimeDuration.Short;
-        
         public bool UseRandomSFX => _useRandomSFX;
         public List<AssetReference> RandomSFXReferences => _randomSFXReferences;
         
         public float Pitch => _pitch;
         public bool UseRandomPitch => _useRandomPitch;
         public float PitchMagnitude => _pitchMagnitude;
-        
-        public override AudioAssetLifetimeDuration LifetimeDuration => _lifetimeDuration;
     }
 }

@@ -5396,6 +5396,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
 --- !u!114 &183681894154958883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5446,7 +5447,7 @@ MonoBehaviour:
   - StructName: ExplosionRadius
     _statData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
     _defaultValue: 2
-  _defaultBuildingTags: 1a0000001b0000001c000000
+  _defaultBuildingTags: 070000001a0000001b0000001c000000
   _buildingEntityType: 2
   _buildingAttackType: 1
   _destroyOnDeath: 0
@@ -5490,6 +5491,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: mortar_tower_building_entity_tooltip
 --- !u!114 &-8513229045828187900
 MonoBehaviour:

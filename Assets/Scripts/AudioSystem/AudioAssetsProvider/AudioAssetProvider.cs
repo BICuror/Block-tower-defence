@@ -110,17 +110,17 @@ namespace CuroAudio
             
             public void ResetTimerDuration()
             {
-                if (_associatedAudioReference.LifetimeDuration == AudioAssetLifetimeDuration.NoLifetime) return;
+                if (!_associatedAudioReference.HasLifetimeDuration) return;
                 
                 _leftDuration = _lifetimeDurations[_associatedAudioReference.LifetimeDuration];
             }
 
             public async UniTask StartTimer()
             {
-                if (_associatedAudioReference.LifetimeDuration == AudioAssetLifetimeDuration.NoLifetime) return;
+                if (!_associatedAudioReference.HasLifetimeDuration) return;
                 
                 ResetTimerDuration();
-
+                
                 while (_leftDuration > 0)
                 {
                     try

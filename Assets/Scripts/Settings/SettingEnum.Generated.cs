@@ -24,5 +24,6 @@ namespace CuroSettings
         ShadowsEnabled = 16,
         FullTagsEnabled = 17,
         SpeedUpTimeScale = 18,
+        ScreenSpaceAmbinentOcclusionEnabled = 19,
     }
 }

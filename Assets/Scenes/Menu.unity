@@ -1624,7 +1624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: CuroRebindSettings::UnityEngine.InputSystem.Samples.RebindUI.RebindSaveLoad
   actions: {fileID: -944628639613478452, guid: 7fb4dd987718e0449943dcc06b8a0431, type: 3}
-  playerPreferenceKey: 
+  playerPreferenceKey: settings_player_controls_
   loadOnEnable: 1
   saveOnDisable: 1
 --- !u!1 &1062026544
@@ -2991,7 +2991,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e80dfa9c38e4abb42b86884b03dc7d20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenuScreen
+  _islandDataContainer: {fileID: 11400000, guid: c7acafdc6e829d244916c8733df1b7b0, type: 2}
+  _defaultIslandData: {fileID: 11400000, guid: 752d71f66d8493641bb63118ca6b06ae, type: 2}
+  _tutorialIslandData: {fileID: 11400000, guid: 0186191845cf4094e9f17abaa211bf1f, type: 2}
   _playGameButton: {fileID: 1967834876}
+  _startTutorialButton: {fileID: 1088403653}
   _settingsButton: {fileID: 1524492602}
   _rebindButton: {fileID: 157197754}
   _feedbackButton: {fileID: 2066777373}

@@ -17,7 +17,7 @@ namespace Tutorial
         {
             for (int i = 0; i < _steps.Count; i++)
             {
-                _steps[i].StartStep();
+                await _steps[i].StartStep();
                 
                 Debug.Log($"Started step {_steps[i].gameObject.name}");
                 
@@ -25,7 +25,7 @@ namespace Tutorial
                 
                 Debug.Log($"Ended step {_steps[i].gameObject.name}");
                 
-                _steps[i].EndStep();
+                await _steps[i].EndStep();
             }
             
             TutorialCompleted?.Invoke();

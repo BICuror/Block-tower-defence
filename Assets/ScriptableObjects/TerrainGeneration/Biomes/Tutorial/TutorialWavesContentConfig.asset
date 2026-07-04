@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fd811eaa81676843877e7953d918665, type: 3}
+  m_Name: TutorialWavesContentConfig
+  m_EditorClassIdentifier: Assembly-CSharp::WavesContentConfig
+  _minimalItemStrength: 1
+  _waves:
+  - Name: Wave 1
+    _content: 
+    _requiredEnemyTier: 0
+    _forceExistingBuildingAttackWaves: 0
+    _additionalItemStrength: 0
+    _combinedItemStrength: 0
+    _itemsAmount: 0
+    _optionalTasksAmount: 0
+    _enemySpawnersAmount: 1
+  - Name: Wave 2
+    _content: 
+    _requiredEnemyTier: 0
+    _forceExistingBuildingAttackWaves: 0
+    _additionalItemStrength: 0
+    _combinedItemStrength: 0
+    _itemsAmount: 0
+    _optionalTasksAmount: 0
+    _enemySpawnersAmount: 1

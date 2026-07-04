@@ -10,7 +10,9 @@ namespace GameControls.States
     {
         [Inject] private CameraRotationController _cameraRotationController;
         [Inject] private InspectorController _inspectorController;
+        [Inject] private DragController _dragController;
 
+        private InputAction _pointerPositionAction;
         private InputAction _pointerDeltaAction;
         private InputAction _dragAction;
 
@@ -18,6 +20,7 @@ namespace GameControls.States
         
         public override void Initialize()
         {
+            _pointerPositionAction = InputActionMap["PointerPosition"];
             _pointerDeltaAction = InputActionMap["PointerDelta"];
             _dragAction = InputActionMap["DragOrRotateCamera"];
         }
@@ -44,6 +47,8 @@ namespace GameControls.States
         {
             if (_inspectorController.IsHoveredOverNonIdleUI()) return;
 
+            if (_dragController.HoveredOverDraggableObject(GetPointerPosition(), out GameObject _)) return;
+            
             InvokeTryEnterState();
         }
 
@@ -65,5 +70,7 @@ namespace GameControls.States
         }
         
         private Vector2 GetPointerDelta() => _pointerDeltaAction.ReadValue<Vector2>() / Time.timeScale;
+
+        private Vector2 GetPointerPosition() => _pointerPositionAction.ReadValue<Vector2>();
     }
 }

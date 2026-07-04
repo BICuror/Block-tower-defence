@@ -29,6 +29,8 @@ public sealed class EntityTooltip : InspectionPanelBase
     [SerializeField] private StatPanelContainer _statPanelContainer;
     
     private CombatEntity _combatEntity;
+    
+    public CombatEntity InspectedEntity => _combatEntity;
 
     private void Start()
     {

@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: Chargers
       _intArgument: 2
@@ -44,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 5
       _argumentName: HasCharges
       _intArgument: 2
@@ -58,6 +60,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStacks
       _intArgument: 1
@@ -72,6 +75,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 1
       _argumentName: EffectDuration
       _intArgument: 1
@@ -86,6 +90,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 4
       _argumentName: EffectTypeName
       _intArgument: 1
@@ -100,6 +105,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -115,7 +121,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill

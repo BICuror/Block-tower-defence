@@ -1,12 +1,13 @@
+using GameControls.Controllers;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using WorldGeneration;
 using UnityEngine;
 using System.Linq;
-using Combat;
-using GameControls.Controllers;
 using Navigation;
 using Zenject;
+using Combat;
+using System;
 
 public sealed class IdleStateController : WaveStateController
 {
@@ -36,16 +37,18 @@ public sealed class IdleStateController : WaveStateController
 
     public override WaveState GetControlledState() => WaveState.Idle;
 
+    public Func<UniTask> OnPreEnemyGroupGeneraton;
+    
     protected override async UniTask OnEnterStateStarted()
     {
         _waveIndexContainer.IncreaseWaveCounter();
         
         _decorationContainer.UpdateDecorationsState();
-        UpdateEnemyBiomesAmount();
-        
         
         await _itemContainerManager.UpdateContainedItems();
-        await TryStartBuildingSelection();
+        await OnPreEnemyGroupGeneraton.Invoke();
+        
+        UpdateEnemyBiomesAmount();
         
         GenerateEnemyGroups();
         
@@ -95,16 +98,6 @@ public sealed class IdleStateController : WaveStateController
         
         _enemyBiomesContainer.RegenerateBiomes();
         _enemyBiomesContainer.GenerateBiomesDecorations();
-    }
-
-    private async UniTask TryStartBuildingSelection()
-    {
-        if (_waveIndexContainer.GetCurrentWaveContent().Content.Contains(WaveContentType.BuildingSelection))
-        {
-            _selectionManager.StartSelectionPhase();
-            _selectionManager.StartSelection(new SelectionSettings(SelectionType.Building), false).Forget();
-            await UniTask.WaitWhile(() => _selectionManager.SelectionPhaseIsActive);
-        }
     }
 
     private void GenerateEnemyGroups()

@@ -31,7 +31,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -90,7 +89,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -138,20 +136,24 @@ MonoBehaviour:
   _tagsInclude: 1
   _buildingEntityTypeTags: 05000000
   _rarity: 2
-  _tags: 
+  _tags: 1f000000
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 0
   _reqiredOwnerTags:
+    Condition: 0
     Requirements: []
   _reqiredOtherEntityTags:
+    Condition: 0
     Requirements: []
   _hasBlockTags: 0
   _blockOwnerTags:
+    Condition: 0
     Requirements: []
   _blockOtherEntityTags:
+    Condition: 0
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []

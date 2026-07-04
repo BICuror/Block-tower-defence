@@ -5279,7 +5279,7 @@ MonoBehaviour:
   - StructName: MaxEntities
     _statData: {fileID: 11400000, guid: 72a3b2e7fdf72c046929f57f91dbf799, type: 2}
     _defaultValue: 3
-  _defaultBuildingTags: 190000001c0000001e000000
+  _defaultBuildingTags: 07000000190000001c0000001e000000
   _buildingEntityType: 5
   _buildingAttackType: 1
   _destroyOnDeath: 0
@@ -5324,6 +5324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: orbital_tower_building_entity_tooltip
 --- !u!114 &1179167039576349397
 MonoBehaviour:

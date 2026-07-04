@@ -245,7 +245,7 @@ MonoBehaviour:
   - StructName: ExplosionDelay
     _statData: {fileID: 11400000, guid: 3cc872057f40f7542b58245ed6a75b0b, type: 2}
     _defaultValue: 1.5
-  _defaultBuildingTags: 1b0000001a0000001e000000
+  _defaultBuildingTags: 070000001b0000001a0000001e000000
   _buildingEntityType: 6
   _buildingAttackType: 1
   _destroyOnDeath: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: bomb_tower_building_entity_tooltip
 --- !u!114 &4483052330896555619
 MonoBehaviour:

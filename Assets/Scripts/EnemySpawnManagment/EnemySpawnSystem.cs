@@ -1,8 +1,8 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using System;
-using Cysharp.Threading.Tasks;
 
 namespace Combat
 {
@@ -16,7 +16,7 @@ namespace Combat
         public event Action LastWaveEnemyDied;
 
         public bool AllEnemiesSpawned => !_spawners.Exists(spawner => !spawner.SpawnedAllEnemies);
-
+            
         private void Awake()
         {
             _globalEnemyContainer.EnemyRemoved += _ => CheckIfAllEnemiesDied();

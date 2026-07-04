@@ -25,7 +25,6 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _SPECULAR_SETUP
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords:
   - _EMISSION
@@ -145,7 +144,7 @@ Material:
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 1
-    - _WorkflowMode: 0
+    - _WorkflowMode: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
@@ -154,7 +153,7 @@ Material:
     - _Color: {r: 0.28235295, g: 0.47058824, b: 0.7176471, a: 1}
     - _EmissionColor: {r: 0.105945155, g: 0.2924528, b: 0.24611609, a: 1}
     - _FadeColor: {r: 0.75686276, g: 0.8627451, b: 0.92156863, a: 1}
-    - _IntersectionColor: {r: 0.75686276, g: 0.8627451, b: 0.92156863, a: 1}
+    - _IntersectionColor: {r: 0.6117647, g: 0.6784314, b: 0.7176471, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

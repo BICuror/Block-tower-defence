@@ -250,6 +250,8 @@ namespace CuroAudio
                 source.clip = await AudioAssetProvider.LoadAudioClipsFromReference(audioReference);
                 source.Play();
                 
+                OnSourcePlay(audioReference, source);
+                
                 await AudioUtility.DoVirtual(0f, 1f, audioReference.TransitionDuration, value => SetSourceVolume(source, value * audioReference.VolumeModifier));
             }
             
@@ -257,7 +259,9 @@ namespace CuroAudio
             {
                 source.volume = volume;
             }
-            
+
+            protected virtual void OnSourcePlay(T audioReference, AudioSource audioSource) {}
+
             protected abstract AudioSource GetAudioSource(AudioLayer layer);
             protected abstract void ReplaceAudioSource(AudioLayer layer);
         }
@@ -284,6 +288,13 @@ namespace CuroAudio
                 _audioSources = audioSources;
             }
 
+            protected override void OnSourcePlay(AmbienceReference ambienceReference, AudioSource audioSource)
+            {
+                if (!ambienceReference.PlayFromRandomPoint) return;
+
+                audioSource.time = Random.Range(0, audioSource.clip.length);
+            }
+            
             protected override AudioSource GetAudioSource(AudioLayer layer) => _audioSources.GetAmbienceAudioSource(layer);
             protected override void ReplaceAudioSource(AudioLayer layer) => _audioSources.ReplaceAmbienceAudioSource(layer).Forget();
         }

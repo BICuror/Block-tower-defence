@@ -1,4 +1,3 @@
-using UnityEngine.UI;
 using UnityEngine;
 
 namespace Tutorial
@@ -6,19 +5,30 @@ namespace Tutorial
     public abstract class ProgressTutorialStep : UITutorialStep
     {
         [Header("Progress")]
+        [SerializeField] private bool _presentAsPercent;
         [SerializeField] private int _requiredProgress = 500;
-        [SerializeField] private Slider _progressSlider;
         private int _progress = 0;
 
-        protected void IncreaseProgress() => IncreaseProgress(1);
+        protected void SetRequiredProgress(int requiredProgress) => _requiredProgress = requiredProgress;
         
-        protected void IncreaseProgress(int value)
+        protected void IncreaseProgress() => ChangeProgress(1);
+        protected void DecreaseProgress() => ChangeProgress(-1);
+        
+        protected void SetProgress(int value)
         {
-            _progress += value;
+            _progress = value;
             
-            _progressSlider.value = (float)_progress / _requiredProgress;
+            StepUIPanel.SetProgress(_progress, _requiredProgress);
             
             if (_progress >= _requiredProgress) CompleteStep();
+        }
+        
+        private void ChangeProgress(int value) => SetProgress(_progress + value);
+        
+        protected override void InitializeUIPanel()
+        {
+            base.InitializeUIPanel();
+            StepUIPanel.InitializeProgressBar(_presentAsPercent, _requiredProgress);
         }
     }   
 }

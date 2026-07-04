@@ -19,16 +19,13 @@ namespace GameControls.States
         
         public void EnableState()
         {
-            gameObject.SetActive(true);
+            enabled = true;
             OnEnableState();
         }
 
         public void DisableState()
         {
-            if (IsActive) Exit();
-            IsActive = false;
-            
-            gameObject.SetActive(false);
+            enabled = false;
             OnDisableState();
         }
         

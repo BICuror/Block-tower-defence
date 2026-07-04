@@ -18,10 +18,8 @@ public sealed class WaveStateMachine : MonoBehaviour
     
     public event Action<WaveState> StateStarted;
     public event Action<WaveState> StateEnded;
-
-    private void Awake() => Initialize();
     
-    private void Initialize()
+    public void Initialize()
     {
         _enemySpawnSystem.LastWaveEnemyDied += TransitionIntoIdle;
         

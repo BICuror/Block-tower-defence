@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
 using GameControls.Features;
-using UnityEngine.UI;
 using GameControls;
-using UnityEngine;
 using Zenject;
 
 namespace Tutorial.Custom

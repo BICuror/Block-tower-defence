@@ -29,7 +29,15 @@ public sealed class Launcher : MonoBehaviour
 
             transform.position = evaluetedPosition;
 
-            await UniTask.WaitForFixedUpdate(_cancellationTokenSource.Token).SuppressCancellationThrow();
+            try
+            {
+                await UniTask.WaitForFixedUpdate(_cancellationTokenSource.Token);
+            }
+            catch (Exception e)
+            {
+                e.LogAsync();
+                return;
+            }
         }
 
         Landed.Invoke();

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "WavesContentConfig", menuName = "WavesContentConfig")]
 

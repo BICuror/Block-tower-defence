@@ -27,7 +27,7 @@ public sealed class OptionalTaskManager : MonoBehaviour
         List<Vector2Int> spawnerPositions = _enemyBiomeContainer.GetEnemyBiomesPositions();
         int tasksGenerated = 0;
         
-        for (int spawnerIndex = 0; spawnerIndex < spawnerPositions.Count; spawnerIndex++)
+        for (int spawnerIndex = 0; spawnerIndex < spawnerPositions.Count && tasksGenerated < tasksToGenerate; spawnerIndex++)
         {
             for (int taskGeneratorIndex = 0; taskGeneratorIndex < _optionalTaskGenerators.Count; taskGeneratorIndex++)
             {
@@ -45,8 +45,6 @@ public sealed class OptionalTaskManager : MonoBehaviour
                     break;
                 }
             }
-            
-            if (tasksGenerated >= tasksToGenerate) break;
         }
     }
 

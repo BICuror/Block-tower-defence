@@ -2,21 +2,33 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-public sealed class WaveContentController : MonoBehaviour
+public sealed class DefaultContentController : MonoBehaviour
 {
-    [SerializeField] private IdleStateController _idleStateController;
     [Inject] private GlobalStatContainer _globalStatContainer;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private WaveIndexContainer _waveIndexContainer;  
     [Inject] private SelectionManager _selectionManager;
+    [Inject] private WaveStateMachine _waveStateMachine;
+    [Inject] private ItemsContainer _itemsContainer;
     [Inject] private ItemFactory _itemFactory; 
-    
-    [SerializeField] private Transform _townhallTransform;
     
     private void Awake()
     {
-        _idleStateController.EnteredStateStarted += TryEnableWaveContent;
-        _idleStateController.EnteredStateCompleted += GenerateWaveItems;
+        IdleStateController idleStateController = _waveStateMachine.GetWaveStateController(WaveState.Idle) as IdleStateController;
+        
+        idleStateController.EnteredStateStarted += TryEnableWaveContent;
+        idleStateController.EnteredStateCompleted += GenerateWaveItems;
+        idleStateController.OnPreEnemyGroupGeneraton = TryStartBuildingSelection;
+    }
+
+    private async UniTask TryStartBuildingSelection()
+    {
+        if (_waveIndexContainer.GetCurrentWaveContent().Content.Contains(WaveContentType.BuildingSelection))
+        {
+            _selectionManager.StartSelectionPhase();
+            _selectionManager.StartSelection(new SelectionSettings(SelectionType.Building), false).Forget();
+            await UniTask.WaitWhile(() => _selectionManager.SelectionPhaseIsActive);
+        }
     }
 
     private void TryEnableWaveContent()
@@ -45,7 +57,6 @@ public sealed class WaveContentController : MonoBehaviour
 
         int additionalItemStrength = additionalItemsToCreate * waveContent.AdditionalItemStrength * additionalItemsToCreate;
         
-        _itemFactory.CreateItems(_townhallTransform.position, waveContent.CombinedItemStrength + additionalItemStrength, minimalItemStrength, waveContent.ItemsAmount + additionalItemsToCreate, true).Forget();
-
+        _itemFactory.CreateItems(_itemsContainer.transform.position, waveContent.CombinedItemStrength + additionalItemStrength, minimalItemStrength, waveContent.ItemsAmount + additionalItemsToCreate, true).Forget();
     }
 }

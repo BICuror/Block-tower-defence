@@ -14,6 +14,8 @@ public sealed class InspectionTooltipController : ParserableTextContainer
     
     private List<TooltipPanelBase> _instantiatedTooltips = new();
     private CombatEntity _inspectedEntity;
+
+    public event Action<TooltipTagData> CreatedTooltip;
     
     public void SetInspectedEntity(CombatEntity entity) => _inspectedEntity = entity;
     
@@ -52,6 +54,8 @@ public sealed class InspectionTooltipController : ParserableTextContainer
                     InspectionKeywordTooltip keywordTooltip = Instantiate(_keywordTooltipPrefab, _subpanelsContainer);
                     InitializeBaseTooltip(keywordTooltip, tagData);
                 }
+                
+                CreatedTooltip?.Invoke(tagData);
             }
         });
     }

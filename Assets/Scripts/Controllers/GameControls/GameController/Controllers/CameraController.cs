@@ -54,7 +54,6 @@ namespace GameControls.Controllers
             _cameraCenter.position = new Vector3(_currentPosition.x, _height, _currentPosition.y);
         }
         
-        
         public void InvokeCameraRotatedEvent() => CameraRotated?.Invoke();
         
         public void ChangeMovementInput(int x, int z)

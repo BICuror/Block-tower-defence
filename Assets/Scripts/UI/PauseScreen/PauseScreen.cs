@@ -1,8 +1,8 @@
-using UnityEngine.SceneManagement;
+using CuroSceneManagement;
 using UnityEngine.UI;
-using DG.Tweening;
 using GameControls;
 using UnityEngine;
+using DG.Tweening;
 using Zenject;
 
 public sealed class PauseScreen : MonoBehaviour
@@ -44,19 +44,18 @@ public sealed class PauseScreen : MonoBehaviour
     private void Restart()
     {
         CleanUp();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
     }
 
     private void Quit()
     {
         CleanUp();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 
     private void CleanUp()
     {
         _gameController.Dispose();
-        DOTween.KillAll();
     }
     
     private void Enable()

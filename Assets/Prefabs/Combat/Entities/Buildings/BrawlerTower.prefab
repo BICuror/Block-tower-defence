@@ -138,7 +138,7 @@ MonoBehaviour:
   - StructName: ContactDamage
     _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
     _defaultValue: 150
-  _defaultBuildingTags: 
+  _defaultBuildingTags: 07000000
   _buildingEntityType: 8
   _buildingAttackType: 2
   _destroyOnDeath: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 0
   _canBeIdleInspected: 1
+  _idleInspectionDelay: 0.4
   _localizationKey: block_tower_building_entity_tooltip
 --- !u!114 &3051641801879490263
 MonoBehaviour:

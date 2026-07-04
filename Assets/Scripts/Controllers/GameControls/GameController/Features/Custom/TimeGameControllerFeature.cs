@@ -24,7 +24,7 @@ namespace GameControls.Features
 
         protected override void OnDisableFeature()
         {
-            _toggleTimeAction.performed += ToggleTimeScale;
+            _toggleTimeAction.performed -= ToggleTimeScale;
         }
         
         private void ToggleTimeScale(InputAction.CallbackContext _) => _timeController.ToggleTimeScale();

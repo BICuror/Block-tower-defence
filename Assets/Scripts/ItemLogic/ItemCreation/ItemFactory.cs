@@ -39,7 +39,7 @@ public sealed class ItemFactory : MonoBehaviour
     public async UniTask CreateItems(Vector3 position, int totalStrength, int minimalItemStrength, int itemAmount, bool createStartWaveItem = false)
     {
         List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(totalStrength, minimalItemStrength, itemAmount);
-
+        
         int totalItemAmount = itemAmount;
         
         if (createStartWaveItem) totalItemAmount += 1;
@@ -53,11 +53,12 @@ public sealed class ItemFactory : MonoBehaviour
             bool isStartWaveItem = i == itemAmount;
             
             Vector3 finalPosition = GetOffset(i) + position;
-            finalPosition.y = _islandHeightMapHolder.GetHeightSafe(Mathf.RoundToInt(finalPosition.x), Mathf.RoundToInt(finalPosition.z)) + 1;
-            
+
             if (!isStartWaveItem) await CreateItemFromEffects(globalEffects[i], position, finalPosition);
             else await CreateStartWaveItem(position, finalPosition);
         }
+        
+        return;
         
         Vector3 GetOffset(int index)
         {
@@ -96,13 +97,15 @@ public sealed class ItemFactory : MonoBehaviour
         item.ItemDestroyed += RemoveItem;
     }
 
-    public async UniTask CreateStartWaveItem(Vector3 centerPosition, Vector3 finalPosition)
+    public async UniTask<Item> CreateStartWaveItem(Vector3 centerPosition, Vector2 finalPosition)
     {
         DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(_waveItemPrefab, centerPosition, finalPosition);
         Item item = itemDraggable.GetComponent<Item>();
 
         List<GlobalEffectData> effectDatas = new List<GlobalEffectData>() {_startWaveEffectData};
         item.AddToggleEffectDatas(effectDatas);
+
+        return item;
     }
 
     public void DestroyAllUnusedItems()

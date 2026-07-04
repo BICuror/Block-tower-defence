@@ -1,21 +1,25 @@
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 
 namespace Tutorial
 {
     public abstract class UITutorialStep : TutorialStep
     {
-        [SerializeField] private CanvasGroup _canvasGroup;
-
-        protected async UniTask EnableUI()
+        [SerializeField] protected TutorialStepUIPanel StepUIPanel;
+        [SerializeField] private string _mainLocKey;
+        
+        protected UniTask EnableUI()
         {
-            await _canvasGroup.DOFade(1f, 0.5f).From(0f).SetLink(_canvasGroup.gameObject).AsyncWaitForCompletion();
+            InitializeUIPanel();
+            
+            return StepUIPanel.Enable();
         }
+        
+        protected UniTask DisableUI() => StepUIPanel.Disable();
 
-        protected async UniTask DisableUI()
+        protected virtual void InitializeUIPanel()
         {
-            await _canvasGroup.DOFade(0f, 0.5f).From(1f).SetLink(_canvasGroup.gameObject).AsyncWaitForCompletion();
+            StepUIPanel.Initialize(_mainLocKey);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using CuroSceneManagement;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -24,6 +25,8 @@ namespace WorldGeneration
 
         private async UniTask GenerateRoadMap()
         {
+            LoadingScreen.Instance.StartPlayingLoadingIconAnimation().Forget();
+            
             bool isComplete = false;
             
             List<Vector2Int> spawnerNodes = _enemyBiomeContainer.GetEnemyBiomesPositions();
@@ -44,6 +47,8 @@ namespace WorldGeneration
             roadGenerationThread.Start();
 
             await UniTask.WaitUntil(() => isComplete);
+            
+            LoadingScreen.Instance.StopPlayingLoadingIconAnimation().Forget();
         }
 
         private void AddCenterRoad()

@@ -99,7 +99,7 @@ public sealed class ItemFactory : MonoBehaviour
 
     public async UniTask<Item> CreateStartWaveItem(Vector3 centerPosition, Vector2 finalPosition)
     {
-        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(_waveItemPrefab, centerPosition, finalPosition);
+        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(_waveItemPrefab, centerPosition, new Vector3(finalPosition.x, 0f, finalPosition.y));
         Item item = itemDraggable.GetComponent<Item>();
 
         List<GlobalEffectData> effectDatas = new List<GlobalEffectData>() {_startWaveEffectData};

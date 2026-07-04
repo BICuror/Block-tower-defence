@@ -1,19 +1,28 @@
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using System.Linq;
 using UnityEngine;
 using Combat;
 using System;
-using Cysharp.Threading.Tasks;
 using TMPro;
 
 public sealed class EntityModificatorPanelContainer : ParserableTextContainer
 {
+    [SerializeField] private EntityModificatorTooltipInvokingPanel _entityModificatorTooltipInvokingPanelPrefab;
     [SerializeField] private UIElementFadeAnimator _entityModificatorCanvasGroup;
+    [SerializeField] private Transform _entityModificatorTooltipParent;
     [SerializeField] private CanvasGroup _negativeCanvasGroup;
+    
+    [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _modificatorHeaderText;
     [SerializeField] private TextMeshProUGUI _modificatorDescriptionText;
-    [SerializeField] private EntityModificatorTooltipInvokingPanel _entityModificatorTooltipInvokingPanelPrefab;
-    [SerializeField] private Transform _entityModificatorTooltipParent;
+    
+    [Header("Details")]
+    [SerializeField] private Transform _detailsContainer;
+    [SerializeField] private TextMeshProUGUI _detailsTextFieldPrefab;
+    [SerializeField] private Transform _detailsSeparatorPrefab;
+    private List<GameObject> _createdDetailsUI = new();
+    
     private List<EntityModificatorTooltipInvokingPanel> _entityModificatorPanels = new();
     
     public Action<TooltipParseTagDataContainer> TooltipOpened;
@@ -48,15 +57,39 @@ public sealed class EntityModificatorPanelContainer : ParserableTextContainer
             }
         });
     }
+    
 
     private void OpenEffectTooltip(EntityModificatorData entityModificatorData)
     {
+        InitializeDescription(entityModificatorData);
+        
         _modificatorHeaderText.text = ParseTextByDefault(entityModificatorData.GetName());
-        _modificatorDescriptionText.text = ParseTextByDefault(entityModificatorData.GetDescription());
         
         _negativeCanvasGroup.gameObject.SetActive(entityModificatorData.EffectType == EffectType.Negative);
         _entityModificatorCanvasGroup.Enable().Forget();
     }
+    
+    private void InitializeDescription(EntityModificatorData entityModificatorData)
+    {
+        string[] descriptions = GetDetailsDescriptions(entityModificatorData);
+        
+        _modificatorDescriptionText.text = ParseTextByDefault(descriptions[0]);
+        
+        _createdDetailsUI.ForEach(Destroy);
+
+        _detailsContainer.gameObject.SetActive(descriptions.Length > 1);
+        
+        for (int i = 0; i < descriptions.Length - 1; i++)
+        {
+            if (i > 0) _createdDetailsUI.Add(Instantiate(_detailsSeparatorPrefab, _detailsContainer).gameObject);
+            
+            TextMeshProUGUI detailsField = Instantiate(_detailsTextFieldPrefab, _detailsContainer);
+            detailsField.text = ParseTextByDefault("startTag" + descriptions[i + 1]);
+            _createdDetailsUI.Add(detailsField.gameObject);
+        }
+    }
+    
+    private string[] GetDetailsDescriptions(EntityModificatorData entityModificatorData) => entityModificatorData.GetDescription().Split('/');
 
     private void CloseEffectTooltip()
     {

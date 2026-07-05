@@ -91,7 +91,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     {
         CrystalInspectionTooltip crystalInspectionTooltip = Instantiate(_crystalInspectionTooltipPrefab, _uiRoot);
            
-        await crystalInspectionTooltip.Initialize(item);
+        crystalInspectionTooltip.Initialize(item);
 
         await OpenTooltip(crystalInspectionTooltip);
     }
@@ -99,6 +99,7 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     public async UniTask OpenEffectTooltip(EntityModificatorData entityModificatorData, Transform target)
     {
         EffectInspectionTooltip effectInspectionTooltip = Instantiate(_effectInspectionTooltipPrefab, _uiRoot);
+        
         effectInspectionTooltip.Initialize(entityModificatorData, target);
 
         await OpenTooltip(effectInspectionTooltip);

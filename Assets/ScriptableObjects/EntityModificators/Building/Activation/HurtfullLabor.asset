@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: OnActivationInvokeTaskAndHurt
     AllEffectTypeNames:
@@ -45,7 +46,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -93,7 +93,7 @@ MonoBehaviour:
   _tagsInclude: 1
   _buildingEntityTypeTags: 0400000002000000
   _rarity: 2
-  _tags: 0c0000001f000000
+  _tags: 0c0000001f00000022000000
   _hasStacks: 1
   _maxStacks: 1
   _effectType: 0

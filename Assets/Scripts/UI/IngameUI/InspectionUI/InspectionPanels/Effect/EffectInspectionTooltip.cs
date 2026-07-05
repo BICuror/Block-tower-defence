@@ -3,11 +3,9 @@ using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
-public sealed class EffectInspectionTooltip : InspectionPanelBase
+public sealed class EffectInspectionTooltip : ResizableInspectionPanelBase
 {   
     [SerializeField] private InspectionTooltipController _inspectionTooltipController;
-    [SerializeField] private RectTransform _mainPanelRectTransform;
-    [SerializeField] private RectTransform _mainRectTransform;
     
     [Header("UI Elements")]
     [SerializeField] private TextMeshProUGUI _descriptionTextField;
@@ -29,8 +27,7 @@ public sealed class EffectInspectionTooltip : InspectionPanelBase
         
         InitializeDetails();
         
-        SetDynamicOffsetProvider(GetDynamicOffset);
-        InitializeInspectionPanelBase(target.GetComponent<InspectableObject>());
+        InitializeResizableInspectionPanel(target.GetComponent<InspectableObject>());
         
         InitializeInspectionTooltipController();
     }
@@ -71,6 +68,4 @@ public sealed class EffectInspectionTooltip : InspectionPanelBase
         
         _inspectionTooltipController.SetTooltipTagContainer(TooltipDataParser.GetTooltipTagDataFromText(_entityModificatorData.GetDescription()));
     }
-    
-    private Vector2 GetDynamicOffset() => new(-_mainRectTransform.sizeDelta.x / 2f + _mainPanelRectTransform.sizeDelta.x / 2f, 0f);
 }

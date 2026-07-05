@@ -110,4 +110,5 @@ public enum EntityModifcatorTag
     ActiveAbility = 31,
     DowngradeBuildTime = 32,
     RemovesExplosion = 33,
+    RequiresMoreHealth = 34,
 }

@@ -31,8 +31,9 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -78,7 +79,7 @@ MonoBehaviour:
   _buildingEntityTypeTags: 060000000700000008000000
   _rarity: 2
   _tags: 0c000000
-  _hasStacks: 0
+  _hasStacks: 1
   _maxStacks: 1
   _effectType: 0
   _showInInspector: 1

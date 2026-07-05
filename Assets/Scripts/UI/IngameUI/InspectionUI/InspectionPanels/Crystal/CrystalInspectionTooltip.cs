@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using UnityEngine.UI;
 using System.Linq;
 using UnityEngine;
 using TMPro;
 
-public sealed class CrystalInspectionTooltip : InspectionPanelBase
+public sealed class CrystalInspectionTooltip : ResizableInspectionPanelBase
 {
     [Header("HeaderParameters")] 
     [SerializeField] private TextMeshProUGUI _rewardsAmountTextField;
@@ -23,11 +22,11 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
     
     private Dictionary<GlobalEffectData, GlobalEffectTooltipInvokingPanel> _crystalTooltips = new();
     
-    public async UniTask Initialize(Item item)
+    public void Initialize(Item item)
     {
         _contentLayoutGroup.childControlWidth = false;
         
-        InitializeInspectionPanelBase(item.GetComponent<InspectableObject>());
+        InitializeResizableInspectionPanel(item.GetComponent<InspectableObject>());
         _inspectionTooltipController.CopyParsersFromContainer(this);
         
         CreateTooltips(item);
@@ -44,7 +43,6 @@ public sealed class CrystalInspectionTooltip : InspectionPanelBase
             if (panelSize > maxSize)
             {
                 maxSize = panelSize;
-                Debug.Log(maxSize);
             }
         }
         

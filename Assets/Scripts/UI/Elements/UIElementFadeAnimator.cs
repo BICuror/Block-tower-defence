@@ -19,6 +19,8 @@ public sealed class UIElementFadeAnimator : MonoBehaviour
         _mainGroup.alpha = 0f;
     }
     
+    public void SetAlpha(float alpha) => _mainGroup.alpha = alpha;
+    
     public async UniTask Enable()
     {
         if (_isActive) return;

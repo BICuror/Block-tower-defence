@@ -123,6 +123,8 @@ MonoBehaviour:
   _pointFollowingUIElement: {fileID: 4636349720512961496}
   _uiElementFadeAnimator: {fileID: 7537163139057577252}
   _hoverableUIElement: {fileID: 2718510580333981180}
+  _mainContentTransform: {fileID: 8686663593294039458}
+  _rootRectTransform: {fileID: 1581158546983494758}
   _rewardsAmountTextField: {fileID: 5394468545300387969}
   _topCanvasGroup: {fileID: 9040480935850354839}
   _upgradeKeywordTooltipTagData: {fileID: 11400000, guid: 710db6f0033c1f7469ceff825e2d8afc, type: 2}
@@ -175,7 +177,7 @@ MonoBehaviour:
   _subPanels:
   - {fileID: 8686663593294039458}
   _rectTransform: {fileID: 1581158546983494758}
-  _staicOffset: {x: 175, y: 159}
+  _staicOffset: {x: 0, y: 50}
 --- !u!114 &8797762896450038727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,7 +255,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0}
+  m_AnchoredPosition: {x: 0, y: -23.15}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1666194690913814886

@@ -23,6 +23,8 @@ public abstract class InspectionPanelBase : ParserableTextContainer
     
     protected void InitializeInspectionPanelBase(InspectableObject inspectableObject)
     {
+        _uiElementFadeAnimator.SetAlpha(0f);
+        
         _inspectable = inspectableObject;
         
         _pointFollowingUIElement.SetTarget(inspectableObject.transform);

@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 2
       _argumentName: HealingOrbPrefab
       _intArgument: 0
@@ -44,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: RequiredKills
       _intArgument: 8
@@ -58,6 +60,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: CreateHealingOrbsOnKill
     AllEffectTypeNames:
@@ -73,7 +76,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -122,8 +124,8 @@ MonoBehaviour:
   _buildingEntityTypeTags: 
   _rarity: 2
   _tags: 00000000
-  _hasStacks: 0
-  _maxStacks: 0
+  _hasStacks: 1
+  _maxStacks: 1
   _effectType: 0
   _showInInspector: 1
   _hasRequiredTags: 1

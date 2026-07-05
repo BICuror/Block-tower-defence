@@ -143,17 +143,15 @@ MonoBehaviour:
   _showInInspector: 1
   _hasRequiredTags: 0
   _reqiredOwnerTags:
-    Condition: 0
     Requirements: []
   _reqiredOtherEntityTags:
-    Condition: 0
     Requirements: []
-  _hasBlockTags: 0
+  _hasBlockTags: 1
   _blockOwnerTags:
-    Condition: 0
-    Requirements: []
+    Requirements:
+    - Tag: 31
+      Amount: 1
   _blockOtherEntityTags:
-    Condition: 0
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []

@@ -29,10 +29,12 @@ public sealed class ItemFactory : MonoBehaviour
     [Button]
     public void DEBUGCreateItems()
     {
-        List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(11, 3, 2);
+        List<List<GlobalEffectData>> globalEffects = _effectSelector.GetItemEffects(11, 1, 4);
             
         CreateItemFromEffects(globalEffects[0], new Vector3(12f, 0f, 12), Vector3.zero).Forget();
         CreateItemFromEffects(globalEffects[1], new Vector3(12f, 0f, 12), Vector3.zero).Forget();
+        CreateItemFromEffects(globalEffects[2], new Vector3(12f, 0f, 12), Vector3.zero).Forget();
+        CreateItemFromEffects(globalEffects[3], new Vector3(12f, 0f, 12), Vector3.zero).Forget();
     } 
 #endif
     
@@ -97,9 +99,9 @@ public sealed class ItemFactory : MonoBehaviour
         item.ItemDestroyed += RemoveItem;
     }
 
-    public async UniTask<Item> CreateStartWaveItem(Vector3 centerPosition, Vector2 finalPosition)
+    public async UniTask<Item> CreateStartWaveItem(Vector3 centerPosition, Vector3 finalPosition)
     {
-        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(_waveItemPrefab, centerPosition, new Vector3(finalPosition.x, 0f, finalPosition.y));
+        DraggableObject itemDraggable = await _draggableCreator.CreateDraggableOnNearbyPosition(_waveItemPrefab, centerPosition, finalPosition);
         Item item = itemDraggable.GetComponent<Item>();
 
         List<GlobalEffectData> effectDatas = new List<GlobalEffectData>() {_startWaveEffectData};

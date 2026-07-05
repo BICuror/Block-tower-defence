@@ -17,7 +17,7 @@ namespace Tutorial.Custom
             List<Vector2Int> spawnPosition = TileMap.GetSuitablePositionsInRadius(_ => true, new Vector2Int(_islandDataContainer.Data.IslandRadius, _islandDataContainer.Data.IslandRadius));
             Vector2Int selectedPosition = spawnPosition[Random.Range(0, spawnPosition.Count)];
             
-            await _itemFactory.CreateStartWaveItem(new Vector3(_islandDataContainer.Data.IslandRadius, 2, _islandDataContainer.Data.IslandRadius), selectedPosition);
+            await _itemFactory.CreateStartWaveItem(new Vector3(_islandDataContainer.Data.IslandRadius, 2, _islandDataContainer.Data.IslandRadius), new Vector3(selectedPosition.x, 0f, selectedPosition.y));
 
             await EnableUI();
 

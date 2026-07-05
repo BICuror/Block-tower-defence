@@ -56,25 +56,29 @@ public sealed class ItemEffectSelector : MonoBehaviour
     private List<int> GetRandomItemStrengths(int totalStrength, int minStrength, int itemAmount)
     {
         List<int> result = new();
-        
-        int maxItemStrength = totalStrength - minStrength * (itemAmount - 1);
-        
-        List<int> nonEmptyStrengths = PopulateNonEmptyStrengthList(totalStrength).FindAll(strength => strength >= minStrength && strength <= maxItemStrength);
 
+        int itemsLeftToGenerate = itemAmount;
         int leftStrength = totalStrength;
         
         for (int i = 0; i < itemAmount; i++)
         {
+            int minStrengthRequiredForOtherItems = minStrength * (itemsLeftToGenerate - 1);
+            int maxItemStrength = leftStrength - minStrengthRequiredForOtherItems;
+            
+            List<int> nonEmptyStrengths = PopulateNonEmptyStrengthList(maxItemStrength).FindAll(strength => strength >= minStrength && strength <= maxItemStrength);
+            
             int currentItemStrength = nonEmptyStrengths[Random.Range(0, nonEmptyStrengths.Count)];
             
-            if (itemAmount - 1 == i) currentItemStrength = leftStrength;
+            if (itemsLeftToGenerate == 1) currentItemStrength = leftStrength;
             
             result.Add(currentItemStrength);
             
             leftStrength -= currentItemStrength;
-            
-            nonEmptyStrengths.Remove(currentItemStrength);
+
+            itemsLeftToGenerate -= 1;
         }
+        
+        if (result.Contains(0)) Debug.LogError("FOUND 0");
         
         return result;
     }

@@ -12,6 +12,7 @@ using System;
 public sealed class IdleStateController : WaveStateController
 {
     [SerializeField] private TerrainAnimator _roadAnimator;
+    [SerializeField] private GameEndScreen _victoryScreen;
     
     [Inject] private CameraController _cameraController;
     
@@ -38,6 +39,8 @@ public sealed class IdleStateController : WaveStateController
     public override WaveState GetControlledState() => WaveState.Idle;
 
     public Func<UniTask> OnPreEnemyGroupGeneraton;
+    
+    public void EnableVictoryScreen() => _victoryScreen.Enable().Forget() ;
     
     protected override async UniTask OnEnterStateStarted()
     {

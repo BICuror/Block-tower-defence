@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: CreateAOEOnBuild
     AllEffectTypeNames:
@@ -45,7 +46,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -87,6 +87,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -104,7 +105,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -146,6 +146,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -163,7 +164,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -205,11 +205,12 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 06000000080000000700000003000000
+  _buildingEntityTypeTags: 0600000008000000070000000300000005000000
   _rarity: 2
   _tags: 0600000013000000
   _hasStacks: 1

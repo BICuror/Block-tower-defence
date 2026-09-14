@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
   m_Name: SmallArcher
   m_EditorClassIdentifier: 
-  _buildingAttackType: 1
+  _tier: 0
   _spawnDelay: 1.9
   _diesOnContact: 0
   _contactDamage: 2.5
@@ -40,5 +40,6 @@ MonoBehaviour:
   _hasEntityModificators: 0
   _entityModificatorDatas: []
   _hasObjectModificators: 1
-  _objectModificators: []
+  _objectModificators:
+  - {fileID: 7635548585433285287, guid: a3e43829c967d034aab6ef241e2db292, type: 3}
   _deathSound: 8

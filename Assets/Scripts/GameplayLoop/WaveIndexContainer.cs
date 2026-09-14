@@ -14,8 +14,10 @@ public sealed class WaveIndexContainer : MonoBehaviour
     private void Awake() => _instance = this;
     
     public int GetCurrentWave() => _currentWave;
+    public int GetMaxWave() => _islandDataContainer.Data.WavesContentConfig.WavesCount;
+    
     public void IncreaseWaveCounter() => _currentWave++;
-
+    
     public WaveContent GetCurrentWaveContent()
     {
         return _islandDataContainer.Data.WavesContentConfig.GetWaveContent(GetCurrentWave());

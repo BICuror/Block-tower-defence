@@ -15,6 +15,7 @@ MonoBehaviour:
   _groupParts:
   - _enemyData: {fileID: 11400000, guid: d083d5000a95b9343b087e9fa8a37138, type: 2}
     _useDefaultWeightContainer: 1
+    _scaleByModificators: 1
     _defaultGroupWeightContainer: {fileID: 11400000, guid: 15eb0af6c4528f84b84fb6f2e6d62a06, type: 2}
     _enemyGroupWeightContainer:
       _amountPerWave: 
@@ -22,6 +23,7 @@ MonoBehaviour:
     _enemyAmountScale: 0.8
   - _enemyData: {fileID: 11400000, guid: 225351e9e3d2d124da7e5a18d7724a5a, type: 2}
     _useDefaultWeightContainer: 1
+    _scaleByModificators: 0
     _defaultGroupWeightContainer: {fileID: 11400000, guid: 6c6af1473b4c9924880e5fbe426d8fe5, type: 2}
     _enemyGroupWeightContainer:
       _amountPerWave: 

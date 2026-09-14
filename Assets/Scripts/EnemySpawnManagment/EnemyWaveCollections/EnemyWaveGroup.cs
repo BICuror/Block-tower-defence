@@ -26,12 +26,14 @@ public sealed class EnemyWaveGroup : ScriptableObject
 {
     [SerializeField] private EnemyData _enemyData;
     [SerializeField] private bool _useDefaultWeightContainer = true;
+    [SerializeField] private bool _scaleByModificators = true;
     [AllowNesting] [ShowIf("_useDefaultWeightContainer")] [SerializeField] private EnemyWaveDefaultGroupWeightContainer _defaultGroupWeightContainer;
     [AllowNesting] [HideIf("_useDefaultWeightContainer")] [SerializeField] private EnemyGroupWeightContainer _enemyGroupWeightContainer;
 
     [SerializeField] private float _enemyAmountScale = 1f;
     
     public EnemyData Data => _enemyData;
+    public bool ScaleByModificators => _scaleByModificators;
 
     public int GetEnemyAmount(int waveIndex)
     {

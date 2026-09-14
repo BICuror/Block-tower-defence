@@ -10,8 +10,16 @@ public sealed class WavesContentConfig : ScriptableObject
     [SerializeField] private List<WaveContent> _waves;
     
     public int MinimalItemStrength => _minimalItemStrength;
-    
-    public WaveContent GetWaveContent(int waveIndex) => _waves[waveIndex - 1];
+    public int WavesCount => _waves.Count;
+
+    public WaveContent GetWaveContent(int waveIndex)
+    {
+        waveIndex -= 1;
+        
+        if (waveIndex <= WavesCount) return _waves[waveIndex];
+        
+        return _waves[^1];
+    }
     
     private void OnValidate()
     {

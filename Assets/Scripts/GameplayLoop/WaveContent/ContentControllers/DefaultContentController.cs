@@ -18,9 +18,27 @@ public sealed class DefaultContentController : MonoBehaviour
         
         idleStateController.EnteredStateStarted += TryEnableWaveContent;
         idleStateController.EnteredStateCompleted += GenerateWaveItems;
-        idleStateController.OnPreEnemyGroupGeneraton = TryStartBuildingSelection;
+        idleStateController.OnPreEnemyGroupGeneraton = OnPreEnemyGroupGeneration;
     }
 
+    private async UniTask OnPreEnemyGroupGeneration()
+    {
+        await TryEnableVictoryScreen();
+        
+        await TryStartBuildingSelection();
+    }
+
+    private async UniTask TryEnableVictoryScreen()
+    {
+        if (_waveIndexContainer.GetMaxWave() >= _waveIndexContainer.GetCurrentWave()) return;
+        
+        IdleStateController idleStateController = _waveStateMachine.GetWaveStateController(WaveState.Idle) as IdleStateController;
+        
+        idleStateController.EnableVictoryScreen();
+        
+        await UniTask.WaitWhile(() => gameObject);
+    }
+    
     private async UniTask TryStartBuildingSelection()
     {
         if (_waveIndexContainer.GetCurrentWaveContent().Content.Contains(WaveContentType.BuildingSelection))

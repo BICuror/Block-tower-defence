@@ -1,17 +1,12 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using System;
 
 namespace Tutorial
 {
     public sealed class TutorialController : MonoBehaviour
     {
         [SerializeField] private List<TutorialStep> _steps;
-
-        public event Action TutorialCompleted;
-        
-        private void Start() => StartTutorial().Forget();
 
         public async UniTask StartTutorial()
         {
@@ -27,8 +22,6 @@ namespace Tutorial
                 
                 await _steps[i].EndStep();
             }
-            
-            TutorialCompleted?.Invoke();
         }
     }
 }

@@ -30,6 +30,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 4
       _argumentName: EffectTypeName
       _intArgument: 0
@@ -44,6 +45,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 1
       _argumentName: EffectDuration
       _intArgument: 0
@@ -58,6 +60,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStacks
       _intArgument: 1
@@ -72,6 +75,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
     - _argumentType: 5
       _argumentName: HasCharges
       _intArgument: 1
@@ -86,6 +90,7 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -101,7 +106,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -143,6 +147,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -160,7 +165,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -202,11 +206,12 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
   _tagsInclude: 0
-  _buildingEntityTypeTags: 06000000070000000800000003000000
+  _buildingEntityTypeTags: 0600000007000000080000000300000005000000
   _rarity: 2
   _tags: 1300000001000000
   _hasStacks: 1

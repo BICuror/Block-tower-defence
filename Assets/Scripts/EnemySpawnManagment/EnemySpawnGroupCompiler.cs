@@ -119,8 +119,10 @@ public sealed class EnemySpawnGroupCompiler : MonoBehaviour
         {
             EnemyGroupPart currentPart = groupParts[enemyGroupPartIndex];
 
-            int enemyAmount = Mathf.RoundToInt(currentPart.GetEnemyAmount(_waveIndexContainer.GetCurrentWave()) * amountMultiplier);
+            int enemyAmount = currentPart.GetEnemyAmount(_waveIndexContainer.GetCurrentWave());
 
+            if (currentPart.ScaleByModificators) enemyAmount = Mathf.RoundToInt(enemyAmount * amountMultiplier);
+            
             if (enemyAmount <= 0) enemyAmount = 1;
 
             for (int enemyIndex = 0; enemyIndex < enemyAmount; enemyIndex++)

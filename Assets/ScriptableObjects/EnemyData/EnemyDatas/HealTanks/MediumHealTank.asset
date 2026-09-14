@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 622e4964f28173545a473e59642ae1e3, type: 3}
+  m_Name: MediumHealTank
+  m_EditorClassIdentifier: 
+  _tier: 0
+  _spawnDelay: 5
+  _diesOnContact: 0
+  _contactDamage: 10
+  _maxHealth: 625
+  _speed: 1.9
+  _statInitializer: []
+  _effectImmunities: []
+  _navigationData: {fileID: 11400000, guid: 5a3a9cb992d859945a076e8ffe1d357b, type: 2}
+  _mesh: {fileID: 2534964839176971238, guid: db8802b864268d348a1601dbf333690f, type: 3}
+  _material: {fileID: -1917415248361198804, guid: 051ee4434e6afeb43a9c7a04c797c6a1, type: 3}
+  _scale: 1.1
+  _localizationKey: tank_enemy_entity_tooltip
+  _hasEntityModificators: 1
+  _entityModificatorDatas:
+  - {fileID: 11400000, guid: c2c3a2aa78ba4c54c86b89791e60c96c, type: 2}
+  - {fileID: 11400000, guid: 6cd94b3ee58f0c148a3c44f1883042a5, type: 2}
+  _hasObjectModificators: 0
+  _objectModificators: []
+  _deathSound: 8

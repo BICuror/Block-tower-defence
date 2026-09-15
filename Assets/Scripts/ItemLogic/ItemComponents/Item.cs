@@ -13,6 +13,11 @@ public class Item : DraggableObject
     
     [SerializeField] private ItemColor _itemColor;
     [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
+    
+    [Header("Scale")]
+    [SerializeField] private float _maxScale;
+    [SerializeField] private float _minScale;
+    
     private List<GlobalEffectData> _effectDatas = new();
     private int _charges;
     
@@ -41,9 +46,17 @@ public class Item : DraggableObject
         base.Awake();
         PickedUp += () => ItemPickedUp?.Invoke(this);
     }
-    
+
     public void AddToggleEffectDatas(List<GlobalEffectData> effectDatas) => _effectDatas.AddRange(effectDatas); 
-    public void SetChargesAmount(int charges) => _charges = charges;
+
+    public void SetChargesAmount(int charges)
+    {
+        _charges = charges;
+        
+        float scale = Mathf.Lerp(_maxScale, _minScale, charges / 5.5f);
+        
+        AnimationObject.transform.localScale = new Vector3(scale, scale, scale);
+    } 
 
     public async UniTask DecreaseDuration()
     {

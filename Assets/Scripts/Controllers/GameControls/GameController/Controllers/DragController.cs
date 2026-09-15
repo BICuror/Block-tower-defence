@@ -1,5 +1,6 @@
-using UnityEngine.Events;
 using UnityEngine;
+using System;
+using Cysharp.Threading.Tasks;
 
 namespace GameControls.Controllers
 {
@@ -20,12 +21,13 @@ namespace GameControls.Controllers
         [SerializeField] private Camera _camera;
         [SerializeField] private DraggableConnector _draggableConnector;
     
-        public UnityEvent<GameObject> PickedObject;
-        public UnityEvent<GameObject> DroppedObject;
-    
-        private GameObject _currentDraggableGameObject;
+        private DraggableObject _currentDraggableObject;
         private IDraggable _currentIDraggable;
-        private Vector3 _lastValuablePosition;
+        
+        private Vector3 _lastValidPlacementPosition;
+        
+        public event Action<DraggableObject> PickedObject;
+        public event Action<DraggableObject> DroppedObject;
         
         public bool HoveredOverDraggableObject(Vector2 mousePosition, out GameObject draggableObject)
         {
@@ -83,19 +85,19 @@ namespace GameControls.Controllers
     
             if (Physics.Raycast(ray, out RaycastHit rayInfo, Mathf.Infinity, _draggableObjectLayerSettings.GetLayerMask()))
             {
-                _currentDraggableGameObject = rayInfo.collider.gameObject;
+                _currentDraggableObject = rayInfo.collider.gameObject.GetComponent<DraggableObject>();
                 _currentIDraggable = rayInfo.collider.gameObject.GetComponent<IDraggable>();
-                _lastValuablePosition = rayInfo.collider.transform.position;
+                _lastValidPlacementPosition = rayInfo.collider.transform.position;
                 _draggableConnector.transform.position = rayInfo.collider.transform.position;
     
-                _draggableConnector.PickUpDraggable(_currentDraggableGameObject);
+                _draggableConnector.PickUpDraggable(_currentDraggableObject.gameObject);
     
-                if (CanBePlacedAt(GetPlacmentPosition(_lastValuablePosition)) == false)
+                if (CanBePlacedAt(GetPlacementPosition(_lastValidPlacementPosition)) == false)
                 {
-                    _lastValuablePosition = FindSuitablePositionNearby(_lastValuablePosition.x, _lastValuablePosition.z);
+                    _lastValidPlacementPosition = FindSuitablePositionNearby(_lastValidPlacementPosition.x, _lastValidPlacementPosition.z);
                 }
     
-                PickedObject.Invoke(_currentDraggableGameObject);
+                PickedObject?.Invoke(_currentDraggableObject);
             }
         }
         
@@ -105,43 +107,34 @@ namespace GameControls.Controllers
     
             if (Physics.Raycast(ray, out RaycastHit rayInfo, Mathf.Infinity, _waterAndTerrainLayerSettings.GetLayerMask()))
             {
-                Vector2Int placementPosition = GetPlacmentPosition(rayInfo.point);
-                
-                if (CanBePlacedAt(placementPosition))
+                Vector2 placementPosition = GetPlacementPosition(rayInfo.point);
+
+                if (!CanBePlacedAt(placementPosition))
                 {
-                    float height = GetPlacementHeight(placementPosition);
-                    
-                    _lastValuablePosition = new Vector3(placementPosition.x, height, placementPosition.y);
+                    placementPosition = GetPlacementPosition(TileMap.GetNearestDraggablePlacePosition(_currentDraggableObject, rayInfo.point, maxRadius: 50));
                 }
+
+                float height = GetPlacementHeight(placementPosition);
+                    
+                _lastValidPlacementPosition = new Vector3(placementPosition.x, height, placementPosition.y);
             }
             
             _currentIDraggable.OnDrag();
             MoveDraggable();
         }
     
-        private void MoveDraggable() => _draggableConnector.MoveTowardsPosition(_lastValuablePosition);
+        private void MoveDraggable() => _draggableConnector.MoveTowardsPosition(_lastValidPlacementPosition);
     
         public void DropDraggable(Vector2 mousePosition)
         {
             TryDragTo(mousePosition);
             
-            DroppedObject.Invoke(_currentDraggableGameObject);
+            DroppedObject?.Invoke(_currentDraggableObject);
     
-            _draggableConnector.PlaceDraggable(_currentDraggableGameObject, _currentIDraggable, GetLastSnappedGridPosition());
+            _draggableConnector.PlaceDraggable(_currentDraggableObject.gameObject, _currentIDraggable, _lastValidPlacementPosition).Forget();
     
             _currentIDraggable = null;
-            _currentDraggableGameObject = null;
-        }
-    
-        private Vector3 GetLastSnappedGridPosition()
-        {
-            Vector2Int placementPosition = GetPlacmentPosition(_lastValuablePosition);
-            
-            Vector3 placePosition = new Vector3(placementPosition.x, 0, placementPosition.y); 
-    
-            float height = GetPlacementHeight(placementPosition);
-        
-            return new Vector3(placePosition.x, height, placePosition.z);    
+            _currentDraggableObject = null;
         }
         
         private Vector3 FindSuitablePositionNearby(float centerX, float centerZ)
@@ -159,9 +152,11 @@ namespace GameControls.Controllers
                         
                         if (CanBePlacedAt(position))
                         {
-                            float height = GetPlacementHeight(position);
+                            Vector2 placementPosition = GetPlacementPosition(new Vector3(x, 0, y));
                         
-                            return new Vector3(searchX + x, height, searchY + y);
+                            float height = GetPlacementHeight(position);
+                            
+                            return new Vector3(placementPosition.x, height, placementPosition.y);
                         }
                     } 
                 }
@@ -170,17 +165,17 @@ namespace GameControls.Controllers
             return Vector3.zero;
         }
         
-        private bool CanBePlacedAt(Vector2Int position)
+        private bool CanBePlacedAt(Vector2 position)
         {
             if (_currentIDraggable.GetPlacementModule())
             {
-                return _currentIDraggable.GetPlacementModule().CanBePlaced(position);
+                return _currentIDraggable.GetPlacementModule().CanBePlaced(position, _currentIDraggable.TileScale);
             }
             
-            return _defaultPlacementModule.CanBePlaced(position);
+            return _defaultPlacementModule.CanBePlaced(position, _currentIDraggable.TileScale);
         }
     
-        private float GetPlacementHeight(Vector2Int position)
+        private float GetPlacementHeight(Vector2 position)
         {
             if (_currentIDraggable.GetPlacementModule())
             {
@@ -190,16 +185,20 @@ namespace GameControls.Controllers
             return _defaultPlacementModule.GetHeight(position);      
         }
     
-        private Vector2Int GetPlacmentPosition(Vector3 mousePosition)
+        private Vector2 GetPlacementPosition(Vector3 mousePosition)
         {
-            Vector2Int position = new Vector2Int(Mathf.RoundToInt(mousePosition.x), Mathf.RoundToInt(mousePosition.z));
+            Vector2Int roundedMousePosition = (new Vector2(mousePosition.x, mousePosition.z) - TileMap.GetTileSizeDraggableObjectOffset(_currentIDraggable.TileScale)).ToIntVector();
+            
+            PlacementModule placementModule = _defaultPlacementModule;
             
             if (_currentIDraggable.GetPlacementModule())
             {
-                return _currentIDraggable.GetPlacementModule().GetPlacementPosition(position);
+                placementModule = _currentIDraggable.GetPlacementModule();
             }
             
-            return _defaultPlacementModule.GetPlacementPosition(position);     
+            Vector2 placementPosition = placementModule.GetPlacementPosition(roundedMousePosition, _currentIDraggable.TileScale);
+            
+            return placementPosition + TileMap.GetTileSizeDraggableObjectOffset(_currentIDraggable.TileScale);
         }
     }
 }

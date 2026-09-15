@@ -358,6 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3691398b0f0a91c43ad6e3003d098869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileSize: 1
   _dragAnimationObject: {fileID: 5617128095792407976}
   _placementRequirements: {fileID: 11400000, guid: fa58316b082bdb044883e4755b1b2816, type: 2}
   _isDraggable: 1
@@ -373,6 +374,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2064e2a1408c44b8349d96b54a970c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _screenShakeData:
+    Intensity: 0.6
+    Duration: 0.3
   _enemyLayerSettings: {fileID: 11400000, guid: 06d08c6367264cc44a27bffbfedcbae9, type: 2}
   _explotionEffect: {fileID: 7798452880272546598}
   _defaultRadius: 1
@@ -390,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SphereAreaVisualisation
   _meshRenderer: {fileID: 3257628828542143827}
   _draggableSystemConfig: {fileID: 11400000, guid: 9dd193eb337f06e4ab64ed7ba831bfbf, type: 2}
+  _enableOnStart: 0
   _visualisationTransform: {fileID: 1291620564571830285}
 --- !u!114 &7036865070818702045
 MonoBehaviour:

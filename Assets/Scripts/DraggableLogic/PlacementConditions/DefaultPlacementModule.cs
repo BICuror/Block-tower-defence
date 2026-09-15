@@ -6,35 +6,19 @@ public sealed class DefaultPlacementModule : PlacementModule
 {
     [SerializeField] private LayerSettingType _sutableTerrainLayer = LayerSettingType.SolidTerrain;
 
-    public override bool CanBePlaced(Vector2Int position)
+    public override bool CanBePlaced(Vector2 position, int tileScale)
     {
-        if (TileMap.HasTile(position, _sutableTerrainLayer))
-        {
-            int nonStackableTiels = TileMap.GetTileCount(position, LayerSettingType.SolidObjects);
-    
-            if (nonStackableTiels == 0) return true;
-            if (nonStackableTiels == 1)
-            {
-                GameObject nonStackableTile = TileMap.GetHitObject(position, LayerSettingType.SolidObjects);
-    
-                if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
-                {
-                    return !draggableObject.IsPlaced;
-                }
-            }
-        }
-
-        return false;
+        return TileMap.DraggableCanBePlacedAccordingToScale(position, tileScale, _sutableTerrainLayer, LayerSettingType.SolidObjects);
     }
 
-    public override float GetHeight(Vector2Int position)
+    public override float GetHeight(Vector2 position)
     {
-        RaycastHit hit = TileMap.GetHitInfo(position, _sutableTerrainLayer);
+        RaycastHit hit = TileMap.GetHitInfo(position.ToIntVector(), _sutableTerrainLayer);
         
         return hit.point.y + AdditionalPlacementHeight;
     }
 
-    public override Vector2Int GetPlacementPosition(Vector2Int position)
+    public override Vector2 GetPlacementPosition(Vector2 position, int tileScale)
     {
         return position;
     }

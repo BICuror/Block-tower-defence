@@ -4,30 +4,18 @@ using UnityEngine;
 
 public sealed class DefaultAndWaterPlacementModule : PlacementModule
 {
-    public override bool CanBePlaced(Vector2Int position)
+    public override bool CanBePlaced(Vector2 position, int tileScale)
     {
-        int nonStackableTiels = TileMap.GetTileCount(position, LayerSettingType.SolidObjects);
-    
-        if (nonStackableTiels == 0) return true;
-        
-        if (nonStackableTiels == 1)
-        {
-            GameObject nonStackableTile = TileMap.GetHitObject(position, LayerSettingType.SolidObjects);
-
-            if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
-            {
-                return !draggableObject.IsPlaced;
-            }
-        }
-        
-        return false;
+        return TileMap.DraggableCanBePlacedAccordingToScale(position, tileScale, LayerSettingType.WaterAndTerrain, LayerSettingType.SolidObjects);
     }
 
-    public override float GetHeight(Vector2Int position)
+    public override float GetHeight(Vector2 position)
     {
-        if (TileMap.HasTile(position, LayerSettingType.AnyTerrain))
+        Vector2Int roundedPosition = Vector2Int.RoundToInt(position);
+        
+        if (TileMap.HasTile(roundedPosition, LayerSettingType.AnyTerrain))
         {
-            RaycastHit hit = TileMap.GetHitInfo(position, LayerSettingType.AnyTerrain);
+            RaycastHit hit = TileMap.GetHitInfo(roundedPosition, LayerSettingType.AnyTerrain);
             
             return hit.point.y + AdditionalPlacementHeight;
         }
@@ -35,7 +23,7 @@ public sealed class DefaultAndWaterPlacementModule : PlacementModule
         return 1f + AdditionalPlacementHeight;
     }   
 
-    public override Vector2Int GetPlacementPosition(Vector2Int position)
+    public override Vector2 GetPlacementPosition(Vector2 position, int tileScale)
     {
         return position;
     }

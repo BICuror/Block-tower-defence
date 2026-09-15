@@ -36,6 +36,24 @@ public static class TileMap
         return Physics.Raycast(heightRay, out hit, RAY_LENGTH, LayerService.GetLayerSetting(layerSettingType).GetLayerMask());
     }
 
+    public static bool HasTileIgnoringDraggedObjects(Vector2Int position, LayerSettingType layerSettingType)
+    {
+        List<GameObject> objects = GetHitObjects(position, layerSettingType);
+
+        if (objects.Count == 0) return false;
+        
+        foreach (GameObject gameObject in objects)
+        {
+            if (gameObject.TryGetComponent(out DraggableObject draggableObject))
+            {
+                if (draggableObject.IsPlaced) return true;
+            }
+            else return true;
+        }
+        
+        return false;
+    }
+
     #endregion
 
     #region FindSuitablePosition
@@ -192,21 +210,50 @@ public static class TileMap
 
     #region GetNearestDraggablePlacePosition
 
-    public static Vector3 GetNearestDraggablePlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50)
+    public static Vector3 GetNearestRandomDraggablePlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50, bool forceDistanceComparison = false)
     {
-        Vector2Int roundedDesiredPosition = new Vector2Int(Mathf.RoundToInt(desiredPosition.x), Mathf.RoundToInt(desiredPosition.z));
-
-        List<Vector2Int> possiblePositions = FindClosestValidPositionsInRadius(IsValidPosition, roundedDesiredPosition, 0, maxRadius);
-
-        Vector2Int finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
-
+        List<Vector2Int> possiblePositions = GetNearestDraggablePlacePositions(draggableObject, desiredPosition, positionValidator, maxRadius);
+        
+        Vector2 finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
+        
+        finalPosition += GetTileSizeDraggableObjectOffset(draggableObject.TileScale);
+        
         float height = draggableObject.GetPlacementModule().GetHeight(finalPosition);
 
-        return new Vector3(finalPosition.x, height, finalPosition.y);
+        return finalPosition.ToVector3(draggableObject.GetPlacementModule().GetHeight(finalPosition));
+    }
 
+    public static Vector3 GetNearestDraggablePlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50)
+    {
+        List<Vector2Int> possiblePositions = GetNearestDraggablePlacePositions(draggableObject, desiredPosition, positionValidator, maxRadius);
+
+        Vector2 finalPosition = desiredPosition.ToVector2();
+
+        float minimalDistance = float.MaxValue;
+        
+        Vector2 desiredFinalPosition = desiredPosition.ToVector2();
+        
+        foreach (Vector2Int possiblePosition in possiblePositions)
+        {
+            float distance = Vector2.Distance(desiredFinalPosition, possiblePosition);
+            
+            if (distance < minimalDistance) finalPosition = possiblePosition;
+        }
+        
+        finalPosition += GetTileSizeDraggableObjectOffset(draggableObject.TileScale);
+        
+        return finalPosition.ToVector3(draggableObject.GetPlacementModule().GetHeight(finalPosition));
+    }
+    
+    public static List<Vector2Int> GetNearestDraggablePlacePositions(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50)
+    {
+        List<Vector2Int> possiblePositions = FindClosestValidPositionsInRadius(IsValidPosition, desiredPosition.ToVector2().ToIntVector(), 0, maxRadius);
+
+        return possiblePositions;
+        
         bool IsValidPosition(Vector2Int position)
         {
-            if (!draggableObject.GetPlacementModule().CanBePlaced(position)) return false;
+            if (!draggableObject.GetPlacementModule().CanBePlaced(position + GetTileSizeDraggableObjectOffset(draggableObject.TileScale), draggableObject.TileScale)) return false;
 
             return positionValidator == null || positionValidator.Invoke(position);
         }
@@ -361,6 +408,48 @@ public static class TileMap
     }
 
     #endregion
+
+    public static bool DraggableCanBePlacedAccordingToScale(Vector2 position, int tileScale, LayerSettingType validTerrain, LayerSettingType obstacleTerrain)
+    {
+        float height = int.MinValue;
+        
+        Vector2 offset = new Vector2((tileScale - 1) * -0.5f, (tileScale - 1) * -0.5f);
+
+        for (int x = 0; x < tileScale; x++)
+        {
+            for (int z = 0; z < tileScale; z++)
+            {
+                Vector2Int checkPosition = new Vector2(x + offset.x + position.x, z + offset.y + position.y).ToIntVector();
+
+                if (!HasTile(checkPosition, validTerrain)) return false;
+
+                RaycastHit hit = GetHitInfo(checkPosition, validTerrain);
+                
+                if (height == int.MinValue)
+                {
+                    height = hit.point.y;
+                }
+                else
+                {
+                    if (hit.point.y != height)
+                    {
+                        return false;
+                    }
+                }
+
+                if (HasTileIgnoringDraggedObjects(checkPosition, obstacleTerrain)) return false;
+            }
+        }
+        
+        return true;
+    }
+
+    public static Vector2 GetTileSizeDraggableObjectOffset(int tileSize)
+    {
+        if (tileSize % 2 == 0) return new Vector2(0.5f, 0.5f);
+        
+        return Vector2.zero;
+    }
     
     private static Ray GetRay(Vector2Int position)
     {

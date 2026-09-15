@@ -7,10 +7,10 @@ public abstract class PlacementModule : ScriptableObject
     
     [SerializeField] protected float AdditionalPlacementHeight = 0.5f;
     
-    public abstract bool CanBePlaced(Vector2Int position);
-    public abstract float GetHeight(Vector2Int position);
-    public abstract Vector2Int GetPlacementPosition(Vector2Int position);
-
+    public abstract bool CanBePlaced(Vector2 position, int tileScale);
+    public abstract float GetHeight(Vector2 position);
+    public abstract Vector2 GetPlacementPosition(Vector2 position, int tileScale);
+    
     protected bool IsValidPosition(Vector2Int position)
     {
         return Vector2Int.Distance(position, new Vector2Int(CENTER_INDEX, CENTER_INDEX)) <= MAX_DISTANCE_FROM_CENTER;

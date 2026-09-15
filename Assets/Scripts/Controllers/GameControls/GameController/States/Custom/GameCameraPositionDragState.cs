@@ -1,5 +1,6 @@
 using GameControls.Controllers;
 using Cysharp.Threading.Tasks;
+using GameControls.Features;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using Zenject;
@@ -8,6 +9,7 @@ namespace GameControls.States
 {
     public sealed class GameCameraPositionDragState : GameControllerState
     {
+        [Inject] private CameraZoomGameControllerFeature _cameraZoomGameController;
         [Inject] private InspectorController _inspectorController;
         [Inject] private CursorController _cursorController;
         [Inject] private CameraController _cameraController;
@@ -69,7 +71,7 @@ namespace GameControls.States
             {
                 await UniTask.WaitForFixedUpdate();
 
-                _cameraController.DragCamera(GetPointerDelta());
+                _cameraController.DragCamera(GetPointerDelta() * _cameraZoomGameController.CurrentZoom);
             }
 
             InvokeTryExitState();

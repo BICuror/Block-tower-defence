@@ -6,6 +6,7 @@ using Combat;
 
 public class AreaManager : MonoBehaviour
 {
+    
     [SerializeField] private List<AreaScanerController> _mainScanerControllers;
     
     [Header("Priority")] 
@@ -13,6 +14,7 @@ public class AreaManager : MonoBehaviour
     [ShowIf("_hasPriority")] [SerializeField] private AreaEntityDetectorPriorityType _priorityType;
     
     [Cached] protected ReachAreaScale _reachAreaScale;
+    [Cached] protected DraggableObject _draggableObject;
     
     public bool HasPriority => _hasPriority;
     public AreaEntityDetectorPriorityType CurrentPriorityType => _priorityType;
@@ -79,6 +81,13 @@ public class AreaManager : MonoBehaviour
         }
 
         return priorityAlgorithm;
+    }
+
+    private float GetOwnerScaleModifier()
+    {
+        if (_draggableObject) return (_draggableObject.TileScale - 1) * 0.5f;
+        
+        return 0;
     }
 }
 

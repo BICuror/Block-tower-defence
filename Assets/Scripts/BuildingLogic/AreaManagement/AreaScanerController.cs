@@ -8,6 +8,7 @@ using Zenject;
 public sealed class AreaScanerController : MonoBehaviour
 {
     [Inject] private DraggableSystemConfig _draggableSystemConfig;
+    [Cached] private DraggableObject _draggableObject;
     [Cached] private AreaManager _areaManager;
     
     [SerializeField] private bool _autoScale;
@@ -34,12 +35,22 @@ public sealed class AreaScanerController : MonoBehaviour
             if (!_areaManager) _areaManager = transform.parent.GetComponent<AreaManager>();
             _areaManager.AddAreaScanerController(this);
         }
+
+        if (_draggableObject)
+        {
+            _draggableObject.OnTileScaleChanged += UpdateScale;
+        }
     }
     
     public void SetScale(int radius)
     {
         _currentRadius = radius;
-        
+
+        UpdateScale();
+    }
+
+    private void UpdateScale()
+    {
         transform.localScale = GetScale();
     }
 
@@ -50,11 +61,14 @@ public sealed class AreaScanerController : MonoBehaviour
         if (_overrideAdditionalScaleValue) scale += _additionalScaleValue;
         else scale += _draggableSystemConfig.AdditionalAreaVisualisationSize;
 
+        if (_draggableObject) scale += (_draggableObject.TileScale - 1);
+
         return new Vector3(scale, _height, scale);
     }
     
     private void OnDestroy()
     {
         if (_autoScale) _areaManager.RemoveAreaScanerController(this);
+        if (_draggableObject) _draggableObject.OnTileScaleChanged -= UpdateScale;
     }
 }

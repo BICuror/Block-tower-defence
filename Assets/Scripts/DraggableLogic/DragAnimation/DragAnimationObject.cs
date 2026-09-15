@@ -1,24 +1,26 @@
 using UnityEngine;
-
-[RequireComponent(typeof(MeshRenderer))]
+using System;
 
 public sealed class DragAnimationObject : MonoBehaviour
 {
     [SerializeField] private bool _returnToDefaultYRotation = false;
     
-    private float _meshHegiht;
+    private float _defaultScale = 1f;
     private Transform _initialParent;
     private Vector3 _initialLocalPosition;
     private float _initialLocalYRotation;
-    private bool _isConnected;
+    private bool _isDragged;
     
     public Vector3 InitialLocalPosition => _initialLocalPosition;
-    public bool IsConnected => _isConnected;
-    public float MeshHeight => _meshHegiht;
+    public bool IsDragged => _isDragged;
+    public float MeshHeight => 1f;
+    
+    public event Action<float> DefaultScaleChanged;
+    public event Action DragStarted;
+    public event Action DragEnded;
     
     private void Awake()
     {
-        _meshHegiht = GetComponent<MeshRenderer>().bounds.size.y;
         _initialParent = transform.parent;
         _initialLocalPosition = transform.localPosition;
         _initialLocalYRotation = transform.localRotation.eulerAngles.y;
@@ -26,11 +28,18 @@ public sealed class DragAnimationObject : MonoBehaviour
 
     private void OnEnable() => SetInitialParent();
 
+    public void SetDefaultScale(float scale)
+    {
+        _defaultScale = scale;
+        
+        DefaultScaleChanged?.Invoke(scale);
+    }
+    
     public void ConnectToJoint(Joint joint)
     {
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
         
-        transform.position = joint.transform.position - new Vector3(0f, _meshHegiht, 0f);
+        transform.position = joint.transform.position - new Vector3(0f, MeshHeight, 0f);
 
         transform.parent = null;
         rigidbody.mass = 5f;
@@ -39,13 +48,17 @@ public sealed class DragAnimationObject : MonoBehaviour
 
         joint.connectedBody = rigidbody;
 
-        _isConnected = true;
+        _isDragged = true;
+
+        DragStarted?.Invoke();
     } 
 
     public void DisconnectFromJoint(Joint joint)
     {
         Destroy(GetComponent<Rigidbody>());
         joint.connectedBody = null;
+        
+        DragEnded?.Invoke();
     }
 
     public void SetInitialParent()
@@ -54,6 +67,6 @@ public sealed class DragAnimationObject : MonoBehaviour
         transform.localPosition = _initialLocalPosition;
         if (_returnToDefaultYRotation) transform.localRotation = Quaternion.Euler(0f, _initialLocalYRotation, 0f);
         
-        _isConnected = false;
+        _isDragged = false;
     }
 }

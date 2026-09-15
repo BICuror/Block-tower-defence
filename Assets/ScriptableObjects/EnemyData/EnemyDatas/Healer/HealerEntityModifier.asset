@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
-  m_Name: PermamentRegereration
+  m_Name: HealerEntityModifier
   m_EditorClassIdentifier: 
   _icon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
   _localizationKey: global_regen_entity_modificator_tooltip
@@ -33,7 +33,7 @@ MonoBehaviour:
       _sprite: {fileID: 0}
     - _argumentType: 0
       _argumentName: Stacks
-      _intArgument: 1
+      _intArgument: 3
       _boolArgument: 0
       _floatArgument: 0.1
       _stringArgument: 
@@ -113,7 +113,7 @@ MonoBehaviour:
   _hasStacks: 0
   _maxStacks: 1
   _effectType: 1
-  _showInInspector: 1
+  _showInInspector: 0
   _hasRequiredTags: 0
   _reqiredOwnerTags:
     Requirements: []

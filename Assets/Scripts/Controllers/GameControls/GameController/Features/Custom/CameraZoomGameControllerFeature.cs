@@ -28,6 +28,8 @@ namespace GameControls.Features
         private float _finalZoom;
         private Tween _zoomTween;
         
+        public float CurrentZoom => _camera.orthographicSize;
+        
         public event Action ZoomChanged;
         
         public override void Initialize()

@@ -1,5 +1,7 @@
 public interface IDraggable 
 {
+    int TileScale { get; }
+    
     void PickUp();
     void Place();  
     void OnDrag();

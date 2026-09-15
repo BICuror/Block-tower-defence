@@ -5,6 +5,7 @@ using System;
 
 public class DraggableObject : MonoBehaviour, IDraggable
 {
+    [SerializeField] private int _tileScale = 1;
     [SerializeField] private DragAnimationObject _dragAnimationObject;
     [SerializeField] private PlacementModule _placementRequirements;
     [SerializeField] private bool _isDraggable = true;
@@ -13,14 +14,22 @@ public class DraggableObject : MonoBehaviour, IDraggable
     protected DraggableState DraggableState;
     
     public bool IsPlaced => DraggableState == DraggableState.Placed;
+    public int TileScale => _tileScale;
+    protected DragAnimationObject AnimationObject => _dragAnimationObject;
 
     public event Action PickedUp;
     public event Action Placed;
     public event Action OnDrag;
+    public event Action OnTileScaleChanged;
     
     public event Action<DraggableObject> DraggablePickedUp; 
     public event Action<DraggableObject> DraggablePlaced;
 
+    protected void Start()
+    {
+        SetTileScale(_tileScale);
+    }
+    
     protected void Awake()
     {
         _collider = GetComponent<Collider>();    
@@ -54,6 +63,15 @@ public class DraggableObject : MonoBehaviour, IDraggable
     
     public PlacementModule GetPlacementModule() => _placementRequirements; 
     public void SetNewDragAnimationObject(DragAnimationObject newAnimationObject) => _dragAnimationObject = newAnimationObject;
+    
+    public void SetTileScale(int scale)
+    {
+        _tileScale = scale;
+        
+        _dragAnimationObject.SetDefaultScale(_tileScale);
+        
+        OnTileScaleChanged?.Invoke();
+    }
 }
 
 public enum DraggableState

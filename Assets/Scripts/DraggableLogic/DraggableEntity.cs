@@ -12,6 +12,8 @@ namespace Combat
 
         protected void Start()
         {
+            base.Start();
+            
             PickedUp += OnEntityPickedUp;
             Placed += OnEntityPlaced;
         }

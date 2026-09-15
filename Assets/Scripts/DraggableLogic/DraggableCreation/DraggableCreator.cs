@@ -11,7 +11,7 @@ public sealed class DraggableCreator : MonoBehaviour
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private DiContainer _diContainer;
-    
+
     [Header("SpawnPositionSettings")]
     [SerializeField] private GameObject _draggableBlocker;
     [SerializeField] private LayerSetting _terrainLayerSettings;    
@@ -24,18 +24,26 @@ public sealed class DraggableCreator : MonoBehaviour
         if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
 
         DraggableObject createdDraggable = _diContainer.InstantiatePrefab(draggablePrefab, finalPosition, Quaternion.identity, null).GetComponent<DraggableObject>();
-        
-        createdDraggable.gameObject.SetActive(false);
-        
-        await CreateLauncher(centerPosition, finalPosition, launcherPrefab);
 
-        TryToAddToGlobalBuildingContainer(createdDraggable);
-        
-        createdDraggable.gameObject.SetActive(true);
+        await LaunchDraggable(createdDraggable, centerPosition, finalPosition, launcherPrefab);
         
         return createdDraggable;
     }
 
+    public async UniTask LaunchDraggable(DraggableObject draggable, Vector3 centerPosition, Vector3 finalPosition, [Optional] Launcher launcherPrefab)
+    {
+        if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
+        
+        draggable.gameObject.SetActive(false);
+        
+        await CreateLauncher(centerPosition, finalPosition, launcherPrefab);
+
+        TryToAddToGlobalBuildingContainer(draggable);
+        
+        draggable.transform.position = finalPosition;
+        draggable.gameObject.SetActive(true);
+    }
+    
     public async UniTask<DraggableObject> CreateDraggableOnNearbyPosition(DraggableObject draggablePrefab, Vector3 startPositon, Vector3 finalPosition, [Optional]Launcher launcherPrefab)
     {
         if (!launcherPrefab) launcherPrefab = _defaultLauncherPrefab;
@@ -93,15 +101,21 @@ public sealed class DraggableCreator : MonoBehaviour
         
         List<Vector2Int> foundPositions = TileMap.FindClosestValidPositionsInRadius(IsSuitablePosition, roundedCenterPosition, radius, _islandDataContainer.Data.IslandSize);
         
-        Vector2Int selectedPosition = foundPositions[Random.Range(0, foundPositions.Count)];
+        Vector2 selectedPosition = foundPositions[Random.Range(0, foundPositions.Count)];
+
+        selectedPosition += TileMap.GetTileSizeDraggableObjectOffset(draggableObject.TileScale);
+        
+        selectedPosition = draggableObject.GetPlacementModule().GetPlacementPosition(selectedPosition, draggableObject.TileScale);
         
         float height = draggableObject.GetPlacementModule().GetHeight(selectedPosition);
-        
+
         return new Vector3(selectedPosition.x, height, selectedPosition.y);
 
         bool IsSuitablePosition(Vector2Int position)
         {
-            return draggableObject.GetPlacementModule().CanBePlaced(position);
+            if (draggableObject.TileScale % 2 == 0) return draggableObject.GetPlacementModule().CanBePlaced(position + TileMap.GetTileSizeDraggableObjectOffset(draggableObject.TileScale), draggableObject.TileScale);
+            
+            return draggableObject.GetPlacementModule().CanBePlaced(position, draggableObject.TileScale);
         }
     }
     #endregion

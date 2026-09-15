@@ -5313,6 +5313,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 0
+  _shacker: {fileID: 1278709420875641837}
 --- !u!114 &1278709420875641837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5538,6 +5539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3691398b0f0a91c43ad6e3003d098869, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileScale: 1
   _dragAnimationObject: {fileID: 7444604681278474849}
   _placementRequirements: {fileID: 11400000, guid: fa58316b082bdb044883e4755b1b2816, type: 2}
   _isDraggable: 1

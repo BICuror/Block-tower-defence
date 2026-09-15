@@ -5062,11 +5062,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a70898ddcc4264bb02f33abc4eda73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tileScale: 1
   _dragAnimationObject: {fileID: 8110531671198179174}
   _placementRequirements: {fileID: 11400000, guid: 075c8d6d778e98a429f7b23fd2db4776, type: 2}
   _isDraggable: 1
   _itemColor: 0
   _destroyEffectPrefab: {fileID: 8324663063960217067, guid: 00674b86dd6a6c74480c39aab740683f, type: 3}
+  _maxScale: 1.5
+  _minScale: 3.1
   _toggleGlobalEffectData: {fileID: 0}
 --- !u!114 &-1740854102193638907
 MonoBehaviour:

@@ -38,6 +38,8 @@ public sealed class BuildingSelectionOptionObject : SelectionOptionObject
         
         _draggableObject.DraggablePickedUp += _ => ((IDraggable)_instantiatedBuilding.Draggable).PickUp();
         _draggableObject.DraggablePlaced += _ => ((IDraggable)_instantiatedBuilding.Draggable).Place();
+        
+        _draggableObject.SetTileScale(_instantiatedBuilding.ComponentsContainer.Get<DraggableObject>().TileScale);
 
         _instantiatedBuilding.ComponentsContainer.Get<Collider>().enabled = false;
 

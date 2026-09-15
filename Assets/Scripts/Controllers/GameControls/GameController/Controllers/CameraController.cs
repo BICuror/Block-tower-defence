@@ -19,7 +19,7 @@ namespace GameControls.Controllers
         [SerializeField] private float _height = 5f;
         [Range(0f, 1f)] [SerializeField] private float _easingSleepThreshold = 0.1f;
         [Range(0f, 1f)] [SerializeField] private float _cameraEasingSpeed = 0.9f;
-        [Range(0f, 1f)] [SerializeField] private float _cameraRadiusScale = 0.5f;
+        [Range(0f, 2f)] [SerializeField] private float _cameraRadiusScale = 0.5f;
 
         private FloatSetting _cameraMovementSensitivity;
         private FloatSetting _cameraDragSensitivity;

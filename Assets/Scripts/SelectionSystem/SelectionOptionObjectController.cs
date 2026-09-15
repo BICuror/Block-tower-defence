@@ -11,6 +11,7 @@ public sealed class SelectionOptionObjectController : MonoBehaviour
     [SerializeField] private float _creationRadius = 5f;
     [Inject] private DraggableCreator _draggableCreator;
     [Inject] private SelectionManager _selectionManager;
+    [Inject] private DiContainer _diContainer;
     
     private readonly List<SelectionOptionObject> _selectionOptionObjects = new();
     
@@ -34,9 +35,17 @@ public sealed class SelectionOptionObjectController : MonoBehaviour
         {
             DraggableObject draggableObjectPrefab = selectionOptionObjectPrefab.GetComponent<DraggableObject>();
 
-            T selectionOptionObject = (await _draggableCreator.CreateDraggableOnNearbyPosition(draggableObjectPrefab, transform.position, GetOffset(i) + transform.position)).GetComponent<T>();
-            
+            T selectionOptionObject = _diContainer.InstantiatePrefab(draggableObjectPrefab.gameObject).GetComponent<T>();
+            DraggableObject draggableObject = selectionOptionObject.GetComponent<DraggableObject>();
             initializeSelectionOption?.Invoke(selectionOptionObject);
+            
+            draggableObject.gameObject.SetActive(false);
+
+            await UniTask.WaitForFixedUpdate();
+            
+            await _draggableCreator.LaunchDraggable(draggableObject, transform.position, TileMap.GetNearestDraggablePlacePosition(draggableObject, GetOffset(i) + transform.position));
+            
+            selectionOptionObject.OnObjectCreationCompleted();
             
             _selectionOptionObjects.Add(selectionOptionObject);
         }

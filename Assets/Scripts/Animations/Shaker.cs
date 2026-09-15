@@ -10,7 +10,7 @@ public class Shaker : MonoBehaviour
 
     [Header("Links")]
     [SerializeField] protected Transform _mesh;
-    private Vector3 _defaultScale = -Vector3.one;
+    protected Vector3 DefaultScale = -Vector3.one;
     
     [Serializable] private struct ShakeData
     {
@@ -27,20 +27,20 @@ public class Shaker : MonoBehaviour
 
     public void SetDefaultValues(Vector3 defaultScale)
     {
-        _defaultScale = defaultScale;
+        DefaultScale = defaultScale;
         _mesh.localScale = defaultScale;
     }
     
     private void CaptureDefaultValues()
     {
-        _defaultScale = _mesh.localScale; 
+        DefaultScale = _mesh.localScale; 
     }
     
     private void SetDefaultValues()
     { 
-        if (_defaultScale == -Vector3.one) CaptureDefaultValues();
+        if (DefaultScale == -Vector3.one) CaptureDefaultValues();
         
-        _mesh.localScale = _defaultScale;
+        _mesh.localScale = DefaultScale;
     }
     
     public void Shake()

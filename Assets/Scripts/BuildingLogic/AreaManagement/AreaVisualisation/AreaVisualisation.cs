@@ -1,7 +1,5 @@
-using NaughtyAttributes;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.Serialization;
 using Zenject;
 
 public abstract class AreaVisualisation : MonoBehaviour

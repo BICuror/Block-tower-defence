@@ -41,12 +41,9 @@ public sealed class InspectionTooltipManager : MonoBehaviour
     {
         _instance = this;
         
-        _dragController.PickedObject.AddListener(_ =>
-        {
-            DisableActiveSinglePopup();
-            SetActiveLayer(UILayer.None).Forget();
-        });
-        _dragController.DroppedObject.AddListener(_ => SetActiveLayer(UILayer.Group).Forget());
+        _dragController.PickedObject += _ => DisableActiveSinglePopup();
+        _dragController.PickedObject += _ => SetActiveLayer(UILayer.None).Forget();
+        _dragController.DroppedObject += _ => SetActiveLayer(UILayer.Group).Forget();
     }
     
     private async UniTask SetActiveLayer(UILayer layer)

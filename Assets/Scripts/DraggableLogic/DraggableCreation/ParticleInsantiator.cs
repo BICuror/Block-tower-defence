@@ -18,6 +18,10 @@ public sealed class ParticleInsantiator : MonoBehaviour
         visualEffect.transform.position = placedObject.transform.position;
 
         visualEffect.transform.rotation = placedObject.transform.rotation;
+
+        float scale = placedObject.GetComponent<DraggableObject>().TileScale * 0.8f;
+        
+        visualEffect.transform.localScale = new Vector3(scale, scale, scale);
     
         visualEffect.PlayBurstEffectAndForget();
     }

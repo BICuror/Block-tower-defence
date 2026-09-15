@@ -4,54 +4,47 @@ using UnityEngine;
 
 public sealed class CrystalPlacementModule : PlacementModule
 {
-    public override bool CanBePlaced(Vector2Int position)
+    public override bool CanBePlaced(Vector2 position, int tileScale)
     {
-        if (TileMap.HasTile(position, LayerSettingType.Townhall))
+        Vector2Int roundPosition = position.ToIntVector();
+        
+        if (TileMap.HasTile(roundPosition, LayerSettingType.Townhall))
         {
-            GameObject townhall = TileMap.GetHitObject(position, LayerSettingType.Townhall).transform.parent.gameObject;
+            GameObject townhall = TileMap.GetHitObject(roundPosition, LayerSettingType.Townhall).transform.parent.gameObject;
             
             return townhall.GetComponentInChildren<SelectionManager>().SelectionPhaseIsActive == false;
         }
         
-        if (!IsValidPosition(position)) return false;
-        
-        int nonStackableTiels = TileMap.GetTileCount(position, LayerSettingType.NonstackableCreatedItems);
+        if (!IsValidPosition(roundPosition)) return false;
 
-        if (nonStackableTiels == 0) return true;
-        if (nonStackableTiels == 1)
-        {
-            GameObject nonStackableTile = TileMap.GetHitObject(position, LayerSettingType.NonstackableCreatedItems);
-
-            if (nonStackableTile.TryGetComponent(out DraggableObject draggableObject))
-            {
-                return !draggableObject.IsPlaced;
-            }
-        }
-
-        return false; 
+        return TileMap.DraggableCanBePlacedAccordingToScale(position, tileScale, LayerSettingType.AnyTerrain, LayerSettingType.NonstackableCreatedItems);
     }
 
-    public override float GetHeight(Vector2Int position)
+    public override float GetHeight(Vector2 position)
     {
-        if (TileMap.HasTile(position, LayerSettingType.Townhall, out RaycastHit hit))
+        Vector2Int roundPosition = position.ToIntVector();
+        
+        if (TileMap.HasTile(roundPosition, LayerSettingType.Townhall, out RaycastHit hit))
         {
             return hit.point.y;
         }
 
-        float height = TileMap.GetHitInfo(position, LayerSettingType.SolidTerrain).point.y;
+        float height = TileMap.GetHitInfo(roundPosition, LayerSettingType.SolidTerrain).point.y;
 
         if (height < 1) height = 1;
 
         return height + AdditionalPlacementHeight;
     }
     
-    public override Vector2Int GetPlacementPosition(Vector2Int position)
+    public override Vector2 GetPlacementPosition(Vector2 position, int tileScale)
     {
-        if (TileMap.HasTile(position, LayerSettingType.Townhall))
+        Vector2Int roundPosition = position.ToIntVector();
+        
+        if (TileMap.HasTile(roundPosition, LayerSettingType.Townhall))
         {
-            GameObject townhall = TileMap.GetHitObject(position, LayerSettingType.Townhall);
+            GameObject townhall = TileMap.GetHitObject(roundPosition, LayerSettingType.Townhall);
             
-            return new Vector2Int(Mathf.RoundToInt(townhall.transform.position.x), Mathf.RoundToInt(townhall.transform.position.z));
+            return new Vector2Int(Mathf.RoundToInt(townhall.transform.position.x), Mathf.RoundToInt(townhall.transform.position.z)) - TileMap.GetTileSizeDraggableObjectOffset(tileScale);
         }
 
         return position;

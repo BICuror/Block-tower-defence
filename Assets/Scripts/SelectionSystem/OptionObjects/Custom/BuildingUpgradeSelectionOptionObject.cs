@@ -1,5 +1,5 @@
-using Combat;
 using Cysharp.Threading.Tasks;
+using Combat;
 
 public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
 {
@@ -14,13 +14,16 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
     public void SetEffectData(EntityModificatorData modificatorData)
     {
         _modificatorData = modificatorData;
-
-        _effectPreviewTooltip = InspectionTooltipManager.Instance.OpenEffectPreviewTooltip(_modificatorData, transform);
     }
     
     public override void ApplySelectedEffect()
     {
         _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_modificatorData);
+    }
+    
+    public override void OnObjectCreationCompleted()
+    {
+        _effectPreviewTooltip = InspectionTooltipManager.Instance.OpenEffectPreviewTooltip(_modificatorData, transform);
     }
 
     private void OnDestroy()

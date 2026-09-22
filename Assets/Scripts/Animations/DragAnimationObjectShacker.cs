@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using DG.Tweening;
 using UnityEngine;
 
@@ -6,6 +7,14 @@ using UnityEngine;
 public sealed class DragAnimationObjectShacker : Shaker
 {
     [SerializeField] private HoverableObject _hoverableObject;
+
+    [Header("Scale")] 
+    [SerializeField] private bool _useTileScaleInsteadOfFixedWhenPickedUp;
+    [SerializeField] private float _pickedUpScale = 0.7f;
+    [SerializeField] private bool _hasStaticYScale;
+    [ShowIf("_hasStaticYScale")] [SerializeField] private float _defaultYScale;
+    private Tween _scaleTween;
+    
     private DragAnimationObject _dragAnimationObject;
     private bool _dragAnimationIsActive;
     
@@ -25,26 +34,37 @@ public sealed class DragAnimationObjectShacker : Shaker
 
     private void SetDefaultScale(float scale)
     {
-        SetDefaultValues(new Vector3(scale, scale, scale));
+        if (_hasStaticYScale) SetDefaultValues(new Vector3(scale, _defaultYScale, scale));
+        else SetDefaultValues(new Vector3(scale, scale, scale));
         _mesh.localScale = DefaultScale;
     }
     
     private void TryShake()
     {
-        if (!_dragAnimationIsActive) Shake();
+        if (!_dragAnimationIsActive && !_dragAnimationObject.IsDragged) Shake();
     }
 
     private void OnDragAnimationStarted()
     {
-        _mesh.DOKill();
+        StopScaleTween();
+
+        Vector3 pickedUpScale;
         
-        _mesh.DOScale(Vector3.one * 0.7f, 0.4f).SetLink(gameObject).OnComplete(() => _dragAnimationIsActive = true);
+        if (_useTileScaleInsteadOfFixedWhenPickedUp) pickedUpScale = DefaultScale * _pickedUpScale;
+        else pickedUpScale = new Vector3(_pickedUpScale, _pickedUpScale, _pickedUpScale);
+        
+        _scaleTween = _mesh.DOScale(pickedUpScale, 0.4f).SetLink(gameObject).OnComplete(() => _dragAnimationIsActive = true);
+    }
+
+    private void StopScaleTween()
+    {
+        if (_scaleTween != null && _scaleTween.IsActive()) _scaleTween.Kill();
     }
     
     private void OnDragAnimationEnded()
     {
-        _mesh.DOKill();
+        StopScaleTween();
         
-        _mesh.DOScale(DefaultScale, 0.4f).SetLink(gameObject).OnComplete(() => _dragAnimationIsActive = false);
+        _scaleTween = _mesh.DOScale(DefaultScale, 0.4f).SetLink(gameObject).OnComplete(() => _dragAnimationIsActive = false);
     }
 }

@@ -105,6 +105,8 @@ public sealed class IdleStateController : WaveStateController
 
     private void GenerateEnemyGroups()
     {
+        _enemySpawnSystem.UpdateEnemySpawnMultiplier();
+        
         _enemySpawnGroupCompiler.RegenerateWaveSeed();
         _enemySpawnGroupCompiler.SetNextWaveData(_waveIndexContainer.GetCurrentWaveContent().ForceExistingBuildingAttackWaves);
         _enemySpawnGroupCompiler.GenerateEnemyGroups();

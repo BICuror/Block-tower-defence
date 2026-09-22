@@ -18,6 +18,10 @@ MonoBehaviour:
     _content: 00000000
     _requiredEnemyTier: 0
     _forceExistingBuildingAttackWaves: 1
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 2
     _combinedItemStrength: 6
     _itemsAmount: 2
@@ -27,6 +31,10 @@ MonoBehaviour:
     _content: 0100000003000000
     _requiredEnemyTier: 0
     _forceExistingBuildingAttackWaves: 1
+    _enemySpawnAmountMultiplier: 0.4
+    _spawnMethod: 1
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 8
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -36,6 +44,10 @@ MonoBehaviour:
     _content: 0000000003000000
     _requiredEnemyTier: 0
     _forceExistingBuildingAttackWaves: 1
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
     _itemsAmount: 2
@@ -45,6 +57,10 @@ MonoBehaviour:
     _content: 0100000003000000
     _requiredEnemyTier: 0
     _forceExistingBuildingAttackWaves: 1
+    _enemySpawnAmountMultiplier: 2.3
+    _spawnMethod: 1
+    _spawnDelayMultiplier: 0.5
+    _timeBeforeSwithcingToOtherSpawner: 6
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -54,6 +70,10 @@ MonoBehaviour:
     _content: 
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 1
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 6
     _itemsAmount: 3
@@ -63,6 +83,10 @@ MonoBehaviour:
     _content: 0000000003000000
     _requiredEnemyTier: 1
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
     _itemsAmount: 3
@@ -72,6 +96,10 @@ MonoBehaviour:
     _content: 0100000003000000
     _requiredEnemyTier: 1
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -81,6 +109,10 @@ MonoBehaviour:
     _content: 0300000003000000
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
     _itemsAmount: 2
@@ -90,6 +122,10 @@ MonoBehaviour:
     _content: 03000000
     _requiredEnemyTier: 1
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -99,6 +135,10 @@ MonoBehaviour:
     _content: 
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 7
     _itemsAmount: 2
@@ -108,6 +148,10 @@ MonoBehaviour:
     _content: 03000000
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -117,6 +161,10 @@ MonoBehaviour:
     _content: 
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 6
     _itemsAmount: 2
@@ -126,6 +174,10 @@ MonoBehaviour:
     _content: 03000000
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -135,6 +187,10 @@ MonoBehaviour:
     _content: 
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 6
     _itemsAmount: 2
@@ -144,6 +200,10 @@ MonoBehaviour:
     _content: 03000000
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 10
     _itemsAmount: 3
@@ -153,6 +213,10 @@ MonoBehaviour:
     _content: 
     _requiredEnemyTier: 2
     _forceExistingBuildingAttackWaves: 0
+    _enemySpawnAmountMultiplier: 0
+    _spawnMethod: 0
+    _spawnDelayMultiplier: 1
+    _timeBeforeSwithcingToOtherSpawner: 0
     _additionalItemStrength: 4
     _combinedItemStrength: 6
     _itemsAmount: 3

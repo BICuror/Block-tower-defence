@@ -12,7 +12,7 @@ public sealed class BuildingFetch : MonoBehaviour
     [SerializeField] private float _draggingTimePerTile = 0.2f;
     [SerializeField] private float _fetchDistance = 3f;
     [SerializeField] private FetchType _fetchType;
-    private CombatEntity _currentTargetEntity;
+    private BuildingEntity _currentTargetEntity;
     private FetchState _currentState;
 
     private void Start()
@@ -37,11 +37,11 @@ public sealed class BuildingFetch : MonoBehaviour
     {
         if (_currentState != FetchState.Idle) return;
 
-        if (entity.Draggable.IsDraggable())
+        if (entity.ComponentsContainer.Get<DraggableObject>().CanBeDragged())
         {
             SetState(FetchState.Chase);
 
-            _currentTargetEntity = entity;
+            _currentTargetEntity = entity as BuildingEntity;
             _currentTargetEntity.Draggable.PickedUp += StopChase;
 
             FetchEntity().Forget();

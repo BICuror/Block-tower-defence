@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using NaughtyAttributes;
 
 [CreateAssetMenu(fileName = "WavesContentConfig", menuName = "WavesContentConfig")]
 
@@ -35,6 +36,12 @@ public sealed class WavesContentConfig : ScriptableObject
     [Header("EnemyWaveGeneration")] 
     [SerializeField] private EnemyTier _requiredEnemyTier;
     [SerializeField] private bool _forceExistingBuildingAttackWaves;
+
+    [Header("EnemySpawn")] 
+    [SerializeField] private float _enemySpawnAmountMultiplier = 0f;
+    [SerializeField] private EnemySpawnMethod _spawnMethod;
+    [SerializeField] private float _spawnDelayMultiplier = 1f;
+    [SerializeField] [AllowNesting, ShowIf("_spawnMethod", EnemySpawnMethod.OneSpawnerAtATime)] private float _timeBeforeSwithcingToOtherSpawner;
     
     [Header("ItemSetting")]
     [SerializeField] private int _additionalItemStrength = 4;
@@ -50,6 +57,10 @@ public sealed class WavesContentConfig : ScriptableObject
     public List<WaveContentType> Content => _content;
     
     public EnemyTier RequiredEnemyTier => _requiredEnemyTier;
+    public float EnemySpawnAmountMultiplier => _enemySpawnAmountMultiplier;
+    public EnemySpawnMethod SpawnMethod => _spawnMethod;
+    public float SpawnDelayMultiplier => _spawnDelayMultiplier;
+    public float TimeBeforeSwitchingToOtherSpawner => _timeBeforeSwithcingToOtherSpawner;
     public bool ForceExistingBuildingAttackWaves => _forceExistingBuildingAttackWaves;
     public int AdditionalItemStrength => _additionalItemStrength;
     public int CombinedItemStrength => _combinedItemStrength;
@@ -66,4 +77,10 @@ public enum WaveContentType
     FreeBuildingUpgradeSelection = 1,
     BossWave = 2,
     RerollRewardFromOptionalTask = 3,
+}
+
+public enum EnemySpawnMethod
+{
+    Simultaneous,
+    OneSpawnerAtATime
 }

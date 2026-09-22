@@ -15,7 +15,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     [Cached] private MaxDamageMultiplier _maxDamageMultiplier;
     [Cached] private AreaEntityDetector _enemyAreaScaner;
     [Cached] private ChargeDuration _chargeDuration;
-    [Cached] private CombatEntity _ownerEntity;
+    [Cached] private BuildingEntity _ownerEntity;
     [Cached] private Damage _damage;
     private float _elapsedTime;
     private InfernoDamageModifier _infernoDamageModifier = new();

@@ -7,7 +7,7 @@ public sealed class ApplyModifierUntilPickUpEntityModifier : EntityModificator
     
     public override void Enable()
     {
-        Entity.Draggable.PickedUp += Remove;
+        Entity.ComponentsContainer.Get<DraggableObject>().PickedUp += Remove;
 
         Type effectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
         
@@ -16,7 +16,7 @@ public sealed class ApplyModifierUntilPickUpEntityModifier : EntityModificator
 
     public override void Disable()
     {
-        Entity.Draggable.PickedUp -= Remove;
+        Entity.ComponentsContainer.Get<DraggableObject>().PickedUp -= Remove;
         
         Type effectType = Type.GetType(Args.GetArgument<string>("EffectTypeName"));
         

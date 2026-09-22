@@ -6,7 +6,7 @@ public interface IDraggable
     void Place();  
     void OnDrag();
 
-    bool IsDraggable();   
+    bool CanBeDragged();   
     PlacementModule GetPlacementModule();
     DragAnimationObject GetDragAnimationObject();
 }

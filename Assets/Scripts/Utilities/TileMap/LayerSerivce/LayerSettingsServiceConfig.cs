@@ -27,4 +27,6 @@ public enum LayerSettingType
     BlockingDecoration = 11,
     SolidTerrainAndRoad = 12,
     DecorationExclusionLayer = 13,
+    WaterAndAnyTerrainWithoutPlatforms = 14,
+    Water = 15,
 }

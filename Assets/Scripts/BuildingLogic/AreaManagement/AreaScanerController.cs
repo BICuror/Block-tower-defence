@@ -8,8 +8,8 @@ using Zenject;
 public sealed class AreaScanerController : MonoBehaviour
 {
     [Inject] private DraggableSystemConfig _draggableSystemConfig;
-    [Cached] private DraggableObject _draggableObject;
-    [Cached] private AreaManager _areaManager;
+    [Cached(required: false)] private AreaManager _areaManager;
+    [Cached(required: false)] private DraggableObject _draggableObject;
     
     [SerializeField] private bool _autoScale;
 
@@ -32,7 +32,6 @@ public sealed class AreaScanerController : MonoBehaviour
     {
         if (_autoScale)
         {
-            if (!_areaManager) _areaManager = transform.parent.GetComponent<AreaManager>();
             _areaManager.AddAreaScanerController(this);
         }
 

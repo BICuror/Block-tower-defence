@@ -18,8 +18,8 @@ public sealed class ScaleDamageWithHeight : EntityModificator
         Entity.StatContainer.Get<ReachAreaScale>().AddStatModifier(_reachAreaStatModifier);
         Entity.StatContainer.Get<Damage>().AddStatModifier(_damageStatModifier);
 
-        Entity.Draggable.Placed += UpdateScale;
-        Entity.Draggable.OnDrag += UpdateScale;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed += UpdateScale;
+        Entity.ComponentsContainer.Get<DraggableObject>().OnDrag += UpdateScale;
     }
 
     private void UpdateScale()
@@ -32,8 +32,8 @@ public sealed class ScaleDamageWithHeight : EntityModificator
 
     public override void Disable()
     {
-        Entity.Draggable.Placed -= UpdateScale;
-        Entity.Draggable.OnDrag += UpdateScale;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed -= UpdateScale;
+        Entity.ComponentsContainer.Get<DraggableObject>().OnDrag += UpdateScale;
         
         Entity.StatContainer.Get<ReachAreaScale>().RemoveStatModifier(_reachAreaStatModifier);
         Entity.StatContainer.Get<Damage>().RemoveStatModifier(_damageStatModifier);

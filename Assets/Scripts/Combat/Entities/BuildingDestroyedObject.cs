@@ -20,7 +20,7 @@ public sealed class BuildingDestroyedObject : MonoBehaviour
         
         _inspectableObject.ReplaceableDataParser.AddOrUpdateParsableData("*", entity.ComponentsContainer.Get<InspectableObject>().Name);
         
-        _draggableObject.SetDraggableState(entity.Draggable.IsDraggable());
+        _draggableObject.SetDraggableState(entity.Draggable.CanBeDragged());
 
         _waveStateMachine.GetWaveStateController(WaveState.Attack).QuitStateCompleted += OnWaveEnd;
     }

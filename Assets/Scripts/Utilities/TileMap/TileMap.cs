@@ -39,8 +39,6 @@ public static class TileMap
     public static bool HasTileIgnoringDraggedObjects(Vector2Int position, LayerSettingType layerSettingType)
     {
         List<GameObject> objects = GetHitObjects(position, layerSettingType);
-
-        if (objects.Count == 0) return false;
         
         foreach (GameObject gameObject in objects)
         {
@@ -49,6 +47,18 @@ public static class TileMap
                 if (draggableObject.IsPlaced) return true;
             }
             else return true;
+        }
+        
+        return false;
+    }
+    
+    public static bool HasTileIgnoringObject(Vector2Int position, GameObject ignoredObject, LayerSettingType layerSettingType)
+    {
+        List<GameObject> objects = GetHitObjects(position, layerSettingType);
+        
+        foreach (GameObject gameObject in objects)
+        {
+            if (gameObject != ignoredObject) return true;
         }
         
         return false;
@@ -217,10 +227,8 @@ public static class TileMap
         Vector2 finalPosition = possiblePositions[Random.Range(0, possiblePositions.Count)];
         
         finalPosition += GetTileSizeDraggableObjectOffset(draggableObject.TileScale);
-        
-        float height = draggableObject.GetPlacementModule().GetHeight(finalPosition);
 
-        return finalPosition.ToVector3(draggableObject.GetPlacementModule().GetHeight(finalPosition));
+        return finalPosition.ToVector3(draggableObject.GetPlacementModule().GetHeight(finalPosition, draggableObject.TileScale));
     }
 
     public static Vector3 GetNearestDraggablePlacePosition(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50)
@@ -236,13 +244,17 @@ public static class TileMap
         foreach (Vector2Int possiblePosition in possiblePositions)
         {
             float distance = Vector2.Distance(desiredFinalPosition, possiblePosition);
-            
-            if (distance < minimalDistance) finalPosition = possiblePosition;
+
+            if (minimalDistance > distance)
+            {
+                finalPosition = possiblePosition;
+                minimalDistance = distance;
+            }
         }
         
         finalPosition += GetTileSizeDraggableObjectOffset(draggableObject.TileScale);
         
-        return finalPosition.ToVector3(draggableObject.GetPlacementModule().GetHeight(finalPosition));
+        return finalPosition.ToVector3(draggableObject.GetPlacementModule().GetHeight(finalPosition, draggableObject.TileScale));
     }
     
     public static List<Vector2Int> GetNearestDraggablePlacePositions(DraggableObject draggableObject, Vector3 desiredPosition, Predicate<Vector2Int> positionValidator = null, int maxRadius = 50)
@@ -408,9 +420,11 @@ public static class TileMap
     }
 
     #endregion
-
+    
     public static bool DraggableCanBePlacedAccordingToScale(Vector2 position, int tileScale, LayerSettingType validTerrain, LayerSettingType obstacleTerrain)
     {
+        if (HasObjectsInTileScale(position, tileScale, obstacleTerrain)) return false;
+        
         float height = int.MinValue;
         
         Vector2 offset = new Vector2((tileScale - 1) * -0.5f, (tileScale - 1) * -0.5f);
@@ -436,12 +450,27 @@ public static class TileMap
                         return false;
                     }
                 }
-
-                if (HasTileIgnoringDraggedObjects(checkPosition, obstacleTerrain)) return false;
             }
         }
         
         return true;
+    }
+
+    public static bool HasObjectsInTileScale(Vector2 position, int tileScale, LayerSettingType obstacleTerrain)
+    {
+        Vector2 offset = new Vector2((tileScale - 1) * -0.5f, (tileScale - 1) * -0.5f);
+
+        for (int x = 0; x < tileScale; x++)
+        {
+            for (int z = 0; z < tileScale; z++)
+            {
+                Vector2Int checkPosition = new Vector2(x + offset.x + position.x, z + offset.y + position.y).ToIntVector();
+
+                if (HasTileIgnoringDraggedObjects(checkPosition, obstacleTerrain)) return true;
+            }
+        }
+        
+        return false;
     }
 
     public static Vector2 GetTileSizeDraggableObjectOffset(int tileSize)

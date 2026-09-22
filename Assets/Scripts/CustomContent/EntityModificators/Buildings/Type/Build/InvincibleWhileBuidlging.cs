@@ -4,7 +4,7 @@ public sealed class InvincibleWhileBuidlging : EntityModificator
 {
     public override void Enable()
     {
-        Entity.Draggable.Placed += AddInvincibility;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed += AddInvincibility;
         Entity.ComponentsContainer.Get<BuildingDraggable>().BuildCompleted += RemoveInvincibility;
     }
 
@@ -20,7 +20,7 @@ public sealed class InvincibleWhileBuidlging : EntityModificator
 
     public override void Disable()
     {
-        Entity.Draggable.Placed -= AddInvincibility;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed -= AddInvincibility;
         Entity.ComponentsContainer.Get<BuildingDraggable>().BuildCompleted -= RemoveInvincibility;
         RemoveInvincibility();
     }

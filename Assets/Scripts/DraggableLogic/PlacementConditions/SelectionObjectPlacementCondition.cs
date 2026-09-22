@@ -25,7 +25,7 @@ public sealed class SelectionObjectPlacementCondition : PlacementModule
         return TileMap.DraggableCanBePlacedAccordingToScale(position, tileScale, LayerSettingType.AnyTerrain, LayerSettingType.NonstackableCreatedItems);
     }
 
-    public override float GetHeight(Vector2 position)
+    public override float GetHeight(Vector2 position, int tileScale)
     {
         Vector2Int roundPosition = position.ToIntVector();
         

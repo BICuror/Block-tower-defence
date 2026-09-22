@@ -11,7 +11,7 @@ public sealed class DefaultPlacementModule : PlacementModule
         return TileMap.DraggableCanBePlacedAccordingToScale(position, tileScale, _sutableTerrainLayer, LayerSettingType.SolidObjects);
     }
 
-    public override float GetHeight(Vector2 position)
+    public override float GetHeight(Vector2 position, int tileScale)
     {
         RaycastHit hit = TileMap.GetHitInfo(position.ToIntVector(), _sutableTerrainLayer);
         

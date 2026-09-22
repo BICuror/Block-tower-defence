@@ -13,7 +13,7 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         _statModifier = new();
         Entity.StatContainer.Get<Damage>().AddStatModifier(_statModifier);
         
-        Entity.Draggable.Placed += CalculateBonusDamage;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed += CalculateBonusDamage;
         
         _areaDisplay = Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().InstantiateAndAddModificator(Args.GetArgument<GameObject>("AreaPrefab"));
         
@@ -45,6 +45,6 @@ public sealed class MoreDamageNearbyWater : EntityModificator
         
         Entity.ComponentsContainer.Get<EntityObjectModificatorContainer>().RemoveAndDestroyModificator(_areaDisplay);
         Entity.StatContainer.Get<Damage>().RemoveStatModifier(_statModifier);
-        Entity.Draggable.Placed -= CalculateBonusDamage;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed -= CalculateBonusDamage;
     }
 }

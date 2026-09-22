@@ -121,7 +121,12 @@ namespace Cashing
                 }
                 catch (Exception e)
                 {
-                    throw new Exception($"Failed to resolve component {type.Name} for {injectReciverObject.GetType().Name}");
+                    if (fields[i].GetAttribute<CachedAttribute>().Required)
+                    {
+                        throw new Exception($"Failed to resolve component {type.Name} for {injectReciverObject.GetType().Name}");
+                    }
+                    
+                    Debug.LogWarning($"Didn't inject component {type.Name} for {injectReciverObject.GetType().Name}");
                 }
             }
         }

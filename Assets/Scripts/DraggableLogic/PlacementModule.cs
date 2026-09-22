@@ -8,7 +8,7 @@ public abstract class PlacementModule : ScriptableObject
     [SerializeField] protected float AdditionalPlacementHeight = 0.5f;
     
     public abstract bool CanBePlaced(Vector2 position, int tileScale);
-    public abstract float GetHeight(Vector2 position);
+    public abstract float GetHeight(Vector2 position, int tileScale);
     public abstract Vector2 GetPlacementPosition(Vector2 position, int tileScale);
     
     protected bool IsValidPosition(Vector2Int position)

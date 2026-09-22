@@ -24,6 +24,6 @@ public sealed class AttackStateController : WaveStateController
 
     protected override async UniTask OnEnterStateCompleted()
     {
-        _enemySpawnSystem.StartWave();
+        _enemySpawnSystem.StartWave().Forget();
     }
 }

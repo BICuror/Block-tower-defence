@@ -6,7 +6,7 @@ public class ApplyModificatorOnIdleStartRemoveUponPickup : EntityModificator
     
     public override void Enable()
     {
-        Entity.Draggable.PickedUp += TryRemoveModificator;
+        Entity.ComponentsContainer.Get<DraggableObject>().PickedUp += TryRemoveModificator;
         _waveStateMachine.StateStarted += TryToApplyModificator;
         _waveStateMachine.StateEnded += TryRemoveModificator;
         TryToApplyModificator(_waveStateMachine.CurrentState);
@@ -14,7 +14,7 @@ public class ApplyModificatorOnIdleStartRemoveUponPickup : EntityModificator
 
     public override void Disable()
     {
-        Entity.Draggable.PickedUp -= TryRemoveModificator;
+        Entity.ComponentsContainer.Get<DraggableObject>().PickedUp -= TryRemoveModificator;
         _waveStateMachine.StateStarted -= TryToApplyModificator;
         _waveStateMachine.StateEnded -= TryRemoveModificator;
         RemoveModificator();

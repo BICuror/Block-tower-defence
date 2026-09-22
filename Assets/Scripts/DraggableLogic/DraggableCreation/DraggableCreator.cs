@@ -107,7 +107,7 @@ public sealed class DraggableCreator : MonoBehaviour
         
         selectedPosition = draggableObject.GetPlacementModule().GetPlacementPosition(selectedPosition, draggableObject.TileScale);
         
-        float height = draggableObject.GetPlacementModule().GetHeight(selectedPosition);
+        float height = draggableObject.GetPlacementModule().GetHeight(selectedPosition, draggableObject.TileScale);
 
         return new Vector3(selectedPosition.x, height, selectedPosition.y);
 

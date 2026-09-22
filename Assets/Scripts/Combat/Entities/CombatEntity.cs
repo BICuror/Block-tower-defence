@@ -11,7 +11,6 @@ namespace Combat
         private EntityValueModifierContainer _valueModifierContainer;
 
         public EntityValueModifierContainer ValueModifierContainer => _valueModifierContainer;
-        public DraggableObject Draggable => ComponentsContainer.Get<DraggableObject>();
         public EntityHealth Health => ComponentsContainer.Get<EntityHealth>();
 
         public event Action Activated;

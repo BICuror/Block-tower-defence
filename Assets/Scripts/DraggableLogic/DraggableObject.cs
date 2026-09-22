@@ -1,7 +1,8 @@
+using NaughtyAttributes;
 using UnityEngine;
 using System;
 
-[RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(BoxCollider))]
 
 public class DraggableObject : MonoBehaviour, IDraggable
 {
@@ -9,7 +10,12 @@ public class DraggableObject : MonoBehaviour, IDraggable
     [SerializeField] private DragAnimationObject _dragAnimationObject;
     [SerializeField] private PlacementModule _placementRequirements;
     [SerializeField] private bool _isDraggable = true;
-    private Collider _collider;
+
+    [Header("Collider")] 
+    [SerializeField] private bool _hasStaticYColliderScale;
+    [ShowIf("_hasStaticYColliderScale")] [SerializeField] private float _staticYColliderScale;
+    
+    private BoxCollider _collider;
     
     protected DraggableState DraggableState;
     
@@ -32,7 +38,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
     
     protected void Awake()
     {
-        _collider = GetComponent<Collider>();    
+        _collider = GetComponent<BoxCollider>();    
     }
     
     void IDraggable.PickUp()
@@ -55,7 +61,7 @@ public class DraggableObject : MonoBehaviour, IDraggable
 
     void IDraggable.OnDrag() => OnDrag?.Invoke();
     
-    public bool IsDraggable() => _isDraggable && DraggableState == DraggableState.Placed;
+    public virtual bool CanBeDragged() => _isDraggable && DraggableState == DraggableState.Placed;
     
     DragAnimationObject IDraggable.GetDragAnimationObject() => _dragAnimationObject;
     
@@ -67,6 +73,9 @@ public class DraggableObject : MonoBehaviour, IDraggable
     public void SetTileScale(int scale)
     {
         _tileScale = scale;
+        
+        if (_hasStaticYColliderScale) _collider.size = new Vector3(_tileScale, _staticYColliderScale, _tileScale);
+        else _collider.size = new Vector3(_tileScale, _tileScale, _tileScale);
         
         _dragAnimationObject.SetDefaultScale(_tileScale);
         

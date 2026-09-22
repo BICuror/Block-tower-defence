@@ -4,6 +4,8 @@ using System;
 public sealed class DragAnimationObject : MonoBehaviour
 {
     [SerializeField] private bool _returnToDefaultYRotation = false;
+    [SerializeField] private float _dragVerticalOffset = 1f;
+    [SerializeField] private float _mass = 5f;
     
     private float _defaultScale = 1f;
     private Transform _initialParent;
@@ -39,10 +41,10 @@ public sealed class DragAnimationObject : MonoBehaviour
     {
         Rigidbody rigidbody = gameObject.AddComponent<Rigidbody>();
         
-        transform.position = joint.transform.position - new Vector3(0f, MeshHeight, 0f);
+        transform.position = joint.transform.position - new Vector3(0f, _dragVerticalOffset, 0f);
 
         transform.parent = null;
-        rigidbody.mass = 5f;
+        rigidbody.mass = _mass;
         rigidbody.useGravity = true;
         rigidbody.constraints = RigidbodyConstraints.None; 
 

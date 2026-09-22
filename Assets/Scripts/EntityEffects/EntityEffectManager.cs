@@ -8,9 +8,9 @@ namespace Combat
 {
     public class EntityEffectManager : MonoBehaviour
     {
-        [Cached] private DraggableObject _draggableObject;
         [Cached] private CombatEntity _ownerEntity;
         [Cached] private EntityHealth _entityHealth;
+        [Cached(required: false)] private DraggableObject _draggableObject;
         private Dictionary<Type, EntityEffect> _appliedEffects = new();
         private Dictionary<Type, EntityEffectRemovalHandler> _removalHandlers = new();
         private List<Type> _effectImmunities = new();
@@ -18,7 +18,8 @@ namespace Combat
         public List<Type> AppliedEffectTypes => _appliedEffects.Keys.ToList();
         public Dictionary<Type, EntityEffect> AppliedEffects => _appliedEffects;
         
-        private bool EffectsCanBeApplied => _draggableObject.IsPlaced && _entityHealth.IsAlive();
+        private bool EffectsCanBeApplied => !EntityIsDragged && _entityHealth.IsAlive();
+        private bool EntityIsDragged => _draggableObject && !_draggableObject.IsPlaced;
         
         public Action<Type> EffectApplied;
         public Action<Type> EffectUpdated;
@@ -26,10 +27,8 @@ namespace Combat
         
         private void Start()
         {
-            DraggableObject draggableObject = _ownerEntity.ComponentsContainer.Get<DraggableObject>();
-            
             _ownerEntity.Health.Died += RemoveAllEffects;
-            draggableObject.PickedUp += RemoveAllEffects;
+            if (_draggableObject) _draggableObject.PickedUp += RemoveAllEffects;
         }
         
         public void AddEffectImmunity(Type effectType) => _effectImmunities.Add(effectType);
@@ -152,7 +151,7 @@ namespace Combat
         private void OnDestroy()
         {
             _ownerEntity.Health.Died -= RemoveAllEffects;
-            _draggableObject.PickedUp -= RemoveAllEffects;
+            if (_draggableObject) _draggableObject.PickedUp -= RemoveAllEffects;
         }
     }
 }

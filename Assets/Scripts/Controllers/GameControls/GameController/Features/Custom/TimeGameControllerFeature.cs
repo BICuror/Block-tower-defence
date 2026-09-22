@@ -6,11 +6,8 @@ namespace GameControls.Features
     public sealed class TimeGameControllerFeature : GameControllerFeature
     {
         [Inject] private TimeController _timeController;
-        
-        private const float DEFAULT_TIME_SCALE = 1f;
 
         private InputAction _toggleTimeAction;
-        private bool _speedUpTime;
 
         public override void Initialize()
         {

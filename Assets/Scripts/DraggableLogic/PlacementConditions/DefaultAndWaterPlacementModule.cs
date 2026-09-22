@@ -9,7 +9,7 @@ public sealed class DefaultAndWaterPlacementModule : PlacementModule
         return TileMap.DraggableCanBePlacedAccordingToScale(position, tileScale, LayerSettingType.WaterAndTerrain, LayerSettingType.SolidObjects);
     }
 
-    public override float GetHeight(Vector2 position)
+    public override float GetHeight(Vector2 position, int tileScale)
     {
         Vector2Int roundedPosition = Vector2Int.RoundToInt(position);
         

@@ -15,7 +15,6 @@ namespace Navigation
     {
         [Inject] private NavigationMapHolder _navigationMapHolder;
         [SerializeField] private Transform _rotationTarget;
-        [Cached] private DraggableEntity _draggableEntity;
         [Cached] private EntityHealth _entityHealth;
         [Cached] private Speed _speed;
         
@@ -32,20 +31,6 @@ namespace Navigation
         private NavigationNode _nextNode;
         private float _movementProgress;
         private bool _canMove;
-
-        private List<Vector2Int> _checkDirection = new List<Vector2Int>()
-        {
-            Vector2Int.down,
-            Vector2Int.left,
-            Vector2Int.right,
-            Vector2Int.up
-        };
-        
-        private void Start()
-        {
-            _draggableEntity.PickedUp += Disable;
-            _draggableEntity.Placed += Enable;
-        }
 
         public void Disable()
         {

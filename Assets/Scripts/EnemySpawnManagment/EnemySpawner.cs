@@ -32,21 +32,22 @@ namespace Combat
             if (_enemiesToSpawn.Count > 0) SpawnEnemy();
         }
         
-        public async UniTask SpawnGroup()
+        public async UniTask SpawnGroup(float spawnDelayMultiplier, float spawnPeriod = 0f)
         {
-            HideEnemySpawnInfo();
+            float elapsedTime = 0;
             
-            while (true)
+            while (spawnPeriod == 0 || elapsedTime <= spawnPeriod)
             {
                 TrySpawnEnemy();
-                
+                    
                 if (_enemiesToSpawn.Count > 0)
                 {
-                    float minimalSpawnDelay = Mathf.Min(_enemiesToSpawn[0].SpawnDelay, _previousSpawnDelay);
-
                     try
                     {
-                        await UniTask.WaitForSeconds(minimalSpawnDelay, cancellationToken: _cancellationTokenSource.Token);
+                        float spawnDelay = GetSpawnDelay() * spawnDelayMultiplier;
+                        elapsedTime += spawnDelay;
+                        
+                        await UniTask.WaitForSeconds(spawnDelay, cancellationToken: _cancellationTokenSource.Token);
                     }
                     catch (Exception e)
                     {
@@ -56,6 +57,11 @@ namespace Combat
                 }
                 else break;
             }
+        }
+
+        private float GetSpawnDelay()
+        {
+            return Mathf.Min(_enemiesToSpawn[0].SpawnDelay, _previousSpawnDelay);
         }
 
         public void StopSpawning()

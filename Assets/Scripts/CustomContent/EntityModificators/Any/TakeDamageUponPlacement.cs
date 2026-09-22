@@ -9,12 +9,12 @@ public sealed class TakeDamageUponPlacement : EntityModificator
     {
         _damagePercent = Args.GetArgument<float>("DamagePercent");
         
-        Entity.Draggable.Placed += DamageEntity;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed += DamageEntity;
     }
 
     public override void Disable()
     {
-        Entity.Draggable.Placed -= DamageEntity;
+        Entity.ComponentsContainer.Get<DraggableObject>().Placed -= DamageEntity;
     }
 
     private void DamageEntity()

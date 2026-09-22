@@ -21,6 +21,7 @@ namespace Combat
         
         private BuildingHealth _health;
 
+        public DraggableObject Draggable => ComponentsContainer.Get<DraggableObject>();
         public List<EntityModifcatorTag> DefaultBuildingTags => _defaultBuildingTags;
         public BuildingEntityType BuildingEntityType => _buildingEntityType;
         public BuildingAttackType BuildingAttackType => _buildingAttackType;
@@ -65,6 +66,7 @@ namespace Combat
             if (_leavesBuildingDestroyedObject)
             {
                 _currentDestroyedObject = Instantiate(_buildingDestroyedObjectPrefab, transform.position, transform.rotation);
+                _currentDestroyedObject.GetComponent<DraggableObject>().SetTileScale(Draggable.TileScale);
                 _currentDestroyedObject.SetEntity(this, _destroyOnDeath);
             }
 

@@ -11,6 +11,7 @@ namespace CuroAudio
         sound_ui_button_hover = 3,
         sound_ui_button_click = 4,
         sound_general_gameplay_placement = 5,
+        sound_general_gameplay_water_placement = 22,
         sound_general_gameplay_building_selection_complete = 6,
         sound_general_gameplay_building_upgrade_selection_complete = 7,
         sound_enemy_death = 8,

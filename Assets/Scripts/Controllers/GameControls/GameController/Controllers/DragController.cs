@@ -40,7 +40,7 @@ namespace GameControls.Controllers
                 if (rayInfo.collider.gameObject.TryGetComponent(out IDraggable draggable))
                 {
                     draggableObject = rayInfo.collider.gameObject;
-                    return draggable.IsDraggable();
+                    return draggable.CanBeDragged();
                 }
             }
     
@@ -179,10 +179,10 @@ namespace GameControls.Controllers
         {
             if (_currentIDraggable.GetPlacementModule())
             {
-                return _currentIDraggable.GetPlacementModule().GetHeight(position);
+                return _currentIDraggable.GetPlacementModule().GetHeight(position, _currentIDraggable.TileScale);
             }
             
-            return _defaultPlacementModule.GetHeight(position);      
+            return _defaultPlacementModule.GetHeight(position, _currentIDraggable.TileScale);      
         }
     
         private Vector2 GetPlacementPosition(Vector3 mousePosition)

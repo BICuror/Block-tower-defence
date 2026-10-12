@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace WorldGeneration
 {
     public sealed class IslandHeightMapHolder
@@ -6,6 +8,7 @@ namespace WorldGeneration
 
         public int[,] Map => _heightMap;
 
+        public int GetHeightSafe(Vector2Int position) => GetHeightSafe(position.x, position.y);
         public int GetHeightSafe(int x, int z)
         {
             if (x < 0 || z < 0) return 0;

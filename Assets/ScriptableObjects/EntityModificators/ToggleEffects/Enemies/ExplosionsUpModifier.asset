@@ -16,11 +16,16 @@ MonoBehaviour:
   _localizationKey: enemies_get_explosion_radius_up_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
-  _showInInspector: 1
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: EntityModificatorStatChange
     AllEffectTypeNames:
-    - ActivateWhenBuilt
     - AddIconEntityModificator
     - AOEMortarExplotion
     - ApplyEffectOnActivation
@@ -30,21 +35,36 @@ MonoBehaviour:
     - ApplyModificatorOnIdleStartRemoveUponPickup
     - ApplyModifierUntilPickUpEntityModifier
     - ApplyPermamentEntityEffect
+    - AttackAllEnemiesInAreaCycle
+    - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
-    - CreateBoosterTower
     - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
     - CustomParticleEntityModifier
     - DamageModifierEntityModificator
     - DealMoreDamageWhenMoreCrystalsSelected
+    - EntityModificatorGlobalStatChange
     - EntityModificatorStatChange
+    - EntityModificatorStatConvert
+    - EntityModificatorStatCreate
     - ExecuteEntitiesInArea
     - FasterCycleUntilKill
+    - GameObjectApplierEntityModificator
+    - GrantStatsToAllBuildingssOnDeathEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HealModifierEntityModificator
     - HeavyMortarCore
     - IncreaseBuildTimeEachBuilt
+    - InfernoDontResetChargeEntityModifier
     - InfernoExplodeOnFullCharge
     - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
     - LaunchArrowsOnKill
     - ModificatorObjectApplyerEntityModificator
     - MoreDamageNearbyWater
@@ -53,19 +73,25 @@ MonoBehaviour:
     - OnActivationInvokeTaskAndHurt
     - PiercingArrows
     - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
     - ScaleDamageWithHeight
     - ShieldEntityModificator
     - ShootOnKill
     - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
+    - ToggleReachAreaScaleEntityModificator
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 
   _rarity: 0
   _tags: 
-  _effectType: 0
   _hasStacks: 0
   _maxStacks: 0
+  _effectType: 0
+  _showInInspector: 1
   _hasRequiredTags: 0
-  _anyRequired: 0
   _reqiredOwnerTags:
     Requirements: []
   _reqiredOtherEntityTags:
@@ -75,6 +101,8 @@ MonoBehaviour:
     Requirements: []
   _blockOtherEntityTags:
     Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
   _statChanges:
   - StatData: {fileID: 11400000, guid: 948c0aba985132443b6586947bc84e64, type: 2}
     FlatChange: 5
@@ -82,3 +110,7 @@ MonoBehaviour:
   - StatData: {fileID: 11400000, guid: 22ef7112d2888a84dba118e783d42566, type: 2}
     FlatChange: 0.5
     MultiplierChange: 0
+  _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

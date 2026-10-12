@@ -25,8 +25,7 @@ public sealed class ArcherTower : DefaultCombatTaskConditionProvider
         base.Start();
         _arrowObjectPool = new WeaponPool<Arrow>(_arrowPrefab, 3, _ownerEntity,  _arrowLifetime);
         
-        foreach (Arrow arrow in _arrowObjectPool.Pool) { SubscribeToArrow(arrow); }
-        _arrowObjectPool.PoolObject.ObjectCreated += SubscribeToArrow;
+        _arrowObjectPool.SetWeaponCreatedDelegate(SubscribeToArrow);
         
         ArrowHitBehaviour.Initialize(_ownerEntity, new DisableArrow());
 

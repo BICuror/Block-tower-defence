@@ -4,62 +4,54 @@ using UnityEngine;
 using Cashing;
 using Zenject;
 using Combat;
+using Combat.Effects;
+using UnityEngine.Serialization;
 
 public sealed class EntityModificatorsContainer : MonoBehaviour
 {
-    private readonly ListDictionary<EntityModificatorData, List<EntityModificator>> _appliedModificators = new();
-    [SerializeField] private List<EntityModificatorData> _initialModificatorDatas;
-    [Inject] private EntityModificatorFactory _entityModificatorFactory;
+    private readonly ListDictionary<EntityModificatorData, Effect> _appliedEffects = new();
+    [FormerlySerializedAs("_initialModificatorDatas")] [SerializeField] private List<EntityModificatorData> _initialEffectConfigs;
+    [Inject] private EffectFactory _effectFactory;
     [Cached] private CombatEntity _ownerEntity;
         
-    public List<EntityModificatorData> AppliedModificators => _appliedModificators.GetAllKeys();
+    public List<EntityModificatorData> AppliedModificators => _appliedEffects.GetAllKeys();
 
     private async void Start()
     {
         await UniTask.WaitForFixedUpdate();
         
-        _initialModificatorDatas.ForEach(modificatorData =>
+        _initialEffectConfigs.ForEach(modificatorData =>
         {
-            AddModificator(modificatorData);
+            AddEffect(modificatorData);
         });   
     }
 
-    public int GetModificatorsAmount(EntityModificatorData modificatorData) => _appliedModificators.Get(modificatorData).Count;
+    public int GetEffectsAmount(EntityModificatorData modificatorData) => _appliedEffects.Get(modificatorData).Count;
     
-    public void AddModificator(EntityModificatorData modificatorData)
+    public void AddEffect(EntityModificatorData modificatorData)
     {
-        List<EntityModificator> modificators = _entityModificatorFactory.CreateEntityModificators(modificatorData);
-        
-        for (int i = 0; i < modificators.Count; i++)
+        if (_effectFactory.EffectCanBeApplied(modificatorData, _ownerEntity))
         {
-            modificators[i].SetEntity(_ownerEntity);
-            modificators[i].SetEntityModificatorData(modificatorData);
+            Effect effect = _effectFactory.CreateEntityModificator(modificatorData, _ownerEntity);
 
-            if (!modificators[i].CanBeApplied())
-            {
-                modificators.RemoveAt(i);
-                i--;
-                continue;
-            }
-                    
-            modificators[i].Enable();
+            _appliedEffects.Add(modificatorData, effect);
+            
+            effect.Enable().Forget();
         }
-
-        if (modificators.Count > 0) _appliedModificators.Add(modificatorData, modificators);
     }
 
     public bool Has(EntityModificatorData modificatorData)
     {
-        return _appliedModificators.GetAllKeys().Contains(modificatorData);
+        return _appliedEffects.GetAllKeys().Contains(modificatorData);
     }
     
     public void RemoveModificator(EntityModificatorData modificatorData)
     {
-        if (_appliedModificators.Contains(modificatorData))
+        if (_appliedEffects.Contains(modificatorData))
         {
-            List<EntityModificator> modificators = _appliedModificators.Remove(modificatorData);
-            
-            modificators.ForEach(modificator => modificator.Disable());
+            Effect effect = _appliedEffects.Remove(modificatorData);
+
+            effect.Disable();
         }
     }
 
@@ -67,9 +59,9 @@ public sealed class EntityModificatorsContainer : MonoBehaviour
     {
         List<EntityModifcatorTag> entityModifcatorTags = new();
         
-        _appliedModificators.GetAllKeys().ForEach(modificatorData =>
+        _appliedEffects.GetAllKeys().ForEach(modificatorData =>
         {
-            for (int i = 0; i < _appliedModificators.Get(modificatorData).Count; i++)
+            for (int i = 0; i < _appliedEffects.Get(modificatorData).Count; i++)
             {
                 modificatorData.Tags.ForEach(tag => entityModifcatorTags.Add(tag));
             }

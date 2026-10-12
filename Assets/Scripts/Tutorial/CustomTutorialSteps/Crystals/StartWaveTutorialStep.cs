@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Combat.Items;
 using UnityEngine;
 using Zenject;
 

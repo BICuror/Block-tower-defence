@@ -27,10 +27,193 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events:
+    - Name: Activation
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: d02c6d2bda19e664ebcfb5a50a1d9853, type: 2}
+      _commandEntries:
+      - Name: DealNonLethalDamageToSelf
+        _arguments:
+        - Name: DamageAmount
+          ArgumentType: 2
+          IntValue: 0
+          FloatValue: 4
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 0}
+          AudioEnumgValue: 0
+          StatDataValue: {fileID: 0}
+        _config: {fileID: 11400000, guid: 50a93782c93e3834c93e259ce3c589f6, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      - Name: InvokeAction
+        _arguments: []
+        _config: {fileID: 11400000, guid: 9481bba08a7563f439c5c3cef6bf06f0, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 1
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions:
+        - Name: '[E] MoreHealth'
+          _arguments:
+          - Name: Threshold
+            ArgumentType: 2
+            IntValue: 0
+            FloatValue: 4
+            GameObjectValue: {fileID: 0}
+            EntityModificatorDataValue: {fileID: 0}
+            BoolValue: 0
+            EntityEffectParticleHandlerValue: {fileID: 0}
+            EntityObjectModifierValue: {fileID: 0}
+            LayerSettingValue: {fileID: 0}
+            AdditionalEnemyGroupValue:
+              _amountMultiplier: 0
+              _groupParts: []
+            SpriteValue: {fileID: 0}
+            StringValue: 
+            StatusEffectConfigValue: {fileID: 0}
+            AudioEnumgValue: 0
+            StatDataValue: {fileID: 0}
+          _config: {fileID: 11400000, guid: df0c315739c77dd4bae90035b1811044, type: 2}
+        - Name: CanPerformTask
+          _arguments: []
+          _config: {fileID: 11400000, guid: de1abe27e33216c458974b93f68c88d5, type: 2}
+    - Name: '[F] OnHealthPercentChanged'
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 2cf27ad0870dca04baff4eb3d294832e, type: 2}
+      _commandEntries:
+      - Name: '[F] AbilityIcon SetAbilityIconValue'
+        _arguments: []
+        _config: {fileID: 11400000, guid: 6871ed6f23d59754e87f42220bcf9992, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions:
+        - Name: '[E] MoreHealth'
+          _arguments:
+          - Name: Threshold
+            ArgumentType: 2
+            IntValue: 0
+            FloatValue: 0
+            GameObjectValue: {fileID: 0}
+            EntityModificatorDataValue: {fileID: 0}
+            BoolValue: 0
+            EntityEffectParticleHandlerValue: {fileID: 0}
+            EntityObjectModifierValue: {fileID: 0}
+            LayerSettingValue: {fileID: 0}
+            AdditionalEnemyGroupValue:
+              _amountMultiplier: 0
+              _groupParts: []
+            SpriteValue: {fileID: 0}
+            StringValue: 
+            StatusEffectConfigValue: {fileID: 0}
+            AudioEnumgValue: 0
+            StatDataValue: {fileID: 0}
+          _config: {fileID: 11400000, guid: df0c315739c77dd4bae90035b1811044, type: 2}
+    _subDomains:
+    - Name: ActiveAbilityBar
+      _arguments:
+      - Name: BarSprite
+        ArgumentType: 10
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: -1809229495, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      - Name: ShowOnlyAtAttackState
+        ArgumentType: 5
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      - Name: DisableOnEmptyBar
+        ArgumentType: 5
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 1
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      - Name: InitialValue
+        ArgumentType: 2
+        IntValue: 0
+        FloatValue: 1
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      _config: {fileID: 11400000, guid: 1a2bc62137c19934bb614669ad078931, type: 2}
   _itemTypeContainers:
   - _itemTypeName: OnActivationInvokeTaskAndHurt
     AllEffectTypeNames:
@@ -87,6 +270,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -114,3 +298,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

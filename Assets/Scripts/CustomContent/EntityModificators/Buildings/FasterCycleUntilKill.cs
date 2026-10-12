@@ -1,4 +1,5 @@
 using Combat;
+using Combat.IngameUI;
 using Cysharp.Threading.Tasks;
 
 public sealed class FasterCycleUntilKill : EntityModificator

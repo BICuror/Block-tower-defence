@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Combat.EnemySpawnSystem;
+using Combat.Enemies;
 using Combat;
 
 namespace Tutorial.Custom
 {
     public sealed class EnemyInspectionTutorialStep : ProgressTutorialStep
     {
-        private List<EnemyData> _inspectedEnemyData = new();
+        private List<EnemyConfig> _inspectedEnemyData = new();
         
         public override async UniTask StartStep()
         {
@@ -24,11 +26,11 @@ namespace Tutorial.Custom
 
             if (entityTooltip.InspectedEntity is not EnemyEntity) return;
 
-            EnemyData enemyData = entityTooltip.InspectedEntity.ComponentsContainer.Get<EnemyBootstrap>().EnemyData;
+            EnemyConfig enemyConfig = entityTooltip.InspectedEntity.ComponentsContainer.Get<EnemyBootstrap>().EnemyConfig;
             
-            if (_inspectedEnemyData.Contains(enemyData)) return;
+            if (_inspectedEnemyData.Contains(enemyConfig)) return;
             
-            _inspectedEnemyData.Add(enemyData);
+            _inspectedEnemyData.Add(enemyConfig);
             
             SetProgress(_inspectedEnemyData.Count);
 

@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 8966701188442631870}
   - component: {fileID: 1832896965438921276}
   - component: {fileID: 5338315934051013164}
-  - component: {fileID: 1473540362893138095}
   - component: {fileID: 4796874414312455121}
   - component: {fileID: 7293058390722735774}
   - component: {fileID: 2069166974269113938}
@@ -185,31 +184,13 @@ MonoBehaviour:
   - StructName: MaxHealth
     _statData: {fileID: 11400000, guid: 41f71852b3791dd49bec27235deb0ffb, type: 2}
     _defaultValue: 15
-  - StructName: Speed
-    _statData: {fileID: 11400000, guid: 88a57a3c7a16ca241abdc99cfc33c832, type: 2}
-    _defaultValue: 0
   - StructName: SpawnDelay
     _statData: {fileID: 11400000, guid: aa9be83ed5e46a74ebc20381ba7a49d0, type: 2}
     _defaultValue: 5
   - StructName: ContactDamage
     _statData: {fileID: 11400000, guid: b0b8cf4c21a3df147bf6418760120b2f, type: 2}
     _defaultValue: 1
-  _shouldDestoryOnDeath: 1
---- !u!114 &1473540362893138095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2935730226360874662}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a6137a6b8c2984a84336ed4b36dde9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dragAnimationObject: {fileID: 3044245853541137609}
-  _placementRequirements: {fileID: 11400000, guid: ed0b37b53241cdb4487b3177528ef075, type: 2}
-  _isDraggable: 0
+  _deathHandleHandleMethod: 2
 --- !u!114 &4796874414312455121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _pauseOnInspection: 1
   _canBeIdleInspected: 0
+  _idleInspectionDelay: 0.4
   _localizationKey: egg_enemy_entity_tooltip
 --- !u!114 &2741087370764162865
 MonoBehaviour:
@@ -261,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3837b236e993244e922495d3c287a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _initialModificatorDatas: []
+  _initialEffectConfigs: []
 --- !u!114 &9071622223124352225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,6 +432,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _returnToDefaultYRotation: 1
+  _dragVerticalOffset: 1
+  _mass: 5
 --- !u!1001 &9020206849579197724
 PrefabInstance:
   m_ObjectHideFlags: 0

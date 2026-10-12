@@ -15,7 +15,7 @@ public sealed class ObjectPool<T> where T : Component
     private DiContainer _diContainer;
     private Predicate<T> _isFreeElement;
     
-    public Action<T> ObjectCreated;
+    private Action<T> _onObjectCreated;
 
     public IReadOnlyList<T> Pool => _pool;
     
@@ -32,6 +32,18 @@ public sealed class ObjectPool<T> where T : Component
         _container.gameObject.name = GetType().ToString();
         
         InstantiatePool(poolSize);
+    }
+
+    public void SetObjectCreatedDelegate(Action<T> onObjectCreated)
+    {
+        if (_onObjectCreated != null) throw new Exception("OnObjectCreated is already set");
+        
+        _onObjectCreated = onObjectCreated;
+
+        foreach (T poolObject in _pool)
+        {
+            _onObjectCreated.Invoke(poolObject);
+        }
     }
 
     private void InstantiatePool(int poolSize)
@@ -116,7 +128,7 @@ public sealed class ObjectPool<T> where T : Component
         
         if (_diContainer != null) _diContainer.Inject(pooledObject);
         
-        ObjectCreated?.Invoke(pooledObject);
+        _onObjectCreated?.Invoke(pooledObject);
         
         return pooledObject;
     }

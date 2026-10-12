@@ -1,12 +1,15 @@
 using UnityEngine;
 
-[RequireComponent(typeof(TaskCycle))]
-
-public sealed class TaskCycleShaker : Shaker
+namespace Combat.Animation
 {
-    private void Awake()
+    [RequireComponent(typeof(TaskCycle))]
+    
+    public sealed class TaskCycleShaker : Shaker
     {
-        Initialize();
-        GetComponent<TaskCycle>().TaskPerformed += Shake;
+        private void Awake()
+        {
+            Initialize();
+            GetComponent<TaskCycle>().TaskPerformed += Shake;
+        }
     }
 }

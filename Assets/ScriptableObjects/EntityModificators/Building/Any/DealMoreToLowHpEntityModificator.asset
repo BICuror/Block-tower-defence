@@ -27,10 +27,11 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 5
       _argumentName: IsDealerDamageModifier
       _intArgument: 0
@@ -42,10 +43,11 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: Multiplier
       _intArgument: 0
@@ -57,10 +59,11 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: Threshold
       _intArgument: 0
@@ -72,10 +75,18 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: DamageModifierEntityModificator
     AllEffectTypeNames:
@@ -132,6 +143,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -157,3 +169,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

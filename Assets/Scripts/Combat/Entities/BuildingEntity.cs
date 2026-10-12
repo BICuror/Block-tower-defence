@@ -1,21 +1,24 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;
+using Zenject;
 using System;
-using System.Collections.Generic;
 
 namespace Combat
 {
     public sealed class BuildingEntity : CombatEntity
     {
+        [Inject] private WaveStateMachine _waveStateMachine;
+         
         [Header("Data")]
         [SerializeField] private List<EntityModifcatorTag> _defaultBuildingTags;
         [SerializeField] private BuildingEntityType _buildingEntityType;
         [SerializeField] private BuildingAttackType _buildingAttackType; 
         
         [Header("DestroyedObject")]
-        [SerializeField] private bool _destroyOnDeath;
         [SerializeField] private bool _leavesBuildingDestroyedObject = true;
+        [ShowIf("_leavesBuildingDestroyedObject")] [SerializeField] private bool _leavesDestroyedObjectInIdleState = true;
         [ShowIf("_leavesBuildingDestroyedObject")] [SerializeField] private BuildingDestroyedObject _buildingDestroyedObjectPrefab;
         private BuildingDestroyedObject _currentDestroyedObject;
         
@@ -25,7 +28,6 @@ namespace Combat
         public List<EntityModifcatorTag> DefaultBuildingTags => _defaultBuildingTags;
         public BuildingEntityType BuildingEntityType => _buildingEntityType;
         public BuildingAttackType BuildingAttackType => _buildingAttackType;
-        public bool IsDestroyedOnDeath => _destroyOnDeath;
         public BuildingHealth BuildingHealth => _health;
         
         public event Action<BuildingEntity> BuildingRevived;
@@ -41,7 +43,6 @@ namespace Combat
             InjectCached(_health);
             _health.Initialize();
             _health.RefilHP();
-            _health.HandleDeath += HandleDeathEvent;
         }
         
         public async UniTask ReviveBuilding()
@@ -59,18 +60,16 @@ namespace Combat
             BuildingRevived?.Invoke(this);
         }
 
-        private void HandleDeathEvent()
+        protected override void OnHandleDeath()
         {
-            gameObject.SetActive(false);
-
             if (_leavesBuildingDestroyedObject)
             {
+                if (!_leavesDestroyedObjectInIdleState && _waveStateMachine.CurrentState == WaveState.Idle) return;
+                
                 _currentDestroyedObject = Instantiate(_buildingDestroyedObjectPrefab, transform.position, transform.rotation);
                 _currentDestroyedObject.GetComponent<DraggableObject>().SetTileScale(Draggable.TileScale);
-                _currentDestroyedObject.SetEntity(this, _destroyOnDeath);
+                _currentDestroyedObject.SetEntity(this, DeathHandleMethod == EntityDeathHandleMethod.Destroy);
             }
-
-            if (_destroyOnDeath) Destroy(gameObject);
         }
     }
 }

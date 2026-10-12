@@ -18,7 +18,7 @@ public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
     
     public override void ApplySelectedEffect()
     {
-        _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_modificatorData);
+        _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_modificatorData);
     }
     
     public override void OnObjectCreationCompleted()

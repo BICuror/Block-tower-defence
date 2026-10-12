@@ -30,6 +30,8 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 0
       _argumentName: ArrowsPerKill
       _intArgument: 7
@@ -44,6 +46,8 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: ProjectileSpeed
       _intArgument: 5
@@ -58,6 +62,8 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: DelayBetweenShots
       _intArgument: 5
@@ -72,6 +78,15 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: LaunchArrowsOnKill
     AllEffectTypeNames:
@@ -87,7 +102,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -129,6 +143,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -154,3 +169,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

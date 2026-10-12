@@ -6,8 +6,6 @@ namespace Combat
     
     public sealed class EnemyEntity : CombatEntity
     {
-        [SerializeField] private bool _shouldDestoryOnDeath;
-        
         private EnemyHealth _health;
         
         public EnemyHealth EnemyHealth => _health;
@@ -20,14 +18,6 @@ namespace Combat
             base.Awake();
             InjectCached(_health);
             _health.Initialize();
-            _health.HandleDeath += HandleDeathEvent;
-        }
-        
-        private void HandleDeathEvent()
-        {
-            gameObject.SetActive(false);
-            
-            if (_shouldDestoryOnDeath) Destroy(gameObject);
         }
     }
 }

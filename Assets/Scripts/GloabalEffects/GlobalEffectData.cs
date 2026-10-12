@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Configs;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -6,7 +7,18 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(fileName = "GlobalEffectData", menuName = "Effects/GlobalEffectData")]
 
 public class GlobalEffectData : InspectableData
-{
+{    
+    [SerializeField] private DomainConfig _domainConfig;
+    
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    
     [Header("Effect")]
     [SerializeField] private List<InstanceItemTypeContainer> _instanceItemTypeContainers;
     
@@ -34,6 +46,8 @@ public class GlobalEffectData : InspectableData
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private EntityModifierTagRequirementsContainer _blockBuildingsTags;
     [AllowNesting] [ShowIf("_hasBlockTags")] [SerializeField] private GlobalEffectTagRequirementContainer _blockGlobalEffectTags;
     
+    public DomainConfig DomainConfig => _domainConfig;
+    
     public List<InstanceItemTypeContainer> InstanceItemTypeContainers => _instanceItemTypeContainers;
     public EffectAppearanceConditionData EffectAppearanceCondition => _effectAppearanceCondition;
     public ArgumentsContainer EffectAppearanceConditionArgumentsContainer => _effectAppearanceConditionArgumentsContainer;
@@ -55,6 +69,15 @@ public class GlobalEffectData : InspectableData
     public void SetItemTypeNames(List<string> itemTypeNames)
     {
         _instanceItemTypeContainers.ForEach(itemTypeContainer => itemTypeContainer.AllEffectTypeNames = itemTypeNames);
+    }
+    
+    protected override IEnumerable<INonScriptableObjectUpdatable> GetAllNonScriptableObjectUpdatables()
+    {
+        List<INonScriptableObjectUpdatable> updatables = new();
+        
+        updatables.AddRange(_domainConfig.GetAllUpdatables());
+
+        return updatables;
     }
 }
 

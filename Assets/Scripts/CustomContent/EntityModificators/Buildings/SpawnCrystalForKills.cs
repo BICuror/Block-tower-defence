@@ -1,5 +1,6 @@
 using Zenject;
 using Combat;
+using Combat.Items;
 
 public sealed class SpawnCrystalForKills : EntityModificator
 {

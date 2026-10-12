@@ -30,6 +30,15 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: ExecuteEntitiesInArea
     AllEffectTypeNames:
@@ -45,8 +54,9 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
     - CreateBombsAtWaveStart
     - CreateEggOnDeath
     - CreateHealingOrbsOnKill
@@ -85,6 +95,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -110,3 +121,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

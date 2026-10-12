@@ -1,3 +1,4 @@
+using Combat.Items;
 using UnityEngine;
 using Zenject;
 

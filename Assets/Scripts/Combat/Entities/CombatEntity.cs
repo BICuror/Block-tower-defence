@@ -1,15 +1,20 @@
+using Cysharp.Threading.Tasks;
+using UnityEngine;
 using Cashing;
 using System;
-using Cysharp.Threading.Tasks;
 
 namespace Combat
 {
     public abstract class CombatEntity : EntityComponentCacher, IActivatable
     {
         private const float INVANURABILITY_PERIOD = 0.3f;
+
+        [Header("DeathLogic")] 
+        [SerializeField] private EntityDeathHandleMethod _deathHandleHandleMethod = EntityDeathHandleMethod.Disable;
         
         private EntityValueModifierContainer _valueModifierContainer;
 
+        public EntityDeathHandleMethod DeathHandleMethod => _deathHandleHandleMethod;
         public EntityValueModifierContainer ValueModifierContainer => _valueModifierContainer;
         public EntityHealth Health => ComponentsContainer.Get<EntityHealth>();
 
@@ -20,6 +25,8 @@ namespace Combat
             base.Awake();
             
             _valueModifierContainer = new EntityValueModifierContainer(this);
+            
+            Health.HandleDeath += HandleDeath;
         }
         
         public void Activate() => Activated?.Invoke();
@@ -47,5 +54,34 @@ namespace Combat
         
             Health.InvulnerabilityTokenContainer.RemoveToken();
         }
+
+        private void HandleDeath()
+        {
+            switch (_deathHandleHandleMethod)
+            {
+                case EntityDeathHandleMethod.Disable:
+                {
+                    gameObject.SetActive(false); 
+                } break;
+                case EntityDeathHandleMethod.Destroy:
+                {
+                    Destroy(gameObject);
+                    
+                    Health.HandleDeath -= HandleDeath;
+                } break;
+                case EntityDeathHandleMethod.None: break;
+            }
+
+            OnHandleDeath();
+        }
+
+        protected virtual void OnHandleDeath() {}
+    }
+
+    public enum EntityDeathHandleMethod
+    {
+        None,
+        Disable,
+        Destroy,
     }
 }

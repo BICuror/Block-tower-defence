@@ -25,15 +25,6 @@ public sealed class GlobalEffectFactory
         }
     }
     
-    public List<GlobalEffect> CreateEffects(List<GlobalEffectData> effectDatas)
-    {
-        List<GlobalEffect> resultEffectList = new();
-        
-        effectDatas.ForEach(effectData => resultEffectList.AddRange(CreateEffects(effectData)));
-
-        return resultEffectList;
-    }
-    
     public List<GlobalEffect> CreateEffects(GlobalEffectData globalEffectData)
     {
         List<GlobalEffect> effects = new();

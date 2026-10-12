@@ -16,6 +16,20 @@ public static class VectorUtilities
         return resultVector;
     }
     
+    public static Vector3Int ToVector3Int(this Vector2Int vector, int height)
+    {
+        Vector3Int resultVector = new Vector3Int(vector.x, height, vector.y);
+        
+        return resultVector;
+    }
+    
+    public static Vector3 ToVector3(this Vector2Int vector, int height)
+    {
+        Vector3 resultVector = new Vector3Int(vector.x, height, vector.y);
+        
+        return resultVector;
+    }
+    
     public static Vector2Int ToIntVector(this Vector2 vector)
     {
         Vector2Int newVector2Int = new Vector2Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y));

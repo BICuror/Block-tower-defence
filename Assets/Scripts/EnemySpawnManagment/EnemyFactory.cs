@@ -1,7 +1,8 @@
+using Combat.Enemies;
 using UnityEngine;
 using Zenject;
 
-namespace Combat
+namespace Combat.EnemySpawnSystem
 {
     public sealed class EnemyFactory : MonoBehaviour
     {
@@ -21,13 +22,13 @@ namespace Combat
             _enemyPool = new ObjectPool<EnemyEntity>(_blankEnemy, 10);
         }
     
-        public EnemyEntity CreateEnemy(EnemyData enemyDataToCreate, Vector3 spawnPosition)
+        public EnemyEntity CreateEnemy(EnemyConfig enemyConfigToCreate, Vector3 spawnPosition)
         {
             EnemyEntity newEnemy = _enemyPool.GetNextPooledObject();
             
             newEnemy.transform.position = spawnPosition;
             
-            newEnemy.ComponentsContainer.Get<EnemyBootstrap>().SetEnemyData(enemyDataToCreate);
+            newEnemy.ComponentsContainer.Get<EnemyBootstrap>().SetEnemyConfig(enemyConfigToCreate);
     
             _globalEnemyContainer.Add(newEnemy);
             

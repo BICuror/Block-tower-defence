@@ -1,4 +1,5 @@
 using Combat;
+using Combat.IngameUI;
 
 public abstract class EntityModificator
 {

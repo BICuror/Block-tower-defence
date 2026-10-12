@@ -16,6 +16,13 @@ MonoBehaviour:
   _localizationKey: attack_enemies_in_area_on_taking_damage_entity_modificator_tooltip
   _argumentsContainer:
     _argumentItems: []
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: AttackAllEnemiesInAreaEntityModificator
     AllEffectTypeNames:
@@ -72,6 +79,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -99,3 +107,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

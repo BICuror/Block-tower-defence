@@ -6,16 +6,16 @@ using DG.Tweening;
 using UnityEngine;
 using Zenject;
 using System;
-
+using Combat.EnemySpawnSystem;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 public class SpawnObjectsToggleEffect : GlobalEffect
 {
+    [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     [Inject] private IslandHeightMapHolder _islandHeightMapHolder;
     [Inject] private IslandDataContainer _islandDataContainer;
     [Inject] private RoadMapHolder _roadMapHolder;
-    [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
     
     private CancellationTokenSource _cancellationTokenSource = new();
     private bool _isInitialized;

@@ -18,6 +18,7 @@ namespace Combat
         public event Action Healed;
         public event Action Died;
         public event Action HandleDeath;
+        public event Action<float> DamageReceived;
         public event Action<CombatEntity> EntityDamaged;
         public event Action<CombatEntity> EntityDied; 
         
@@ -45,10 +46,10 @@ namespace Combat
         #region DamageRecivement 
         public void ReceiveEffectDamage(float damage, DamageVisualsType damageVisualsType)
         {
-            if (damage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
+            if (!IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
             ReceiveDamage(damage, damageVisualsType);
-            OnDamageTaken();
+            OnDamageTaken(damage);
         }
 
         public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
@@ -57,9 +58,12 @@ namespace Combat
             
             float resultDamage = _entity.ValueModifierContainer.DamageReceiverContainer.ModifyByAllModificators(outDamage, damageDealer);
             
-            if (resultDamage <= 0 || !IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
+            if (!IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
             
             ReceiveDamage(resultDamage, DamageVisualsType.Damage);
+            
+            damageDealer.ValueModifierContainer.InvokeOnEnemyHit(_entity);
+            damageDealer.ValueModifierContainer.InvokeOnDamageDealt(resultDamage);
             
             if (!IsAlive())
             {
@@ -67,7 +71,7 @@ namespace Combat
                 _entity.ValueModifierContainer.InvokeOnDeathEffects(damageDealer);
             }
             
-            OnDamageTaken();
+            OnDamageTaken(resultDamage);
         }
 
         private void ReceiveDamage(float damage, DamageVisualsType damageVisualsType)
@@ -77,13 +81,14 @@ namespace Combat
             DamageNumberDisplayManager.Instance.DisplayDamageNumber(damage, _entity.transform.position, damageVisualsType);
         }
 
-        private void OnDamageTaken()
+        private void OnDamageTaken(float damage)
         {
             if (!IsAlive()) Die();
             else
             {
                 EntityDamaged?.Invoke(_entity);
                 Damaged?.Invoke();
+                DamageReceived?.Invoke(damage);
             }
         }
         #endregion
@@ -122,5 +127,5 @@ namespace Combat
         }
 
         protected abstract void InvokeEntityDied();
-    }   
+    }
 }

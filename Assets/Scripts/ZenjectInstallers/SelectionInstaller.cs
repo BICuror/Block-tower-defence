@@ -1,3 +1,4 @@
+using Combat.UpgradeCharges;
 using UnityEngine;
 using Zenject;
 
@@ -11,6 +12,6 @@ public sealed class SelectionInstaller : MonoInstaller
         Container.Bind<UpgradeChargeContainer>().FromInstance(_upgradeChargeContainer).AsSingle();
         Container.Bind<SelectionManager>().FromInstance(_selectionManager).AsSingle();
         Container.Bind<GlobalEffectFactory>().AsSingle();
-        Container.Bind<EntityModificatorFactory>().AsSingle();
+        Container.Bind<EffectFactory>().AsSingle();
     }
 }

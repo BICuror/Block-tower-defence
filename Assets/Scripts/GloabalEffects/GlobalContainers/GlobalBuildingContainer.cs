@@ -51,7 +51,7 @@ public sealed class GlobalBuildingContainer
         _globalBuildingEntities.Remove(buildingEntity);
         BuildingRemoved?.Invoke(buildingEntity);
         
-        if (!buildingEntity.IsDestroyedOnDeath) buildingEntity.BuildingRevived += ReturnBuildingToPool;
+        if (buildingEntity.DeathHandleMethod != EntityDeathHandleMethod.Destroy) buildingEntity.BuildingRevived += ReturnBuildingToPool;
     }
 
     private void ReturnBuildingToPool(BuildingEntity buildingEntity)

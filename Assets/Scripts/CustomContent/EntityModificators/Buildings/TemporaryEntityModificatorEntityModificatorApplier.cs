@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Combat.UpgradeCharges;
 using Zenject;
 
 public sealed class TemporaryEntityModificatorEntityModificatorApplier : EntityModificator
@@ -11,7 +12,7 @@ public sealed class TemporaryEntityModificatorEntityModificatorApplier : EntityM
     {
         _wavesLeft = Args.GetArgument<int>("WavesDuration");
         
-        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(Args.GetArgument<EntityModificatorData>("EntityModificator"));
+        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(Args.GetArgument<EntityModificatorData>("EntityModificator"));
         
         _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted += TryRemoveModificator;
     }
@@ -22,7 +23,7 @@ public sealed class TemporaryEntityModificatorEntityModificatorApplier : EntityM
         
         _waveStateMachine.GetWaveStateController(WaveState.Idle).EnteredStateStarted -= TryRemoveModificator;
 
-        _upgradeChargeContainer.AddChargesWithAnimation(Args.GetArgument<int>("UpgradeChargesAmount"), Entity.transform).Forget();
+        _upgradeChargeContainer.AddCharge(Entity.transform, Args.GetArgument<int>("UpgradeChargesAmount")).Forget();
     }
 
     private void TryRemoveModificator()

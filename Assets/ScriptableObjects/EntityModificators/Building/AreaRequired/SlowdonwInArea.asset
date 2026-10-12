@@ -30,6 +30,8 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 4
       _argumentName: EffectTypeName
       _intArgument: 0
@@ -44,6 +46,8 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 0
       _argumentName: EffectStacks
       _intArgument: 1
@@ -58,6 +62,117 @@ MonoBehaviour:
       _additionalEnemyGroupData:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events:
+    - Name: '[E] OnEntityEnterMainArea'
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 32f2b802ad2457e448afe78028d5acf8, type: 2}
+      _commandEntries:
+      - Name: '[E] ApplyStatusEffectPermament'
+        _arguments:
+        - Name: EffectData
+          ArgumentType: 12
+          IntValue: 0
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 11400000, guid: 57cc7125de655224d85ee877b5d528be, type: 2}
+          AudioEnumgValue: 0
+          StatDataValue: 0
+        - Name: Stacks
+          ArgumentType: 1
+          IntValue: 1
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 0}
+          AudioEnumgValue: 0
+          StatDataValue: 0
+        _config: {fileID: 11400000, guid: 52c8efcacc1b8684b9de8378a3397de2, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    - Name: '[E] OnEntityExitMainArea'
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 1bf68fcf3371cab438659834821be4a0, type: 2}
+      _commandEntries:
+      - Name: RemoveStatusEffectStacks
+        _arguments:
+        - Name: EffectData
+          ArgumentType: 12
+          IntValue: 0
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 11400000, guid: 57cc7125de655224d85ee877b5d528be, type: 2}
+          AudioEnumgValue: 0
+          StatDataValue: 0
+        - Name: Stacks
+          ArgumentType: 1
+          IntValue: 1
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 0}
+          AudioEnumgValue: 0
+          StatDataValue: 0
+        _config: {fileID: 11400000, guid: fbad50d59e15138428ed74793a912bad, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -73,7 +188,6 @@ MonoBehaviour:
     - AttackAllEnemiesInAreaCycle
     - AttackAllEnemiesInAreaEntityModificator
     - BombsLeaveBlockTowers
-    - ChangeStatPerEntityInArea
     - ConvertMarkedEnemiesIntoRockOnKill
     - CreateAOEOnBuild
     - CreateAOEOnKill
@@ -115,6 +229,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -140,3 +255,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

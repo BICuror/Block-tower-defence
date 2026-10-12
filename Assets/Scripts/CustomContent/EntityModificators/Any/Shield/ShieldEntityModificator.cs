@@ -1,6 +1,7 @@
 using Zenject;
 using System;
 using Combat;
+using Combat.IngameUI;
 using CuroAudio;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

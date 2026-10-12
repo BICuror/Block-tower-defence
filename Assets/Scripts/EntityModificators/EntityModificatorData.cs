@@ -1,11 +1,25 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using System.Linq;
+using Configs;
 
 [CreateAssetMenu(fileName = "EntityModificatorData", menuName = "EntityModificators/EntityModificatorData")]
 
 public class EntityModificatorData : InspectableData
 {
+    [SerializeField] private ConditionalExecutionEntry _canBeAppliedConditionContainer;
+    [SerializeField] private DomainConfig _domainConfig;
+    
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    [Space]
+    
     [Space] [Header("GlobalEffectData")]
     [SerializeField] private List<InstanceItemTypeContainer> _itemTypeContainers;
 
@@ -43,6 +57,9 @@ public class EntityModificatorData : InspectableData
     [SerializeField] private List<StatChange> _statChanges;
     [SerializeField] private List<StatInitializer> _statInitializers;
 
+    public ConditionalExecutionEntry CanBeAppliedConditionContainer;
+    public DomainConfig DomainConfig => _domainConfig;
+    
     public List<InstanceItemTypeContainer> ItemTypeContainers => _itemTypeContainers;
     public bool BuildingTagsInclude => _tagsInclude;
     public List<BuildingEntityType> BuildingEntityTypeTags => _buildingEntityTypeTags;
@@ -66,6 +83,16 @@ public class EntityModificatorData : InspectableData
     public void SetItemTypeNames(List<string> itemTypeNames)
     {
         _itemTypeContainers.ForEach(itemTypeContainer => itemTypeContainer.AllEffectTypeNames = itemTypeNames);
+    }
+
+    protected override IEnumerable<INonScriptableObjectUpdatable> GetAllNonScriptableObjectUpdatables()
+    {
+        List<INonScriptableObjectUpdatable> updatables = new();
+        
+        updatables.AddRange(_domainConfig.GetAllUpdatables());
+        updatables.AddRange(_canBeAppliedConditionContainer.GetAllUpdatables());
+
+        return updatables;
     }
 }
 

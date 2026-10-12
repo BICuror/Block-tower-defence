@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using System;
+using Combat.EnemySpawnSystem;
+using UnityEngine.Serialization;
 
 [Serializable] public sealed class ArgumentsContainer
 {
@@ -46,8 +48,9 @@ using System;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityEffectParticleHandler)] [SerializeField] private EntityEffectParticleHandler _entityEffectParticleHandler;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityObjectModifier)] [SerializeField] private EntityObjectModifier _entityObjectModifierPrefab;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.LayerSetting)] [SerializeField] private LayerSetting _layerSetting;
-    [AllowNesting] [ShowIf("_argumentType", ArgumentType.AdditionalEnemyGroup)] [SerializeField] private AdditionalEnemyGroupData _additionalEnemyGroupData;
+    [FormerlySerializedAs("_additionalEnemyGroupData")] [AllowNesting] [ShowIf("_argumentType", ArgumentType.AdditionalEnemyGroup)] [SerializeField] private AdditionalEnemyGroupDataConfig _additionalEnemyGroupDataConfig;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.Sprite)] [SerializeField] private Sprite _sprite;
+    [AllowNesting] [ShowIf("_argumentType", ArgumentType.StatData)] [SerializeField] private StatData _statData;
     
     public string ArgumentName => _argumentName;
     public ArgumentType ArgumentType => _argumentType;
@@ -65,8 +68,9 @@ using System;
             case ArgumentType.EntityEffectParticleHandler: return _entityEffectParticleHandler;
             case ArgumentType.EntityObjectModifier: return _entityObjectModifierPrefab;
             case ArgumentType.LayerSetting: return _layerSetting;
-            case ArgumentType.AdditionalEnemyGroup: return _additionalEnemyGroupData;
+            case ArgumentType.AdditionalEnemyGroup: return _additionalEnemyGroupDataConfig;
             case ArgumentType.Sprite: return _sprite;
+            case ArgumentType.StatData: return _statData;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }
@@ -85,4 +89,5 @@ public enum ArgumentType
     LayerSetting = 8,
     AdditionalEnemyGroup = 9,
     Sprite = 10,
+    StatData = 11,
 }

@@ -36,9 +36,7 @@ namespace WorldGeneration
             
             biome.SetCenterPosition(spawnerPosition);    
 
-            biome.SetSpawnerNodeIndex(spawnerNodeIndex);    
-
-            biome.Initialize();
+            biome.SetSpawnerNodeIndex(spawnerNodeIndex);
 
             _enemyBiomeContainer.AddBiome(biome);
         }

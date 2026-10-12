@@ -1,13 +1,14 @@
-using Zenject;
+using Combat.OptionalTasks;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Zenject;
 
-public class OptionalTaskSystemInstaller : MonoInstaller
+public sealed class OptionalTaskSystemInstaller : MonoInstaller
 {
-    [FormerlySerializedAs("_optionalTaskGenerator")] [SerializeField] private OptionalTaskManager optionalTaskManager;
-
+    [SerializeField] private OptionalTaskGenerationController _optionalTaskGenerationController;
+    
     public override void InstallBindings()
     {
-        Container.Bind<OptionalTaskManager>().FromInstance(optionalTaskManager).AsSingle().NonLazy();
+        Container.Bind<OptionalTaskGenerationController>().FromInstance(_optionalTaskGenerationController).AsSingle().NonLazy();
+        Container.Bind<OptionalTaskObjectsManager>().AsSingle().NonLazy();
     }
 }

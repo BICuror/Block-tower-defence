@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.OptionalTasks;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +8,7 @@ namespace Navigation
     public class NavigationMapGenerator : MonoBehaviour
     {
         [Inject] private NavigationNodeMapGenerator _navigationNodeMapGenerator;
-        [Inject] private OptionalTaskManager _optionalTaskManager;
+        [Inject] private OptionalTaskGenerationController _optionalTaskGenerationController;
         [Inject] private NavigationMapHolder _navigationMapHolder;
         [Inject] private IslandDataContainer _islandDataContainer;
         [Inject] private NavigationMapper _navigationMapper;
@@ -37,9 +38,9 @@ namespace Navigation
         
         private void GenerateOptionalNavigationLayer()
         {
-            for (int i = 0; i < _optionalTaskManager.LayerPrebuildDatas.Count; i++)
+            for (int i = 0; i < _optionalTaskGenerationController.LayerPrebuildDatas.Count; i++)
             {
-                CreateLayer(_optionalTaskManager.LayerPrebuildDatas[i].Position, NavigationMapLayerType.AdditionalTask).SetNavigationCondition(_optionalTaskManager.LayerPrebuildDatas[i].NavigationCondition);
+                CreateLayer(_optionalTaskGenerationController.LayerPrebuildDatas[i].Position, NavigationMapLayerType.AdditionalTask).SetNavigationCondition(_optionalTaskGenerationController.LayerPrebuildDatas[i].NavigationCondition);
             }
         }
 

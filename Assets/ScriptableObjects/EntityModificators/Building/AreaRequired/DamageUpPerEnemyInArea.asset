@@ -31,6 +31,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 4
       _argumentName: StatTypeName
       _intArgument: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: FlatChangePerEntity
       _intArgument: 0
@@ -61,6 +63,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: FlatChangeMax
       _intArgument: 0
@@ -76,6 +79,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 10
       _argumentName: HasEntitiesInAreaIcon
       _intArgument: 0
@@ -91,6 +95,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+      _statData: {fileID: 0}
     - _argumentType: 5
       _argumentName: DisplayValueWithIcon
       _intArgument: 0
@@ -106,6 +111,262 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events:
+    - Name: '[E] OnEntityEnterMainArea'
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 32f2b802ad2457e448afe78028d5acf8, type: 2}
+      _commandEntries:
+      - Name: ChangeStacks
+        _arguments:
+        - Name: StacksChangeValue
+          ArgumentType: 1
+          IntValue: 1
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 0}
+          AudioEnumgValue: 0
+          StatDataValue: {fileID: 0}
+        _config: {fileID: 11400000, guid: dd501aa75d1120049a24565bd9053c8f, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    - Name: '[E] OnEntityExitMainArea'
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 1bf68fcf3371cab438659834821be4a0, type: 2}
+      _commandEntries:
+      - Name: ChangeStacks
+        _arguments:
+        - Name: StacksChangeValue
+          ArgumentType: 1
+          IntValue: -1
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 0}
+          AudioEnumgValue: 0
+          StatDataValue: {fileID: 0}
+        _config: {fileID: 11400000, guid: dd501aa75d1120049a24565bd9053c8f, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    - Name: '[I] OnStacksChanged'
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 2a0b2149bdbe38043818b5f8e32f4cdf, type: 2}
+      _commandEntries:
+      - Name: '[I] SetStackableStatChangeStacks'
+        _arguments: []
+        _config: {fileID: 11400000, guid: 41a01c6929445a84088a492232638279, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      - Name: '[I] SetIconValue'
+        _arguments: []
+        _config: {fileID: 11400000, guid: 501226392811bb44f81f16dd09b72c5c, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      - Name: Debug
+        _arguments:
+        - Name: Message
+          ArgumentType: 11
+          IntValue: 0
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          BoolValue: 0
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: "\u0449\u0449\u0449"
+          StatusEffectConfigValue: {fileID: 0}
+          AudioEnumgValue: 0
+          StatDataValue: {fileID: 0}
+        _config: {fileID: 11400000, guid: acfff965da386f348b8d4f34304015db, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    _subDomains:
+    - Name: Stacks
+      _arguments:
+      - Name: MaxStacks
+        ArgumentType: 1
+        IntValue: 30
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      _config: {fileID: 11400000, guid: cb66ab78e3ef75b4eb7a385a758b7fed, type: 2}
+    - Name: StackableStatChange
+      _arguments:
+      - Name: StatData
+        ArgumentType: 14
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 11400000, guid: 227f34fd36a27904db836b6d7aa7d5c5, type: 2}
+      - Name: MaxStacks
+        ArgumentType: 1
+        IntValue: 30
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      - Name: FlatChangePerStack
+        ArgumentType: 2
+        IntValue: 0
+        FloatValue: 3
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      - Name: MultChangePerStack
+        ArgumentType: 2
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      _config: {fileID: 11400000, guid: 996e38d5884fe2e4fa420101aba2dd5a, type: 2}
+    - Name: Icon
+      _arguments:
+      - Name: IconSprite
+        ArgumentType: 10
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      - Name: HasValue
+        ArgumentType: 5
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorDataValue: {fileID: 0}
+        BoolValue: 1
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      _config: {fileID: 11400000, guid: 6087a93d89e2cc247a51ef3c7fedb51f, type: 2}
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -162,6 +423,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -187,3 +449,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

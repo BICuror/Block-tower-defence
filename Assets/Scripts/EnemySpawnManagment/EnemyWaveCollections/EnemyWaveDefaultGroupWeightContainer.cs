@@ -3,7 +3,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using System;
 
-[CreateAssetMenu(fileName = "EnemyWaveGroup", menuName = "SpawnManagement/EnemyWaveDefaultGroupWeightContainer")]
+[CreateAssetMenu(fileName = "EnemyWaveGroupConfig", menuName = "SpawnManagement/EnemyWaveDefaultGroupWeightContainer")]
 
 public sealed class EnemyWaveDefaultGroupWeightContainer : ScriptableObject
 {

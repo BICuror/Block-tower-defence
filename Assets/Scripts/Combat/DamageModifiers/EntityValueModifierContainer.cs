@@ -17,6 +17,8 @@ public sealed class EntityValueModifierContainer
     public event Action<CombatEntity> EntityKilled;
     //invoked before entity.Die()
     public event Action<CombatEntity> EntityDied;
+    public event Action<float> DamageDealt;
+    public event Action<CombatEntity> EnemyHit;
     
     public EntityValueModifierContainer(CombatEntity ownerEntity)
     {
@@ -24,6 +26,16 @@ public sealed class EntityValueModifierContainer
         _damageDealerContainer = new(ownerEntity);
         _healReceiverContainer = new(ownerEntity);
         _healDealerContainer = new(ownerEntity);
+    }
+    
+    public void InvokeOnEnemyHit(CombatEntity hitEntity)
+    {
+        EnemyHit?.Invoke(hitEntity);
+    }
+    
+    public void InvokeOnDamageDealt(float damage)
+    {
+        DamageDealt?.Invoke(damage);
     }
 
     public void InvokeOnKillEffects(CombatEntity killedEntity)

@@ -29,7 +29,7 @@ public sealed class ApplyEntityModificatorIfNotFullHP : EntityModificator
 
     private void ApplyModificator()
     {
-        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorData);
+        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
         _applied = true;
     }
 

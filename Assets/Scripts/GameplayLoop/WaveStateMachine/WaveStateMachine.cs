@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Combat.EnemySpawnSystem;
 using UnityEngine;
 using Zenject;
-using Combat;
 using System;
 
 public sealed class WaveStateMachine : MonoBehaviour
 {
     private const WaveState INITIAL_STATE = WaveState.None;
 
-    [Inject] private EnemySpawnSystem _enemySpawnSystem;
+    [Inject] private EnemySpawnSystemController _enemySpawnSystem;
     [SerializeField] private List<WaveStateController> _stateControllersList;
     private Dictionary<WaveState, WaveStateController> _stateControllers = new();
     private WaveState _currentState;
@@ -21,7 +21,7 @@ public sealed class WaveStateMachine : MonoBehaviour
     
     public void Initialize()
     {
-        _enemySpawnSystem.LastWaveEnemyDied += TransitionIntoIdle;
+        _enemySpawnSystem.WaveComplete += TransitionIntoIdle;
         
         _currentState = INITIAL_STATE;
 

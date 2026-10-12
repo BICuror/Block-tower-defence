@@ -173,6 +173,13 @@ public static class TileMap
         return foundPositions;
     }
     
+    public static Vector2Int FindClosestValidPosition(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
+    {
+        List<Vector2Int> foundPositions = FindClosestValidPositionsInRadius(positionValidator, position, radius, maxRadius);
+        
+        return foundPositions[Random.Range(0, foundPositions.Count)];
+    }
+    
     public static List<Vector2Int> FindClosestValidPositionsInRadius(Predicate<Vector2Int> positionValidator, Vector2Int position, int radius, int maxRadius)
     {
         List<Vector2Int> foundPositions = new();

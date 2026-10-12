@@ -1,11 +1,13 @@
-using System;
+using Combat.EnemySpawnSystem;
 using Combat.Animation;
+using Combat.IngameUI;
 using UnityEngine;
 using Navigation;
-using Cashing;
 using CuroAudio;
+using Cashing;
+using System;
 
-namespace Combat
+namespace Combat.Enemies
 {
     public sealed class EnemyBootstrap : MonoBehaviour
     {
@@ -24,18 +26,18 @@ namespace Combat
         [Cached] private HealthBar _healthBar;
         [Cached] private Collider _collider;
         
-        private EnemyData _enemyData;
+        private EnemyConfig _enemyConfig;
 
-        public EnemyData EnemyData => _enemyData;
+        public EnemyConfig EnemyConfig => _enemyConfig;
 
         private void Start()
         {
             _enemyHealth.HandleDeath += OnEnemyDeath;
         }
         
-        public void SetEnemyData(EnemyData enemyDataToSet, bool initializeNavigation = true, bool initializeModificators = true)
+        public void SetEnemyConfig(EnemyConfig enemyConfigToSet, bool initializeNavigation = true, bool initializeModificators = true)
         {
-            _enemyData = enemyDataToSet;
+            _enemyConfig = enemyConfigToSet;
 
             SetStats();
             SetVisualData();
@@ -43,7 +45,7 @@ namespace Combat
             _enemyHealth.RefilHP();
             _collider.enabled = true;
             
-            _inspectableObject.SetLocalizationKey(enemyDataToSet.LocalizationKey);
+            _inspectableObject.SetLocalizationKey(enemyConfigToSet.LocalizationKey);
 
             ApplyEntityEffectImmunities();
 
@@ -55,7 +57,7 @@ namespace Combat
             
             if (initializeNavigation)
             {
-                _navMeshAgent.SetAgentData(enemyDataToSet.NavigationData);
+                _navMeshAgent.SetAgentData(enemyConfigToSet.NavigationData);
                 _navMeshAgent.Enable();
             }
         }
@@ -66,35 +68,35 @@ namespace Combat
         {
             MaxHealth maxHealthStat = _statContainer.Get<MaxHealth>(); 
             maxHealthStat.Reset(); 
-            maxHealthStat.SetDefault(_enemyData.MaxHealth);
+            maxHealthStat.SetDefault(_enemyConfig.MaxHealth);
             
             Speed speedStat = _statContainer.Get<Speed>(); 
             speedStat.Reset(); 
-            speedStat.SetDefault(_enemyData.Speed);
+            speedStat.SetDefault(_enemyConfig.Speed);
             
             ContactDamage contactDamageStat = _statContainer.Get<ContactDamage>();
             contactDamageStat.Reset();
-            contactDamageStat.SetDefault(_enemyData.ContactDamage);
+            contactDamageStat.SetDefault(_enemyConfig.ContactDamage);
             
-            _statContainer.AddStats(_enemyData.StatInitializers.ToArray());
+            _statContainer.AddStats(_enemyConfig.StatInitializers.ToArray());
             
-            _enemyContactDamager.SetIsDestroyedOnContactDamage(_enemyData.DiesOnContact);
+            _enemyContactDamager.SetIsDestroyedOnContactDamage(_enemyConfig.DiesOnContact);
         }
     
         private void SetVisualData()
         {
-            _meshFilter.sharedMesh = _enemyData.Mesh;
+            _meshFilter.sharedMesh = _enemyConfig.Mesh;
             
-            _hitHighlighter.SetDefaultMaterial(_enemyData.Material);
+            _hitHighlighter.SetDefaultMaterial(_enemyConfig.Material);
 
-            _hitShaker.SetDefaultValues(new Vector3(_enemyData.Scale, _enemyData.Scale, _enemyData.Scale));
+            _hitShaker.SetDefaultValues(new Vector3(_enemyConfig.Scale, _enemyConfig.Scale, _enemyConfig.Scale));
         }
     
         private void TryCreateSpecialObjects()
         {
-            if (!_enemyData.HasObjectModificators) return;
+            if (!_enemyConfig.HasObjectModificators) return;
             
-            _enemyData.ObjectModificators.ForEach(additionalObjectPrefab =>
+            _enemyConfig.ObjectModificators.ForEach(additionalObjectPrefab =>
             {
                 _entityObjectModificatorContainer.InstantiateAndAddModificator(additionalObjectPrefab);
             });
@@ -102,17 +104,17 @@ namespace Combat
 
         private void TryApplyEntityModificators()
         {
-            if (!_enemyData.HasEntityModificators) return;
+            if (!_enemyConfig.HasEntityModificators) return;
             
-            _enemyData.EntityModificatorDatas.ForEach(entityModificatorData =>
+            _enemyConfig.EntityModificatorDatas.ForEach(entityModificatorData =>
             {
-                _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(entityModificatorData);
+                _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(entityModificatorData);
             });
         }
         
         private void ApplyEntityEffectImmunities()
         {
-            _enemyData.EffectImmunities.ForEach(effectType =>
+            _enemyConfig.EffectImmunities.ForEach(effectType =>
             {
                 Type entityEffectType = Type.GetType(effectType);
                 
@@ -126,9 +128,9 @@ namespace Combat
 
         private void TryRemoveEntityModificators()
         {
-            if (!_enemyData.HasEntityModificators) return;
+            if (!_enemyConfig.HasEntityModificators) return;
             
-            _enemyData.EntityModificatorDatas.ForEach(entityModificatorData =>
+            _enemyConfig.EntityModificatorDatas.ForEach(entityModificatorData =>
             {
                 _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(entityModificatorData);
             });
@@ -136,7 +138,7 @@ namespace Combat
 
         private void RemoveEntityEffectImmunities()
         {
-            _enemyData.EffectImmunities.ForEach(effectType =>
+            _enemyConfig.EffectImmunities.ForEach(effectType =>
             {
                 Type entityEffectType = Type.GetType(effectType);
                 
@@ -148,11 +150,11 @@ namespace Combat
 
         private void OnEnemyDeath()
         {
-            AudioSystem.PlaySFX(_enemyData.DeathSound, transform.position);
+            AudioSystem.PlaySFX(_enemyConfig.DeathSound, transform.position);
             
             TryRemoveEntityModificators();
             _entityObjectModificatorContainer.DestroyAllModificators();
-            _statContainer.RemoveStats(_enemyData.StatInitializers.ToArray());
+            _statContainer.RemoveStats(_enemyConfig.StatInitializers.ToArray());
             RemoveEntityEffectImmunities();
             
             _navMeshAgent.Disable();

@@ -3,6 +3,7 @@ using System.Threading;
 using Zenject;
 using System;
 using Combat;
+using Combat.IngameUI;
 
 public sealed class ApplyEffectOnActivation : EntityModificator
 {
@@ -77,7 +78,7 @@ public sealed class ApplyEffectOnActivation : EntityModificator
     
     private void UpdateAbilityIcon()
     {
-        _abilityIcon.SetValue((float)_currentActivationStacks / _maxActivationStacks).Forget();
+        _abilityIcon.SetValue((float)_currentActivationStacks / _maxActivationStacks);
     }
 
     public override void Disable()

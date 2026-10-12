@@ -1,6 +1,7 @@
 using UnityEngine;
 using Zenject;
 using Combat;
+using Combat.EnemySpawnSystem;
 
 namespace WorldGeneration
 {
@@ -14,7 +15,6 @@ namespace WorldGeneration
         [Inject] private EnemyBiomeMapGenerator _enemyBiomeMapGenerator;
         [Inject] private EnemyBiomeMapToGridConverter _enemyBiomeMapToGridConverter;
         [Inject] private OverlappingIslandDecorationsDisabler _overlappingIslandDecorationsDisabler;
-        [Inject] private EnemySpawnSystem _enemySpawnSystem;
         [Inject] private SpawnerRotator _spawnerRotator;
 
         [SerializeField] private EnemyBiomeTileTerrainGenerator _enemyBiomeTileTerrainGenerator;
@@ -31,13 +31,8 @@ namespace WorldGeneration
         private int _currentStage;
         
         public Vector2Int SpawnerNodeIndex => _spawnerNodeIndex;
-        public EnemySpawner EnemySpawner => _enemySpawner;
+        public EnemySpawner Spawner => _enemySpawner;
         public int CurrentStage => _currentStage;
-        
-        public void Initialize()
-        {
-            _enemySpawnSystem.AddSpawner(_enemySpawner);
-        }
 
         public void SetSpawnerNodeIndex(Vector2Int spawnerNodeIndex) => _spawnerNodeIndex = spawnerNodeIndex;
         public void SetCenterPosition(Vector2Int position)
@@ -110,8 +105,6 @@ namespace WorldGeneration
 
         public void Destroy()
         {
-            _enemySpawnSystem.RemoveSpawner(_enemySpawner);
-
             Destroy(gameObject);
         }   
     }

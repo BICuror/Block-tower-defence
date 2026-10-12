@@ -22,9 +22,7 @@ public sealed class EnemyArcherObject : MonoBehaviour, ITaskConditionProvider
         _enemyAreaScaner.AddedItem += _ => _taskCycle.TryCycle();
      
         _arrowObjectPool = new WeaponPool<Arrow>(_arrowPrefab, 3, _ownerEntity,  _arrowLifetime);
-        
-        foreach (Arrow arrow in _arrowObjectPool.Pool) { SubscribeToArrow(arrow); }
-        _arrowObjectPool.PoolObject.ObjectCreated += SubscribeToArrow;
+        _arrowObjectPool.SetWeaponCreatedDelegate(SubscribeToArrow);
 
         _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Shoot;
     }

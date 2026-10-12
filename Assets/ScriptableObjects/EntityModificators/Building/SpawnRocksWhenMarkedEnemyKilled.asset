@@ -46,6 +46,13 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: ConvertMarkedEnemiesIntoRockOnKill
     AllEffectTypeNames:
@@ -102,6 +109,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -115,23 +123,22 @@ MonoBehaviour:
   _showInInspector: 1
   _hasRequiredTags: 1
   _reqiredOwnerTags:
-    Condition: 0
     Requirements:
     - Tag: 11
       Amount: 1
   _reqiredOtherEntityTags:
-    Condition: 0
     Requirements:
     - Tag: 11
       Amount: 1
   _hasBlockTags: 1
   _blockOwnerTags:
-    Condition: 0
     Requirements: []
   _blockOtherEntityTags:
-    Condition: 0
     Requirements: []
   _hasRequiredUpgrades: 0
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

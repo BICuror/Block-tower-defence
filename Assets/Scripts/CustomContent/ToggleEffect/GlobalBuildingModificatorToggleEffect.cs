@@ -32,7 +32,7 @@ public sealed class GlobalBuildingModificatorToggleEffect : GlobalEffect
 
     private void AddEntityModificator(BuildingEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
     }
 
     private void RemoveEntityModificator(BuildingEntity entity)

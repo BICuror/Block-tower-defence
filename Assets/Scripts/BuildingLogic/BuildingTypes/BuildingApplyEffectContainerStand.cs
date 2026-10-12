@@ -19,7 +19,7 @@ namespace Combat
         {
             for (int i = 0; i < _applyEffects.Length; i++)
             {
-                container.AddModificator(_applyEffects[i]);
+                container.AddEffect(_applyEffects[i]);
             }
         }
     

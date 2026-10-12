@@ -31,6 +31,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 4
       _argumentName: StatTypeName
       _intArgument: 0
@@ -46,6 +47,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 10
       _argumentName: HasEntitiesInAreaIcon
       _intArgument: 0
@@ -61,6 +63,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: -1927012866, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+      _statData: {fileID: 0}
     - _argumentType: 10
       _argumentName: NoEntitiesInAreaIcon
       _intArgument: 0
@@ -76,6 +79,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 281690487, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: MultChangeWhenNoEntitiesInArea
       _intArgument: 0
@@ -91,6 +95,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: MultChangeMax
       _intArgument: 0
@@ -106,6 +111,7 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
     - _argumentType: 1
       _argumentName: MultChangePerEntity
       _intArgument: 0
@@ -121,6 +127,14 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: ModificatorObjectApplyerEntityModificator
     AllEffectTypeNames:
@@ -177,6 +191,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -202,3 +217,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

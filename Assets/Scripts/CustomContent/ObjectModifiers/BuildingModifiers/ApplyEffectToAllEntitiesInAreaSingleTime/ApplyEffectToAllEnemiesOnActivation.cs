@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cashing;
 using Combat;
+using Combat.IngameUI;
 
 public sealed class ApplyEffectToAllEnemiesOnActivation : ApplyEffectOnceToEntitiesInArea
 {
@@ -28,6 +29,6 @@ public sealed class ApplyEffectToAllEnemiesOnActivation : ApplyEffectOnceToEntit
     
     private void UpdateIconState()
     {
-        _abilityIcon.SetValue((float)CurrentCharges / MaxCharges).Forget();
+        _abilityIcon.SetValue((float)CurrentCharges / MaxCharges);
     }
 }

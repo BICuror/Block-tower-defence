@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Combat.Items;
 using System.Linq;
 using UnityEngine;
 using TMPro;
@@ -32,7 +33,7 @@ public sealed class CrystalInspectionTooltip : ResizableInspectionPanelBase
         CreateTooltips(item);
 
         _rewardsAmountTextField.text = item.Charges.ToString();
-        _topCanvasGroup.gameObject.SetActive(!item.EffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
+        //_topCanvasGroup.gameObject.SetActive(!item.EffectDatas.Exists(effectData => effectData.InstanceItemTypeContainers.Exists(itemType => itemType.InstanceType == typeof(StartWaveGlobalToggleEffect))));
 
         float maxSize = 0;
         

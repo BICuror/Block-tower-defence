@@ -27,9 +27,15 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
+      _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _instanceItemTypeContainers:
   - _itemTypeName: GlobalBuildingModificatorToggleEffect
     AllEffectTypeNames:

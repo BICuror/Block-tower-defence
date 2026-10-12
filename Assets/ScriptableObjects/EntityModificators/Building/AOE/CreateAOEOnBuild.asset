@@ -27,10 +27,18 @@ MonoBehaviour:
       _entityEffectParticleHandler: {fileID: 0}
       _entityObjectModifierPrefab: {fileID: 0}
       _layerSetting: {fileID: 0}
-      _additionalEnemyGroupData:
+      _additionalEnemyGroupDataConfig:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+      _statData: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: CreateAOEOnBuild
     AllEffectTypeNames:
@@ -242,3 +250,6 @@ MonoBehaviour:
   - StructName: 
     _statData: {fileID: 11400000, guid: a5c34ff2cbd9d6c498e0c7923635532e, type: 2}
     _defaultValue: 1
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

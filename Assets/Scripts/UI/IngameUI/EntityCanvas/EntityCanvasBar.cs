@@ -1,33 +1,36 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public sealed class EntityCanvasBar : ProgressBarBase
+namespace Combat.IngameUI
 {
-    [SerializeField] private bool _shakeOnValueChange;
-    [SerializeField] private SpriteRenderer _iconRenderer;
-    [SerializeField] private float _tweenDuration = 0.2f;
-    private float _lastAssignedValue;
-    
-    public void Initialize(Sprite iconSprite, float value)
+    public sealed class EntityCanvasBar : ProgressBarBase
     {
-        base.Initialize();
+        [SerializeField] private bool _shakeOnValueChange;
+        [SerializeField] private SpriteRenderer _iconRenderer;
+        [SerializeField] private float _tweenDuration = 0.2f;
+        private float _lastAssignedValue;
         
-        _iconRenderer.sprite = iconSprite;
-        _lastAssignedValue = value;
-
-        SetValue(value).Forget();
-    }
-
-    public async UniTask SetValue(float value)
-    {
-        if (_shakeOnValueChange) Shake();
-        
-        await FillBar(_lastAssignedValue, value, _tweenDuration);
-        
-        _lastAssignedValue = value;
-    }
+        public void Initialize(Sprite iconSprite, float value)
+        {
+            base.Initialize();
+            
+            _iconRenderer.sprite = iconSprite;
+            _lastAssignedValue = value;
     
-    protected override string ProgressFieldName => "Progress";
-
-    protected override void OnFillComplete() {}
+            SetValue(value).Forget();
+        }
+    
+        public async UniTask SetValue(float value)
+        {
+            if (_shakeOnValueChange) Shake();
+            
+            await FillBar(_lastAssignedValue, value, _tweenDuration);
+            
+            _lastAssignedValue = value;
+        }
+        
+        protected override string ProgressFieldName => "Progress";
+    
+        protected override void OnFillComplete() {}
+    }
 }

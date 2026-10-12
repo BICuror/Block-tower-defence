@@ -1,4 +1,4 @@
-using UnityEngine;
+using Combat.Items;
 using Zenject;
 
 public sealed class DealMoreDamageWhenMoreCrystalsSelected : EntityModificator

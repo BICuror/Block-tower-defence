@@ -1,71 +1,62 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
 using UnityEngine;
 using Zenject;
+using System;
 
-public sealed class UpgradeChargeContainer : MonoBehaviour
+namespace Combat.UpgradeCharges
 {
-    [Inject] private SelectionManager _selectionManager;
-    [SerializeField] private GameObject _chargePrefab;
-    [SerializeField] private int _chargesPerUpgrade;
-    [SerializeField] private Transform _finalPosition;
-    [SerializeField] private float _animationDuration;
-    [SerializeField] private AnimationCurve _verticalAnimationCurve;
-    [SerializeField] private AnimationCurve _horizontalAnimationCurve;
-    [SerializeField] private UpgradeChargeBar _chargeBar;
-    [SerializeField] private float _timeBetweenCharges;
-    private int _currentCharge;
-
-    private bool _chargeAddProcessIsActive;
-    
-    public async UniTask AddChargesWithAnimation(int charges, Transform source)
+    public sealed class UpgradeChargeContainer : MonoBehaviour
     {
-        await UniTask.WaitUntil(() => _chargeAddProcessIsActive == false);
+        [Inject] private SelectionManager _selectionManager;
+        [SerializeField] private int _chargesPerUpgrade;
+
+        [Header("Animation")] 
+        [SerializeField] private UpgradeChargeContainerAnimator _upgradeChargeContainerAnimator;
+        private List<AnimateChargesRequest> _animationRequests = new();
+        private int _currentCharge;
+
+        public int CurrentCharge => _currentCharge;
+
+        public event Action UpgradeSelectionEnqueued;
         
-        _chargeAddProcessIsActive = true;
-        
-        for (int i = 0; i < charges; i++)
+        public void AddUpgradeCharge()
         {
-            AddChargeWithAnimation(source.position, _timeBetweenCharges).Forget();
-            await UniTask.WaitForSeconds(_timeBetweenCharges);
+            _currentCharge++;
+    
+            if (_currentCharge >= _chargesPerUpgrade)
+            {
+                _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
+                _currentCharge = 0;
+                
+                UpgradeSelectionEnqueued?.Invoke();
+            }
         }
         
-        _chargeAddProcessIsActive = false;
-    }
-    
-    private async UniTask AddChargeWithAnimation(Vector3 sourcePosition, float barFillDuration)
-    {
-        GameObject charge = Instantiate(_chargePrefab, sourcePosition, Quaternion.identity);
-
-        await MoveChargeObjectToFinalPosition(charge, _finalPosition.position);
-        
-        Destroy(charge);
-        
-        _currentCharge++;
-
-        await _chargeBar.SetCharges(_currentCharge, barFillDuration * 0.75f);
-        
-        if (_currentCharge >= _chargesPerUpgrade)
+        public async UniTask AddCharge(Transform source, int chargeAmount)
         {
-            _selectionManager.EnqueueSelection(new SelectionSettings(SelectionType.BuildingUpgrade));
-            _chargeBar.ResetBar();
-            _currentCharge = 0;
-        }
-    }
-
-    private async UniTask MoveChargeObjectToFinalPosition(GameObject chargeObject, Vector3 finalPosition)
-    {
-        Vector3 startPosition = chargeObject.transform.position;
-        
-        await DOVirtual.Float(0f, 1f, _animationDuration, MoveCharge).AsyncWaitForCompletion();
-        
-        void MoveCharge(float progress)
-        {
-            Vector3 lerpedPosition = Vector3.LerpUnclamped(startPosition, finalPosition, _horizontalAnimationCurve.Evaluate(progress));
-
-            lerpedPosition.y += _verticalAnimationCurve.Evaluate(progress);
+            AnimateChargesRequest request = new AnimateChargesRequest(source, chargeAmount);
             
-            chargeObject.transform.position = lerpedPosition;
+            _animationRequests.Add(request);
+
+            await UniTask.WaitUntil(() => request.Complete);
+        }
+        
+        public async UniTask AnimateAllRequests()
+        {
+            for (int i = 0; i < _animationRequests.Count; i++)
+            {
+                AnimateChargesRequest request = _animationRequests[i];
+                
+                for (int chargeIndex = 0; chargeIndex < request.Amount; chargeIndex++)
+                {
+                    await _upgradeChargeContainerAnimator.AddChargeWithAnimation(request.Source.position);
+                }
+                
+                request.Complete = true;
+            }
+            
+            _animationRequests.Clear();
         }
     }
 }

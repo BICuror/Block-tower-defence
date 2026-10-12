@@ -2,6 +2,7 @@ using UnityEngine;
 using Cashing;
 using System;
 using Combat;
+using Combat.IngameUI;
 
 public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifier
 {

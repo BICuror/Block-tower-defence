@@ -1,77 +1,62 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Zenject;
-using System;
 using DG.Tweening;
-using UnityEngine.Serialization;
+using System;
 
-public sealed class EntityCanvasAbilityIcon : ProgressBarBase
+namespace Combat.IngameUI
 {
-    [Inject] private WaveStateMachine _waveStateMachine;
-    
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    
-    [Header("Scale")]
-    [SerializeField] private float _defaultIconScale = 1f;
-    [SerializeField] private float _depletedIconScale;
-
-    private float _fillDuration = 1f;
-    private WaveState _activeWaveState;
-    private bool _hasActiveWaveState;
-    private float _previousValue;
-    
-    public bool IsActive => gameObject.activeSelf;
-    protected override string ProgressFieldName => "BuildProgress";
-    
-    public Action StateUpdated;
-    
-    public void Initialize(Sprite sprite, float value = 0)
+    public sealed class EntityCanvasAbilityIcon : ProgressBarBase
     {
-        Initialize();
-        _spriteRenderer.sprite = sprite;
-        _previousValue = value;
+        [SerializeField] private SpriteRenderer _spriteRenderer;
         
-        SetValue(value).Forget();
-    }
+        [Header("Scale")]
+        [SerializeField] private float _defaultIconScale = 1f;
+        [SerializeField] private float _depletedIconScale;
     
-    public void SetFillDuration(float fillDuration) => _fillDuration = fillDuration;
-
-    public async void SetActiveWaveState(WaveState waveState)
-    {
-        _activeWaveState = waveState;
-        _hasActiveWaveState = true;
+        private float _fillDuration = 1f;
+        private bool _hasActiveWaveState;
+        private float _previousValue;
         
-        await UniTask.WaitUntil(() => _waveStateMachine != null);
+        public bool IsActive => gameObject.activeSelf;
+        public float LastSetValue => _previousValue;
+        protected override string ProgressFieldName => "BuildProgress";
+    
+        public event Action StateUpdated;
         
-        UpdateState(_waveStateMachine.CurrentState);
-        _waveStateMachine.StateStarted += UpdateState;
-    }
-
-    public async UniTask SetValue(float value)
-    { 
-        transform.DOKill();
+        public void Initialize(Sprite sprite, float value = 0)
+        {
+            Initialize();
+            _spriteRenderer.sprite = sprite;
+            _previousValue = value;
+    
+            SetValue(value);
+        }
         
-        if (value != 0 )transform.DOScale(_defaultIconScale, 0.5f).SetLink(gameObject);
-        
-        await FillBar(_previousValue, value, _fillDuration);
-        _previousValue = value;
-        
-        if (value == 0) transform.DOScale(_depletedIconScale, 0.5f).SetLink(gameObject);
-    }
-
-    private void UpdateState(WaveState waveState)
-    {
-        if (!_hasActiveWaveState) return;
-        
-        gameObject.SetActive(waveState == _activeWaveState);
-        
-        StateUpdated?.Invoke();
-    }
-
-    private void OnDestroy()
-    {
-        base.OnDestroy();
-        
-        _waveStateMachine.StateStarted -= UpdateState;
+        public void SetFillDuration(float fillDuration) => _fillDuration = fillDuration;
+    
+        public void SetValue(float value)
+        {
+            FillBar(_previousValue, value, _fillDuration).Forget();
+            _previousValue = value;
+        }
+    
+        public void SetActiveState(bool state)
+        {
+            if (gameObject.activeSelf == state) return;
+            
+            transform.DOKill();
+            
+            if (state)
+            {
+                gameObject.SetActive(true);
+                transform.DOScale(_defaultIconScale, 0.5f).SetLink(gameObject);
+            }
+            else
+            {
+                transform.DOScale(_depletedIconScale, 0.5f).SetLink(gameObject).OnComplete(() => gameObject.SetActive(false));
+            }
+            
+            StateUpdated?.Invoke();
+        }
     }
 }

@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+using Combat.IngameUI;
 
 public sealed class OnActivationInvokeTaskAndHurt : EntityModificator
 {
@@ -29,7 +29,7 @@ public sealed class OnActivationInvokeTaskAndHurt : EntityModificator
     {
         int maxCharges = (int)((Entity.Health.GetMaxHp() - _activationDamage) / _activationDamage);
         int charges = (int)((Entity.Health.GetHp() - _activationDamage) / _activationDamage);
-        _abilityIcon.SetValue((float)charges / maxCharges).Forget();
+        _abilityIcon.SetValue((float)charges / maxCharges);
     }
     
     public override void Disable()

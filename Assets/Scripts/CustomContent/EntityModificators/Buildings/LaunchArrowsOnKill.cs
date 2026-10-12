@@ -23,8 +23,7 @@ public sealed class LaunchArrowsOnKill : EntityModificator
         _arrowsPerKill = Args.GetArgument<int>("ArrowsPerKill");
 
         _arrowPool = new WeaponPool<Arrow>(_arrowPrefab, 2, Entity, 5);
-        foreach (Arrow arrow in _arrowPool.Pool) { SubscribeToArrow(arrow); }
-        _arrowPool.PoolObject.ObjectCreated += SubscribeToArrow;
+        _arrowPool.SetWeaponCreatedDelegate(SubscribeToArrow);
 
         Entity.ValueModifierContainer.EntityKilled += TryToLaunchArrowAsync;
     }

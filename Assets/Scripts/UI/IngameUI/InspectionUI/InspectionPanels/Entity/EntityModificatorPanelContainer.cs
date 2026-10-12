@@ -45,7 +45,7 @@ public sealed class EntityModificatorPanelContainer : ParserableTextContainer
                 
                 _entityModificatorPanels.Add(tooltipInvokingPanel);
     
-                tooltipInvokingPanel.SetAmount(entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetModificatorsAmount(modificatorData));
+                tooltipInvokingPanel.SetAmount(entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetEffectsAmount(modificatorData));
                 tooltipInvokingPanel.SetEntityModificator(modificatorData);
                 tooltipInvokingPanel.CopyParsersFromContainer(this);
                 

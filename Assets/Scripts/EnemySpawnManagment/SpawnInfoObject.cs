@@ -1,37 +1,39 @@
+using Combat.Enemies;
 using UnityEngine;
 using DG.Tweening;
-using Combat;
 using TMPro;
 
-public sealed class SpawnInfoObject : MonoBehaviour
+namespace Combat.EnemySpawnSystem
 {
-    [SerializeField] private EnemyBootstrap _enemyBootstrap;
-    
-    [SerializeField] private TextMeshPro _amountText;
-
-    [Header("Scale")]
-    [SerializeField] private float _finalScale;
-    [SerializeField] private float _animationDuration;
-
-    public void Appear()
+    public sealed class SpawnInfoObject : MonoBehaviour
     {
-        gameObject.SetActive(true);
-        transform.DOScale(new Vector3(_finalScale, _finalScale, _finalScale), _animationDuration);
-    }
+        [SerializeField] private EnemyBootstrap _enemyBootstrap;
 
-    public void Disappear()
-    { 
-        transform.DOScale(Vector3.zero, _animationDuration).OnComplete(() => gameObject.SetActive(false));
-    }
+        [SerializeField] private TextMeshPro _amountText;
 
-    public void SetEnemiyData(EnemyData enemyData)
-    {
-        _enemyBootstrap.SetEnemyData(enemyData, false, false);
-    }
+        [Header("Scale")] [SerializeField] private float _finalScale;
+        [SerializeField] private float _animationDuration;
 
-    public void SetAmount(int amount)
-    {
-        _amountText.text = amount.ToString();
-        _amountText.gameObject.SetActive(true);
+        public void Appear()
+        {
+            gameObject.SetActive(true);
+            transform.DOScale(new Vector3(_finalScale, _finalScale, _finalScale), _animationDuration);
+        }
+
+        public void Disappear()
+        {
+            transform.DOScale(Vector3.zero, _animationDuration).OnComplete(() => gameObject.SetActive(false));
+        }
+
+        public void SetEnemiyData(EnemyConfig enemyConfig)
+        {
+            _enemyBootstrap.SetEnemyConfig(enemyConfig, false, false);
+        }
+
+        public void SetAmount(int amount)
+        {
+            _amountText.text = amount.ToString();
+            _amountText.gameObject.SetActive(true);
+        }
     }
 }

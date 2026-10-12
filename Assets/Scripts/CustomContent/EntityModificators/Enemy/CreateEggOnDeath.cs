@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Combat;
+using Combat.Enemies;
 
 public sealed class CreateEggOnDeath : EntityModificator
 {
@@ -24,6 +25,6 @@ public sealed class CreateEggOnDeath : EntityModificator
     {
         EnemyEgg egg = Object.Instantiate(_enemyEggPrefab, Entity.transform.position, Quaternion.identity);
         
-        egg.TrySpawnEnemy(Entity.ComponentsContainer.Get<EnemyBootstrap>().EnemyData).Forget();
+        egg.TrySpawnEnemy(Entity.ComponentsContainer.Get<EnemyBootstrap>().EnemyConfig).Forget();
     }
 }

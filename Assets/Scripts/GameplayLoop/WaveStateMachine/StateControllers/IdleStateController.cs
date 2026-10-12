@@ -1,7 +1,11 @@
 using GameControls.Controllers;
 using Cysharp.Threading.Tasks;
+using Combat.EnemySpawnSystem;
+using Combat.UpgradeCharges;
+using Combat.OptionalTasks;
 using NaughtyAttributes;
 using WorldGeneration;
+using Combat.Items;
 using UnityEngine;
 using System.Linq;
 using Navigation;
@@ -22,17 +26,19 @@ public sealed class IdleStateController : WaveStateController
     [Inject] private IslandDecorationContainer _decorationContainer;
 
     [Inject] private EnemySpawnGroupCompiler _enemySpawnGroupCompiler;
+    [Inject] private EnemySpawnSystemController _enemySpawnSystem;
     [Inject] private EnemyBiomeContainer _enemyBiomesContainer;
     [Inject] private EnemyBiomeGenerator _enemyBiomeGenerator;
-    [Inject] private EnemySpawnSystem _enemySpawnSystem;
     
+    [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
     [Inject] private ItemContainerManager _itemContainerManager;
     [Inject] private SelectionManager _selectionManager;
     [Inject] private ItemFactory _itemFactory;
     
     [Inject] private RoadWeightMapGenerator _roadWeightMapGenerator;
     [Inject] private NavigationMapGenerator _navigationMapGenerator;
-    [Inject] private OptionalTaskManager _optionalTaskManager; 
+    [Inject] private OptionalTaskGenerationController _optionalTaskGenerationController;
+    [Inject] private OptionalTaskObjectsManager _optionalTaskObjectsManager;
     [Inject] private RoadMapGenerator _roadMapGenerator;
     [Inject] private RoadGenerator _roadGenerator;
 
@@ -48,7 +54,10 @@ public sealed class IdleStateController : WaveStateController
         
         _decorationContainer.UpdateDecorationsState();
         
-        await _itemContainerManager.UpdateContainedItems();
+        _optionalTaskObjectsManager.GrantOptionalTasksRewards();
+        _itemContainerManager.UpdateContainedItems();
+        
+        await _upgradeChargeContainer.AnimateAllRequests();
         await OnPreEnemyGroupGeneraton.Invoke();
         
         UpdateEnemyBiomesAmount();
@@ -119,7 +128,8 @@ public sealed class IdleStateController : WaveStateController
         await _roadMapGenerator.GenerateRoads();
         _roadWeightMapGenerator.GenerateRoadWeightMap();
         
-        _optionalTaskManager.GenerateTasksAndModifyRoadMap();
+        _optionalTaskGenerationController.GenerateTasksAndModifyRoadMap();
+        _optionalTaskObjectsManager.UpdateOptionalTasksRewards();
         
         _navigationMapGenerator.GenerateMap();
         _roadGenerator.GenerateRoads();

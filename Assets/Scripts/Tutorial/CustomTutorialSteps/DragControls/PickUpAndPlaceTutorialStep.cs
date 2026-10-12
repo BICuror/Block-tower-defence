@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using GameControls.States;
+using Combat.IngameUI;
 using GameControls;
 using UnityEngine;
 using Zenject;

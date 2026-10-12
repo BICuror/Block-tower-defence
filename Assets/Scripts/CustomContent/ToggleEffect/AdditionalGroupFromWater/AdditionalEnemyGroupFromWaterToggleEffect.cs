@@ -4,6 +4,7 @@ using WorldGeneration;
 using UnityEngine;
 using Zenject;
 using Combat;
+using Combat.EnemySpawnSystem;
 
 public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalEffect
 {
@@ -44,17 +45,20 @@ public sealed class AdditionalEnemyGroupFromWaterToggleEffect : GlobalEffect
 
         if (validSpawnPositions.Count == 0) return;
 
-        AdditionalEnemyGroupData enemyGroupData = Args.GetArgument<AdditionalEnemyGroupData>("EnemyGroupData"); 
+        AdditionalEnemyGroupDataConfig enemyGroupDataConfig = Args.GetArgument<AdditionalEnemyGroupDataConfig>("EnemyGroupData"); 
         
-        List<EnemyData> enemyDatas = _enemySpawnGroupCompiler.GetEnemyGroupPart(enemyGroupData.GroupParts, enemyGroupData.AmountMultiplier);
+        List<EnemySpawnData> enemyDatas = _enemySpawnGroupCompiler.GetEnemyGroupPart(enemyGroupDataConfig.GroupParts, enemyGroupDataConfig.AmountMultiplier);
         
-        for (int i = 0; i < enemyDatas.Count; i++)
+        foreach (EnemySpawnData enemySpawnData in enemyDatas)
         {
-            int randomPositionIndex = Random.Range(0, validSpawnPositions.Count);
-
-            EnemyFactory.Instance.CreateEnemy(enemyDatas[i], validSpawnPositions[randomPositionIndex]);
-
-            await UniTask.WaitForSeconds(_spawnDelay);
+            for (int i = 0; i < enemySpawnData.Amount; i++)
+            {
+                int randomPositionIndex = Random.Range(0, validSpawnPositions.Count);
+    
+                EnemyFactory.Instance.CreateEnemy(enemySpawnData.Config, validSpawnPositions[randomPositionIndex]);
+    
+                await UniTask.WaitForSeconds(_spawnDelay);
+            }
         }
     }
 

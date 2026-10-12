@@ -1,80 +1,82 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Combat.UpgradeCharges;
 using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
 using System;
 
-public class Item : DraggableObject
+namespace Combat.Items
 {
-    [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
-    [Inject] private GlobalEffectContainer _globalEffectContainer;
-    [Inject] private GlobalEffectFactory _globalEffectFactory;
-    
-    [SerializeField] private ItemColor _itemColor;
-    [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
-    
-    [Header("Scale")]
-    [SerializeField] private float _maxScale;
-    [SerializeField] private float _minScale;
-    
-    private List<GlobalEffectData> _effectDatas = new();
-    private int _charges;
-    
-#if UNITY_EDITOR
-    [Header("Debug")]
-    [SerializeField] private GlobalEffectData _toggleGlobalEffectData;
-    
-    [Button]
-    public void ApplyEffect()
+    public class Item : DraggableObject
     {
-        if (_effectDatas.Contains(_toggleGlobalEffectData)) return;
+        [Inject] private UpgradeChargeContainer _upgradeChargeContainer;
+        [Inject] private GlobalEffectContainer _globalEffectContainer;
+        [Inject] private GlobalEffectFactory _globalEffectFactory;
         
-        _effectDatas.Add(_toggleGlobalEffectData);
-    }
-    
-#endif 
-    public List<GlobalEffectData> EffectDatas => _effectDatas;
-    public int Charges => _charges;
-    public ItemColor ItemColor => _itemColor;
-    
-    public event Action<Item> ItemPickedUp;
-    public event Action<Item> ItemDestroyed;
-    
-    private void Awake()
-    {
-        base.Awake();
-        PickedUp += () => ItemPickedUp?.Invoke(this);
-    }
-
-    public void AddToggleEffectDatas(List<GlobalEffectData> effectDatas) => _effectDatas.AddRange(effectDatas); 
-
-    public void SetChargesAmount(int charges)
-    {
-        _charges = charges;
+        [SerializeField] private ItemColor _itemColor;
+        [SerializeField] private VisualEffectHandler _destroyEffectPrefab;
         
-        float scale = Mathf.Lerp(_maxScale, _minScale, charges / 5.5f);
+        [Header("Scale")]
+        [SerializeField] private float _maxScale;
+        [SerializeField] private float _minScale;
         
-        AnimationObject.transform.localScale = new Vector3(scale, scale, scale);
-    } 
-
-    public async UniTask DecreaseDuration()
-    {
-        if (_charges == 0) await UniTask.WaitForSeconds(1f);
+        private List<GlobalEffectData> _effectDatas = new();
+        private int _charges;
         
-        await _upgradeChargeContainer.AddChargesWithAnimation(_charges, transform);
+    #if UNITY_EDITOR
+        [Header("Debug")]
+        [SerializeField] private GlobalEffectData _toggleGlobalEffectData;
         
-        DestroyItem();
-    }
+        [Button]
+        public void ApplyEffect()
+        {
+            if (_effectDatas.Contains(_toggleGlobalEffectData)) return;
+            
+            _effectDatas.Add(_toggleGlobalEffectData);
+        }
+        
+    #endif 
+        public List<GlobalEffectData> EffectDatas => _effectDatas;
+        public int Charges => _charges;
+        public ItemColor ItemColor => _itemColor;
+        
+        public event Action<Item> ItemPickedUp;
+        public event Action<Item> ItemDestroyed;
+        
+        private void Awake()
+        {
+            base.Awake();
+            PickedUp += () => ItemPickedUp?.Invoke(this);
+        }
     
-    public void EnableToggleEffects() => _globalEffectContainer.AddEffects(_effectDatas);
+        public void AddToggleEffectDatas(List<GlobalEffectData> effectDatas) => _effectDatas.AddRange(effectDatas); 
     
-    public void DisableToggleEffects() => _globalEffectContainer.RemoveEffects(_effectDatas);
+        public void SetChargesAmount(int charges)
+        {
+            _charges = charges;
+            
+            float scale = Mathf.Lerp(_maxScale, _minScale, charges / 5.5f);
+            
+            AnimationObject.transform.localScale = new Vector3(scale, scale, scale);
+        } 
     
-    public void DestroyItem()
-    {
-        Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity).PlayBurstEffectAndForget();
-        ItemDestroyed?.Invoke(this);
-        Destroy(gameObject);
+        public async UniTask DecreaseDuration()
+        {
+            await _upgradeChargeContainer.AddCharge(transform, _charges);
+            
+            DestroyItem();
+        }
+        
+        public void EnableToggleEffects() => _globalEffectContainer.AddEffects(_effectDatas);
+        
+        public void DisableToggleEffects() => _globalEffectContainer.RemoveEffects(_effectDatas);
+        
+        public void DestroyItem()
+        {
+            Instantiate(_destroyEffectPrefab, transform.position, Quaternion.identity).PlayBurstEffectAndForget();
+            ItemDestroyed?.Invoke(this);
+            Destroy(gameObject);
+        }
     }
 }

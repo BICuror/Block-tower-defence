@@ -1,9 +1,12 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnemyWavesData", menuName = "SpawnManagement/EnemyWavesData")]
-
-public class EnemyWavesData : ScriptableObject
+namespace Combat.EnemySpawnSystem
 {
-    [SerializeField] private EnemyWaveGroup[] _waveGroups;
-    public EnemyWaveGroup[] WaveGroups => _waveGroups;
+    [CreateAssetMenu(fileName = "EnemyWavesData", menuName = "SpawnManagement/EnemyWavesData")]
+   
+    public class EnemyWavesData : ScriptableObject
+    {
+        [SerializeField] private EnemyWaveGroupConfig[] _waveGroups;
+        public EnemyWaveGroupConfig[] WaveGroups => _waveGroups;
+    }
 }

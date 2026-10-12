@@ -38,7 +38,7 @@ public sealed class GlobalEnemyModificatorToggleEffect : GlobalEffect
     {
         if (Random.Range(0, 100) <= _chance)
         {
-            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorData);
+            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
         }
     }
 

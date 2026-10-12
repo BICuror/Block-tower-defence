@@ -46,6 +46,58 @@ MonoBehaviour:
         _amountMultiplier: 0
         _groupParts: []
       _sprite: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events:
+    - Name: OnEntityHit
+      _arguments: []
+      _eventLinkConfig: {fileID: 11400000, guid: 8097b79545a92904db07043bd0ff1c19, type: 2}
+      _commandEntries:
+      - Name: '[E] ApplyStatusEffectPermament'
+        _arguments:
+        - Name: EffectData
+          ArgumentType: 12
+          IntValue: 0
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 11400000, guid: c4bb1660ba235174e81b740e6ad14b12, type: 2}
+        - Name: Stacks
+          ArgumentType: 1
+          IntValue: 1
+          FloatValue: 0
+          GameObjectValue: {fileID: 0}
+          EntityModificatorDataValue: {fileID: 0}
+          EntityEffectParticleHandlerValue: {fileID: 0}
+          EntityObjectModifierValue: {fileID: 0}
+          LayerSettingValue: {fileID: 0}
+          AdditionalEnemyGroupValue:
+            _amountMultiplier: 0
+            _groupParts: []
+          SpriteValue: {fileID: 0}
+          StringValue: 
+          StatusEffectConfigValue: {fileID: 0}
+        _config: {fileID: 11400000, guid: 52c8efcacc1b8684b9de8378a3397de2, type: 2}
+        _hasInvokeConditions: 0
+        _conditionalExecution:
+          _requiredConditionLogic: 0
+          _conditions: []
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    _subDomains: []
   _itemTypeContainers:
   - _itemTypeName: ApplyEntityEffectOnHit
     AllEffectTypeNames:
@@ -102,6 +154,7 @@ MonoBehaviour:
     - ShootOnKill
     - SpawnCrystalForKills
     - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
     - TakeDamageUponPlacement
     - TemporaryEntityModificatorEntityModificatorApplier
     - ToggleReachAreaScaleEntityModificator
@@ -129,3 +182,6 @@ MonoBehaviour:
   _requiredUpgrades: []
   _statChanges: []
   _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using Combat.EnemySpawnSystem;
+using NaughtyAttributes;
 using UnityEngine;
 using System;
-using NaughtyAttributes;
 
 [CreateAssetMenu(fileName = "WavesContentConfig", menuName = "WavesContentConfig")]
 
@@ -34,7 +35,7 @@ public sealed class WavesContentConfig : ScriptableObject
     [SerializeField] List<WaveContentType> _content;
 
     [Header("EnemyWaveGeneration")] 
-    [SerializeField] private EnemyTier _requiredEnemyTier;
+    [SerializeField] private EnemySelectionTier _requiredEnemyTier;
     [SerializeField] private bool _forceExistingBuildingAttackWaves;
 
     [Header("EnemySpawn")] 
@@ -42,6 +43,8 @@ public sealed class WavesContentConfig : ScriptableObject
     [SerializeField] private EnemySpawnMethod _spawnMethod;
     [SerializeField] private float _spawnDelayMultiplier = 1f;
     [SerializeField] [AllowNesting, ShowIf("_spawnMethod", EnemySpawnMethod.OneSpawnerAtATime)] private float _timeBeforeSwithcingToOtherSpawner;
+    [SerializeField] [AllowNesting, ShowIf("_spawnMethod", EnemySpawnMethod.Siege)] private int _pillarsAmount;
+    [SerializeField] [AllowNesting, ShowIf("_spawnMethod", EnemySpawnMethod.Siege)] private float _pillarsHealth;
     
     [Header("ItemSetting")]
     [SerializeField] private int _additionalItemStrength = 4;
@@ -56,11 +59,13 @@ public sealed class WavesContentConfig : ScriptableObject
     
     public List<WaveContentType> Content => _content;
     
-    public EnemyTier RequiredEnemyTier => _requiredEnemyTier;
+    public EnemySelectionTier RequiredEnemyTier => _requiredEnemyTier;
     public float EnemySpawnAmountMultiplier => _enemySpawnAmountMultiplier;
     public EnemySpawnMethod SpawnMethod => _spawnMethod;
     public float SpawnDelayMultiplier => _spawnDelayMultiplier;
     public float TimeBeforeSwitchingToOtherSpawner => _timeBeforeSwithcingToOtherSpawner;
+    public int PillarsAmount => _pillarsAmount;
+    public float PillarsHealth => _pillarsHealth;
     public bool ForceExistingBuildingAttackWaves => _forceExistingBuildingAttackWaves;
     public int AdditionalItemStrength => _additionalItemStrength;
     public int CombinedItemStrength => _combinedItemStrength;
@@ -81,6 +86,7 @@ public enum WaveContentType
 
 public enum EnemySpawnMethod
 {
-    Simultaneous,
-    OneSpawnerAtATime
+    Default,
+    OneSpawnerAtATime,
+    Siege,
 }

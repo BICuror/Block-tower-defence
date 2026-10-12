@@ -45,7 +45,7 @@ public class ApplyModificatorOnIdleStartRemoveUponPickup : EntityModificator
     {
         if (!Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorData>("EntityModificatorData")))
         { 
-            Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+            Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
         }
     }
     

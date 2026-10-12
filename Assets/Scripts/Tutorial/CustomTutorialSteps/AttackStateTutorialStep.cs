@@ -1,6 +1,6 @@
+using Combat.EnemySpawnSystem;
 using Cysharp.Threading.Tasks;
 using GameControls.Features;
-using WorldGeneration;
 using GameControls;
 using Zenject;
 using Combat;
@@ -9,18 +9,13 @@ namespace Tutorial.Custom
 {
     public sealed class AttackStateTutorialStep : ProgressTutorialStep
     {
+        [Inject] private EnemySpawnGroupContainer _enemySpawnGroupContainer;
         [Inject] private GlobalEnemyContainer _globalEnemyContainer;
-        [Inject] private EnemyBiomeContainer _enemyBiomeContainer;
         [Inject] private GameController _gameController;
         
         public override async UniTask StartStep()
         {
-            int totalEnemiesToSpawn = 0;
-            
-            foreach (EnemyBiome enemyBiome in _enemyBiomeContainer.EnemyBiomeList)
-            {
-                totalEnemiesToSpawn += enemyBiome.EnemySpawner.EntitiesAmountToSpawn;
-            }
+            int totalEnemiesToSpawn = _enemySpawnGroupContainer.GetTotalSpawnCount();
             
             SetRequiredProgress(totalEnemiesToSpawn);
 

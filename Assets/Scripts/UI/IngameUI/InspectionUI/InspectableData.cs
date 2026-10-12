@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Combat.EnemySpawnSystem;
 using Ligofff.CustomSOIcons;
 using CuroLocalization;
 using UnityEngine;
+using Configs;
 
-public abstract class InspectableData : ScriptableObject
+public abstract class InspectableData : UpdatableScriptableObject
 {
     [Header("UI Data")] 
     [SerializeField] private Sprite _icon;
@@ -64,9 +66,9 @@ public abstract class InspectableData : ScriptableObject
                 } break;
                 case ArgumentType.AdditionalEnemyGroup:
                 {
-                    AdditionalEnemyGroupData enemyGroupData = _argumentsContainer.GetArgument<AdditionalEnemyGroupData>(argument.ArgumentName);
+                    AdditionalEnemyGroupDataConfig enemyGroupDataConfig = _argumentsContainer.GetArgument<AdditionalEnemyGroupDataConfig>(argument.ArgumentName);
 
-                    initialDescription = ParseByEnemyGroup(enemyGroupData, initialDescription);
+                    initialDescription = ParseByEnemyGroup(enemyGroupDataConfig, initialDescription);
                 } break;
             }
         });
@@ -94,7 +96,7 @@ public abstract class InspectableData : ScriptableObject
             return initialText;
         }
         
-        string ParseByEnemyGroup(AdditionalEnemyGroupData additionalEnemyGroupData, string initialText)
+        string ParseByEnemyGroup(AdditionalEnemyGroupDataConfig additionalEnemyGroupData, string initialText)
         {
             int totalEnemyAmount = 0;
                     

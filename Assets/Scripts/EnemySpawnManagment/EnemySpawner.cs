@@ -2,82 +2,57 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using UnityEngine;
+using Zenject;
 using System;
 
-namespace Combat
+namespace Combat.EnemySpawnSystem
 {
     public sealed class EnemySpawner : MonoBehaviour
     {
-        [SerializeField] private EnemySpawnerInfoDisplayer _enemySpawnerInfoDisplayer;
-        private CancellationTokenSource _cancellationTokenSource = new();
-        private List<EnemyData> _enemiesToSpawn;
+        [Inject] private EnemySpawnSystemController _enemySpawnSystem;
+        [Inject] private WaveIndexContainer _waveIndexContainer;
+        
+        [SerializeField] private EnemySpawnerInfoDisplay _enemySpawnerInfoDisplay;
         private float _previousSpawnDelay;
-        
-        public bool SpawnedAllEnemies => _enemiesToSpawn.Count == 0;
-        public int EntitiesAmountToSpawn => _enemiesToSpawn.Count;
-        public List<EnemyData> EnemiesToSpawn => _enemiesToSpawn;
-        
-        public void SetEnemiesToSpawn(List<EnemyData> enemiesToSpawn)
-        {
-            _enemiesToSpawn = enemiesToSpawn;
-    
-            _enemySpawnerInfoDisplayer.SetSpawnInfo(_enemiesToSpawn);
-        }
 
-        public void ShowEnemySpawnInfo() => _enemySpawnerInfoDisplayer.ShowSpawnInfo();
-        public void HideEnemySpawnInfo() => _enemySpawnerInfoDisplayer.HideSpawnInfo();
+        public EnemySpawnerInfoDisplay SpawnerInfoDisplay => _enemySpawnerInfoDisplay;
         
-        public void TrySpawnEnemy()
+        private void Awake() => _enemySpawnSystem.AddSpawner(this);
+        
+        public float GetSpawnDelay(EnemyConfig enemyConfig)
         {
-            if (_enemiesToSpawn.Count > 0) SpawnEnemy();
+            return Mathf.Min(enemyConfig.SpawnDelay, _previousSpawnDelay) * _waveIndexContainer.GetCurrentWaveContent().SpawnDelayMultiplier;
         }
         
-        public async UniTask SpawnGroup(float spawnDelayMultiplier, float spawnPeriod = 0f)
+        public async UniTask SpawnEnemyGroup(IReadOnlyList<EnemySpawnData> spawnGroup, CancellationToken cancellationToken)
         {
-            float elapsedTime = 0;
-            
-            while (spawnPeriod == 0 || elapsedTime <= spawnPeriod)
+            foreach (EnemySpawnData enemySpawnData in spawnGroup)
             {
-                TrySpawnEnemy();
-                    
-                if (_enemiesToSpawn.Count > 0)
+                for (int i = 0; i < enemySpawnData.Amount; i++)
                 {
+                    SpawnEnemy(enemySpawnData.Config);
+
                     try
                     {
-                        float spawnDelay = GetSpawnDelay() * spawnDelayMultiplier;
-                        elapsedTime += spawnDelay;
-                        
-                        await UniTask.WaitForSeconds(spawnDelay, cancellationToken: _cancellationTokenSource.Token);
+                        await UniTask.WaitForSeconds(GetSpawnDelay(enemySpawnData.Config), cancellationToken: cancellationToken);
                     }
                     catch (Exception e)
                     {
                         e.LogAsync();
-                        break;
+                        
+                        return;
                     }
                 }
-                else break;
             }
         }
-
-        private float GetSpawnDelay()
+        
+        public void SpawnEnemy(EnemyConfig enemyConfig)
         {
-            return Mathf.Min(_enemiesToSpawn[0].SpawnDelay, _previousSpawnDelay);
-        }
-
-        public void StopSpawning()
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-            _cancellationTokenSource = new();
+            _previousSpawnDelay = enemyConfig.SpawnDelay;
+         
+            EnemyFactory.Instance.CreateEnemy(enemyConfig, transform.position);
         }
         
-        private void SpawnEnemy()
-        {
-            _previousSpawnDelay = _enemiesToSpawn[0].SpawnDelay;
-         
-            EnemyFactory.Instance.CreateEnemy(_enemiesToSpawn[0], transform.position);
-            
-            _enemiesToSpawn.RemoveAt(0);
-        }
+        private void OnDestroy() => _enemySpawnSystem.RemoveSpawner(this);
     }
 }

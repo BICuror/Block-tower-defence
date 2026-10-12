@@ -16,7 +16,7 @@ public sealed class ApplyModificatorInArea : EntityObjectModifier
 
     private void ApplyModificator(CombatEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
     }
     
     private void RemoveModificator(CombatEntity entity)

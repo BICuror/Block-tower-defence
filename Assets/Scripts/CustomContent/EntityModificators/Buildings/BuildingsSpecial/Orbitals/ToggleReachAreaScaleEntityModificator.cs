@@ -1,3 +1,5 @@
+using Combat.IngameUI;
+
 public sealed class ToggleReachAreaScaleEntityModificator : EntityModificator
 {
     private EntityCanvasAbilityIcon _abilityIcon;

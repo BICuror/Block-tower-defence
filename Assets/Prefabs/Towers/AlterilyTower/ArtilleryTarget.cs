@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Stats;
 using UnityEngine;
 using System;
 using Combat;
@@ -7,6 +8,7 @@ public sealed class ArtilleryTarget : WeaponBase
 {
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
     [SerializeField] private AreaScanerController _areaScanerController;
+    private Damage _damage;
     
     public AreaEntityDetector AreaEntityDetector => _areaEntityDetector;
     
@@ -14,6 +16,8 @@ public sealed class ArtilleryTarget : WeaponBase
     
     protected override void OnInitialized()
     {
+        _damage = OwnerEntity.GetComponent<Damage>();
+        
         _areaEntityDetector.AddedItem += InvokeOnAreaEntityAdded;
         
         OwnerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += TryDamageAllEnemiesInArea;
@@ -24,13 +28,11 @@ public sealed class ArtilleryTarget : WeaponBase
 
     private void TryDamageAllEnemiesInArea()
     {
-        float damage = OwnerEntity.StatContainer.Get<Damage>().Value;
-
         IReadOnlyList<CombatEntity> enemiesInArea = new List<CombatEntity>(_areaEntityDetector.GetList());
         
         for (int i = 0; i < enemiesInArea.Count; i++)
         {
-            DamageEntity(damage, enemiesInArea[i]);
+            DamageEntity(_damage.GetValueModificationContainer(), enemiesInArea[i]);
         }
     }
     

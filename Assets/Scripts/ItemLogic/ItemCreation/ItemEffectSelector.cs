@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using System.Linq;
 using UnityEngine;
 using Zenject;
@@ -94,7 +95,7 @@ namespace Combat.Items
             
             List<GlobalEffectData> allUnselectedEffectDatas = new(_islandDataContainer.Data.ItemToggleEffectContainer.EffectDatas);
             
-            Debug.Log($"Trying to find item effect data for {strength}");
+            Debug.Log($"Trying to find item effect config for {strength}");
             List<int> nonEmptyStrengths = PopulateNonEmptyStrengthList(strength).Intersect(GetValidEffectStrengthList()).ToList();
             
             int leftStrength = strength;

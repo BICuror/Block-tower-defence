@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using Combat.IngameUI;
 using Combat.Items;
 using System.Linq;
+using Combat.IngameUI.CombatEntityCanvas;
 using Zenject;
 
 public sealed class RerollAllUnusedItems : EntityModificator
@@ -62,7 +63,7 @@ public sealed class RerollAllUnusedItems : EntityModificator
         
         unusedItems.ForEach(unusedItem =>
         {
-            //if (!unusedItem.EffectDatas.Exists(data => data.InstanceItemTypeContainers.Exists(typeContainer => typeContainer.InstanceType == typeof(StartWaveGlobalToggleEffect))))
+            //if (!unusedItem.EffectDatas.Exists(config => config.InstanceItemTypeContainers.Exists(typeContainer => typeContainer.InstanceType == typeof(StartWaveGlobalToggleEffect))))
             {
                 destroyedItems++;
                 itemsTotalStrength += unusedItem.Charges;

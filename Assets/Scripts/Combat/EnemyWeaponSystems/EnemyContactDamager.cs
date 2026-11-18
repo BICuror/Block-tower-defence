@@ -1,3 +1,4 @@
+using Combat.Stats;
 using UnityEngine;
 using Cashing;
 using Combat;
@@ -17,11 +18,11 @@ public sealed class EnemyContactDamager : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out BuildingEntity buildingEntity))
         {
-            buildingEntity.Health.ReceiveEnemyDamage(_contactDamage.Value, _ownerEntity);
+            buildingEntity.Health.ReceiveEnemyDamage(_contactDamage.GetValueModificationContainer(), _ownerEntity);
 
             if (buildingEntity.StatContainer.Has<ContactDamage>())
             {
-                _ownerEntity.Health.ReceiveEnemyDamage(buildingEntity.StatContainer.Get<ContactDamage>().Value, buildingEntity);
+                _ownerEntity.Health.ReceiveEnemyDamage(buildingEntity.StatContainer.Get<ContactDamage>().GetValueModificationContainer(), buildingEntity);
             }
             
             _ownerEntity.ComponentsContainer.Get<EntityEffectManager>().TryApplyTemporaryEffect(typeof(FearEffect), 1, 5f);

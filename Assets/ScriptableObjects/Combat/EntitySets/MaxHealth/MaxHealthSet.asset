@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fbb437571a6a364c842a8b8df9ff5d8, type: 3}
+  m_Name: MaxHealthSet
+  m_EditorClassIdentifier: Assembly-CSharp::Combat.Entity.Sets.EntitySetConfig
+  _thresholdDatas:
+  - _levelThreshold: 1
+    _thresholdDescriptionEffectLocKey: set_max_health_threshold_1
+    _entityModificator: {fileID: 11400000, guid: a972f6c3dfedd34479998f311ead44d1, type: 2}
+  - _levelThreshold: 2
+    _thresholdDescriptionEffectLocKey: set_max_health_threshold_2
+    _entityModificator: {fileID: 11400000, guid: ba26f92acb70bd847a03cae7d335283a, type: 2}
+  - _levelThreshold: 3
+    _thresholdDescriptionEffectLocKey: set_max_health_threshold_3
+    _entityModificator: {fileID: 11400000, guid: e1d1752025a465a46a734efefd284353, type: 2}
+  _setIcon: {fileID: -439191689, guid: 3df288c8e1b7e99499012e8aa8d9f618, type: 3}
+  _setLocKey: set_mark_header

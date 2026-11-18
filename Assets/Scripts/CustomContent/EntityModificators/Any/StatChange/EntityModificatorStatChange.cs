@@ -7,9 +7,9 @@ public sealed class EntityModificatorStatChange : EntityModificator
 
     public override bool CanBeApplied()
     {
-        foreach (StatChange statChange in ModificatorData.StatChanges)
+        foreach (StatChange statChange in ModificatorConfig.StatChanges)
         {
-            Type statType = statChange.StatData.GetStatType();
+            Type statType = statChange._statConfig.GetStatType();
             
             if (Entity.StatContainer.Has(statType))
             {
@@ -22,9 +22,9 @@ public sealed class EntityModificatorStatChange : EntityModificator
     
     public override void Enable()
     {
-        ModificatorData.StatChanges.ForEach(statChange =>
+        ModificatorConfig.StatChanges.ForEach(statChange =>
         {
-            Type statType = statChange.StatData.GetStatType();
+            Type statType = statChange._statConfig.GetStatType();
             
             if (Entity.StatContainer.Has(statType))
             {

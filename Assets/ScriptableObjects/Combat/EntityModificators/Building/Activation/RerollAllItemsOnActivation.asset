@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: RerollAllItemsOnActivation
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 131133860, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: item_reroll_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems: []
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
+    _arguments: []
+  _itemTypeContainers:
+  - _itemTypeName: RerollAllUnusedItems
+    AllEffectTypeNames:
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
+    - CreateBombs
+    - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
+    - CustomParticleEntityModifier
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - GameObjectApplierEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HeavyMortarCore
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoveDiagonalyEntityModifier
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
+    - TemporaryEntityModificatorEntityModificatorApplier
+  - _itemTypeName: EntityModificatorGlobalStatChange
+    AllEffectTypeNames:
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
+    - CreateBombs
+    - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
+    - CustomParticleEntityModifier
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - GameObjectApplierEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HeavyMortarCore
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoveDiagonalyEntityModifier
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
+    - TemporaryEntityModificatorEntityModificatorApplier
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 
+  _rarity: 2
+  _tags: 040000001f000000
+  _hasStacks: 1
+  _maxStacks: 1
+  _entitySetTypes: 
+  _effectType: 0
+  _showInInspector: 1
+  _hasRequiredTags: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 1
+  _blockOwnerTags:
+    Requirements:
+    - Tag: 31
+      Amount: 1
+  _blockOtherEntityTags:
+    Requirements:
+    - Tag: 4
+      Amount: 1
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
+  _statChanges:
+  - _statConfig: {fileID: 11400000, guid: 7ece7942a667b54449f1c2ce248dc332, type: 2}
+    FlatChange: 1
+    MultiplierChange: 0
+  _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

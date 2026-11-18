@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using ScriptableLogic.Conditions;
+using ScriptableLogic.Commands;
 using Configs;
 using System;
 
-namespace EventLinks
+namespace ScriptableLogic.EventLinks
 {
     public abstract class EventLink : ArgumentsRequester, IDisposable
     {

@@ -1,1 +1,4 @@
-public sealed class ChargeDuration : Stat {}
+namespace Combat.Stats
+{
+    public sealed class ChargeDuration : Stat {}
+}

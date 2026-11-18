@@ -1,25 +1,18 @@
 using Configs;
 
-public abstract class Condition : ArgumentsRequester
+namespace ScriptableLogic.Conditions
 {
-    protected ScriptableLogicFactory.ScriptableLogicConstructorArgs Args;
-    
-    public void Initialize(ScriptableLogicFactory.ScriptableLogicConstructorArgs args)
+    public abstract class Condition : ArgumentsRequester
     {
-        Args = args;
-
-        OnInitialize();
-    }
+        protected ScriptableLogicFactory.ScriptableLogicConstructorArgs Args;
+        
+        public void Initialize(ScriptableLogicFactory.ScriptableLogicConstructorArgs args)
+        {
+            Args = args;
     
-    protected virtual void OnInitialize() {}
-}
-
-public abstract class SubDomainCondition<T> : Condition where T : SubDomain
-{
-    protected T SubDomain;
-    
-    protected override void OnInitialize()
-    {
-        SubDomain = Args.Domain.GetSubDomain<T>();
+            OnInitialize();
+        }
+        
+        protected virtual void OnInitialize() {}
     }
 }

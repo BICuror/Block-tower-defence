@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using ScriptableLogic.Conditions;
+using ScriptableLogic.Commands;
 using UnityEngine;
-using Configs;
 using Combat;
 
 public abstract class TypedExecutor<T>
@@ -10,13 +11,18 @@ public abstract class TypedExecutor<T>
     private Dictionary<Condition, ICondition> _cachedConditions = new();
     private Dictionary<Condition, ICondition<T>> _cachedTypedConditions = new();
 
+    private Dictionary<Command, bool> _isTypedCommand = new();
+    private Dictionary<Condition, bool> _isTypedCondition = new();
+
     public void ExecuteCommands(IEnumerable<Command> commands, T dynamicArg)
     {
         foreach (Command command in commands)
         {
             if (!ExecuteConditions(command.ConditionalContainer, dynamicArg)) continue;
             
-            if (command is ICommand<T>)
+            if (!_isTypedCommand.ContainsKey(command)) _isTypedCommand.Add(command, command is ICommand<T>);
+            
+            if (_isTypedCommand[command])
             {
                 if (!_cachedTypedCommands.ContainsKey(command)) _cachedTypedCommands.Add(command, command as ICommand<T>);
                 
@@ -36,8 +42,10 @@ public abstract class TypedExecutor<T>
         foreach (Condition condition in conditionalContainer.Conditions)
         {
             bool value;
-
-            if (condition is ICondition<T>)
+            
+            if (!_isTypedCondition.ContainsKey(condition)) _isTypedCondition.Add(condition, condition is ICondition<T>);
+            
+            if (_isTypedCondition[condition])
             {
                 if (!_cachedTypedConditions.ContainsKey(condition)) _cachedTypedConditions.Add(condition, condition as ICondition<T>);
 

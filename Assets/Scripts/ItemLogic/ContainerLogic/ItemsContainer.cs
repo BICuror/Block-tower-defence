@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.IngameUI.Inspection;
 using UnityEngine;
 using System;
 

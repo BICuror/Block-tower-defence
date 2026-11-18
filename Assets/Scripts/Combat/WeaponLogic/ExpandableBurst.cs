@@ -1,6 +1,7 @@
+using Cysharp.Threading.Tasks;
+using Combat.Stats;
 using UnityEngine;
 using Combat;
-using Cysharp.Threading.Tasks;
 
 public sealed class ExpandableBurst : Weapon
 {
@@ -20,7 +21,7 @@ public sealed class ExpandableBurst : Weapon
     {
         if (other.TryGetComponent(out CombatEntity enemyEntity))
         {
-            DamageEntity(_damage.Value, enemyEntity);
+            DamageEntity(_damage.GetValueModificationContainer(), enemyEntity);
         }
     }
 }

@@ -1,0 +1,191 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff650047651eb4946b2b5a757097becc, type: 3}
+  m_Name: AddMarkToAllEntitiesInArea
+  m_EditorClassIdentifier: 
+  _icon: {fileID: -686756865, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: apply_mark_to_all_enemies_on_activation_entity_modificator_tooltip
+  _argumentsContainer:
+    _argumentItems:
+    - _argumentType: 7
+      _argumentName: ObjectModificator
+      _intArgument: 0
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      entityModificatorConfig: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupDataConfig:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+      _statConfig: {fileID: 0}
+    - _argumentType: 0
+      _argumentName: Chargers
+      _intArgument: 2
+      _boolArgument: 0
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      entityModificatorConfig: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupDataConfig:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+      _statConfig: {fileID: 0}
+    - _argumentType: 5
+      _argumentName: HasCharges
+      _intArgument: 2
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      entityModificatorConfig: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupDataConfig:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+      _statConfig: {fileID: 0}
+    - _argumentType: 0
+      _argumentName: EffectStacks
+      _intArgument: 1
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      entityModificatorConfig: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupDataConfig:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+      _statConfig: {fileID: 0}
+    - _argumentType: 1
+      _argumentName: EffectDuration
+      _intArgument: 1
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: 
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      entityModificatorConfig: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupDataConfig:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+      _statConfig: {fileID: 0}
+    - _argumentType: 4
+      _argumentName: EffectTypeName
+      _intArgument: 1
+      _boolArgument: 1
+      _floatArgument: 0
+      _stringArgument: MarkEffect
+      _gameObjectArgument: {fileID: 8698641187551789753, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      entityModificatorConfig: {fileID: 0}
+      _entityEffectParticleHandler: {fileID: 0}
+      _entityObjectModifierPrefab: {fileID: 8152917522738674743, guid: 43a86a45f9fddfe4bab9ce72a3065af7, type: 3}
+      _layerSetting: {fileID: 0}
+      _additionalEnemyGroupDataConfig:
+        _amountMultiplier: 0
+        _groupParts: []
+      _sprite: {fileID: 0}
+      _statConfig: {fileID: 0}
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands: []
+    _events: []
+    _subDomains: []
+    _arguments: []
+  _itemTypeContainers:
+  - _itemTypeName: ModificatorObjectApplyerEntityModificator
+    AllEffectTypeNames:
+    - AddIconEntityModificator
+    - AOEMortarExplotion
+    - ApplyEntityModificatorIfFullHP
+    - ApplyEntityModificatorIfNotFullHP
+    - ApplyModificatorOnIdleStartRemoveUponPickup
+    - ApplyModifierUntilPickUpEntityModifier
+    - BombsLeaveBlockTowers
+    - ConvertMarkedEnemiesIntoRockOnKill
+    - CreateAOEOnBuild
+    - CreateAOEOnKill
+    - CreateBombs
+    - CreateEggOnDeath
+    - CreateHealingOrbsOnKill
+    - CreateTemporaryBuilding
+    - CustomParticleEntityModifier
+    - EntityModificatorStatChange
+    - ExecuteEntitiesInArea
+    - GameObjectApplierEntityModificator
+    - HealAllBuidlingsOnDeathEntityModificator
+    - HeavyMortarCore
+    - InfernoDontResetChargeEntityModifier
+    - InfernoExplodeOnFullCharge
+    - InvincibleWhileBuidlging
+    - InvokeActionOnBuildEntityModificator
+    - InvokeOnBuildMultiplleTimesEntityModificator
+    - LaunchArrowsOnKill
+    - ModificatorObjectApplyerEntityModificator
+    - MoveDiagonalyEntityModifier
+    - PiercingArrows
+    - RerollAllUnusedItems
+    - ReviveBuildingEntityModifier
+    - ShootOnKill
+    - SpawnCrystalForKills
+    - StartBuildingProcessOnActionEntityModificator
+    - StunOnLowHealthAndRegenerate
+    - TemporaryEntityModificatorEntityModificatorApplier
+  _tagsInclude: 1
+  _buildingEntityTypeTags: 02000000030000000400000005000000
+  _rarity: 2
+  _tags: 0b000000010000001f000000
+  _hasStacks: 1
+  _maxStacks: 1
+  _entitySetTypes: 
+  _effectType: 0
+  _showInInspector: 1
+  _hasRequiredTags: 0
+  _reqiredOwnerTags:
+    Requirements: []
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 1
+  _blockOwnerTags:
+    Requirements:
+    - Tag: 31
+      Amount: 1
+  _blockOtherEntityTags:
+    Requirements:
+    - Tag: 11
+      Amount: 1
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades: []
+  _statChanges: []
+  _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

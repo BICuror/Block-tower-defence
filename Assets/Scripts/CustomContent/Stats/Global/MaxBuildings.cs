@@ -1,4 +1,7 @@
-public sealed class MaxBuildings : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 1;
+    public sealed class MaxBuildings : Stat
+    {
+        protected override float MinimalValue => 1;
+    }
 }

@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using System.Threading;
 using System;
 using Combat;
+using Combat.ValueModifiers;
 
 public sealed class StunOnLowHealthAndRegenerate : EntityModificator
 {
@@ -49,7 +50,7 @@ public sealed class StunOnLowHealthAndRegenerate : EntityModificator
 
         while (elapsedTime < _duration)
         {
-            Entity.Health.ReceiveHeal(stepHeal, Entity);
+            Entity.Health.ReceiveHeal(new ValueModificationContainer(stepHeal), Entity);
 
             try
             {

@@ -6,9 +6,9 @@ using System;
 
 public sealed class EntityEffectDataContainer : ScriptableObject
 {
-    [SerializeField] private SerializedDictionary<string, EntityEffectData> _effectDatas = new();
+    [SerializeField] private SerializedDictionary<string, EntityEffectConfig> _effectDatas = new();
 
-    public EntityEffectData GetEffectData(Type effectType)
+    public EntityEffectConfig GetEffectData(Type effectType)
     {
         return _effectDatas[effectType.ToString()];
     }

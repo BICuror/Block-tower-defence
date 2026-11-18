@@ -640,5 +640,12 @@
   "tutorial_wave_state_description": "When wave comes - you should kill them all",
   "tutorial_wave_state_goal": "kill all enemies",
   "win_screen_header": "~ Victory ~",
-  "lose_screen_header": "~ Lose ~"
+  "lose_screen_header": "~ Lose ~",
+  "set_quick_attacks_threshold_1": "#good -{ChangeStatFlatCommand_TaskRechargeDuration_FlatChange} good# #Recharge",
+  "set_quick_attacks_threshold_2": "#good -{ChangeStatMultCommand_TaskRechargeDuration_MultiplierChange%}% good# #Recharge",
+  "set_quick_attacks_threshold_3": "Every {StacksSubDomain_MaxStacks} #Action=Actions invokes #Action again",
+  "set_max_health_threshold_1": "#good +{ChangeStatFlatCommand_MaxHealth_FlatChange} good# #MaxHealth",
+  "set_max_health_threshold_2": "#good +{ChangeStatMultCommand_MaxHealth_MultiplierChange%}% good# #MaxHealth",
+  "set_max_health_threshold_3": "#good +{ChangeStatMultCommand_MaxHealth_MultiplierChange%}% good# #MaxHealth",
+  "KEY": "ENGLISH"
 }

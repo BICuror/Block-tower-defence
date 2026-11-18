@@ -1,5 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EffectTooltipTagDataContainer", menuName = "Tooltips/Effects/Container")]
+namespace Combat.IngameUI.Inspection.Tooltips
+{
+    [CreateAssetMenu(fileName = "EffectTooltipTagDataContainer", menuName = "Tooltips/Effects/Container")]
 
-public sealed class EffectTooltipTagDataContainer : TooltipTagDataContainer<EffectTooltipTagData> {}
+    public sealed class EffectTooltipTagDataContainer : TooltipTagDataContainer<EffectTooltipTagData> {}
+}

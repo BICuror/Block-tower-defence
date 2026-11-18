@@ -1,13 +1,14 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
+using UnityEngine.Serialization;
 using NaughtyAttributes;
+using Combat.Stats;
 using UnityEngine;
 using Navigation;
 using CuroAudio;
-using UnityEngine.Serialization;
 
 namespace Combat.EnemySpawnSystem
 {
-
     [CreateAssetMenu(fileName = "EnemyConfig", menuName = "EnemyDatas/EnemyConfig")]
     
     public sealed class EnemyConfig : ScriptableObject
@@ -41,7 +42,7 @@ namespace Combat.EnemySpawnSystem
         [SerializeField] private bool _hasEntityModificators;
 
         [ShowIf("_hasEntityModificators")]
-        [SerializeField] private List<EntityModificatorData> _entityModificatorDatas;
+        [SerializeField] private List<EntityModificatorConfig> _entityModificatorDatas;
 
         [SerializeField] private bool _hasObjectModificators;
 
@@ -61,7 +62,7 @@ namespace Combat.EnemySpawnSystem
         public List<string> EffectImmunities => _effectImmunities;
         public NavigationAgentData NavigationData => _navigationData;
         public bool HasEntityModificators => _hasEntityModificators;
-        public List<EntityModificatorData> EntityModificatorDatas => _entityModificatorDatas;
+        public List<EntityModificatorConfig> EntityModificatorDatas => _entityModificatorDatas;
         public bool HasObjectModificators => _hasObjectModificators;
         public List<GameObject> ObjectModificators => _objectModificators;
         public string LocalizationKey => _localizationKey;

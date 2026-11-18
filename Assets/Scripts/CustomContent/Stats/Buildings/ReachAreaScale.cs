@@ -1,4 +1,7 @@
-public sealed class ReachAreaScale : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue { get => 1f; }
+    public sealed class ReachAreaScale : Stat
+    {
+        protected override float MinimalValue { get => 1f; }
+    }
 }

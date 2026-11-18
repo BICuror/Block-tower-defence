@@ -1,3 +1,5 @@
+using Combat.Entity.Modificators;
+using ScriptableLogic.Conditions;
 using Combat.Effects;
 using Zenject;
 using Combat;
@@ -6,28 +8,27 @@ public sealed class EffectFactory
 {
     [InjectLocal] private DiContainer _diContainer;
 
-    public bool EffectCanBeApplied(EntityModificatorData modificatorData)
+    public bool EffectCanBeApplied(EntityModificatorConfig modificatorConfig)
     {
         TypedExecutor executor = new();
         
-        ConditionalContainer container = ScriptableLogicFactory.CreateConditionalContainer(modificatorData.CanBeAppliedConditionContainer, new ScriptableLogicFactory.ScriptableLogicConstructorArgs());
+        ConditionalContainer container = ScriptableLogicFactory.CreateConditionalContainer(modificatorConfig.CanBeAppliedConditionContainer, new ScriptableLogicFactory.ScriptableLogicConstructorArgs());
 
         return executor.ExecuteConditions(container);
     }
-
     
-    public bool EffectCanBeApplied(EntityModificatorData modificatorData, CombatEntity entity)
+    public bool EffectCanBeApplied(EntityModificatorConfig modificatorConfig, CombatEntity entity)
     {
         EntityTypedExecutor executor = new();
 
-        ConditionalContainer container = ScriptableLogicFactory.CreateConditionalContainer(modificatorData.CanBeAppliedConditionContainer, new ScriptableLogicFactory.ScriptableLogicConstructorArgs());
+         ConditionalContainer container = ScriptableLogicFactory.CreateConditionalContainer(modificatorConfig.CanBeAppliedConditionContainer, new ScriptableLogicFactory.ScriptableLogicConstructorArgs());
 
         return executor.ExecuteConditions(container, entity);
     }
     
-    public Effect CreateGlobalEffect(EntityModificatorData modificatorData, CombatEntity entity)
+    public Effect CreateGlobalEffect(EntityModificatorConfig modificatorConfig, CombatEntity entity)
     {
-        Domain domain = ScriptableLogicFactory.CreateDomain(modificatorData.DomainConfig);
+        Domain domain = ScriptableLogicFactory.CreateDomain(modificatorConfig.DomainConfig);
         
         foreach (object injectableObject in domain.GetAllObjectsForInjection())
         {
@@ -44,9 +45,9 @@ public sealed class EffectFactory
         }
     }
     
-    public Effect CreateEntityModificator(EntityModificatorData modificatorData, CombatEntity entity)
+    public Effect CreateEntityModificator(EntityModificatorConfig modificatorConfig, CombatEntity entity)
     {
-        Domain domain = ScriptableLogicFactory.CreateDomain(modificatorData.DomainConfig, entity);
+        Domain domain = ScriptableLogicFactory.CreateDomain(modificatorConfig.DomainConfig, entity);
         
         foreach (object injectableObject in domain.GetAllObjectsForInjection())
         {

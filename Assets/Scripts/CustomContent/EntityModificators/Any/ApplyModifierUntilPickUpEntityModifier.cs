@@ -1,9 +1,10 @@
+using Combat.Entity.Modificators;
 using System;
 using Combat;
 
 public sealed class ApplyModifierUntilPickUpEntityModifier : EntityModificator
 {
-    public override bool CanBeApplied() => !Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+    public override bool CanBeApplied() => !Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig"));
     
     public override void Enable()
     {
@@ -25,6 +26,6 @@ public sealed class ApplyModifierUntilPickUpEntityModifier : EntityModificator
 
     private void Remove()
     {
-        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig"));
     }
 }

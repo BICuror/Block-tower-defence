@@ -1,5 +1,8 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "KeywordTooltipTagDataContainer", menuName = "Tooltips/Keywords/Container")]
+namespace Combat.IngameUI.Inspection.Tooltips
+{
+    [CreateAssetMenu(fileName = "KeywordTooltipTagDataContainer", menuName = "Tooltips/Keywords/Container")]
 
-public sealed class KeywordTooltipTagDataContainer : TooltipTagDataContainer<KeywordTooltipTagData> {}
+    public sealed class KeywordTooltipTagDataContainer : TooltipTagDataContainer<KeywordTooltipTagData> {}
+}

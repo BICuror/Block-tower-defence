@@ -1,26 +1,44 @@
-using Zenject;
+using ScriptableLogic.EventLinks;
+using System;
 
-public sealed class TakeDamageUponPlacement : EntityModificator
+namespace ScriptableLogic.EventLinks
 {
-    [Inject] private WaveStateMachine _waveStateMachine;
-    private float _damagePercent;
+    public sealed class DraggablePlacementEventLink : ParameterlessEventLink
+    {
+        protected override void SubscribeToEvent(Action action)
+        {
+            Args.Owner.ComponentsContainer.Get<DraggableObject>().Placed += action;
+        }
+
+        protected override void UnsubscribeToEvent(Action action)
+        {
+            Args.Owner.ComponentsContainer.Get<DraggableObject>().Placed -= action;
+        }
+    }
     
-    public override void Enable()
+    public sealed class DraggablePickedUpEventLink : ParameterlessEventLink
     {
-        _damagePercent = Args.GetArgument<float>("DamagePercent");
-        
-        Entity.ComponentsContainer.Get<DraggableObject>().Placed += DamageEntity;
+        protected override void SubscribeToEvent(Action action)
+        {
+            Args.Owner.ComponentsContainer.Get<DraggableObject>().PickedUp += action;
+        }
+
+        protected override void UnsubscribeToEvent(Action action)
+        {
+            Args.Owner.ComponentsContainer.Get<DraggableObject>().PickedUp -= action;
+        }
     }
-
-    public override void Disable()
+    
+    public sealed class BuildingBuiltEventLink : ParameterlessEventLink
     {
-        Entity.ComponentsContainer.Get<DraggableObject>().Placed -= DamageEntity;
-    }
+        protected override void SubscribeToEvent(Action action)
+        {
+            Args.Owner.ComponentsContainer.Get<BuildingDraggable>().BuildCompleted += action;
+        }
 
-    private void DamageEntity()
-    {
-        if (_waveStateMachine.CurrentState != WaveState.Attack) return;
-
-        CombatUtilities.TryTakeNonLethalDamage(Entity, _damagePercent * Entity.Health.GetMaxHp());
+        protected override void UnsubscribeToEvent(Action action)
+        {
+            Args.Owner.ComponentsContainer.Get<BuildingDraggable>().BuildCompleted  -= action;
+        }
     }
 }

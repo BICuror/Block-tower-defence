@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a306f31b63d844242a0be30323c677de, type: 3}
+  m_Name: QuickAttacks 1
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 148981153, guid: 1931599c4107e624a84165116f765cd5, type: 3}
+  _localizationKey: 
+  _argumentsContainer:
+    _argumentItems: []
+  _canBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []
+  _domainConfig:
+    _commands:
+    - Name: ChangeStatFlat
+      _arguments:
+      - Name: StatData
+        ArgumentType: 14
+        IntValue: 0
+        FloatValue: 0
+        GameObjectValue: {fileID: 0}
+        EntityModificatorConfigValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 11400000, guid: 4eea32e26a466a64c9631d485db112c3, type: 2}
+      - Name: FlatChange
+        ArgumentType: 2
+        IntValue: 0
+        FloatValue: -0.1
+        GameObjectValue: {fileID: 0}
+        EntityModificatorConfigValue: {fileID: 0}
+        BoolValue: 0
+        EntityEffectParticleHandlerValue: {fileID: 0}
+        EntityObjectModifierValue: {fileID: 0}
+        LayerSettingValue: {fileID: 0}
+        AdditionalEnemyGroupValue:
+          _amountMultiplier: 0
+          _groupParts: []
+        SpriteValue: {fileID: 0}
+        StringValue: 
+        StatusEffectConfigValue: {fileID: 0}
+        AudioEnumgValue: 0
+        StatDataValue: {fileID: 0}
+      _config: {fileID: 11400000, guid: b354de77e2f37f8468b2ac11b2155b68, type: 2}
+      _hasInvokeConditions: 0
+      _conditionalExecution:
+        _requiredConditionLogic: 0
+        _conditions: []
+    _events: []
+    _subDomains: []
+    _arguments:
+    - ChangeStatFlatCommand_TaskRechargeDuration_StatData
+    - ChangeStatFlatCommand_TaskRechargeDuration_FlatChange
+  _itemTypeContainers: []
+  _tagsInclude: 0
+  _buildingEntityTypeTags: 
+  _rarity: 0
+  _tags: 15000000
+  _hasStacks: 0
+  _maxStacks: 1
+  _entitySetTypes: 
+  _effectType: 0
+  _showInInspector: 0
+  _hasRequiredTags: 0
+  _reqiredOwnerTags:
+    Requirements:
+    - Tag: 27
+      Amount: 1
+  _reqiredOtherEntityTags:
+    Requirements: []
+  _hasBlockTags: 0
+  _blockOwnerTags:
+    Requirements: []
+  _blockOtherEntityTags:
+    Requirements: []
+  _hasRequiredUpgrades: 0
+  _requiredUpgrades:
+  - {fileID: 11400000, guid: 232c6aa071ba3554e8395370060714cb, type: 2}
+  _statChanges: []
+  _statInitializers: []
+  CanBeAppliedConditionContainer:
+    _requiredConditionLogic: 0
+    _conditions: []

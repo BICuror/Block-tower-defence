@@ -1,19 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Tooltips/TextParseDataContainer")]
-
-public sealed class TooltipTextParseDataContainer : ScriptableObject
+namespace Combat.IngameUI.Inspection.Tooltips
 {
-    [SerializeField] private List<ParsedData> _textParseDatas;
-    [SerializeField] private List<ParsedData> _replaceableParseDatas;
+    [CreateAssetMenu(menuName = "Tooltips/TextParseDataContainer")]
 
-    public List<ParsedData> TextParseDatas => _textParseDatas;
-    public List<ParsedData> ReplaceableParseDatas => _replaceableParseDatas;
-}
+    public sealed class TooltipTextParseDataContainer : ScriptableObject
+    {
+        [SerializeField] private List<ParsedData> _textParseDatas;
+        [SerializeField] private List<ParsedData> _replaceableParseDatas;
 
-[System.Serializable] public sealed class ParsedData
-{
-    public string InitialKey;
-    public string ReplacedKey;
+        public List<ParsedData> TextParseDatas => _textParseDatas;
+        public List<ParsedData> ReplaceableParseDatas => _replaceableParseDatas;
+    }
+
+    [System.Serializable]
+    public sealed class ParsedData
+    {
+        public string InitialKey;
+        public string ReplacedKey;
+    }
 }

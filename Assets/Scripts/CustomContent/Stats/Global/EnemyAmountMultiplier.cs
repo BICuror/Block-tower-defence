@@ -1,4 +1,7 @@
-public sealed class EnemyAmountMultiplier : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 0.1f;
+    public sealed class EnemyAmountMultiplier : Stat
+    {
+        protected override float MinimalValue => 0.25f;
+    }
 }

@@ -424,7 +424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5957467180676952036, guid: 29094b257833e7243adcca91448ff68f, type: 3}
       propertyPath: _initialEffectConfigs.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5957467180676952036, guid: 29094b257833e7243adcca91448ff68f, type: 3}
       propertyPath: '_initialEffectConfigs.Array.data[0]'
@@ -433,16 +433,53 @@ PrefabInstance:
     - target: {fileID: 5957467180676952036, guid: 29094b257833e7243adcca91448ff68f, type: 3}
       propertyPath: '_initialEffectConfigs.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 6e4a4248d9c29a040a88c24436662bb1, type: 2}
+      objectReference: {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
+    - target: {fileID: 5957467180676952036, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+      propertyPath: '_initialEffectConfigs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
+    - target: {fileID: 5957467180676952036, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+      propertyPath: '_initialEffectConfigs.Array.data[3]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
+    - target: {fileID: 5957467180676952036, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+      propertyPath: '_initialEffectConfigs.Array.data[4]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 799fd419b1044e04296765b3f747cbd6, type: 2}
     - target: {fileID: 7153398647755387167, guid: 29094b257833e7243adcca91448ff68f, type: 3}
       propertyPath: m_Name
       value: ArcherTower
       objectReference: {fileID: 0}
+    - target: {fileID: 7153398647755387167, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7153398647755387167, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 17131416}
   m_SourcePrefab: {fileID: 100100000, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+--- !u!1 &17131415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7153398647755387167, guid: 29094b257833e7243adcca91448ff68f, type: 3}
+  m_PrefabInstance: {fileID: 17131414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &17131416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17131415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 641faa51cb76ce647b046ee742b71b67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Combat.Entity.Sets.EntitySetContainer
+  _entitySetConfigContainer: {fileID: 11400000, guid: e08f54bcd1425bb4cadb6ee4d034e64d, type: 2}
 --- !u!114 &20957093 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6905678625069313111, guid: 6ae6d68eb9d06e5488d2f4a8f4a690ba, type: 3}
@@ -7091,7 +7128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _areaVisualisationInspector: {fileID: 1056926168}
-  _inspectionTooltipManager: {fileID: 1944573493}
+  _inspectionCanvasManager: {fileID: 1944573493}
 --- !u!1 &1113074831
 GameObject:
   m_ObjectHideFlags: 0
@@ -11186,10 +11223,10 @@ MonoBehaviour:
   _wrongDirectionMaxDistance: 50
   _maxAlwaysValidPopupDistance: 150
   _uiRoot: {fileID: 216911923}
-  _entityTooltipPrefab: {fileID: 3646298347599478733, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
-  _crystalInspectionTooltipPrefab: {fileID: 4577728077339426284, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
-  _effectInspectionTooltipPrefab: {fileID: 7211506274850091020, guid: ffcf668de163c934b859484bcb35b877, type: 3}
-  _effectPreviewTooltipPrefab: {fileID: 2364438044622368734, guid: a3d2792b90749ab478d7b6723dafd9b4, type: 3}
+  _entityInspectionCanvasPrefab: {fileID: 3646298347599478733, guid: 33791396a6b8f564b93398e46e3ae17c, type: 3}
+  _crystalInspectionCanvasPrefab: {fileID: 4577728077339426284, guid: 293b605e7860ed0418c6679eaa1dc331, type: 3}
+  _entityModificatorInspectionCanvasPrefab: {fileID: 7211506274850091020, guid: ffcf668de163c934b859484bcb35b877, type: 3}
+  _entityModificatorPreviewCanvasPrefab: {fileID: 2364438044622368734, guid: a3d2792b90749ab478d7b6723dafd9b4, type: 3}
   _rerollPrevieTooltipPrefab: {fileID: 7077863330190419813, guid: 352e707ff02de4249adeda298c3b9d8d, type: 3}
 --- !u!1 &1945322920
 GameObject:

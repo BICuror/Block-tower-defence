@@ -1,28 +1,31 @@
 using UnityEngine.Events;
 using UnityEngine;
 
-public sealed class UIElementKeyboardController : MonoBehaviour
+namespace UI
 {
-    private UIElementControls _uiElementControls;
-
-    public UnityEvent Quit;
-
-    private void Awake()
+    public sealed class UIElementKeyboardController : MonoBehaviour
     {
-        _uiElementControls = new UIElementControls();
-        _uiElementControls.Enable();
-
-        _uiElementControls.Main.Quit.started += _ => QuitUI();
-    }
+        private UIElementControls _uiElementControls;
     
-    private void QuitUI()
-    {
-        Quit.Invoke();
-    }
-
-    private void OnDestroy()
-    {
-        _uiElementControls.Disable();
-        _uiElementControls.Dispose();
+        public UnityEvent Quit;
+    
+        private void Awake()
+        {
+            _uiElementControls = new UIElementControls();
+            _uiElementControls.Enable();
+    
+            _uiElementControls.Main.Quit.started += _ => QuitUI();
+        }
+        
+        private void QuitUI()
+        {
+            Quit.Invoke();
+        }
+    
+        private void OnDestroy()
+        {
+            _uiElementControls.Disable();
+            _uiElementControls.Dispose();
+        }
     }
 }

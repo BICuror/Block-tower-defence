@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using System;
 
 namespace Configs
 {
@@ -9,31 +10,59 @@ namespace Configs
         {
             List<ArgumentData> argumentDatas = new();
             
-            foreach (FieldInfo fieldInfo in GetType().GetAllFieldsFromThisAndDerivedTypes())
-            {
-                ArgumentAttribute argumentAttribute = fieldInfo.GetCustomAttribute(typeof(ArgumentAttribute)) as ArgumentAttribute;
-                
-                if (argumentAttribute == null) continue;
-
-                argumentDatas.Add(new(fieldInfo.FieldType, argumentAttribute.FieldName));
-            }
+            GetArgumentDataFromType(GetType());
 
             return argumentDatas;
+
+            void GetArgumentDataFromType(Type type, string prefix = "")
+            {
+                foreach (FieldInfo fieldInfo in type.GetAllFieldsFromThisAndDerivedTypes())
+                {
+                    ArgumentAttribute argumentAttribute = fieldInfo.GetCustomAttribute(typeof(ArgumentAttribute)) as ArgumentAttribute;
+
+                    if (argumentAttribute != null)
+                    {
+                        argumentDatas.Add(new(fieldInfo.FieldType, prefix + argumentAttribute.FieldName));
+                        continue;
+                    }
+                    
+                    ArgumentItemAttribute argumentItemAttribute = fieldInfo.GetCustomAttribute(typeof(ArgumentItemAttribute)) as ArgumentItemAttribute;
+
+                    if (argumentItemAttribute != null)
+                    {
+                        GetArgumentDataFromType(fieldInfo.FieldType, argumentItemAttribute.FieldName);
+                    }
+                }
+            }
         }
 
         public void InjectArgumentEntries(IReadOnlyList<ArgumentDataEntry> argumentEntries)
         {
-            IEnumerable<FieldInfo> fieldInfos = GetType().GetAllFieldsFromThisAndDerivedTypes();
-            
             Dictionary<string, ArgumentDataEntry> argumentDataEntries = GetArgumentEntriesAsDictionary(argumentEntries);
             
-            foreach (FieldInfo fieldInfo in fieldInfos)
+            InjectArgumentDataEntries(this);
+
+            return;
+
+            void InjectArgumentDataEntries(object injectableObject, string prefix = "")
             {
-                ArgumentAttribute argumentAttribute = fieldInfo.GetCustomAttribute(typeof(ArgumentAttribute)) as ArgumentAttribute;
-                
-                if (argumentAttribute == null) continue;
-                
-                fieldInfo.SetValue(this, argumentDataEntries[argumentAttribute.FieldName].GetValue(fieldInfo.FieldType));
+                foreach (FieldInfo fieldInfo in injectableObject.GetType().GetAllFieldsFromThisAndDerivedTypes())
+                {
+                    ArgumentAttribute argumentAttribute = fieldInfo.GetCustomAttribute(typeof(ArgumentAttribute)) as ArgumentAttribute;
+                    
+                    if (argumentAttribute != null)
+                    {
+                        fieldInfo.SetValue(injectableObject, argumentDataEntries[prefix + argumentAttribute.FieldName].GetValue(fieldInfo.FieldType));
+                        continue;
+                    }
+                    
+                    ArgumentItemAttribute argumentItemAttribute = fieldInfo.GetCustomAttribute(typeof(ArgumentItemAttribute)) as ArgumentItemAttribute;
+
+                    if (argumentItemAttribute != null)
+                    {
+                        InjectArgumentDataEntries(fieldInfo.GetRawConstantValue(), argumentItemAttribute.FieldName);
+                    }
+                }
             }
         }
 

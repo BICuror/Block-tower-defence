@@ -1,8 +1,7 @@
-using Cysharp.Threading.Tasks;
+using Combat.IngameUI.CombatEntityCanvas;
 using UnityEngine;
 using Cashing;
 using Combat;
-using Combat.IngameUI;
 
 public sealed class ApplyEffectToAllEnemiesOnActivation : ApplyEffectOnceToEntitiesInArea
 {

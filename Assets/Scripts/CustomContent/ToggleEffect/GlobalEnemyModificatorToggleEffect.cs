@@ -1,3 +1,4 @@
+using Combat.Entity.Modificators;
 using UnityEngine;
 using Zenject;
 using Combat;
@@ -5,14 +6,14 @@ using Combat;
 public sealed class GlobalEnemyModificatorToggleEffect : GlobalEffect
 {
     [Inject] private GlobalEnemyContainer _globalEnemyContainer;
-    private EntityModificatorData _entityModificatorData;
+    private EntityModificatorConfig _entityModificatorConfig;
     private int _chance = 100;
     
     public override void Enable()
     {
         if (Args.HasArgument("Chance")) _chance = Args.GetArgument<int>("Chance");
         
-        _entityModificatorData = Args.GetArgument<EntityModificatorData>("EntityModificatorData");
+        _entityModificatorConfig = Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig");
         
         _globalEnemyContainer.EnemyAdded += AddEntityModificator;
         _globalEnemyContainer.EnemyRemoved += RemoveEntityModificator;
@@ -38,12 +39,12 @@ public sealed class GlobalEnemyModificatorToggleEffect : GlobalEffect
     {
         if (Random.Range(0, 100) <= _chance)
         {
-            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+            entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorConfig);
         }
     }
 
     private void RemoveEntityModificator(EnemyEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorConfig);
     }
 }

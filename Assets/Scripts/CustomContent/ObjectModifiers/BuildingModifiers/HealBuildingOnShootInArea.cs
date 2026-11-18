@@ -1,32 +1,24 @@
-using UnityEngine;
-using Cashing;
+using ScriptableLogic.ArgumentItem;
+using Cysharp.Threading.Tasks;
+using Configs;
 using Combat;
 
-public sealed class HealBuildingOnShootInArea : EntityObjectModifier
+namespace ScriptableLogic.Commands
 {
-    [SerializeField] private AreaEntityDetector _buildingAreaScaner;
-    [Cached] private TaskCycle _taskCycle;
-    [Cached] private CombatEntity _owner;
-    private float _healAmount;
-    
-    private void Start()
+    public sealed class HealCommand : Command, ICommand, ICommand<CombatEntity>
     {
-        _healAmount = Args.GetArgument<float>("HealAmount");
+        [ArgumentItem("HealAmount")] private ValueArgumentItem _healAmount;
         
-        _taskCycle.TaskPerformed += TryToActivate;
-    }
+        public UniTask Execute()
+        {
+            return Execute(Args.Owner);
+        }
 
-    private void TryToActivate()
-    {
-        if (_buildingAreaScaner.IsEmpty) return;
-
-        CombatEntity entity = _buildingAreaScaner.RandomItem;
-        
-        entity.Health.ReceiveHeal(_healAmount, _owner);
-    }
-
-    private void OnDestroy()
-    {
-        _taskCycle.TaskPerformed -= TryToActivate;
+        public UniTask Execute(CombatEntity args)
+        {
+            args.Health.ReceiveHeal(_healAmount.GetValueModificationContainer(), Args.Owner);
+            
+            return UniTask.CompletedTask;
+        }
     }
 }

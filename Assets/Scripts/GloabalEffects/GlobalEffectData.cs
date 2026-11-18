@@ -1,12 +1,13 @@
 using System.Collections.Generic;
-using Configs;
+using Combat.Entity.Modificators;
+using UnityEngine.Serialization;
 using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
+using Configs;
 
 [CreateAssetMenu(fileName = "GlobalEffectData", menuName = "Effects/GlobalEffectData")]
 
-public class GlobalEffectData : InspectableData
+public class GlobalEffectData : InspectableConfig
 {    
     [SerializeField] private DomainConfig _domainConfig;
     

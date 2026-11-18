@@ -1,3 +1,5 @@
+using Combat.ValueModifiers;
+using Combat.Stats;
 using Cashing;
 using System;
 
@@ -52,13 +54,17 @@ namespace Combat
             OnDamageTaken(damage);
         }
 
-        public void ReceiveEnemyDamage(float baseDamage, CombatEntity damageDealer)
+        public void ReceiveEnemyDamage(ValueModificationContainer valueModificationContainer, CombatEntity damageDealer)
         {
-            float outDamage = damageDealer.ValueModifierContainer.DamageDealerContainer.ModifyByAllModificators(baseDamage, _entity);
-            
-            float resultDamage = _entity.ValueModifierContainer.DamageReceiverContainer.ModifyByAllModificators(outDamage, damageDealer);
-            
             if (!IsAlive() || !_invulnerabilityTokenContainer.IsEmpty) return;
+            
+            if (damageDealer.ValueModifierContainer.DamageDealerContainer.TryModify(valueModificationContainer, _entity)) return;
+            
+            if (_entity.ValueModifierContainer.DamageReceiverContainer.TryModify(valueModificationContainer, damageDealer)) return;
+            
+            if (!IsAlive()) return;
+
+            float resultDamage = valueModificationContainer.GetModifiedValue();
             
             ReceiveDamage(resultDamage, DamageVisualsType.Damage);
             
@@ -96,11 +102,13 @@ namespace Combat
         #region HealRecivement
         public void ReceivePercentHeal(float percent) => ReceiveHeal(percent * _maxHealth);
         
-        public void ReceiveHeal(float baseHeal, CombatEntity healDealer)
+        public void ReceiveHeal(ValueModificationContainer valueModificationContainer, CombatEntity healDealer)
         {
-            float outHeal = healDealer.ValueModifierContainer.DamageDealerContainer.ModifyByAllModificators(baseHeal, _entity);
+            if (healDealer.ValueModifierContainer.HealDealerContainer.TryModify(valueModificationContainer, _entity)) return;
             
-            float resultHeal = _entity.ValueModifierContainer.DamageReceiverContainer.ModifyByAllModificators(outHeal, healDealer);
+            if (_entity.ValueModifierContainer.HealReceiverContainer.TryModify(valueModificationContainer, healDealer)) return;
+            
+            float resultHeal = valueModificationContainer.GetModifiedValue();
             
             ReceiveHeal(resultHeal);
         }

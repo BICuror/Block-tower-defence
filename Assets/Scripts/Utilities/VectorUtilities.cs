@@ -36,4 +36,11 @@ public static class VectorUtilities
         
         return newVector2Int;
     }
+    
+    public static Vector3Int ToIntVector(this Vector3 vector)
+    {
+        Vector3Int newVector3Int = new Vector3Int(Mathf.RoundToInt(vector.x), Mathf.RoundToInt(vector.y), Mathf.RoundToInt(vector.z));
+        
+        return newVector3Int;
+    }
 }

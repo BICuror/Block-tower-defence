@@ -1,5 +1,7 @@
+using Combat.IngameUI.CombatEntityCanvas;
 using Cysharp.Threading.Tasks;
-using Combat.IngameUI;
+using Combat.ValueModifiers;
+using Combat.Stats;
 using UnityEngine;
 using Cashing;
 using Combat;
@@ -19,7 +21,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     [Cached] private BuildingEntity _ownerEntity;
     [Cached] private Damage _damage;
     private float _elapsedTime;
-    private InfernoDamageModifier _infernoDamageModifier = new();
+    private ChargeableDamageModifier _infernoValueModifier = new();
     
     private EntityCanvasBar _chargeBar;
     private CombatEntity _currentEnemy;
@@ -32,7 +34,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     {
         base.Start();
         
-        _ownerEntity.ValueModifierContainer.DamageDealerContainer.Add(_infernoDamageModifier);
+        _ownerEntity.ValueModifierContainer.DamageDealerContainer.Add(_infernoValueModifier);
         
         _chargeBar = _ownerEntity.ComponentsContainer.Get<EntityCanvas>().AddBar(_canvasBarIcon, 0f, _chargeBarPrefab);
         
@@ -67,16 +69,11 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         return true;
     }
 
-    public void AddCharge(float addedChargeValue)
+    public void ChangeChargePercent(float chargeChangeValue)
     {
-        _elapsedTime += addedChargeValue;
+        _elapsedTime = Mathf.Clamp(_elapsedTime + chargeChangeValue, 0f, _chargeDuration.Value);
         
-        if (_elapsedTime >= _chargeDuration.Value)
-        {
-            _elapsedTime = _chargeDuration.Value;
-            
-            OnMaxChargeReached.Execute();
-        }
+        if (_elapsedTime >= _chargeDuration.Value) OnMaxChargeReached.Execute();
         
         float charge = _elapsedTime / _chargeDuration.Value;
         
@@ -92,7 +89,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
             return;
         }
 
-        AddCharge(_taskCycleRechargeDuration.Value);
+        ChangeChargePercent(_taskCycleRechargeDuration.Value);
         
         float charge = _elapsedTime / _chargeDuration.Value;
 
@@ -105,7 +102,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
             return;
         }
         
-        _weaponBase.DamageEntity(_damage.Value, _currentEnemy);
+        _weaponBase.DamageEntity(_damage.GetValueModificationContainer(), _currentEnemy);
     }
     
     private void TryClearEnemy(CombatEntity removedEnemy)
@@ -124,7 +121,7 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
     {
         _beamSystem.SetAlpha(value);
         _chargeBar.SetValue(value).Forget();
-        _infernoDamageModifier.SetCharge(value);
+        _infernoValueModifier.SetCharge(value);
     }
 
     private sealed class ResetChargeBehaviour : CombatBehaviour
@@ -132,27 +129,6 @@ public sealed class InfernoTower : DefaultCombatTaskConditionProvider
         public override void Execute()
         {
             Entity.ComponentsContainer.Get<InfernoTower>().ResetCharge();
-        }
-    }
-    
-    private sealed class InfernoDamageModifier : DamageModifier
-    {
-        private MaxDamageMultiplier _maxDamageMultiplier;
-        private float _charge;
-        
-        public override ResolveOrder Order => ResolveOrder.Start;
-
-        public override void Initialize()
-        {
-            _maxDamageMultiplier = OwnerEntity.StatContainer.Get<MaxDamageMultiplier>();
-            SetCharge(0f);
-        }
-        
-        public void SetCharge(float charge) => _charge = charge;
-        
-        public override float Modify(CombatEntity otherEntity, float value)
-        {
-            return value * Mathf.Lerp(1, _maxDamageMultiplier.Value, _charge);
         }
     }
 }

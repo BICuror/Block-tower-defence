@@ -1,9 +1,12 @@
-public interface ICondition<T>
+namespace ScriptableLogic.Conditions
 {
-    public bool GetValue(T value);
-}
-
-public interface ICondition
-{
-    public bool GetValue();
+    public interface ICondition<T>
+    {
+        public bool GetValue(T value);
+    }
+    
+    public interface ICondition
+    {
+        public bool GetValue();
+    }
 }

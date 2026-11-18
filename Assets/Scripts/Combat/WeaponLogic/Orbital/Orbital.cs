@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using WorldGeneration;
+using Combat.Stats;
 using UnityEngine;
 using Combat;
 using System;
@@ -151,7 +152,7 @@ public sealed class Orbital : WeaponBase
     {
         if (other.TryGetComponent(out EnemyEntity enemyEntity))
         {
-            DamageEntity(_damage.Value, enemyEntity);
+            DamageEntity(_damage.GetValueModificationContainer(), enemyEntity);
         }
     }
 }

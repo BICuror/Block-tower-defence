@@ -1,33 +1,37 @@
+using Combat.IngameUI.Inspection.InspectionCanvas;
+using Combat.IngameUI.Inspection;
+using Combat.Entity.Modificators;
 using Cysharp.Threading.Tasks;
 using Combat;
 
 public sealed class BuildingUpgradeSelectionOptionObject : SelectionOptionObject
 {
     private BuildingEntity _targetBuildingEntity;
-    private EntityModificatorData _modificatorData;
-    private EffectInspectionTooltipPreview _effectPreviewTooltip;
+    private EntityModificatorConfig _modificatorConfig;
+    private EntityModificatorInspectionCanvasPreview _entityModificatorPreviewCanvas;
     
-    public EntityModificatorData ModificatorData => _modificatorData;
-
+    public EntityModificatorConfig ModificatorConfig => _modificatorConfig;
+    public BuildingEntity TargetBuildingEntity => _targetBuildingEntity;
+    
     public void SetTargetBuildingEntity(BuildingEntity buildingEntity) => _targetBuildingEntity = buildingEntity;
 
-    public void SetEffectData(EntityModificatorData modificatorData)
+    public void SetEffectData(EntityModificatorConfig modificatorConfig)
     {
-        _modificatorData = modificatorData;
+        _modificatorConfig = modificatorConfig;
     }
     
     public override void ApplySelectedEffect()
     {
-        _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_modificatorData);
+        _targetBuildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_modificatorConfig);
     }
     
     public override void OnObjectCreationCompleted()
     {
-        _effectPreviewTooltip = InspectionTooltipManager.Instance.OpenEffectPreviewTooltip(_modificatorData, transform);
+        _entityModificatorPreviewCanvas = InspectionCanvasManager.Instance.OpenEffectPreviewTooltip(_modificatorConfig, transform);
     }
 
     private void OnDestroy()
     {
-        InspectionTooltipManager.Instance.DestroyElement(_effectPreviewTooltip).Forget();
+        InspectionCanvasManager.Instance.DestroyElement(_entityModificatorPreviewCanvas).Forget();
     }
 }

@@ -9,12 +9,12 @@ namespace Configs
     {
         [HideInInspector] public string Name = "Non defined";
         
-        [SerializeField, AllowNesting, EnableIf("DisplayArguments"), NonReorderable]
-        private List<ArgumentDataEntry> _arguments;
+        [SerializeField, AllowNesting, ShowIf("DisplayArguments")] private List<ArgumentDataEntry> _arguments;
 
         public IReadOnlyList<ArgumentDataEntry> Arguments => _arguments;
 
         protected abstract bool DisplayArguments { get; }
+        
         protected abstract Type GetCurrentTargetType();
 
         public virtual List<INonScriptableObjectUpdatable> GetAllUpdatables()
@@ -45,8 +45,7 @@ namespace Configs
             List<ArgumentDataEntry> distinctEntries = GetAllDistinctEntries(requiredArguments);
             List<ArgumentData> distinctDatas = GetAllDistinctDatas(requiredArguments);
 
-            bool allArgumentsAreValid = requiredArguments.Count == _arguments.Count && distinctEntries.Count == 0 &&
-                                        distinctDatas.Count == 0;
+            bool allArgumentsAreValid = requiredArguments.Count == _arguments.Count && distinctEntries.Count == 0 && distinctDatas.Count == 0;
 
             if (allArgumentsAreValid) return;
 

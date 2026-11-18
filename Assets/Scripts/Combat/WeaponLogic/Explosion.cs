@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
+using Combat.Stats;
 using UnityEngine;
-using Zenject;
 
 namespace Combat
 {
@@ -30,7 +30,7 @@ namespace Combat
 
             for (int i = 0; i < hitEnemies.Length; i++)
             {
-                DamageEntity(_explosionDamage.Value, hitEnemies[i].GetComponent<CombatEntity>());
+                DamageEntity(_explosionDamage.GetValueModificationContainer(), hitEnemies[i].GetComponent<CombatEntity>());
             }
 
             ScreenShakeController.Instance.PlayScreenShake(_screenShakeData, transform.position);

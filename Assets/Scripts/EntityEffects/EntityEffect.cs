@@ -4,22 +4,22 @@ using Random = UnityEngine.Random;
 
 public abstract class EntityEffect
 {
-    private EntityEffectData _effectData;
+    private EntityEffectConfig _effectConfig;
     protected ArgumentsContainer ArgumentsContainer;
     protected CombatEntity Entity;
     public int TrueStack;
     public int Stack;
     
-    public int MaxStacks => _effectData.MaxStacks;
-    public EntityEffectData EffectData => _effectData;
+    public int MaxStacks => _effectConfig.MaxStacks;
+    public EntityEffectConfig EffectConfig => _effectConfig;
     
     public abstract EntityEffectType EffectType { get; }
     public virtual bool CanBeApplied() => true;
     
-    public void Initialize(ArgumentsContainer argumentsContainer, EntityEffectData effectData)
+    public void Initialize(ArgumentsContainer argumentsContainer, EntityEffectConfig effectConfig)
     {
         ArgumentsContainer = argumentsContainer;
-        _effectData = effectData;
+        _effectConfig = effectConfig;
         OnInitialized();
     }
 

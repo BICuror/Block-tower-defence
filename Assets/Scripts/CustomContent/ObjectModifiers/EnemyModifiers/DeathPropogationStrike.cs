@@ -2,11 +2,12 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Cashing;
 using Combat;
+using UnityEngine.Serialization;
 
 public class DeathPropogationStrike : MonoBehaviour
 {
     [Cached] private CombatEntity _ownerEntity;
-    [SerializeField] private PropogationStrike _propogationStrikePrefab;
+    [FormerlySerializedAs("_propogationStrikePrefab")] [SerializeField] private RicochetStrike _ricochetStrikePrefab;
     
     private void Start()
     {
@@ -17,13 +18,13 @@ public class DeathPropogationStrike : MonoBehaviour
     {
         _ownerEntity.Health.Died -= LaunchPropogationStrike;
         
-        PropogationStrike propogationStrike = Instantiate(_propogationStrikePrefab, transform.position, Quaternion.identity);
-        propogationStrike.Initialize(_ownerEntity);
+        RicochetStrike ricochetStrike = Instantiate(_ricochetStrikePrefab, transform.position, Quaternion.identity);
+        ricochetStrike.Initialize(_ownerEntity);
         
-        StartPropogationStrike(propogationStrike).Forget();
+        StartPropogationStrike(ricochetStrike).Forget();
     }
 
-    private async UniTask StartPropogationStrike(PropogationStrike strike)
+    private async UniTask StartPropogationStrike(RicochetStrike strike)
     {
         await strike.StartPropogationStrike(strike.transform.position);
         Destroy(strike.gameObject);

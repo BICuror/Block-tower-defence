@@ -1,11 +1,13 @@
+using Combat.Entity.Modificators;
+
 public sealed class ApplyEntityModificatorIfNotFullHP : EntityModificator
 {
-    private EntityModificatorData _entityModificatorData;
+    private EntityModificatorConfig _entityModificatorConfig;
     private bool _applied;
     
     public override void Enable()
     {
-        _entityModificatorData = Args.GetArgument<EntityModificatorData>("EntityModificatorData");
+        _entityModificatorConfig = Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig");
 
         UpdateModificatorState();
 
@@ -29,13 +31,13 @@ public sealed class ApplyEntityModificatorIfNotFullHP : EntityModificator
 
     private void ApplyModificator()
     {
-        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorConfig);
         _applied = true;
     }
 
     private void RemoveModificator()
     {
-        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorData);
+        Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorConfig);
         _applied = false;
     }
 }

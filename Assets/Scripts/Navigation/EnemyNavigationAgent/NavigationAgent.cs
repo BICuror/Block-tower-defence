@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using Combat.Stats;
 using UnityEngine;
 using Cashing;
 using Zenject;

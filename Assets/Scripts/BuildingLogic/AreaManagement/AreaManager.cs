@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
+using Combat.Stats;
 using UnityEngine;
 using Cashing;
 using Combat;
 
-public class AreaManager : MonoBehaviour
+public sealed class AreaManager : MonoBehaviour
 {
     [SerializeField] private List<AreaScanerController> _mainScanerControllers;
     

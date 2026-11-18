@@ -1,6 +1,9 @@
+using Combat.Entity.Modificators;
+using Combat.IngameUI.Inspection;
 using Combat.EnemySpawnSystem;
 using Combat.Animation;
 using Combat.IngameUI;
+using Combat.Stats;
 using UnityEngine;
 using Navigation;
 using CuroAudio;
@@ -108,7 +111,7 @@ namespace Combat.Enemies
             
             _enemyConfig.EntityModificatorDatas.ForEach(entityModificatorData =>
             {
-                _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(entityModificatorData);
+                _combatEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(entityModificatorData);
             });
         }
         

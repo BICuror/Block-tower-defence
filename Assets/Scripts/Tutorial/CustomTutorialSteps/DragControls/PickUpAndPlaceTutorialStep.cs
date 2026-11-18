@@ -1,6 +1,7 @@
+using Combat.IngameUI.CombatEntityCanvas;
 using Cysharp.Threading.Tasks;
 using GameControls.States;
-using Combat.IngameUI;
+using Combat.Stats;
 using GameControls;
 using UnityEngine;
 using Zenject;

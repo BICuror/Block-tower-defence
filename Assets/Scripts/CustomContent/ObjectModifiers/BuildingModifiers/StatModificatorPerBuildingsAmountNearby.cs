@@ -3,6 +3,7 @@ using Cashing;
 using System;
 using Combat;
 using Combat.IngameUI;
+using Combat.IngameUI.CombatEntityCanvas;
 
 public sealed class StatModificatorPerBuildingsAmountNearby : EntityObjectModifier
 {

@@ -1,1 +1,4 @@
-public sealed class AOEDamageMultiplier : Stat {}
+namespace Combat.Stats
+{
+    public sealed class AOEDamageMultiplier : Stat {}
+}

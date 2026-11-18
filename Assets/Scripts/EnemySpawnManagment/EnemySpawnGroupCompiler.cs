@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using WorldGeneration;
+using Combat.Stats;
 using UnityEngine;
 using Zenject;
 

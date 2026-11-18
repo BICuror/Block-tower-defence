@@ -1,4 +1,7 @@
-public sealed class ExplosionDelay : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 0.1f;
+    public sealed class ExplosionDelay : Stat
+    {
+        protected override float MinimalValue => 0.1f;
+    }
 }

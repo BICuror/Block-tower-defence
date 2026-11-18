@@ -1,4 +1,7 @@
-public sealed class OrbitalSpeed : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 0.01f;
+    public sealed class OrbitalSpeed : Stat
+    {
+        protected override float MinimalValue => 0.005f;
+    }
 }

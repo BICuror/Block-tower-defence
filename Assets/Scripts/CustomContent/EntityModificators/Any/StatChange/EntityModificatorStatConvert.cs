@@ -1,56 +1,47 @@
-using System;
+using ScriptableLogic.Conditions;
+using Cysharp.Threading.Tasks;
+using Combat.Stats;
+using Configs;
 
-public sealed class EntityModificatorStatConvert : EntityModificator
+namespace ScriptableLogic.Commands
 {
-    private StatModifier _statModifier;
-    private Type _createdStatType;
-    private Type _mainStatType;
-    private bool _createdStat;
-    
-    public override void Enable()
+    public sealed class ConvertStatCommand : StatCommand, INonExecutableCommand
     {
-        _createdStatType = Type.GetType(Args.GetArgument<string>("CreatedStatType"));
-        _mainStatType = Type.GetType(Args.GetArgument<string>("MainStatType"));
+        [Argument("ConvertedFromStatConfig")] private StatConfig _convertedFromStatConfig;
+        private Stat _convertedStat;
         
-        if (!Entity.StatContainer.Has(_createdStatType))
+        public override UniTask Enable()
         {
-            _createdStat = true;
+            Stat convertedFromStat = Args.Owner.StatContainer.Get(_convertedFromStatConfig.GetStatType());
             
-            Entity.StatContainer.AddStat(Activator.CreateInstance(_createdStatType) as Stat);
-        }
-        else
-        {
-            Entity.StatContainer.Get(_createdStatType).AddStatModifier(_statModifier);
+            Args.Owner.StatContainer.AddStat(StatConfig.GetStatType(), _convertedStat.Value);
+            convertedFromStat.ValueChanged += SetDefaultValue;
+            
+            return UniTask.CompletedTask;
         }
 
-        Entity.StatContainer.Get(_mainStatType).ValueChanged += UpdateStatValue;
-        UpdateStatValue(Entity.StatContainer.Get(_mainStatType).Value);
-    }
-
-    private void UpdateStatValue(float value)
-    {
-        if (_createdStat)
+        private void SetDefaultValue(float value)
         {
-            Entity.StatContainer.Get(_createdStatType).SetDefault(value);
+            _convertedStat.SetDefault(value);    
         }
-        else
-        {
-            _statModifier.SetFlat(value);
+        
+        public override UniTask Disable()
+        {            
+            Stat convertedFromStat = Args.Owner.StatContainer.Get(_convertedFromStatConfig.GetStatType());
+            
+            convertedFromStat.ValueChanged -= SetDefaultValue;
+            
+            return UniTask.CompletedTask;
         }
     }
 
-    public override void Disable()
+    public sealed class HasStatCondition : Condition, ICondition
     {
-        Entity.StatContainer.Get(_mainStatType).ValueChanged -= UpdateStatValue;
+        [Argument("RequiredStatConfig")] private StatConfig _requiredStatConfig;
         
-        if (_createdStat)
+        public bool GetValue()
         {
-            
-            Entity.StatContainer.Remove(_createdStatType);
-        }
-        else
-        {
-            Entity.StatContainer.Get(_createdStatType).RemoveStatModifier(_statModifier);
+            return Args.Owner.StatContainer.Has(_requiredStatConfig.GetStatType());
         }
     }
 }

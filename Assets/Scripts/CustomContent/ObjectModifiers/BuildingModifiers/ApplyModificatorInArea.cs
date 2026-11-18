@@ -1,27 +1,28 @@
+using Combat.Entity.Modificators;
 using UnityEngine;
 using Combat;
 
 public sealed class ApplyModificatorInArea : EntityObjectModifier
 {
     [SerializeField] private AreaEntityDetector _areaEntityDetector;
-    private EntityModificatorData _entityModificatorData;
+    private EntityModificatorConfig _entityModificatorConfig;
     
     private void Start()
     {
         _areaEntityDetector.AddedItem += ApplyModificator;
         _areaEntityDetector.RemovedItem += RemoveModificator;
         
-        _entityModificatorData = Args.GetArgument<EntityModificatorData>("EntityModificatorData");
+        _entityModificatorConfig = Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig");
     }
 
     private void ApplyModificator(CombatEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorConfig);
     }
     
     private void RemoveModificator(CombatEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorConfig);
     }
 
     private void OnDestroy()

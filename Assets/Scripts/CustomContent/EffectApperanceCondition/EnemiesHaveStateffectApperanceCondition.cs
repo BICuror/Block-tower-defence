@@ -9,6 +9,6 @@ public sealed class EnemiesHaveStateffectApperanceCondition : EffectApperanceCon
     {
         string requiredTypeName = Args.GetArgument<string>("RequiredTypeName");
         
-        return _enemySpawnGroupContainer.GetAllEnemyConfigs().Exists(enemyData => enemyData.StatInitializers.Exists(statInitializer => statInitializer.StatData.GetStatType().Name == requiredTypeName));
+        return _enemySpawnGroupContainer.GetAllEnemyConfigs().Exists(enemyData => enemyData.StatInitializers.Exists(statInitializer => statInitializer.StatConfig.GetStatType().Name == requiredTypeName));
     }
 }

@@ -1,14 +1,15 @@
+using Combat.Entity.Modificators;
 using Zenject;
 using Combat;
 
 public sealed class GlobalBuildingModificatorToggleEffect : GlobalEffect
 {
     [Inject] private GlobalBuildingContainer _globalBuildingContainer;
-    private EntityModificatorData _entityModificatorData;
+    private EntityModificatorConfig _entityModificatorConfig;
     
     public override void Enable()
     {
-        _entityModificatorData = Args.GetArgument<EntityModificatorData>("EntityModificatorData");
+        _entityModificatorConfig = Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig");
         
         _globalBuildingContainer.BuildingAdded += AddEntityModificator;
         _globalBuildingContainer.BuildingRemoved += RemoveEntityModificator;
@@ -32,11 +33,11 @@ public sealed class GlobalBuildingModificatorToggleEffect : GlobalEffect
 
     private void AddEntityModificator(BuildingEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(_entityModificatorConfig);
     }
 
     private void RemoveEntityModificator(BuildingEntity entity)
     {
-        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorData);
+        entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(_entityModificatorConfig);
     }
 }

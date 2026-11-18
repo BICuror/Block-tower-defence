@@ -12,6 +12,7 @@ using Navigation;
 using Zenject;
 using Combat;
 using System;
+using UI;
 
 public sealed class IdleStateController : WaveStateController
 {

@@ -1,4 +1,7 @@
-public sealed class TaskRechargeDuration : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 0.05f;
+    public sealed class TaskRechargeDuration : Stat
+    {
+        protected override float MinimalValue => 0.05f;
+    }
 }

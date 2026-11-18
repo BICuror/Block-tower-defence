@@ -1,1 +1,4 @@
-public sealed class MaxDamageMultiplier : Stat {}
+namespace Combat.Stats
+{
+    public sealed class MaxDamageMultiplier : Stat {}
+}

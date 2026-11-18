@@ -1,4 +1,7 @@
-public sealed class SpawnDelay : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 0.5f;
+    public sealed class SpawnDelay : Stat
+    {
+        protected override float MinimalValue => 0.5f;
+    }
 }

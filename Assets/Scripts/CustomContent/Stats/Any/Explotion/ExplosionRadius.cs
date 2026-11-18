@@ -1,1 +1,4 @@
-public sealed class ExplosionRadius : Stat {}
+namespace Combat.Stats
+{
+    public sealed class ExplosionRadius : Stat {}
+}

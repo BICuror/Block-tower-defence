@@ -20,7 +20,7 @@ public sealed class GlobalEffectFactory
         }
         catch (Exception e)
         {
-            Debug.LogError($"Effect data has appearance condition, but doesn't have type {globalEffectData.name}");
+            Debug.LogError($"Effect config has appearance condition, but doesn't have type {globalEffectData.name}");
             throw e;
         }
     }

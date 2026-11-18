@@ -1,3 +1,5 @@
+using Combat.IngameUI.Inspection.InspectionCanvas;
+using Combat.IngameUI.Inspection;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Combat.EnemySpawnSystem;
@@ -12,21 +14,21 @@ namespace Tutorial.Custom
         
         public override async UniTask StartStep()
         {
-            InspectionTooltipManager.Instance.OpenedTooltip += TrySubscribeToEntityTooltipSync;
+            InspectionCanvasManager.Instance.OpenedTooltip += TrySubscribeToEntityTooltipSync;
             
             await EnableUI();
         }
 
-        private void TrySubscribeToEntityTooltipSync(InspectionPanelBase inspectionPanelBase) => TrySubscribeToEntityTooltip(inspectionPanelBase).Forget();
-        private async UniTask TrySubscribeToEntityTooltip(InspectionPanelBase inspectionPanelBase)
+        private void TrySubscribeToEntityTooltipSync(InspectionCanvasBase inspectionCanvasBase) => TrySubscribeToEntityTooltip(inspectionCanvasBase).Forget();
+        private async UniTask TrySubscribeToEntityTooltip(InspectionCanvasBase inspectionCanvasBase)
         {
-            if (inspectionPanelBase is not EntityTooltip) return;
+            if (inspectionCanvasBase is not EntityInspectionCanvas) return;
 
-            EntityTooltip entityTooltip = inspectionPanelBase as EntityTooltip;
+            EntityInspectionCanvas entityInspectionCanvas = inspectionCanvasBase as EntityInspectionCanvas;
 
-            if (entityTooltip.InspectedEntity is not EnemyEntity) return;
+            if (entityInspectionCanvas.InspectedEntity is not EnemyEntity) return;
 
-            EnemyConfig enemyConfig = entityTooltip.InspectedEntity.ComponentsContainer.Get<EnemyBootstrap>().EnemyConfig;
+            EnemyConfig enemyConfig = entityInspectionCanvas.InspectedEntity.ComponentsContainer.Get<EnemyBootstrap>().EnemyConfig;
             
             if (_inspectedEnemyData.Contains(enemyConfig)) return;
             
@@ -36,7 +38,7 @@ namespace Tutorial.Custom
 
             DisableUI();
             
-            await UniTask.WaitWhile(() => inspectionPanelBase);
+            await UniTask.WaitWhile(() => inspectionCanvasBase);
             
             if (IsComplete) return;
 
@@ -45,7 +47,7 @@ namespace Tutorial.Custom
         
         public override async UniTask EndStep()
         {
-            InspectionTooltipManager.Instance.OpenedTooltip -= TrySubscribeToEntityTooltipSync;
+            InspectionCanvasManager.Instance.OpenedTooltip -= TrySubscribeToEntityTooltipSync;
             
             await DisableUI();
         }

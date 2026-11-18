@@ -1,8 +1,10 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using Combat.EnemySpawnSystem;
 using UnityEngine;
 using CuroAudio;
 using System;
+using Combat.ValueModifiers;
 
 namespace Configs
 {
@@ -12,7 +14,7 @@ namespace Configs
         Int = 1,
         Float = 2,
         GameObject = 3,
-        EntityModificatorData = 4,
+        EntityModificatorConfig = 4,
         Bool = 5,
         EntityEffectParticleHandler = 6,
         EntityObjectModifier = 7,
@@ -22,7 +24,8 @@ namespace Configs
         String = 11,
         StatusEffectConfig = 12,
         AudioEnum = 13,
-        StatData = 14,
+        StatConfig = 14,
+        ValueModifierConfig = 15,
     }
 
     public static class ArgumentTypeLookupTable
@@ -32,7 +35,7 @@ namespace Configs
             {typeof(int), ArgumentType.Int},
             {typeof(float), ArgumentType.Float},
             {typeof(GameObject), ArgumentType.GameObject},
-            {typeof(EntityModificatorData), ArgumentType.EntityModificatorData},
+            {typeof(EntityModificatorConfig), ArgumentType.EntityModificatorConfig},
             {typeof(bool), ArgumentType.Bool},
             {typeof(EntityEffectParticleHandler), ArgumentType.EntityEffectParticleHandler},
             {typeof(EntityObjectModifier), ArgumentType.EntityObjectModifier},
@@ -40,9 +43,10 @@ namespace Configs
             {typeof(AdditionalEnemyGroupDataConfig), ArgumentType.AdditionalEnemyGroup},
             {typeof(Sprite), ArgumentType.Sprite},
             {typeof(string), ArgumentType.String},
-            {typeof(EntityEffectData), ArgumentType.StatusEffectConfig},
+            {typeof(EntityEffectConfig), ArgumentType.StatusEffectConfig},
             {typeof(AudioEnum), ArgumentType.AudioEnum},
-            {typeof(StatData), ArgumentType.StatData},
+            {typeof(StatConfig), ArgumentType.StatConfig},
+            {typeof(ValueModifierConfig), ArgumentType.ValueModifierConfig},
         };
     }
 }

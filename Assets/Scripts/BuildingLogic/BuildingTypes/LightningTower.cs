@@ -9,22 +9,22 @@ public sealed class LightningTower : DefaultCombatTaskConditionProvider
     [Cached] private AreaEntityDetector _enemyAreaScaner;
 
     [Header("Links")] 
-    [SerializeField] private PropogationStrike _ligningPrefab;
+    [SerializeField] private RicochetStrike _ligningPrefab;
     [SerializeField] private Transform _shootingPoint;
 
-    private WeaponPool<PropogationStrike> _lightningStrikeObjectPool;
+    private WeaponPool<RicochetStrike> _lightningStrikeObjectPool;
 
     private void Start()
     {
         base.Start();
-        _lightningStrikeObjectPool = new WeaponPool<PropogationStrike>(_ligningPrefab, 3, _ownerEntity);
+        _lightningStrikeObjectPool = new WeaponPool<RicochetStrike>(_ligningPrefab, 3, _ownerEntity);
 
         _ownerEntity.ComponentsContainer.Get<TaskCycle>().TaskPerformed += Shoot;
     }
 
     private void Shoot()
     {
-        PropogationStrike ligning = _lightningStrikeObjectPool.GetPooledWeapon();
+        RicochetStrike ligning = _lightningStrikeObjectPool.GetPooledWeapon();
 
         ligning.StartPropogationStrike(_enemyAreaScaner.GetPrioritizedEntity(), _shootingPoint.position).Forget();
     }

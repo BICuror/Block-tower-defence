@@ -1,7 +1,10 @@
-public sealed class GlobalStatContainer : StatContainer
+namespace Combat.Stats
 {
-    public GlobalStatContainer(IslandDataContainer islandDataContainer)
+    public sealed class GlobalStatContainer : StatContainer
     {
-        AddStats(islandDataContainer.Data.GlobalStatInitializerConfig.StatInitializers);
+        public GlobalStatContainer(IslandDataContainer islandDataContainer)
+        {
+            AddStats(islandDataContainer.Data.GlobalStatInitializerConfig.StatInitializers);
+        }
     }
 }

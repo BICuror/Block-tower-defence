@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using System.Linq;
 
 public sealed class EntityTagRequirementsChecker

@@ -1,9 +1,12 @@
+using Combat.IngameUI.Inspection.Tooltips;
+using Combat.IngameUI.CombatEntityCanvas;
+using Combat.IngameUI.Inspection;
 using Cysharp.Threading.Tasks;
 using Combat.UpgradeCharges;
-using Combat.IngameUI;
 using UnityEngine;
-using Zenject;
+using TextParsers;
 using Cashing;
+using Zenject;
 
 namespace Combat.OptionalTasks
 {

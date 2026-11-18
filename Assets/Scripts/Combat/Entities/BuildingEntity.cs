@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
 using UnityEngine;

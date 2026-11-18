@@ -1,72 +1,80 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Combat.Effects;
 using UnityEngine;
 using Cashing;
 using Zenject;
-using Combat;
-using Combat.Effects;
-using UnityEngine.Serialization;
 
-public sealed class EntityModificatorsContainer : MonoBehaviour
+namespace Combat.Entity.Modificators
 {
-    private readonly ListDictionary<EntityModificatorData, Effect> _appliedEffects = new();
-    [FormerlySerializedAs("_initialModificatorDatas")] [SerializeField] private List<EntityModificatorData> _initialEffectConfigs;
-    [Inject] private EffectFactory _effectFactory;
-    [Cached] private CombatEntity _ownerEntity;
-        
-    public List<EntityModificatorData> AppliedModificators => _appliedEffects.GetAllKeys();
-
-    private async void Start()
+    public sealed class EntityModificatorsContainer : MonoBehaviour
     {
-        await UniTask.WaitForFixedUpdate();
+        private readonly ListDictionary<EntityModificatorConfig, Effect> _appliedEffects = new();
+
+        [SerializeField] private List<EntityModificatorConfig> _initialEffectConfigs;
+
+        [Inject] private EffectFactory _effectFactory;
+        [Cached] private CombatEntity _ownerEntity;
+
+        public List<EntityModificatorConfig> AppliedModificators => _appliedEffects.GetAllKeys();
         
-        _initialEffectConfigs.ForEach(modificatorData =>
-        {
-            AddEffect(modificatorData);
-        });   
-    }
+        public event Action<EntityModificatorConfig> ModificatorApplied;
+        public event Action<EntityModificatorConfig> ModificatorRemoved;
 
-    public int GetEffectsAmount(EntityModificatorData modificatorData) => _appliedEffects.Get(modificatorData).Count;
-    
-    public void AddEffect(EntityModificatorData modificatorData)
-    {
-        if (_effectFactory.EffectCanBeApplied(modificatorData, _ownerEntity))
+        private async void Start()
         {
-            Effect effect = _effectFactory.CreateEntityModificator(modificatorData, _ownerEntity);
+            await UniTask.WaitForFixedUpdate();
 
-            _appliedEffects.Add(modificatorData, effect);
-            
-            effect.Enable().Forget();
+            _initialEffectConfigs.ForEach(modificatorData => { AddModificator(modificatorData); });
         }
-    }
 
-    public bool Has(EntityModificatorData modificatorData)
-    {
-        return _appliedEffects.GetAllKeys().Contains(modificatorData);
-    }
-    
-    public void RemoveModificator(EntityModificatorData modificatorData)
-    {
-        if (_appliedEffects.Contains(modificatorData))
+        public int GetEffectsAmount(EntityModificatorConfig modificatorConfig) => _appliedEffects.Get(modificatorConfig).Count;
+
+        public void AddModificator(EntityModificatorConfig modificatorConfig)
         {
-            Effect effect = _appliedEffects.Remove(modificatorData);
-
-            effect.Disable();
-        }
-    }
-
-    public List<EntityModifcatorTag> GetAppliedTags()
-    {
-        List<EntityModifcatorTag> entityModifcatorTags = new();
-        
-        _appliedEffects.GetAllKeys().ForEach(modificatorData =>
-        {
-            for (int i = 0; i < _appliedEffects.Get(modificatorData).Count; i++)
+            if (_effectFactory.EffectCanBeApplied(modificatorConfig, _ownerEntity))
             {
-                modificatorData.Tags.ForEach(tag => entityModifcatorTags.Add(tag));
-            }
-        });
+                Effect effect = _effectFactory.CreateEntityModificator(modificatorConfig, _ownerEntity);
 
-        return entityModifcatorTags;
+                _appliedEffects.Add(modificatorConfig, effect);
+
+                effect.Enable().Forget();
+                
+                ModificatorApplied?.Invoke(modificatorConfig);
+            }
+        }
+
+        public bool Has(EntityModificatorConfig modificatorConfig)
+        {
+            return _appliedEffects.GetAllKeys().Contains(modificatorConfig);
+        }
+
+        public void RemoveModificator(EntityModificatorConfig modificatorConfig)
+        {
+            if (_appliedEffects.Contains(modificatorConfig))
+            {
+                Effect effect = _appliedEffects.Remove(modificatorConfig);
+
+                effect.Disable();
+                
+                ModificatorRemoved?.Invoke(modificatorConfig);
+            }
+        }
+
+        public List<EntityModifcatorTag> GetAppliedTags()
+        {
+            List<EntityModifcatorTag> entityModifcatorTags = new();
+
+            _appliedEffects.GetAllKeys().ForEach(modificatorData =>
+            {
+                for (int i = 0; i < _appliedEffects.Get(modificatorData).Count; i++)
+                {
+                    modificatorData.Tags.ForEach(tag => entityModifcatorTags.Add(tag));
+                }
+            });
+
+            return entityModifcatorTags;
+        }
     }
 }

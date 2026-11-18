@@ -1,3 +1,5 @@
+using Combat.Stats;
+
 public sealed class SpeedUpEffect : EntityEffect
 {
     private float _speedMultiplier;

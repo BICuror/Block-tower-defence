@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using UnityEngine;
 using System.Linq;
 using Zenject;
 using Combat;
 using System;
-
 using Random = UnityEngine.Random;
 
 public sealed class EntityModificatorDataSelector : MonoBehaviour
@@ -15,12 +15,11 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     [SerializeField] private List<EntityModificatorRarityDrop> _modificatorRarityDrops;
     private int _currentSelectionIndex;
     
-    public List<EntityModificatorData> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
+    public List<EntityModificatorConfig> GetRandomEntityEffectDatas(BuildingEntity entity, int amount)
     {
-        List<EntityModificatorData> resultEffectDatas = new();
+        List<EntityModificatorConfig> resultEffectDatas = new();
         
-        List<EntityModificatorData> allEffectDatas = _islandDataContainer.Data.EntityModificatorDataContainer.EntityModificatorDataList.FindAll(modificator => 
-           UpgradeCanAppear(modificator, entity));
+        List<EntityModificatorConfig> allEffectDatas = _islandDataContainer.Data.EntityModificatorConfigContainer.EntityModificatorDataList.FindAll(modificator => UpgradeCanAppear(modificator, entity));
         
         List<EntityModifcationRarity> droppedRarities = new();
 
@@ -36,9 +35,9 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
                 randomRarity = GetHighestModificatorRarity(availableRarities);
             }
             
-            List<EntityModificatorData> modificatorsOfRarity = allEffectDatas.Where(modificatorData => modificatorData.Rarity == randomRarity).ToList();
+            List<EntityModificatorConfig> modificatorsOfRarity = allEffectDatas.Where(modificatorData => modificatorData.Rarity == randomRarity).ToList();
 
-            EntityModificatorData randomModificator = GetRandomEntityModificatorDataFromGroup(entity, modificatorsOfRarity);
+            EntityModificatorConfig randomModificator = GetRandomEntityModificatorDataFromGroup(entity, modificatorsOfRarity);
             
             resultEffectDatas.Add(randomModificator);
             allEffectDatas.Remove(randomModificator);
@@ -49,35 +48,35 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
         return resultEffectDatas;
     }
 
-    private bool UpgradeCanAppear(EntityModificatorData modificatorData, BuildingEntity entity)
+    private bool UpgradeCanAppear(EntityModificatorConfig modificatorConfig, BuildingEntity entity)
     {
-        return CheckBuildingEntityTagRequirements(modificatorData, entity) && 
-               CheckStacksRequirements(modificatorData, entity) && 
-               CheckTagRequirements(modificatorData, entity) && 
-               CheckExistingRequiredUpgradesRequirement(modificatorData, entity);
+        return CheckBuildingEntityTagRequirements(modificatorConfig, entity) && 
+               CheckStacksRequirements(modificatorConfig, entity) && 
+               CheckTagRequirements(modificatorConfig, entity) && 
+               CheckExistingRequiredUpgradesRequirement(modificatorConfig, entity);
     }
 
     #region BuildingEntityTagCheck
 
-    private bool CheckBuildingEntityTagRequirements(EntityModificatorData modificatorData, BuildingEntity entity)
+    private bool CheckBuildingEntityTagRequirements(EntityModificatorConfig modificatorConfig, BuildingEntity entity)
     {
-        if (modificatorData.BuildingTagsInclude)
+        if (modificatorConfig.BuildingTagsInclude)
         {
-            return modificatorData.BuildingEntityTypeTags.Contains(entity.BuildingEntityType);
+            return modificatorConfig.BuildingEntityTypeTags.Contains(entity.BuildingEntityType);
         }
         
-        return !modificatorData.BuildingEntityTypeTags.Contains(entity.BuildingEntityType);
+        return !modificatorConfig.BuildingEntityTypeTags.Contains(entity.BuildingEntityType);
     }
 
     #endregion
     
     #region UniquieTagCheck
 
-    private bool CheckStacksRequirements(EntityModificatorData modificatorData, BuildingEntity entity)
+    private bool CheckStacksRequirements(EntityModificatorConfig modificatorConfig, BuildingEntity entity)
     {
-        if (modificatorData.HasStacks)
+        if (modificatorConfig.HasStacks)
         {
-            return entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count(appliedModificatorData => appliedModificatorData == modificatorData) < modificatorData.MaxStacks;
+            return entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Count(appliedModificatorData => appliedModificatorData == modificatorConfig) < modificatorConfig.MaxStacks;
         }
 
         return true;
@@ -87,25 +86,25 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
 
     #region TagRequirementsCheck
 
-    private bool CheckTagRequirements(EntityModificatorData modificatorData, BuildingEntity entity)
+    private bool CheckTagRequirements(EntityModificatorConfig modificatorConfig, BuildingEntity entity)
     {
-        if (!modificatorData.HasRequiredTags && !modificatorData.HasBlockTags) return true;
+        if (!modificatorConfig.HasRequiredTags && !modificatorConfig.HasBlockTags) return true;
 
         List<EntityModifcatorTag> ownerTags = entity.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags();
         ownerTags.AddRange(entity.DefaultBuildingTags);
         
         List<EntityModifcatorTag> otherTags = _globalBuildingContainer.GetBuildingTags(entity);
         
-        if (modificatorData.HasRequiredTags)
+        if (modificatorConfig.HasRequiredTags)
         {
-            if (modificatorData.ReqiredOwnerTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.ReqiredOwnerTags)) return false;
-            if (modificatorData.ReqiredOtherEntityTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.ReqiredOtherEntityTags)) return false;
+            if (modificatorConfig.ReqiredOwnerTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorConfig.ReqiredOwnerTags)) return false;
+            if (modificatorConfig.ReqiredOtherEntityTags.Count > 0 && !EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorConfig.ReqiredOtherEntityTags)) return false;
         }
 
-        if (modificatorData.HasBlockTags)
+        if (modificatorConfig.HasBlockTags)
         {
-            if (modificatorData.BlockOwnerTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorData.BlockOwnerTags)) return false;
-            if (modificatorData.BlockOtherEntityTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorData.BlockOtherEntityTags)) return false;
+            if (modificatorConfig.BlockOwnerTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(ownerTags, modificatorConfig.BlockOwnerTags)) return false;
+            if (modificatorConfig.BlockOtherEntityTags.Count > 0 && EntityTagRequirementsChecker.RequirementsAreMet(otherTags, modificatorConfig.BlockOtherEntityTags)) return false;
         }
         
         return true;
@@ -115,13 +114,13 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     
     #region ExistingUpgradesRequirementsCheck
 
-    private bool CheckExistingRequiredUpgradesRequirement(EntityModificatorData modificatorData, BuildingEntity entity)
+    private bool CheckExistingRequiredUpgradesRequirement(EntityModificatorConfig modificatorConfig, BuildingEntity entity)
     {
-        if (!modificatorData.HasRequiredUpgrades) return true;
+        if (!modificatorConfig.HasRequiredUpgrades) return true;
         
-        for (int i = 0; i < modificatorData.RequiredUpgrades.Count; i++)
+        for (int i = 0; i < modificatorConfig.RequiredUpgrades.Count; i++)
         {
-            if (!entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Contains(modificatorData.RequiredUpgrades[i])) return false;
+            if (!entity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators.Contains(modificatorConfig.RequiredUpgrades[i])) return false;
         }
         
         return true;
@@ -131,7 +130,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     
     #region RaritySelection
     
-    private List<EntityModificatorRarityDrop> GetAvailableRarityDrops(List<EntityModificatorData> availableModificators)
+    private List<EntityModificatorRarityDrop> GetAvailableRarityDrops(List<EntityModificatorConfig> availableModificators)
     {
         List<EntityModifcationRarity> allRarities = Enum.GetValues(typeof(EntityModifcationRarity)).Cast<EntityModifcationRarity>().ToList();
         
@@ -186,7 +185,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
     
     #endregion
     
-    private EntityModificatorData GetRandomEntityModificatorDataFromGroup(BuildingEntity buildingEntity, List<EntityModificatorData> possibleModificatorGroup)
+    private EntityModificatorConfig GetRandomEntityModificatorDataFromGroup(BuildingEntity buildingEntity, List<EntityModificatorConfig> possibleModificatorGroup)
     {
         List<EntityModifcatorTag> entityModifcatorTags = buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().GetAppliedTags();
         
@@ -198,7 +197,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
             else entityModifcatorTagCounts.Add(modificatorTag, 1);
         });
         
-        List<EntityModificatorData> unobtainedModificatorDataList = possibleModificatorGroup.Except(buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators).ToList();
+        List<EntityModificatorConfig> unobtainedModificatorDataList = possibleModificatorGroup.Except(buildingEntity.ComponentsContainer.Get<EntityModificatorsContainer>().AppliedModificators).ToList();
         
         foreach (EntityModifcatorTag entityModifcatorTag in entityModifcatorTagCounts.Keys)
         {
@@ -206,7 +205,7 @@ public sealed class EntityModificatorDataSelector : MonoBehaviour
             {
                 if (unobtainedModificatorDataList.Exists(modificator => modificator.Tags.Contains(entityModifcatorTag)))
                 {
-                    List<EntityModificatorData> tagEntityModificatorDataList = unobtainedModificatorDataList.FindAll(modificator => modificator.Tags.Contains(entityModifcatorTag));    
+                    List<EntityModificatorConfig> tagEntityModificatorDataList = unobtainedModificatorDataList.FindAll(modificator => modificator.Tags.Contains(entityModifcatorTag));    
                     
                     return tagEntityModificatorDataList[Random.Range(0, tagEntityModificatorDataList.Count)];
                 }

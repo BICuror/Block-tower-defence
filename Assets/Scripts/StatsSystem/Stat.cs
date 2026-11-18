@@ -1,108 +1,99 @@
 using System.Collections.Generic;
+using Combat.ValueModifiers;
 using UnityEngine;
 using System.Data;
 using System;
 
-public class Stat
+namespace Combat.Stats
 {
-    private List<StatModifier> _statModifiers = new(0);
-    private float _default;
-    private float _flat;
-    private float _multiplier = 1f;
-    private float _value;
-    private int _roundedValue;
-
-    protected virtual float MinimalValue => 0;
-    
-    public float Default => _default;
-    public float Value => _value;
-    public int RoundedValue => _roundedValue;
-    public bool IsModified => _statModifiers.Count > 0 || _flat != 0 || _multiplier != 1f;
-
-    public event Action<float> ValueChanged;
-    public event Action<int> RoundedValueChanged;
-
-    public void Reset()
+    public abstract class Stat
     {
-        _flat = 0f;
-        _multiplier = 1f;
-
-        while (_statModifiers.Count > 0)
+        private List<StatModifier> _statModifiers = new(0);
+        private float _defaultValue;
+        private int _roundedValue;
+        private float _value;
+    
+        private float _flatModifier;
+        private float _multModifier = 1f;
+        
+        protected virtual float MinimalValue => 0;
+        
+        public float DefaultValue => _defaultValue;
+        public float Value => _value;
+        public int RoundedValue => _roundedValue;
+        public float FlatModifier => _flatModifier;
+        public float MultModifier => _multModifier;
+    
+        public event Action<float> ValueChanged;
+        public event Action<int> RoundedValueChanged;
+    
+        public void Reset()
         {
-            RemoveStatModifier(_statModifiers[0]);
-        }
-    }
-    
-    public void SetDefault(float value)
-    {
-        _default = value;
-        CalculateStatValue();
-    }
-    public void ChangeFlat(float value)
-    {
-        _flat += value;
-        CalculateStatValue();
-    }
-    public void ChangeMultiplier(float value)
-    {
-        _multiplier += value;
-        CalculateStatValue();
-    }
-
-    public bool IsApplied(StatModifier statModifier) => _statModifiers.Contains(statModifier);
-    
-    public void AddStatModifier(StatModifier statModifier)
-    {
-        if (IsApplied(statModifier)) throw new DuplicateNameException("Tried to add same stat modifier twice");
-        
-        statModifier.ModifierChanged += CalculateStatValue;
-        _statModifiers.Add(statModifier);
-        CalculateStatValue();
-    }
-
-    public void RemoveStatModifier(StatModifier statModifier)
-    {
-        statModifier.ModifierChanged -= CalculateStatValue;
-        _statModifiers.Remove(statModifier);
-        CalculateStatValue();
-    }
-
-    public float GetFlatModifier()
-    {
-        float flat = _flat;
-        
-        _statModifiers.ForEach(modifier => flat += modifier.Flat);
-
-        return flat;
-    }
-    
-    public float GetMultiplierModifier()
-    {
-        float multiplier = _multiplier;
-        
-        _statModifiers.ForEach(modifier => multiplier += modifier.Multiplier);
-
-        return multiplier;
-    }
-    
-    private void CalculateStatValue()
-    {
-        float flatAddition = _flat;
-        float multiplier = _multiplier;
-        
-        for (int i = 0; i < _statModifiers.Count; i++)
-        {
-            flatAddition += _statModifiers[i].Flat;
-            multiplier += _statModifiers[i].Multiplier;
+            foreach (StatModifier statModifier in _statModifiers)
+            {
+                statModifier.ModifierChanged -= CalculateStatValue;
+            }
+            
+            _statModifiers.Clear();
+            CalculateStatValue();
         }
         
-        _value = (_default + flatAddition) * multiplier;
-
-        if (_value < MinimalValue) _value = MinimalValue;
+        public void SetDefault(float value)
+        {
+            _defaultValue = value;
+            CalculateStatValue();
+        }
+    
+        public void AddStatModifier(StatModifier statModifier)
+        {
+            if (_statModifiers.Contains(statModifier)) throw new DuplicateNameException("Tried to add same stat modifier twice");
+            
+            statModifier.ModifierChanged += CalculateStatValue;
+            _statModifiers.Add(statModifier);
+            CalculateStatValue();
+        }
+    
+        public void RemoveStatModifier(StatModifier statModifier)
+        {
+            statModifier.ModifierChanged -= CalculateStatValue;
+            _statModifiers.Remove(statModifier);
+            CalculateStatValue();
+        }
+    
+        public ValueModificationContainer GetValueModificationContainer()
+        {
+            ValueModificationContainer valueModificationContainer = new ValueModificationContainer()
+            {
+                InitialValue = _defaultValue,
+                FlatChange = _flatModifier,
+                MultChange = _multModifier
+            };
+    
+            return valueModificationContainer;
+        }
         
-        _roundedValue = Mathf.RoundToInt(_value);
-
-        ValueChanged?.Invoke(_value);
-        RoundedValueChanged?.Invoke(_roundedValue);
+        private void CalculateStatValue()
+        {
+            float flatAddition = 0;
+            float multAddition = 1f;
+            
+            for (int i = 0; i < _statModifiers.Count; i++)
+            {
+                flatAddition += _statModifiers[i].Flat;
+                multAddition += _statModifiers[i].Multiplier;
+            }
+    
+            _flatModifier = flatAddition;
+            _multModifier = multAddition;
+            
+            _value = (_defaultValue + flatAddition) * multAddition;
+    
+            if (_value < MinimalValue) _value = MinimalValue;
+            
+            _roundedValue = Mathf.RoundToInt(_value);
+    
+            ValueChanged?.Invoke(_value);
+            RoundedValueChanged?.Invoke(_roundedValue);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Combat.Entity.Modificators;
 using Zenject;
 
 public class ApplyModificatorOnIdleStartRemoveUponPickup : EntityModificator
@@ -43,17 +44,17 @@ public class ApplyModificatorOnIdleStartRemoveUponPickup : EntityModificator
     
     private void ApplyModificator()
     {
-        if (!Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorData>("EntityModificatorData")))
+        if (!Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig")))
         { 
-            Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+            Entity.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig"));
         }
     }
     
     private void RemoveModificator()
     {
-        if (Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorData>("EntityModificatorData")))
+        if (Entity.ComponentsContainer.Get<EntityModificatorsContainer>().Has(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig")))
         { 
-            Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+            Entity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig"));
         }
     }
 }

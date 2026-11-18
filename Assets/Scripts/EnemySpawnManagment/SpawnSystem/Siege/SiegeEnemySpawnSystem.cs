@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using WorldGeneration;
+using Combat.Stats;
 using UnityEngine;
 using Zenject;
 

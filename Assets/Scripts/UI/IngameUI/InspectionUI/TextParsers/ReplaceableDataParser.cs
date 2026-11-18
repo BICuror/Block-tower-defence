@@ -1,36 +1,39 @@
 using System.Collections.Generic;
 using System;
 
-public sealed class ReplaceableDataParser
+namespace TextParsers
 {
-    private readonly Dictionary<string, string> _replaceableData = new();
-
-    public event Action ReplaceableDataUpdated;
+    public sealed class ReplaceableDataParser
+    {
+        private readonly Dictionary<string, string> _replaceableData = new();
     
-    public string ParseReplaceableData(string text)
-    {
-        foreach (string key in _replaceableData.Keys)
+        public event Action ReplaceableDataUpdated;
+        
+        public string ParseReplaceableData(string text)
         {
-            while (text.Contains(key))
+            foreach (string key in _replaceableData.Keys)
             {
-                text = text.Replace(key, _replaceableData[key]);
+                while (text.Contains(key))
+                {
+                    text = text.Replace(key, _replaceableData[key]);
+                }
             }
+            
+            return text;
         }
-        
-        return text;
-    }
-
-    public void AddOrUpdateParsableData(string key, string text)
-    {
-        _replaceableData.Add(key, text);
-        
-        ReplaceableDataUpdated?.Invoke();
-    }
-
-    public void RemoveParsableData(string key)
-    {
-        _replaceableData.Remove(key);
-        
-        ReplaceableDataUpdated?.Invoke();
+    
+        public void AddOrUpdateParsableData(string key, string text)
+        {
+            _replaceableData.Add(key, text);
+            
+            ReplaceableDataUpdated?.Invoke();
+        }
+    
+        public void RemoveParsableData(string key)
+        {
+            _replaceableData.Remove(key);
+            
+            ReplaceableDataUpdated?.Invoke();
+        }
     }
 }

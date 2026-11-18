@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using Combat.Stats;
 using System.Linq;
 using UnityEngine;
 using ModestTree;
@@ -155,9 +156,9 @@ namespace Cashing
         {
             for (int i = 0; i < _statInitializers.Length; i++)
             {
-                _statInitializers[i].StructName = _statInitializers[i].StatData.GetStatType().ToString();
+                _statInitializers[i].StructName = _statInitializers[i].StatConfig.GetStatType().ToString();
 
-                Type statType = _statInitializers[i].StatData.GetStatType();
+                Type statType = _statInitializers[i].StatConfig.GetStatType();
             
                 if (_statContainer.Has(statType))
                 {

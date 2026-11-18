@@ -1,7 +1,7 @@
-using Cashing;
 using NaughtyAttributes;
 using UnityEngine;
 using Zenject;
+using Cashing;
 
 [RequireComponent(typeof(Collider))]
 
@@ -40,6 +40,8 @@ public sealed class AreaScanerController : MonoBehaviour
             _draggableObject.OnTileScaleChanged += UpdateScale;
         }
     }
+    
+    public void SetAutoScale(bool value) => _autoScale = value;
     
     public void SetScale(int radius)
     {

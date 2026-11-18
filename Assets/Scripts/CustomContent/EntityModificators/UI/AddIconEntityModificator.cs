@@ -1,3 +1,5 @@
+using Combat.IngameUI.CombatEntityCanvas;
+
 public sealed class AddIconEntityModificator : EntityModificator
 {
     protected EntityCanvasIcon _icon;

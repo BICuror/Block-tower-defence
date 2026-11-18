@@ -1,1 +1,4 @@
-public sealed class AOERadius : Stat {}
+namespace Combat.Stats
+{
+    public sealed class AOERadius : Stat {}
+}

@@ -1,20 +1,23 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GlobalStatInitializerConfig", menuName = "Generation/GlobalStatInitializerConfig")]
-
-public sealed class GlobalStatInitializerConfig : ScriptableObject
+namespace Combat.Stats
 {
-    [SerializeField] private StatInitializer[] _statInitializers;
+    [CreateAssetMenu(fileName = "GlobalStatInitializerConfig", menuName = "Generation/GlobalStatInitializerConfig")]
     
-    public StatInitializer[] StatInitializers => _statInitializers;
-    
-    private void OnValidate()
+    public sealed class GlobalStatInitializerConfig : ScriptableObject
     {
-        for (int i = 0; i < _statInitializers.Length; i++)
+        [SerializeField] private StatInitializer[] _statInitializers;
+        
+        public StatInitializer[] StatInitializers => _statInitializers;
+        
+        private void OnValidate()
         {
-            StatInitializer _statInitializer = _statInitializers[i];
-            
-            _statInitializer.StructName = _statInitializer.StatData.GetStatType().ToString();
+            for (int i = 0; i < _statInitializers.Length; i++)
+            {
+                StatInitializer _statInitializer = _statInitializers[i];
+                
+                _statInitializer.StructName = _statInitializer.StatConfig.GetStatType().ToString();
+            }
         }
     }
 }

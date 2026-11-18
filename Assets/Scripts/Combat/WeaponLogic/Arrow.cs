@@ -1,3 +1,4 @@
+using Combat.Stats;
 using UnityEngine;
 using CuroAudio;
 using System;
@@ -35,7 +36,7 @@ namespace Combat
         {
             if (other.TryGetComponent(out CombatEntity enemyEntity))
             {
-                DamageEntity(_damage.Value, enemyEntity);
+                DamageEntity(_damage.GetValueModificationContainer(), enemyEntity);
                 
                 OnArrowHit?.Invoke(this);
             }

@@ -1,4 +1,7 @@
-public sealed class MaxEntities : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 1f;
+    public sealed class MaxEntities : Stat
+    {
+        protected override float MinimalValue => 1f;
+    }
 }

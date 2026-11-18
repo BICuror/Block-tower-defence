@@ -1,1 +1,7 @@
-public sealed class Damage : Stat {}
+namespace Combat.Stats
+{
+    public sealed class Damage : Stat
+    {
+        
+    }
+}

@@ -1,10 +1,13 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EffectTooltipTagData", menuName = "Tooltips/Effects/TagData")]
-
-public sealed class EffectTooltipTagData : TooltipTagData
+namespace Combat.IngameUI.Inspection.Tooltips
 {
-    [SerializeField] private string _associatedEffectTypeName;
-    
-    public string AssociatedEffectTypeName => _associatedEffectTypeName;
+    [CreateAssetMenu(fileName = "EffectTooltipTagData", menuName = "Tooltips/Effects/TagData")]
+
+    public sealed class EffectTooltipTagData : TooltipTagData
+    {
+        [SerializeField] private string _associatedEffectTypeName;
+
+        public string AssociatedEffectTypeName => _associatedEffectTypeName;
+    }
 }

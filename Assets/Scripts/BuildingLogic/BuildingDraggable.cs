@@ -1,10 +1,9 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using Combat.Stats;
 using UnityEngine;
-using Cashing;
 using System;
 using Combat;
-using Zenject;
 
 public sealed class BuildingDraggable : DraggableEntity
 {

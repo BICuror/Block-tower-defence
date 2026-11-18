@@ -1,4 +1,7 @@
-public sealed class MaxHealth : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 1f;
+    public sealed class MaxHealth : Stat
+    {
+        protected override float MinimalValue => 1f;
+    }
 }

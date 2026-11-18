@@ -1,4 +1,7 @@
+using Combat.Entity.Modificators;
+using UnityEngine.Serialization;
 using Combat.EnemySpawnSystem;
+using Combat.Stats;
 using UnityEngine;
 
 namespace WorldGeneration
@@ -21,11 +24,12 @@ namespace WorldGeneration
         [SerializeField] private GlobalStatInitializerConfig _globalStatInitializerConfig;
         public GlobalStatInitializerConfig GlobalStatInitializerConfig => _globalStatInitializerConfig;
 
+        [FormerlySerializedAs("_entityModificatorDataContainer")]
         [Header("SelectionSettings")] [Space] 
-        [SerializeField] private EntityModificatorDataContainer _entityModificatorDataContainer;
+        [SerializeField] private EntityModificatorConfigContainer entityModificatorConfigContainer;
         [SerializeField] private SelectionContainer _selectionContainer;
         
-        public EntityModificatorDataContainer EntityModificatorDataContainer => _entityModificatorDataContainer;
+        public EntityModificatorConfigContainer EntityModificatorConfigContainer => entityModificatorConfigContainer;
         public SelectionContainer SelectionContainer => _selectionContainer;
 
         [Header("ItemSpawnSettings")][Space]

@@ -1,5 +1,6 @@
+using Combat.IngameUI.CombatEntityCanvas;
+using Combat.IngameUI.Inspection;
 using Cysharp.Threading.Tasks;
-using Combat.IngameUI;
 using DG.Tweening;
 using UnityEngine;
 using Cashing;

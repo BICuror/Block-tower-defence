@@ -1,4 +1,5 @@
 using Combat;
+using Combat.Stats;
 
 public sealed class SlowdownEffect : EntityEffect
 {

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ScriptableLogic.Conditions;
 using NaughtyAttributes;
 using UnityEngine;
 using System;
@@ -32,6 +33,25 @@ namespace Configs
 
             if (_config) Name = _config.name;
             else Name = "No config";
+        }
+
+        public virtual string GetArgumentPrefix()
+        {
+            if (_config != null)
+            {
+                try
+                {
+                    return _config.GetContainedType().Name;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e + _config.name);
+                    throw;
+                }
+                
+            }
+
+            return "";
         }
     }
 

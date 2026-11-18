@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -10,7 +11,7 @@ public sealed class BuildingUpgradeSelector : SelectorBase<BuildingUpgradeSelect
     [SerializeField] private EntityModificatorDataSelector _entityModificatorDataSelector;
     [SerializeField] private DraggableConnector _draggableConnector;
     [SerializeField] private Transform _centerPosition;
-    private List<EntityModificatorData> _entityModificatorDatas;
+    private List<EntityModificatorConfig> _entityModificatorDatas;
     private BuildingEntity _buildingEntityToUpgrade;
     private Vector3Int _initialPosition;
 

@@ -1,7 +1,7 @@
+using Combat.IngameUI.CombatEntityCanvas;
 using Cysharp.Threading.Tasks;
 using Combat.UpgradeCharges;
 using System.Threading;
-using Combat.IngameUI;
 using UnityEngine;
 using Cashing;
 using Zenject;

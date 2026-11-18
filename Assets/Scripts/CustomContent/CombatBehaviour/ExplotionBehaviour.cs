@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Combat.Stats;
 using UnityEngine;
 using System;
 using Combat;
@@ -11,12 +12,6 @@ public sealed class ExplosionBehaviour : CombatBehaviour<Vector3>, IDisposable
     public ExplosionBehaviour(ArgumentsContainer args)
     {
         Args = args;
-    }
-
-    protected override void OnOwnerEntitySet()
-    {
-        Entity.StatContainer.AddStatIfDoesntExist<ExplosionRadius>(Args, "ExplosionRadius");
-        Entity.StatContainer.AddStatIfDoesntExist<ExplosionDamage>(Args, "ExplosionDamage");
     }
         
     public override void Execute(Vector3 explotionPosition)

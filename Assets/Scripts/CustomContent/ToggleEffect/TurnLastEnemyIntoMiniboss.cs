@@ -1,6 +1,7 @@
+using Combat.Entity.Modificators;
+using Combat.EnemySpawnSystem;
 using Zenject;
 using Combat;
-using Combat.EnemySpawnSystem;
 
 public sealed class TurnLastEnemyIntoMiniboss : GlobalEffect
 {
@@ -18,7 +19,7 @@ public sealed class TurnLastEnemyIntoMiniboss : GlobalEffect
         {
             EnemyEntity lastEnemy = _globalEnemyContainer.Entities[0];
 
-            lastEnemy.ComponentsContainer.Get<EntityModificatorsContainer>().AddEffect(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+            lastEnemy.ComponentsContainer.Get<EntityModificatorsContainer>().AddModificator(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig"));
             lastEnemy.EnemyHealth.EnemyDied += RemoveEntityModificator;
             
             lastEnemy.Health.ReceivePercentHeal(1f);
@@ -27,7 +28,7 @@ public sealed class TurnLastEnemyIntoMiniboss : GlobalEffect
 
     private void RemoveEntityModificator(EnemyEntity enemyEntity)
     {
-        enemyEntity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorData>("EntityModificatorData"));
+        enemyEntity.ComponentsContainer.Get<EntityModificatorsContainer>().RemoveModificator(Args.GetArgument<EntityModificatorConfig>("EntityModificatorConfig"));
 
         enemyEntity.EnemyHealth.EnemyDied -= RemoveEntityModificator;
     }

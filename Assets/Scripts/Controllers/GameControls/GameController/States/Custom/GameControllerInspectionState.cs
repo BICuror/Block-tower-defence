@@ -1,3 +1,4 @@
+using Combat.IngameUI.Inspection;
 using GameControls.Controllers;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;

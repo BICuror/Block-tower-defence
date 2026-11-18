@@ -1,7 +1,8 @@
+using Combat.IngameUI.Inspection;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Combat;
-using Cysharp.Threading.Tasks;
 
 public sealed class BuildingDestroyedObject : MonoBehaviour
 {

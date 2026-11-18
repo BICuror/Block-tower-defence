@@ -2,6 +2,7 @@ using NaughtyAttributes;
 using UnityEngine;
 using System;
 using Combat;
+using Combat.Stats;
 
 public sealed class ApplyEffectInArea : EntityObjectModifier
 {

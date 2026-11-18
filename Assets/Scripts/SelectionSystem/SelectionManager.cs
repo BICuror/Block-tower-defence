@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using NaughtyAttributes;
+using Combat.Stats;
 using UnityEngine;
 using CuroAudio;
 using Zenject;

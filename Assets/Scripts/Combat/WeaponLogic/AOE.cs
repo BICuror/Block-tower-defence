@@ -1,8 +1,10 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
 using NaughtyAttributes;
+using Combat.Stats;
 using UnityEngine;
 using Combat;
+using Combat.ValueModifiers;
 
 public sealed class AOE : WeaponBase
 {
@@ -41,7 +43,7 @@ public sealed class AOE : WeaponBase
     
             for (int i = 0; i < hitEnemies.Length; i++)
             {
-                DamageEntity(_aoeDamageMultiplier.Value * GetDamageValue(), hitEnemies[i].GetComponent<CombatEntity>());
+                DamageEntity(GetValueModificationContainer(), hitEnemies[i].GetComponent<CombatEntity>());
             }
             
             try
@@ -72,11 +74,16 @@ public sealed class AOE : WeaponBase
         _explotionEffect.transform.localScale = new Vector3(scale, scale, scale);
     }
 
-    private float GetDamageValue()
+    private ValueModificationContainer GetValueModificationContainer()
     {
-        if (OwnerEntity.StatContainer.Has<Damage>()) return OwnerEntity.StatContainer.Get<Damage>().Value;
+        ValueModificationContainer valueModificationContainer;
+
+        if (OwnerEntity.StatContainer.Has<Damage>()) valueModificationContainer = OwnerEntity.StatContainer.Get<Damage>().GetValueModificationContainer();
+        else valueModificationContainer = OwnerEntity.StatContainer.Get<ExplosionDamage>().GetValueModificationContainer();
+
+        valueModificationContainer.MultChange += _aoeDamageMultiplier.Value;
         
-        return OwnerEntity.StatContainer.Get<ExplosionDamage>().Value;
+        return valueModificationContainer;
     }
 
 #if UNITY_EDITOR        

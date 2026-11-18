@@ -1,3 +1,5 @@
+using Combat.Stats;
+
 public sealed class HasteEffect : EntityEffect
 {
     private StatModifier _statModifier = new();

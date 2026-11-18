@@ -1,4 +1,7 @@
-public sealed class BuildTime : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue { get => 0.05f; }
+    public sealed class BuildTime : Stat
+    {
+        protected override float MinimalValue { get => 0.05f; }
+    }
 }

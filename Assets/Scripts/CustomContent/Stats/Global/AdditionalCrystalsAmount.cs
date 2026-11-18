@@ -1,1 +1,4 @@
-public sealed class AdditionalCrystalsAmount : Stat {}
+namespace Combat.Stats
+{
+    public sealed class AdditionalCrystalsAmount : Stat {}
+}

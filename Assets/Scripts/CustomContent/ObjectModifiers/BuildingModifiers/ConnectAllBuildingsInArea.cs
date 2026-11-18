@@ -7,6 +7,7 @@ using Cashing;
 using Zenject;
 using System;
 using Combat;
+using Combat.ValueModifiers;
 
 public sealed class ConnectAllBuildingsInArea : EntityObjectModifier
 {
@@ -107,7 +108,7 @@ public sealed class ConnectAllBuildingsInArea : EntityObjectModifier
             {
                 if (raycastHit.collider.gameObject.TryGetComponent(out CombatEntity enemyEntity))
                 {
-                    _weapon.DamageEntity(_beamDamage, enemyEntity);
+                    _weapon.DamageEntity(new ValueModificationContainer(_beamDamage), enemyEntity);
                 }
             }
         }

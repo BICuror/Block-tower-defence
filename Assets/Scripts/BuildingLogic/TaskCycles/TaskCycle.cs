@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System.Threading;
+using Combat.Stats;
 using UnityEngine;
 using System;
 using Combat;
@@ -16,8 +17,8 @@ public abstract class TaskCycle : MonoBehaviour
     private void Start()
     {
         CreateTaskCycleCore();
-        taskCycleCore.TaskCycled = InvokeTaskCycled;
-        taskCycleCore.TaskPerformed = InvokeTaskPerformed;
+        taskCycleCore.TaskCycled += InvokeTaskCycled;
+        taskCycleCore.TaskPerformed += InvokeTaskPerformed;
         
         taskCycleCore.Enable();
     }
@@ -108,8 +109,8 @@ public abstract class TaskCycleCore
     public abstract float TaskRechargeDuration { get; }
     public TokenContainer CycleBlockTokenContainer => _cycleBlockTokenContainer;
     
-    public Action TaskPerformed;
-    public Action TaskCycled;
+    public event Action TaskPerformed;
+    public event Action TaskCycled;
 
     protected TaskCycleCore(CombatEntity ownerEntity)
     {

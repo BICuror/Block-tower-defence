@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Combat.Stats;
 using UnityEngine;
 using CuroAudio;
 
@@ -51,7 +52,7 @@ namespace Combat
         {
             if (other.TryGetComponent(out CombatEntity enemyEntity))
             {
-                DamageEntity(_damage.Value, enemyEntity);
+                DamageEntity(_damage.GetValueModificationContainer(), enemyEntity);
             }
         }
     }

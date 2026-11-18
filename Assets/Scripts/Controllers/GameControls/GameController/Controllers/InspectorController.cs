@@ -1,3 +1,5 @@
+using Combat.IngameUI.Inspection.InspectionCanvas;
+using Combat.IngameUI.Inspection;
 using Cysharp.Threading.Tasks;
 using Combat.Items;
 using UnityEngine;
@@ -12,7 +14,7 @@ namespace GameControls.Controllers
         [Inject] private TimeController _timeController;
 
         [SerializeField] private AreaVisualisationInspector _areaVisualisationInspector;
-        [SerializeField] private InspectionTooltipManager _inspectionTooltipManager;
+        [SerializeField] private InspectionCanvasManager _inspectionCanvasManager;
 
         private InspectableObject _inspectableObject;
 
@@ -39,7 +41,7 @@ namespace GameControls.Controllers
         {
             inspectableObject = null;
 
-            if (_inspectionTooltipManager.NonIdleTooltipsOpened) return false;
+            if (_inspectionCanvasManager.NonIdleTooltipsOpened) return false;
 
             Ray ray = Camera.main.ScreenPointToRay(mousePosition);
 
@@ -80,9 +82,9 @@ namespace GameControls.Controllers
             return !IsHoveredOverNonIdleUI();
         }
 
-        public bool IsHoveredOverNonIdleUI() => _inspectionTooltipManager.HoveredOverNonIdleTooltip;
+        public bool IsHoveredOverNonIdleUI() => _inspectionCanvasManager.HoveredOverNonIdleTooltip;
 
-        public void StopInspecting() => _inspectionTooltipManager.DisableActiveSinglePopup();
+        public void StopInspecting() => _inspectionCanvasManager.DisableActiveSinglePopup();
 
         private async UniTask StartInspecting(InspectableObject inspectableObject, bool forceInspection = false)
         {
@@ -95,24 +97,23 @@ namespace GameControls.Controllers
 
             _areaVisualisationInspector.ActivateVisualisation(inspectableObject.gameObject);
 
-            _inspectionTooltipManager.DisableActiveSinglePopup();
+            _inspectionCanvasManager.DisableActiveSinglePopup();
 
             if (inspectableObject.TryGetComponent(out BuildingSelectionOptionObject buildingOptionObject))
             {
-                await _inspectionTooltipManager.OpenEntityTooltip(buildingOptionObject.InstantiatedBuilding);
+                await _inspectionCanvasManager.OpenEntityTooltip(buildingOptionObject.InstantiatedBuilding);
             }
             else if (inspectableObject.TryGetComponent(out CombatEntity combatEntity))
             {
-                await _inspectionTooltipManager.OpenEntityTooltip(combatEntity);
+                await _inspectionCanvasManager.OpenEntityTooltip(combatEntity);
             }
             else if (inspectableObject.TryGetComponent(out Item item))
             {
-                await _inspectionTooltipManager.OpenCrystalTooltip(item);
+                await _inspectionCanvasManager.OpenCrystalTooltip(item);
             }
             else if (inspectableObject.TryGetComponent(out BuildingUpgradeSelectionOptionObject selectionOptionObject))
             {
-                await _inspectionTooltipManager.OpenEffectTooltip(selectionOptionObject.ModificatorData,
-                    selectionOptionObject.transform);
+                await _inspectionCanvasManager.OpenEffectTooltip(selectionOptionObject.ModificatorConfig, selectionOptionObject.TargetBuildingEntity, selectionOptionObject.transform);
             }
 
             if (inspectableObject)

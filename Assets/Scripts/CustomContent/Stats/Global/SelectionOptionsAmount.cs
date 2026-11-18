@@ -1,4 +1,7 @@
-public sealed class SelectionOptionsAmount : Stat
+namespace Combat.Stats
 {
-    protected override float MinimalValue => 1;
+    public sealed class SelectionOptionsAmount : Stat
+    {
+        protected override float MinimalValue => 1;
+    }
 }

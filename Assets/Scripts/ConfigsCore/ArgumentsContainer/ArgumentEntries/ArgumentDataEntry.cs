@@ -1,8 +1,10 @@
+using Combat.Entity.Modificators;
+using Combat.EnemySpawnSystem;
+using Combat.ValueModifiers;
 using NaughtyAttributes;
 using UnityEngine;
-using System;
-using Combat.EnemySpawnSystem;
 using CuroAudio;
+using System;
 
 namespace Configs
 {
@@ -20,8 +22,8 @@ namespace Configs
         [AllowNesting, ShowIf("ArgumentType", ArgumentType.GameObject)]
         public GameObject GameObjectValue;
         
-        [AllowNesting, ShowIf("ArgumentType", ArgumentType.EntityModificatorData)]
-        public EntityModificatorData EntityModificatorDataValue;
+        [AllowNesting, ShowIf("ArgumentType", ArgumentType.EntityModificatorConfig)]
+        public EntityModificatorConfig EntityModificatorConfigValue;
 
         [AllowNesting, ShowIf("ArgumentType", ArgumentType.Bool)]
         public bool BoolValue;
@@ -45,13 +47,16 @@ namespace Configs
         public string StringValue;
         
         [AllowNesting, ShowIf("ArgumentType", ArgumentType.StatusEffectConfig)]
-        public EntityEffectData StatusEffectConfigValue;
+        public EntityEffectConfig StatusEffectConfigValue;
         
         [AllowNesting, ShowIf("ArgumentType", ArgumentType.AudioEnum)]
         public AudioEnum AudioEnumgValue;
         
-        [AllowNesting, ShowIf("ArgumentType", ArgumentType.StatData)]
-        public StatData StatDataValue;
+        [AllowNesting, ShowIf("ArgumentType", ArgumentType.StatConfig)]
+        public StatConfig StatConfigValue;
+        
+        [AllowNesting, ShowIf("ArgumentType", ArgumentType.ValueModifierConfig)]
+        public ValueModifierConfig ValueModifierConfigValue;
         
         public object GetValue(Type argumentType)
         {
@@ -62,7 +67,7 @@ namespace Configs
                 case ArgumentType.Int: return IntValue;
                 case ArgumentType.Float: return FloatValue;
                 case ArgumentType.GameObject: return GameObjectValue;
-                case ArgumentType.EntityModificatorData: return EntityModificatorDataValue;
+                case ArgumentType.EntityModificatorConfig: return EntityModificatorConfigValue;
                 case ArgumentType.Bool: return BoolValue;
                 case ArgumentType.EntityEffectParticleHandler: return EntityEffectParticleHandlerValue;
                 case ArgumentType.EntityObjectModifier: return EntityObjectModifierValue;
@@ -72,7 +77,8 @@ namespace Configs
                 case ArgumentType.String: return StringValue;
                 case ArgumentType.StatusEffectConfig: return StatusEffectConfigValue;
                 case ArgumentType.AudioEnum: return AudioEnumgValue;
-                case ArgumentType.StatData: return StatDataValue;
+                case ArgumentType.StatConfig: return StatConfigValue;
+                case ArgumentType.ValueModifierConfig: return ValueModifierConfigValue;
                 default: throw new ArgumentException($"Not implemented argument of type {ArgumentType}");
             }
         }

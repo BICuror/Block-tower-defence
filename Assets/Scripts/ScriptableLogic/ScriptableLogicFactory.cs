@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using ScriptableLogic.EventLinks;
+using ScriptableLogic.Conditions;
+using ScriptableLogic.SubDomains;
+using ScriptableLogic.Commands;
 using UnityEngine;
-using EventLinks;
-using Coinfigs;
 using Configs;
 using System;
 using Combat;
@@ -27,7 +29,12 @@ public static class ScriptableLogicFactory
         
         foreach (SubDomainEntry subDomainEntry in config.SubDomainEntries)
         {
-            subDomains.Add(subDomainEntry.GetContainedType(), CreateSubDomain(subDomainEntry, args));
+            SubDomain subDomain = CreateSubDomain(subDomainEntry, args);
+            
+            foreach (Type derivedType in subDomainEntry.GetContainedType().GetThisAndAllDerivedTypesUntil(typeof(SubDomain)))
+            {
+                subDomains.Add(derivedType, subDomain);
+            }
         }
         
         domain.SetSubDomains(subDomains);

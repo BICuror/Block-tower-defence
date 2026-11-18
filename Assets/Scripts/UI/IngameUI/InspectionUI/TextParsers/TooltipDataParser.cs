@@ -1,43 +1,47 @@
+using Combat.IngameUI.Inspection.Tooltips;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public sealed class TooltipDataParser : MonoBehaviour
+namespace TextParsers
 {
-    private const char TOOLTIP_TAG_START_CHAR = '#';
- 
-    [SerializeField] private TooltipAllTagDataContainer _allTagDataContainer;
-    
-    public TooltipParseTagDataContainer GetTooltipTagDataFromText(string tooltipText)
+    public sealed class TooltipDataParser : MonoBehaviour
     {
-        TooltipParseTagDataContainer parseDataContainer = new();
+        private const char TOOLTIP_TAG_START_CHAR = '#';
 
-        if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR))
+        [SerializeField] private TooltipAllTagDataContainer _allTagDataContainer;
+
+        public TooltipParseTagDataContainer GetTooltipTagDataFromText(string tooltipText)
         {
-            List<string> tooltipTextParts = tooltipText.Split(TOOLTIP_TAG_START_CHAR).ToList();
-            
-            tooltipTextParts.ForEach(tooltipTextPart =>
+            TooltipParseTagDataContainer parseDataContainer = new();
+
+            if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR))
             {
-                ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.EffectTagDatas);   
-                ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.StatTagDatas);   
-                ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.KeywordTagDatas);   
-            });
-            
-            parseDataContainer.TagDatas = parseDataContainer.TagDatas.Distinct().ToList();
+                List<string> tooltipTextParts = tooltipText.Split(TOOLTIP_TAG_START_CHAR).ToList();
+
+                tooltipTextParts.ForEach(tooltipTextPart =>
+                {
+                    ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.EffectTagDatas);
+                    ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.StatTagDatas);
+                    ParseTags(tooltipTextPart, parseDataContainer, _allTagDataContainer.KeywordTagDatas);
+                });
+
+                parseDataContainer.TagDatas = parseDataContainer.TagDatas.Distinct().ToList();
+            }
+
+            return parseDataContainer;
         }
-        
-        return parseDataContainer;
-    }
-    
-    private void ParseTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer, IReadOnlyList<TooltipTagData> tagDataList)
-    {
-        tooltipText = TOOLTIP_TAG_START_CHAR + tooltipText;
-        
-        foreach (TooltipTagData tagData in tagDataList)
+
+        private void ParseTags(string tooltipText, TooltipParseTagDataContainer parseDataContainer, IReadOnlyList<TooltipTagData> tagDataList)
         {
-            if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR + tagData.Tag))
+            tooltipText = TOOLTIP_TAG_START_CHAR + tooltipText;
+
+            foreach (TooltipTagData tagData in tagDataList)
             {
-                parseDataContainer.TagDatas.Add(tagData);
+                if (tooltipText.Contains(TOOLTIP_TAG_START_CHAR + tagData.Tag))
+                {
+                    parseDataContainer.TagDatas.Add(tagData);
+                }
             }
         }
     }

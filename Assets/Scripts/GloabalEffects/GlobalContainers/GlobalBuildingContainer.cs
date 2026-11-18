@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Combat.Entity.Modificators;
 using System.Data;
 using System;
 using Combat;

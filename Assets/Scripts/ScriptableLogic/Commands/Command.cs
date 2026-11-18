@@ -1,25 +1,29 @@
+using ScriptableLogic.Conditions;
 using Cysharp.Threading.Tasks;
 using Configs;
 
-public abstract class Command : ArgumentsRequester
+namespace ScriptableLogic.Commands
 {
-    protected ScriptableLogicFactory.ScriptableLogicConstructorArgs Args;
-    
-    private ConditionalContainer _conditionalContainer;
-
-    public ConditionalContainer ConditionalContainer => _conditionalContainer;
-    
-    public void Initialize(ScriptableLogicFactory.ScriptableLogicConstructorArgs args, ConditionalContainer conditionalContainer)
+    public abstract class Command : ArgumentsRequester
     {
-        _conditionalContainer = conditionalContainer;
-        Args = args;
+        protected ScriptableLogicFactory.ScriptableLogicConstructorArgs Args;
         
-        OnInitialize();
+        private ConditionalContainer _conditionalContainer;
+    
+        public ConditionalContainer ConditionalContainer => _conditionalContainer;
+        
+        public void Initialize(ScriptableLogicFactory.ScriptableLogicConstructorArgs args, ConditionalContainer conditionalContainer)
+        {
+            _conditionalContainer = conditionalContainer;
+            Args = args;
+            
+            OnInitialize();
+        }
+        
+        protected virtual void OnInitialize() {}
+        
+        public virtual UniTask Enable() => UniTask.CompletedTask;
+    
+        public virtual UniTask Disable() => UniTask.CompletedTask;
     }
-    
-    protected virtual void OnInitialize() {}
-    
-    public virtual UniTask Enable() => UniTask.CompletedTask;
-
-    public virtual UniTask Disable() => UniTask.CompletedTask;
 }

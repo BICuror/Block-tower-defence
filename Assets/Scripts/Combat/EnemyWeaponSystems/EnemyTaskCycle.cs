@@ -1,3 +1,4 @@
+using Combat.Stats;
 using Combat;
 
 public sealed class EnemyTaskCycle : TaskCycle

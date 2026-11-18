@@ -1,3 +1,6 @@
+using Combat.IngameUI.Inspection.InspectionCanvas;
+using Combat.IngameUI.Inspection.Tooltips;
+using Combat.IngameUI.Inspection;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using GameControls.States;
@@ -14,25 +17,25 @@ namespace Tutorial.Custom
         
         public override async UniTask StartStep()
         {
-            InspectionTooltipManager.Instance.OpenedTooltip += TrySubscribeToEntityTooltipSync;
+            InspectionCanvasManager.Instance.OpenedTooltip += TrySubscribeToEntityTooltipSync;
             
             await EnableUI();
             
             _gameController.EnableState(ControllerState.Inspecting);
         }
 
-        private void TrySubscribeToEntityTooltipSync(InspectionPanelBase inspectionPanelBase) => TrySubscribeToEntityTooltip(inspectionPanelBase).Forget();
-        private async UniTask TrySubscribeToEntityTooltip(InspectionPanelBase inspectionPanelBase)
+        private void TrySubscribeToEntityTooltipSync(InspectionCanvasBase inspectionCanvasBase) => TrySubscribeToEntityTooltip(inspectionCanvasBase).Forget();
+        private async UniTask TrySubscribeToEntityTooltip(InspectionCanvasBase inspectionCanvasBase)
         {
-            if (inspectionPanelBase is not EntityTooltip) return;
+            if (inspectionCanvasBase is not EntityInspectionCanvas) return;
 
-            InspectionTooltipController tooltipController = inspectionPanelBase.GetComponentInChildren<InspectionTooltipController>();
+            TooltipController tooltipController = inspectionCanvasBase.GetComponentInChildren<TooltipController>();
 
             tooltipController.CreatedTooltip += TryIncreaseProgress;
             
             DisableUI();
             
-            await UniTask.WaitWhile(() => inspectionPanelBase);
+            await UniTask.WaitWhile(() => inspectionCanvasBase);
             
             if (IsComplete) return;
 
@@ -50,7 +53,7 @@ namespace Tutorial.Custom
 
         public override async UniTask EndStep()
         {
-            InspectionTooltipManager.Instance.OpenedTooltip -= TrySubscribeToEntityTooltipSync;
+            InspectionCanvasManager.Instance.OpenedTooltip -= TrySubscribeToEntityTooltipSync;
             
             await DisableUI();
         }

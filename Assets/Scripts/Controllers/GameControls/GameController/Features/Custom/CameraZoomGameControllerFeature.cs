@@ -1,3 +1,4 @@
+using Combat.IngameUI.Inspection.InspectionCanvas;
 using UnityEngine.InputSystem;
 using CuroSettings;
 using DG.Tweening;
@@ -59,15 +60,14 @@ namespace GameControls.Features
 
         private void ChangeZoomValue(float changeValue)
         {
-            if (InspectionTooltipManager.Instance.NonIdleTooltipsOpened) return;
+            if (InspectionCanvasManager.Instance.NonIdleTooltipsOpened) return;
 
             _finalZoom = Mathf.Clamp(_finalZoom + changeValue, _minZoomValue, _maxZoomValue);
 
             if (_finalZoom <= _minZoomValue || _finalZoom >= _maxZoomValue) return;
 
             if (_zoomTween != null) _zoomTween.Kill();
-            _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom)
-                .SetEase(_zoomSmoothingCurve).SetUpdate(true);
+            _zoomTween = DOVirtual.Float(_camera.orthographicSize, _finalZoom, _zoomSmoothingDuration, SetZoom).SetEase(_zoomSmoothingCurve).SetUpdate(true);
         }
 
         private void SetZoom(float value)

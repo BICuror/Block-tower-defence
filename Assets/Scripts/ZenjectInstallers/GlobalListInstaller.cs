@@ -1,3 +1,4 @@
+using Combat.Stats;
 using Zenject;
 
 public sealed class GlobalListInstaller : MonoInstaller

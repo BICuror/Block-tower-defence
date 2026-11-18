@@ -3,9 +3,10 @@ using NaughtyAttributes;
 using UnityEngine;
 using System;
 using Combat.EnemySpawnSystem;
+using Combat.Entity.Modificators;
 using UnityEngine.Serialization;
 
-[Serializable] public sealed class ArgumentsContainer
+[Serializable] [Obsolete] public sealed class ArgumentsContainer
 {
     [Header("Arguments Container")] 
     [SerializeField] private List<ArgumentContainerItem> _argumentItems;
@@ -34,7 +35,7 @@ using UnityEngine.Serialization;
     }
 }
 
-[Serializable] public sealed class ArgumentContainerItem
+[Serializable] [Obsolete] public sealed class ArgumentContainerItem
 {
     [SerializeField] private ArgumentType _argumentType;
     [SerializeField] private string _argumentName;
@@ -44,13 +45,13 @@ using UnityEngine.Serialization;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.Float)] [SerializeField] private float _floatArgument;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.String)] [SerializeField] private string _stringArgument;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.GameObject)] [SerializeField] private GameObject _gameObjectArgument;
-    [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityModificatorData)] [SerializeField] private EntityModificatorData _entityModificatorData;
+    [FormerlySerializedAs("_entityModificatorData")] [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityModificatorData)] [SerializeField] private EntityModificatorConfig entityModificatorConfig;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityEffectParticleHandler)] [SerializeField] private EntityEffectParticleHandler _entityEffectParticleHandler;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.EntityObjectModifier)] [SerializeField] private EntityObjectModifier _entityObjectModifierPrefab;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.LayerSetting)] [SerializeField] private LayerSetting _layerSetting;
     [FormerlySerializedAs("_additionalEnemyGroupData")] [AllowNesting] [ShowIf("_argumentType", ArgumentType.AdditionalEnemyGroup)] [SerializeField] private AdditionalEnemyGroupDataConfig _additionalEnemyGroupDataConfig;
     [AllowNesting] [ShowIf("_argumentType", ArgumentType.Sprite)] [SerializeField] private Sprite _sprite;
-    [AllowNesting] [ShowIf("_argumentType", ArgumentType.StatData)] [SerializeField] private StatData _statData;
+    [FormerlySerializedAs("_statData")] [AllowNesting] [ShowIf("_argumentType", ArgumentType.StatData)] [SerializeField] private StatConfig _statConfig;
     
     public string ArgumentName => _argumentName;
     public ArgumentType ArgumentType => _argumentType;
@@ -64,13 +65,13 @@ using UnityEngine.Serialization;
             case ArgumentType.Float: return _floatArgument;
             case ArgumentType.String: return _stringArgument;
             case ArgumentType.GameObject: return _gameObjectArgument;
-            case ArgumentType.EntityModificatorData: return _entityModificatorData;
+            case ArgumentType.EntityModificatorData: return entityModificatorConfig;
             case ArgumentType.EntityEffectParticleHandler: return _entityEffectParticleHandler;
             case ArgumentType.EntityObjectModifier: return _entityObjectModifierPrefab;
             case ArgumentType.LayerSetting: return _layerSetting;
             case ArgumentType.AdditionalEnemyGroup: return _additionalEnemyGroupDataConfig;
             case ArgumentType.Sprite: return _sprite;
-            case ArgumentType.StatData: return _statData;
+            case ArgumentType.StatData: return _statConfig;
             default: throw new NotImplementedException($"Unknown argument type: {_argumentType}");
         }
     }

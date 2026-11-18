@@ -4,6 +4,7 @@ using System.Threading;
 using UnityEngine;
 using Zenject;
 using System;
+using Combat.Stats;
 
 namespace Combat.Enemies
 {
@@ -28,8 +29,7 @@ namespace Combat.Enemies
             if (_autoAddToGlobalEnemyContainer) _globalEnemyContainer.Add(_ownerEntity);
 
             if (_ownerEntity.ComponentsContainer.Get<Collider>().enabled)
-                Debug.LogError(
-                    "Egg collider should be disabled by default in prefab, otherwise it might break entity area detectors and global enemy list");
+                Debug.LogError("Egg collider should be disabled by default in prefab, otherwise it might break entity area detectors and global enemy list");
 
             _ownerEntity.ComponentsContainer.Get<Collider>().enabled = true;
         }
@@ -38,8 +38,7 @@ namespace Combat.Enemies
         {
             try
             {
-                await UniTask.WaitForSeconds(_ownerEntity.StatContainer.Get<SpawnDelay>().Value + 0.5f,
-                    cancellationToken: _cancellationTokenSource.Token);
+                await UniTask.WaitForSeconds(_ownerEntity.StatContainer.Get<SpawnDelay>().Value + 0.5f, cancellationToken: _cancellationTokenSource.Token);
             }
             catch (Exception e)
             {

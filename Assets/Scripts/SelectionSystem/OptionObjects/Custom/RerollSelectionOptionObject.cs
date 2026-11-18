@@ -1,14 +1,16 @@
+using Combat.IngameUI.Inspection.InspectionCanvas;
+using Combat.IngameUI.Inspection;
 using Cysharp.Threading.Tasks;
 using Zenject;
 
 public sealed class RerollSelectionOptionObject : SelectionOptionObject
 {
     [Inject] private SelectionManager _selectionManager;
-    private InspectionPanelBase _inspectionPanelBase;
+    private InspectionCanvasBase _inspectionCanvasBase;
 
     public void Initialize()
     {
-        _inspectionPanelBase = InspectionTooltipManager.Instance.OpenRerollPreview(transform);
+        _inspectionCanvasBase = InspectionCanvasManager.Instance.OpenRerollPreview(transform);
     }
     
     public override void ApplySelectedEffect()
@@ -18,6 +20,6 @@ public sealed class RerollSelectionOptionObject : SelectionOptionObject
 
     private void OnDestroy()
     {
-        InspectionTooltipManager.Instance.DestroyElement(_inspectionPanelBase).Forget();
+        InspectionCanvasManager.Instance.DestroyElement(_inspectionCanvasBase).Forget();
     }
 }

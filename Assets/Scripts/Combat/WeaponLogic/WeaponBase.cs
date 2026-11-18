@@ -1,5 +1,6 @@
 using System;
 using Combat;
+using Combat.ValueModifiers;
 using UnityEngine;
 
 public class WeaponBase : MonoBehaviour
@@ -18,11 +19,11 @@ public class WeaponBase : MonoBehaviour
         OnInitialized();
     }
 
-    public void DamageEntity(float damageAmount, CombatEntity receivingEntity)
+    public void DamageEntity(ValueModificationContainer valueModificationContainer, CombatEntity receivingEntity)
     {
         if (!receivingEntity.Health.IsAlive()) return;
             
-        receivingEntity.Health.ReceiveEnemyDamage(damageAmount, OwnerEntity);
+        receivingEntity.Health.ReceiveEnemyDamage(valueModificationContainer, OwnerEntity);
             
         HitEntity?.Invoke(receivingEntity);
             

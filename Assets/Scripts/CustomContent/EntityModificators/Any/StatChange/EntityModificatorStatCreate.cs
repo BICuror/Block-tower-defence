@@ -1,45 +1,22 @@
-using System.Collections.Generic;
-using System;
+using Cysharp.Threading.Tasks;
+using Combat.Stats;
 
-public class EntityModificatorStatCreate : EntityModificator
+namespace ScriptableLogic.Commands.Combat
 {
-    private List<Stat> _createdStats = new();
-    
-    public override bool CanBeApplied()
+    public sealed class CreateStatCommand : Command, INonExecutableCommand
     {
-        foreach (StatInitializer statInitializer in ModificatorData.StatInitializers)
+        private Stat _createdStat;
+        
+        public override UniTask Enable()
         {
-            Type statType = statInitializer.StatData.GetStatType();
             
-            if (!Entity.StatContainer.Has(statType))
-            {
-                return true;
-            }
+            return UniTask.CompletedTask;
         }
-
-        return false;
-    }
     
-    public override void Enable()
-    {
-        ModificatorData.StatInitializers.ForEach(statInitializer =>
+        public override UniTask Disable()
         {
-            Type statType = statInitializer.StatData.GetStatType();
             
-            if (!Entity.StatContainer.Has(statType))
-            {
-                Stat stat = Activator.CreateInstance(statType) as Stat;
-                stat.SetDefault(statInitializer.DefaultValue);
-                
-                Entity.StatContainer.AddStat(stat);
-            }
-        });
-    }
-
-    public override void Disable()
-    {
-        _createdStats.ForEach(createdStat => Entity.StatContainer.Remove(createdStat.GetType()));
-
-        _createdStats.Clear();
+            return UniTask.CompletedTask;
+        }
     }
 }
